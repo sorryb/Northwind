@@ -1,10 +1,16 @@
-﻿@{
+﻿<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+    <script src="~/js/jsMap.js"></script>
+</head>
+@{
     ViewBag.Title = "Contact";
 }
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Contact <small>We'd Love to Hear From You!</small></h1>
+            <h1 class="page-header">Contact </h1>
             <ol class="breadcrumb">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                 <li class="active">Contact</li>
@@ -12,30 +18,32 @@
         </div>
         <div class="col-lg-12">
             <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
-            <iframe width="100%" scrolling="no" height="400px" frameborder="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed" marginwidth="0" marginheight="0"></iframe>
+            <iframe id="googleMap" width="100%" scrolling="no" height="400px" frameborder="0"  marginwidth="0" marginheight="0" > </iframe>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD5UEY0fKPDkaB2ZvQnN9y8ZbO3P-jj3w&callback=myMap"></script>
+            
         </div>
     </div><!-- /.row -->
     <div class="row">
         <div class="col-sm-8">
-            <h3>Let's Get In Touch!</h3>
-            <p>Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+            <h3>Ia legătura cu noi</h3>
+            <p>Pentru a evita filtrele de junk mail, în cazul în care ne contactați prima dată, vă rugăm să folosiți formularul de mai jos. În acest fel vă asigurați că mesajul dumnevoastră va ajunge la noi. Vă mulțumim.</p>
             <form action="contact-form-submission.php" method="POST" role="form">
                 <div class="row">
                     <div class="form-group col-lg-4">
-                        <label for="input1">Name</label>
+                        <label for="input1">Nume</label>
                         <input type="text" id="input1" class="form-control" name="contact_name">
                     </div>
                     <div class="form-group col-lg-4">
-                        <label for="input2">Email Address</label>
+                        <label for="input2">Email </label>
                         <input type="email" id="input2" class="form-control" name="contact_email">
                     </div>
                     <div class="form-group col-lg-4">
-                        <label for="input3">Phone Number</label>
+                        <label for="input3">Telefon</label>
                         <input type="phone" id="input3" class="form-control" name="contact_phone">
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-lg-12">
-                        <label for="input4">Message</label>
+                        <label for="input4">Comentariu</label>
                         <textarea id="input4" rows="6" class="form-control" name="contact_message"></textarea>
                     </div>
                     <div class="form-group col-lg-12">
@@ -46,21 +54,21 @@
             </form>
         </div>
         <div class="col-sm-4">
-            <h3>Modern Business</h3>
-            <h4>A Start Bootstrap Template</h4>
-            <p>
-                5555 44th Street N.<br>
-                Bootstrapville, CA 32323<br>
-            </p>
-            <p><i class="fa fa-phone"></i> <abbr title="Phone">P</abbr>: (555) 984-3600</p>
-            <p><i class="fa fa-envelope-o"></i> <abbr title="Email">E</abbr>: <a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a></p>
-            <p><i class="fa fa-clock-o"></i> <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM</p>
-            <ul class="list-unstyled list-inline list-social-icons">
-                <li class="tooltip-social facebook-link"><a title="Facebook" data-placement="top" data-toggle="tooltip" href="#facebook-page"><i class="fa fa-facebook-square fa-2x"></i></a></li>
-                <li class="tooltip-social linkedin-link"><a title="LinkedIn" data-placement="top" data-toggle="tooltip" href="#linkedin-company-page"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
-                <li class="tooltip-social twitter-link"><a title="Twitter" data-placement="top" data-toggle="tooltip" href="#twitter-profile"><i class="fa fa-twitter-square fa-2x"></i></a></li>
-                <li class="tooltip-social google-plus-link"><a title="Google+" data-placement="top" data-toggle="tooltip" href="#google-plus-page"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
-            </ul>
-        </div>
+            <h3>Kepler RomInfo</h3>
+            <h4>A Start Bootstrap Template</h4><br />
+            <span><i class="glyphicon glyphicon-map-marker"></i>
+                Bulevardul Dimitrie Pompeiu 5, <br>
+                Sector 2, București 077190.<br>
+            </span>
+            <span><i class="glyphicon glyphicon-earphone"></i> : 021 233 1080 </span><br />
+    <span><i class="glyphicon glyphicon-envelope"></i> : <a href="https://www.kepler-rominfo.com/pages/home">kepler-rominfo.com </a></span><br />
+    <span><i class="glyphicon glyphicon-calendar"></i>  : Luni - Vineri: 9:00 AM - 6:00 PM</span><br />
+    <ul class="list-unstyled list-inline list-social-icons">
+        <li class="tooltip-social facebook-link"><a title="Facebook" data-placement="top" data-toggle="tooltip" href="#facebook-page"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+        <li class="tooltip-social linkedin-link"><a title="LinkedIn" data-placement="top" data-toggle="tooltip" href="#linkedin-company-page"><i class="fa fa-linkedin-square fa-2x"></i></a></li>
+        <li class="tooltip-social twitter-link"><a title="Twitter" data-placement="top" data-toggle="tooltip" href="#twitter-profile"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+        <li class="tooltip-social google-plus-link"><a title="Google+" data-placement="top" data-toggle="tooltip" href="#google-plus-page"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+    </ul>
+</div>
     </div><!-- /.row -->
 </div>
