@@ -166,7 +166,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
-    <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,12 +240,6 @@
     <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Portfolio\OneColumn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Portfolio\TwoColumn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Blog\Home1.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +256,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Products\Products.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
