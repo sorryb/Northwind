@@ -14,7 +14,6 @@ namespace NorthwindWeb.Models
             Employees = new HashSet<Employees>();
         }
 
-        [Key]
         [StringLength(20)]
         public string TerritoryID { get; set; }
 

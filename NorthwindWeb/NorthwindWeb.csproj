@@ -166,14 +166,14 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
-    <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Categories.cs" />
-    <Compile Include="Models\CustomerDemographics.cs" />
     <Compile Include="Models\Customers.cs" />
+    <Compile Include="Models\CustomerDemographics.cs" />
     <Compile Include="Models\Employees.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\NorthwindModel.cs" />
@@ -426,6 +426,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\Products\Products.cshtml" />
     <None Include="Properties\PublishProfiles\BROMPREPROD1.pubxml" />
   </ItemGroup>
   <PropertyGroup>
