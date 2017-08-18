@@ -1,5 +1,6 @@
 ﻿@model NorthwindWeb.ViewModels.OrderIndexData
 
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Orders";
 }
@@ -34,13 +35,13 @@
                     }
                     <tr class="@selectedRow">
                         <td>
-                            @Html.DisplayFor(modelItem => item.OrderID)
+                            @item.OrderID
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.OrderDate)
+                            @item.OrderDate
                         </td>
                         <td>
-                            @Html.ActionLink("Detalii", "Home1", new { id = item.OrderID })>
+                            @Html.ActionLink("Detalii", "Home1", new { id = item.OrderID,page = Model.page.PageNumber })>
                         </td>
                     </tr>
                 }
@@ -66,7 +67,7 @@
                         }
                         <tr class="@selectedRow">
                             <td>
-                                @Html.ActionLink("Produse", "Home1", new { pid = item.ProductID })
+                                @Html.ActionLink("Produse", "Home1", new { pid = item.ProductID, page = Model.page.PageNumber })
                             </td>
                             <td>
                                 @item.ProductID
@@ -228,4 +229,6 @@
             <!-- /well -->
         </div>
     </div>
+    Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
+@*@Html.PagedListPager(Model.page, page => Url.Action("Home1", new { id ,pid=null,page}))*@
 </div>

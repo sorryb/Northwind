@@ -8,7 +8,6 @@ namespace NorthwindWeb.Models
 
     public partial class Orders
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Orders()
         {
             Order_Details = new HashSet<Order_Details>();
@@ -54,8 +53,7 @@ namespace NorthwindWeb.Models
 
         public virtual Employees Employee { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order_Details> Order_Details { get; set; }
+        public virtual ICollection<Order_Details> Order_Details { get;  }
 
         public virtual Shippers Shipper { get; set; }
     }
