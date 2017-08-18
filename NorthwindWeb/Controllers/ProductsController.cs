@@ -40,5 +40,19 @@ namespace NorthwindWeb.Controllers
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
+        public ActionResult Search(string search, int? page = 1)
+        {
+            var products = db.Products as IQueryable<Products>;
+            
+            ViewBag.title = "Result for: " + search;
+            ViewBag.search = search;
+            ViewBag.page = page;
+            products = db.Products.Where(x => x.ProductName.Contains(search));
+            
+            products = products.OrderBy(x => x.ProductName);
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(products.ToPagedList(pageNumber, pageSize));
+        }
     }
 }

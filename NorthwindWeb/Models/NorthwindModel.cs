@@ -115,11 +115,11 @@ namespace NorthwindWeb.Models
                 .IsFixedLength();
 
             modelBuilder.Entity<Persons>()
-                .Property(e => e.LastName)
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Persons>()
-                .Property(e => e.FirstName)
+                .Property(e => e.Nume)
                 .IsUnicode(false);
         }
     }

@@ -209,7 +209,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\AndreeaPopescu.jpg" />
+    <Content Include="images\aple.png" />
     <Content Include="images\emanuelTincu.jpg" />
+    <Content Include="images\hi-fun.png" />
+    <Content Include="images\images.jpg" />
+    <Content Include="images\Home\AppleLogo.png" />
+    <Content Include="images\Home\asus.png" />
+    <Content Include="images\Home\huawei.jpg" />
+    <Content Include="images\Home\logo-firma.png" />
+    <Content Include="images\Home\logo-sony.jpg" />
+    <Content Include="images\Home\Nokia.gif" />
+    <Content Include="images\Home\samsung.jpg" />
     <Content Include="images\IoanaTimis.jpg" />
     <Content Include="images\ionIon.jpg" />
     <Content Include="images\Home\footer_logo.png" />
@@ -316,6 +326,7 @@
     <Content Include="images\Gadgeturi\telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru-2.jpg" />
     <Content Include="images\Gadgeturi\telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru-3.jpg" />
     <Content Include="images\Gadgeturi\telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru.jpg" />
+    <Content Include="images\samsung.png" />
     <Content Include="images\servicii\apeluri-voce.jpg" />
     <Content Include="images\servicii\mesagerie-vocala.jpg" />
     <Content Include="images\servicii\mobiledata.jpg" />
@@ -348,6 +359,7 @@
     <Content Include="images\Smartphone\telefon-mobil-sony-xperia-x-compact-32gb-4g-black-1.jpg" />
     <Content Include="images\Smartphone\telefon-mobil-sony-xperia-x-compact-32gb-4g-black.jpg" />
     <Content Include="images\Smartphone\telefon-mobil-xiaomi-redmi-4a-16gb-dual-sim-4g-dark-grey.jpg" />
+    <Content Include="images\sony3.jpg" />
     <Content Include="images\StefanBogdan.jpg" />
     <Content Include="images\telefoane_clasice.jpg" />
     <Content Include="images\telefoane_clasice\telefon-mobil-alcatel-1054-white.jpg" />
@@ -382,6 +394,7 @@
     <Content Include="images\telefoane_clasice\telefon-mobil-nokia-3310-dual-sim-dark-blue.jpg" />
     <Content Include="images\telefoane_clasice\telefon-mobil-nokia-3310-orange.jpg" />
     <Content Include="images\TraianELENA.jpg" />
+    <Content Include="images\wpid-nokia-logo.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="Web.config">
@@ -453,6 +466,7 @@
   <ItemGroup>
     <Content Include="Views\Products\Products.cshtml" />
     <None Include="Properties\PublishProfiles\BROMPREPROD1.pubxml" />
+    <Content Include="Views\Products\Search.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
