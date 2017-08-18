@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.ViewModels;
 
+
 namespace NorthwindWeb.Controllers
 {
     
@@ -20,25 +21,31 @@ namespace NorthwindWeb.Controllers
         public ActionResult Home1(int? did, int? pid)
         {
             var viewModel = new OrderIndexData();
-            viewModel.Order = db.Orders
-                .OrderBy(i => i.OrderID);
+            viewModel.Order = from s in db.Orders
+                              select s;
+
+
+                //db.Orders
+                //.OrderBy(i => i.OrderID);
             if (did != null)
             {
                 ViewBag.OrderID = did.Value;
-                viewModel.Order_Detail = viewModel.Order.Where(i => i.OrderID == did.Value).Single().Order_Details;
+                viewModel.Order_Detail = from s in db.Order_Details where(s.OrderID==did)
+                                         select s;
             }
             if (pid != null)
             {
                 ViewBag.CourseID = pid.Value;
-                // Lazy loading
-                //viewModel.Enrollments = viewModel.Courses.Where(
-                //    x => x.CourseID == courseID).Single().Enrollments;
-                // Explicit loading
-                var selectedDetails = viewModel.Order_Detail.Where(x => x.ProductID == pid).Single();
+               
+                viewModel.Product = from s in db.Products
+                                    where (s.ProductID == pid)
+                                    select s;
+
+                //var selectedDetails = viewModel.Order_Detail.Where(x => x.ProductID == pid).Single();
                 //db.Entry(selectedDetails).Collection(x => x.Products).Load();
                 //foreach (Products produs in selectedDetails.Products)
                 //{
-                //    db.Entry(produs).Reference(x => x.Student).Load();
+                //    db.Entry(produs).Reference(x => x.Order_Details).Load();
                 //}
 
                 //viewModel.Product = selectedDetails.Products;
