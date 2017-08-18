@@ -199,6 +199,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\logo-white.png" />
     <Content Include="images\accesorii.png" />
     <Content Include="images\accesorii\bratara-smartwatch-samsung-gear-s3-piele-neagra-1.jpg" />
     <Content Include="images\accesorii\bratara-smartwatch-samsung-gear-s3-piele-neagra-3.jpg" />
