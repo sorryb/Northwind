@@ -8,7 +8,7 @@ namespace NorthwindWeb.Models
     public partial class NorthwindModel : DbContext
     {
         public NorthwindModel()
-            : base("name=NorthwindDb")
+            : base("name=NwModel")
         {
         }
 
@@ -19,7 +19,7 @@ namespace NorthwindWeb.Models
         public virtual DbSet<Order_Details> Order_Details { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Region> Region { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Shippers> Shippers { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
@@ -27,6 +27,10 @@ namespace NorthwindWeb.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Categories>()
+                .Property(e => e.img)
+                .IsUnicode(false);
+
             modelBuilder.Entity<CustomerDemographics>()
                 .Property(e => e.CustomerTypeID)
                 .IsFixedLength();
@@ -42,7 +46,7 @@ namespace NorthwindWeb.Models
 
             modelBuilder.Entity<Employees>()
                 .HasMany(e => e.Employees1)
-                .WithOptional(e => e.Employees2)
+                .WithOptional(e => e.Employee1)
                 .HasForeignKey(e => e.ReportsTo);
 
             modelBuilder.Entity<Employees>()
@@ -64,7 +68,7 @@ namespace NorthwindWeb.Models
 
             modelBuilder.Entity<Orders>()
                 .HasMany(e => e.Order_Details)
-                .WithRequired(e => e.Orders)
+                .WithRequired(e => e.Order)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Products>()
@@ -72,8 +76,24 @@ namespace NorthwindWeb.Models
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<Products>()
+                .Property(e => e.img)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Products>()
+                .Property(e => e.img1)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Products>()
+                .Property(e => e.img2)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Products>()
+                .Property(e => e.img3)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Products>()
                 .HasMany(e => e.Order_Details)
-                .WithRequired(e => e.Products)
+                .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Region>()
@@ -87,7 +107,7 @@ namespace NorthwindWeb.Models
 
             modelBuilder.Entity<Shippers>()
                 .HasMany(e => e.Orders)
-                .WithOptional(e => e.Shippers)
+                .WithOptional(e => e.Shipper)
                 .HasForeignKey(e => e.ShipVia);
 
             modelBuilder.Entity<Territories>()

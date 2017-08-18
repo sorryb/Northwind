@@ -15,7 +15,6 @@ namespace NorthwindWeb.Models
             CustomerDemographics = new HashSet<CustomerDemographics>();
         }
 
-        [Key]
         [StringLength(5)]
         public string CustomerID { get; set; }
 

@@ -14,7 +14,6 @@ namespace NorthwindWeb.Models
             Products = new HashSet<Products>();
         }
 
-        [Key]
         public int SupplierID { get; set; }
 
         [Required]
@@ -27,7 +26,7 @@ namespace NorthwindWeb.Models
         [StringLength(30)]
         public string ContactTitle { get; set; }
 
-        [StringLength(60)]
+        [StringLength(100)]
         public string Address { get; set; }
 
         [StringLength(15)]

@@ -172,8 +172,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Categories.cs" />
-    <Compile Include="Models\CustomerDemographics.cs" />
     <Compile Include="Models\Customers.cs" />
+    <Compile Include="Models\CustomerDemographics.cs" />
     <Compile Include="Models\Employees.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\NorthwindModel.cs" />
