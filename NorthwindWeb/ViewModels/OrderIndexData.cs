@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
 using NorthwindWeb.Models;
+using PagedList;
+
 
 namespace NorthwindWeb.ViewModels
 {
     public class OrderIndexData
-    {
+    {   public IPagedList page { get; set; }
         public IEnumerable<Orders> Order { get; set; }
         public IEnumerable<Order_Details> Order_Detail { get; set; }
         public IEnumerable<Products> Product { get; set; }

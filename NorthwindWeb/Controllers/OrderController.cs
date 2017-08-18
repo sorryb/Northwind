@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.ViewModels;
+using PagedList;
 
 
 namespace NorthwindWeb.Controllers
@@ -18,15 +19,18 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
-        public ActionResult Home1(int? id, int? pid)
+        public ActionResult Home1(int? id, int? pid, int? page)
         {
             var viewModel = new OrderIndexData();
-            viewModel.Order = db.Orders;
-                              
+            viewModel.Order = db.Orders.OrderBy(x=>x.OrderID);
 
+            //if (search!=null)
+            //{
+            //    viewModel.Order = viewModel.Order.Where(s => s.OrderID==search).OrderBy(x => x.OrderID);
+            //}
 
-                //db.Orders
-                //.OrderBy(i => i.OrderID);
+            //db.Orders
+            //.OrderBy(i => i.OrderID);
             if (id != null)
             {
                 ViewBag.OrderID = id.Value;
@@ -50,8 +54,12 @@ namespace NorthwindWeb.Controllers
 
                 //viewModel.Product = selectedDetails.Products;
             }
-
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            viewModel.page = viewModel.Order.ToPagedList(pageNumber, pageSize);
+            viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
             return View(viewModel);
+            
         }
     }
 }
