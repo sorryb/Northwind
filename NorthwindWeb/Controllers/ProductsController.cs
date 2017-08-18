@@ -1,34 +1,44 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using System.Web.Mvc;
+using PagedList;
+using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
     public class ProductsController : Controller
     {
         private Models.NorthwindModel db = new Models.NorthwindModel();
-        public ActionResult Products(string category)
+        public ActionResult Products(string category, int? page = 1)
         {
-            var products=db.Products as IQueryable;
-            switch(category)
+            var products = db.Products as IQueryable<Products>;
+            switch (category)
             {
                 case "Classic":
-                products = db.Products.Select(x => x.CategoryID == 1);
+                    ViewBag.title = "Classic";
+                    products = db.Products.Where(x => x.CategoryID == 1);
                     break;
                 case "Smartphone":
-                products = db.Products.Select(x => x.CategoryID == 2);
+                    ViewBag.title = "Smartphone";
+                    products = db.Products.Where(x => x.CategoryID == 2);
                     break;
                 case "Accesorii":
-                products = db.Products.Select(x => x.CategoryID == 3);
+                    ViewBag.title = "Accesorii";
+                    products = db.Products.Where(x => x.CategoryID == 3);
                     break;
                 case "Gadgeturi":
-                products = db.Products.Select(x => x.CategoryID == 4);
+                    ViewBag.title = "Gadgeturi";
+                    products = db.Products.Where(x => x.CategoryID == 4);
                     break;
                 case "eBookReaders":
-                products = db.Products.Select(x => x.CategoryID == 5);
+                    ViewBag.title = "eBookReaders";
+                    products = db.Products.Where(x => x.CategoryID == 5);
                     break;
-
             }
-            return View(products);
+            products = products.OrderBy(x => x.ProductName);
+            int pageSize = 1;
+            int pageNumber = (page ?? 1);
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
     }
 }

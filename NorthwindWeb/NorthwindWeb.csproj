@@ -174,6 +174,7 @@
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\TesteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,7 +307,10 @@
     <Content Include="images\Gadgeturi\telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru-2.jpg" />
     <Content Include="images\Gadgeturi\telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru-3.jpg" />
     <Content Include="images\Gadgeturi\telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru.jpg" />
+    <Content Include="images\servicii\apeluri-voce.jpg" />
+    <Content Include="images\servicii\mesagerie-vocala.jpg" />
     <Content Include="images\servicii\mobiledata.jpg" />
+    <Content Include="images\servicii\SMS-Marketing.png" />
     <Content Include="images\smartphone.jpg" />
     <Content Include="images\Smartphone\telefon-mobil-apple-iphone-6-16gb-space-gray.jpg" />
     <Content Include="images\Smartphone\telefon-mobil-apple-iphone-6s-32gb-space-grey-1.jpg" />
@@ -369,7 +373,6 @@
     <Content Include="images\telefoane_clasice\telefon-mobil-nokia-3310-orange.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
-    <Content Include="js\jsMap.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -388,6 +391,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Teste\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -8,11 +8,13 @@ namespace NorthwindWeb.Models
 
     public partial class Shippers
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+
+
         public Shippers()
         {
             Orders = new HashSet<Orders>();
         }
+
         [Key]
         public int ShipperID { get; set; }
 
@@ -23,7 +25,8 @@ namespace NorthwindWeb.Models
         [StringLength(24)]
         public string Phone { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+ 
+
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }
