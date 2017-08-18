@@ -5,7 +5,7 @@ namespace NorthwindWeb.Controllers
 {
     public class ProductsController : Controller
     {
-        Models.NorthwindModel db = new Models.NorthwindModel();
+        private Models.NorthwindModel db = new Models.NorthwindModel();
         public ActionResult Products(string category)
         {
             var products=db.Products as IQueryable;

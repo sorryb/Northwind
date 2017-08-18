@@ -15,7 +15,7 @@ namespace NorthwindWeb.Models
             Orders = new HashSet<Orders>();
             Territories = new HashSet<Territories>();
         }
-
+        [Key]
         public int EmployeeID { get; set; }
 
         [Required]

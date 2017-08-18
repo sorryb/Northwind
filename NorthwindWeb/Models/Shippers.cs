@@ -13,7 +13,7 @@ namespace NorthwindWeb.Models
         {
             Orders = new HashSet<Orders>();
         }
-
+        [Key]
         public int ShipperID { get; set; }
 
         [Required]

@@ -13,7 +13,7 @@ namespace NorthwindWeb.Models
         {
             Products = new HashSet<Products>();
         }
-
+        [Key]
         public int CategoryID { get; set; }
 
         [Required]
