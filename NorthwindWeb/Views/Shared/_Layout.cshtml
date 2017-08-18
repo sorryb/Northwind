@@ -38,19 +38,19 @@
                 
                 <ul class="nav navbar-nav navbar-right">
                     <li id="about">
-                       @Html.ActionLink("About", "Index", "About")
+                       @Html.ActionLink("Despre noi", "Index", "About")
                     </li>
                     <li id="services">
-                        @Html.ActionLink("Services", "Index", "Services")
+                        @Html.ActionLink("Servicii", "Index", "Services")
                     </li>
                     <li id="contact">
                         @Html.ActionLink("Contact", "Index", "Contact")
                     </li>
                     <li id="portfolio" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produse <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="1columnportfolio">
-                                @Html.ActionLink("Classic", "Products", "Products", new { category = "Classic" }, null)
+                                @Html.ActionLink("Clasic", "Products", "Products", new { category = "Classic" }, null)
                             </li>
                             <li id="2columnportfolio">
                                 @Html.ActionLink("Smartphone", "Products", "Products", new { category = "Smartphone" }, null)
@@ -70,23 +70,23 @@
                         </ul>
                     </li>
                     <li id="blog" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="bloghome1">
-                                @Html.ActionLink("Order", "Home1", "Order")
+                                @Html.ActionLink("Lista Comenzi", "Home1", "Order")
                             </li>
                             
                             
                         </ul>
                     </li>
                     <li id="other" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alte informatii <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="fullwidthpage">
-                                @Html.ActionLink("Full Width Page", "FullWidth", "Other")
+                                @Html.ActionLink("Alte info 1", "FullWidth", "Other")
                             </li>
                             <li id="sidebarpage">
-                                @Html.ActionLink("Sidebar Page", "Sidebar", "Other")
+                                @Html.ActionLink("Alte info 2", "Sidebar", "Other")
                             </li>
                             <li id="faq">
                                 @Html.ActionLink("FAQ", "Faq", "Other")
