@@ -204,6 +204,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\modern-business.css" />
+    <Content Include="css\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -211,6 +212,10 @@
     <Content Include="images\emanuelTincu.jpg" />
     <Content Include="images\IoanaTimis.jpg" />
     <Content Include="images\ionIon.jpg" />
+    <Content Include="images\Home\footer_logo.png" />
+    <Content Include="images\Home\imgad.jpg" />
+    <Content Include="images\Home\reduceri-telefoane-emag-it-mobile-days.jpg" />
+    <Content Include="images\Home\smartwatch.jpg" />
     <Content Include="images\logo-white.png" />
     <Content Include="images\accesorii.png" />
     <Content Include="images\accesorii\bratara-smartwatch-samsung-gear-s3-piele-neagra-1.jpg" />

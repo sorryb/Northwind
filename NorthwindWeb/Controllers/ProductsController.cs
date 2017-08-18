@@ -36,7 +36,7 @@ namespace NorthwindWeb.Controllers
                     break;
             }
             products = products.OrderBy(x => x.ProductName);
-            int pageSize = 1;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
