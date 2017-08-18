@@ -15,7 +15,6 @@ namespace NorthwindWeb.Models
             Orders = new HashSet<Orders>();
             Territories = new HashSet<Territories>();
         }
-
         [Key]
         public int EmployeeID { get; set; }
 
@@ -43,9 +42,6 @@ namespace NorthwindWeb.Models
         [StringLength(15)]
         public string City { get; set; }
 
-        [StringLength(15)]
-        public string Region { get; set; }
-
         [StringLength(10)]
         public string PostalCode { get; set; }
 
@@ -54,9 +50,6 @@ namespace NorthwindWeb.Models
 
         [StringLength(24)]
         public string HomePhone { get; set; }
-
-        [StringLength(4)]
-        public string Extension { get; set; }
 
         [Column(TypeName = "image")]
         public byte[] Photo { get; set; }
@@ -72,7 +65,7 @@ namespace NorthwindWeb.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees> Employees1 { get; set; }
 
-        public virtual Employees Employees2 { get; set; }
+        public virtual Employees Employee1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

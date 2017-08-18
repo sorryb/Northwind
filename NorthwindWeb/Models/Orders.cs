@@ -13,7 +13,6 @@ namespace NorthwindWeb.Models
         {
             Order_Details = new HashSet<Order_Details>();
         }
-
         [Key]
         public int OrderID { get; set; }
 
@@ -51,13 +50,13 @@ namespace NorthwindWeb.Models
         [StringLength(15)]
         public string ShipCountry { get; set; }
 
-        public virtual Customers Customers { get; set; }
+        public virtual Customers Customer { get; set; }
 
-        public virtual Employees Employees { get; set; }
+        public virtual Employees Employee { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }
 
-        public virtual Shippers Shippers { get; set; }
+        public virtual Shippers Shipper { get; set; }
     }
 }

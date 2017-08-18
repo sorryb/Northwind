@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.ViewModels;
 
+
 namespace NorthwindWeb.Controllers
 {
     
@@ -17,28 +18,34 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
-        public ActionResult Home1(int? did, int? pid)
+        public ActionResult Home1(int? id, int? pid)
         {
             var viewModel = new OrderIndexData();
-            viewModel.Order = db.Orders
-                .OrderBy(i => i.OrderID);
-            if (did != null)
+            viewModel.Order = db.Orders;
+                              
+
+
+                //db.Orders
+                //.OrderBy(i => i.OrderID);
+            if (id != null)
             {
-                ViewBag.OrderID = did.Value;
-                viewModel.Order_Detail = viewModel.Order.Where(i => i.OrderID == did.Value).Single().Order_Details;
+                ViewBag.OrderID = id.Value;
+                viewModel.Order_Detail = db.Order_Details.Where(x => x.OrderID == id);
+                                          
+                                        
             }
             if (pid != null)
             {
                 ViewBag.CourseID = pid.Value;
-                // Lazy loading
-                //viewModel.Enrollments = viewModel.Courses.Where(
-                //    x => x.CourseID == courseID).Single().Enrollments;
-                // Explicit loading
-                var selectedDetails = viewModel.Order_Detail.Where(x => x.ProductID == pid).Single();
+
+                viewModel.Product = db.Products.Where(x => x.ProductID == pid);
+                                 
+
+                //var selectedDetails = viewModel.Order_Detail.Where(x => x.ProductID == pid).Single();
                 //db.Entry(selectedDetails).Collection(x => x.Products).Load();
                 //foreach (Products produs in selectedDetails.Products)
                 //{
-                //    db.Entry(produs).Reference(x => x.Student).Load();
+                //    db.Entry(produs).Reference(x => x.Order_Details).Load();
                 //}
 
                 //viewModel.Product = selectedDetails.Products;

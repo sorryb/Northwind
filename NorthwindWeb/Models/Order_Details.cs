@@ -26,8 +26,8 @@ namespace NorthwindWeb.Models
 
         public float Discount { get; set; }
 
-        public virtual Orders Orders { get; set; }
+        public virtual Orders Order { get; set; }
 
-        public virtual Products Products { get; set; }
+        public virtual Products Product { get; set; }
     }
 }
