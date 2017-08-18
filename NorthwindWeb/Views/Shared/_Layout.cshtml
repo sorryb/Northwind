@@ -13,11 +13,10 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        
+
     <![endif]-->
 </head>
 <body>
-    
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -29,27 +28,32 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-                
-                @Html.ActionLink(" Studio Phone Silver", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
-            </div>
 
+                @Html.ActionLink(" Studio Phone Silver", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
+
+            </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
+
                 <ul class="nav navbar-nav navbar-right">
                     <li id="about">
-                       @Html.ActionLink("About", "Index", "About")
+<<<<<<< HEAD
+                        @Html.ActionLink("About", "Index", "About")
+=======
+                       @Html.ActionLink("Despre noi", "Index", "About")
+>>>>>>> c143f4337da6025444932200e2c1b6d437bf9dfb
                     </li>
                     <li id="services">
-                        @Html.ActionLink("Services", "Index", "Services")
+                        @Html.ActionLink("Servicii", "Index", "Services")
                     </li>
                     <li id="contact">
                         @Html.ActionLink("Contact", "Index", "Contact")
                     </li>
                     <li id="portfolio" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produse <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="1columnportfolio">
-                                @Html.ActionLink("Classic", "Products", "Products", new { category = "Classic" }, null)
+                                @Html.ActionLink("Clasic", "Products", "Products", new { category = "Classic" }, null)
                             </li>
                             <li id="2columnportfolio">
                                 @Html.ActionLink("Smartphone", "Products", "Products", new { category = "Smartphone" }, null)
@@ -63,43 +67,60 @@
                             <li id="2columnportfolio">
                                 @Html.ActionLink("eBook readers", "Products", "Products", new { category = "eBookReaders" }, null)
                             </li>
-                            
-                            
-                            
+
+
+
                         </ul>
                     </li>
                     <li id="blog" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order<b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="bloghome1">
-                                @Html.ActionLink("Order", "Home1", "Order")
+                                @Html.ActionLink("Lista Comenzi", "Home1", "Order")
                             </li>
-                            
-                            
+
+
                         </ul>
                     </li>
                     <li id="other" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Other Pages <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alte informatii <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="fullwidthpage">
-                                @Html.ActionLink("Full Width Page", "FullWidth", "Other")
+                                @Html.ActionLink("Alte info 1", "FullWidth", "Other")
                             </li>
                             <li id="sidebarpage">
-                                @Html.ActionLink("Sidebar Page", "Sidebar", "Other")
+                                @Html.ActionLink("Alte info 2", "Sidebar", "Other")
                             </li>
                             <li id="faq">
                                 @Html.ActionLink("FAQ", "Faq", "Other")
                             </li>
-                          
+                        </ul>
+                    </li>
+                    <li id="other" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i><b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="col-lg-12">
+                                <form id="searchInput" action="/Products/Search">
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                                <i class="glyphicon glyphicon-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
                             </li>
-                            
                         </ul>
                     </li>
                 </ul>
+
+
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
+
     </nav>
 
     @RenderBody()
@@ -120,7 +141,7 @@
     <!-- /.container -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    
+
     <script src="@Url.Content("/js/bootstrap.js")"></script>
     <script src="@Url.Content("/js/modern-business.js")"></script>
 </body>
