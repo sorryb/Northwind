@@ -18,28 +18,28 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
-        public ActionResult Home1(int? did, int? pid)
+        public ActionResult Home1(int? id, int? pid)
         {
             var viewModel = new OrderIndexData();
-            viewModel.Order = from s in db.Orders
-                              select s;
+            viewModel.Order = db.Orders;
+                              
 
 
                 //db.Orders
                 //.OrderBy(i => i.OrderID);
-            if (did != null)
+            if (id != null)
             {
-                ViewBag.OrderID = did.Value;
-                viewModel.Order_Detail = from s in db.Order_Details where(s.OrderID==did)
-                                         select s;
+                ViewBag.OrderID = id.Value;
+                viewModel.Order_Detail = db.Order_Details.Where(x => x.OrderID == id);
+                                          
+                                        
             }
             if (pid != null)
             {
                 ViewBag.CourseID = pid.Value;
-               
-                viewModel.Product = from s in db.Products
-                                    where (s.ProductID == pid)
-                                    select s;
+
+                viewModel.Product = db.Products.Where(x => x.ProductID == pid);
+                                 
 
                 //var selectedDetails = viewModel.Order_Detail.Where(x => x.ProductID == pid).Single();
                 //db.Entry(selectedDetails).Collection(x => x.Products).Load();
