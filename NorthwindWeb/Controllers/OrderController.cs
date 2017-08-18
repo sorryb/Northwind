@@ -31,6 +31,7 @@ namespace NorthwindWeb.Controllers
 
             //db.Orders
             //.OrderBy(i => i.OrderID);
+            if (id == 0) { id = null; }
             if (id != null)
             {
                 ViewBag.OrderID = id.Value;
@@ -38,6 +39,7 @@ namespace NorthwindWeb.Controllers
                                           
                                         
             }
+            if (pid == 0) { pid = null; }
             if (pid != null)
             {
                 ViewBag.CourseID = pid.Value;
