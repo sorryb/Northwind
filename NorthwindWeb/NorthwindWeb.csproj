@@ -209,6 +209,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\AndreeaPopescu.jpg" />
+    <Content Include="images\Home\AppleLogo.png" />
+    <Content Include="images\Home\asus.png" />
+    <Content Include="images\Home\huawei.jpg" />
+    <Content Include="images\Home\logo-firma.png" />
+    <Content Include="images\Home\logo-sony.jpg" />
+    <Content Include="images\Home\Nokia.gif" />
+    <Content Include="images\Home\samsung.jpg" />
     <Content Include="images\IoanaTimis.jpg" />
     <Content Include="images\Home\footer_logo.png" />
     <Content Include="images\Home\imgad.jpg" />
