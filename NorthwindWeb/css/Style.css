@@ -1,3 +1,16 @@
 ﻿body {
     font-family: Tahoma;
 }
+.contentcenter {
+    margin-left:auto;
+    margin-right:auto;
+}
+img[class~=products]{
+    max-height:450px;
+    max-width:750px;
+}
+.price {
+    color: #df691a;
+    font-size:large;
+    font-weight:bold;
+}
