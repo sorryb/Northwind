@@ -208,7 +208,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="images\AndreeaPopescu.jpg" />
+    <Content Include="images\emanuelTincu.jpg" />
     <Content Include="images\IoanaTimis.jpg" />
+    <Content Include="images\ionIon.jpg" />
     <Content Include="images\logo-white.png" />
     <Content Include="images\accesorii.png" />
     <Content Include="images\accesorii\bratara-smartwatch-samsung-gear-s3-piele-neagra-1.jpg" />
