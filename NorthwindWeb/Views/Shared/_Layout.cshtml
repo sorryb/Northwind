@@ -45,10 +45,19 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="1columnportfolio">
-                                @Html.ActionLink("1 Column Portfolio", "OneColumn", "Portfolio")
+                                @Html.ActionLink("Classic", "Products", "Products", new { category = "Classic" },new {  })
                             </li>
                             <li id="2columnportfolio">
-                                @Html.ActionLink("2 Column Portfolio", "TwoColumn", "Portfolio")
+                                @Html.ActionLink("Smartphone", "Smartphone", "Products")
+                            </li>
+                            <li id="2columnportfolio">
+                                @Html.ActionLink("Accesorii", "Accesorii", "Products")
+                            </li>
+                            <li id="2columnportfolio">
+                                @Html.ActionLink("Gadgeturi", "Gadgeturi", "Products")
+                            </li>
+                            <li id="2columnportfolio">
+                                @Html.ActionLink("eBook readers", "eBookReaders", "Products")
                             </li>
                             
                             
@@ -56,10 +65,10 @@
                         </ul>
                     </li>
                     <li id="blog" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="bloghome1">
-                                @Html.ActionLink("Orders", "Home1", "Blog")
+                                @Html.ActionLink("Order", "Home1", "Order")
                             </li>
                             
                             
