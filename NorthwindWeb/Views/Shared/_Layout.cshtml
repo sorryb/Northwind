@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NorthWind - @ViewBag.Title</title>
+    <title>Phone Studio - @ViewBag.Title</title>
 
     <!-- Bootstrap -->
     <link href="@Url.Content("/css/bootstrap.css")" rel="stylesheet">
@@ -47,10 +47,19 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="1columnportfolio">
-                                @Html.ActionLink("1 Column Portfolio", "OneColumn", "Portfolio")
+                                @Html.ActionLink("Classic", "Products", "Products", new { category = "Classic" },new {  })
                             </li>
                             <li id="2columnportfolio">
-                                @Html.ActionLink("2 Column Portfolio", "TwoColumn", "Portfolio")
+                                @Html.ActionLink("Smartphone", "Smartphone", "Products")
+                            </li>
+                            <li id="2columnportfolio">
+                                @Html.ActionLink("Accesorii", "Accesorii", "Products")
+                            </li>
+                            <li id="2columnportfolio">
+                                @Html.ActionLink("Gadgeturi", "Gadgeturi", "Products")
+                            </li>
+                            <li id="2columnportfolio">
+                                @Html.ActionLink("eBook readers", "eBookReaders", "Products")
                             </li>
                             
                             
@@ -58,10 +67,10 @@
                         </ul>
                     </li>
                     <li id="blog" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Orders <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Order<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="bloghome1">
-                                @Html.ActionLink("Orders", "Home1", "Blog")
+                                @Html.ActionLink("Order", "Home1", "Order")
                             </li>
                             
                             
@@ -101,7 +110,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Company 2017</p>
+                    <p>Copyright &copy; Studio Phone Silver 2017</p>
                 </div>
             </div>
         </footer>

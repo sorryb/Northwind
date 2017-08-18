@@ -6,6 +6,7 @@ namespace NorthwindWeb.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    [Table("Persons")]
     public partial class Persons
     {
         [Key]

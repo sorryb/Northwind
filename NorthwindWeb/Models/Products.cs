@@ -13,12 +13,10 @@ namespace NorthwindWeb.Models
         {
             Order_Details = new HashSet<Order_Details>();
         }
-
         [Key]
         public int ProductID { get; set; }
 
-        [Required]
-        [StringLength(40)]
+        [StringLength(100)]
         public string ProductName { get; set; }
 
         public int? SupplierID { get; set; }
@@ -39,11 +37,23 @@ namespace NorthwindWeb.Models
 
         public bool Discontinued { get; set; }
 
-        public virtual Categories Categories { get; set; }
+        [Column(TypeName = "text")]
+        public string img { get; set; }
+
+        [Column(TypeName = "text")]
+        public string img1 { get; set; }
+
+        [Column(TypeName = "text")]
+        public string img2 { get; set; }
+
+        [Column(TypeName = "text")]
+        public string img3 { get; set; }
+
+        public virtual Categories Category { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Details> Order_Details { get; set; }
 
-        public virtual Suppliers Suppliers { get; set; }
+        public virtual Suppliers Supplier { get; set; }
     }
 }
