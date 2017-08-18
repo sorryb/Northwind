@@ -42,7 +42,7 @@ namespace NorthwindWeb.Controllers
             if (pid == 0) { pid = null; }
             if (pid != null)
             {
-                ViewBag.CourseID = pid.Value;
+                ViewBag.ProductID = pid.Value;
 
                 viewModel.Product = db.Products.Where(x => x.ProductID == pid);
                                  
@@ -56,7 +56,7 @@ namespace NorthwindWeb.Controllers
 
                 //viewModel.Product = selectedDetails.Products;
             }
-            int pageSize = 3;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             viewModel.page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
