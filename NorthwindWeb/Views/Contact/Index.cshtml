@@ -1,13 +1,22 @@
-﻿<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
-    <script src="~/js/jsMap.js"></script>
-</head>
+﻿<script type="text/javascript">
+    function myMap() {
+        var mapCanvas = document.getElementById("googleMap");
+        var myCenter = new google.maps.LatLng(44.480104, 26.108327199999962);
+        var mapOptions = { center: myCenter, zoom: 5, mapTypeId: google.maps.MapTypeId.HYBRID };
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+        map.setTilt(45);
+        var marker = new google.maps.Marker({
+            position: myCenter,
+            animation: google.maps.Animation.BOUNCE
+        });
+        marker.setMap(map);
+    }
+</script>
+
 @{
     ViewBag.Title = "Contact";
 }
-<div class="container">
+<div class="container" style="font-family:Verdana;" >
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Contact </h1>
@@ -18,9 +27,10 @@
         </div>
         <div class="col-lg-12">
             <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
-            <iframe id="googleMap" width="100%" scrolling="no" height="400px" frameborder="0"  marginwidth="0" marginheight="0" > </iframe>
-            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD5UEY0fKPDkaB2ZvQnN9y8ZbO3P-jj3w&callback=myMap"></script>
             
+            <iframe id="googleMap" width="100%" scrolling="no" height="400px" frameborder="0"  marginwidth="0" marginheight="0" > </iframe>
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCimPuCpCni2fydX2nXUSgrkq9y0_Q1O9o&callback=myMap"></script>
+          
         </div>
     </div><!-- /.row -->
     <div class="row">
@@ -54,11 +64,12 @@
             </form>
         </div>
         <div class="col-sm-4">
-            <h3>Kepler RomInfo</h3>
-            <h4>A Start Bootstrap Template</h4><br />
+            <h3>Kepler Rominfo</h3>
+            <h4></h4><br />
             <span><i class="glyphicon glyphicon-map-marker"></i>
-                Bulevardul Dimitrie Pompeiu 5, <br>
-                Sector 2, București 077190.<br>
+                Bulevardul Dimitrie Pompeiu 5, <br />
+                Sector 2, București 077190.<br />
+
             </span>
             <span><i class="glyphicon glyphicon-earphone"></i> : 021 233 1080 </span><br />
     <span><i class="glyphicon glyphicon-envelope"></i> : <a href="https://www.kepler-rominfo.com/pages/home">kepler-rominfo.com </a></span><br />

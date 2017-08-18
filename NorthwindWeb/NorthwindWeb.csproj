@@ -360,7 +360,6 @@
     <Content Include="images\telefoane_clasice\telefon-mobil-nokia-3310-orange.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
-    <Content Include="js\jsMap.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
