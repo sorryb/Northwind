@@ -61,7 +61,7 @@
                     @foreach (var item in Model.Order_Detail)
                     {
                         string selectedRow = "";
-                        if (item.OrderID == ViewBag.OrderID)
+                        if (item.ProductID == ViewBag.ProductID)
                         {
                             selectedRow = "success";
                         }
@@ -87,7 +87,7 @@
                 </table>
             }
             @if (Model.Product != null)
-            {
+            {<hr>
                 <h3>
                     Caracteristici Produs
                 </h3>
@@ -172,7 +172,7 @@
         </div>
         <div class="col-lg-4">
             <div class="well">
-                <h4>Blog Search</h4>
+                <h4>Cautare in comentari</h4>
                 <div class="input-group">
                     <input type="text" class="form-control">
                     <span class="input-group-btn">
