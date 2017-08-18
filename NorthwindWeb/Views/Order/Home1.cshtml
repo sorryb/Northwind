@@ -230,5 +230,5 @@
         </div>
     </div>
     Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
-@*@Html.PagedListPager(Model.page, page => Url.Action("Home1", new { id ,pid=null,page}))*@
+@Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id=0, pid=0}))
 </div>

@@ -1,88 +1,50 @@
 ﻿@model PagedList.IPagedList<NorthwindWeb.Models.Products>
 @using PagedList.Mvc;
-
+@{int itemCount = Model.Count; }
 <div class="container">
+
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Two Column Portfolio
-                <small>Showcase Your Work</small>
+                Products
             </h1>
             <ol class="breadcrumb">
                 <li>
                     @Html.ActionLink("Home", "Index", "Home")
                 </li>
-                <li class="active">Two Column Portfolio</li>
+                <li class="active">@ViewBag.title</li>
             </ol>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 portfolio-item">
-            <a href="@Url.Action("SingleItem","Portfolio")">
-                <img src="http://placehold.it/750x450" class="img-responsive">
-            </a>
-            <h3>
-               @Html.ActionLink("Project Name","SingleItem","Portfolio")
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-        <div class="col-md-6 portfolio-item">
-            <a href="@Url.Action("SingleItem","Portfolio")">
-                <img src="http://placehold.it/750x450" class="img-responsive">
-            </a>
-            <h3>
-                @Html.ActionLink("Project Name", "SingleItem", "Portfolio")
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 portfolio-item">
-            <a href="@Url.Action("SingleItem","Portfolio")">
-                <img src="http://placehold.it/750x450" class="img-responsive">
-            </a>
-            <h3>
-                @Html.ActionLink("Project Name", "SingleItem", "Portfolio")
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-        <div class="col-md-6 portfolio-item">
-            <a href="@Url.Action("SingleItem","Portfolio")">
-                <img src="http://placehold.it/750x450" class="img-responsive">
-            </a>
-            <h3>
-                @Html.ActionLink("Project Name", "SingleItem", "Portfolio")
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 portfolio-item">
-            <a href="@Url.Action("SingleItem","Portfolio")">
-                <img src="http://placehold.it/750x450" class="img-responsive">
-            </a>
-            <h3>
-                @Html.ActionLink("Project Name", "SingleItem", "Portfolio")
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-        <div class="col-md-6 portfolio-item">
-            <a href="@Url.Action("SingleItem","Portfolio")">
-                <img src="http://placehold.it/750x450" class="img-responsive">
-            </a>
-            <h3>
-                @Html.ActionLink("Project Name", "SingleItem", "Portfolio")
-            </h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
-        </div>
-    </div>
+    @{
+        for (int i = 0; i < itemCount; i+=2)
+        {
+            <div class="row">
+                <div class="col-md-6 portfolio-item">
+                    <img src="@Model.ElementAt(i).img" class="img-responsive">
+                    <h3>
+                        @Model.ElementAt(i).ProductName;
+                    </h3>
+                </div>
+                @if (i + 1 < itemCount)
+                {
+                    <div class="col-md-6 portfolio-item">
+                        <img src="@Model.ElementAt(i + 1).img" class="img-responsive">
+                        <h3>
+                            @Model.ElementAt(i + 1).ProductName;
+                        </h3>
+                    </div>
+                }
+            </div>
+        }
+    }
     <hr>
     <div class="row text-center">
         <div class="col-lg-12">
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-                    @Html.PagedListPager(Model, page => Url.Action("Products", "Products",
-            new {category = ViewBag.title, page}))
+            @Html.PagedListPager(Model, page => Url.Action("Products", "Products",
+            new { category = ViewBag.title, page }))
         </div>
     </div>
 </div>

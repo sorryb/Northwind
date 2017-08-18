@@ -208,6 +208,8 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\AndreeaPopescu.jpg" />
+    <Content Include="images\IoanaTimis.jpg" />
     <Content Include="images\Home\footer_logo.png" />
     <Content Include="images\Home\imgad.jpg" />
     <Content Include="images\Home\reduceri-telefoane-emag-it-mobile-days.jpg" />
@@ -344,6 +346,7 @@
     <Content Include="images\Smartphone\telefon-mobil-sony-xperia-x-compact-32gb-4g-black-1.jpg" />
     <Content Include="images\Smartphone\telefon-mobil-sony-xperia-x-compact-32gb-4g-black.jpg" />
     <Content Include="images\Smartphone\telefon-mobil-xiaomi-redmi-4a-16gb-dual-sim-4g-dark-grey.jpg" />
+    <Content Include="images\StefanBogdan.jpg" />
     <Content Include="images\telefoane_clasice.jpg" />
     <Content Include="images\telefoane_clasice\telefon-mobil-alcatel-1054-white.jpg" />
     <Content Include="images\telefoane_clasice\telefon-mobil-alcatel-2008g-black-silver.jpg" />
@@ -376,6 +379,7 @@
     <Content Include="images\telefoane_clasice\telefon-mobil-nokia-3310-dual-sim-dark-blue-1.jpg" />
     <Content Include="images\telefoane_clasice\telefon-mobil-nokia-3310-dual-sim-dark-blue.jpg" />
     <Content Include="images\telefoane_clasice\telefon-mobil-nokia-3310-orange.jpg" />
+    <Content Include="images\TraianELENA.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="Web.config">

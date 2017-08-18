@@ -48,19 +48,19 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Products <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="1columnportfolio">
-                                @Html.ActionLink("Classic", "Products", "Products", new { category = "Classic" },new {  })
+                                @Html.ActionLink("Classic", "Products", "Products", new { category = "Classic" }, null)
                             </li>
                             <li id="2columnportfolio">
-                                @Html.ActionLink("Smartphone", "Smartphone", "Products")
+                                @Html.ActionLink("Smartphone", "Products", "Products", new { category = "Smartphone" }, null)
                             </li>
                             <li id="2columnportfolio">
-                                @Html.ActionLink("Accesorii", "Accesorii", "Products")
+                                @Html.ActionLink("Accesorii", "Products", "Products", new { category = "Accesorii" }, null)
                             </li>
                             <li id="2columnportfolio">
-                                @Html.ActionLink("Gadgeturi", "Gadgeturi", "Products")
+                                @Html.ActionLink("Gadgeturi", "Products", "Products", new { category = "Gadgeturi" }, null)
                             </li>
                             <li id="2columnportfolio">
-                                @Html.ActionLink("eBook readers", "eBookReaders", "Products")
+                                @Html.ActionLink("eBook readers", "Products", "Products", new { category = "eBookReaders" }, null)
                             </li>
                             
                             
