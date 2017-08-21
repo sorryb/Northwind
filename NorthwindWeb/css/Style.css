@@ -18,18 +18,11 @@ img[class~=products] {
     font-weight: bold;
 }
 
-span.cartprod {
-    position: absolute;
-    top: 420px;
-    left: 517.5px;
-    height: 30px;
-    width: 30px;
-    font-size: 30px;
-}
 [class~=glyphicon-shopping-cart] {
     font-size: 25px;
-    padding:5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
 }
+
 [class~=roundedshop] {
     background-color: rgba(195, 0, 0, 0.3);
     padding: 0px 0px 0px 0px;
@@ -39,4 +32,12 @@ span.cartprod {
 
 .home {
     color: #2b3e50;
+}
+
+.cartprod {
+    font-size: 15px;
+}
+
+a:hover {
+    text-decoration: none;
 }
