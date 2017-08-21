@@ -14,3 +14,7 @@ img[class~=products]{
     font-size:large;
     font-weight:bold;
 }
+
+.home {
+    color: #2b3e50;
+}
