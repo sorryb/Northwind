@@ -26,17 +26,51 @@ span.cartprod {
     width: 30px;
     font-size: 30px;
 }
+
+.shopcartcontainer {
+    position:absolute;
+    padding: 20px 25px 0px 20px;
+    right:0px;
+}
+
 [class~=glyphicon-shopping-cart] {
     font-size: 25px;
-    padding:5px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
 }
+
 [class~=roundedshop] {
-    background-color: rgba(195, 0, 0, 0.3);
+    background-color: rgb(223, 105, 26);
     padding: 0px 0px 0px 0px;
     width: 35px;
     height: 35px;
 }
 
+.shopcart-container {
+    position: absolute;
+    margin-top: -12px;
+    width: 35px;
+    text-align: right;
+    float: left;
+}
+
+#shopcart-productcount {
+    font-size: 10px;
+    border: 1px #2b3e50 solid;
+    border-radius: 5px;
+    background-color: rgba(16, 117, 24, 0.6);
+    width: auto;
+    margin: 0px;
+    padding: 0px 2px 0px 2px;
+}
+
 .home {
     color: #2b3e50;
+}
+
+.cartprod {
+    font-size: 15px;
+}
+
+a:hover {
+    text-decoration: none;
 }
