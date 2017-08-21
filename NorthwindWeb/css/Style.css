@@ -66,3 +66,11 @@ span.cartprod {
 .home {
     color: #2b3e50;
 }
+
+.cartprod {
+    font-size: 15px;
+}
+
+a:hover {
+    text-decoration: none;
+}
