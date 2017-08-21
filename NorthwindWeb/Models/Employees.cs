@@ -42,6 +42,9 @@ namespace NorthwindWeb.Models
         [StringLength(15)]
         public string City { get; set; }
 
+        [StringLength(15)]
+        public string Region { get; set; }
+
         [StringLength(10)]
         public string PostalCode { get; set; }
 
@@ -50,6 +53,9 @@ namespace NorthwindWeb.Models
 
         [StringLength(24)]
         public string HomePhone { get; set; }
+
+        [StringLength(4)]
+        public string Extension { get; set; }
 
         [Column(TypeName = "image")]
         public byte[] Photo { get; set; }
