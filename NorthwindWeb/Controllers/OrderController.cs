@@ -31,16 +31,33 @@ namespace NorthwindWeb.Controllers
 
             //db.Orders
             //.OrderBy(i => i.OrderID);
-            var order10 = (from o in db.Orders
-                           join od in db.Order_Details on o.OrderID equals od.OrderID
-                           group od by o.OrderID into x
-                           select new { OrderID = x.Key, total = x.Sum(o => o.UnitPrice * o.Quantity * Convert.ToDecimal(1 - o.Discount)) })
-                           .OrderByDescending(x=>x.total)
-                           .Take(10);
-                        
-                        
 
+            var order10 = (from o in db.Orders
+                                            join od in db.Order_Details on o.OrderID equals od.OrderID
+                                            group od by o.OrderID into x
+                                            select new { OrderID = x.Key, Cost = x.Sum(o => o.UnitPrice * o.Quantity) })
+                           .OrderByDescending(x => x.Cost)
+                           .Take(10);
+                           ;
+            //IQueryable<Order10> orders = order10 as IQueryable<Order10>;
             
+            List<Order10> list= new List<Order10>();
+            
+            foreach (var item in order10)
+            {
+                Order10 x=new Order10();
+                
+                x.OrderID = item.OrderID;
+                x.Cost = item.Cost;
+                list.Add(x);
+              
+            }
+            //IEnumerable<Order10> orders = list;
+            viewModel.Order10 = list;
+
+
+
+
             if (id == 0) { id = null; }
             if (id != null)
             {

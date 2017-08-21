@@ -41,7 +41,7 @@
                             @item.OrderDate
                         </td>
                         <td>
-                            @Html.ActionLink("Detalii", "Home1", new { id = item.OrderID,page = Model.page.PageNumber })>
+                            @Html.ActionLink("Detalii", "Home1", new { id = item.OrderID, page = Model.page.PageNumber })>
                         </td>
                     </tr>
                 }
@@ -185,40 +185,44 @@
             </div>
             <!-- /well -->
             <div class="well">
-                <h4>Popular Blog Categories</h4>
+                <h4>Cele mai expensive comenzi</h4>
+
                 <div class="row">
-                    <div class="col-lg-6">
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#dinosaurs">Dinosaurs</a>
-                            </li>
-                            <li>
-                                <a href="#spaceships">Spaceships</a>
-                            </li>
-                            <li>
-                                <a href="#fried-foods">Fried Foods</a>
-                            </li>
-                            <li>
-                                <a href="#wild-animals">Wild Animals</a>
-                            </li>
-                        </ul>
+                    <div class="col-lg-12">
+                        <table class="table">
+                            <tr>
+                                <th>Numar Comanda</th>
+                                <th>Cost</th>
+                               
+                            </tr>
+
+                            @foreach (var item in Model.Order10)
+                            {
+                            <tr>
+                                <td>@Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, page = Model.page.PageNumber })</td>
+                                <td>@item.Cost</td>
+                                 
+                            </tr>
+                            }
+                        </table>
+
                     </div>
-                    <div class="col-lg-6">
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#alien-abductions">Alien Abductions</a>
-                            </li>
-                            <li>
-                                <a href="#business-casual">Business Casual</a>
-                            </li>
-                            <li>
-                                <a href="#robots">Robots</a>
-                            </li>
-                            <li>
-                                <a href="#fireworks">Fireworks</a>
-                            </li>
-                        </ul>
-                    </div>
+                    @*<div class="col-lg-6">
+                            <ul class="list-unstyled">
+                                <li>
+                                    <a href="#alien-abductions">Alien Abductions</a>
+                                </li>
+                                <li>
+                                    <a href="#business-casual">Business Casual</a>
+                                </li>
+                                <li>
+                                    <a href="#robots">Robots</a>
+                                </li>
+                                <li>
+                                    <a href="#fireworks">Fireworks</a>
+                                </li>
+                            </ul>
+                        </div>*@
                 </div>
             </div>
             <!-- /well -->
@@ -230,5 +234,5 @@
         </div>
     </div>
     Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
-@Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id=0, pid=0}))
+    @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id = 0, pid = 0 }))
 </div>
