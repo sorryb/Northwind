@@ -1722,93 +1722,93 @@ go
 --	Product
 
 --eBookReader select * from Products
-insert into Products values('eBook Reader Kindle 6 Glare Touch Screen WiFi Black 140210',1,5,1,339,10,1,1,'true', '/Images/eBook/ebook-reader-kindle-6-glare-touch-screen-wifi-black.jpg', null, null, null);
-insert into Products values('eBook Reader Kindle PaperWhite Wi-Fi 4GB New Model 2015 Black 111399',2,5,1,629,10,1,1,'true', '/Images/eBook/ebook-reader-kindle-paperwhite-wi-fi-4gb-new-model-2015.jpg', null, null, null);
-insert into Products values('eBook Reader Kindle PaperWhite Wi-Fi 4GB New Model 2015 White 143087',2,5,1,599,10,1,1,'true', '/Images/eBook/ebook-reader-kindle-paperwhite-wifi-white.jpg', null, null, null);
-insert into Products values('eBook Reader PocketBook Touch LUX 3 4GB Red pb626',1,5,1,569,10,1,1,'true', '/Images/eBook/ebook-reader-pocketbook-touch-lux-3-4gb-red.jpg', null, null, null);
-insert into Products values('eBook Reader PocketBook Touch LUX 3 4GB White pb626',2,5,1,569,10,1,1,'true', '/Images/eBook/ebook-reader-pocketbook-touch-lux-3-4gb-white.jpg', '/Images/eBook/ebook-reader-pocketbook-touch-lux-3-4gb-white-3.jpg', null, null);
-insert into Products values('eBook Reader PocketBook Touch LUX 3 4GB Grey pb626',1,5,1,569,10,1,1,'true', '/Images/eBook/ebook-reader-pocketbook-touch-lux-3-4gb-grey.jpg', '/Images/eBook/ebook-reader-pocketbook-touch-lux-3-4gb-grey-2.jpg', null, null);
-insert into Products values('eBook Reader PocketBook Touch HD Black pb631',4,5,1,799,10,1,1,'true', '/Images/eBook/ebook-reader-pocketbook-touch-hd-black.jpg', null, null, null);
-insert into Products values('eBook Reader Bookeen CybooK Muse FrontLight Black',3,5,1,699,10,1,1,'true', '/Images/eBook/e-book-reader-bookeen-cybook-muse-frontlight-black.jpg', null, null, null);
-insert into Products values('eBook Reader Prestigio MultiReader SUPREME 4GB Black',2,5,1,549,10,1,1,'true', '/Images/eBook/ebook-reader-prestigio-multireader-supreme-4gb-black.jpg', null, null, null);
-insert into Products values('eBook Reader Bookeen Cybook Muse HD 8GB Black',4,5,1,569,10,1,1,'true', '/Images/eBook/ebook-reader-bookeen-cybook-muse-hd-8gb-black.jpg', '/Images/eBook/ebook-reader-bookeen-cybook-muse-hd-8gb-black-6.jpg', null, null);
-insert into Products values('eBook Reader Bookeen Cybook Muse Light 4GB Black ',3,5,1,579,10,1,1,'true', '/Images/eBook/ebook-reader-bookeen-cybook-muse-light-4gb-black.jpg', '/Images/eBook/ebook-reader-bookeen-cybook-muse-light-4gb-black-3.jpg', null, null);
-
---tel clasice
-insert into Products values('Telefon Mobil CAT B25 Dual SIM Black',2,1,1,229,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-cat-b25-dual-sim-black.jpg', '/Images/telefoane_clasice/telefon-mobil-cat-b25-dual-sim-black-3.jpg', null, null);
-insert into Products values('Telefon Mobil Nokia 3310 Dual SIM Dark Blue',1,1,1,249,10,1,1,'true','/Images/telefoane_clasice/telefon-mobil-nokia-3310-dual-sim-dark-blue.jpg', '/Images/telefoane_clasice/telefon-mobil-nokia-3310-dual-sim-dark-blue-1.jpg', null, null)
-insert into Products values('Telefon Mobil Alcatel Tiger X3 1016G Black',4,1,1,69,10,1,1,'true','/Images/telefoane_clasice/telefon-mobil-alcatel-tiger-x3-1016g-black-2.jpg', '/Images/telefoane_clasice/telefon-mobil-alcatel-tiger-x3-1016g-black-4.jpg', null, null)
-insert into Products values('Telefon Mobil Nokia 3310 Single Sim Orange',1,1,1,249,10,1,1,'true','/Images/telefoane_clasice/telefon-mobil-nokia-3310-orange.jpg', null, null, null)
-insert into Products values('Telefon Mobil Nokia 130 Dual SIM Red',2,1,1,99,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-nokia-130-dual-sim-red.jpg', '/Images/telefoane_clasice/telefon-mobil-nokia-130-dual-sim-red-2.jpg', null, null);
-insert into Products values('Telefon Mobil Alcatel 1054 White',1,1,1,83,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-alcatel-1054-white.jpg', null, null, null);
-insert into Products values('Telefon Mobil Nokia 150 Single Sim White',3,1,1,141,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-nokia-150-dual-sim-white.jpg', null, null, null);
-insert into Products values('Telefon Mobil MaxCom MM 141 Dual Sim Grey',2,1,1,101,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-maxcom-mm-141-dual-sim-4g-grey.jpg', '/Images/telefoane_clasice/telefon-mobil-maxcom-mm-141-dual-sim-4g-grey-1.jpg', '/Images/telefoane_clasice/telefon-mobil-maxcom-mm-141-dual-sim-4g-grey-2.jpg', null);
-insert into Products values('Telefon Mobil Alcatel 2008G Black-Silver',1,1,1,165,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-alcatel-2008g-black-silver.jpg', null, null, null);
-insert into Products values('Telefon Mobil Nokia 216 Dual Sim Black',3,1,1,156,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-nokia-216-single-sim-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil Nokia 216 Dual SIM Grey',1,1,1,156,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-nokia-216-dual-sim-grey.jpg','/Images/telefoane_clasice/telefon-mobil-nokia-216-dual-sim-grey-1.jpg', null, null);
-insert into Products values('Telefon Mobil Karbonn K-flip Dual Sim White',1,1,1,127,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-karbonn-k-flip-dual-sim-white.jpg', '/Images/telefoane_clasice/telefon-mobil-karbonn-k-flip-dual-sim-white-2.jpg', '/Images/telefoane_clasice/telefon-mobil-karbonn-k-flip-dual-sim-white-3.jpg', null);
-insert into Products values('Telefon Mobil MyPhone Metro Red',2,1,1,209,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-myphone-metro-red.jpg', '/Images/telefoane_clasice/telefon-mobil-myphone-metro-red-1.jpg', '/Images/telefoane_clasice/telefon-mobil-myphone-metro-red-3.jpg', '/Images/telefoane_clasice/telefon-mobil-myphone-metro-red-2.jpg');
-insert into Products values('Telefon Mobil MyPhone 6310 Dual Sim Black',3,1,1,104,10,1,1,'true', '/Images/telefoane_clasice/telefon-mobil-myphone-6310-dual-sim-black.jpg', '/Images/telefoane_clasice/telefon-mobil-myphone-6310-dual-sim-black-1.jpg', '/Images/telefoane_clasice/telefon-mobil-myphone-6310-dual-sim-black-4.jpg', null);
-
-
--- Accesorii
-insert into Products values('Bratara Xiaomi Silicon pentru MiBand 2 - Roz',4,3,1,24,10,1,1,'true', '/Images/accesorii/bratara-xiaomi-silicon-pentru-miband-2---roz.jpg', null, null, null);
-insert into Products values('Bratara Xiaomi Silicon pentru MiBand 2 - Verde',4,3,1,24,10,1,1,'true', '/Images/accesorii/bratara-xiaomi-silicon-pentru-miband-2---verde.jpg', null, null, null);
-insert into Products values('Curea Ceas Garmin Forerunner 910XT GPS Negru',4,3,1,86,10,1,1,'true', '/Images/accesorii/curea-ceas-garmin-forerunner-910xt-gps-negru.jpg', null, null, null);
-insert into Products values('Bratara Smartwatch Samsung Gear S3 Silicon Maron',4,3,1,127,10,1,1,'true', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-maron.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-maron-1.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-maron-2.jpg', null);
-insert into Products values('Curea Apple Watch 38mm Piele Neagra MLHG2',4,3,1,964,10,1,1,'true', '/Images/accesorii/curea-apple-watch-38mm-piele-neagra-mlhg2-1.jpg', '/Images/accesorii/curea-apple-watch-38mm-piele-neagra-mlhg2-2.jpg', '/Images/accesorii/curea-apple-watch-38mm-piele-neagra-mlhg2.jpg', null);
-insert into Products values('Dock Slate Native Union Pentru Apple Watch',4,3,1,217,10,1,1,'true', '/Images/accesorii/dock-slate-native-union-pentru-apple-watch.jpg', '/Images/accesorii/dock-slate-native-union-pentru-apple-watch-2.jpg', '/Images/accesorii/dock-slate-native-union-pentru-apple-watch-1.jpg', null);
-insert into Products values('Dock Native Union Luxury Tech Marble Pentru Apple Watch',4,3,1,423,10,1,1,'true', '/Images/accesorii/dock-native-union-luxury-tech-marble-pentru-apple-watch.jpg', '/Images/accesorii/dock-native-union-luxury-tech-marble-pentru-apple-watch-1.jpg', null, null);
-insert into Products values('Stand de incarcare pentru Huawei Watch W1 Argintiu',4,3,1,95,10,1,1,'true', '/Images/accesorii/stand-de-incarcare-pentru-huawei-watch-w1-argintiu.jpg', '/Images/accesorii/stand-de-incarcare-pentru-huawei-watch-w1-argintiu-1.jpg', null, null);
-insert into Products values('Cablu de incarcare Fitbit Flex',4,3,1,25,10,1,1,'true', '/Images/accesorii/cablu-de-incarcare-fitbit-flex.jpg', null, null, null);
-insert into Products values('Husa Bumper Cellularline pentru Apple Watch 38mm',4,3,1,49,10,1,1,'true', '/Images/accesorii/husa-bumper-cellularline-pentru-apple-watch-38mm.jpg', '/Images/accesorii/husa-bumper-cellularline-pentru-apple-watch-38mm-1.jpg', '/Images/accesorii/husa-bumper-cellularline-pentru-apple-watch-38mm-2.jpg', null);
-insert into Products values('Bratara Smartwatch Samsung Gear S3 Silicon Argintiur',4,3,1,128,10,1,1,'true', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-argintiu.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-argintiu-1.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-argintiu-2.jpg', null);
-insert into Products values('Bratara Smartwatch Samsung Gear S3 Piele Neagra',4,3,1,115 ,10,1,1,'true', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-piele-neagra.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-piele-neagra-1.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-piele-neagra-3.jpg', null);
-insert into Products values('Bratara Smartwatch Samsung Gear S3 Silicon Khaki',4,3,1,86,10,1,1,'true', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-khaki.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-khaki-1.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-khaki-3.jpg', null);
-insert into Products values('Bratara Smartwatch Samsung Gear S3 Silicon Blue Black',4,3,1,86,10,1,1,'true', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-blue-black.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-blue-black-1.jpg', '/Images/accesorii/bratara-smartwatch-samsung-gear-s3-silicon-blue-black-2.jpg', null);
-insert into Products values('Folie Protectie Sticla Securizata Curbata Apple Watch 42 mm Negra',4,3,1,36,10,1,1,'true', '/Images/accesorii/folie-protectie-sticla-securizata-curbata-apple-watch-42-mm-negra.jpg', null, null, null);
-insert into Products values('Folie Protectie Sticla Securizata Curbata Apple Watch 38 mm Negra',4,3,1,36,10,1,1,'true', '/Images/accesorii/folie-protectie-sticla-securizata-curbata-apple-watch-negra.jpg', null, null, null);
-
-
---smartphones
-insert into Products values('Telefon Mobil Apple iPhone 7 32GB Black',1,2,1,2999,10,1,1,'true', '/Images/Smartphone/telefon-mobil-apple-iphone-7-32gb-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil OnePlus 5 A5000 64GB Dual SIM 4G Black',2,2,1,2599,10,1,1,'true', '/Images/Smartphone/telefon-mobil-oneplus-5-a5000-64gb-dual-sim-4g-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil Samsung Galaxy A3(2017) A320 4G Black',3,2,1,1199,10,1,1,'true', '/Images/Smartphone/telefon-mobil-samsung-galaxy-a3-2017-a320-4g-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil Samsung Galaxy J5(2016) J510 Dual SIM Gold',4,2,1,849,10,1,1,'true', '/Images/Smartphone/telefon-mobil-samsung-galaxy-j510-dual-sim-gold.jpg', null, null, null);
-insert into Products values('Telefon Mobil Samsung Galaxy S8 G950F 64GB 4G Black',1,2,1,2989,10,1,1,'true', '/Images/Smartphone/telefon-mobil-samsung-galaxy-s8-g950f-64gb-4g-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil Apple iPhone 6 32GB Space Gray',2,2,1,1899,10,1,1,'true', '/Images/Smartphone/telefon-mobil-apple-iphone-6-16gb-space-gray.jpg', null, null, null);
-insert into Products values('Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G Black',3,2,1,349,10,1,1,'true', '/Images/Smartphone/telefon-mobil-samsung-galaxy-j105-3g-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G Gold',2,2,1,349,10,1,1,'true', '/Images/Smartphone/telefon-mobil-samsung-galaxy-j105-3g-gold.jpg', null, null, null);
-insert into Products values('Telefon Mobil Xiaomi Redmi 4A 32GB Dual Sim 4G Dark Grey',4,2,1,499,10,1,1,'true', '/Images/Smartphone/telefon-mobil-xiaomi-redmi-4a-16gb-dual-sim-4g-dark-grey.jpg', null, null, null);
-insert into Products values('Telefon Mobil Lenovo Moto Z 32GB Dual Sim 4G Black',3,2,1,1659,10,1,1,'true', '/Images/Smartphone/telefon-mobil-lenovo-moto-z3-32gb-dual-sim-4g-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil Samsung Galaxy S8 Plus G955F 64GB 4G Black',2,2,1,3549,10,1,1,'true', '/Images/Smartphone/telefon-mobil-samsung-galaxy-s8-plus-g955f-64gb-4g-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil HTC 10 32GB 4G Gold',1,2,1,1799,10,1,1,'true', '/Images/Smartphone/telefon-mobil-htc-10-32gb-4g-gold.jpg', null, null, null);
-insert into Products values('Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Gold',3,2,1,1199,10,1,1,'true', '/Images/Smartphone/telefon-mobil-huawei-p10-lite-32gb-dual-sim-4g-gold.jpg', null, null, null);
-insert into Products values('Telefon Mobil Apple iPhone SE 32GB Space Gray',1,2,1,1699,10,1,1,'true', '/Images/Smartphone/telefon-mobil-apple-iphone-se-16gb-space-gray.jpg', null, null, null);
-insert into Products values('Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Black',3,2,1,1199,10,1,1,'true', '/Images/Smartphone/telefon-mobil-huawei-p10-lite-32gb-dual-sim-4g-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G White',1,2,1,339,10,1,1,'true', '/Images/Smartphone/telefon-mobil-samsung-galaxy-j105-3g-white.jpg', '/Images/Smartphone/telefon-mobil-samsung-galaxy-j105-3g-black-cpyy-1.jpg', null, null);
-insert into Products values('Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Blue',4,2,1,1199,10,1,1,'true', '/Images/Smartphone/telefon-mobil-huawei-p10-lite-32gb-dual-sim-4g-blue.jpg', null, null, null);
-insert into Products values('Telefon Mobil Samsung Galaxy S6 Edge G925 32GB Black',4,2,1,1899,10,1,1,'true', '/Images/Smartphone/telefon-mobil-samsung-galaxy-s6-edge-g925-32gb-black.jpg', null, null, null);
-insert into Products values('Telefon Mobil Sony Xperia X Compact 32GB 4G Black xcompactblk',4,2,1,1599,10,1,1,'true', '/Images/Smartphone/telefon-mobil-sony-xperia-x-compact-32gb-4g-black.jpg', '/Images/Smartphone/telefon-mobil-sony-xperia-x-compact-32gb-4g-black-1.jpg', null, null);
-insert into Products values('Telefon Mobil LG G5 SE H840 32GB Titanium Grey H840 Grey',4,2,1,1349,10,1,1,'true', '/Images/Smartphone/telefon-mobil-lg-g5-se-h840-32gb-titanium-grey.jpg', '/Images/Smartphone/telefon-mobil-lg-g5-se-h840-32gb-titanium-grey-1.jpg', '/Images/Smartphone/telefon-mobil-lg-g5-se-h840-32gb-titanium-grey-4.jpg', '/Images/Smartphone/telefon-mobil-lg-g5-se-h840-32gb-titanium-grey-5.jpg');
-insert into Products values('Telefon Mobil Apple iPhone 6s 32GB Space Grey iphone 6s 32gb Space Grey',4,2,1,2599,10,1,1,'true', '/Images/Smartphone/telefon-mobil-apple-iphone-6s-32gb-space-grey.jpg', '/Images/Smartphone/telefon-mobil-apple-iphone-6s-32gb-space-grey-1.jpg', null, null);
-
---gadgeturi
-insert into Products values('Boxa Portabila Emie Cybertron Wireless',1,4,1,749,10,1,1,'true','/Images/Gadgeturi/boxa-portabila-emie-cybertron-wireless-negru.jpg','/Images/Gadgeturi/boxa-portabila-emie-cybertron-wireless-negru-1.jpg',null,null)
-insert into Products values('Ochelari Samsung Gear VR 2 SM-R323 Negru',1,4,1,209,10,1,1,'true','/Images/Gadgeturi/ochelari-vr-samsung-gear-vr-r323-negru.jpg','/Images/Gadgeturi/ochelari-vr-samsung-gear-vr-r323-negru-1.jpg','/Images/Gadgeturi/ochelari-vr-samsung-gear-vr-r323-negru-2.jpg','/Images/Gadgeturi/ochelari-vr-samsung-gear-vr-r323-negru-3.jpg')
-insert into Products values('Manusi cu Casca Bluetooth Hi-Fun M Black',1,4,1,229,10,1,1,'true','/Images/Gadgeturi/manusi-bluetooth-hi-fun-m-black.jpg','/Images/Gadgeturi/manusi-bluetooth-hi-fun-m-black-1.jpg',null,null)
-insert into Products values('Dispozitiv monitorizare somn SenSe Sleep',1,4,1,119,10,1,1,'true','/Images/Gadgeturi/dispozitiv-monitorizare-somn-sense-sleep-peanut.jpg','/Images/Gadgeturi/dispozitiv-monitorizare-somn-sense-sleep-peanut-1.jpg','/Images/Gadgeturi/dispozitiv-monitorizare-somn-sense-sleep-peanut-2.jpg',null)
-insert into Products values('Telecomanda Bluetooth Esperanza',1,4,1,28,10,1,1,'true','/Images/Gadgeturi/telecomanda-bluetooth-esperanza-pentru-ochelari-3d-vr-emv100.jpg','/Images/Gadgeturi/telecomanda-bluetooth-esperanza-pentru-ochelari-3d-vr-emv100-3.jpg','/Images/Gadgeturi/telecomanda-bluetooth-esperanza-pentru-ochelari-3d-vr-emv100-4.jpg','/Images/Gadgeturi/telecomanda-bluetooth-esperanza-pentru-ochelari-3d-vr-emv100-6.jpg')
-insert into Products values('Caciula Stereo Cellularline Music Cap cu Microfon Negru',1,4,1,37,10,1,1,'true', '/Images/Gadgeturi/caciula-stereo-cellularline-music-cap-cu-microfon-negru.jpg', '/Images/Gadgeturi/caciula-stereo-cellularline-music-cap-cu-microfon-negru-1.jpg', '/Images/Gadgeturi/caciula-stereo-cellularline-music-cap-cu-microfon-negru-2.jpg', null);
-insert into Products values('Dispozitiv localizare cu Bluetooth Media-Tech BT Seeker',1,4,1,29,10,1,1,'true', '/Images/Gadgeturi/detector-de-chei-media-tech-bt-seeker-negru.jpg', '/Images/Gadgeturi/detector-de-chei-media-tech-bt-seeker-negru-1.jpg', null, null);
-insert into Products values('Telecomanda Media-Tech Trigger BT pentru VR Matrix PRO Negru',1,4,1,39,10,1,1,'true', '/Images/Gadgeturi/telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru.jpg', '/Images/Gadgeturi/telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru-1.jpg', '/Images/Gadgeturi/telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru-2.jpg', '/Images/Gadgeturi/telecomanda-media-tech-trigger-bt-pentru-vr-matrix-pro-negru-3.jpg');
-insert into Products values('Drona Arcade Orbit',1,4,1,149,10,1,1,'true', '/Images/Gadgeturi/drona-arcade-orbit.jpg', '/Images/Gadgeturi/drona-arcade-orbit-1.jpg', '/Images/Gadgeturi/drona-arcade-orbit-2.jpg', '/Images/Gadgeturi/drona-arcade-orbit-3.jpg');
-insert into Products values('Camera Video Fondi OnReal Negru',1,4,1,514,10,1,1,'true', '/Images/Gadgeturi/camera-video-fondi-onreal-negru.jpg', '/Images/Gadgeturi/camera-video-fondi-onreal-negru-1.jpg', null,null);
-insert into Products values('Telecomanda Arcade Bluetooth pentru Arcade Horizon VR',1,4,1,74,10,1,1,'true', '/Images/Gadgeturi/telecomanda-arcade-bluetooth-pentru-arcade-horizon-vr.jpg',null,null,null);
-insert into Products values('Robot Inteligent Interactiv Ubtech Alpha 1S Bluetooth',1,4,1,2369,10,1,1,'true', '/Images/Gadgeturi/robot-inteligent-interactiv-ubtech-alpha-1s-bluetooth.jpg', '/Images/Gadgeturi/robot-inteligent-interactiv-ubtech-alpha-1s-bluetooth-1.jpg', '/Images/Gadgeturi/robot-inteligent-interactiv-ubtech-alpha-1s-bluetooth-2.jpg', '/Images/Gadgeturi/robot-inteligent-interactiv-ubtech-alpha-1s-bluetooth-4.jpg');
-insert into Products values('Robot Inteligent de Serviciu Uno',1,4,1,3249,10,1,1,'true', '/Images/Gadgeturi/robot-inteligent-uno-de-serviciu-bluetooth.jpg', '/Images/Gadgeturi/robot-inteligent-uno-de-serviciu-bluetooth-1.jpg', '/Images/Gadgeturi/robot-inteligent-uno-de-serviciu-bluetooth-2.jpg', '/Images/Gadgeturi/robot-inteligent-uno-de-serviciu-bluetooth-3.jpg');
-insert into Products values('Boxa Portabila Bluetooth JBL Flip 4 Waterproof Black',1,4,1,579,10,1,1,'true', '/Images/Gadgeturi/boxa-portabila-jbl-flip-4.jpg', '/Images/Gadgeturi/boxa-portabila-jbl-flip-4-1.jpg', '/Images/Gadgeturi/boxa-portabila-jbl-flip-4-2.jpg', '/Images/Gadgeturi/boxa-portabila-jbl-flip-4-3.jpg');
-insert into Products values('Boxa Portabila Bluetooth JBL Charge 2+ Wireless Cu Microfon',1,4,1,499,10,1,1,'true', '/Images/Gadgeturi/boxa-portabila-bluetooth-jbl-charge-2--wireless-cu-microfon-gri.jpg', '/Images/Gadgeturi/boxa-portabila-bluetooth-jbl-charge-2--wireless-cu-microfon-gri-1.jpg', '/Images/Gadgeturi/boxa-portabila-bluetooth-jbl-charge-2--wireless-cu-microfon-gri-2.jpg', '/Images/Gadgeturi/boxa-portabila-bluetooth-jbl-charge-2--wireless-cu-microfon-gri-3.jpg');
+update Products set ProductName='eBook Reader Kindle 6 Glare Touch Screen WiFi Black 140210',				SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=339	where ProductID=1
+update Products set ProductName='eBook Reader Kindle PaperWhite Wi-Fi 4GB New Model 2015 Black 111399',		SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=629	where ProductID=2
+update Products set ProductName='eBook Reader Kindle PaperWhite Wi-Fi 4GB New Model 2015 White 143087',		SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=599	where ProductID=3
+update Products set ProductName='eBook Reader PocketBook Touch LUX 3 4GB Red pb626',						SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=4
+update Products set ProductName='eBook Reader PocketBook Touch LUX 3 4GB White pb626',						SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=5
+update Products set ProductName='eBook Reader PocketBook Touch LUX 3 4GB Grey pb626',						SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=6
+update Products set ProductName='eBook Reader PocketBook Touch HD Black pb631',								SupplierID=4,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=799	where ProductID=7
+update Products set ProductName='eBook Reader Bookeen CybooK Muse FrontLight Black',						SupplierID=3,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=699	where ProductID=8
+update Products set ProductName='eBook Reader Prestigio MultiReader SUPREME 4GB Black',						SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=549	where ProductID=9
+update Products set ProductName='eBook Reader Bookeen Cybook Muse HD 8GB Black',							SupplierID=4,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=10
+update Products set ProductName='eBook Reader Bookeen Cybook Muse Light 4GB Black ',						SupplierID=3,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=579	where ProductID=11
+				  																																										
+				  																																										
+update Products set ProductName='Telefon Mobil CAT B25 Dual SIM Black',										SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=229	where ProductID=12
+update Products set ProductName='Telefon Mobil Nokia 3310 Dual SIM Dark Blue',								SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=249	where ProductID=13
+update Products set ProductName='Telefon Mobil Alcatel Tiger X3 1016G Black',								SupplierID=4,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=69		where ProductID=14
+update Products set ProductName='Telefon Mobil Nokia 3310 Single Sim Orange',								SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=249	where ProductID=15
+update Products set ProductName='Telefon Mobil Nokia 130 Dual SIM Red',										SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=99		where ProductID=16
+update Products set ProductName='Telefon Mobil Alcatel 1054 White',											SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=83		where ProductID=17
+update Products set ProductName='Telefon Mobil Nokia 150 Single Sim White',									SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=141	where ProductID=18
+update Products set ProductName='Telefon Mobil MaxCom MM 141 Dual Sim Grey',								SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=101	where ProductID=19
+update Products set ProductName='Telefon Mobil Alcatel 2008G Black-Silver',									SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=165	where ProductID=20
+update Products set ProductName='Telefon Mobil Nokia 216 Dual Sim Black',									SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=156	where ProductID=21
+update Products set ProductName='Telefon Mobil Nokia 216 Dual SIM Grey',									SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=156	where ProductID=22
+update Products set ProductName='Telefon Mobil Karbonn K-flip Dual Sim White',								SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=127	where ProductID=23
+update Products set ProductName='Telefon Mobil MyPhone Metro Red',											SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=209	where ProductID=24
+update Products set ProductName='Telefon Mobil MyPhone 6310 Dual Sim Black',								SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=104	where ProductID=25
+				 																																										
+				 																																										
+				 																																										
+update Products set ProductName='Bratara Xiaomi Silicon pentru MiBand 2 - Roz',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=24		where ProductID=26
+update Products set ProductName='Bratara Xiaomi Silicon pentru MiBand 2 - Verde',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=24		where ProductID=27
+update Products set ProductName='Curea Ceas Garmin Forerunner 910XT GPS Negru',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=28
+update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Silicon Maron',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=127	where ProductID=29
+update Products set ProductName='Curea Apple Watch 38mm Piele Neagra MLHG2',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=964	where ProductID=30
+update Products set ProductName='Dock Slate Native Union Pentru Apple Watch',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=217	where ProductID=31
+update Products set ProductName='Dock Native Union Luxury Tech Marble Pentru Apple Watch',					SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=423	where ProductID=32
+update Products set ProductName='Stand de incarcare pentru Huawei Watch W1 Argintiu',						SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=95		where ProductID=33
+update Products set ProductName='Cablu de incarcare Fitbit Flex',											SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=25		where ProductID=34
+update Products set ProductName='Husa Bumper Cellularline pentru Apple Watch 38mm',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=49		where ProductID=35
+update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Silicon Argintiur',						SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=128	where ProductID=36
+update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Piele Neagra',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=115	where ProductID=37
+update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Silicon Khaki',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=38
+update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Silicon Blue Black',					SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=39
+update Products set ProductName='Folie Protectie Sticla Securizata Curbata Apple Watch 42 mm Negra',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=36		where ProductID=40
+update Products set ProductName='Folie Protectie Sticla Securizata Curbata Apple Watch 38 mm Negra',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=36		where ProductID=41
+																																														
+																																														
+																																														
+update Products set ProductName='Telefon Mobil Apple iPhone 7 32GB Black',									SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2999	where ProductID=42
+update Products set ProductName='Telefon Mobil OnePlus 5 A5000 64GB Dual SIM 4G Black',						SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2599	where ProductID=43
+update Products set ProductName='Telefon Mobil Samsung Galaxy A3(2017) A320 4G Black',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=44
+update Products set ProductName='Telefon Mobil Samsung Galaxy J5(2016) J510 Dual SIM Gold',					SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=849	where ProductID=45
+update Products set ProductName='Telefon Mobil Samsung Galaxy S8 G950F 64GB 4G Black',						SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2989	where ProductID=46
+update Products set ProductName='Telefon Mobil Apple iPhone 6 32GB Space Gray',								SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1899	where ProductID=47
+update Products set ProductName='Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G Black',		SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=349	where ProductID=48
+update Products set ProductName='Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G Gold',			SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=349	where ProductID=49
+update Products set ProductName='Telefon Mobil Xiaomi Redmi 4A 32GB Dual Sim 4G Dark Grey',					SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=499	where ProductID=50
+update Products set ProductName='Telefon Mobil Lenovo Moto Z 32GB Dual Sim 4G Black',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1659	where ProductID=51
+update Products set ProductName='Telefon Mobil Samsung Galaxy S8 Plus G955F 64GB 4G Black',					SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=3549	where ProductID=52
+update Products set ProductName='Telefon Mobil HTC 10 32GB 4G Gold',										SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1799	where ProductID=53
+update Products set ProductName='Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Gold',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=54
+update Products set ProductName='Telefon Mobil Apple iPhone SE 32GB Space Gray',							SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1699	where ProductID=55
+update Products set ProductName='Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Black',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=56
+update Products set ProductName='Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G White',		SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=339	where ProductID=57
+update Products set ProductName='Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Blue',						SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=58
+update Products set ProductName='Telefon Mobil Samsung Galaxy S6 Edge G925 32GB Black',						SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1899	where ProductID=59
+update Products set ProductName='Telefon Mobil Sony Xperia X Compact 32GB 4G Black xcompactblk',			SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1599	where ProductID=60
+update Products set ProductName='Telefon Mobil LG G5 SE H840 32GB Titanium Grey H840 Grey',					SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1349	where ProductID=61
+update Products set ProductName='Telefon Mobil Apple iPhone 6s 32GB Space Grey iphone 6s 32gb Space Grey',	SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2599	where ProductID=62
+																																														
+																																														
+update Products set ProductName='Boxa Portabila Emie Cybertron Wireless',									SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=749	where ProductID=63
+update Products set ProductName='Ochelari Samsung Gear VR 2 SM-R323 Negru',									SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=209	where ProductID=64
+update Products set ProductName='Manusi cu Casca Bluetooth Hi-Fun M Black',									SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=229	where ProductID=65
+update Products set ProductName='Dispozitiv monitorizare somn SenSe Sleep',									SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=119	where ProductID=66
+update Products set ProductName='Telecomanda Bluetooth Esperanza',											SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=28		where ProductID=67
+update Products set ProductName='Caciula Stereo Cellularline Music Cap cu Microfon Negru',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=37		where ProductID=68
+update Products set ProductName='Dispozitiv localizare cu Bluetooth Media-Tech BT Seeker',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=29		where ProductID=69
+update Products set ProductName='Telecomanda Media-Tech Trigger BT pentru VR Matrix PRO Negru',				SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=39		where ProductID=70
+update Products set ProductName='Drona Arcade Orbit',														SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=149	where ProductID=71
+update Products set ProductName='Camera Video Fondi OnReal Negru',											SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=514	where ProductID=72
+update Products set ProductName='Telecomanda Arcade Bluetooth pentru Arcade Horizon VR',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=74		where ProductID=73
+update Products set ProductName='Robot Inteligent Interactiv Ubtech Alpha 1S Bluetooth',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=2369	where ProductID=74
+update Products set ProductName='Robot Inteligent de Serviciu Uno',											SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=3249	where ProductID=75
+update Products set ProductName='Boxa Portabila Bluetooth JBL Flip 4 Waterproof Black',						SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=579	where ProductID=76
+update Products set ProductName='Boxa Portabila Bluetooth JBL Charge 2+ Wireless Cu Microfon',				SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=499	where ProductID=77
 
 go
 

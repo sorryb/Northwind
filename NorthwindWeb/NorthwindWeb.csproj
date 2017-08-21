@@ -197,6 +197,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\Order10.cs" />
+    <Compile Include="ViewModels\Comanda.cs" />
     <Compile Include="ViewModels\OrderIndexData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -464,7 +465,7 @@
     <Content Include="Views\Other\Faq.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Other\FourOhFour.cshtml" />
+    <Content Include="Views\Other\alt2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
