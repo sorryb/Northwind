@@ -31,6 +31,16 @@ namespace NorthwindWeb.Controllers
 
             //db.Orders
             //.OrderBy(i => i.OrderID);
+            var order10 = (from o in db.Orders
+                           join od in db.Order_Details on o.OrderID equals od.OrderID
+                           group od by o.OrderID into x
+                           select new { OrderID = x.Key, total = x.Sum(o => o.UnitPrice * o.Quantity * Convert.ToDecimal(1 - o.Discount)) })
+                           .OrderByDescending(x=>x.total)
+                           .Take(10);
+                        
+                        
+
+            
             if (id == 0) { id = null; }
             if (id != null)
             {
@@ -45,16 +55,6 @@ namespace NorthwindWeb.Controllers
                 ViewBag.ProductID = pid.Value;
 
                 viewModel.Product = db.Products.Where(x => x.ProductID == pid);
-                                 
-
-                //var selectedDetails = viewModel.Order_Detail.Where(x => x.ProductID == pid).Single();
-                //db.Entry(selectedDetails).Collection(x => x.Products).Load();
-                //foreach (Products produs in selectedDetails.Products)
-                //{
-                //    db.Entry(produs).Reference(x => x.Order_Details).Load();
-                //}
-
-                //viewModel.Product = selectedDetails.Products;
             }
             int pageSize = 10;
             int pageNumber = (page ?? 1);
