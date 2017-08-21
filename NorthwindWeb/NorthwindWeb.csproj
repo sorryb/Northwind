@@ -466,6 +466,7 @@
   <ItemGroup>
     <Content Include="Views\Products\Products.cshtml" />
     <None Include="Properties\PublishProfiles\BROMPREPROD1.pubxml" />
+    <Content Include="Views\Products\Search.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
