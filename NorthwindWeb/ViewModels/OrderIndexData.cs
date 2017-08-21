@@ -11,5 +11,6 @@ namespace NorthwindWeb.ViewModels
         public IEnumerable<Order_Details> Order_Detail { get; set; }
         public IEnumerable<Products> Product { get; set; }
         public IEnumerable<Order10> Order10 { get; set; }
+        public BigOrder Comanda { get; set; }
     }
 }
