@@ -32,7 +32,7 @@ namespace NorthwindWeb.Controllers
             }
             ViewBag.CurrentFilter = search;
             viewModel.Order = comenzii(search);
-            
+            viewModel.Comanda = bigcomanda();
 
             viewModel.Order10 = lista();
             if (id == 0) { id = null; }
@@ -90,8 +90,8 @@ namespace NorthwindWeb.Controllers
                        ;
             if (!String.IsNullOrEmpty(search))
             {
-
-                if (int.TryParse(search, out int i))
+                int i;
+                if (int.TryParse(search, out  i))
                 {
                     order = order.Where(s => s.OrderID == i);
                 }
@@ -116,6 +116,22 @@ namespace NorthwindWeb.Controllers
 
             }
             return comenzi;
+        }
+        public BigOrder bigcomanda()
+        {
+            var order = (from o in db.Orders
+                         join od in db.Order_Details on o.OrderID equals od.OrderID
+                         group od by o.OrderID into x
+                         select new { OrderID = x.Key, max = x.Sum(o=>o.Quantity) })
+                                  .OrderByDescending(x => x.max)
+                                  .Take(1);
+            BigOrder s=new BigOrder();
+            foreach (var item in order)
+            {
+                s.OrderID = item.OrderID;
+                s.Produse = item.max;
+            }
+            return s;
         }
     }
 }
