@@ -5,10 +5,6 @@ go
 
 ---------------------------------------------------------------------------------------
 --		Employees
-alter table Employees
-	drop column Extension,
-		column Region
-go
 
 update Employees
 Set LastName = 'Danciu', 
@@ -148,83 +144,263 @@ update Region
 set RegionDescription = 'Dobrogea'
 where RegionID = '4';
 
-insert into Region values ('5', 'Maramures')
-insert into Region values ('6', 'Moldova')
-insert into Region values ('7', 'Muntenia')
-insert into Region values ('8', 'Oltenia')
-insert into Region values ('9', 'Transilvania')
+if(not exists (SELECT * FROM Region where RegionDescription = 'Maramures' or RegionID = '5'))
+	insert into Region values ('5', 'Maramures');
+if(not exists (SELECT * FROM Region where RegionDescription = 'Moldova' or RegionID = '6'))
+	insert into Region values ('6', 'Moldova')
+if(not exists (SELECT * FROM Region where RegionDescription = 'Muntenia' or RegionID = '7'))
+	insert into Region values ('7', 'Muntenia')
+if(not exists (SELECT * FROM Region where RegionDescription = 'Oltenia' or RegionID = '8'))
+	insert into Region values ('8', 'Oltenia')
+if(not exists (SELECT * FROM Region where RegionDescription = 'Transilvania' or RegionID = '9'))
+	insert into Region values ('9', 'Transilvania')
 go
----------------------------------------------------------------------------------------
---		Territories
 
-/*#1. drop FOREIGN key*/
-alter table EmployeeTerritories
-drop constraint FK_EmployeeTerritories_Territories
-go
+
+---------------------------------------------------------------------------------------
+--		EmployeeTerritories truncate
 
 truncate table EmployeeTerritories
-truncate table Territories
-go
 
-/*#1. create FOREIGN key */
-ALTER TABLE [dbo].[EmployeeTerritories]
-ADD  CONSTRAINT [FK_EmployeeTerritories_Territories] FOREIGN KEY(TerritoryID)
-REFERENCES [dbo].[Territories] ([TerritoryID])
-go
-
+---------------------------------------------------------------------------------------
+--		Territories
+--select * from Territories
 /*Banat*/
-insert into Territories values('1', 'Timis', 1);
-insert into Territories values('2', 'Caras-Severin', 1);
+update Territories
+set TerritoryID = '1',
+	TerritoryDescription = 'Timis',
+	RegionID = 1
+where TerritoryID = 01581;
+update Territories
+set TerritoryID = '2',
+	TerritoryDescription = 'Caras-Severin',
+	RegionID = 1
+where TerritoryID = 01730;
+update Territories
+set TerritoryID = '3',
+	TerritoryDescription = 'Botosani',
+	RegionID = 2
+where TerritoryID = 01833;
 /*Bucovina*/
-insert into Territories values('3', 'Botosani', 2);
-insert into Territories values('4', 'Suceava', 2);
+update Territories
+set TerritoryID = '4',
+	TerritoryDescription = 'Suceava',
+	RegionID = 2
+where TerritoryID = 02116;
+update Territories
+set TerritoryID = '5',
+	TerritoryDescription = 'Bihor',
+	RegionID = 3
+where TerritoryID = 02139;
 /*Crisana*/
-insert into Territories values('5', 'Bihor', 3);
-insert into Territories values('6', 'Arad', 3);
+update Territories
+set TerritoryID = '6',
+	TerritoryDescription = 'Arad',
+	RegionID = 3
+where TerritoryID = 02184;
+update Territories
+set TerritoryID = '7',
+	TerritoryDescription = 'Tulcea',
+	RegionID = 4
+where TerritoryID = 02903;
 /*Dobrogea*/
-insert into Territories values('7', 'Tulcea', 4);
-insert into Territories values('8', 'Constanta', 4);
+update Territories
+set TerritoryID = '8',
+	TerritoryDescription = 'Constanta',
+	RegionID = 4
+where TerritoryID = 03049;
+update Territories
+set TerritoryID = '9',
+	TerritoryDescription = 'Satu-Mare',
+	RegionID = 5
+where TerritoryID = 03801;
 /*Maramures*/
-insert into Territories values('9', 'Satu-Mare', 5);
-insert into Territories values('10', 'Maramures', 5);
+update Territories
+set TerritoryID = '10',
+	TerritoryDescription = 'Maramures',
+	RegionID = 5
+where TerritoryID = 06897;
+update Territories
+set TerritoryID = '11',
+	TerritoryDescription = 'Neamt',
+	RegionID = 6
+where TerritoryID = 07960;
 /*Moldova*/
-insert into Territories values('11', 'Neamt', 6);
-insert into Territories values('12', 'Iasi', 6);
-insert into Territories values('13', 'Bacau', 6);
-insert into Territories values('14', 'Vaslui', 6);
-insert into Territories values('15', 'Vrancea', 6);
-insert into Territories values('16', 'Galati', 6);
+update Territories
+set TerritoryID = '12',
+	TerritoryDescription = 'Iasi',
+	RegionID = 6
+where TerritoryID = 08837;
+update Territories
+set TerritoryID = '13',
+	TerritoryDescription = 'Bacau',
+	RegionID = 6
+where TerritoryID = 10019;
+update Territories
+set TerritoryID = '14',
+	TerritoryDescription = 'Vaslui',
+	RegionID = 6
+where TerritoryID = 10038;
+update Territories
+set TerritoryID = '15',
+	TerritoryDescription = 'Vrancea',
+	RegionID = 6
+where TerritoryID = 11747;
+update Territories
+set TerritoryID = '16',
+	TerritoryDescription = 'Galati',
+	RegionID = 6
+where TerritoryID = 14450;
+update Territories
+set TerritoryID = '17',
+	TerritoryDescription = 'Braila',
+	RegionID = 7
+where TerritoryID = 19428;
 /*Muntenia*/
-insert into Territories values('17', 'Braila', 7);
-insert into Territories values('18', 'Buzau', 7);
-insert into Territories values('19', 'Calarasi', 7);
-insert into Territories values('20', 'Prahova', 7);
-insert into Territories values('21', 'Dambovita', 7);
-insert into Territories values('22', 'Arges', 7);
-insert into Territories values('23', 'Ialomita', 7);
-insert into Territories values('24', 'Calarasi', 7);
-insert into Territories values('25', 'Ilfov', 7);
-insert into Territories values('26', 'Bucuresti', 7);
-insert into Territories values('27', 'Giurgiu', 7);
-insert into Territories values('28', 'Teleorman', 7);
+update Territories
+set TerritoryID = '18',
+	TerritoryDescription = 'Buzau',
+	RegionID = 7
+where TerritoryID = 19713;
+update Territories
+set TerritoryID = '19',
+	TerritoryDescription = 'Calarasi',
+	RegionID = 7
+where TerritoryID = 20852;
+update Territories
+set TerritoryID = '20',
+	TerritoryDescription = 'Prahova',
+	RegionID = 7
+where TerritoryID = 27403;
+update Territories
+set TerritoryID = '21',
+	TerritoryDescription = 'Dambovita',
+	RegionID = 7
+where TerritoryID = 27511;
+update Territories
+set TerritoryID = '22',
+	TerritoryDescription = 'Arges',
+	RegionID = 7
+where TerritoryID = 29202;
+update Territories
+set TerritoryID = '23',
+	TerritoryDescription = 'Ialomita',
+	RegionID = 7
+where TerritoryID = 30346;
+update Territories
+set TerritoryID = '24',
+	TerritoryDescription = 'Calarasi',
+	RegionID = 7
+where TerritoryID = 31406;
+update Territories
+set TerritoryID = '25',
+	TerritoryDescription = 'Ilfov',
+	RegionID = 7
+where TerritoryID = 32859;
+update Territories
+set TerritoryID = '26',
+	TerritoryDescription = 'Bucuresti',
+	RegionID = 7
+where TerritoryID = 33607;
+update Territories
+set TerritoryID = '27',
+	TerritoryDescription = 'Giurgiu',
+	RegionID = 7
+where TerritoryID = 40222;
+update Territories
+set TerritoryID = '28',
+	TerritoryDescription = 'Teleorman',
+	RegionID = 7
+where TerritoryID = 44122;
+update Territories
+set TerritoryID = '29',
+	TerritoryDescription = 'Gorj',
+	RegionID = 8
+where TerritoryID = 45839;
 /*Oltenia*/
-insert into Territories values('29', 'Gorj', 8);
-insert into Territories values('30', 'Valcea', 8);
-insert into Territories values('31', 'Olt', 8);
-insert into Territories values('32', 'Dolj', 8);
-insert into Territories values('33', 'Mehedinti', 8);
+update Territories
+set TerritoryID = '30',
+	TerritoryDescription = 'Valcea',
+	RegionID = 8
+where TerritoryID = 48075;
+update Territories
+set TerritoryID = '31',
+	TerritoryDescription = 'Olt',
+	RegionID = 8
+where TerritoryID = 48084;
+update Territories
+set TerritoryID = '32',
+	TerritoryDescription = 'Dolj',
+	RegionID = 8
+where TerritoryID = 48304;
+update Territories
+set TerritoryID = '33',
+	TerritoryDescription = 'Mehedinti',
+	RegionID = 8
+where TerritoryID = 53404;
+update Territories
+set TerritoryID = '34',
+	TerritoryDescription = 'Salaj',
+	RegionID = 9
+where TerritoryID = 55113;
 /*Transilvania*/
-insert into Territories values('34', 'Salaj', 9);
-insert into Territories values('35', 'Bistrita-Nasaud', 9);
-insert into Territories values('36', 'Cluj', 9);
-insert into Territories values('37', 'Mures', 9);
-insert into Territories values('38', 'Harghita', 9);
-insert into Territories values('39', 'Covasna', 9);
-insert into Territories values('40', 'Brasov', 9);
-insert into Territories values('41', 'Sibiu', 9);
-insert into Territories values('42', 'Alba', 9);
-insert into Territories values('43', 'Hunedoara', 9);
+update Territories
+set TerritoryID = '35',
+	TerritoryDescription = 'Bistrita-Nasaud',
+	RegionID = 9
+where TerritoryID = 55439;
+update Territories
+set TerritoryID = '36',
+	TerritoryDescription = 'Cluj',
+	RegionID = 9
+where TerritoryID = 60179;
+update Territories
+set TerritoryID = '37',
+	TerritoryDescription = 'Mures',
+	RegionID = 9
+where TerritoryID = 60601;
+update Territories
+set TerritoryID = '38',
+	TerritoryDescription = 'Harghita',
+	RegionID = 9
+where TerritoryID = 72716;
+update Territories
+set TerritoryID = '39',
+	TerritoryDescription = 'Covasna',
+	RegionID = 9
+where TerritoryID = 75234;
+update Territories
+set TerritoryID = '40',
+	TerritoryDescription = 'Brasov',
+	RegionID = 9
+where TerritoryID = 78759;
+update Territories
+set TerritoryID = '41',
+	TerritoryDescription = 'Sibiu',
+	RegionID = 9
+where TerritoryID = 80202;
+update Territories
+set TerritoryID = '42',
+	TerritoryDescription = 'Alba',
+	RegionID = 9
+where TerritoryID = 80909;
+update Territories
+set TerritoryID = '43',
+	TerritoryDescription = 'Hunedoara',
+	RegionID = 9
+where TerritoryID = 85014;
 go
+
+delete from Territories where TerritoryID = 90405;
+delete from Territories where TerritoryID = 94025;
+delete from Territories where TerritoryID = 94105;
+delete from Territories where TerritoryID = 95008;
+delete from Territories where TerritoryID = 95054;
+delete from Territories where TerritoryID = 95060;
+delete from Territories where TerritoryID = 98004;
+delete from Territories where TerritoryID = 98052;
+delete from Territories where TerritoryID = 98104;
+delete from Territories where TerritoryID = 85251;
 
 ---------------------------------------------------------------------------------------
 --		EmployeeTerritories
@@ -295,6 +471,7 @@ insert into EmployeeTerritories values (9, 27);
 insert into EmployeeTerritories values (9, 24);
 insert into EmployeeTerritories values (9, 26);
 go
+
 
 ---------------------------------------------------------------------------------------
 --		Customers
@@ -1542,49 +1719,8 @@ end;
 go
 
 ----------------------------------------------------------------------------------
---	Product changes
+--	Product
 
-/* Alter table pentu a il putea modifica*/
-alter table [Order Details]
-drop constraint FK_Order_Details_Products;
-go
---supliers
-alter table Products
-drop constraint FK_Products_Categories;
-go
-
-alter table Products
-drop constraint FK_Products_Suppliers;
-
-
-	truncate table [dbo].[Suppliers];
-
-	alter table Suppliers
-	alter column [Address] nvarchar(100);
-	--sup list
-	insert into Suppliers values('EURO GSM IMPEX S.R.L.','Ion Vasilde','Proprietar','B-dul Muncii nr.18','CLUJ-NAPOCA',null,'400641','Romania','0264450450',null,'https://eurogsm.ro');
-	insert into Suppliers values('GERSIM IMPEX S.R.L.','Mircea Daniel','Manager depozit','Strada Bilciurești 9A','BUCURESTI',null,'014012','Romania','0213264850','0213264851','http://www.gersim.ro');
-	insert into Suppliers values('EMAG S.A.','Dumitru George','Agent Vanzari','Swan Office Park, Windsor Building Sos. Bucureşti Nord nr. 15-23','ILFOV',null,'077190','Romania','0722.25.00.00',null,'https://emag.ro');
-	insert into Suppliers values('SC MEDIA GALAXY S.R.L.','Popescu Mihai','Reprezentant Vanzari','Bulevardul Poligrafiei Nr.1, Sector 1','Bucuresti',null,'400641','Romania','0212062000','0213199939','www.mediagalaxy.ro');
-
--- aici stergem produsele
-truncate table Products
-
-ALTER TABLE [dbo].Products
-ADD  CONSTRAINT FK_Products_Suppliers FOREIGN KEY(SupplierID)
-REFERENCES [dbo].Suppliers (SupplierID)
-go
-
--- aici bagam produsele
-alter table Products
-alter column ProductName nvarchar(100);
-go
-alter table Products
-add img text null,
-	img1 text null,
-	img2 text null,
-	img3 text null;
-go
 --eBookReader select * from Products
 insert into Products values('eBook Reader Kindle 6 Glare Touch Screen WiFi Black 140210',1,5,1,339,10,1,1,'true', '/Images/eBook/ebook-reader-kindle-6-glare-touch-screen-wifi-black.jpg', null, null, null);
 insert into Products values('eBook Reader Kindle PaperWhite Wi-Fi 4GB New Model 2015 Black 111399',2,5,1,629,10,1,1,'true', '/Images/eBook/ebook-reader-kindle-paperwhite-wi-fi-4gb-new-model-2015.jpg', null, null, null);
@@ -1675,6 +1811,89 @@ insert into Products values('Boxa Portabila Bluetooth JBL Flip 4 Waterproof Blac
 insert into Products values('Boxa Portabila Bluetooth JBL Charge 2+ Wireless Cu Microfon',1,4,1,499,10,1,1,'true', '/Images/Gadgeturi/boxa-portabila-bluetooth-jbl-charge-2--wireless-cu-microfon-gri.jpg', '/Images/Gadgeturi/boxa-portabila-bluetooth-jbl-charge-2--wireless-cu-microfon-gri-1.jpg', '/Images/Gadgeturi/boxa-portabila-bluetooth-jbl-charge-2--wireless-cu-microfon-gri-2.jpg', '/Images/Gadgeturi/boxa-portabila-bluetooth-jbl-charge-2--wireless-cu-microfon-gri-3.jpg');
 
 go
+
+----------------------------------------------------------------------------------
+--		Suppliers
+
+update Suppliers 
+	set CompanyName = 'EURO GSM IMPEX S.R.L.',
+	ContactName = 'Ion Vasilde',
+	ContactTitle = 'Proprietar',
+	[Address] = 'B-dul Muncii nr.18',
+	City = 'CLUJ-NAPOCA',
+	Region = null,
+	PostalCode = '400641',
+	Country = 'Romania',
+	Phone = '0264450450',
+	Fax = 'null',
+	HomePage = 'https://eurogsm.ro'
+where CompanyName = 'Exotic Liquids';
+update Suppliers 
+	set CompanyName = 'GERSIM IMPEX S.R.L.',
+	ContactName = 'Mircea Daniel',
+	ContactTitle = 'Manager depozit',
+	[Address] = 'Strada Bilciurești 9A',
+	City = 'BUCURESTI',
+	Region = null,
+	PostalCode = '014012',
+	Country = 'Romania',
+	Phone = '0213264850',
+	Fax = '0213264851',
+	HomePage = 'http://www.gersim.ro'
+where CompanyName = 'New Orleans Cajun Delights';
+update Suppliers 
+	set CompanyName = 'EMAG S.A.','Dumitru George',
+	ContactName = 'Dumitru George',
+	ContactTitle = 'Agent Vanzari',
+	[Address] = 'Swan Office Park, Windsor Building Sos. Bucureşti Nord nr. 15-23',
+	City = 'ILFOV',
+	Region = 'null',
+	PostalCode = '077190',
+	Country = 'Romania',
+	Phone = '0722.25.00.00',
+	Fax = null,
+	HomePage = 'https://emag.ro'
+where CompanyName like 'Grandma Kelly%' and CompanyName like '%s Homestead';
+update Suppliers 
+	set CompanyName = 'SC MEDIA GALAXY S.R.L.',
+	ContactName = 'Popescu Mihai',
+	ContactTitle = 'Reprezentant Vanzari',
+	[Address] = 'Bulevardul Poligrafiei Nr.1, Sector 1',
+	City = 'Bucuresti',
+	Region = null,
+	PostalCode = '400641',
+	Country = 'Romania',
+	Phone = '0212062000',
+	Fax = '0213199939',
+	HomePage = 'www.mediagalaxy.ro'
+where CompanyName = 'Tokyo Traders';
+
+
+delete from Suppliers where CompanyName like 'Cooperativa de Quesos %' and CompanyName like '%Las Cabras';
+delete from Suppliers where CompanyName like 'Mayumi%';
+delete from Suppliers where CompanyName = 'Pavlova, Ltd.';
+delete from Suppliers where CompanyName = 'Specialty Biscuits, Ltd.';
+delete from Suppliers where CompanyName = 'PB Knäckebröd AB';
+delete from Suppliers where CompanyName = 'Refrescos Americanas LTDA';
+delete from Suppliers where CompanyName = 'Heli Süßwaren GmbH & Co. KG';
+delete from Suppliers where CompanyName = 'Plutzer Lebensmittelgroßmärkte AG';
+delete from Suppliers where CompanyName = 'Nord-Ost-Fisch Handelsgesellschaft mbH';
+delete from Suppliers where CompanyName = 'Formaggi Fortini s.r.l.';
+delete from Suppliers where CompanyName = 'Norske Meierier';
+delete from Suppliers where CompanyName = 'Bigfoot Breweries';
+delete from Suppliers where CompanyName = 'Svensk Sjöföda AB';
+delete from Suppliers where CompanyName = 'Aux joyeux ecclésiastiques';
+delete from Suppliers where CompanyName = 'New England Seafood Cannery';
+delete from Suppliers where CompanyName = 'Leka Trading';
+delete from Suppliers where CompanyName = 'Lyngbysild';
+delete from Suppliers where CompanyName = 'Zaanse Snoepfabriek';
+delete from Suppliers where CompanyName = 'Karkki Oy';
+delete from Suppliers where CompanyName like '%day, Mate';
+delete from Suppliers where CompanyName = 'Ma Maison';
+delete from Suppliers where CompanyName = 'Pasta Buttini s.r.l.';
+delete from Suppliers where CompanyName = 'Escargots Nouveaux';
+delete from Suppliers where CompanyName = 'Gai pâturage';
+delete from Suppliers where CompanyName like 'Forêts d%' and CompanyName like '%érables';
 ----------------------------------------------------------------------------------
 --	Category Changes
 
