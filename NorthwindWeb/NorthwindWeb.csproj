@@ -198,6 +198,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\Order10.cs" />
     <Compile Include="ViewModels\OrderIndexData.cs" />
+    <Compile Include="ViewModels\ServicesIndex.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
