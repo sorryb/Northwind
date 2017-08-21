@@ -1784,31 +1784,31 @@ update Products set ProductName='Lenovo Moto Z 32GB Dual Sim 4G Black',		Supplie
 update Products set ProductName='Samsung Galaxy S8 Plus 64GB 4G Black',		SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=3549	where ProductID=52
 update Products set ProductName='HTC 10 32GB 4G Gold',						SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1799	where ProductID=53
 update Products set ProductName='Huawei P10 Lite 32GB Dual Sim 4G Gold',	SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=54
-update Products set ProductName='Apple iPhone SE 32GB Space Gray',							SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1699	where ProductID=55
-update Products set ProductName='Huawei P10 Lite 32GB Dual Sim 4G Black',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=56
-update Products set ProductName='Samsung Galaxy J1 Prime White',		SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=339	where ProductID=57
-update Products set ProductName='Huawei P10 Lite 32GB Blue',						SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=58
-update Products set ProductName='Samsung Galaxy S6 Edge 32GB Black',						SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1899	where ProductID=59
-update Products set ProductName='Sony Xperia X Compact 32GB 4G Black',			SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1599	where ProductID=60
-update Products set ProductName='LG G5 SE H840 32GB Titanium Grey',					SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1349	where ProductID=61
-update Products set ProductName='iPhone 6s 32GB 32gb Space Grey',	SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2599	where ProductID=62
+update Products set ProductName='Apple iPhone SE 32GB Space Gray',			SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1699	where ProductID=55
+update Products set ProductName='Huawei P10 Lite 32GB Dual Sim 4G Black',	SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=56
+update Products set ProductName='Samsung Galaxy J1 Prime White',			SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=339	where ProductID=57
+update Products set ProductName='Huawei P10 Lite 32GB Blue',				SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=58
+update Products set ProductName='Samsung Galaxy S6 Edge 32GB Black',		SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1899	where ProductID=59
+update Products set ProductName='Sony Xperia X Compact 32GB 4G Black',		SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1599	where ProductID=60
+update Products set ProductName='LG G5 SE H840 32GB Titanium Grey',			SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1349	where ProductID=61
+update Products set ProductName='iPhone 6s 32GB 32gb Space Grey',			SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2599	where ProductID=62
 																																														
 																																														
-update Products set ProductName='Boxa Portabila Emie Cybertron Wireless',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=749	where ProductID=63
-update Products set ProductName='Ochelari Samsung Gear VR 2 SM-R323 Negru',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=209	where ProductID=64
-update Products set ProductName='Manusi cu Casca Bluetooth Hi-Fun M Black',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=229	where ProductID=65
-update Products set ProductName='Dispozitiv monitorizare somn SenSe Sleep',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=119	where ProductID=66
-update Products set ProductName='Telecomanda Bluetooth Esperanza',							SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=28		where ProductID=67
-update Products set ProductName='Caciula Stereo cu Microfon Negru',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=37		where ProductID=68
-update Products set ProductName='Dispozitiv localizare cu  Seeker',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=29		where ProductID=69
-update Products set ProductName='Telecomanda Media-Tech pentru VR',				SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=39		where ProductID=70
-update Products set ProductName='Drona Arcade Orbit',														SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=149	where ProductID=71
-update Products set ProductName='Camera Video Fondi OnReal Negru',											SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=514	where ProductID=72
-update Products set ProductName='Telecomanda Arcade Bluetooth',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=74		where ProductID=73
-update Products set ProductName='Robot Inteligent Interactiv Ubtech Alpha',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=2369	where ProductID=74
-update Products set ProductName='Robot Inteligent de Serviciu Uno',											SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=3249	where ProductID=75
-update Products set ProductName='Boxa Portabila Flip 4 Waterproof Black',						SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=579	where ProductID=76
-update Products set ProductName='Boxa Portabila  Wireless Cu Microfon',				SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=499	where ProductID=77
+update Products set ProductName='Boxa Portabila Emie Cybertron Wireless',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=749	where ProductID=63
+update Products set ProductName='Ochelari Samsung Gear VR 2 SM-R323 Negru',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=209	where ProductID=64
+update Products set ProductName='Manusi cu Casca Bluetooth Hi-Fun M Black',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=229	where ProductID=65
+update Products set ProductName='Dispozitiv monitorizare somn SenSe Sleep',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=119	where ProductID=66
+update Products set ProductName='Telecomanda Bluetooth Esperanza',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=28		where ProductID=67
+update Products set ProductName='Caciula Stereo cu Microfon Negru',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=37		where ProductID=68
+update Products set ProductName='Dispozitiv localizare cu  Seeker',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=29		where ProductID=69
+update Products set ProductName='Telecomanda Media-Tech pentru VR',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=39		where ProductID=70
+update Products set ProductName='Drona Arcade Orbit',						SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=149	where ProductID=71
+update Products set ProductName='Camera Video Fondi OnReal Negru',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=514	where ProductID=72
+update Products set ProductName='Telecomanda Arcade Bluetooth',				SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=74		where ProductID=73
+update Products set ProductName='Robot Inteligent Interactiv Ubtech Alpha',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=2369	where ProductID=74
+update Products set ProductName='Robot Inteligent de Serviciu Uno',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=3249	where ProductID=75
+update Products set ProductName='Boxa Portabila Flip 4 Waterproof Black',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=579	where ProductID=76
+update Products set ProductName='Boxa Portabila  Wireless Cu Microfon',		SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=499	where ProductID=77
 
 go
 
@@ -1842,10 +1842,10 @@ update Suppliers
 	HomePage = 'http://www.gersim.ro'
 where CompanyName = 'New Orleans Cajun Delights';
 update Suppliers 
-	set CompanyName = 'EMAG S.A.','Dumitru George',
+	set CompanyName = 'EMAG S.A.',
 	ContactName = 'Dumitru George',
 	ContactTitle = 'Agent Vanzari',
-	[Address] = 'Swan Office Park, Windsor Building Sos. Bucureşti Nord nr. 15-23',
+	[Address] = 'Windsor Building Sos. Bucureşti Nord nr. 15-23',
 	City = 'ILFOV',
 	Region = 'null',
 	PostalCode = '077190',
@@ -1898,27 +1898,10 @@ delete from Suppliers where CompanyName like 'Forêts d%' and CompanyName like '
 ----------------------------------------------------------------------------------
 --	Category Changes
 
--- aici bagi categoriile
-update Categories set CategoryName='Classic',Description='Telefoane cu butoane', img = 'Images/telefoane_clasice.jpg' where CategoryID=1
-update Categories set CategoryName='Smartphone',Description='Touchscreen', img = 'Images/smartphone.jpg' where CategoryID=2
-update Categories set CategoryName='Accesorii',Description='Selfie sticks, Incarcatoare, Casti, Baterii, Huse', img = 'Images/accesorii.png' where CategoryID=3
-update Categories set CategoryName='Gadgeturi',Description='Boxe, Ochelari VR, Telecomenzi', img = 'Images/Gadgeturi.jpg' where CategoryID=4
-update Categories set CategoryName='eBookreader',Description='Bookreader', img = 'Images/eBookreader.jpg' where CategoryID=5
+update Categories set CategoryName='Classic',Description='Telefoane cu butoane' where CategoryID=1
+update Categories set CategoryName='Smartphone',Description='Touchscreen' where CategoryID=2
+update Categories set CategoryName='Accesorii',Description='Selfie sticks, Incarcatoare, Casti, Baterii, Huse' where CategoryID=3
+update Categories set CategoryName='Gadgeturi',Description='Boxe, Ochelari VR, Telecomenzi' where CategoryID=4
+update Categories set CategoryName='eBookreader',Description='Bookreader' where CategoryID=5
 delete from Categories where CategoryID between 6 and 8
 go
-/*#1. create FOREIGN key */
-ALTER TABLE [dbo].Products
-ADD  CONSTRAINT FK_Products_Categories FOREIGN KEY(CategoryID)
-REFERENCES [dbo].Categories (CategoryID)
-go
---alg :(
-
-/*#1. create FOREIGN key */
-ALTER TABLE [dbo].[Order Details]
-ADD  CONSTRAINT FK_Order_Details_Products FOREIGN KEY(ProductID)
-REFERENCES [dbo].Products (ProductID)
-go
-
-drop table Persons
-go
-create table Persons(Nume varchar(50),Email nvarchar(50),Comentariu text)
