@@ -252,12 +252,5 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="northwind.sql" />
-    <Build Include="translate script.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="northwnd.ldf" />
-    <None Include="northwnd.mdf" />
-    <None Include="Readme.txt" />
   </ItemGroup>
 </Project>
