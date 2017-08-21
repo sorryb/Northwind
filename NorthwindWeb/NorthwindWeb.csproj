@@ -212,6 +212,8 @@
     <Content Include="images\aple.png" />
     <Content Include="images\emanuelTincu.jpg" />
     <Content Include="images\hi-fun.png" />
+    <Content Include="images\Home\ebooks.jpg" />
+    <Content Include="images\Home\k.jpg" />
     <Content Include="images\images.jpg" />
     <Content Include="images\Home\AppleLogo.png" />
     <Content Include="images\Home\asus.png" />
