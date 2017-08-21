@@ -24,3 +24,7 @@ img[class~=products]{
     width: 35px;
     height: 35px;
 }
+
+.home {
+    color: #2b3e50;
+}
