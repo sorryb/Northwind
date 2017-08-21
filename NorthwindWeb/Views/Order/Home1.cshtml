@@ -36,7 +36,7 @@
                     }
                     <tr class="@selectedRow">
                         <td>
-                            @Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, page = Model.page.PageNumber })
+                            @Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
                         </td>
                         <td>
                             @item.OrderDate
@@ -53,7 +53,7 @@
                 <h3>Detali Comanda</h3>
                 <table class="table">
                     <tr>
-                     
+
                         <th>ProductID</th>
                         <th>Pret</th>
                         <th>Cantitate</th>
@@ -69,9 +69,9 @@
                         }
                         <tr class="@selectedRow">
                             <td>
-                                @Html.ActionLink(Convert.ToString(item.ProductID), "Home1", new { pid = item.ProductID, page = Model.page.PageNumber })
+                                @Html.ActionLink(Convert.ToString(item.ProductID), "Home1", new { pid = item.ProductID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
                             </td>
-                           
+
                             <td>
                                 @Html.DisplayFor(modelItem => item.UnitPrice)
                             </td>
@@ -114,7 +114,7 @@
                 </table>
             }
             Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
-            @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id = 0, pid = 0 }))
+            @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id = 0, pid = 0, currentFilter = ViewBag.CurrentFilter }))
             @*<h1>
                     <a href="@Url.Action("Post")">A Blog Home Template for Bootstrap 3</a>
                 </h1>
@@ -176,12 +176,13 @@
             <div class="well">
                 <h4>Cautare in comentari</h4>
                 <div class="input-group">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default">
-                            <i class="fa fa-search"></i>
+                    @using (Html.BeginForm("Home1", "Order", FormMethod.Get))
+                    {                  @Html.TextBox("search", ViewBag.CurrentFilter as string)
+
+                        <button type="submit" class="btn btn-default">
+                            <i class="glyphicon glyphicon-search"></i>
                         </button>
-                    </span>
+                    }
                 </div>
                 <!-- /input-group -->
             </div>
