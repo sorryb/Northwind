@@ -253,7 +253,7 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="dbo\Scripts\Northwind.sql" />
+    <None Include="dbo\Scripts\Northwind.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Scripts\Translate.sql" />

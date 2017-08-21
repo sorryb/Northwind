@@ -448,12 +448,6 @@
     <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Portfolio\OneColumn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Portfolio\TwoColumn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Order\Home1.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -466,7 +460,7 @@
     <Content Include="Views\Other\Faq.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Other\FourOhFour.cshtml" />
+    <Content Include="Views\Other\alt2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

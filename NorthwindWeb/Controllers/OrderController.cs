@@ -90,8 +90,8 @@ namespace NorthwindWeb.Controllers
                        ;
             if (!String.IsNullOrEmpty(search))
             {
-
-                if (int.TryParse(search, out int i))
+                int i;
+                if (int.TryParse(search, out  i))
                 {
                     order = order.Where(s => s.OrderID == i);
                 }
