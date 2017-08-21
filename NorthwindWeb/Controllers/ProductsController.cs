@@ -54,10 +54,6 @@ namespace NorthwindWeb.Controllers
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
-        public void AddToCart()
-        {
-
-        }
     }
     
 }
