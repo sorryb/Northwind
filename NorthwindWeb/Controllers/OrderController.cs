@@ -39,7 +39,7 @@ namespace NorthwindWeb.Controllers
                            .OrderByDescending(x => x.Cost)
                            .Take(10);
                            ;
-            //IQueryable<Order10> orders = order10 as IQueryable<Order10>;
+            
             
             List<Order10> list= new List<Order10>();
             
@@ -52,7 +52,7 @@ namespace NorthwindWeb.Controllers
                 list.Add(x);
               
             }
-            //IEnumerable<Order10> orders = list;
+         
             viewModel.Order10 = list;
 
 

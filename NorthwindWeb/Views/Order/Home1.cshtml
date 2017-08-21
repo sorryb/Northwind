@@ -24,7 +24,7 @@
                 <tr>
                     <th>Numar Comanda</th>
                     <th>Data plasare</th>
-                    <th></th>
+
                 </tr>
                 @foreach (var item in Model.Order)
                 {
@@ -35,14 +35,12 @@
                     }
                     <tr class="@selectedRow">
                         <td>
-                            @item.OrderID
+                            @Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, page = Model.page.PageNumber })
                         </td>
                         <td>
                             @item.OrderDate
                         </td>
-                        <td>
-                            @Html.ActionLink("Detalii", "Home1", new { id = item.OrderID, page = Model.page.PageNumber })>
-                        </td>
+
                     </tr>
                 }
             </table>
@@ -51,7 +49,7 @@
                 <h3>Detali Comanda</h3>
                 <table class="table">
                     <tr>
-                        <th></th>
+                     
                         <th>ProductID</th>
                         <th>Pret</th>
                         <th>Cantitate</th>
@@ -67,11 +65,9 @@
                         }
                         <tr class="@selectedRow">
                             <td>
-                                @Html.ActionLink("Produse", "Home1", new { pid = item.ProductID, page = Model.page.PageNumber })
+                                @Html.ActionLink(Convert.ToString(item.ProductID), "Home1", new { pid = item.ProductID, page = Model.page.PageNumber })
                             </td>
-                            <td>
-                                @item.ProductID
-                            </td>
+                           
                             <td>
                                 @Html.DisplayFor(modelItem => item.UnitPrice)
                             </td>
@@ -113,6 +109,8 @@
                     }
                 </table>
             }
+            Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
+            @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id = 0, pid = 0 }))
             @*<h1>
                     <a href="@Url.Action("Post")">A Blog Home Template for Bootstrap 3</a>
                 </h1>
@@ -193,16 +191,16 @@
                             <tr>
                                 <th>Numar Comanda</th>
                                 <th>Cost</th>
-                               
+
                             </tr>
 
                             @foreach (var item in Model.Order10)
                             {
-                            <tr>
-                                <td>@Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, page = Model.page.PageNumber })</td>
-                                <td>@item.Cost</td>
-                                 
-                            </tr>
+                                <tr>
+                                    <td>@Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, page = Model.page.PageNumber })</td>
+                                    <td>@item.Cost</td>
+
+                                </tr>
                             }
                         </table>
 
@@ -232,7 +230,7 @@
             </div>
             <!-- /well -->
         </div>
+
     </div>
-    Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
-    @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id = 0, pid = 0 }))
+
 </div>
