@@ -55,4 +55,5 @@ namespace NorthwindWeb.Controllers
             return View(products.ToPagedList(pageNumber, pageSize));
         }
     }
+    
 }

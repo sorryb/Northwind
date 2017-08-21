@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -195,6 +196,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Order10.cs" />
     <Compile Include="ViewModels\OrderIndexData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -212,6 +214,8 @@
     <Content Include="images\aple.png" />
     <Content Include="images\emanuelTincu.jpg" />
     <Content Include="images\hi-fun.png" />
+    <Content Include="images\Home\ebooks.jpg" />
+    <Content Include="images\Home\k.jpg" />
     <Content Include="images\images.jpg" />
     <Content Include="images\Home\AppleLogo.png" />
     <Content Include="images\Home\asus.png" />
@@ -397,6 +401,8 @@
     <Content Include="images\wpid-nokia-logo.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\Site.js" />
+    <Content Include="js\script.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

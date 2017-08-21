@@ -28,14 +28,17 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-
+                
                 @Html.ActionLink(" Studio Phone Silver", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
-
+                
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
 
                 <ul class="nav navbar-nav navbar-right">
+                    <li id="about">
+                        @Html.ActionLink("Despre noi", "Index", "About")
+                    </li>
                     <li id="services">
                         @Html.ActionLink("Servicii", "Index", "Services")
                     </li>
@@ -57,9 +60,6 @@
                             <li id="2columnportfolio">
                                 @Html.ActionLink("eBook readers", "Products", "Products", new { category = "eBookReaders" }, null)
                             </li>
-
-
-
                         </ul>
                     </li>
                     <li id="blog" class="dropdown">
@@ -68,8 +68,6 @@
                             <li id="bloghome1">
                                 @Html.ActionLink("Lista Comenzi", "Home1", "Order")
                             </li>
-
-
                         </ul>
                     </li>
                     <li id="other" class="dropdown">
@@ -86,13 +84,10 @@
                             </li>
                         </ul>
                     </li>
-
-
-
                     <li id="other" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li class="col-lg-12">
+                            <li>
                                 <form id="searchInput" action="/Products/Search">
                                     <div class="input-group">
                                         <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
@@ -123,7 +118,14 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-
+        <div class="shopcartcontainer">
+            <div class="align-middle img-circle roundedshop">
+                <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                <div class="shopcart-container">
+                    <span id="shopcart-productcount">12</span>
+                </div>
+            </div>
+        </div>
     </nav>
 
     @RenderBody()
@@ -147,5 +149,6 @@
 
     <script src="@Url.Content("/js/bootstrap.js")"></script>
     <script src="@Url.Content("/js/modern-business.js")"></script>
+    <script src="@Url.Content("/js/script.js")"></script>
 </body>
 </html>

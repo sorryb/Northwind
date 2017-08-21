@@ -24,6 +24,7 @@
                     <img src="@Model.ElementAt(i).img" class="img-responsive contentcenter products">
                     <h3 class="text-center">
                         @Model.ElementAt(i).ProductName <br />
+                        <span onclick="AddToCart(@Model.ElementAt(i).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod" />
                         <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i).UnitPrice, 2) Lei</span>
                     </h3>
                 </div>
@@ -33,6 +34,7 @@
                         <img src="@Model.ElementAt(i + 1).img" class="img-responsive contentcenter products">
                         <h3 class="text-center">
                             @Model.ElementAt(i + 1).ProductName <br />
+                            <span onclick="AddToCart(@Model.ElementAt(i+1).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod" />
                             <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i + 1).UnitPrice, 2) Lei</span>
                         </h3>
                     </div>
