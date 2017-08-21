@@ -26,6 +26,9 @@
                         @Model.ElementAt(i).ProductName <br />
                         <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i).UnitPrice, 2) Lei</span>
                     </h3>
+                        <a href=@Url.Action("AddToCart","Products")>
+                            <span class="glyphicon glyphicon-shopping-cart cartprod"></span>
+                        </a>
                 </div>
                 @if (i + 1 < itemCount)
                 {
@@ -35,6 +38,9 @@
                             @Model.ElementAt(i + 1).ProductName <br />
                             <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i + 1).UnitPrice, 2) Lei</span>
                         </h3>
+                            <a href=@Url.Action("AddToCart","Products")>
+                                <span class="glyphicon glyphicon-shopping-cart cartprod"></span>
+                            </a>
                     </div>
                 }
             </div>

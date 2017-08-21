@@ -1,18 +1,30 @@
 ﻿body {
     font-family: Tahoma;
 }
+
 .contentcenter {
-    margin-left:auto;
-    margin-right:auto;
+    margin-left: auto;
+    margin-right: auto;
 }
-img[class~=products]{
-    max-height:450px;
-    max-width:750px;
+
+img[class~=products] {
+    max-height: 450px;
+    max-width: 750px;
 }
+
 .price {
     color: #df691a;
-    font-size:large;
-    font-weight:bold;
+    font-size: large;
+    font-weight: bold;
+}
+
+span.cartprod {
+    position: absolute;
+    top: 420px;
+    left: 517.5px;
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
 }
 [class~=glyphicon-shopping-cart] {
     font-size: 25px;
