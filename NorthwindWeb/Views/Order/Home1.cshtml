@@ -24,6 +24,7 @@
                 <tr>
                     <th>Numar Comanda</th>
                     <th>Data plasare</th>
+                    <th>Nume Client</th>
 
                 </tr>
                 @foreach (var item in Model.Order)
@@ -39,6 +40,9 @@
                         </td>
                         <td>
                             @item.OrderDate
+                        </td>
+                        <td>
+                            @item.CompanyName
                         </td>
 
                     </tr>

@@ -22,7 +22,26 @@ namespace NorthwindWeb.Controllers
         public ActionResult Home1(int? id, int? pid, int? page)
         {
             var viewModel = new OrderIndexData();
-            viewModel.Order = db.Orders.OrderBy(x=>x.OrderID);
+            var order = from o in db.Orders
+                        join c in db.Customers on o.CustomerID equals c.CustomerID
+                        join s in db.Shippers on o.ShipVia equals s.ShipperID
+                        select new { o.OrderID, o.OrderDate, c.CompanyName, ShipperName = s.CompanyName };
+            List<Comanda> comenzi = new List<Comanda>();
+
+            foreach (var item in order)
+            {
+                Comanda x = new Comanda();
+
+                x.OrderID = item.OrderID;
+                DateTime t =Convert.ToDateTime(item.OrderDate);
+                x.OrderDate = t.Day.ToString() + "." + t.Month + "." + t.Year;
+                x.CompanyName = item.CompanyName;
+                x.ShipperName = item.ShipperName;
+                comenzi.Add(x);
+
+            }
+
+            viewModel.Order = comenzi;
 
             //if (search!=null)
             //{
@@ -48,7 +67,7 @@ namespace NorthwindWeb.Controllers
                 Order10 x=new Order10();
                 
                 x.OrderID = item.OrderID;
-                x.Cost = item.Cost;
+                x.Cost =decimal.Round(item.Cost,2);
                 list.Add(x);
               
             }
