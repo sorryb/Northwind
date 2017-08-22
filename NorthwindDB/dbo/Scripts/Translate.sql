@@ -1722,93 +1722,93 @@ go
 --	Product
 
 --eBookReader select * from Products
-update Products set ProductName='eBook Reader Kindle 6 Glare Touch Screen WiFi Black 140210',				SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=339	where ProductID=1
-update Products set ProductName='eBook Reader Kindle PaperWhite Wi-Fi 4GB New Model 2015 Black 111399',		SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=629	where ProductID=2
-update Products set ProductName='eBook Reader Kindle PaperWhite Wi-Fi 4GB New Model 2015 White 143087',		SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=599	where ProductID=3
-update Products set ProductName='eBook Reader PocketBook Touch LUX 3 4GB Red pb626',						SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=4
-update Products set ProductName='eBook Reader PocketBook Touch LUX 3 4GB White pb626',						SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=5
-update Products set ProductName='eBook Reader PocketBook Touch LUX 3 4GB Grey pb626',						SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=6
-update Products set ProductName='eBook Reader PocketBook Touch HD Black pb631',								SupplierID=4,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=799	where ProductID=7
-update Products set ProductName='eBook Reader Bookeen CybooK Muse FrontLight Black',						SupplierID=3,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=699	where ProductID=8
-update Products set ProductName='eBook Reader Prestigio MultiReader SUPREME 4GB Black',						SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=549	where ProductID=9
-update Products set ProductName='eBook Reader Bookeen Cybook Muse HD 8GB Black',							SupplierID=4,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=10
-update Products set ProductName='eBook Reader Bookeen Cybook Muse Light 4GB Black ',						SupplierID=3,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=579	where ProductID=11
+update Products set ProductName='Kindle 6 Glare Touch Screen WiFi Black',	SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=339	where ProductID=1
+update Products set ProductName='Kindle PaperWhite Model 2015 Black',		SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=629	where ProductID=2
+update Products set ProductName='Kindle PaperWhite Model 2015 White',		SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=599	where ProductID=3
+update Products set ProductName='PocketBook Touch LUX 3 Red pb626',		  	SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=4
+update Products set ProductName='PocketBook Touch LUX 3 White pb626',	  	SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=5
+update Products set ProductName='PocketBook Touch LUX 3 Grey pb626',	  	SupplierID=1,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=6
+update Products set ProductName='PocketBook Touch HD Black pb631',		  	SupplierID=4,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=799	where ProductID=7
+update Products set ProductName='Bookeen CybooK Muse FrontLight Black',	  	SupplierID=3,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=699	where ProductID=8
+update Products set ProductName='Prestigio MultiReader SUPREME 4GB Black',	SupplierID=2,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=549	where ProductID=9
+update Products set ProductName='Bookeen Cybook Muse HD 8GB Black',		  	SupplierID=4,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=569	where ProductID=10
+update Products set ProductName='Bookeen Cybook Muse Light 4GB Black ',	  	SupplierID=3,     CategoryID=5,     QuantityPerUnit=1,     UnitPrice=579	where ProductID=11
 				  																																										
 				  																																										
-update Products set ProductName='Telefon Mobil CAT B25 Dual SIM Black',										SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=229	where ProductID=12
-update Products set ProductName='Telefon Mobil Nokia 3310 Dual SIM Dark Blue',								SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=249	where ProductID=13
-update Products set ProductName='Telefon Mobil Alcatel Tiger X3 1016G Black',								SupplierID=4,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=69		where ProductID=14
-update Products set ProductName='Telefon Mobil Nokia 3310 Single Sim Orange',								SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=249	where ProductID=15
-update Products set ProductName='Telefon Mobil Nokia 130 Dual SIM Red',										SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=99		where ProductID=16
-update Products set ProductName='Telefon Mobil Alcatel 1054 White',											SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=83		where ProductID=17
-update Products set ProductName='Telefon Mobil Nokia 150 Single Sim White',									SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=141	where ProductID=18
-update Products set ProductName='Telefon Mobil MaxCom MM 141 Dual Sim Grey',								SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=101	where ProductID=19
-update Products set ProductName='Telefon Mobil Alcatel 2008G Black-Silver',									SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=165	where ProductID=20
-update Products set ProductName='Telefon Mobil Nokia 216 Dual Sim Black',									SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=156	where ProductID=21
-update Products set ProductName='Telefon Mobil Nokia 216 Dual SIM Grey',									SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=156	where ProductID=22
-update Products set ProductName='Telefon Mobil Karbonn K-flip Dual Sim White',								SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=127	where ProductID=23
-update Products set ProductName='Telefon Mobil MyPhone Metro Red',											SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=209	where ProductID=24
-update Products set ProductName='Telefon Mobil MyPhone 6310 Dual Sim Black',								SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=104	where ProductID=25
+update Products set ProductName='CAT B25 Dual SIM Black',					SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=229	where ProductID=12
+update Products set ProductName='Nokia 3310 Dual SIM Dark Blue',			SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=249	where ProductID=13
+update Products set ProductName='Alcatel Tiger X3 1016G Black',				SupplierID=4,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=69		where ProductID=14
+update Products set ProductName='Nokia 3310 Single Sim Orange',				SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=249	where ProductID=15
+update Products set ProductName='Nokia 130 Dual SIM Red',					SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=99		where ProductID=16
+update Products set ProductName='Alcatel 1054 White',						SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=83		where ProductID=17
+update Products set ProductName='Nokia 150 Single Sim White',				SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=141	where ProductID=18
+update Products set ProductName='MaxCom MM 141 Dual Sim Grey',				SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=101	where ProductID=19
+update Products set ProductName='Alcatel 2008G Black-Silver',				SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=165	where ProductID=20
+update Products set ProductName='Nokia 216 Dual Sim Black',					SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=156	where ProductID=21
+update Products set ProductName='Nokia 216 Dual SIM Grey',					SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=156	where ProductID=22
+update Products set ProductName='Karbonn K-flip Dual Sim White',			SupplierID=1,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=127	where ProductID=23
+update Products set ProductName='MyPhone Metro Red',						SupplierID=2,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=209	where ProductID=24
+update Products set ProductName='MyPhone 6310 Dual Sim Black',				SupplierID=3,     CategoryID=1,     QuantityPerUnit=1,     UnitPrice=104	where ProductID=25
 				 																																										
 				 																																										
 				 																																										
-update Products set ProductName='Bratara Xiaomi Silicon pentru MiBand 2 - Roz',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=24		where ProductID=26
-update Products set ProductName='Bratara Xiaomi Silicon pentru MiBand 2 - Verde',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=24		where ProductID=27
-update Products set ProductName='Curea Ceas Garmin Forerunner 910XT GPS Negru',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=28
-update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Silicon Maron',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=127	where ProductID=29
-update Products set ProductName='Curea Apple Watch 38mm Piele Neagra MLHG2',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=964	where ProductID=30
-update Products set ProductName='Dock Slate Native Union Pentru Apple Watch',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=217	where ProductID=31
-update Products set ProductName='Dock Native Union Luxury Tech Marble Pentru Apple Watch',					SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=423	where ProductID=32
-update Products set ProductName='Stand de incarcare pentru Huawei Watch W1 Argintiu',						SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=95		where ProductID=33
+update Products set ProductName='Bratara Xiaomi Silicon - Roz',				SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=24		where ProductID=26
+update Products set ProductName='Bratara Xiaomi Silicon - Verde',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=24		where ProductID=27
+update Products set ProductName='Curea Ceas 910XT GPS Negru',				SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=28
+update Products set ProductName='Bratara Gear S3 Silicon Maron',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=127	where ProductID=29
+update Products set ProductName='Curea Apple Watch 38mm Piele Neagra',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=964	where ProductID=30
+update Products set ProductName='Dock Slate Union Pentru Apple Watch',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=217	where ProductID=31
+update Products set ProductName='Dock Native Union Luxury Tech Marble',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=423	where ProductID=32
+update Products set ProductName='Stand de incarcare Huawei Watch',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=95		where ProductID=33
 update Products set ProductName='Cablu de incarcare Fitbit Flex',											SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=25		where ProductID=34
-update Products set ProductName='Husa Bumper Cellularline pentru Apple Watch 38mm',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=49		where ProductID=35
-update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Silicon Argintiur',						SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=128	where ProductID=36
-update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Piele Neagra',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=115	where ProductID=37
-update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Silicon Khaki',							SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=38
-update Products set ProductName='Bratara Smartwatch Samsung Gear S3 Silicon Blue Black',					SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=39
-update Products set ProductName='Folie Protectie Sticla Securizata Curbata Apple Watch 42 mm Negra',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=36		where ProductID=40
-update Products set ProductName='Folie Protectie Sticla Securizata Curbata Apple Watch 38 mm Negra',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=36		where ProductID=41
+update Products set ProductName='Husa Apple Watch 38mm',					SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=49		where ProductID=35
+update Products set ProductName='Bratara Smartwatch Silicon Argintiur',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=128	where ProductID=36
+update Products set ProductName='Bratara Smartwatch Piele Neagra',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=115	where ProductID=37
+update Products set ProductName='Bratara Smartwatch Silicon Khaki',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=38
+update Products set ProductName='Bratara Smartwatch Silicon Blue Black',	SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=39
+update Products set ProductName='Folie Protectie Curbata 42 mm Negra',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=36		where ProductID=40
+update Products set ProductName='Folie Protectie Curbata 38 mm Negra',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=36		where ProductID=41
 																																														
 																																														
 																																														
-update Products set ProductName='Telefon Mobil Apple iPhone 7 32GB Black',									SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2999	where ProductID=42
-update Products set ProductName='Telefon Mobil OnePlus 5 A5000 64GB Dual SIM 4G Black',						SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2599	where ProductID=43
-update Products set ProductName='Telefon Mobil Samsung Galaxy A3(2017) A320 4G Black',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=44
-update Products set ProductName='Telefon Mobil Samsung Galaxy J5(2016) J510 Dual SIM Gold',					SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=849	where ProductID=45
-update Products set ProductName='Telefon Mobil Samsung Galaxy S8 G950F 64GB 4G Black',						SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2989	where ProductID=46
-update Products set ProductName='Telefon Mobil Apple iPhone 6 32GB Space Gray',								SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1899	where ProductID=47
-update Products set ProductName='Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G Black',		SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=349	where ProductID=48
-update Products set ProductName='Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G Gold',			SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=349	where ProductID=49
-update Products set ProductName='Telefon Mobil Xiaomi Redmi 4A 32GB Dual Sim 4G Dark Grey',					SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=499	where ProductID=50
-update Products set ProductName='Telefon Mobil Lenovo Moto Z 32GB Dual Sim 4G Black',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1659	where ProductID=51
-update Products set ProductName='Telefon Mobil Samsung Galaxy S8 Plus G955F 64GB 4G Black',					SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=3549	where ProductID=52
-update Products set ProductName='Telefon Mobil HTC 10 32GB 4G Gold',										SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1799	where ProductID=53
-update Products set ProductName='Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Gold',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=54
-update Products set ProductName='Telefon Mobil Apple iPhone SE 32GB Space Gray',							SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1699	where ProductID=55
-update Products set ProductName='Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Black',						SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=56
-update Products set ProductName='Telefon Mobil Samsung Galaxy J1 Mini Prime J106 Dual Sim 3G White',		SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=339	where ProductID=57
-update Products set ProductName='Telefon Mobil Huawei P10 Lite 32GB Dual Sim 4G Blue',						SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=58
-update Products set ProductName='Telefon Mobil Samsung Galaxy S6 Edge G925 32GB Black',						SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1899	where ProductID=59
-update Products set ProductName='Telefon Mobil Sony Xperia X Compact 32GB 4G Black xcompactblk',			SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1599	where ProductID=60
-update Products set ProductName='Telefon Mobil LG G5 SE H840 32GB Titanium Grey H840 Grey',					SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1349	where ProductID=61
-update Products set ProductName='Telefon Mobil Apple iPhone 6s 32GB Space Grey iphone 6s 32gb Space Grey',	SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2599	where ProductID=62
+update Products set ProductName='Apple iPhone 7 32GB Black',				SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2999	where ProductID=42
+update Products set ProductName='OnePlus 5 A5000 64GB Dual SIM 4G Black',	SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2599	where ProductID=43
+update Products set ProductName='Samsung Galaxy A3(2017) 4G Black',			SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=44
+update Products set ProductName='Samsung Galaxy J5(2016) Dual SIM Gold',	SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=849	where ProductID=45
+update Products set ProductName='Samsung Galaxy S8 G950F 64GB 4G Black',	SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2989	where ProductID=46
+update Products set ProductName='Apple iPhone 6 32GB Space Gray',			SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1899	where ProductID=47
+update Products set ProductName='Samsung Galaxy J1 Mini Prime Black',		SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=349	where ProductID=48
+update Products set ProductName='Samsung Galaxy J1 Mini Prime Gold',		SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=349	where ProductID=49
+update Products set ProductName='Xiaomi Redmi 4A 32GB Dark Grey',			SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=499	where ProductID=50
+update Products set ProductName='Lenovo Moto Z 32GB Dual Sim 4G Black',		SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1659	where ProductID=51
+update Products set ProductName='Samsung Galaxy S8 Plus 64GB 4G Black',		SupplierID=2,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=3549	where ProductID=52
+update Products set ProductName='HTC 10 32GB 4G Gold',						SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1799	where ProductID=53
+update Products set ProductName='Huawei P10 Lite 32GB Dual Sim 4G Gold',	SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=54
+update Products set ProductName='Apple iPhone SE 32GB Space Gray',			SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1699	where ProductID=55
+update Products set ProductName='Huawei P10 Lite 32GB Dual Sim 4G Black',	SupplierID=3,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=56
+update Products set ProductName='Samsung Galaxy J1 Prime White',			SupplierID=1,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=339	where ProductID=57
+update Products set ProductName='Huawei P10 Lite 32GB Blue',				SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1199	where ProductID=58
+update Products set ProductName='Samsung Galaxy S6 Edge 32GB Black',		SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1899	where ProductID=59
+update Products set ProductName='Sony Xperia X Compact 32GB 4G Black',		SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1599	where ProductID=60
+update Products set ProductName='LG G5 SE H840 32GB Titanium Grey',			SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=1349	where ProductID=61
+update Products set ProductName='iPhone 6s 32GB 32gb Space Grey',			SupplierID=4,     CategoryID=2,     QuantityPerUnit=1,     UnitPrice=2599	where ProductID=62
 																																														
 																																														
-update Products set ProductName='Boxa Portabila Emie Cybertron Wireless',									SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=749	where ProductID=63
-update Products set ProductName='Ochelari Samsung Gear VR 2 SM-R323 Negru',									SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=209	where ProductID=64
-update Products set ProductName='Manusi cu Casca Bluetooth Hi-Fun M Black',									SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=229	where ProductID=65
-update Products set ProductName='Dispozitiv monitorizare somn SenSe Sleep',									SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=119	where ProductID=66
-update Products set ProductName='Telecomanda Bluetooth Esperanza',											SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=28		where ProductID=67
-update Products set ProductName='Caciula Stereo Cellularline Music Cap cu Microfon Negru',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=37		where ProductID=68
-update Products set ProductName='Dispozitiv localizare cu Bluetooth Media-Tech BT Seeker',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=29		where ProductID=69
-update Products set ProductName='Telecomanda Media-Tech Trigger BT pentru VR Matrix PRO Negru',				SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=39		where ProductID=70
-update Products set ProductName='Drona Arcade Orbit',														SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=149	where ProductID=71
-update Products set ProductName='Camera Video Fondi OnReal Negru',											SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=514	where ProductID=72
-update Products set ProductName='Telecomanda Arcade Bluetooth pentru Arcade Horizon VR',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=74		where ProductID=73
-update Products set ProductName='Robot Inteligent Interactiv Ubtech Alpha 1S Bluetooth',					SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=2369	where ProductID=74
-update Products set ProductName='Robot Inteligent de Serviciu Uno',											SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=3249	where ProductID=75
-update Products set ProductName='Boxa Portabila Bluetooth JBL Flip 4 Waterproof Black',						SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=579	where ProductID=76
-update Products set ProductName='Boxa Portabila Bluetooth JBL Charge 2+ Wireless Cu Microfon',				SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=499	where ProductID=77
+update Products set ProductName='Boxa Portabila Emie Cybertron Wireless',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=749	where ProductID=63
+update Products set ProductName='Ochelari Samsung Gear VR 2 SM-R323 Negru',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=209	where ProductID=64
+update Products set ProductName='Manusi cu Casca Bluetooth Hi-Fun M Black',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=229	where ProductID=65
+update Products set ProductName='Dispozitiv monitorizare somn SenSe Sleep',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=119	where ProductID=66
+update Products set ProductName='Telecomanda Bluetooth Esperanza',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=28		where ProductID=67
+update Products set ProductName='Caciula Stereo cu Microfon Negru',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=37		where ProductID=68
+update Products set ProductName='Dispozitiv localizare cu  Seeker',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=29		where ProductID=69
+update Products set ProductName='Telecomanda Media-Tech pentru VR',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=39		where ProductID=70
+update Products set ProductName='Drona Arcade Orbit',						SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=149	where ProductID=71
+update Products set ProductName='Camera Video Fondi OnReal Negru',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=514	where ProductID=72
+update Products set ProductName='Telecomanda Arcade Bluetooth',				SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=74		where ProductID=73
+update Products set ProductName='Robot Inteligent Interactiv Ubtech Alpha',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=2369	where ProductID=74
+update Products set ProductName='Robot Inteligent de Serviciu Uno',			SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=3249	where ProductID=75
+update Products set ProductName='Boxa Portabila Flip 4 Waterproof Black',	SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=579	where ProductID=76
+update Products set ProductName='Boxa Portabila  Wireless Cu Microfon',		SupplierID=1,     CategoryID=4,     QuantityPerUnit=1,     UnitPrice=499	where ProductID=77
 
 go
 
@@ -1842,10 +1842,10 @@ update Suppliers
 	HomePage = 'http://www.gersim.ro'
 where CompanyName = 'New Orleans Cajun Delights';
 update Suppliers 
-	set CompanyName = 'EMAG S.A.','Dumitru George',
+	set CompanyName = 'EMAG S.A.',
 	ContactName = 'Dumitru George',
 	ContactTitle = 'Agent Vanzari',
-	[Address] = 'Swan Office Park, Windsor Building Sos. Bucureşti Nord nr. 15-23',
+	[Address] = 'Windsor Building Sos. Bucureşti Nord nr. 15-23',
 	City = 'ILFOV',
 	Region = 'null',
 	PostalCode = '077190',
@@ -1894,38 +1894,14 @@ delete from Suppliers where CompanyName = 'Pasta Buttini s.r.l.';
 delete from Suppliers where CompanyName = 'Escargots Nouveaux';
 delete from Suppliers where CompanyName = 'Gai pâturage';
 delete from Suppliers where CompanyName like 'Forêts d%' and CompanyName like '%érables';
+
 ----------------------------------------------------------------------------------
 --	Category Changes
 
-/* Alter table pentu a il putea modifica*/
-
-alter table Categories
-drop column Picture;
-go
-alter table Categories
-add img text null;
-go
--- aici bagi categoriile
-update Categories set CategoryName='Classic',Description='Telefoane cu butoane', img = 'Images/telefoane_clasice.jpg' where CategoryID=1
-update Categories set CategoryName='Smartphone',Description='Touchscreen', img = 'Images/smartphone.jpg' where CategoryID=2
-update Categories set CategoryName='Accesorii',Description='Selfie sticks, Incarcatoare, Casti, Baterii, Huse', img = 'Images/accesorii.png' where CategoryID=3
-update Categories set CategoryName='Gadgeturi',Description='Boxe, Ochelari VR, Telecomenzi', img = 'Images/Gadgeturi.jpg' where CategoryID=4
-update Categories set CategoryName='eBookreader',Description='Bookreader', img = 'Images/eBookreader.jpg' where CategoryID=5
+update Categories set CategoryName='Classic',Description='Telefoane cu butoane' where CategoryID=1
+update Categories set CategoryName='Smartphone',Description='Touchscreen' where CategoryID=2
+update Categories set CategoryName='Accesorii',Description='Selfie sticks, Incarcatoare, Casti, Baterii, Huse' where CategoryID=3
+update Categories set CategoryName='Gadgeturi',Description='Boxe, Ochelari VR, Telecomenzi' where CategoryID=4
+update Categories set CategoryName='eBookreader',Description='Bookreader' where CategoryID=5
 delete from Categories where CategoryID between 6 and 8
 go
-/*#1. create FOREIGN key */
-ALTER TABLE [dbo].Products
-ADD  CONSTRAINT FK_Products_Categories FOREIGN KEY(CategoryID)
-REFERENCES [dbo].Categories (CategoryID)
-go
---alg :(
-
-/*#1. create FOREIGN key */
-ALTER TABLE [dbo].[Order Details]
-ADD  CONSTRAINT FK_Order_Details_Products FOREIGN KEY(ProductID)
-REFERENCES [dbo].Products (ProductID)
-go
-
-drop table Persons
-go
-create table Persons(Nume varchar(50),Email nvarchar(50),Comentariu text)
