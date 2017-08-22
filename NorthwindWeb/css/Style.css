@@ -18,15 +18,6 @@ img[class~=products] {
     font-weight: bold;
 }
 
-span.cartprod {
-    position: absolute;
-    top: 420px;
-    left: 517.5px;
-    height: 30px;
-    width: 30px;
-    font-size: 30px;
-}
-
 .shopcartcontainer {
     position:absolute;
     padding: 20px 25px 0px 20px;

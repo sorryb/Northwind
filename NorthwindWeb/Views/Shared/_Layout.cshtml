@@ -36,9 +36,7 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="about">
-                        @Html.ActionLink("Despre noi", "Index", "About")
-                    </li>
+                   
                     <li id="services">
                         @Html.ActionLink("Servicii", "Index", "Services")
                     </li>
@@ -92,13 +90,10 @@
                         @Html.ActionLink("Contact", "Index", "Contact")
                     </li>
 
-
-
-                    </li>
                     <li id="other" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>
+                            <li class="col-lg-12">
                                 <form id="searchInput" action="/Products/Search">
                                     <div class="input-group">
                                         <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
@@ -106,19 +101,13 @@
                                             <button class="btn btn-default" type="submit">
                                                 <i class="glyphicon glyphicon-search"></i>
                                             </button>
-
-                      
                                         </div>
                                     </div>
                                 </form>
-
                             </li>
                         </ul>
                     </li>
-
-            
-             
-
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
