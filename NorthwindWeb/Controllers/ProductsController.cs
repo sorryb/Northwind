@@ -35,11 +35,11 @@ namespace NorthwindWeb.Controllers
                     products = db.Products.Where(x => x.CategoryID == 2);
                     break;
                 case "Accesorii":
-                    ViewBag.title = "Accesorii";
+                    ViewBag.title = "Accesories";
                     products = db.Products.Where(x => x.CategoryID == 3);
                     break;
                 case "Gadgeturi":
-                    ViewBag.title = "Gadgeturi";
+                    ViewBag.title = "Gadgets";
                     products = db.Products.Where(x => x.CategoryID == 4);
                     break;
                 case "eBookReaders":
@@ -69,7 +69,7 @@ namespace NorthwindWeb.Controllers
 
 
             var products = from prod in db.Products
-                           from cat in db.Categories
+                            join cat in db.Categories on prod.CategoryID equals cat.CategoryID
                            where prod.ProductName.Contains(search)
                            select new ViewModels.ViewProductCategoryS
                            {

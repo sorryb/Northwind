@@ -1902,6 +1902,6 @@ update Categories set CategoryName='Classic',Description='Telefoane cu butoane' 
 update Categories set CategoryName='Smartphone',Description='Touchscreen' where CategoryID=2
 update Categories set CategoryName='Accesories',Description='Selfie sticks, Incarcatoare, Casti, Baterii, Huse' where CategoryID=3
 update Categories set CategoryName='Gadgets',Description='Boxe, Ochelari VR, Telecomenzi' where CategoryID=4
-update Categories set CategoryName='eBookreader',Description='Bookreader' where CategoryID=5
+update Categories set CategoryName='eBookReaders',Description='Bookreader' where CategoryID=5
 delete from Categories where CategoryID between 6 and 8
 go
