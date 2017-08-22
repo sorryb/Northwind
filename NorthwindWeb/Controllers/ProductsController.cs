@@ -62,7 +62,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult Search(string search, int? page = 1)
         {
                     
-            ViewBag.title = "Result for: " + search;
+            ViewBag.title = "Rezultate pentru: " + search;
             ViewBag.search = search;
             ViewBag.page = page;
      
