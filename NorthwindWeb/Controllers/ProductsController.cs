@@ -42,13 +42,24 @@ namespace NorthwindWeb.Controllers
         }
         public ActionResult Search(string search, int? page = 1)
         {
-            var products = db.Products as IQueryable<Products>;
+            //var products = db.Products as IQueryable<>;
             
             ViewBag.title = "Result for: " + search;
             ViewBag.search = search;
             ViewBag.page = page;
-            products = db.Products.Where(x => x.ProductName.Contains(search));
-            
+            //products = db.Products.Where(x => x.ProductName.Contains(search));
+
+            var products = from prod in db.Products
+                           from cat in db.Categories
+                           where prod.ProductName.Contains(search)
+                           select new ViewModels.ViewProductCategoryS
+                           {
+                               CategoryName = cat.CategoryName,
+                               ProductName = prod.ProductName,
+                               ProductID = prod.ProductID.ToString(),
+                               ProductPrice = decimal.Round(prod.UnitPrice ?? 0, 2).ToString()
+                           };
+
             products = products.OrderBy(x => x.ProductName);
             int pageSize = 10;
             int pageNumber = (page ?? 1);

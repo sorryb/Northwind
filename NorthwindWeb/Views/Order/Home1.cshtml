@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Orders";
 }
+<link href="~/css/Order.css" rel="stylesheet" />
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -32,7 +33,7 @@
                     string selectedRow = "";
                     if (item.OrderID == ViewBag.OrderID)
                     {
-                        selectedRow = "success";
+                        selectedRow = "selectat";
                     }
                     <tr class="@selectedRow">
                         <td>
@@ -65,7 +66,7 @@
                         string selectedRow = "";
                         if (item.ProductID == ViewBag.ProductID)
                         {
-                            selectedRow = "success";
+                            selectedRow = "selectat";
                         }
                         <tr class="@selectedRow">
                             <td>
@@ -73,7 +74,7 @@
                             </td>
 
                             <td>
-                                @Html.DisplayFor(modelItem => item.UnitPrice)
+                                @Html.DisplayFor(modelItem => item.UnitPrice) lei
                             </td>
                             <td>
                                 @item.Quantity
@@ -95,7 +96,7 @@
                     <tr>
                         <th>Denumire Produs</th>
                         <th>Categorie</th>
-                        <th>Disponibile in stoc</th>
+                        <th>Buc</th>
                     </tr>
                     @foreach (var item in Model.Product)
                     {
@@ -104,7 +105,7 @@
                                 @item.ProductName
                             </td>
                             <td>
-                                @item.CategoryID
+                                @item.CategoryName
                             </td>
                             <td>
                                 @item.UnitsInStock
@@ -115,62 +116,7 @@
             }
             Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
             @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id = 0, pid = 0, currentFilter = ViewBag.CurrentFilter }))
-            @*<h1>
-                    <a href="@Url.Action("Post")">A Blog Home Template for Bootstrap 3</a>
-                </h1>
-                <p class="lead">
-                    by <a href="#">Start Bootstrap</a>
-                </p>
-                <hr>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:00 PM</p>
-                <hr>
-                <a href="@Url.Action("Post")">
-                    <img class="img-responsive" src="http://placehold.it/900x300">
-                </a>
-                <hr>
-                <p>This is a very basic starter template for a blog homepage. It makes use of Font Awesome icons that are built into the 'Modern Business' template, and it makes use of the Bootstrap 3 pager at the bottom of the page.</p>
-                <a href="@Url.Action("Post")" class="btn btn-primary">Read More <i class="fa fa-angle-right"></i></a>
-                <hr>
-                <h1>
-                    <a href="@Url.Action("Post")">Another Blog Post</a>
-                </h1>
-                <p class="lead">
-                    by <a href="#">Start Bootstrap</a>
-                </p>
-                <hr>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:45 PM</p>
-                <hr>
-                <a href="@Url.Action("Post")">
-                    <img class="img-responsive" src="http://placehold.it/900x300">
-                </a>
-                <hr>
-                <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science...</p>
-                <a href="@Url.Action("Post")" class="btn btn-primary">Read More <i class="fa fa-angle-right"></i></a>
-                <hr>
-                <h1>
-                    <a href="@Url.Action("Post")">Third Blog Post Entry</a>
-                </h1>
-                <p class="lead">
-                    by <a href="#">Start Bootstrap</a>
-                </p>
-                <hr>
-                <p><i class="fa fa-clock-o"></i> Posted on August 28, 2013 at 10:45 PM</p>
-                <hr>
-                <a href="@Url.Action("Post")">
-                    <img class="img-responsive" src="http://placehold.it/900x300">
-                </a>
-                <hr>
-                <p>Science cuts two ways, of course; its products can be used for both good and evil. But there's no turning back from science. The early warnings about technological dangers also come from science...</p>
-                <a href="@Url.Action("Post")" class="btn btn-primary">Read More <i class="fa fa-angle-right"></i></a>
-                <hr>
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">← Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer →</a>
-                    </li>
-                </ul>*@
+           
         </div>
         <div class="col-lg-4">
             <div class="well">
@@ -202,30 +148,15 @@
                             @foreach (var item in Model.Order10)
                             {
                                 <tr>
-                                    <td>@Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, page = Model.page.PageNumber })</td>
-                                    <td>@item.Cost</td>
+                                    <td>@Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, search = item.OrderID })</td>
+                                    <td>@item.Cost lei</td>
 
                                 </tr>
                             }
                         </table>
 
                     </div>
-                    @*<div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li>
-                                    <a href="#alien-abductions">Alien Abductions</a>
-                                </li>
-                                <li>
-                                    <a href="#business-casual">Business Casual</a>
-                                </li>
-                                <li>
-                                    <a href="#robots">Robots</a>
-                                </li>
-                                <li>
-                                    <a href="#fireworks">Fireworks</a>
-                                </li>
-                            </ul>
-                        </div>*@
+                   
                 </div>
             </div>
             <!-- /well -->
@@ -233,7 +164,7 @@
                 <h4>Cea mai mare comanda</h4>
                 <table class="table">
                     <tr>
-                        <th>@Html.ActionLink(Convert.ToString(Model.Comanda.OrderID), "Home1", new { id = Model.Comanda.OrderID, page = Model.page.PageNumber })</th>
+                        <th>@Html.ActionLink(Convert.ToString(Model.Comanda.OrderID), "Home1", new { id = Model.Comanda.OrderID, search = Model.Comanda.OrderID })</th>
                         <th>@Model.Comanda.Produse Produse</th>
 
                     </tr>

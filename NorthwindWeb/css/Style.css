@@ -23,6 +23,12 @@ img[class~=products] {
     right:0px;
 }
 
+.shopcartcontainer-products {
+    position: absolute;
+    padding: 20px 25px 0px 20px;
+    left:0px;
+}
+
 [class~=glyphicon-shopping-cart] {
     font-size: 25px;
     padding: 5px 5px 5px 5px;
@@ -35,7 +41,7 @@ img[class~=products] {
     height: 35px;
 }
 
-.shopcart-container {
+.shopcart-container-text {
     position: absolute;
     margin-top: -12px;
     width: 35px;
@@ -57,9 +63,8 @@ img[class~=products] {
     color: #2b3e50;
 }
 
-.cartprod {
-    font-size: 15px;
-    color: #df691a;
+h3.prodpad{
+    padding-left:40px;
 }
 
 a:hover {
