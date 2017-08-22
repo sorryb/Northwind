@@ -200,6 +200,8 @@
     <Compile Include="ViewModels\Order10.cs" />
     <Compile Include="ViewModels\Comanda.cs" />
     <Compile Include="ViewModels\OrderIndexData.cs" />
+    <Compile Include="ViewModels\Produse.cs" />
+    <Compile Include="ViewModels\ServicesIndex.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
