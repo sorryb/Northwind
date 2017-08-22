@@ -6,14 +6,26 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Products
+                Produse
             </h1>
-            <ol class="breadcrumb">
-                <li>
-                    @Html.ActionLink("Home", "Index", "Home")
-                </li>
-                <li class="active">@ViewBag.title</li>
-            </ol>
+            <div>
+                <ol class="breadcrumb">
+                    <li class="active">
+                        @ViewBag.title
+
+                        <form id="searchInput" class="prodsearch" action="@Url.Action("Products","Products",new { category=ViewBag.title, search,page=1 } )">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ol>
+            </div>
         </div>
     </div>
     @{
@@ -22,16 +34,6 @@
             <div class="row productdiv">
                 <div class="col-md-6 portfolio-item">
                     <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products whiterounded">
-
-                    <div class="shopcartcontainer-products">
-                        <div class="align-middle img-circle roundedshop">
-                            <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
-                            <div class="shopcart-container-text">
-                                <span id="shopcart-productcount">+</span>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <h3 class="text-center prodpad">
                         @Model.ElementAt(i).ProductName <br />
@@ -43,20 +45,12 @@
                     <div class="col-md-6 portfolio-item">
 
                         <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products whiterounded">
-                            <div class="shopcartcontainer-products">
-                                <div class="align-middle img-circle roundedshop">
-                                    <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
-                                    <div class="shopcart-container-text">
-                                        <span id="shopcart-productcount">+</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3 class="text-center prodpad">
-                                @Model.ElementAt(i + 1).ProductName <br />
-                                <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i + 1).UnitPrice, 2) Lei</span>
-                            </h3>
-                        </div>
+                        
+                        <h3 class="text-center prodpad">
+                            @Model.ElementAt(i + 1).ProductName <br />
+                            <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i + 1).UnitPrice, 2) Lei</span>
+                        </h3>
+                    </div>
                 }
             </div>
             <hr />

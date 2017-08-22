@@ -83,3 +83,12 @@ a:hover {
     width:750px;
     height:400px;
 }
+
+form.prodsearch {
+    position: relative;
+    top: -20px;
+}
+
+.form-control {
+    float:right !important;
+}
