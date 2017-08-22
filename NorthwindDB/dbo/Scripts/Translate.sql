@@ -1756,11 +1756,11 @@ update Products set ProductName='Bratara Xiaomi Silicon - Roz',				SupplierID=4,
 update Products set ProductName='Bratara Xiaomi Silicon - Verde',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=24		where ProductID=27
 update Products set ProductName='Curea Ceas 910XT GPS Negru',				SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=86		where ProductID=28
 update Products set ProductName='Bratara Gear S3 Silicon Maron',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=127	where ProductID=29
-update Products set ProductName='Curea Apple Watch 38mm Piele Neagra',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=964	where ProductID=30
-update Products set ProductName='Dock Slate Union Pentru Apple Watch',								SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=217	where ProductID=31
+update Products set ProductName='Curea Apple Watch 38mm Piele Neagra',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=964	where ProductID=30
+update Products set ProductName='Dock Slate Union Pentru Apple Watch',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=217	where ProductID=31
 update Products set ProductName='Dock Native Union Luxury Tech Marble',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=423	where ProductID=32
 update Products set ProductName='Stand de incarcare Huawei Watch',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=95		where ProductID=33
-update Products set ProductName='Cablu de incarcare Fitbit Flex',											SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=25		where ProductID=34
+update Products set ProductName='Cablu de incarcare Fitbit Flex',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=25		where ProductID=34
 update Products set ProductName='Husa Apple Watch 38mm',					SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=49		where ProductID=35
 update Products set ProductName='Bratara Smartwatch Silicon Argintiur',		SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=128	where ProductID=36
 update Products set ProductName='Bratara Smartwatch Piele Neagra',			SupplierID=4,     CategoryID=3,     QuantityPerUnit=1,     UnitPrice=115	where ProductID=37
