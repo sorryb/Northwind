@@ -201,7 +201,6 @@
     <Compile Include="ViewModels\OrderInfo.cs" />
     <Compile Include="ViewModels\OrderIndexData.cs" />
     <Compile Include="ViewModels\OrderProduct.cs" />
-    <Compile Include="ViewModels\OrderProduct.cs" />
     <Compile Include="ViewModels\ProductCategory.cs" />
     <Compile Include="ViewModels\ProductServices.cs" />
     <Compile Include="ViewModels\ServicesIndex.cs" />
@@ -235,7 +234,7 @@
     <Content Include="images\Accesories\39.jpg" />
     <Content Include="images\Accesories\40.jpg" />
     <Content Include="images\Accesories\41.jpg" />
-    <Content Include="images\AndreeaPopescu.jpg" />
+    <Content Include="images\1.jpg" />
     <Content Include="images\aple.png" />
     <Content Include="images\eBookReaders\1.jpg" />
     <Content Include="images\eBookReaders\10.jpg" />
@@ -248,7 +247,7 @@
     <Content Include="images\eBookReaders\7.jpg" />
     <Content Include="images\eBookReaders\8.jpg" />
     <Content Include="images\eBookReaders\9.jpg" />
-    <Content Include="images\emanuelTincu.jpg" />
+    <Content Include="images\2.jpg" />
     <Content Include="images\Gadgets\63.jpg" />
     <Content Include="images\Gadgets\64.jpg" />
     <Content Include="images\Gadgets\65.jpg" />
@@ -275,8 +274,8 @@
     <Content Include="images\Home\logo-sony.jpg" />
     <Content Include="images\Home\Nokia.gif" />
     <Content Include="images\Home\samsung.jpg" />
-    <Content Include="images\IoanaTimis.jpg" />
-    <Content Include="images\ionIon.jpg" />
+    <Content Include="images\3.jpg" />
+    <Content Include="images\5.jpg" />
     <Content Include="images\Home\footer_logo.png" />
     <Content Include="images\Home\imgad.jpg" />
     <Content Include="images\Home\reduceri-telefoane-emag-it-mobile-days.jpg" />
@@ -313,7 +312,7 @@
     <Content Include="images\Smartphone\60.jpg" />
     <Content Include="images\Smartphone\50.jpg" />
     <Content Include="images\sony3.jpg" />
-    <Content Include="images\StefanBogdan.jpg" />
+    <Content Include="images\6.jpg" />
     <Content Include="images\telefoane_clasice.jpg" />
     <Content Include="images\Classic\17.jpg" />
     <Content Include="images\Classic\20.jpg" />
@@ -329,7 +328,7 @@
     <Content Include="images\Classic\21.jpg" />
     <Content Include="images\Classic\13.jpg" />
     <Content Include="images\Classic\15.jpg" />
-    <Content Include="images\TraianELENA.jpg" />
+    <Content Include="images\4.jpg" />
     <Content Include="images\wpid-nokia-logo.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
