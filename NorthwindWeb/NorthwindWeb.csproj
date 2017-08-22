@@ -204,6 +204,7 @@
     <Compile Include="ViewModels\ProductCategory.cs" />
     <Compile Include="ViewModels\Produse.cs" />
     <Compile Include="ViewModels\ServicesIndex.cs" />
+    <Compile Include="ViewModels\ViewProductCategoryS.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
@@ -289,21 +290,6 @@
     <Content Include="images\accesorii\stand-de-incarcare-pentru-huawei-watch-w1-argintiu-1.jpg" />
     <Content Include="images\accesorii\stand-de-incarcare-pentru-huawei-watch-w1-argintiu.jpg" />
     <Content Include="images\eBookreader.jpg" />
-    <Content Include="images\eBook\e-book-reader-bookeen-cybook-muse-frontlight-black.jpg" />
-    <Content Include="images\eBook\ebook-reader-bookeen-cybook-muse-hd-8gb-black-6.jpg" />
-    <Content Include="images\eBook\ebook-reader-bookeen-cybook-muse-hd-8gb-black.jpg" />
-    <Content Include="images\eBook\ebook-reader-bookeen-cybook-muse-light-4gb-black-3.jpg" />
-    <Content Include="images\eBook\ebook-reader-bookeen-cybook-muse-light-4gb-black.jpg" />
-    <Content Include="images\eBook\ebook-reader-kindle-6-glare-touch-screen-wifi-black.jpg" />
-    <Content Include="images\eBook\ebook-reader-kindle-paperwhite-wi-fi-4gb-new-model-2015.jpg" />
-    <Content Include="images\eBook\ebook-reader-kindle-paperwhite-wifi-white.jpg" />
-    <Content Include="images\eBook\ebook-reader-pocketbook-touch-hd-black.jpg" />
-    <Content Include="images\eBook\ebook-reader-pocketbook-touch-lux-3-4gb-grey-2.jpg" />
-    <Content Include="images\eBook\ebook-reader-pocketbook-touch-lux-3-4gb-grey.jpg" />
-    <Content Include="images\eBook\ebook-reader-pocketbook-touch-lux-3-4gb-red.jpg" />
-    <Content Include="images\eBook\ebook-reader-pocketbook-touch-lux-3-4gb-white-3.jpg" />
-    <Content Include="images\eBook\ebook-reader-pocketbook-touch-lux-3-4gb-white.jpg" />
-    <Content Include="images\eBook\ebook-reader-prestigio-multireader-supreme-4gb-black.jpg" />
     <Content Include="images\Gadgeturi.jpg" />
     <Content Include="images\samsung.png" />
     <Content Include="images\servicii\apeluri-voce.jpg" />
@@ -373,6 +359,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\NewFolder1\" />
     <Folder Include="Views\Teste\" />
   </ItemGroup>
   <ItemGroup>
