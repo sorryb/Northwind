@@ -6,12 +6,24 @@ using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// Products controller. From table Products.
+    /// </summary>
     public class ProductsController : Controller
     {
         private Models.NorthwindModel db = new Models.NorthwindModel();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public ActionResult Products(string category, int? page = 1)
         {
             var products = db.Products as IQueryable<Products>;
+
+            //test categories of products.
             switch (category)
             {
                 case "Classic":
@@ -40,14 +52,21 @@ namespace NorthwindWeb.Controllers
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="search"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public ActionResult Search(string search, int? page = 1)
         {
-            //var products = db.Products as IQueryable<>;
-            
+                    
             ViewBag.title = "Result for: " + search;
             ViewBag.search = search;
             ViewBag.page = page;
-            //products = db.Products.Where(x => x.ProductName.Contains(search));
+     
+
 
             var products = from prod in db.Products
                            from cat in db.Categories
@@ -61,6 +80,8 @@ namespace NorthwindWeb.Controllers
                            };
 
             products = products.OrderBy(x => x.ProductName);
+
+
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
