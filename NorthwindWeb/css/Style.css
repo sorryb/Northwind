@@ -66,6 +66,7 @@ img[class~=whiterounded] {
     padding: 0px 2px 0px 2px;
 }
 
+/*change color of text -- used in Views-Home-Index*/
 .home {
     color: #2b3e50;
 }
@@ -78,8 +79,12 @@ a:hover {
     text-decoration: none;
 }
 
-.img-services
-{
-    width:750px;
-    height:400px;
+
+/*change dimensions of images -- used in Views-Services-Index*/
+.img-services {
+    width: 700px;
+    height: 320px;
+    border-radius: 20px;
+    background-color: white;
+    padding: 20px;
 }
