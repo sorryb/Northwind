@@ -20,43 +20,32 @@
         for (int i = 0; i < itemCount; i += 2)
         {
             <div class="row productdiv">
-                <div class="col-md-6 portfolio-item">
-                    <img src="/Images/@Model.ElementAt(i).CategoryName/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products">
-
-                    <div class="shopcartcontainer-products">
-                        <div class="align-middle img-circle roundedshop">
-                            <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
-                            <div class="shopcart-container-text">
-                                <span id="shopcart-productcount">+</span>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <h3 class="text-center prodpad">
-                        @Model.ElementAt(i).ProductName <br />
-                        <span class="price"> @Model.ElementAt(i).ProductPrice Lei</span>
-                    </h3>
+                <div class="col-md-6 portfolio-item" style="display:block">
+                    <img src="/Images/@Model.ElementAt(i).CategoryName/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive products col-md-6">
+                    <ul class="col-md-6">
+                        <li class="textlarge"><strong>@Model.ElementAt(i).ProductName</strong></li>
+                        <li class="textlarge"><strong>Pret: @Decimal.Round(Model.ElementAt(i).ProductPrice, 2)</strong></li>
+                        <li><strong>Categorie: @Model.ElementAt(i).CategoryName</strong></li>
+                        <li><strong>Furnizor: @Model.ElementAt(i).SuppliersName</strong></li>
+                        <li><strong>In Stoc: @Model.ElementAt(i).Stock</strong></li>
+                        <li><strong>In Comenzi: @Model.ElementAt(i).OnOrder</strong></li>
+                    </ul>
                 </div>
                 @if (i + 1 < itemCount)
                 {
                     <div class="col-md-6 portfolio-item">
 
-                        <img src="/Images/@Model.ElementAt(i + 1).CategoryName/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products">
-                            <div class="shopcartcontainer-products">
-                                <div class="align-middle img-circle roundedshop">
-                                    <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
-                                    <div class="shopcart-container-text">
-                                        <span id="shopcart-productcount">+</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <img src="/Images/@Model.ElementAt(i + 1).CategoryName/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products col-md-6">
 
-                            <h3 class="text-center prodpad">
-                                @Model.ElementAt(i + 1).ProductName <br />
-                                <span class="price"> @Model.ElementAt(i + 1).ProductPrice Lei</span>
-                            </h3>
-                        </div>
+                        <ul class="col-md-6">
+                            <li class="textlarge"><strong>@Model.ElementAt(i + 1).ProductName</strong></li>
+                            <li class="textlarge"><strong>Pret: @Decimal.Round(Model.ElementAt(i + 1).ProductPrice, 2)</strong></li>
+                            <li><strong>Categorie: @Model.ElementAt(i + 1).CategoryName</strong></li>
+                            <li><strong>Furnizor: @Model.ElementAt(i + 1).SuppliersName</strong></li>
+                            <li><strong>In Stoc: @Model.ElementAt(i + 1).Stock</strong></li>
+                            <li><strong>In Comenzi: @Model.ElementAt(i + 1).OnOrder</strong></li>
+                        </ul>
+                    </div>
                 }
             </div>
             <hr />
