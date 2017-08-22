@@ -57,7 +57,7 @@ namespace NorthwindWeb.Controllers
                            CategoryName = cat.CategoryName,
                            ProductName = prod.ProductName,
                            ProductID = prod.ProductID.ToString(),
-                           ProductPrice = decimal.Round(prod.UnitPrice ?? 0, 2).ToString(),
+                           ProductPrice = prod.UnitPrice ?? 0,
                            OnOrder = prod.UnitsOnOrder.ToString(),
                            Stock = prod.UnitsInStock.ToString(),
                            SuppliersName = supp.CompanyName
@@ -89,7 +89,7 @@ namespace NorthwindWeb.Controllers
                                CategoryName = cat.CategoryName,
                                ProductName = prod.ProductName,
                                ProductID = prod.ProductID.ToString(),
-                               ProductPrice = decimal.Round(prod.UnitPrice ?? 0, 2).ToString()
+                               ProductPrice = prod.UnitPrice ?? 0
                            };
 
             products = products.OrderBy(x => x.ProductName);
