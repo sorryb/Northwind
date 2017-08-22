@@ -10,6 +10,7 @@ namespace NorthwindWeb.ViewModels
     {
         public IQueryable<string> top4nume {get; set;}
         public IEnumerable<Produse> top4produse { get; set; }
+        public IEnumerable<Produse> ultimele3 { get; set; }
 
     }
 }
