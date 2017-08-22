@@ -35,6 +35,12 @@ img[class~=products] {
     padding: 5px 5px 5px 5px;
 }
 
+img[class~=whiterounded] {
+    border-radius: 20px;
+    background-color: white;
+    padding: 20px;
+}
+
 [class~=roundedshop] {
     background-color: rgb(223, 105, 26);
     padding: 0px 0px 0px 0px;
