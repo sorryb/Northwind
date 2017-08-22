@@ -31,16 +31,16 @@ namespace NorthwindWeb.Controllers
                 search = currentFilter;
             }
             ViewBag.CurrentFilter = search;
-            viewModel.Order = comenzii(search);
-            viewModel.Comanda = bigcomanda();
+            viewModel.Order = Comenzii(search);
+            viewModel.Comanda = BigComanda();
 
-            viewModel.Order10 = lista();
+            viewModel.Order10 = Lista();
             if (id == 0) { id = null; }
             if (id != null)
             {
                 ViewBag.OrderID = id.Value;
-                viewModel.Order_Detail = db.Order_Details.Where(x => x.OrderID == id);
-
+                viewModel.Order_Detail = Detali(ViewBag.OrderID);
+                
 
             }
             if (pid == 0) { pid = null; }
@@ -58,7 +58,7 @@ namespace NorthwindWeb.Controllers
 
         }
 
-        public List<Order10> lista()
+        public List<Order10> Lista()
         {
             var order10 = (from o in db.Orders
                            join od in db.Order_Details on o.OrderID equals od.OrderID
@@ -81,7 +81,7 @@ namespace NorthwindWeb.Controllers
             return list;
         }
 
-        public List<Comanda> comenzii(string search)
+        public List<Comanda> Comenzii(string search)
         {
             var order = (from o in db.Orders
                          join c in db.Customers on o.CustomerID equals c.CustomerID
@@ -117,7 +117,8 @@ namespace NorthwindWeb.Controllers
             }
             return comenzi;
         }
-        public BigOrder bigcomanda()
+
+        public BigOrder BigComanda()
         {
             var order = (from o in db.Orders
                          join od in db.Order_Details on o.OrderID equals od.OrderID
@@ -132,6 +133,30 @@ namespace NorthwindWeb.Controllers
                 s.Produse = item.max;
             }
             return s;
+        }
+
+        public List<OrderProduct> Detali(int id)
+        {
+            var detali = (from o in db.Order_Details
+                          .Where(x => x.OrderID == id)
+                          join p in db.Products on o.ProductID equals p.ProductID
+                          select new { p.ProductName, o.UnitPrice,o.Quantity,o.Discount,o.ProductID })
+                              
+            ;
+            List<OrderProduct> list = new List<OrderProduct>();
+
+            foreach (var item in detali)
+            {
+                OrderProduct x = new OrderProduct();
+                x.ProductID = item.ProductID;
+                x.ProductName = item.ProductName;
+                x.UnitPrice = item.UnitPrice;
+                x.Quantity = item.Quantity;
+                x.Discount = item.Discount;
+                list.Add(x);
+
+            }
+            return list;
         }
     }
 }
