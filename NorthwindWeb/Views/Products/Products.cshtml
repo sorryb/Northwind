@@ -19,9 +19,9 @@
     @{
         for (int i = 0; i < itemCount; i += 2)
         {
-            <div class="row">
+            <div class="row productdiv">
                 <div class="col-md-6 portfolio-item">
-                    <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products">
+                    <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products whiterounded">
 
                     <div class="shopcartcontainer-products">
                         <div class="align-middle img-circle roundedshop">
@@ -42,7 +42,7 @@
                 {
                     <div class="col-md-6 portfolio-item">
 
-                        <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products">
+                        <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products whiterounded">
                             <div class="shopcartcontainer-products">
                                 <div class="align-middle img-circle roundedshop">
                                     <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
