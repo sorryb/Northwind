@@ -37,20 +37,8 @@ namespace NorthwindWeb.Models
 
         public bool Discontinued { get; set; }
 
-        [Column(TypeName = "text")]
-        public string img { get; set; }
-
-        [Column(TypeName = "text")]
-        public string img1 { get; set; }
-
-        [Column(TypeName = "text")]
-        public string img2 { get; set; }
-
-        [Column(TypeName = "text")]
-        public string img3 { get; set; }
 
         public virtual Categories Category { get; set; }
-
 
         public virtual ICollection<Order_Details> Order_Details { get; set; }
 

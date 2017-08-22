@@ -102,6 +102,7 @@
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Views\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Orders.sql">
@@ -252,12 +253,9 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </Build>
-    <Build Include="northwind.sql" />
-    <Build Include="translate script.sql" />
+    <None Include="dbo\Scripts\Northwind.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="northwnd.ldf" />
-    <None Include="northwnd.mdf" />
-    <None Include="Readme.txt" />
+    <None Include="dbo\Scripts\Translate.sql" />
   </ItemGroup>
 </Project>

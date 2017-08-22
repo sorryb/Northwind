@@ -18,12 +18,12 @@ namespace NorthwindWeb.Models
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Order_Details> Order_Details { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Persons> Persons { get; set; }
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Shippers> Shippers { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
-        public virtual DbSet<Persons> Persons { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -76,22 +76,6 @@ namespace NorthwindWeb.Models
                 .HasPrecision(19, 4);
 
             modelBuilder.Entity<Products>()
-                .Property(e => e.img)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Products>()
-                .Property(e => e.img1)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Products>()
-                .Property(e => e.img2)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Products>()
-                .Property(e => e.img3)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Products>()
                 .HasMany(e => e.Order_Details)
                 .WithRequired(e => e.Product)
                 .WillCascadeOnDelete(false);
@@ -113,14 +97,6 @@ namespace NorthwindWeb.Models
             modelBuilder.Entity<Territories>()
                 .Property(e => e.TerritoryDescription)
                 .IsFixedLength();
-
-            modelBuilder.Entity<Persons>()
-                .Property(e => e.Email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Persons>()
-                .Property(e => e.Nume)
-                .IsUnicode(false);
         }
     }
 }
