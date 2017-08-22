@@ -71,3 +71,9 @@ h3.prodpad{
 a:hover {
     text-decoration: none;
 }
+
+.img-services
+{
+    width:750px;
+    height:400px;
+}
