@@ -24,11 +24,11 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="orderID"></param>
-        /// <param name="productID"></param>
-        /// <param name="page"></param>
-        /// <param name="search"></param>
-        /// <param name="currentFilter"></param>
+        /// <param name="orderID">Returns selected Order</param>
+        /// <param name="productID">Returns selected Product</param>
+        /// <param name="page">Returns the current page</param>
+        /// <param name="search">The search string</param>
+        /// <param name="currentFilter">Curent search</param>
         /// <returns></returns>
         public ActionResult Home1(int? orderID, int? productID, int? page, string search, string currentFilter)
         {
@@ -97,7 +97,7 @@ namespace NorthwindWeb.Controllers
             return list;
         }
 
-        private List<Comanda> Orders(string search)
+        private List<OrderInfo> Orders(string search)
         {
             var order = (from o in db.Orders
                          join c in db.Customers on o.CustomerID equals c.CustomerID
@@ -117,11 +117,11 @@ namespace NorthwindWeb.Controllers
                 }
             }
             order.OrderBy(i => i.OrderID);
-            List<Comanda> comenzi = new List<Comanda>();
+            List<OrderInfo> comenzi = new List<OrderInfo>();
 
             foreach (var item in order)
             {
-                Comanda x = new Comanda();
+                OrderInfo x = new OrderInfo();
 
                 x.OrderID = item.OrderID;
                 DateTime t = Convert.ToDateTime(item.OrderDate);

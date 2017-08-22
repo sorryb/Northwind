@@ -4,10 +4,12 @@ using PagedList;
 
 
 namespace NorthwindWeb.ViewModels
-{
+{/// <summary>
+/// The data model sent by the OrderController to Home1
+/// </summary>
     public class OrderIndexData
     {   public IPagedList page { get; set; }
-        public IEnumerable<Comanda> Order { get; set; }
+        public IEnumerable<OrderInfo> Order { get; set; }
         public IEnumerable<OrderProduct> Order_Detail { get; set; }
         public IEnumerable<ProductCategory> Product { get; set; }
         public IEnumerable<Order10> Order10 { get; set; }

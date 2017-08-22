@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels
-{
+{/// <summary>
+/// The class used to store, join between the Products and Categories
+/// </summary>
     public class ProductCategory
     {
         public string ProductName { get; set; }
