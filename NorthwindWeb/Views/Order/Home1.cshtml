@@ -22,69 +22,75 @@
     <div class="row">
         <div class="col-lg-8">
             <table class="table">
-                <tr>
-                    <th>Numar Comanda</th>
-                    <th>Data plasare</th>
-                    <th>Nume Client</th>
-
-                </tr>
-                @foreach (var item in Model.Order)
-                {
-                    string selectedRow = "";
-                    if (item.OrderID == ViewBag.OrderID)
-                    {
-                        selectedRow = "selectat";
-                    }
-                    <tr class="@selectedRow">
-                        <td>
-                            @Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
-                        </td>
-                        <td>
-                            @item.OrderDate
-                        </td>
-                        <td>
-                            @item.CompanyName
-                        </td>
-
+                <thead class="thead">
+                    <tr role="row">
+                        <th>Numar Comanda</th>
+                        <th>Data plasare</th>
+                        <th>Nume Client</th>
                     </tr>
-                }
+                </thead>
+                <tbody class="tbody">
+                    @foreach (var item in Model.Order)
+                    {
+                        string selectedRow = "";
+                        if (item.OrderID == ViewBag.OrderID)
+                        {
+                            selectedRow = "selectat";
+                        }
+                        <tr class="@selectedRow" role="row">
+                            <td>
+                                @Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { orderID = item.OrderID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                            </td>
+                            <td>
+                                @item.OrderDate
+                            </td>
+                            <td>
+                                @item.CompanyName
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
             </table>
             @if (Model.Order_Detail != null)
             {<hr>
                 <h3>Detali Comanda</h3>
                 <table class="table">
-                    <tr>
+                    <thead class="thead">
+
+                    <tr role="row">
 
                         <th>Nume Produs</th>
                         <th>Pret</th>
                         <th>Cantitate</th>
                         <th>Reducere</th>
                     </tr>
-
-                    @foreach (var item in Model.Order_Detail)
-                    {
-                        string selectedRow = "";
-                        if (item.ProductID == ViewBag.ProductID)
+                    </thead>
+                    <tbody  class="tbody">
+                        @foreach (var item in Model.Order_Detail)
                         {
-                            selectedRow = "selectat";
+                            string selectedRow = "";
+                            if (item.ProductID == ViewBag.ProductID)
+                            {
+                                selectedRow = "selectat";
+                            }
+                            <tr class="@selectedRow">
+                                <td>
+                                    @Html.ActionLink(item.ProductName, "Home1", new { orderID = ViewBag.OrderID, productID = item.ProductID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UnitPrice) lei
+                                </td>
+                                <td>
+                                    @item.Quantity
+                                </td>
+                                <td>
+                                    @(item.Discount * 100)%
+                                </td>
+                            </tr>
                         }
-                        <tr class="@selectedRow">
-                            <td>
-                                @Html.ActionLink(item.ProductName, "Home1", new { pid = item.ProductID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
-                            </td>
-
-                            <td>
-                                @Html.DisplayFor(modelItem => item.UnitPrice) lei
-                            </td>
-                            <td>
-                                @item.Quantity
-                            </td>
-                            <td>
-                                @(item.Discount * 100)%
-                            </td>
-                        </tr>
-                    }
-
+                    </tbody>
                 </table>
             }
             @if (Model.Product != null)
@@ -93,29 +99,33 @@
                     Caracteristici Produs
                 </h3>
                 <table class="table">
-                    <tr>
-                        <th>Denumire Produs</th>
-                        <th>Categorie</th>
-                        <th>Buc</th>
-                    </tr>
-                    @foreach (var item in Model.Product)
-                    {
-                        <tr>
-                            <td>
-                                @item.ProductName
-                            </td>
-                            <td>
-                                @item.CategoryName
-                            </td>
-                            <td>
-                                @item.UnitsInStock
-                            </td>
+                    <thead class="thead">
+                        <tr role="row">
+                            <th>Denumire Produs</th>
+                            <th>Categorie</th>
+                            <th>Buc</th>
                         </tr>
-                    }
+                    </thead>
+                    <tbody  class="tbody">
+                        @foreach (var item in Model.Product)
+                        {
+                            <tr>
+                                <td>
+                                    @item.ProductName
+                                </td>
+                                <td>
+                                    @item.CategoryName
+                                </td>
+                                <td>
+                                    @item.UnitsInStock
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
             }
             Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
-            @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, id = 0, pid = 0, currentFilter = ViewBag.CurrentFilter }))
+            @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
            
         </div>
         <div class="col-lg-4">
@@ -148,7 +158,7 @@
                             @foreach (var item in Model.Order10)
                             {
                                 <tr>
-                                    <td>@Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { id = item.OrderID, search = item.OrderID })</td>
+                                    <td>@Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { orderID = item.OrderID, search = item.OrderID })</td>
                                     <td>@item.Cost lei</td>
 
                                 </tr>
@@ -164,8 +174,8 @@
                 <h4>Cea mai mare comanda</h4>
                 <table class="table">
                     <tr>
-                        <th>@Html.ActionLink(Convert.ToString(Model.Comanda.OrderID), "Home1", new { id = Model.Comanda.OrderID, search = Model.Comanda.OrderID })</th>
-                        <th>@Model.Comanda.Produse Produse</th>
+                        <th>@Html.ActionLink(Convert.ToString(Model.Comand.OrderID), "Home1", new { orderID = Model.Comand.OrderID, search = Model.Comand.OrderID })</th>
+                        <th>@Model.Comand.Produse Produse</th>
 
                     </tr>
                 </table>

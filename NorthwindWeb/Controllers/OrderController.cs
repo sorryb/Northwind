@@ -14,14 +14,27 @@ using PagedList;
 namespace NorthwindWeb.Controllers
 {
 
-
+    /// <summary>
+    /// Orders controller. For table Orders.
+    /// </summary>
     public class OrderController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
 
-        public ActionResult Home1(int? id, int? pid, int? page, string search, string currentFilter)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="orderID">Returns selected Order</param>
+        /// <param name="productID">Returns selected Product</param>
+        /// <param name="page">Returns the current page</param>
+        /// <param name="search">The search string</param>
+        /// <param name="currentFilter">Curent search</param>
+        /// <returns></returns>
+        public ActionResult Home1(int? orderID, int? productID, int? page, string search, string currentFilter)
         {
             var viewModel = new OrderIndexData();
+            
+            // test null if in search control
             if (search != null)
             {
                 page = 1;
@@ -31,25 +44,28 @@ namespace NorthwindWeb.Controllers
                 search = currentFilter;
             }
             ViewBag.CurrentFilter = search;
-            viewModel.Order = Comenzii(search);
-            viewModel.Comanda = BigComanda();
+            viewModel.Order = Orders(search);
+            viewModel.Comand = BigComand();
 
-            viewModel.Order10 = Lista();
-            if (id == 0) { id = null; }
-            if (id != null)
+            viewModel.Order10 = ListOrder10();
+            // test null if orders not selected in page
+            if (orderID == 0) { orderID = null; }
+            if (orderID != null)
             {
-                ViewBag.OrderID = id.Value;
-                viewModel.Order_Detail = Detali(ViewBag.OrderID);
+                ViewBag.OrderID = orderID.Value;
+                viewModel.Order_Detail = Details(ViewBag.OrderID);
                 
 
             }
-            if (pid == 0) { pid = null; }
-            if (pid != null)
+            //test null if OrdersDetails not selected in page
+            if (productID == 0) { productID = null; }
+            if (productID != null)
             {
-                ViewBag.ProductID = pid.Value;
+                ViewBag.ProductID = productID.Value;
 
                 viewModel.Product = ProdCateg(ViewBag.ProductID);
             }
+            //pagination
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             viewModel.page = viewModel.Order.ToPagedList(pageNumber, pageSize);
@@ -58,7 +74,7 @@ namespace NorthwindWeb.Controllers
 
         }
 
-        public List<Order10> Lista()
+        private List<Order10> ListOrder10()
         {
             var order10 = (from o in db.Orders
                            join od in db.Order_Details on o.OrderID equals od.OrderID
@@ -81,7 +97,7 @@ namespace NorthwindWeb.Controllers
             return list;
         }
 
-        public List<Comanda> Comenzii(string search)
+        private List<OrderInfo> Orders(string search)
         {
             var order = (from o in db.Orders
                          join c in db.Customers on o.CustomerID equals c.CustomerID
@@ -101,11 +117,11 @@ namespace NorthwindWeb.Controllers
                 }
             }
             order.OrderBy(i => i.OrderID);
-            List<Comanda> comenzi = new List<Comanda>();
+            List<OrderInfo> comenzi = new List<OrderInfo>();
 
             foreach (var item in order)
             {
-                Comanda x = new Comanda();
+                OrderInfo x = new OrderInfo();
 
                 x.OrderID = item.OrderID;
                 DateTime t = Convert.ToDateTime(item.OrderDate);
@@ -118,7 +134,7 @@ namespace NorthwindWeb.Controllers
             return comenzi;
         }
 
-        public BigOrder BigComanda()
+        private BigOrder BigComand()
         {
             var order = (from o in db.Orders
                          join od in db.Order_Details on o.OrderID equals od.OrderID
@@ -135,7 +151,7 @@ namespace NorthwindWeb.Controllers
             return s;
         }
 
-        public List<OrderProduct> Detali(int id)
+        private List<OrderProduct> Details(int id)
         {
             var detali = (from o in db.Order_Details
                           .Where(x => x.OrderID == id)
@@ -159,7 +175,7 @@ namespace NorthwindWeb.Controllers
             return list;
         }
 
-        public List<ProductCategory> ProdCateg(int id)
+        private List<ProductCategory> ProdCateg(int id)
         {
             var detali = (from p in db.Products
                           .Where(x => x.ProductID == id)

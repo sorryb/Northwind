@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels
-{/// <summary>
-/// The class used to store, join between the Products and Categories
-/// </summary>
-    public class ProductCategory
+{
+    public class ViewProductCategoryS
     {
+        //take ProductID, ProductNmae and CategoryName  all as string
+        public string ProductID { get; set; }   
         public string ProductName { get; set; }
         public string CategoryName { get; set; }
-        public short? UnitsInStock { get; set; }
+        public string ProductPrice { get; set; }
     }
 }

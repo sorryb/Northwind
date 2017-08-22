@@ -12,17 +12,28 @@ using PagedList;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ServicesController : Controller
     {
         private Models.NorthwindModel db = new Models.NorthwindModel();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
             var viewModel = new ServicesIndex();
-            viewModel.top4nume = (from p in db.Products
+
+            //take the names of first 4 products
+            viewModel.top4name = (from p in db.Products
                                   orderby p.ProductID
                                   select p.ProductName).Take(4);
 
-            var produse = (from p in db.Products
+            //take first 4 products
+            var products = (from p in db.Products
                            join c in db.Categories on p.CategoryID equals c.CategoryID
                            join s in db.Suppliers on p.SupplierID equals s.SupplierID
                            select new
@@ -36,11 +47,12 @@ namespace NorthwindWeb.Controllers
                                p.UnitsOnOrder,
                            }).Take(4);
 
-            List<Produse> list = new List<Produse>();
+            List<ProductServices> listOfProducts = new List<ProductServices>();
 
-            foreach (var item in produse)
+            //lopp in first 4 products 
+            foreach (var item in products)
             {
-                Produse x = new Produse();
+                ProductServices x = new ProductServices();
 
                 x.ProductName = item.ProductName;
                 x.CategoryName = item.CategoryName;
@@ -50,21 +62,49 @@ namespace NorthwindWeb.Controllers
                 x.UnitsInStock = item.UnitsInStock;
                 x.UnitsOnOrder = item.UnitsOnOrder;
 
-                list.Add(x);
+                listOfProducts.Add(x);
 
             }
-            viewModel.top4produse = list;
+            viewModel.top4products = listOfProducts;
 
 
-            //                select top 4 p.ProductName,s.CompanyName,c.CategoryName
-            //from Products p
-            //inner join Categories c on p.CategoryID = c.CategoryID
-            //inner join Suppliers s on p.SupplierID = s.SupplierID
+            //take last 3 products
+            var productsOrderByDesc = (from p in db.Products
+                           join c in db.Categories on p.CategoryID equals c.CategoryID
+                           join s in db.Suppliers on p.SupplierID equals s.SupplierID
+                           orderby p.ProductID descending
+                           select new
+                           {
+                               p.ProductName,
+                               p.ProductID,
+                               s.CompanyName,
+                               c.CategoryName,
+                               p.QuantityPerUnit,
+                               p.UnitPrice,
+                               p.UnitsInStock,
+                               p.UnitsOnOrder,
+                           }).Take(3);
 
-            //var x = from p in db.Products
-            //        orderby p.ProductID
-            //        select p.ProductName;
-            //x=x.Take(4);
+            List<ProductServices> listOfProductsOrderByDesc = new List<ProductServices>();
+
+            //loop in last 3 products
+            foreach (var item2 in productsOrderByDesc)
+            {
+                ProductServices y = new ProductServices();
+
+                y.ProductName = item2.ProductName;
+                y.ProductID = item2.ProductID;
+                y.CategoryName = item2.CategoryName;
+                y.CompanyName = item2.CompanyName;
+                y.QuantityPerUnit = item2.QuantityPerUnit;
+                y.UnitPrice = item2.UnitPrice;
+                y.UnitsInStock = item2.UnitsInStock;
+                y.UnitsOnOrder = item2.UnitsOnOrder;
+
+                listOfProductsOrderByDesc.Add(y);
+
+            }
+            viewModel.last3 = listOfProductsOrderByDesc;
 
 
             return View(viewModel);
