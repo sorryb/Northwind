@@ -1,7 +1,7 @@
-﻿@model PagedList.IPagedList<NorthwindWeb.Models.Products>
+﻿@model PagedList.IPagedList<NorthwindWeb.ViewModels.ViewProductCategoryS>
 @using PagedList.Mvc;
 @{int itemCount = Model.Count; }
-<div class="container">
+<div class="container whiterounded coloronwhite">
 
     <div class="row">
         <div class="col-lg-12">
@@ -33,24 +33,32 @@
         {
             <div class="row productdiv">
                 <div class="col-md-6 portfolio-item">
-                    <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products whiterounded">
+                    <img src="/Images/@Model.ElementAt(i).CategoryName/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products">
 
                     <h3 class="text-center prodpad">
                         @Model.ElementAt(i).ProductName <br />
-                        <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i).UnitPrice, 2) Lei</span>
+                        <span class="price"> @Model.ElementAt(i).ProductPrice Lei</span>
                     </h3>
                 </div>
                 @if (i + 1 < itemCount)
                 {
                     <div class="col-md-6 portfolio-item">
 
-                        <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products whiterounded">
-                        
-                        <h3 class="text-center prodpad">
-                            @Model.ElementAt(i + 1).ProductName <br />
-                            <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i + 1).UnitPrice, 2) Lei</span>
-                        </h3>
-                    </div>
+                        <img src="/Images/@Model.ElementAt(i + 1).CategoryName/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products">
+                            <div class="shopcartcontainer-products">
+                                <div class="align-middle img-circle roundedshop">
+                                    <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                    <div class="shopcart-container-text">
+                                        <span id="shopcart-productcount">+</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-center prodpad">
+                                @Model.ElementAt(i + 1).ProductName <br />
+                                <span class="price"> @Model.ElementAt(i + 1).ProductPrice Lei</span>
+                            </h3>
+                        </div>
                 }
             </div>
             <hr />
