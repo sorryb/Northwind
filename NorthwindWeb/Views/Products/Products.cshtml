@@ -21,10 +21,10 @@
         {
             <div class="row">
                 <div class="col-md-6 portfolio-item">
-                    <img src="@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products">
+                    <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products">
                     <h3 class="text-center">
                         @Model.ElementAt(i).ProductName <br />
-                        <span onclick="AddToCart(@Model.ElementAt(i).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod"/>
+                        <span onclick="AddToCart(@Model.ElementAt(i).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod"></span>
                         <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i).UnitPrice, 2) Lei</span>
                     </h3>
                 </div>
@@ -32,11 +32,11 @@
                 {
                     <div class="col-md-6 portfolio-item">
                         <div>
-                            <img src="@(Model.ElementAt(i + 1).ProductID).jpg" class="img-responsive contentcenter products">
+                            <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products">
                         </div>
                         <h3 class="text-center">
                             @Model.ElementAt(i + 1).ProductName <br />
-                            <span onclick="AddToCart(@Model.ElementAt(i+1).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod" />
+                            <span onclick="AddToCart(@Model.ElementAt(i+1).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod" ></span>
                             <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i + 1).UnitPrice, 2) Lei</span>
                         </h3>
                     </div>

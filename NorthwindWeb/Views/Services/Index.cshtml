@@ -1,7 +1,9 @@
-﻿@{
+﻿@model NorthwindWeb.ViewModels.ServicesIndex
+@{
     ViewBag.Title = "Services";
 }
-<div class="container" >
+
+<div class="container">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
@@ -57,39 +59,117 @@
                     </div>
                 </div>
             </div>
-            </div>
-            <!-- /.row -->
-            <!-- Service Tabs -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Principalele servicii oferite</h2>
-                    <ul class="nav nav-tabs" id="myTab">
-                        <li class="active">
-                            <a data-toggle="tab" href="#service-one">SMS şi MMS</a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#service-two">VOX Mesagerie Vocala</a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#service-three">Apeluri voce</a>
-                        </li>
-                        <li>
-                            <a data-toggle="tab" href="#service-four">Restricţionare apeluri</a>
-                        </li>
-                      
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div id="service-one" class="tab-pane fade in active">
-                            <i class="fa fa-gear pull-left fa-4x"></i>
-                            <p>Prin SMS trimiţi mesaje scrise de maximum 160 de caractere la un singur tarif către orice reţea naţională. Mesajele multimedia (MMS) îți permit să trimiți si să primesti mesaje text de până la 1000 de caractere, imagini si fisiere audio. Un MMS trimis către o rețea națională te costă 0,179E (TVA inclus).</p>
-                            <p>Orice SMS trimis către un număr din România se taxează la fel. Diferit se taxează doar SMS-urile către numere internaţionale. Primirea unui SMS, indiferent de ţara de provenienţă, este gratuită.</p>
-                        </div>
-                        <div id="service-two" class="tab-pane fade">
+        </div>
+        <!-- /.row -->
+        <!-- Service Tabs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Principalele servicii oferite</h2>
+                <ul class="nav nav-tabs" id="myTab">
+                    @{int i = 1;}
+                    @foreach (var y in Model.top4nume)
+                    {
+                        if (i == 1)
+                        {
+                            <li class="active">
+                                <a data-toggle="tab" href="#@i">@y</a>
+                            </li>
+                            <span hidden="true">@(i++)</span>
+                        }
+                        else
+                        {
+                            <li>
+                                <a data-toggle="tab" href="#@i">@y</a>
+                            </li>
+                            <span hidden="true">@(i++)</span>
+                        }
+                    }
+
+                </ul>
+                <div class="tab-content" id="myTabContent">
+
+                    @{int j = 1;}
+                    @foreach (var y in Model.top4produse)
+                    {
+                        if (j == 1)
+                        {
+                            <div id="@j" class="tab-pane fade in active">
+                                <i class="fa fa-gear pull-left fa-4x"></i>
+                                <table class="table">
+                                    <tr>
+                                        <th>Nume produs</th>
+                                        <th>Nume companie</th>
+                                        <th>Nume Categorie</th>
+                                        <th>Cantitate pe unitate</th>
+                                        <th>Pret unitar</th>
+                                        <th>Unitati in stoc</th>
+                                        <th>Unitati la comanda</th>
+
+
+
+                                    </tr>
+                                    <tr>
+                                        <td>@y.ProductName</td>
+                                        <td>@y.CompanyName</td>
+                                        <td>@y.CategoryName</td>
+                                        <td>@y.QuantityPerUnit</td>
+                                        <td>@y.UnitPrice</td>
+                                        <td>@y.UnitsInStock</td>
+                                        <td>@y.UnitsOnOrder</td>
+
+
+                                    </tr>
+
+                                </table>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div id="@j" class="tab-pane">
+                                <i class="fa fa-gear pull-left fa-4x"></i>
+                                <table class="table">
+                                    <tr>
+                                        <th>Nume produs</th>
+                                        <th>Nume companie</th>
+                                        <th>Nume Categorie</th>
+                                        <th>Cantitate pe unitate</th>
+                                        <th>Pret unitar</th>
+                                        <th>Unitati in stoc</th>
+                                        <th>Unitati la comanda</th>
+
+
+
+                                    </tr>
+                                    <tr>
+                                        <td>@y.ProductName</td>
+                                        <td>@y.CompanyName</td>
+                                        <td>@y.CategoryName</td>
+                                        <td>@y.QuantityPerUnit</td>
+                                        <td>@y.UnitPrice</td>
+                                        <td>@y.UnitsInStock</td>
+                                        <td>@y.UnitsOnOrder</td>
+
+
+                                    </tr>
+
+                                </table>
+
+                            </div>
+                        }
+                        <span hidden="true">@(j++)</span>
+                    }
+                    @*<div id="1" class="tab-pane fade in active">
+                        <i class="fa fa-gear pull-left fa-4x"></i>
+                        <p>Prin SMS trimiţi mesaje scrise de maximum 160 de caractere la un singur tarif către orice reţea naţională. Mesajele multimedia (MMS) îți permit să trimiți si să primesti mesaje text de până la 1000 de caractere, imagini si fisiere audio. Un MMS trimis către o rețea națională te costă 0,179E (TVA inclus).</p>
+                        <p>Orice SMS trimis către un număr din România se taxează la fel. Diferit se taxează doar SMS-urile către numere internaţionale. Primirea unui SMS, indiferent de ţara de provenienţă, este gratuită.</p>*@
+                    @*</div>
+                        <div id="2" class="tab-pane fade">
                             <i class="fa fa-gears pull-left fa-4x"></i>
                             <p>VOX redirecţionează apelurile pe care le primeşti către căsuţa vocală când nu poţi răspunde, vorbeşti cu altcineva, ai telefonul închis sau eşti în afara ariei de acoperire.Îţi poţi personaliza căsuţa vocală cu un mesaj de întâmpinare şi alege un cod secret pentru a te asigura că ea nu va fi accesată decât de tine. Nu eşti taxat pentru niciuna dintre redirecţionările apelurilor pierdute către căsuţa vocală.</p>
                             <p>Nu trebuie să plăteşti o taxă pentru redirecţionarea apelurilor, aceasta este gratuită atât în ţară, cât şi în străinătate. Ascultarea mesajelor e şi ea gratuită.</p>
                         </div>
-                        <div id="service-three" class="tab-pane fade">
+                        <div id="3" class="tab-pane fade">
                             <i class="fa fa-magic pull-left fa-4x"></i>
                             <p><b>Poţi să redirecționezi către un număr programat:</b></p>
                             <p>-apelurile nepreluate (CFNRy – Call Forward when no Reply);</p>
@@ -97,8 +177,10 @@
                             <p>-apelurile primite în timpul unei convorbiri (CFB – Call Forward when Busy).</p>
                             <p>-toate apelurile primite şi să nu mai primeşti vreun apel pe mobil (CFU – Call Forward Unconditional)</p>
                             <p><b>Apel in asteptare:</b></p>
-                             <p>Presupune activarea serviciului din meniul telefonului când vorbeşti şi ai alt apel în aşteptare.Dacă nu doreşti să răspunzi, ignoră apelul în aşteptare şi continuă convorbirea;
-                             Dacă doreşti să răspunzi, apasă tasta "YES" sau "OK". Poţi interschimba apelurile, punându-le în aşteptare. </p>
+                            <p>
+                                Presupune activarea serviciului din meniul telefonului când vorbeşti şi ai alt apel în aşteptare.Dacă nu doreşti să răspunzi, ignoră apelul în aşteptare şi continuă convorbirea;
+                                Dacă doreşti să răspunzi, apasă tasta "YES" sau "OK". Poţi interschimba apelurile, punându-le în aşteptare.
+                            </p>
                             <p><b>Pentru a iniţia o teleconferinţă:</b></p>
                             <p>Apelează prima persoană;</p>
                             <p>Pune primul apel în aşteptare;</p>
@@ -106,7 +188,7 @@
                             <p>Repetă procesul invitând alte persoane în discuţie (maximum 5).</p>
                             <p>Convorbirile din cadrul conferinţei se tarifează conform tipului de abonament pe care îl deţii.</p>
                         </div>
-                        <div id="service-four" class="tab-pane fade">
+                        <div id="4" class="tab-pane fade">
                             <i class="fa fa-flask pull-left fa-4x"></i>
                             <p>Cu serviciul Restricţionare apeluri poţi restricţiona:</p>
                             <p>-toate apelurile primite;</p>
@@ -114,35 +196,35 @@
                             <p>toate apelurile primite când te afli în Roaming;</p>
                             <p>toate apelurile internaţionale iniţiate;</p>
                             <p>toate apelurile internaţionale iniţiate, cu excepţia celor către România, când te afli în Roaming.</p>
-                          
-                        </div>
-                    </div>
+
+                        </div>*@
                 </div>
             </div>
-            <!-- /.row -->
-            <!-- Service Images -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h2 class="page-header">Imagini</h2>
-                </div>
-                <div class="col-sm-4">
-                    <img src="~/Images/servicii/SMS-Marketing.png" class="img-responsive">
-                    <h3>SMS şi MMS</h3>
-                    <p>Comunici rapid și discret cu toți prietenii tăi, prin text sau imagini, nu doar prin voce, cu serviciile Mesaje Scrise (SMS) și Mesaje Multimedia (MMS). </p>
-                    
-                </div>
-                <div class="col-sm-4">
-                    <img src="~/Images/servicii/mesagerie-vocala.jpg" class="img-responsive">
-                    <h3>VOX Mesagerie Vocala</h3>
-                    <p>Primești mesajele de la prietenii tăi chiar și atunci când nu ești disponibil cu serviciul Mesagerie Vocală.</p>
-                    
-                </div>
-                <div class="col-sm-4">
-                    <img src="~/Images/servicii/apeluri-voce.jpg" class="img-responsive">
-                    <h3>Apeluri voce</h3>
-                    <p>Serviciul Apeluri voce oferă posibilitatea de a redirecţiona apeluri,de a iniţia o teleconferinţă şi de a folosi apelul în aşteptare.</p>
-                    
-                </div>
-            </div>
-            <!-- /.row -->
         </div>
+        <!-- /.row -->
+        <!-- Service Images -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Imagini</h2>
+            </div>
+            <div class="col-sm-4">
+                <img src="~/Images/servicii/SMS-Marketing.png" class="img-responsive">
+                <h3>SMS şi MMS</h3>
+                <p>Comunici rapid și discret cu toți prietenii tăi, prin text sau imagini, nu doar prin voce, cu serviciile Mesaje Scrise (SMS) și Mesaje Multimedia (MMS). </p>
+
+            </div>
+            <div class="col-sm-4">
+                <img src="~/Images/servicii/mesagerie-vocala.jpg" class="img-responsive">
+                <h3>VOX Mesagerie Vocala</h3>
+                <p>Primești mesajele de la prietenii tăi chiar și atunci când nu ești disponibil cu serviciul Mesagerie Vocală.</p>
+
+            </div>
+            <div class="col-sm-4">
+                <img src="~/Images/servicii/apeluri-voce.jpg" class="img-responsive">
+                <h3>Apeluri voce</h3>
+                <p>Serviciul Apeluri voce oferă posibilitatea de a redirecţiona apeluri,de a iniţia o teleconferinţă şi de a folosi apelul în aşteptare.</p>
+
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
