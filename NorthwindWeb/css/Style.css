@@ -35,7 +35,7 @@ img[class~=products] {
     padding: 5px 5px 5px 5px;
 }
 
-img[class~=whiterounded] {
+[class~=whiterounded] {
     border-radius: 20px;
     background-color: white;
     padding: 20px;
