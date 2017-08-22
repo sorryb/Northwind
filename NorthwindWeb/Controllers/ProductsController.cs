@@ -21,33 +21,47 @@ namespace NorthwindWeb.Controllers
         /// <returns></returns>
         public ActionResult Products(string category, int? page = 1)
         {
-            var products = db.Products as IQueryable<Products>;
-
+            var products = db.Products as IQueryable<ViewModels.ViewProductCategoryS>;
+            int categID = 1;
             //test categories of products.
             switch (category)
             {
                 case "Classic":
                     ViewBag.title = "Classic";
-                    products = db.Products.Where(x => x.CategoryID == 1);
+                    categID = 1;
                     break;
                 case "Smartphone":
                     ViewBag.title = "Smartphone";
-                    products = db.Products.Where(x => x.CategoryID == 2);
+                    categID = 2;
                     break;
                 case "Accesorii":
                     ViewBag.title = "Accesories";
-                    products = db.Products.Where(x => x.CategoryID == 3);
+                    categID = 3;
                     break;
                 case "Gadgeturi":
                     ViewBag.title = "Gadgets";
-                    products = db.Products.Where(x => x.CategoryID == 4);
+                    categID = 4;
                     break;
                 case "eBookReaders":
                     ViewBag.title = "eBookReaders";
-                    products = db.Products.Where(x => x.CategoryID == 5);
+                    categID = 5;
                     break;
             }
-            products = products.OrderBy(x => x.ProductName);
+            products = from prod in db.Products
+                       join cat in db.Categories on prod.CategoryID equals cat.CategoryID
+                       join supp in db.Suppliers on prod.SupplierID equals supp.SupplierID
+                       where prod.CategoryID.Value == categID
+                       orderby prod.ProductName ascending
+                       select new ViewModels.ViewProductCategoryS
+                       {
+                           CategoryName = cat.CategoryName,
+                           ProductName = prod.ProductName,
+                           ProductID = prod.ProductID.ToString(),
+                           ProductPrice = decimal.Round(prod.UnitPrice ?? 0, 2).ToString(),
+                           OnOrder = prod.UnitsOnOrder.ToString(),
+                           Stock = prod.UnitsInStock.ToString(),
+                           SuppliersName = supp.CompanyName
+                       };
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
@@ -62,7 +76,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult Search(string search, int? page = 1)
         {
                     
-            ViewBag.title = "Result for: " + search;
+            ViewBag.title = "Rezultate pentru: " + search;
             ViewBag.search = search;
             ViewBag.page = page;
      

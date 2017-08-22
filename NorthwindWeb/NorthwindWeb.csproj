@@ -201,6 +201,7 @@
     <Compile Include="ViewModels\OrderInfo.cs" />
     <Compile Include="ViewModels\OrderIndexData.cs" />
     <Compile Include="ViewModels\OrderProduct.cs" />
+    <Compile Include="ViewModels\OrderProduct.cs" />
     <Compile Include="ViewModels\ProductCategory.cs" />
     <Compile Include="ViewModels\ProductServices.cs" />
     <Compile Include="ViewModels\ServicesIndex.cs" />
