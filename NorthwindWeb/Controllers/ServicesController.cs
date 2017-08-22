@@ -56,6 +56,45 @@ namespace NorthwindWeb.Controllers
             viewModel.top4produse = list;
 
 
+
+            var produse2 = (from p in db.Products
+                           join c in db.Categories on p.CategoryID equals c.CategoryID
+                           join s in db.Suppliers on p.SupplierID equals s.SupplierID
+                           orderby p.ProductID descending
+                           select new
+                           {
+                               p.ProductName,
+                               p.ProductID,
+                               s.CompanyName,
+                               c.CategoryName,
+                               p.QuantityPerUnit,
+                               p.UnitPrice,
+                               p.UnitsInStock,
+                               p.UnitsOnOrder,
+                           }).Take(3);
+
+            List<Produse> list2 = new List<Produse>();
+
+            foreach (var item2 in produse2)
+            {
+                Produse y = new Produse();
+
+                y.ProductName = item2.ProductName;
+                y.CategoryName = item2.CategoryName;
+                y.CompanyName = item2.CompanyName;
+                y.QuantityPerUnit = item2.QuantityPerUnit;
+                y.UnitPrice = item2.UnitPrice;
+                y.UnitsInStock = item2.UnitsInStock;
+                y.UnitsOnOrder = item2.UnitsOnOrder;
+
+                list2.Add(y);
+
+            }
+            viewModel.ultimele3 = list2;
+
+
+
+
             //                select top 4 p.ProductName,s.CompanyName,c.CategoryName
             //from Products p
             //inner join Categories c on p.CategoryID = c.CategoryID

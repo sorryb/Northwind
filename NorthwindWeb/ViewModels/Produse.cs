@@ -8,6 +8,7 @@ namespace NorthwindWeb.ViewModels
     public class Produse
     {
         public string ProductName { get; set; }
+        public int ProductID { get; set; }
         public string CategoryName { get; set; }
         public string CompanyName { get; set; }
         public string QuantityPerUnit { get; set; }
