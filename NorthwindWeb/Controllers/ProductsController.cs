@@ -19,7 +19,7 @@ namespace NorthwindWeb.Controllers
         /// <param name="category"></param>
         /// <param name="page"></param>
         /// <returns></returns>
-        public ActionResult Products(string category, int? page = 1)
+        public ActionResult Products(string category, string search = "", int? page = 1)
         {
             var products = db.Products as IQueryable<ViewModels.ViewProductCategoryS>;
             int categID = 1;
@@ -50,7 +50,7 @@ namespace NorthwindWeb.Controllers
             products = from prod in db.Products
                        join cat in db.Categories on prod.CategoryID equals cat.CategoryID
                        join supp in db.Suppliers on prod.SupplierID equals supp.SupplierID
-                       where prod.CategoryID.Value == categID
+                       where prod.CategoryID.Value == categID && prod.ProductName.Contains(search)
                        orderby prod.ProductName ascending
                        select new ViewModels.ViewProductCategoryS
                        {
@@ -75,7 +75,6 @@ namespace NorthwindWeb.Controllers
         /// <returns></returns>
         public ActionResult Search(string search, int? page = 1)
         {
-                    
             ViewBag.title = "Rezultate pentru: " + search;
             ViewBag.search = search;
             ViewBag.page = page;
