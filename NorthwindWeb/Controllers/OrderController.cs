@@ -48,7 +48,7 @@ namespace NorthwindWeb.Controllers
             {
                 ViewBag.ProductID = pid.Value;
 
-                viewModel.Product = db.Products.Where(x => x.ProductID == pid);
+                viewModel.Product = ProdCateg(ViewBag.ProductID);
             }
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -153,6 +153,29 @@ namespace NorthwindWeb.Controllers
                 x.UnitPrice = item.UnitPrice;
                 x.Quantity = item.Quantity;
                 x.Discount = item.Discount;
+                list.Add(x);
+
+            }
+            return list;
+        }
+
+        public List<ProductCategory> ProdCateg(int id)
+        {
+            var detali = (from p in db.Products
+                          .Where(x => x.ProductID == id)
+                          join c in db.Categories on p.CategoryID equals c.CategoryID
+                          select new { p.ProductName, c.CategoryName,p.UnitsInStock })
+
+            ;
+            List<ProductCategory> list = new List<ProductCategory>();
+
+            foreach (var item in detali)
+            {
+                ProductCategory x = new ProductCategory();
+                x.ProductName = item.ProductName;
+                x.CategoryName = item.CategoryName;
+                x.UnitsInStock = item.UnitsInStock;
+                
                 list.Add(x);
 
             }

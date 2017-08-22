@@ -22,24 +22,41 @@
             <div class="row">
                 <div class="col-md-6 portfolio-item">
                     <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products">
-                    <h3 class="text-center">
+
+                    <div class="shopcartcontainer-products">
+                        <div class="align-middle img-circle roundedshop">
+                            <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                            <div class="shopcart-container-text">
+                                <span id="shopcart-productcount">+</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h3 class="text-center prodpad">
                         @Model.ElementAt(i).ProductName <br />
-                        <span onclick="AddToCart(@Model.ElementAt(i).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod"></span>
                         <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i).UnitPrice, 2) Lei</span>
                     </h3>
                 </div>
                 @if (i + 1 < itemCount)
                 {
                     <div class="col-md-6 portfolio-item">
-                        <div>
-                            <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products">
+
+                        <img src="/Images/@(ViewBag.title)/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products">
+                            <div class="shopcartcontainer-products">
+                                <div class="align-middle img-circle roundedshop">
+                                    <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                    <div class="shopcart-container-text">
+                                        <span id="shopcart-productcount">+</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-center prodpad">
+                                @Model.ElementAt(i + 1).ProductName <br />
+                                <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i + 1).UnitPrice, 2) Lei</span>
+                            </h3>
                         </div>
-                        <h3 class="text-center">
-                            @Model.ElementAt(i + 1).ProductName <br />
-                            <span onclick="AddToCart(@Model.ElementAt(i+1).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod" ></span>
-                            <span class="price"> @Decimal.Round((decimal)Model.ElementAt(i + 1).UnitPrice, 2) Lei</span>
-                        </h3>
-                    </div>
                 }
             </div>
             <hr />
