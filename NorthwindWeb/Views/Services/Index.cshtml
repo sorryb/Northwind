@@ -32,9 +32,9 @@
             <p>Cu Service-ul nostru nu rămâi fără telefon atunci când al tău nu mai funcţionează. Îl reparăm în medie în 5 zile într-un centru de service modern, iar în acest timp primeşti un alt telefon (în limita stocului disponibil) pe care să îl foloseşti până îl recuperezi pe al tău.</p>
         </div>
         <div class="col-md-4">
-            <h2 class="page-header">Avantaje</h2>
+            <h2 class="page-header">Beneficii</h2>
             <p>Repară-ţi telefonul la noi şi ai următoarele avantaje:</p>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Click Me!</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Avantaje</button>
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
 
@@ -54,7 +54,6 @@
                             <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
                                 <span class="glyphicon glyphicon-remove"></span> Cancel
                             </button>
-                            <p>Need <a href="#">help?</a></p>
                         </div>
                     </div>
                 </div>
@@ -97,27 +96,15 @@
                         {
                             <div id="@j" class="tab-pane fade in active">
                                 <i class="fa fa-gear pull-left fa-4x"></i>
-                                <table class="table">
-                                    <tr>
-                                        <th>Nume produs</th>
-                                        <th>Nume companie</th>
-                                        <th>Nume Categorie</th>
-                                        <th>Cantitate pe unitate</th>
-                                        <th>Pret unitar</th>
-                                        <th>Unitati in stoc</th>
-                                        <th>Unitati la comanda</th>
-                                    </tr>
-                                    <tr>
-                                        <td>@y.ProductName</td>
-                                        <td>@y.CompanyName</td>
-                                        <td>@y.CategoryName</td>
-                                        <td>@y.QuantityPerUnit</td>
-                                        <td>@y.UnitPrice</td>
-                                        <td>@y.UnitsInStock</td>
-                                        <td>@y.UnitsOnOrder</td>
-                                    </tr>
-
-                                </table>
+                                <ul>
+                                        <li>Denumire: @y.ProductName</li>
+                                        <li>Companie: @y.CompanyName</li>
+                                        <li>Categorie: @y.CategoryName</li>
+                                        <li>Cantitate pe unitate: @y.QuantityPerUnit</li>
+                                        <li>Pret unitar:@decimal.Round(y.UnitPrice ?? 0,2).ToString() lei</li>
+                                        <li>Unitati in stoc: @y.UnitsInStock</li>
+                                        <li>Unitati la comanda: @y.UnitsOnOrder</li>
+                                </ul>
 
                             </div>
                         }
@@ -125,27 +112,15 @@
                         {
                             <div id="@j" class="tab-pane">
                                 <i class="fa fa-gear pull-left fa-4x"></i>
-                                <table class="table">
-                                    <tr>
-                                        <th>Nume produs</th>
-                                        <th>Nume companie</th>
-                                        <th>Nume Categorie</th>
-                                        <th>Cantitate pe unitate</th>
-                                        <th>Pret unitar</th>
-                                        <th>Unitati in stoc</th>
-                                        <th>Unitati la comanda</th>
-                                    </tr>
-                                    <tr>
-                                        <td>@y.ProductName</td>
-                                        <td>@y.CompanyName</td>
-                                        <td>@y.CategoryName</td>
-                                        <td>@y.QuantityPerUnit</td>
-                                        <td>@y.UnitPrice</td>
-                                        <td>@y.UnitsInStock</td>
-                                        <td>@y.UnitsOnOrder</td>
-                                    </tr>
-
-                                </table>
+                                <ul>
+                                    <li>Denumire: @y.ProductName</li>
+                                    <li>Companie: @y.CompanyName</li>
+                                    <li>Categorie: @y.CategoryName</li>
+                                    <li>Cantitate pe unitate: @y.QuantityPerUnit</li>
+                                    <li>Pret unitar: @decimal.Round(y.UnitPrice ?? 0, 2).ToString() lei</li>
+                                    <li>Unitati in stoc: @y.UnitsInStock</li>
+                                    <li>Unitati la comanda: @y.UnitsOnOrder</li>
+                                </ul>
 
                             </div>
                         }
@@ -172,32 +147,15 @@
                     
                     <img src="~/Images/Gadgets/@(y.ProductID).jpg" class="img-services img-responsive">
                     <h3>@y.ProductName</h3>
-                    <table class="table">
-                        <tr>
-                            
-                            <th>Nume companie</th>
-                            <th>Nume Categorie</th>
-                            <th>Cantitate pe unitate</th>                            
-                        </tr>                     
-                        <tr>
-                            <td>@y.CompanyName</td>
-                            <td>@y.CategoryName</td>
-                            <td>@y.QuantityPerUnit</td>                           
-                        </tr>                        
-                    </table>
+                    <ul>                           
+                            <li>@y.CompanyName</li>
+                            <li>@y.CategoryName</li>
+                            <li>Cantitate pe unitate: @y.QuantityPerUnit</li>      
+                            <li>Pret unitar: @decimal.Round(y.UnitPrice ?? 0, 2).ToString() lei</li>
+                            <li>Unitati in stoc: @y.UnitsInStock</li>
+                            <li>Unitati la comanda: @y.UnitsOnOrder</li>
+                    </ul>
 
-                    <table class="table">
-                        <tr>
-                            <th>Pret unitar</th>
-                            <th>Unitati in stoc</th>
-                            <th>Unitati la comanda</th>
-                        </tr>
-                        <tr>
-                            <td>@y.UnitPrice</td>
-                            <td>@y.UnitsInStock</td>
-                            <td>@y.UnitsOnOrder</td>
-                        </tr>
-                    </table>
                 </div>
             }
 
