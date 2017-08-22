@@ -8,8 +8,7 @@
 }
 
 img[class~=products] {
-    max-height: 450px;
-    max-width: 750px;
+    max-width: 100%;
 }
 
 .price {
@@ -60,6 +59,7 @@ img[class~=products] {
 
 .cartprod {
     font-size: 15px;
+    color: #df691a;
 }
 
 a:hover {
