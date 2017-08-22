@@ -314,20 +314,20 @@
     <Content Include="images\sony3.jpg" />
     <Content Include="images\StefanBogdan.jpg" />
     <Content Include="images\telefoane_clasice.jpg" />
-    <Content Include="images\telefoane_clasice\17.jpg" />
-    <Content Include="images\telefoane_clasice\20.jpg" />
-    <Content Include="images\telefoane_clasice\14.jpg" />
-    <Content Include="images\telefoane_clasice\12.jpg" />
-    <Content Include="images\telefoane_clasice\23.jpg" />
-    <Content Include="images\telefoane_clasice\19.jpg" />
-    <Content Include="images\telefoane_clasice\25.jpg" />
-    <Content Include="images\telefoane_clasice\24.jpg" />
-    <Content Include="images\telefoane_clasice\16.jpg" />
-    <Content Include="images\telefoane_clasice\18.jpg" />
-    <Content Include="images\telefoane_clasice\22.jpg" />
-    <Content Include="images\telefoane_clasice\21.jpg" />
-    <Content Include="images\telefoane_clasice\13.jpg" />
-    <Content Include="images\telefoane_clasice\15.jpg" />
+    <Content Include="images\Classic\17.jpg" />
+    <Content Include="images\Classic\20.jpg" />
+    <Content Include="images\Classic\14.jpg" />
+    <Content Include="images\Classic\12.jpg" />
+    <Content Include="images\Classic\23.jpg" />
+    <Content Include="images\Classic\19.jpg" />
+    <Content Include="images\Classic\25.jpg" />
+    <Content Include="images\Classic\24.jpg" />
+    <Content Include="images\Classic\16.jpg" />
+    <Content Include="images\Classic\18.jpg" />
+    <Content Include="images\Classic\22.jpg" />
+    <Content Include="images\Classic\21.jpg" />
+    <Content Include="images\Classic\13.jpg" />
+    <Content Include="images\Classic\15.jpg" />
     <Content Include="images\TraianELENA.jpg" />
     <Content Include="images\wpid-nokia-logo.jpg" />
     <Content Include="js\bootstrap.js" />
@@ -352,7 +352,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\NewFolder1\" />
     <Folder Include="Views\Teste\" />
   </ItemGroup>
   <ItemGroup>
