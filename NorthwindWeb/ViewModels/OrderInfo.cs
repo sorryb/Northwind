@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels
-{
-    public class Comanda
+{/// <summary>
+/// The class used to store, join between the Orders, Customers and Shippers
+/// </summary>
+    public class OrderInfo
     {
         public int OrderID { get; set; }
         public string OrderDate { get; set; }

@@ -198,7 +198,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\BigOrder.cs" />
     <Compile Include="ViewModels\Order10.cs" />
-    <Compile Include="ViewModels\Comanda.cs" />
+    <Compile Include="ViewModels\OrderInfo.cs" />
     <Compile Include="ViewModels\OrderIndexData.cs" />
     <Compile Include="ViewModels\OrderProduct.cs" />
     <Compile Include="ViewModels\ProductCategory.cs" />
