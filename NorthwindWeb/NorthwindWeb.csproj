@@ -201,6 +201,7 @@
     <Compile Include="ViewModels\Comanda.cs" />
     <Compile Include="ViewModels\OrderIndexData.cs" />
     <Compile Include="ViewModels\OrderProduct.cs" />
+    <Compile Include="ViewModels\ProductCategory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\PagedList.css" />
@@ -209,6 +210,7 @@
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\modern-business.css" />
+    <Content Include="css\Order.css" />
     <Content Include="css\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
