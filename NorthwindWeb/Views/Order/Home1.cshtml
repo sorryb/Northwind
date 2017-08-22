@@ -54,7 +54,7 @@
                 <table class="table">
                     <tr>
 
-                        <th>ProductID</th>
+                        <th>Nume Produs</th>
                         <th>Pret</th>
                         <th>Cantitate</th>
                         <th>Reducere</th>
@@ -69,7 +69,7 @@
                         }
                         <tr class="@selectedRow">
                             <td>
-                                @Html.ActionLink(Convert.ToString(item.ProductID), "Home1", new { pid = item.ProductID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                                @Html.ActionLink(item.ProductName, "Home1", new { pid = item.ProductID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
                             </td>
 
                             <td>
