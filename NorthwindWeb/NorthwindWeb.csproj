@@ -202,7 +202,7 @@
     <Compile Include="ViewModels\OrderIndexData.cs" />
     <Compile Include="ViewModels\OrderProduct.cs" />
     <Compile Include="ViewModels\ProductCategory.cs" />
-    <Compile Include="ViewModels\Produse.cs" />
+    <Compile Include="ViewModels\ProductServices.cs" />
     <Compile Include="ViewModels\ServicesIndex.cs" />
     <Compile Include="ViewModels\ViewProductCategoryS.cs" />
   </ItemGroup>

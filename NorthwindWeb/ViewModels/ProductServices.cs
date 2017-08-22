@@ -5,7 +5,10 @@ using System.Web;
 
 namespace NorthwindWeb.ViewModels
 {
-    public class Produse
+    /// <summary>
+    /// Keeps all products from Services.
+    /// </summary>
+    public class ProductServices
     {
         public string ProductName { get; set; }
         public int ProductID { get; set; }
@@ -15,7 +18,7 @@ namespace NorthwindWeb.ViewModels
         public decimal? UnitPrice { get; set; }
         public int? UnitsInStock { get; set; }
         public int? UnitsOnOrder { get; set; }
-        public Produse(){}
+        public ProductServices(){}
 
     }
 }

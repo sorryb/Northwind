@@ -21,7 +21,7 @@
         {
             <div class="row">
                 <div class="col-md-6 portfolio-item">
-                    <img src="~/Images/@(Model.ElementAt(i).CategoryName)/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products">
+                    <img src="~/Images/@(Model.ElementAt(i).CategoryName)/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive contentcenter products whiterounded">
                     <h3 class="text-center">
                         @Model.ElementAt(i).ProductName <br />
                         <span onclick="AddToCart(@Model.ElementAt(i).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod" />
@@ -31,7 +31,7 @@
                 @if (i + 1 < itemCount)
                 {
                     <div class="col-md-6 portfolio-item">
-                        <img src="~/Images/@(Model.ElementAt(i + 1).CategoryName)/@(Model.ElementAt(i + 1).ProductID).jpg" class="img-responsive contentcenter products">
+                        <img src="~/Images/@(Model.ElementAt(i + 1).CategoryName)/@(Model.ElementAt(i + 1).ProductID).jpg" class="img-responsive contentcenter products whiterounded">
                         <h3 class="text-center">
                             @Model.ElementAt(i + 1).ProductName <br />
                             <span onclick="AddToCart(@Model.ElementAt(i+1).ProductID)" class="glyphicon glyphicon-shopping-cart cartprod" />
