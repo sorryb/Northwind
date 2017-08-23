@@ -2,7 +2,7 @@
 <RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SharedDataSourceNorthwind">
   <ConnectionProperties>
     <Extension>SQL</Extension>
-    <ConnectString>Data Source=.;Initial Catalog=Northwind</ConnectString>
+    <ConnectString>Data Source=.\sqlexpress;Initial Catalog=Northwind</ConnectString>
     <IntegratedSecurity>true</IntegratedSecurity>
   </ConnectionProperties>
   <DataSourceID>2f965fab-43fc-4eb4-b7d9-c6466717a090</DataSourceID>
