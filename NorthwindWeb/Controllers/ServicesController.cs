@@ -13,14 +13,14 @@ using PagedList;
 namespace NorthwindWeb.Controllers
 {
     /// <summary>
-    /// 
+    /// Services Controller used for table Products
     /// </summary>
     public class ServicesController : Controller
     {
         private Models.NorthwindModel db = new Models.NorthwindModel();
 
         /// <summary>
-        /// 
+        /// take first 4 products and last 3 products with their detal
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()

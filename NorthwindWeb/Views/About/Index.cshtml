@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "About";
 }
+@model IQueryable<NorthwindWeb.Models.Employees>
 <div class="container" style="font-family:Tahoma">
     <div class="row">
         <div class="col-lg-12">
@@ -11,187 +12,84 @@
             <ol class="breadcrumb">
                 <li>
                     @Html.ActionLink("Home", "Index", "Home")
-            </li>
-            <li class="active">Despre noi</li>
-        </ol>
+                </li>
+                <li class="active">Despre noi</li>
+            </ol>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-6">
-        
-        <img src="~/images/logo-white.png"height="750" width="450" class="img-responsive"/>
+    <div class="row">
+        <div class="col-md-6">
+
+            <img src="~/images/logo-white.png" height="750" width="450" class="img-responsive" />
+        </div>
+        <div class="col-md-6">
+            <h2>Bine ati venit la StudioPhone Silver !</h2>
+            <p>
+                StudioPhone Silver este unul dintre cele mai mari magazine online cu capital integral romanesc care activeaza pe piata IT din Romania.
+                Inca de la inceput, din anul 2017, am avut parte de o crestere dinamica si am contribuit la consolidarea comertului online printr-o gama variata de produse la cel mai bun pret si o experienta de cumparare simpla, rapida si placuta.
+            </p>
+            <p>
+                Avem peste 70 de produse si permanent negociem cu producatorii cele mai bune preturi, obtinem promotii si reduceri substantiale care ne ajuta sa satisfacem preferintele celor care apeleaza la noi.
+                Cautam sa atingem excelenta printr-o atitudine deschisa, responsabila, adaptata nevoilor clientilor nostri.
+            </p>
+        </div>
     </div>
-    <div class="col-md-6">
-        <h2>Bine ati venit la StudioPhone Silver !</h2>
-        <p>StudioPhone Silver este unul dintre cele mai mari magazine online cu capital integral romanesc care activeaza pe piata IT din Romania.
-Inca de la inceput, din anul 2017, am avut parte de o crestere dinamica si am contribuit la consolidarea comertului online printr-o gama variata de produse la cel mai bun pret si o experienta de cumparare simpla, rapida si placuta.</p>
-        <p>Avem peste 70 de produse si permanent negociem cu producatorii cele mai bune preturi, obtinem promotii si reduceri substantiale care ne ajuta sa satisfacem preferintele celor care apeleaza la noi.
-Cautam sa atingem excelenta printr-o atitudine deschisa, responsabila, adaptata nevoilor clientilor nostri.</p>
+    <!-- Team Member Profiles -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Afla cine suntem!</h2>
+        </div>
+
+
+        @foreach (var y in Model)
+        {
+            <div class="col-sm-4">
+                <img src="~/images/@(y.EmployeeID).jpg" height="250" width="270" />
+                <ul>
+                    <li>
+                     @y.TitleOfCourtesy   @y.LastName @y.FirstName-@y.Title
+                    </li>
+                  
+                    <li>
+                        @y.Country - @y.City - @y.Region 
+                    </li>
+                  
+                    
+                    <li>
+                      Contact:  @y.HomePhone
+                    </li>
+
+                </ul>
+
+
+
+            </div>
+
+        }
+
     </div>
-</div>
-<!-- Team Member Profiles -->
-<div class="row">
-    <div class="col-lg-12">
-        <h2 class="page-header">Afla cine
-suntem!</h2>
+    <!-- Parteneri -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Parteneri</h2>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="/images/sony3.jpg" height="500" width="210" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="~/images/hi-fun.png" height="500" width="300" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="~/images/samsung.png" height="500" width="300" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="/images/aple.png" height="500" width="300" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="~/images/images.jpg" height="500" width="300" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="~/images/wpid-nokia-logo.jpg" height="500" width="310" class="img-responsive img-customer">
+        </div>
     </div>
-    <div class="col-sm-4">
-        <img src="~/images/AndreeaPopescu.jpg"height="550" width="255"  class="img-responsive">
-        <h4>
-            Andreea Popescu
-            <small>Director General</small>
-        </h4>
-        <p>Andreea are 38 de ani si a trecut prin toate departamentele, de la programator la director general.</p>
-        <ul class="list-unstyled list-inline list-social-icons">
-            <li class"tooltip-social facebook-link">
-                <a title="Facebook" data-placement="top" data-toggle="tooltip" href="#facebook-profile"><i class="fa fa-facebook-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social linkedin-link">
-                <a title="LinkedIn" data-placement="top" data-toggle="tooltip" href="#linkedin-profile"><i class="fa fa-linkedin-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social twitter-link">
-                <a title="Twitter" data-placement="top" data-toggle="tooltip" href="#twitter-profile"><i class="fa fa-twitter-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social google-plus-link">
-                <a title="Google+" data-placement="top" data-toggle="tooltip" href="#google-plus-profile"><i class="fa fa-google-plus-square fa-2x"></i></a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-sm-4">
-        <img src="~/images/IoanaTimis.jpg" height="550" width="290" class="img-responsive">
-        <h4>
-            Ioana Timis
-            <small>Administrator site</small>
-        </h4>
-        <p>Asigura corectitudinea organizarii datelor, remedierii tehnice, corectarii, actualizarii si modelarii bazei de date.</p>
-        <ul class="list-unstyled list-inline list-social-icons">
-            <li class="tooltip-social facebook-link">
-                <a title="Facebook" data-placement="top" data-toggle="tooltip" href="#facebook-profile"><i class="fa fa-facebook-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social linkedin-link">
-                <a title="LinkedIn" data-placement="top" data-toggle="tooltip" href="#linkedin-profile"><i class="fa fa-linkedin-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social twitter-link">
-                <a title="Twitter" data-placement="top" data-toggle="tooltip" href="#twitter-profile"><i class="fa fa-twitter-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social google-plus-link">
-                <a title="Google+" data-placement="top" data-toggle="tooltip" href="#google-plus-profile"><i class="fa fa-google-plus-square fa-2x"></i></a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-sm-4">
-        <img src="~/images/StefanBogdan.jpg"  height="550" width="285" class="img-responsive">
-        <h4>
-             Stefan Bogdan
-            <small>Director de Vanzari</small>
-        </h4>
-        <p>Participa la elaborarea de strategii si la organizarea campaniilor de promovare pentru produsele / serviciile noi.</p>
-        <ul class="list-unstyled list-inline list-social-icons">
-            <li class="tooltip-social facebook-link">
-                <a title="Facebook" data-placement="top" data-toggle="tooltip" href="#facebook-profile"><i class="fa fa-facebook-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social linkedin-link">
-                <a title="LinkedIn" data-placement="top" data-toggle="tooltip" href="#linkedin-profile"><i class="fa fa-linkedin-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social twitter-link">
-                <a title="Twitter" data-placement="top" data-toggle="tooltip" href="#twitter-profile"><i class="fa fa-twitter-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social google-plus-link">
-                <a title="Google+" data-placement="top" data-toggle="tooltip" href="#google-plus-profile"><i class="fa fa-google-plus-square fa-2x"></i></a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-sm-4">
-        <img src="~/images/ionIon.jpg" height="550" width="285" class="img-responsive">
-        <h4>
-            Ion Ion
-            <small>Director Comercial</small>
-        </h4>
-        <p>Stabileste strategii specifice fiecarui magazin pentru implemetarea stocului optim si a tuturor procedurilor comerciale prevazute.</p>
-        <ul class="list-unstyled list-inline list-social-icons">
-            <li class="tooltip-social facebook-link">
-                <a title="Facebook" data-placement="top" data-toggle="tooltip" href="#facebook-profile"><i class="fa fa-facebook-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social linkedin-link">
-                <a title="LinkedIn" data-placement="top" data-toggle="tooltip" href="#linkedin-profile"><i class="fa fa-linkedin-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social twitter-link">
-                <a title="Twitter" data-placement="top" data-toggle="tooltip" href="#twitter-profile"><i class="fa fa-twitter-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social google-plus-link">
-                <a title="Google+" data-placement="top" data-toggle="tooltip" href="#google-plus-profile"><i class="fa fa-google-plus-square fa-2x"></i></a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-sm-4">
-        <img src="~/images/emanuelTincu.jpg"height="550" width="265" class="img-responsive">
-        <h4>
-            Emanuel Tincu
-            <small>Director Tehnic</small>
-        </h4>
-        <p>Asigura functionarea corespunzatoare a firmei din punct de vedere tehnic si managerial in
-conformitate cu politicile si strategia de productie ale firmei.
-        <ul class="list-unstyled list-inline list-social-icons">
-            <li class="tooltip-social facebook-link">
-                <a title="Facebook" data-placement="top" data-toggle="tooltip" href="#facebook-profile"><i class="fa fa-facebook-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social linkedin-link">
-                <a title="LinkedIn" data-placement="top" data-toggle="tooltip" href="#linkedin-profile"><i class="fa fa-linkedin-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social twitter-link">
-                <a title="Twitter" data-placement="top" data-toggle="tooltip" href="#twitter-profile"><i class="fa fa-twitter-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social google-plus-link">
-                <a title="Google+" data-placement="top" data-toggle="tooltip" href="#google-plus-profile"><i class="fa fa-google-plus-square fa-2x"></i></a>
-            </li>
-        </ul>
-    </div>
-    <div class="col-sm-4">
-       
-        <img src="~/images/TraianELENA.jpg" " height="550" width="260" class="img-responsive">
-        <h4>
-            Traian Elena
-            <small>Relatii cu clientii</small>
-        </h4>
-        <p>Interactioneaza constant cu clienti interni si externi, rezolva solicitari si ajuta la oferirea unei experiente excelente pentru fiecare client StudioPhone Silver.</p>
-        <ul class="list-unstyled list-inline list-social-icons">
-            <li class="tooltip-social facebook-link">
-                <a title="Facebook" data-placement="top" data-toggle="tooltip" href="#facebook-profile"><i class="fa fa-facebook-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social linkedin-link">
-                <a title="LinkedIn" data-placement="top" data-toggle="tooltip" href="#linkedin-profile"><i class="fa fa-linkedin-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social twitter-link">
-                <a title="Twitter" data-placement="top" data-toggle="tooltip" href="#twitter-profile"><i class="fa fa-twitter-square fa-2x"></i></a>
-            </li>
-            <li class="tooltip-social google-plus-link">
-                <a title="Google+" data-placement="top" data-toggle="tooltip" href="#google-plus-profile"><i class="fa fa-google-plus-square fa-2x"></i></a>
-            </li>
-        </ul>
-    </div>
-</div>
-<!-- Parteneri -->
-<div class="row">
-    <div class="col-lg-12">
-        <h2 class="page-header">Parteneri</h2>
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-       <img src="/images/sony3.jpg"  height="500" width="210"class="img-responsive img-customer">
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-        <img src="~/images/hi-fun.png"  height="500" width="300" class="img-responsive img-customer">
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-        <img src="~/images/samsung.png"  height="500" width="300" class="img-responsive img-customer">
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-       <img src="/images/aple.png" height="500" width="300"  class="img-responsive img-customer">
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-        <img src="~/images/images.jpg" height="500" width="300"  class="img-responsive img-customer">
-    </div>
-    <div class="col-md-2 col-sm-4 col-xs-6">
-        <img src="~/images/wpid-nokia-logo.jpg"height="500" width="310"  class="img-responsive img-customer">
-    </div>
-</div>
 </div>
