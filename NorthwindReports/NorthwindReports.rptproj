@@ -22,6 +22,14 @@
       <FullPath>Current_Product_List.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>CategorySalesfor1997.rdl</Name>
+      <FullPath>CategorySalesfor1997.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Current_Product_List.rdl</Name>
+      <FullPath>Current_Product_List.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Customer and Suppliers by City.rdl</Name>
       <FullPath>Customer and Suppliers by City.rdl</FullPath>
     </ProjectItem>
