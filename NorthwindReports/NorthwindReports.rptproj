@@ -10,20 +10,36 @@
   <DataSets />
   <Reports>
     <ProjectItem>
+      <Name>AlphabeticalListOfProducts.rdl</Name>
+      <FullPath>Alphabeticallistofproducts.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CategorySalesfor1997.rdl</Name>
+      <FullPath>CategorySalesfor1997.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Current_Product_List.rdl</Name>
+      <FullPath>Current_Product_List.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>CategorySalesfor1997.rdl</Name>
+      <FullPath>CategorySalesfor1997.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Current_Product_List.rdl</Name>
+      <FullPath>Current_Product_List.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>Customer and Suppliers by City.rdl</Name>
+      <FullPath>Customer and Suppliers by City.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>Employees.rdl</Name>
       <FullPath>Employees.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>SalesByAmount.rdl</Name>
-      <FullPath>SalesByAmount.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>SummaryOfSalesByQuarter.rdl</Name>
-      <FullPath>SuMmaryOfSalesByQuarter.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>SummaryOfSalesByYear.rdl</Name>
-      <FullPath>SummaryOfSalesByYear.rdl</FullPath>
+      <Name>Invoices.rdl</Name>
+      <FullPath>Invoices.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>OrderDetailsExtended.rdl</Name>
@@ -38,20 +54,12 @@
       <FullPath>OrderSubtotals.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>ProductsAboveAveragePrice.rdl</Name>
+      <FullPath>ProductsAboveAveragePrice.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>ProductSalesFor1997.rdl</Name>
       <FullPath>ProductSalesFor1997.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Current_Product_List.rdl</Name>
-      <FullPath>Current_Product_List.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Customer and Suppliers by City.rdl</Name>
-      <FullPath>Customer and Suppliers by City.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Invoices.rdl</Name>
-      <FullPath>Invoices.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ProductsByCategory.rdl</Name>
@@ -62,24 +70,20 @@
       <FullPath>QuarterlyOrders.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>SalesByAmount.rdl</Name>
+      <FullPath>SalesByAmount.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>SalesByCategory.rdl</Name>
       <FullPath>SalesByCategory.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>ProductsAboveAveragePrice.rdl</Name>
-      <FullPath>ProductsAboveAveragePrice.rdl</FullPath>
+      <Name>SummaryOfSalesByQuarter.rdl</Name>
+      <FullPath>SuMmaryOfSalesByQuarter.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>AlphabeticalListOfProducts.rdl</Name>
-      <FullPath>Alphabeticallistofproducts.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>CategorySalesfor1997.rdl</Name>
-      <FullPath>CategorySalesfor1997.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>SalesbyEmployees.rdl</Name>
-      <FullPath>SalesbyEmployees.rdl</FullPath>
+      <Name>SummaryOfSalesByYear.rdl</Name>
+      <FullPath>SummaryOfSalesByYear.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>
@@ -89,7 +93,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2016</TargetServerVersion>
-        <TargetServerURL>http://localhost/reportserver</TargetServerURL>
+        <TargetServerURL>http://localhost/reportserver_SSRS</TargetServerURL>
         <TargetFolder>NorthwindReports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>
