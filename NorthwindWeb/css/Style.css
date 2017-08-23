@@ -12,6 +12,11 @@ img[class~=products] {
     max-height:225px;
 }
 
+/*text large used in products view*/
+[class~=textlarge] {
+    font-size:large;
+}
+
 /*text color in products page*/
 [class~=coloronwhite] {
     color: #df691a;
