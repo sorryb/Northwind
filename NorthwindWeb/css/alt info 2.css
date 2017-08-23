@@ -3,8 +3,9 @@
 }
 .imagine{
     margin-top:40px;
+
 }
 
-img{
+img[class~=right]{
     float:right;
 }
