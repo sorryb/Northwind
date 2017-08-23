@@ -22,7 +22,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult Products(string category, string search = "", int? page = 1)
         {
             var products = db.Products as IQueryable<ViewModels.ViewProductCategoryS>;
-            ViewBag.title = "Produse";
+            ViewBag.title = ViewBag.category= "Produse";
             ViewBag.search = search;
             int categID = 0;
 
