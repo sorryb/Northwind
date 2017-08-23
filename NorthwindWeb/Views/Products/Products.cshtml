@@ -11,9 +11,9 @@
             <div>
                 <ol class="breadcrumb">
                     <li class="active">
-                        @ViewBag.title
-
-                        <form id="searchInput" class="prodsearch" action="@Url.Action("Products","Products",new { category=ViewBag.title, search,page=1 } )">
+                        @ViewBag.title @(!string.IsNullOrEmpty(ViewBag.search) ? "/ "+ViewBag.search : "")
+                        @using (Html.BeginForm("Products", "Products", new { category = ViewBag.title }, FormMethod.Post, htmlAttributes: new { id = "searchInput", @class = "prodsearch" }))
+                        {
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
                                 <div class="input-group-btn">
@@ -22,7 +22,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </form>
+                        }
                     </li>
                 </ol>
             </div>
@@ -44,21 +44,21 @@
                 {
                     <div class="col-md-6 portfolio-item">
 
-                        <img src="/Images/@Model.ElementAt(i + 1).CategoryName/@(Model.ElementAt(i+1).ProductID).jpg" class="img-responsive contentcenter products">
-                            <div class="shopcartcontainer-products">
-                                <div class="align-middle img-circle roundedshop">
-                                    <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
-                                    <div class="shopcart-container-text">
-                                        <span id="shopcart-productcount">+</span>
-                                    </div>
+                        <img src="/Images/@Model.ElementAt(i + 1).CategoryName/@(Model.ElementAt(i + 1).ProductID).jpg" class="img-responsive contentcenter products">
+                        <div class="shopcartcontainer-products">
+                            <div class="align-middle img-circle roundedshop">
+                                <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                <div class="shopcart-container-text">
+                                    <span id="shopcart-productcount">+</span>
                                 </div>
                             </div>
-
-                            <h3 class="text-center prodpad">
-                                @Model.ElementAt(i + 1).ProductName <br />
-                                <span class="price"> @Model.ElementAt(i + 1).ProductPrice Lei</span>
-                            </h3>
                         </div>
+
+                        <h3 class="text-center prodpad">
+                            @Model.ElementAt(i + 1).ProductName <br />
+                            <span class="price"> @Model.ElementAt(i + 1).ProductPrice Lei</span>
+                        </h3>
+                    </div>
                 }
             </div>
             <hr />
