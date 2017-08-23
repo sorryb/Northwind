@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using System.IO;
 
@@ -12,9 +9,14 @@ namespace NorthwindWeb.Controllers
         // GET: Reports
         public ActionResult Index()
         {
-            //var test = Directory.EnumerateFiles("C:\Users\intern\Source\GitHub\Northwind\NorthwindReports", ".rdl");
+            var paths = Directory.EnumerateFiles("C:\\Users\\intern\\Source\\GitHub\\Northwind\\NorthwindReports", "*rdl");
+            List<string> files = new List<string>();
+            foreach (var x in paths)
+            {
+                files.Add(Path.GetFileNameWithoutExtension(x));
+            }
 
-            return View();
+            return View(files);
         }
     }
 }

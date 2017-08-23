@@ -70,10 +70,6 @@
       <FullPath>SalesByCategory.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>SalesbyEmployees.rdl</Name>
-      <FullPath>SalesbyEmployees.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>SummaryOfSalesByQuarter.rdl</Name>
       <FullPath>SuMmaryOfSalesByQuarter.rdl</FullPath>
     </ProjectItem>
