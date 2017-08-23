@@ -22,6 +22,8 @@ namespace NorthwindWeb.Controllers
         public ActionResult Products(string category, string search = "", int? page = 1)
         {
             var products = db.Products as IQueryable<ViewModels.ViewProductCategoryS>;
+            ViewBag.title = category;
+            ViewBag.search = search;
             int categID = 1;
             //test categories of products.
             switch (category)

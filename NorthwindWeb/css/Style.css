@@ -107,3 +107,12 @@ a:hover {
     background-color: white;
     padding: 20px;
 }
+
+form.prodsearch {
+    position: relative;
+    top: -20px;
+}
+
+.form-control {
+    float:right !important;
+}
