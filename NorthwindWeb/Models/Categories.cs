@@ -23,10 +23,7 @@ namespace NorthwindWeb.Models
 
         [Column(TypeName = "ntext")]
         public string Description { get; set; }
-
-        [Column(TypeName = "text")]
-        public string img { get; set; }
-
+        
 
         public virtual ICollection<Products> Products { get;  }
     }
