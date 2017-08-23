@@ -47,19 +47,19 @@
                     <li id="portfolio" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produse <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li id="1columnportfolio">
+                            <li id="11columnportfolio">
                                 @Html.ActionLink("Clasic", "Products", "Products", new { category = "Classic" }, null)
                             </li>
-                            <li id="2columnportfolio">
+                            <li id="21columnportfolio">
                                 @Html.ActionLink("Smartphone", "Products", "Products", new { category = "Smartphone" }, null)
                             </li>
-                            <li id="2columnportfolio">
+                            <li id="22columnportfolio">
                                 @Html.ActionLink("Accesorii", "Products", "Products", new { category = "Accesorii" }, null)
                             </li>
-                            <li id="2columnportfolio">
+                            <li id="23columnportfolio">
                                 @Html.ActionLink("Gadgeturi", "Products", "Products", new { category = "Gadgeturi" }, null)
                             </li>
-                            <li id="2columnportfolio">
+                            <li id="24columnportfolio">
                                 @Html.ActionLink("eBook readers", "Products", "Products", new { category = "eBookReaders" }, null)
                             </li>
                         </ul>
@@ -72,7 +72,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li id="other" class="dropdown">
+                    <li id="others" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alte informatii <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="fullwidthpage">
@@ -94,6 +94,9 @@
                         @Html.ActionLink("Contact", "Index", "Contact")
                     </li>
                   >
+                    <li id="Log In/Log Out">
+                        @Html.ActionLink("Log In/Log Out", "Index", "Log In/Log Out")
+                    </li>
                     <li id="other" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -112,6 +115,7 @@
                         </ul>
                     </li>
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -140,5 +144,9 @@
     <script src="@Url.Content("/js/bootstrap.js")"></script>
     <script src="@Url.Content("/js/modern-business.js")"></script>
     <script src="@Url.Content("/js/script.js")"></script>
+
+<!--        @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)-->
 </body>
 </html>
