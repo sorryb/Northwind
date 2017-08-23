@@ -2,25 +2,31 @@
     ViewBag.Title = "Sidebar Page";
 }
 
+
 <div class="container">
+
+    
     <div class="row">
         <div class="col-md-3 col-sm-4 sidebar">
+
             <ul class="nav nav-stacked nav-pills">
+
                 <li>
                     @Html.ActionLink("Home", "Index", "Home")
                 </li>
                 <li>
-                    <a href="#">About</a>
+                    <a href="http://localhost:7035/About">Despre noi</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a href="http://localhost:7035/Services">Servicii </a>
+                   
                 </li>
                 <li>
                     <a href="#">Contact</a>
                 </li>
 
 
-
+            
 
                 <li>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -28,9 +34,9 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
-                        <li><a href="#">Page 1-2</a></li>
-                        <li><a href="#">Page 1-3</a></li>
+                        <li><a href="#">Promotii</a></li>
+                        <li><a href="#">Telefoane</a></li>
+                        <li><a href="#">Utile</a></li>
                     </ul>
                 </li>
 
@@ -42,7 +48,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
+                        <li><a href="#">Servicii si aplicatii</a></li>
                         <li><a href="#">Page 1-2</a></li>
                         <li><a href="#">Page 1-3</a></li>
                     </ul>
@@ -55,15 +61,32 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
-                        <li><a href="#">Page 1-2</a></li>
-                        <li><a href="#">Page 1-3</a></li>
+                        <li><a href="#">Intrebari despre servicii</a></li>
+                        <li><a href="#">Sunt client nou</a></li>
+                        <li><a href="mailto:cineva@exemplu.com?subject=Nelamuriri">Contacteaza-ne</a></li>
+
                     </ul>
                 </li>
+                </ul>
 
 
 
 </div>
+        <div class="col-md-9 col-sm-8 imagine">
+
+            <img src="~/images/alt2.png" />
+            <p>Te asteptam in magazinul StudioPhone Silver cu o solutie complexa de transfer de date si
+            identificare a problemelor, creata pentru a te ajuta sa te bucuri 100% de telefonul tau.</p>
+                            <p>   Hai sa-ti povestim ce stie sa faca!</p>
+
+            <p>Transfer de continut rapid si sigur</p>
+
+            <p>Ti-ai luat un telefon nou si vrei sa ai la îndemâna toate pozele, videourile,
+                contactele si alte date de pe telefonul vechi?
+                Te poti baza pe Transfer de Continut! </p>
+           
+            
+             </div>
     </div>
     <!-- /.row -->
 </div>

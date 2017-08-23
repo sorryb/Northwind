@@ -71,7 +71,7 @@
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
             @Html.PagedListPager(Model, page => Url.Action("Products", "Products",
-            new { category = ViewBag.title, page }))
+            new { search = ViewBag.search, category = ViewBag.category, page }))
         </div>
     </div>
 </div>

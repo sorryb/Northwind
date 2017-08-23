@@ -13,14 +13,14 @@ using PagedList;
 namespace NorthwindWeb.Controllers
 {
     /// <summary>
-    /// Services Controller used for table Products
+    /// Services Controller. For table Products
     /// </summary>
     public class ServicesController : Controller
     {
         private Models.NorthwindModel db = new Models.NorthwindModel();
 
         /// <summary>
-        /// take first 4 products and last 3 products with their detal
+        /// take first 4 products and last 3 products with their details
         /// </summary>
         /// <returns></returns>
         public ActionResult Index()
@@ -88,18 +88,18 @@ namespace NorthwindWeb.Controllers
             List<ProductServices> listOfProductsOrderByDesc = new List<ProductServices>();
 
             //loop in last 3 products
-            foreach (var item2 in productsOrderByDesc)
+            foreach (var item in productsOrderByDesc)
             {
                 ProductServices y = new ProductServices();
 
-                y.ProductName = item2.ProductName;
-                y.ProductID = item2.ProductID;
-                y.CategoryName = item2.CategoryName;
-                y.CompanyName = item2.CompanyName;
-                y.QuantityPerUnit = item2.QuantityPerUnit;
-                y.UnitPrice = item2.UnitPrice;
-                y.UnitsInStock = item2.UnitsInStock;
-                y.UnitsOnOrder = item2.UnitsOnOrder;
+                y.ProductName = item.ProductName;
+                y.ProductID = item.ProductID;
+                y.CategoryName = item.CategoryName;
+                y.CompanyName = item.CompanyName;
+                y.QuantityPerUnit = item.QuantityPerUnit;
+                y.UnitPrice = item.UnitPrice;
+                y.UnitsInStock = item.UnitsInStock;
+                y.UnitsOnOrder = item.UnitsOnOrder;
 
                 listOfProductsOrderByDesc.Add(y);
 
