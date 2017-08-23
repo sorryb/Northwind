@@ -126,3 +126,7 @@ form.prodsearch {
 .form{
     width:175px;
 }
+
+[class~=crudstyle] input, [class~=crudstyle] select {
+    color: black;
+}
