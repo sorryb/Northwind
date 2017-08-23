@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.ViewModels.Dashboard;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace NorthwindWeb.Controllers
 {
@@ -21,6 +23,7 @@ namespace NorthwindWeb.Controllers
             viewModel.NumberProductsSold = NumberProductsSold();
             viewModel.NumberEmployees = NumberEmployees();
             viewModel.NumberCustomers = NumberCustomers();
+            viewModel.Graph1 = Graph1();
             return View(viewModel);
         }
        private decimal TotalSalesValue()
@@ -58,6 +61,42 @@ namespace NorthwindWeb.Controllers
         {
             int c = db.Customers.Count();
             return c;
+        }
+
+        private DataContractJsonSerializer Graph1()
+        {
+            List<DashboardGraph1> list = new List<DashboardGraph1>();
+            var salesbyyear = from o in db.Orders
+                              join od in db.Order_Details on o.OrderID equals od.OrderID
+                              select new { od.UnitPrice, od.Quantity, od.Discount,o.OrderDate };
+            foreach(var item in salesbyyear)
+            {
+                int ok = 0;
+                foreach(var i in list)
+                {
+                    if (i.Year ==Convert.ToDateTime(item.OrderDate).Year)
+                    {
+                        i.Sales+= item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
+                        ok = 1;
+                        break;
+                    }
+                }
+                if (ok == 0)
+                {
+                    DashboardGraph1 x = new DashboardGraph1();
+                    x.Year = Convert.ToDateTime(item.OrderDate).Year;
+                    x.Sales= item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
+                    list.Add(x);
+                }
+            }
+            foreach(var i in list)
+            {
+                i.Sales = decimal.Round(i.Sales, 2);
+            }
+            MemoryStream stream1 = new MemoryStream();
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(IEnumerable<DashboardGraph1>));
+            ser.WriteObject(stream1, list);
+            return ser;
         }
     }
 }

@@ -19,9 +19,10 @@
     <link href="~/css/dist/sb-admin-2.css" rel="stylesheet" />
    
     <!-- Custom Fonts -->
-   
+
+    <link href="~/css/morris.css" rel="stylesheet" />
     <link href="~/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/css/Dashboard.css" rel="stylesheet" />
+    @*<link href="~/css/Dashboard.css" rel="stylesheet" />*@
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,7 +68,7 @@
                         </li>
                         <li id="portfolio" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produse <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <ul  class="nav nav-second-level">
                                 <li id="1columnportfolio">
                                     @Html.ActionLink("Clasic", "Products", "Products", new { category = "Classic" }, null)
                                 </li>
@@ -87,7 +88,7 @@
                         </li>
                         <li id="blog" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <ul  class="nav nav-second-level">
                                 <li id="bloghome1">
                                     @Html.ActionLink("Lista Comenzi", "Home1", "Order")
                                 </li>
@@ -95,9 +96,9 @@
                         </li>
                         <li id="other" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alte informatii <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
+                            <ul  class="nav nav-second-level">
                                 <li id="fullwidthpage">
-                                    @Html.ActionLink("Alte info 1", "FullWidth", "Other")
+                                    @Html.ActionLink("Avantajele magazinului online", "Avantaje", "Other")
                                 </li>
                                 <li id="sidebarpage">
                                     @Html.ActionLink("Alte info 2", "Sidebar", "Other")
@@ -114,9 +115,7 @@
                         <li id="contact">
                             @Html.ActionLink("Contact", "Index", "Contact")
                         </li>
-                        <li id="Log In/Log Out">
-                            @Html.ActionLink("Log In/Log Out", "Index", "Log In/Log Out")
-                        </li>
+                      
                     </ul>  
                 </div>
                 <!-- /.sidebar-collapse -->
@@ -128,7 +127,16 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        
+                        <script src="~/js/jquery.min.js"></script>
+                        <script src="~/js/bootstrap.min.js"></script>
+                        <!-- Metis Menu Plugin JavaScript -->
+
+                        <script src="~/js/metisMenu/metisMenu.min.js"></script>
+                        <!-- Custom Theme JavaScript -->
+                        <script src="~/js/raphael/raphael.min.js"></script>
+                        <script src="~/js/morrisjs/morris.min.js"></script>
+                        @*<script src="~/js/morrisjs/morris-data.js"></script>*@
+                        <script src="~/js/dist/sb-admin-2.js"></script>
                        @RenderBody()
                     </div>
                     <!-- /.col-lg-12 -->
@@ -142,15 +150,9 @@
     <!-- /#wrapper -->
     <!-- jQuery -->
    
-    <script src="~/js/jquery.min.js"></script>
+   
     <!-- Bootstrap Core JavaScript -->
    
-    <script src="~/js/bootstrap.min.js"></script>
-    <!-- Metis Menu Plugin JavaScript -->
-   
-    <script src="~/js/metisMenu/metisMenu.min.js"></script>
-    <!-- Custom Theme JavaScript -->
-   
-    <script src="~/js/dist/sb-admin-2.js"></script>
+  
 </body>
 </html>
