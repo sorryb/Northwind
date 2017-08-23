@@ -451,7 +451,6 @@
     <Content Include="css\font-awesome\scss\_stacked.scss" />
     <Content Include="css\font-awesome\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\BROMPREPROD1.pubxml" />
-    <Content Include="Views\Products\Search.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
   </ItemGroup>

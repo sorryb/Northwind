@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using PagedList;
-using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
@@ -14,17 +12,20 @@ namespace NorthwindWeb.Controllers
         private Models.NorthwindModel db = new Models.NorthwindModel();
 
         /// <summary>
-        /// 
+        /// Returns a paged list filtered by category and by name
         /// </summary>
-        /// <param name="category"></param>
-        /// <param name="page"></param>
-        /// <returns></returns>
+        /// <param name="category">The category of the product, if it's not a valid value returns all products</param>
+        /// <param name="search">Filters by products' name</param>
+        /// <param name="page">Required for paged list to work</param>
+        /// 
+        /// <returns>PagedList</returns>
         public ActionResult Products(string category, string search = "", int? page = 1)
         {
             var products = db.Products as IQueryable<ViewModels.ViewProductCategoryS>;
-            ViewBag.title = category;
+            ViewBag.title = "Produse";
             ViewBag.search = search;
-            int categID = 1;
+            int categID = 0;
+
             //test categories of products.
             switch (category)
             {
@@ -49,10 +50,12 @@ namespace NorthwindWeb.Controllers
                     categID = 5;
                     break;
             }
+
+            //Gets all products filtered by category and by name from the database.
             products = from prod in db.Products
                        join cat in db.Categories on prod.CategoryID equals cat.CategoryID
                        join supp in db.Suppliers on prod.SupplierID equals supp.SupplierID
-                       where prod.CategoryID.Value == categID && prod.ProductName.Contains(search)
+                       where categID>0 ? prod.CategoryID.Value == categID : true && prod.ProductName.Contains(search)
                        orderby prod.ProductName ascending
                        select new ViewModels.ViewProductCategoryS
                        {
@@ -64,43 +67,10 @@ namespace NorthwindWeb.Controllers
                            Stock = prod.UnitsInStock.ToString(),
                            SuppliersName = supp.CompanyName
                        };
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-            return View(products.ToPagedList(pageNumber, pageSize));
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="search"></param>
-        /// <param name="page"></param>
-        /// <returns></returns>
-        public ActionResult Search(string search, int? page = 1)
-        {
-            ViewBag.title = "Rezultate pentru: " + search;
-            ViewBag.search = search;
-            ViewBag.page = page;
-     
-
-
-            var products = from prod in db.Products
-                            join cat in db.Categories on prod.CategoryID equals cat.CategoryID
-                           where prod.ProductName.Contains(search)
-                           select new ViewModels.ViewProductCategoryS
-                           {
-                               CategoryName = cat.CategoryName,
-                               ProductName = prod.ProductName,
-                               ProductID = prod.ProductID.ToString(),
-                               ProductPrice = prod.UnitPrice ?? 0
-                           };
-
-            products = products.OrderBy(x => x.ProductName);
-
 
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
     }
-    
 }
