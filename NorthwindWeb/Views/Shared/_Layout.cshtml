@@ -9,7 +9,9 @@
     <!-- Bootstrap -->
     <link href="@Url.Content("/css/bootstrap.css")" rel="stylesheet">
     <link href="@Url.Content("/css/modern-business.css")" rel="stylesheet">
+    <link href="@Url.Content("/css/alt info 2.css")" rel="stylesheet">
     <link href="@Url.Content("/css/Style.css")" rel="stylesheet">
+
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -36,7 +38,9 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
 
                 <ul class="nav navbar-nav navbar-right">
-                   
+                    <li id="dashboard">
+                        @Html.ActionLink("Dashboard", "Index", "Dashboard")
+                    </li>
                     <li id="services">
                         @Html.ActionLink("Servicii", "Index", "Services")
                     </li>
@@ -89,11 +93,14 @@
                     <li id="contact">
                         @Html.ActionLink("Contact", "Index", "Contact")
                     </li>
+                    <li id="Log In/Log Out">
+                        @Html.ActionLink("Log In/Log Out", "Index", "Log In/Log Out")
+                    </li>
                     <li id="other" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li class="col-lg-12">
-                                <form id="searchInput" action="/Products/Search">
+                                <form id="searchInput" action="/Products/Products">
                                     <div class="input-group">
                                         <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
                                         <div class="input-group-btn">
