@@ -187,7 +187,6 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
