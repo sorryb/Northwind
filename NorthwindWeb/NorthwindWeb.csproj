@@ -169,6 +169,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context\ApplicationDataContext.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -196,12 +197,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
-    <Compile Include="ViewModels\BigOrder.cs" />
-    <Compile Include="ViewModels\Order10.cs" />
-    <Compile Include="ViewModels\OrderInfo.cs" />
-    <Compile Include="ViewModels\OrderIndexData.cs" />
-    <Compile Include="ViewModels\OrderProduct.cs" />
-    <Compile Include="ViewModels\ProductCategory.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardIndexData.cs" />
+    <Compile Include="ViewModels\Order\BigOrder.cs" />
+    <Compile Include="ViewModels\Order\Order10.cs" />
+    <Compile Include="ViewModels\Order\OrderInfo.cs" />
+    <Compile Include="ViewModels\Order\OrderIndexData.cs" />
+    <Compile Include="ViewModels\Order\OrderProduct.cs" />
+    <Compile Include="ViewModels\Order\ProductCategory.cs" />
     <Compile Include="ViewModels\ProductServices.cs" />
     <Compile Include="ViewModels\ServicesIndex.cs" />
     <Compile Include="ViewModels\ViewProductCategoryS.cs" />
@@ -212,6 +214,15 @@
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\Dashboard.css" />
+    <Content Include="css\dist\sb-admin-2.css" />
+    <Content Include="css\dist\sb-admin-2.min.css" />
+    <Content Include="css\font-awesome\css\font-awesome.css" />
+    <Content Include="css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="css\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="css\metisMenu\metisMenu.css" />
+    <Content Include="css\metisMenu\metisMenu.min.css" />
     <Content Include="css\modern-business.css" />
     <Content Include="css\Order.css" />
     <Content Include="css\Style.css" />
@@ -334,6 +345,12 @@
     <Content Include="images\wpid-nokia-logo.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\dist\sb-admin-2.js" />
+    <Content Include="js\dist\sb-admin-2.min.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\jquery.min.js" />
+    <Content Include="js\metisMenu\metisMenu.js" />
+    <Content Include="js\metisMenu\metisMenu.min.js" />
     <Content Include="js\Site.js" />
     <Content Include="js\script.js" />
     <Content Include="Web.config">
@@ -398,8 +415,47 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Products\Products.cshtml" />
+    <Content Include="css\font-awesome\css\font-awesome.css.map" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="css\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="css\font-awesome\less\animated.less" />
+    <Content Include="css\font-awesome\less\bordered-pulled.less" />
+    <Content Include="css\font-awesome\less\core.less" />
+    <Content Include="css\font-awesome\less\extras.less" />
+    <Content Include="css\font-awesome\less\fixed-width.less" />
+    <Content Include="css\font-awesome\less\font-awesome.less" />
+    <Content Include="css\font-awesome\less\icons.less" />
+    <Content Include="css\font-awesome\less\larger.less" />
+    <Content Include="css\font-awesome\less\list.less" />
+    <Content Include="css\font-awesome\less\mixins.less" />
+    <Content Include="css\font-awesome\less\path.less" />
+    <Content Include="css\font-awesome\less\rotated-flipped.less" />
+    <Content Include="css\font-awesome\less\screen-reader.less" />
+    <Content Include="css\font-awesome\less\spinning.less" />
+    <Content Include="css\font-awesome\less\stacked.less" />
+    <Content Include="css\font-awesome\less\variables.less" />
+    <Content Include="css\font-awesome\scss\font-awesome.scss" />
+    <Content Include="css\font-awesome\scss\_animated.scss" />
+    <Content Include="css\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="css\font-awesome\scss\_core.scss" />
+    <Content Include="css\font-awesome\scss\_extras.scss" />
+    <Content Include="css\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="css\font-awesome\scss\_icons.scss" />
+    <Content Include="css\font-awesome\scss\_larger.scss" />
+    <Content Include="css\font-awesome\scss\_list.scss" />
+    <Content Include="css\font-awesome\scss\_mixins.scss" />
+    <Content Include="css\font-awesome\scss\_path.scss" />
+    <Content Include="css\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="css\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="css\font-awesome\scss\_spinning.scss" />
+    <Content Include="css\font-awesome\scss\_stacked.scss" />
+    <Content Include="css\font-awesome\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\BROMPREPROD1.pubxml" />
-    <Content Include="Views\Products\Search.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
