@@ -197,6 +197,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardGraph1.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardIndexData.cs" />
     <Compile Include="ViewModels\Order\BigOrder.cs" />
     <Compile Include="ViewModels\Order\Order10.cs" />
@@ -349,6 +350,12 @@
     <Content Include="js\jquery.min.js" />
     <Content Include="js\metisMenu\metisMenu.js" />
     <Content Include="js\metisMenu\metisMenu.min.js" />
+    <Content Include="css\morris.css" />
+    <Content Include="js\morrisjs\morris-data.js" />
+    <Content Include="js\morrisjs\morris.js" />
+    <Content Include="js\morrisjs\morris.min.js" />
+    <Content Include="js\raphael\raphael.js" />
+    <Content Include="js\raphael\raphael.min.js" />
     <Content Include="js\Site.js" />
     <Content Include="js\script.js" />
     <Content Include="Web.config">

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Runtime.Serialization.Json;
 
 namespace NorthwindWeb.ViewModels.Dashboard
 {/// <summary>
@@ -13,6 +14,7 @@ namespace NorthwindWeb.ViewModels.Dashboard
         public int NumberProductsSold{get;set;}
         public int NumberEmployees { get; set; }
         public int NumberCustomers { get; set; }
+        public DataContractJsonSerializer Graph1 { get; set; }
 
 
     }
