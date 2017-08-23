@@ -7,12 +7,16 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NorthwindWeb.Context
 {
-    public class ApplicationDataContext : IdentityDbContext<AppUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDataContext()
-            : base("DefaultConnection")
-        { }
+        public ApplicationDbContext()
+            : base("DefaultConnection", throwIfV1Schema: false)
+        {
+        }
 
-        public System.Data.Entity.DbSet<AppUser> AppUsers { get; set; }
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
     }
 }
