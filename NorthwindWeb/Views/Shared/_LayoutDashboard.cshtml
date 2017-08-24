@@ -65,57 +65,43 @@
                             @Html.ActionLink("Dashboard", "Index", "Dashboard")
                         </li>
                         <li id="services">
-                            @Html.ActionLink("Servicii", "Index", "Services")
+                            @Html.ActionLink("Servicii", "Index", "Product", new { category = "Services" }, null)
                         </li>
-                        <li id="portfolio" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produse <b class="caret"></b></a>
+                        <li id="product">
+                            @Html.ActionLink("Produse", "Index", "Product")
+                        </li>
+                        <li id="category" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categori <b class="caret"></b></a>
                             <ul  class="nav nav-second-level">
-                                <li id="1columnportfolio">
-                                    @Html.ActionLink("Clasic", "Products", "Products", new { category = "Classic" }, null)
+                                <li>
+                                    @Html.ActionLink("Clasic", "Index", "Product", new { category = "Classic" }, null)
                                 </li>
-                                <li id="2columnportfolio">
-                                    @Html.ActionLink("Smartphone", "Products", "Products", new { category = "Smartphone" }, null)
+                                <li>
+                                    @Html.ActionLink("Smartphone", "Index", "Product", new { category = "Smartphone" }, null)
                                 </li>
-                                <li id="2columnportfolio">
-                                    @Html.ActionLink("Accesorii", "Products", "Products", new { category = "Accesorii" }, null)
+                                <li>
+                                    @Html.ActionLink("Accesorii", "Index", "Product", new { category = "Accesorii" }, null)
                                 </li>
-                                <li id="2columnportfolio">
-                                    @Html.ActionLink("Gadgeturi", "Products", "Products", new { category = "Gadgeturi" }, null)
+                                <li>
+                                    @Html.ActionLink("Gadgeturi", "Index", "Product", new { category = "Gadgeturi" }, null)
                                 </li>
-                                <li id="2columnportfolio">
-                                    @Html.ActionLink("eBook readers", "Products", "Products", new { category = "eBookReaders" }, null)
+                                <li>
+                                    @Html.ActionLink("eBook readers", "Index", "Product", new { category = "eBookReaders" }, null)
                                 </li>
                             </ul>
+                        </li>
+                        <li id="orders">
+                            @Html.ActionLink("Comenzii", "Index", "Product")
                         </li>
                         <li id="blog" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
                             <ul  class="nav nav-second-level">
                                 <li id="bloghome1">
-                                    @Html.ActionLink("Lista Comenzi", "Home1", "Order")
+                                    @Html.ActionLink("Lista Comenzi", "Home1", "Orders")
                                 </li>
                             </ul>
                         </li>
-                        <li id="other" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alte informatii <b class="caret"></b></a>
-                            <ul  class="nav nav-second-level">
-                                <li id="fullwidthpage">
-                                    @Html.ActionLink("Avantajele magazinului online", "Avantaje", "Other")
-                                </li>
-                                <li id="sidebarpage">
-                                    @Html.ActionLink("Alte info 2", "Sidebar", "Other")
-                                </li>
-                                <li id="faq">
-                                    @Html.ActionLink("FAQ", "Faq", "Other")
-                                </li>
-                            </ul>
-
-
-                        <li id="about">
-                            @Html.ActionLink("Despre noi", "Index", "About")
-                        </li>
-                        <li id="contact">
-                            @Html.ActionLink("Contact", "Index", "Contact")
-                        </li>
+                      
                       
                     </ul>  
                 </div>
@@ -155,7 +141,23 @@
     <script src="~/js/morrisjs/morris.min.js"></script>
     <script src="~/js/morrisjs/morris-data.js"></script>
     <script src="~/js/dist/sb-admin-2.js"></script> 
+    @*<script>
+        $.ajax({
+            url: '@Html.Raw(@Url.Action("Menu", "Home"))',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                $(data).each(function (i, el) {
+                    @{string i};
+                    @i=el;
+                        var x = '<li id=' + el + '>' +@(Html.ActionLink(i.ToString(), "Index", "Product", new { category =i }, null))+'</li>'
+                    $("#category").append(x);
 
+                });
+
+            }
+        });
+    </script>*@
     <!-- section scripts from _Layout-->
     @RenderSection("scripts", required: false)
 

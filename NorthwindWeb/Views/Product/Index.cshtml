@@ -85,7 +85,7 @@
         <div class="col-lg-12">
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-            @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { page }))
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new {category = ViewBag.category, page }))
         </div>
     </div>
 </div>
