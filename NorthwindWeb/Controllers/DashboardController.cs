@@ -72,6 +72,41 @@ namespace NorthwindWeb.Controllers
             return Json(Table(), JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult Graph3()
+        {
+            List<DashboardGraph3> list = new List<DashboardGraph3>();
+            var salesbyyear = from od in db.Order_Details
+                              join p in db.Products on od.ProductID equals p.ProductID
+                              join c in db.Categories on p.CategoryID equals c.CategoryID
+                              select new { od.UnitPrice, od.Quantity, od.Discount,c.CategoryName };
+            foreach (var item in salesbyyear)
+            {
+                int ok = 0;
+                foreach (var i in list)
+                {
+                    if (i.label == item.CategoryName)
+                    {
+                        i.value += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
+                        ok = 1;
+                        break;
+                    }
+                }
+                if (ok == 0)
+                {
+                    DashboardGraph3 x = new DashboardGraph3();
+                    x.label = item.CategoryName;
+                    x.value = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
+                    list.Add(x);
+                }
+            }
+            foreach (var i in list)
+            {
+                i.value = decimal.Round(i.value, 2);
+            }
+
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+
         private List<DashboardGraph2> Table()
         {
             List<DashboardGraph2> list = new List<DashboardGraph2>();

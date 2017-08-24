@@ -17,20 +17,19 @@ $(function () {
 
         }
     });
-    //Morris.Donut({
-    //    element: 'morris-donut-chart',
-    //    data: [{
-    //        label: "Download Sales",
-    //        value: 12
-    //    }, {
-    //        label: "In-Store Sales",
-    //        value: 30
-    //    }, {
-    //        label: "Mail-Order Sales",
-    //        value: 20
-    //    }],
-    //    resize: true
-    //});
+    $.ajax({
+        url: 'Graph3',
+        dataType: 'json',
+        cache: false,
+        success: function (data) {
+            Morris.Donut({
+                element: 'morris-donut-chart',
+                data:data,
+                resize: true
+            })
+        }
+
+    })
     $.ajax({
         url: 'Graph2',
         dataType: 'json',
@@ -41,7 +40,7 @@ $(function () {
                 data: data,
                 xkey: ['Year'],
                 ykeys: ['a', 'b', 'c'],
-                labels: ['Aprilie', 'August','Decembrie'],
+                labels: ['Aprilie', 'August', 'Decembrie'],
                 hideHover: 'auto',
                 resize: true
             })
