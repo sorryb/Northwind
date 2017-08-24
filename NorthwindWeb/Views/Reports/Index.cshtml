@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Reports";
+}
+@model List<string>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 sidebar">
+            <ul class="nav nav-stacked nav-pills">
+                @foreach (var x in Model)
+                {
+                    <li>
+                        <a href="http://localhost/reportserver_SSRS/Pages/ReportViewer.aspx?%2fNorthwindReports%2f@(x)&rs:Command=Render" target="">@(x)</a>
+                    </li>
+                }
+            </ul>
+
+        </div>
+    </div>
+</div>

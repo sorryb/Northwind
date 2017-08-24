@@ -27,9 +27,6 @@ namespace NorthwindWeb.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Categories>()
-                .Property(e => e.img)
-                .IsUnicode(false);
 
             modelBuilder.Entity<CustomerDemographics>()
                 .Property(e => e.CustomerTypeID)

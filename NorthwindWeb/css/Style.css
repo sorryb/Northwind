@@ -116,3 +116,17 @@ form.prodsearch {
 .form-control {
     float:right !important;
 }
+
+.ord-form 
+{
+    color:sandybrown;
+    
+}
+
+.form{
+    width:175px;
+}
+
+[class~=crudstyle] input, [class~=crudstyle] select {
+    color: black;
+}
