@@ -18,16 +18,8 @@
       <FullPath>CategorySalesfor1997.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>Current_Product_List.rdl</Name>
-      <FullPath>Current_Product_List.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>CategorySalesfor1997.rdl</Name>
-      <FullPath>CategorySalesfor1997.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>Current_Product_List.rdl</Name>
-      <FullPath>Current_Product_List.rdl</FullPath>
+      <Name>CurrentProductList.rdl</Name>
+      <FullPath>CurrentProductList.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>Customer and Suppliers by City.rdl</Name>
@@ -74,16 +66,16 @@
       <FullPath>SalesByAmount.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>SalesByCategory.rdl</Name>
-      <FullPath>SalesByCategory.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
       <Name>SummaryOfSalesByQuarter.rdl</Name>
       <FullPath>SuMmaryOfSalesByQuarter.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SummaryOfSalesByYear.rdl</Name>
       <FullPath>SummaryOfSalesByYear.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
+      <Name>SalesByCategory.rdl</Name>
+      <FullPath>SalesByCategory.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

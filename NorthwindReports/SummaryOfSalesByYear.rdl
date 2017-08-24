@@ -59,7 +59,7 @@
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.90278in</Top>
             <Height>0.56542in</Height>
-            <Width>4.51042in</Width>
+            <Width>6.22917in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -113,7 +113,8 @@
                           <rd:DefaultName>textbox2</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
@@ -151,7 +152,8 @@
                           <rd:DefaultName>textbox3</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
@@ -189,7 +191,8 @@
                           <rd:DefaultName>textbox4</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
@@ -229,7 +232,8 @@
                           <rd:DefaultName>ShippedDate</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
@@ -264,7 +268,8 @@
                           <rd:DefaultName>OrderID</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
@@ -287,6 +292,7 @@
                                   <Value>=Fields!Subtotal.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -299,13 +305,15 @@
                           <rd:DefaultName>Subtotal</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -339,7 +347,8 @@
                           <rd:DefaultName>Textbox9</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -373,7 +382,8 @@
                           <rd:DefaultName>Textbox10</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -395,6 +405,7 @@
                                   <Value>=Sum(Fields!Subtotal.Value)</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -407,12 +418,14 @@
                           <rd:DefaultName>Subtotal1</rd:DefaultName>
                           <Style>
                             <Border>
-                              <Style>None</Style>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </Border>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -453,8 +466,8 @@
             </TablixRowHierarchy>
             <FixedColumnHeaders>true</FixedColumnHeaders>
             <DataSetName>DataSetSummaryOfSalesByYear</DataSetName>
-            <Top>2.29111in</Top>
-            <Left>0.00001in</Left>
+            <Top>2.04111in</Top>
+            <Left>0.95834in</Left>
             <Height>0.68in</Height>
             <Width>4.51041in</Width>
             <ZIndex>1</ZIndex>
@@ -477,13 +490,13 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                   <LineHeight>10pt</LineHeight>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Left>3.21875in</Left>
+            <Left>4.9375in</Left>
             <Height>0.5in</Height>
             <Width>1.29167in</Width>
             <ZIndex>2</ZIndex>
@@ -515,11 +528,11 @@
         <Height>4.17944in</Height>
         <Style>
           <Border>
-            <Style>Solid</Style>
+            <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>4.53125in</Width>
+      <Width>6.33333in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

@@ -265,7 +265,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -316,7 +315,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -367,7 +365,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -418,7 +415,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -469,7 +465,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -520,7 +515,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -571,7 +565,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -622,7 +615,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -673,7 +665,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -724,7 +715,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -776,7 +766,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -827,7 +816,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -878,7 +866,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -930,7 +917,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -982,7 +968,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1034,7 +1019,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1086,7 +1070,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1138,7 +1121,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1789,6 +1771,7 @@
                                   <Value>=Fields!UnitPrice.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -1804,23 +1787,12 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>LightGrey</Color>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1933,6 +1905,7 @@
                                   <Value>=Fields!ExtendedPrice.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -1948,23 +1921,12 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>LightGrey</Color>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1981,6 +1943,7 @@
                                   <Value>=Fields!Freight.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -1996,23 +1959,12 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>LightGrey</Color>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -2128,7 +2080,7 @@
         <Height>1.99541in</Height>
         <Style>
           <Border>
-            <Style>Solid</Style>
+            <Style>None</Style>
           </Border>
         </Style>
       </Body>

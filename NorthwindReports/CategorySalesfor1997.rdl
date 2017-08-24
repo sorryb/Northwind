@@ -54,9 +54,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>textbox1</rd:DefaultName>
-            <Top>0.48681in</Top>
+            <Top>0.63542in</Top>
             <Height>0.48556in</Height>
-            <Width>6.1875in</Width>
+            <Width>6.01042in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -68,15 +68,15 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.09375in</Width>
+                  <Width>3.09896in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.09375in</Width>
+                  <Width>2.80729in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>0.22in</Height>
+                  <Height>0.2825in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -107,19 +107,9 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
                             <BottomBorder>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -159,19 +149,9 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
                             <BottomBorder>
-                              <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -184,7 +164,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.21in</Height>
+                  <Height>0.30375in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -213,18 +193,9 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
                             <BottomBorder>
-                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -246,12 +217,13 @@
                                   <Value>=Fields!CategorySales.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -261,27 +233,14 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
-                            <BottomBorder>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -315,12 +274,14 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSetCategorySalesfor1997</DataSetName>
-            <Top>1.15917in</Top>
-            <Height>0.43in</Height>
-            <Width>6.1875in</Width>
+            <Top>1.54806in</Top>
+            <Left>0.10417in</Left>
+            <Height>0.58625in</Height>
+            <Width>5.90625in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
+                <Color>LightGrey</Color>
                 <Style>Solid</Style>
               </Border>
             </Style>
@@ -332,21 +293,21 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Format(Now, "dd.MM.yyyy")</Value>
+                    <Value>=Format(DateValue("08.11.2017"),"dd.MM.yyyy")</Value>
                     <Style>
                       <FontSize>12pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox4</rd:DefaultName>
-            <Left>5.20833in</Left>
-            <Height>0.37792in</Height>
-            <Width>0.97917in</Width>
+            <Left>4.35416in</Left>
+            <Height>0.5in</Height>
+            <Width>1.65625in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -549,7 +510,9 @@
                         <Style>None</Style>
                       </Border>
                       <FontSize>8pt</FontSize>
+                      <Format>0.00 'lei';(0.00 'lei')</Format>
                       <Color>#5c5c5c</Color>
+                      <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                     </Style>
                     <ChartAxisTitle>
                       <Caption />
@@ -676,9 +639,10 @@
               </Style>
             </ChartNoDataMessage>
             <DataSetName>DataSetCategorySalesfor1997</DataSetName>
-            <Top>2.07181in</Top>
+            <Top>2.97111in</Top>
+            <Left>0.10417in</Left>
             <Height>2.74986in</Height>
-            <Width>6.1875in</Width>
+            <Width>5.90625in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -689,12 +653,13 @@
               <BackgroundGradientType>None</BackgroundGradientType>
             </Style>
           </Chart>
-          <Image Name="Image2">
+          <Image Name="Image1">
             <Source>Embedded</Source>
             <Value>kr</Value>
             <Sizing>FitProportional</Sizing>
-            <Height>0.48681in</Height>
-            <Width>0.45833in</Width>
+            <Top>0.01389in</Top>
+            <Height>0.5in</Height>
+            <Width>0.5in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -703,15 +668,14 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>5.13417in</Height>
+        <Height>6.07513in</Height>
         <Style>
           <Border>
-            <Color>LightGrey</Color>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>6.23958in</Width>
+      <Width>6.11458in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
