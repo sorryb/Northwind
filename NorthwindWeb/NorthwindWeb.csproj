@@ -224,6 +224,7 @@
     <Compile Include="ViewModels\Order\OrderProduct.cs" />
     <Compile Include="ViewModels\Order\ProductCategory.cs" />
     <Compile Include="ViewModels\ProductServices.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\ServicesIndex.cs" />
     <Compile Include="ViewModels\ViewProductCategoryS.cs" />
   </ItemGroup>

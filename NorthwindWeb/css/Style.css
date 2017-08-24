@@ -94,11 +94,6 @@ h3.prodpad{
     padding-left:40px;
 }
 
-a:hover {
-    text-decoration: none;
-}
-
-
 /*change dimensions of images -- used in Views-Services-Index*/
 .img-services {
     width: 700px;
@@ -130,3 +125,4 @@ form.prodsearch {
 [class~=crudstyle] input, [class~=crudstyle] select {
     color: black;
 }
+
