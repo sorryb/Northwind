@@ -13,7 +13,7 @@
     <DataSet Name="DataSetInvoices">
       <Query>
         <DataSourceName>DataSourceInvoices</DataSourceName>
-        <CommandText>select * from Invoices</CommandText>
+        <CommandText>SELECT *  FROM Invoices  ORDER BY ShipName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -2043,7 +2043,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>

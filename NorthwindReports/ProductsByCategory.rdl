@@ -14,7 +14,7 @@
       <Query>
         <DataSourceName>DataSourceProductsByCategory</DataSourceName>
         <CommandText>select *
-from  [Products by Category] order by CategoryName</CommandText>
+from  [Products by Category] order by CategoryName, ProductName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>

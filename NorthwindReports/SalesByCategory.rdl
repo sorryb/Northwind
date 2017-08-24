@@ -419,7 +419,6 @@
                             <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -545,7 +544,10 @@
                       <ChartDataLabel>
                         <Style />
                       </ChartDataLabel>
-                      <Style />
+                      <Style>
+                        <BackgroundGradientType>None</BackgroundGradientType>
+                        <BackgroundHatchType>Percent05</BackgroundHatchType>
+                      </Style>
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -813,6 +815,8 @@
                   <BackgroundGradientType>None</BackgroundGradientType>
                   <FontSize>8pt</FontSize>
                 </Style>
+                <Position>LeftCenter</Position>
+                <DockOutsideChartArea>true</DockOutsideChartArea>
                 <ChartLegendTitle>
                   <Caption />
                   <Style>

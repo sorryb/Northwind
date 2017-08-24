@@ -13,7 +13,7 @@
     <DataSet Name="DataSet1">
       <Query>
         <DataSourceName>SharedDataSourceNorthwind</DataSourceName>
-        <CommandText>SELECT * FROM EMPLOYEES</CommandText>
+        <CommandText>SELECT * FROM EMPLOYEES ORDER BY LastName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -1011,7 +1011,7 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
