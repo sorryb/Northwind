@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container crudstyle">
     <h2>Delete</h2>
@@ -124,13 +124,13 @@
                 @Html.DisplayFor(model => model.Extension)
             </dd>
 
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.Photo)
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.Photo)
-            </dd>
+            </dd>*@
 
             <dt>
                 @Html.DisplayNameFor(model => model.Notes)
@@ -138,14 +138,6 @@
 
             <dd>
                 @Html.DisplayFor(model => model.Notes)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PhotoPath)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PhotoPath)
             </dd>
 
         </dl>

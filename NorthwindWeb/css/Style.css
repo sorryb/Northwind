@@ -127,6 +127,12 @@ form.prodsearch {
     width:175px;
 }
 
+/*black text for crud input and select*/
 [class~=crudstyle] input, [class~=crudstyle] select {
     color: black;
+}
+
+/*particular margin for employee crud*/
+[class~=particularEmployees]{
+    margin:20px;
 }
