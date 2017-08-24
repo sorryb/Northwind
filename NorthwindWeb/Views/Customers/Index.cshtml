@@ -1,4 +1,5 @@
-﻿@model IEnumerable<NorthwindWeb.Models.Customers>
+﻿@model PagedList.IPagedList<NorthwindWeb.Models.Customers>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -13,34 +14,34 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().CompanyName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ContactName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ContactTitle)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ContactTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().City)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Region)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Region)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostalCode)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PostalCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Phone)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Fax)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Fax)
             </th>
             <th></th>
         </tr>
@@ -87,4 +88,12 @@
         }
 
     </table>
+    <div class="row text-center">
+        <div class="col-lg-12">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Customers", new { page }))
+        </div>
+    </div>
+
 </div>

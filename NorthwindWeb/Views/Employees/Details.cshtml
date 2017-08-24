@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container crudstyle">
     <h2>Details</h2>
@@ -11,13 +11,6 @@
         <h4>Employees</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Employee1.LastName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Employee1.LastName)
-            </dd>
 
             <dt>
                 @Html.DisplayNameFor(model => model.LastName)
@@ -83,14 +76,23 @@
                 @Html.DisplayFor(model => model.City)
             </dd>
 
-            <dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.Region)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Region)
-            </dd>
-
+                @{
+                    if (Model.Region.IsEmpty())
+                    {
+                        @:"n/a";
+                    }
+                    else
+                    {
+                        Html.DisplayFor(m => m.Region);
+                    }
+                }
+            </dd>*@
+            
             <dt>
                 @Html.DisplayNameFor(model => model.PostalCode)
             </dt>
@@ -124,14 +126,6 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Photo)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Photo)
-            </dd>
-
-            <dt>
                 @Html.DisplayNameFor(model => model.Notes)
             </dt>
 
@@ -140,12 +134,6 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PhotoPath)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PhotoPath)
-            </dd>
 
         </dl>
     </div>

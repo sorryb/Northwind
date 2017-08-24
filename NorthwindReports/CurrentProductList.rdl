@@ -55,7 +55,7 @@ FROM            [Current Product List]</CommandText>
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.83972in</Top>
             <Height>0.56667in</Height>
-            <Width>3.95486in</Width>
+            <Width>6.21527in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -70,10 +70,10 @@ FROM            [Current Product List]</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.99306in</Width>
+                  <Width>1.17014in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.9618in</Width>
+                  <Width>3.37846in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -184,6 +184,7 @@ FROM            [Current Product List]</CommandText>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>ProductID</rd:DefaultName>
+                          <ZIndex>4</ZIndex>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -288,8 +289,9 @@ FROM            [Current Product List]</CommandText>
             </TablixRowHierarchy>
             <DataSetName>DataSetCurrentProductList</DataSetName>
             <Top>1.63833in</Top>
+            <Left>0.78125in</Left>
             <Height>0.43in</Height>
-            <Width>3.95486in</Width>
+            <Width>4.5486in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -305,12 +307,12 @@ FROM            [Current Product List]</CommandText>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Left>2.81375in</Left>
+            <Left>5.07416in</Left>
             <Height>0.4543in</Height>
             <Width>1.14111in</Width>
             <ZIndex>2</ZIndex>
@@ -342,7 +344,7 @@ FROM            [Current Product List]</CommandText>
         <Height>2.26625in</Height>
         <Style />
       </Body>
-      <Width>4.03819in</Width>
+      <Width>6.21528in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

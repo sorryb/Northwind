@@ -94,11 +94,6 @@ h3.prodpad{
     padding-left:40px;
 }
 
-a:hover {
-    text-decoration: none;
-}
-
-
 /*change dimensions of images -- used in Views-Services-Index*/
 .img-services {
     width: 700px;
@@ -108,9 +103,9 @@ a:hover {
     padding: 20px;
 }
 
-form.prodsearch {
+.bread {
     position: relative;
-    top: -20px;
+    top: -30px;
 }
 
 .form-control {
@@ -127,6 +122,19 @@ form.prodsearch {
     width:175px;
 }
 
+/*black text for crud input and select*/
 [class~=crudstyle] input, [class~=crudstyle] select {
     color: black;
+}
+/*for the div containint the iframe*/
+.flex{
+    display:flex;
+}
+
+[class~=particularEmployees]{
+    margin:20px;
+}
+
+.ontop{
+    z-index:2;
 }

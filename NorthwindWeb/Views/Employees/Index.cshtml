@@ -1,11 +1,11 @@
-﻿@model IEnumerable<NorthwindWeb.Models.Employees>
-
+﻿@model PagedList.IPagedList<NorthwindWeb.Models.Employees>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
-<div class="container crudstyle">
+<div class="crudstyle particularEmployees">
     <h2>Index</h2>
 
     <p>
@@ -14,55 +14,46 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Employee1.LastName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().TitleOfCourtesy)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TitleOfCourtesy)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().BirthDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BirthDate)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().HireDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HireDate)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Address)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().City)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Region)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Region)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().PostalCode)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PostalCode)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Country)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().HomePhone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HomePhone)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Extension)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Extension)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Photo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhotoPath)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Notes)
             </th>
             <th></th>
         </tr>
@@ -70,9 +61,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee1.LastName)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LastName)
                 </td>
@@ -113,13 +101,7 @@
                     @Html.DisplayFor(modelItem => item.Extension)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Photo)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Notes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhotoPath)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
@@ -130,4 +112,11 @@
         }
 
     </table>
+    <div class="row text-center">
+        <div class="col-lg-12">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Employees", new { page }))
+        </div>
+    </div>
 </div>

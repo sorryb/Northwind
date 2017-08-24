@@ -1903,5 +1903,13 @@ update Categories set CategoryName='Smartphone',Description='Touchscreen' where 
 update Categories set CategoryName='Accesories',Description='Selfie sticks, Incarcatoare, Casti, Baterii, Huse' where CategoryID=3
 update Categories set CategoryName='Gadgets',Description='Boxe, Ochelari VR, Telecomenzi' where CategoryID=4
 update Categories set CategoryName='eBookReaders',Description='Bookreader' where CategoryID=5
-delete from Categories where CategoryID between 6 and 8
+if(not exists (select * from Categories where Categories.CategoryID = 6 ))
+begin
+	SET IDENTITY_INSERT Categories  on;
+	insert into Categories (CategoryID, CategoryName, [Description]) values (6, 'Services', 'Services that we offer')
+	set identity_insert Categories off;
+end
+else
+	update Categories set CategoryName='Services',Description='Services that we offer' where CategoryID=5
+delete from Categories where CategoryID between 7 and 8
 go

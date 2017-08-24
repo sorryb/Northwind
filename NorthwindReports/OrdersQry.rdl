@@ -13,7 +13,7 @@
     <DataSet Name="DataSetOrdersQry">
       <Query>
         <DataSourceName>DataSourceOrdersQry</DataSourceName>
-        <CommandText>select * from [Orders Qry]</CommandText>
+        <CommandText>select * from [Orders Qry] order by OrderID</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -127,7 +127,7 @@
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.51681in</Top>
             <Height>0.64159in</Height>
-            <Width>15.5625in</Width>
+            <Width>14.90626in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -142,10 +142,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.70833in</Width>
+                  <Width>0.5in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.78321in</Width>
+                  <Width>0.55404in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.82292in</Width>
@@ -160,10 +160,10 @@
                   <Width>0.69792in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.79362in</Width>
+                  <Width>0.39779in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.63542in</Width>
+                  <Width>0.72916in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.87304in</Width>
@@ -178,7 +178,7 @@
                   <Width>0.98958in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.66667in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.80208in</Width>
@@ -190,10 +190,10 @@
                   <Width>0.77083in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.65625in</Width>
+                  <Width>0.79167in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.61458in</Width>
+                  <Width>0.86459in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.57292in</Width>
@@ -1320,6 +1320,7 @@
                                   <Value>=Fields!Freight.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -1335,14 +1336,12 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1866,7 +1865,7 @@
             <DataSetName>DataSetOrdersQry</DataSetName>
             <Top>1.16763in</Top>
             <Height>0.43in</Height>
-            <Width>15.59375in</Width>
+            <Width>14.90626in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -1884,12 +1883,13 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Left>14.26041in</Left>
+            <Top>0.01389in</Top>
+            <Left>13.57292in</Left>
             <Height>0.50292in</Height>
             <Width>1.33334in</Width>
             <ZIndex>2</ZIndex>
@@ -1921,7 +1921,7 @@
         <Height>1.77471in</Height>
         <Style />
       </Body>
-      <Width>15.59375in</Width>
+      <Width>14.96875in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

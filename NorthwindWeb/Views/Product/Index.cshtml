@@ -1,8 +1,8 @@
-﻿@model IEnumerable<NorthwindWeb.Models.Products>
-
+﻿@model PagedList.IPagedList<NorthwindWeb.Models.Products>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container crudstyle">
     <h2>Index</h2>
@@ -13,31 +13,31 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Category.CategoryName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Category.CategoryName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Supplier.CompanyName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Supplier.CompanyName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductName)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.QuantityPerUnit)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().QuantityPerUnit)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UnitsInStock)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitsInStock)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UnitsOnOrder)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitsOnOrder)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ReorderLevel)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ReorderLevel)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Discontinued)
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Discontinued)
             </th>
             <th></th>
         </tr>
@@ -81,4 +81,11 @@
         }
 
     </table>
+    <div class="row text-center">
+        <div class="col-lg-12">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { page }))
+        </div>
+    </div>
 </div>
