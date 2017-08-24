@@ -317,11 +317,14 @@
     <Content Include="images\accesorii.png" />
     <Content Include="images\eBookreader.jpg" />
     <Content Include="images\Gadgeturi.jpg" />
+    <Content Include="images\mag.jpg" />
+    <Content Include="images\magazinonlinelacheie.png" />
     <Content Include="images\samsung.png" />
     <Content Include="images\Services\apeluri-voce.jpg" />
     <Content Include="images\Services\mesagerie-vocala.jpg" />
     <Content Include="images\Services\mobiledata.jpg" />
     <Content Include="images\Services\SMS-Marketing.png" />
+    <Content Include="images\share-magazin-online.png" />
     <Content Include="images\smartphone.jpg" />
     <Content Include="images\Smartphone\62.jpg" />
     <Content Include="images\Smartphone\47.jpg" />
