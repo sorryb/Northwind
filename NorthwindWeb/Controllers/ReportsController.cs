@@ -9,14 +9,21 @@ namespace NorthwindWeb.Controllers
         // GET: Reports
         public ActionResult Index()
         {
-            var paths = Directory.EnumerateFiles("C:\\Users\\intern\\Source\\GitHub\\Northwind\\NorthwindReports", "*rdl");
-            List<string> files = new List<string>();
-            foreach (var x in paths)
+
+            string reportServer = "reportserver_SSRS";
+            string dirpath = Path.GetFullPath(Path.Combine(Server.MapPath("~"), @"../NorthwindReports"));
+
+            List<ViewModels.ReportViewModel> reports = new List<ViewModels.ReportViewModel>();
+            ViewModels.ReportViewModel temp;
+            foreach (var filepath in Directory.GetFiles(dirpath, "*rdl"))
             {
-                files.Add(Path.GetFileNameWithoutExtension(x));
+                string filename = Path.GetFileNameWithoutExtension(filepath);
+                string link = "http://localhost/" + reportServer + "/Pages/ReportViewer.aspx?%2fNorthwindReports%2f" + filename + "&rs:Command=Render";
+                temp = new ViewModels.ReportViewModel(link, filename);
+                reports.Add(temp);
             }
 
-            return View(files);
+            return View(reports);
         }
     }
 }
