@@ -15,17 +15,18 @@ namespace NorthwindWeb.Controllers
     public class DashboardController: Controller
     {
         private NorthwindModel db = new NorthwindModel();
-
+        
 
 
         public ActionResult Index()
         {
-            var viewModel = new DashboardIndexData();
+            DashboardIndexData viewModel = new DashboardIndexData();
+
             viewModel.TotalSalesValue = TotalSalesValue();
             viewModel.NumberProductsSold = NumberProductsSold();
             viewModel.NumberEmployees = NumberEmployees();
             viewModel.NumberCustomers = NumberCustomers();
-           
+            viewModel.Tabel = Table();
             return View(viewModel);
         }
 
@@ -62,6 +63,60 @@ namespace NorthwindWeb.Controllers
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Graph2()
+        {
+            
+            
+            return Json(Table(), JsonRequestBehavior.AllowGet);
+        }
+
+        private List<DashboardGraph2> Table()
+        {
+            List<DashboardGraph2> list = new List<DashboardGraph2>();
+            var salesbyyear = from o in db.Orders
+                              join od in db.Order_Details on o.OrderID equals od.OrderID
+                              select new { od.UnitPrice, od.Quantity, od.Discount, o.OrderDate };
+            foreach (var item in salesbyyear)
+            {
+                int t;
+                if (Convert.ToDateTime(item.OrderDate).Month <= 4) { t = 1; }
+                else if (Convert.ToDateTime(item.OrderDate).Month <= 8) { t = 2; }
+                else { t = 3; }
+                int ok = 0;
+                foreach (var i in list)
+                {
+                    if (int.Parse(i.Year) == Convert.ToDateTime(item.OrderDate).Year)
+                    {
+                        if (t == 1) { i.a += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                        else if (t == 2) { i.b += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                        else { i.c += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+
+                        ok = 1;
+                        break;
+                    }
+                }
+                if (ok == 0)
+                {
+                    DashboardGraph2 x = new DashboardGraph2();
+                    x.Year = Convert.ToString(Convert.ToDateTime(item.OrderDate).Year);
+                    if (t == 1) { x.a = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                    else if (t == 2) { x.b = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                    else { x.c = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                    list.Add(x);
+                }
+            }
+            foreach (var i in list)
+            {
+                {
+                    i.a = decimal.Round(i.a, 2);
+                    i.b = decimal.Round(i.b, 2);
+                    i.c = decimal.Round(i.c, 2);
+                }
+            }
+            return list;
+        }
+
         private decimal TotalSalesValue()
         {
             decimal d=0;
