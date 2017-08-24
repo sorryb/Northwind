@@ -103,9 +103,9 @@ h3.prodpad{
     padding: 20px;
 }
 
-form.prodsearch {
+.bread {
     position: relative;
-    top: -20px;
+    top: -30px;
 }
 
 .form-control {
@@ -125,4 +125,11 @@ form.prodsearch {
 [class~=crudstyle] input, [class~=crudstyle] select {
     color: black;
 }
+/*for the div containint the iframe*/
+.flex{
+    display:flex;
+}
 
+.ontop{
+    z-index:2;
+}
