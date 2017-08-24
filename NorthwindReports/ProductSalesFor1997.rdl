@@ -13,7 +13,7 @@
     <DataSet Name="DataSetProductSalesfor1997">
       <Query>
         <DataSourceName>DataSourceProductSalesfor1997</DataSourceName>
-        <CommandText>select * from [Product Sales for 1997]</CommandText>
+        <CommandText>select * from [Product Sales for 1997] order by CategoryName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -298,6 +298,7 @@
                                   <Value>=Fields!ProductSales.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -313,14 +314,12 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>

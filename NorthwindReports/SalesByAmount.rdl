@@ -266,6 +266,7 @@
                                   <Value>=Fields!SaleAmount.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -286,6 +287,7 @@
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>

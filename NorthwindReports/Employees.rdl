@@ -1022,8 +1022,7 @@
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
-                <Color>#666666</Color>
-                <Style>Solid</Style>
+                <Style>None</Style>
               </Border>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>

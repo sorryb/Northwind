@@ -55,7 +55,6 @@
             </Paragraphs>
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.63542in</Top>
-            <Left>0in</Left>
             <Height>0.48556in</Height>
             <Width>6.01042in</Width>
             <Style>
@@ -218,6 +217,7 @@
                                   <Value>=Fields!CategorySales.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -233,14 +233,12 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -512,7 +510,9 @@
                         <Style>None</Style>
                       </Border>
                       <FontSize>8pt</FontSize>
+                      <Format>0.00 'lei';(0.00 'lei')</Format>
                       <Color>#5c5c5c</Color>
+                      <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                     </Style>
                     <ChartAxisTitle>
                       <Caption />
@@ -658,7 +658,6 @@
             <Value>kr</Value>
             <Sizing>FitProportional</Sizing>
             <Top>0.01389in</Top>
-            <Left>0in</Left>
             <Height>0.5in</Height>
             <Width>0.5in</Width>
             <ZIndex>4</ZIndex>

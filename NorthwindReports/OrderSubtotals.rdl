@@ -220,6 +220,7 @@
                                   <Value>=Fields!Subtotal.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -235,16 +236,15 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

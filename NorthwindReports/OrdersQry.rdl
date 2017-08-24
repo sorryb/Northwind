@@ -127,7 +127,7 @@
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.51681in</Top>
             <Height>0.64159in</Height>
-            <Width>14.42709in</Width>
+            <Width>14.52083in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -163,7 +163,7 @@
                   <Width>0.39779in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.63542in</Width>
+                  <Width>0.72916in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.87304in</Width>
@@ -190,10 +190,10 @@
                   <Width>0.77083in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.65625in</Width>
+                  <Width>0.71875in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.61458in</Width>
+                  <Width>0.72916in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.57292in</Width>
@@ -1320,6 +1320,7 @@
                                   <Value>=Fields!Freight.Value</Value>
                                   <Style>
                                     <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
@@ -1335,14 +1336,12 @@
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BottomBorder>
-                              <Style>Solid</Style>
-                            </BottomBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -1866,7 +1865,7 @@
             <DataSetName>DataSetOrdersQry</DataSetName>
             <Top>1.16763in</Top>
             <Height>0.43in</Height>
-            <Width>14.42709in</Width>
+            <Width>14.69791in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -1889,7 +1888,6 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>0in</Top>
             <Left>12.8125in</Left>
             <Height>0.50292in</Height>
             <Width>1.33334in</Width>
@@ -1922,7 +1920,7 @@
         <Height>1.77471in</Height>
         <Style />
       </Body>
-      <Width>14.52083in</Width>
+      <Width>14.77083in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
