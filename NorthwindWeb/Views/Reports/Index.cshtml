@@ -1,3 +1,22 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Reports";
 }
+@model List<NorthwindWeb.ViewModels.ReportViewModel>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 sidebar">
+            <ul class="nav nav-stacked nav-pills">
+                @foreach (var report in Model)
+                {
+                    <li>
+                        <a href=@report.Link target="reps">@(report.Filename)</a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="col-md-9 sidebar">
+            <iframe name="reps" class="fill"></iframe>
+        </div>
+    </div>
+</div>

@@ -7,6 +7,8 @@ using NorthwindWeb.Models;
 using NorthwindWeb.ViewModels.Dashboard;
 using System.IO;
 using System.Runtime.Serialization.Json;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace NorthwindWeb.Controllers
 {
@@ -63,7 +65,7 @@ namespace NorthwindWeb.Controllers
             return c;
         }
 
-        private DataContractJsonSerializer Graph1()
+        private string Graph1()
         {
             List<DashboardGraph1> list = new List<DashboardGraph1>();
             var salesbyyear = from o in db.Orders
@@ -93,10 +95,14 @@ namespace NorthwindWeb.Controllers
             {
                 i.Sales = decimal.Round(i.Sales, 2);
             }
-            MemoryStream stream1 = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(IEnumerable<DashboardGraph1>));
-            ser.WriteObject(stream1, list);
-            return ser;
+            //MemoryStream stream1 = new MemoryStream();
+            //DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(IEnumerable<DashboardGraph1>));
+            //ser.WriteObject(stream1, list);
+            var jsonSerialiser = new JavaScriptSerializer();
+            var json = JsonConvert.SerializeObject(list);
+            json=json.Replace("&quot;", @"""");
+            
+            return json;
         }
     }
 }
