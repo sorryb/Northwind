@@ -116,7 +116,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe trimestru
-             
+
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -127,18 +127,18 @@
                                 <thead>
                                     <tr>
                                         <th>An</th>
-                                        
+
                                         <th>Total Vanzarti</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach(var item in Model.Tabel)
                                     {
-                                        <tr>
-                                            <td>@item.Year</td>
-                                            
-                                            <td>@(item.a+item.b+item.c) lei</td>
-                                        </tr>
+                                    <tr>
+                                        <td>@item.Year</td>
+
+                                        <td>@(item.a+item.b+item.c) lei</td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -156,6 +156,44 @@
             <!-- /.panel-body -->
         </div>
     </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bell fa-fw"></i> Ultimele 10 Comenzi
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+                    @foreach (var item in Model.LastTen)
+                    {
+                        <a href="#" class="list-group-item">
+                        @item.OrderID
+                        <span class="pull-right text-muted small">
+                            <em>@item.Ago</em>
+                        </span>
+                    </a> 
+                    }
+                    
+                    
+                </div>
+                <!-- /.list-group -->
+                <a href="#" class="btn btn-default btn-block">View All Alerts</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
+            </div>
+            <div class="panel-body">
+                <div id="morris-donut-chart"></div>
+                <a href="#" class="btn btn-default btn-block">View Details</a>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+
 </div>
 
 

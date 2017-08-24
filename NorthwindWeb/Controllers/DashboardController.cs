@@ -27,6 +27,7 @@ namespace NorthwindWeb.Controllers
             viewModel.NumberEmployees = NumberEmployees();
             viewModel.NumberCustomers = NumberCustomers();
             viewModel.Tabel = Table();
+            viewModel.LastTen = LastTen();
             return View(viewModel);
         }
 
@@ -154,7 +155,27 @@ namespace NorthwindWeb.Controllers
             return c;
         }
 
-        
+        private List<Last10Orders> LastTen()
+        {
+            List<Last10Orders> list = new List<Last10Orders>();
+            var order = (from o in db.Orders
+                         select new { o.OrderID,o.OrderDate}).OrderByDescending(o => o.OrderDate).Take(10);
+            foreach(var item in order)
+            {
+                Last10Orders x = new Last10Orders();
+                x.OrderID = item.OrderID;
+                var y = DateTime.Now - Convert.ToDateTime(item.OrderDate);
+                if (y.TotalMinutes <= 60) { x.Ago ="Acum "+ Convert.ToString(y.TotalMinutes) + " Minute"; }
+                else if(y.TotalHours <= 24) { x.Ago = "Acum " + Convert.ToString(y.TotalHours) + " Ore"; }
+                else if (y.TotalDays <= 30) { x.Ago = "Acum " + Convert.ToString(y.TotalHours) + " Zile"; }
+                else { x.Ago = "Cu mai mult de o luna in urma"; }
+                list.Add(x);
+            }
+            return list;
+
+        }
+
+
     }
 
 }
