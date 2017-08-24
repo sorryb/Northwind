@@ -13,8 +13,8 @@
     <DataSet Name="DataSetQuarterlyOrders">
       <Query>
         <DataSourceName>DataSourceQuarterlyOrders</DataSourceName>
-        <CommandText>select *
-from [Quarterly Orders]</CommandText>
+        <CommandText>SELECT *
+FROM [Quarterly Orders] ORDER BY City</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>

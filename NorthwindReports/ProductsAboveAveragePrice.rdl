@@ -13,7 +13,7 @@
     <DataSet Name="DataSetProductsAboveAveragePrice">
       <Query>
         <DataSourceName>DataSourceProductsAboveAveragePrice</DataSourceName>
-        <CommandText>SELECT * FROM [Products Above Average Price]</CommandText>
+        <CommandText>SELECT * FROM [Products Above Average Price] ORDER BY ProductName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -24,14 +24,6 @@
         <Field Name="UnitPrice">
           <DataField>UnitPrice</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="Discontinued">
-          <DataField>Discontinued</DataField>
-          <rd:TypeName>System.Boolean</rd:TypeName>
-        </Field>
-        <Field Name="UnitsInStock">
-          <DataField>UnitsInStock</DataField>
-          <rd:TypeName>System.Int16</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -258,7 +250,6 @@
                             <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

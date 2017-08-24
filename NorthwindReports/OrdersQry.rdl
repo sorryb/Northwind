@@ -13,7 +13,7 @@
     <DataSet Name="DataSetOrdersQry">
       <Query>
         <DataSourceName>DataSourceOrdersQry</DataSourceName>
-        <CommandText>select * from [Orders Qry]</CommandText>
+        <CommandText>select * from [Orders Qry] order by OrderID</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -127,7 +127,7 @@
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.51681in</Top>
             <Height>0.64159in</Height>
-            <Width>14.52083in</Width>
+            <Width>14.90626in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -190,10 +190,10 @@
                   <Width>0.77083in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.71875in</Width>
+                  <Width>0.79167in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.72916in</Width>
+                  <Width>0.86459in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.57292in</Width>
@@ -1865,7 +1865,7 @@
             <DataSetName>DataSetOrdersQry</DataSetName>
             <Top>1.16763in</Top>
             <Height>0.43in</Height>
-            <Width>14.69791in</Width>
+            <Width>14.90626in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -1888,7 +1888,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Left>12.8125in</Left>
+            <Top>0.01389in</Top>
+            <Left>13.57292in</Left>
             <Height>0.50292in</Height>
             <Width>1.33334in</Width>
             <ZIndex>2</ZIndex>
@@ -1920,7 +1921,7 @@
         <Height>1.77471in</Height>
         <Style />
       </Body>
-      <Width>14.77083in</Width>
+      <Width>14.96875in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
