@@ -17,10 +17,10 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Product
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string category = "", int page = 1)
         {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x => x.ProductID);
-
+            ViewBag.category = category;
+            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category)).OrderBy(x => x.ProductID);
             int pageSize = 15;
             int pageNumber = page;
             return View(products.ToPagedList(pageNumber, pageSize));
