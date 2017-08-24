@@ -19,8 +19,16 @@ namespace NorthwindWeb.Controllers
         // GET: Product
         public ActionResult Index(string category = "", int page = 1)
         {
+            IOrderedQueryable<Products> products;
             ViewBag.category = category;
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category)).OrderBy(x => x.ProductID);
+            if (category.Equals(""))
+            {
+               products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x => x.ProductID);
+            }
+            else
+            {
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category)).OrderBy(x => x.ProductID);
+            }
             int pageSize = 15;
             int pageNumber = page;
             return View(products.ToPagedList(pageNumber, pageSize));
