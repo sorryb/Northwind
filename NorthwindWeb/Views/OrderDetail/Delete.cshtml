@@ -1,0 +1,69 @@
+﻿@model NorthwindWeb.Models.Order_Details
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <h2>Delete</h2>
+
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Order_Details</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Order.CustomerID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Order.CustomerID)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Product.ProductName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitPrice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitPrice)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Discount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Discount)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</div>

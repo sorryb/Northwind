@@ -13,8 +13,8 @@
     <DataSet Name="DataSetQuarterlyOrders">
       <Query>
         <DataSourceName>DataSourceQuarterlyOrders</DataSourceName>
-        <CommandText>select *
-from [Quarterly Orders]</CommandText>
+        <CommandText>SELECT *
+FROM [Quarterly Orders] ORDER BY City</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -64,7 +64,7 @@ from [Quarterly Orders]</CommandText>
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.56944in</Top>
             <Height>0.43in</Height>
-            <Width>5.92708in</Width>
+            <Width>6.2175in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -79,16 +79,16 @@ from [Quarterly Orders]</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.69531in</Width>
+                  <Width>1.11198in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.91406in</Width>
+                  <Width>1.88281in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57031in</Width>
+                  <Width>1.11198in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.7474in</Width>
+                  <Width>1.2474in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -413,9 +413,10 @@ from [Quarterly Orders]</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSetQuarterlyOrders</DataSetName>
-            <Top>1.23333in</Top>
+            <Top>1.48333in</Top>
+            <Left>0.45833in</Left>
             <Height>0.43in</Height>
-            <Width>5.92708in</Width>
+            <Width>5.35417in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -433,13 +434,13 @@ from [Quarterly Orders]</CommandText>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>0.25in</Top>
-            <Left>4.92708in</Left>
+            <Top>0.11458in</Top>
+            <Left>5.2175in</Left>
             <Height>0.25in</Height>
             <Width>1in</Width>
             <ZIndex>2</ZIndex>
@@ -458,6 +459,7 @@ from [Quarterly Orders]</CommandText>
             <Source>Embedded</Source>
             <Value>kr</Value>
             <Sizing>FitProportional</Sizing>
+            <Left>0.10417in</Left>
             <Height>0.5in</Height>
             <Width>0.5in</Width>
             <ZIndex>3</ZIndex>
@@ -471,7 +473,7 @@ from [Quarterly Orders]</CommandText>
         <Height>2.07292in</Height>
         <Style />
       </Body>
-      <Width>5.99875in</Width>
+      <Width>6.25917in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

@@ -187,6 +187,7 @@
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderDetailController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -215,7 +216,10 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardGraph1.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardGraph2.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardGraph3.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardIndexData.cs" />
+    <Compile Include="ViewModels\Dashboard\Last10Orders.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\Order\BigOrder.cs" />
     <Compile Include="ViewModels\Order\Order10.cs" />
@@ -224,6 +228,7 @@
     <Compile Include="ViewModels\Order\OrderProduct.cs" />
     <Compile Include="ViewModels\Order\ProductCategory.cs" />
     <Compile Include="ViewModels\ProductServices.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\ServicesIndex.cs" />
     <Compile Include="ViewModels\ViewProductCategoryS.cs" />
   </ItemGroup>
@@ -317,11 +322,14 @@
     <Content Include="images\accesorii.png" />
     <Content Include="images\eBookreader.jpg" />
     <Content Include="images\Gadgeturi.jpg" />
+    <Content Include="images\mag.jpg" />
+    <Content Include="images\magazinonlinelacheie.png" />
     <Content Include="images\samsung.png" />
     <Content Include="images\Services\apeluri-voce.jpg" />
     <Content Include="images\Services\mesagerie-vocala.jpg" />
     <Content Include="images\Services\mobiledata.jpg" />
     <Content Include="images\Services\SMS-Marketing.png" />
+    <Content Include="images\share-magazin-online.png" />
     <Content Include="images\smartphone.jpg" />
     <Content Include="images\Smartphone\62.jpg" />
     <Content Include="images\Smartphone\47.jpg" />
@@ -408,6 +416,11 @@
     <Content Include="Views\Orders\Details.cshtml" />
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\OrderDetail\Create.cshtml" />
+    <Content Include="Views\OrderDetail\Delete.cshtml" />
+    <Content Include="Views\OrderDetail\Details.cshtml" />
+    <Content Include="Views\OrderDetail\Edit.cshtml" />
+    <Content Include="Views\OrderDetail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

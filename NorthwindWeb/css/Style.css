@@ -94,11 +94,6 @@ h3.prodpad{
     padding-left:40px;
 }
 
-a:hover {
-    text-decoration: none;
-}
-
-
 /*change dimensions of images -- used in Views-Services-Index*/
 .img-services {
     width: 700px;
@@ -132,7 +127,10 @@ form.prodsearch {
     color: black;
 }
 
+<<<<<<< HEAD
 /*particular margin for employee crud*/
 [class~=particularEmployees]{
     margin:20px;
 }
+=======
+>>>>>>> 993399c2ed3044cba4e2e204ea39fb2608efa262
