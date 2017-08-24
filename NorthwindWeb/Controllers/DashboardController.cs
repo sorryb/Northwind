@@ -28,6 +28,7 @@ namespace NorthwindWeb.Controllers
             viewModel.NumberCustomers = NumberCustomers();
             viewModel.Tabel = Table();
             viewModel.LastTen = LastTen();
+
             return View(viewModel);
         }
 

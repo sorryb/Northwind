@@ -11,13 +11,13 @@
     @*<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">*@
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <!-- MetisMenu CSS -->
-  
+
     <link href="~/css/metisMenu/metisMenu.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
-  
+
 
     <link href="~/css/dist/sb-admin-2.css" rel="stylesheet" />
-   
+
     <!-- Custom Fonts -->
 
     <link href="~/css/morris.css" rel="stylesheet" />
@@ -45,7 +45,7 @@
                 </button>
                 @Html.ActionLink(" Studio Phone Silver", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
             </div>
-           
+
             <!-- /.navbar-left-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -76,7 +76,6 @@
                         @*<li id="category" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categori <b class="caret"></b></a>
                             <ul  class="nav nav-second-level">
-                                @Html.Partial("~/Views/Shared/PartialPageDashboard.cshtml")
                                 <li>
                                     @Html.ActionLink("Clasic", "Index", "Product", new { category = "Classic" }, null)
                                 </li>
@@ -99,15 +98,16 @@
                         </li>
                         <li id="blog" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
-                            <ul  class="nav nav-second-level">
+                            <ul class="nav nav-second-level">
                                 <li id="bloghome1">
                                     @Html.ActionLink("Lista Comenzi", "Home1", "Orders")
                                 </li>
                             </ul>
                         </li>
-                      
-                      
-                    </ul>  
+                        <li id="reports">
+                            @Html.ActionLink("Rapoarte", "Index", "Reports")
+                        </li>
+                    </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
@@ -116,10 +116,9 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        
-                       @RenderBody()
+                <div class="row flex">
+                    <div class="col-lg-12 flex">
+                        @RenderBody()
                     </div>
                     <!-- /.col-lg-12 -->
                 </div>
@@ -131,10 +130,8 @@
     </div>
     <!-- /#wrapper -->
     <!-- jQuery -->
-   
-   
     <!-- Bootstrap Core JavaScript -->
-   
+
     <script src="~/js/jquery.min.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
     <!-- Metis Menu Plugin JavaScript -->
@@ -145,7 +142,24 @@
     <script src="~/js/morrisjs/morris.min.js"></script>
     <script src="~/js/morrisjs/morris-data.js"></script>
     <script src="~/js/dist/sb-admin-2.js"></script> 
-    
+    @*<script>
+        $.ajax({
+            url: '@Html.Raw(@Url.Action("Menu", "Home"))',
+            dataType: 'json',
+            cache: false,
+            success: function (data) {
+                $(data).each(function (i, el) {
+                    @{string i};
+                    @i=el;
+                        var x = '<li id=' + el + '>' +@(Html.ActionLink(i.ToString(), "Index", "Product", new { category =i }, null))+'</li>'
+                    $("#category").append(x);
+
+                });
+
+            }
+        });
+    </script>*@
+    <!-- section scripts from _Layout-->
     @RenderSection("scripts", required: false)
 
 </body>
