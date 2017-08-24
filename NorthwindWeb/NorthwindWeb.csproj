@@ -218,6 +218,8 @@
     <Compile Include="ViewModels\Dashboard\DashboardGraph1.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardIndexData.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\Orders\DetailsOfOrder.cs" />
+    <Compile Include="ViewModels\Orders\OrderDetali.cs" />
     <Compile Include="ViewModels\Order\BigOrder.cs" />
     <Compile Include="ViewModels\Order\Order10.cs" />
     <Compile Include="ViewModels\Order\OrderInfo.cs" />

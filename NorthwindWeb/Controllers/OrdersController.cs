@@ -9,6 +9,8 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using PagedList;
+using NorthwindWeb.ViewModels.Orders;
+
 
 namespace NorthwindWeb.Controllers
 {
@@ -28,8 +30,9 @@ namespace NorthwindWeb.Controllers
         }
             
         // GET: Orders/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(int id)
         {
+            OrderDetali viewModel = new OrderDetali();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -39,7 +42,30 @@ namespace NorthwindWeb.Controllers
             {
                 return HttpNotFound();
             }
-            return View(orders);
+            viewModel.order = orders;
+
+            var ordet = from od in db.Order_Details
+                        where (od.OrderID == id)
+                        select new { od.OrderID,od.ProductID,od.Quantity,od.UnitPrice};
+
+            List<DetailsOfOrder> list = new List<DetailsOfOrder>();
+
+            //lopp in first 4 products 
+            foreach (var item in ordet)
+            {
+                DetailsOfOrder x = new DetailsOfOrder();
+
+                x.OrderID = item.OrderID;
+                x.ProductID = item.ProductID;
+                x.Quantity = item.Quantity;
+                x.UnitPrice = item.UnitPrice;
+
+
+                list.Add(x);
+
+            }
+            viewModel.details = list;
+            return View(viewModel);
         }
 
         // GET: Orders/Create
