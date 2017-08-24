@@ -16,7 +16,7 @@ namespace NorthwindWeb.ViewModels.Dashboard
         public int NumberProductsSold{get;set;}
         public int NumberEmployees { get; set; }
         public int NumberCustomers { get; set; }
-        public string Graph1 { get; set; }
+        
 
 
     }
