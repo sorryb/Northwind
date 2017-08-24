@@ -103,9 +103,9 @@ h3.prodpad{
     padding: 20px;
 }
 
-form.prodsearch {
+.bread {
     position: relative;
-    top: -20px;
+    top: -30px;
 }
 
 .form-control {
@@ -126,11 +126,15 @@ form.prodsearch {
 [class~=crudstyle] input, [class~=crudstyle] select {
     color: black;
 }
+/*for the div containint the iframe*/
+.flex{
+    display:flex;
+}
 
-<<<<<<< HEAD
-/*particular margin for employee crud*/
 [class~=particularEmployees]{
     margin:20px;
 }
-=======
->>>>>>> 993399c2ed3044cba4e2e204ea39fb2608efa262
+
+.ontop{
+    z-index:2;
+}
