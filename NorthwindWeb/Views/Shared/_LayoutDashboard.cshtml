@@ -70,9 +70,13 @@
                         <li id="product">
                             @Html.ActionLink("Produse", "Index", "Product")
                         </li>
-                        <li id="category" class="dropdown">
+                        <li id="category">
+                            @Html.ActionLink("Categori", "Category", "Dashboard")
+                        </li>
+                        @*<li id="category" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categori <b class="caret"></b></a>
                             <ul  class="nav nav-second-level">
+                                @Html.Partial("~/Views/Shared/PartialPageDashboard.cshtml")
                                 <li>
                                     @Html.ActionLink("Clasic", "Index", "Product", new { category = "Classic" }, null)
                                 </li>
@@ -89,7 +93,7 @@
                                     @Html.ActionLink("eBook readers", "Index", "Product", new { category = "eBookReaders" }, null)
                                 </li>
                             </ul>
-                        </li>
+                        </li>*@
                         <li id="orders">
                             @Html.ActionLink("Comenzii", "Index", "Product")
                         </li>
@@ -141,24 +145,7 @@
     <script src="~/js/morrisjs/morris.min.js"></script>
     <script src="~/js/morrisjs/morris-data.js"></script>
     <script src="~/js/dist/sb-admin-2.js"></script> 
-    @*<script>
-        $.ajax({
-            url: '@Html.Raw(@Url.Action("Menu", "Home"))',
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                $(data).each(function (i, el) {
-                    @{string i};
-                    @i=el;
-                        var x = '<li id=' + el + '>' +@(Html.ActionLink(i.ToString(), "Index", "Product", new { category =i }, null))+'</li>'
-                    $("#category").append(x);
-
-                });
-
-            }
-        });
-    </script>*@
-    <!-- section scripts from _Layout-->
+    
     @RenderSection("scripts", required: false)
 
 </body>

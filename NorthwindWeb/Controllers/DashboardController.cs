@@ -210,6 +210,17 @@ namespace NorthwindWeb.Controllers
 
         }
 
+        public ActionResult Category()
+        {
+            var categori = db.Categories;
+            List<string> list = new List<string>();
+            foreach (var item in categori)
+            {
+                string x = item.CategoryName;
+                list.Add(x);
+            }
+            return View(list);
+        }
 
     }
 

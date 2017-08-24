@@ -13,11 +13,17 @@ namespace NorthwindWeb.Controllers
         {
             return View();
         }
-        public ActionResult Menu()
-        {
-            var categori = from c in db.Categories
-                           select new { c.CategoryName };
-            return Json(categori);
-        }
+        //[ChildActionOnly]
+        //public ActionResult Menu()
+        //{
+        //    var categori = db.Categories;
+        //    List<string> list = new List<string>();
+        //    foreach(var item in categori)
+        //    {
+        //        string x = item.CategoryName;
+        //        list.Add(x);
+        //    }
+        //    return View(list);
+        //}
     }
 }
