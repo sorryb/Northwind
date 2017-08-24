@@ -14,8 +14,8 @@
       <FullPath>Alphabeticallistofproducts.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>CategorySalesfor1997.rdl</Name>
-      <FullPath>CategorySalesfor1997.rdl</FullPath>
+      <Name>CategorySalesPerYear.rdl</Name>
+      <FullPath>CategorySalesPerYear.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>CurrentProductList.rdl</Name>
@@ -50,8 +50,8 @@
       <FullPath>ProductsAboveAveragePrice.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
-      <Name>ProductSalesFor1997.rdl</Name>
-      <FullPath>ProductSalesFor1997.rdl</FullPath>
+      <Name>ProductSalesPerYear.rdl</Name>
+      <FullPath>ProductSalesPerYear.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>ProductsByCategory.rdl</Name>
@@ -66,16 +66,16 @@
       <FullPath>SalesByAmount.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
+      <Name>SalesByCategory.rdl</Name>
+      <FullPath>SalesByCategory.rdl</FullPath>
+    </ProjectItem>
+    <ProjectItem>
       <Name>SummaryOfSalesByQuarter.rdl</Name>
       <FullPath>SuMmaryOfSalesByQuarter.rdl</FullPath>
     </ProjectItem>
     <ProjectItem>
       <Name>SummaryOfSalesByYear.rdl</Name>
       <FullPath>SummaryOfSalesByYear.rdl</FullPath>
-    </ProjectItem>
-    <ProjectItem>
-      <Name>SalesByCategory.rdl</Name>
-      <FullPath>SalesByCategory.rdl</FullPath>
     </ProjectItem>
   </Reports>
   <Configurations>

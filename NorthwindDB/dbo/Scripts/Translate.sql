@@ -1898,18 +1898,18 @@ delete from Suppliers where CompanyName like 'Forêts d%' and CompanyName like '
 ----------------------------------------------------------------------------------
 --	Category Changes
 
-update Categories set CategoryName='Classic',Description='Telefoane cu butoane' where CategoryID=1
+update Categories set CategoryName='Clasice',Description='Telefoane cu butoane' where CategoryID=1
 update Categories set CategoryName='Smartphone',Description='Touchscreen' where CategoryID=2
-update Categories set CategoryName='Accesories',Description='Selfie sticks, Incarcatoare, Casti, Baterii, Huse' where CategoryID=3
-update Categories set CategoryName='Gadgets',Description='Boxe, Ochelari VR, Telecomenzi' where CategoryID=4
-update Categories set CategoryName='eBookReaders',Description='Bookreader' where CategoryID=5
+update Categories set CategoryName='Accesorii',Description='Selfie sticks, Incarcatoare, Casti, Baterii, Huse' where CategoryID=3
+update Categories set CategoryName='Gadgeturi',Description='Boxe, Ochelari VR, Telecomenzi' where CategoryID=4
+update Categories set CategoryName='eBook Reader',Description='Bookreader' where CategoryID=5
 if(not exists (select * from Categories where Categories.CategoryID = 6 ))
 begin
 	SET IDENTITY_INSERT Categories  on;
-	insert into Categories (CategoryID, CategoryName, [Description]) values (6, 'Services', 'Services that we offer')
+	insert into Categories (CategoryID, CategoryName, [Description]) values (6, 'Servicii', 'Services that we offer')
 	set identity_insert Categories off;
 end
 else
-	update Categories set CategoryName='Services',Description='Services that we offer' where CategoryID=5
+	update Categories set CategoryName='Servicii',Description='Services that we offer' where CategoryID=5
 delete from Categories where CategoryID between 7 and 8
 go
