@@ -3,27 +3,31 @@
   <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSourceCurrentProductList">
+    <DataSource Name="DataSourceProductSalesfor1997">
       <DataSourceReference>SharedDataSourceNorthwind</DataSourceReference>
       <rd:SecurityType>Integrated</rd:SecurityType>
-      <rd:DataSourceID>533a2a34-2dfd-4e45-92aa-09d4e8781b38</rd:DataSourceID>
+      <rd:DataSourceID>1dfe7bc1-044c-43c2-895f-819106cde28b</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSetCurrentProductList">
+    <DataSet Name="DataSetProductSalesfor1997">
       <Query>
-        <DataSourceName>DataSourceCurrentProductList</DataSourceName>
-        <CommandText>SELECT        ProductID, ProductName
-FROM            [Current Product List]</CommandText>
+        <DataSourceName>DataSourceProductSalesfor1997</DataSourceName>
+        <CommandText>select * from [Product Sales for 1997] order by CategoryName</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
-        <Field Name="ProductID">
-          <DataField>ProductID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="CategoryName">
+          <DataField>CategoryName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="ProductName">
           <DataField>ProductName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProductSales">
+          <DataField>ProductSales</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -39,7 +43,15 @@ FROM            [Current Product List]</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Current Product List</Value>
+                    <Value>Product Sales per </Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>24pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                  <TextRun>
+                    <Value>=Parameters!Year.Value</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>24pt</FontSize>
@@ -53,9 +65,9 @@ FROM            [Current Product List]</CommandText>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>textbox1</rd:DefaultName>
-            <Top>0.83972in</Top>
-            <Height>0.56667in</Height>
-            <Width>3.95486in</Width>
+            <Top>0.59374in</Top>
+            <Height>0.60709in</Height>
+            <Width>6.22917in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -70,10 +82,13 @@ FROM            [Current Product List]</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.99306in</Width>
+                  <Width>1.26041in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.9618in</Width>
+                  <Width>2.78125in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.21306in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -89,7 +104,7 @@ FROM            [Current Product List]</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Product ID</Value>
+                                  <Value>Category Name</Value>
                                   <Style>
                                     <FontFamily />
                                     <FontSize>11pt</FontSize>
@@ -98,10 +113,7 @@ FROM            [Current Product List]</CommandText>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style>
-                                <FontFamily />
-                                <TextAlign>Left</TextAlign>
-                              </Style>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>textbox2</rd:DefaultName>
@@ -110,7 +122,9 @@ FROM            [Current Product List]</CommandText>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -147,7 +161,51 @@ FROM            [Current Product List]</CommandText>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <BackgroundColor>LightGrey</BackgroundColor>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="textbox4">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Product Sales</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#666666</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <FontFamily />
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>textbox4</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Style>Solid</Style>
+                            </BottomBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -164,43 +222,32 @@ FROM            [Current Product List]</CommandText>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ProductID">
+                        <Textbox Name="CategoryName">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ProductID.Value</Value>
+                                  <Value>=Fields!CategoryName.Value</Value>
                                   <Style>
                                     <FontFamily />
                                     <Color>#333333</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style>
-                                <TextAlign>Left</TextAlign>
-                              </Style>
+                              <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ProductID</rd:DefaultName>
+                          <rd:DefaultName>CategoryName</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
                             <BottomBorder>
-                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -235,23 +282,52 @@ FROM            [Current Product List]</CommandText>
                               <Color>LightGrey</Color>
                               <Style>Solid</Style>
                             </Border>
-                            <TopBorder>
-                              <Color>LightGrey</Color>
-                            </TopBorder>
                             <BottomBorder>
-                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
                             </BottomBorder>
-                            <LeftBorder>
-                              <Color>LightGrey</Color>
-                            </LeftBorder>
-                            <RightBorder>
-                              <Color>LightGrey</Color>
-                            </RightBorder>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
                             <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="ProductSales">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!ProductSales.Value</Value>
+                                  <Style>
+                                    <FontFamily />
+                                    <Format>0.00 'lei';(0.00 'lei')</Format>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>ProductSales</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <FontFamily />
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                            <rd:FormatSymbolCulture>ro-RO</rd:FormatSymbolCulture>
                           </Style>
                         </Textbox>
                       </CellContents>
@@ -262,6 +338,7 @@ FROM            [Current Product List]</CommandText>
             </TablixBody>
             <TablixColumnHierarchy>
               <TablixMembers>
+                <TablixMember />
                 <TablixMember />
                 <TablixMember />
               </TablixMembers>
@@ -286,14 +363,19 @@ FROM            [Current Product List]</CommandText>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
-            <DataSetName>DataSetCurrentProductList</DataSetName>
-            <Top>1.63833in</Top>
+            <DataSetName>DataSetProductSalesfor1997</DataSetName>
+            <Top>1.50292in</Top>
+            <Left>0.69792in</Left>
             <Height>0.43in</Height>
-            <Width>3.95486in</Width>
+            <Width>5.25472in</Width>
             <ZIndex>1</ZIndex>
-            <Style />
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
           </Tablix>
-          <Textbox Name="Textbox6">
+          <Textbox Name="Textbox5">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -301,18 +383,21 @@ FROM            [Current Product List]</CommandText>
                 <TextRuns>
                   <TextRun>
                     <Value>=Format(Now, "dd.MM.yyyy")</Value>
-                    <Style />
+                    <Style>
+                      <FontSize>12pt</FontSize>
+                    </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Left>2.81375in</Left>
-            <Height>0.4543in</Height>
-            <Width>1.14111in</Width>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>0.03818in</Top>
+            <Left>5.17236in</Left>
+            <Height>0.5in</Height>
+            <Width>1.05681in</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -329,8 +414,8 @@ FROM            [Current Product List]</CommandText>
             <Source>Embedded</Source>
             <Value>kr</Value>
             <Sizing>FitProportional</Sizing>
-            <Height>0.4543in</Height>
-            <Width>0.46875in</Width>
+            <Height>0.5in</Height>
+            <Width>0.5in</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -339,10 +424,10 @@ FROM            [Current Product List]</CommandText>
             </Style>
           </Image>
         </ReportItems>
-        <Height>2.26625in</Height>
+        <Height>2.39125in</Height>
         <Style />
       </Body>
-      <Width>4.03819in</Width>
+      <Width>6.29167in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
@@ -352,10 +437,23 @@ FROM            [Current Product List]</CommandText>
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="Year">
+      <DataType>String</DataType>
+      <Prompt>Year</Prompt>
+    </ReportParameter>
+  </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
       <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>Year</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
   <EmbeddedImages>
@@ -429,5 +527,5 @@ c/nyIurmzFZ6BxS38uJFLlJy1BPuRpzNSUrJnXC1t6ek/VOygjm8VPJQIhoIxJmJhMLkYoOxiHCdeiis
   <Language>en-US</Language>
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
-  <rd:ReportID>f4d19d6d-700d-469b-9a21-d9b7cc129ad2</rd:ReportID>
+  <rd:ReportID>412ff5a7-bdf3-4edc-94ef-b5e953e9a860</rd:ReportID>
 </Report>

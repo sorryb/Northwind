@@ -54,13 +54,16 @@
                                 @Html.ActionLink("Smartphone", "Products", "Products", new { category = "Smartphone" }, null)
                             </li>
                             <li id="22columnportfolio">
-                                @Html.ActionLink("Accesorii", "Products", "Products", new { category = "Accesorii" }, null)
+                                @Html.ActionLink("Accesorii", "Products", "Products", new { category = "Accesories" }, null)
                             </li>
                             <li id="23columnportfolio">
-                                @Html.ActionLink("Gadgeturi", "Products", "Products", new { category = "Gadgeturi" }, null)
+                                @Html.ActionLink("Gadgeturi", "Products", "Products", new { category = "Gadgets" }, null)
                             </li>
                             <li id="24columnportfolio">
                                 @Html.ActionLink("eBook readers", "Products", "Products", new { category = "eBookReaders" }, null)
+                            </li>
+                            <li id="24columnportfolio">
+                                @Html.ActionLink("Servicii", "Products", "Products", new { category = "Services" }, null)
                             </li>
                         </ul>
                     </li>
@@ -142,8 +145,8 @@
     <script src="@Url.Content("/js/modern-business.js")"></script>
     <script src="@Url.Content("/js/script.js")"></script>
 
-<!--        @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)-->
+    @RenderSection("scripts", required: false)
 </body>
 </html>

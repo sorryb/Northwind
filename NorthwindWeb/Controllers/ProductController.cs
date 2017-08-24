@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using PagedList;
 
 namespace NorthwindWeb.Controllers
 {
@@ -16,10 +17,21 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Product
-        public async Task<ActionResult> Index()
+        public ActionResult Index(string category = "", int page = 1)
         {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier);
-            return View(await products.ToListAsync());
+            IOrderedQueryable<Products> products;
+            ViewBag.category = category;
+            if (category.Equals(""))
+            {
+               products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x => x.ProductID);
+            }
+            else
+            {
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category)).OrderBy(x => x.ProductID);
+            }
+            int pageSize = 15;
+            int pageNumber = page;
+            return View(products.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Product/Details/5

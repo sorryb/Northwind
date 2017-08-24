@@ -26,29 +26,15 @@ namespace NorthwindWeb.Controllers
             ViewBag.search = search;
             int categID = 0;
 
-            //test categories of products.
-            switch (category)
+            int count = 0;
+            foreach (var a in db.Categories)
             {
-                case "Classic":
-                    ViewBag.title = "Classic";
-                    categID = 1;
-                    break;
-                case "Smartphone":
-                    ViewBag.title = "Smartphone";
-                    categID = 2;
-                    break;
-                case "Accesorii":
-                    ViewBag.title = "Accesories";
-                    categID = 3;
-                    break;
-                case "Gadgeturi":
-                    ViewBag.title = "Gadgets";
-                    categID = 4;
-                    break;
-                case "eBookReaders":
-                    ViewBag.title = "eBookReaders";
-                    categID = 5;
-                    break;
+                count++;
+                if(category == a.CategoryName)
+                {
+                    ViewBag.title = a.CategoryName;
+                    categID = count;
+                }
             }
 
             //Gets all products filtered by category and by name from the database.

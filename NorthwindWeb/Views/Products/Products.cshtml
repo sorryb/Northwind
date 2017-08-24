@@ -11,8 +11,10 @@
             <div>
                 <ol class="breadcrumb">
                     <li class="active">
-                        @ViewBag.title @(!string.IsNullOrEmpty(ViewBag.search) ? "/ "+ViewBag.search : "")
-                        @using (Html.BeginForm("Products", "Products", new { category = ViewBag.title }, FormMethod.Post, htmlAttributes: new { id = "searchInput", @class = "prodsearch" }))
+                        @using (Html.BeginForm("Products", "Products", new
+                        {
+                            category = ViewBag.title
+                        }, FormMethod.Post, htmlAttributes: new { id = "searchInput"}))
                         {
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
@@ -23,6 +25,15 @@
                                 </div>
                             </div>
                         }
+                        @if (!string.IsNullOrEmpty(ViewBag.search))
+                        {
+                            <a href="/Products/Products?category=@(ViewBag.title)" class="bread"> @(ViewBag.title) </a> <span class="bread">/ @(ViewBag.search)</span>
+                        }
+                        else
+                        {
+                            <span class="bread">@(ViewBag.title)</span>
+                        }
+
                     </li>
                 </ol>
             </div>

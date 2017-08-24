@@ -16,8 +16,8 @@ namespace NorthwindWeb.ViewModels.Dashboard
         public int NumberProductsSold{get;set;}
         public int NumberEmployees { get; set; }
         public int NumberCustomers { get; set; }
-        
-
+        public IEnumerable<DashboardGraph2> Tabel { get; set; }
+        public IEnumerable<Last10Orders> LastTen { get; set; }
 
     }
 }

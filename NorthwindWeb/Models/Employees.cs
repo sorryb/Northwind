@@ -65,9 +65,6 @@ namespace NorthwindWeb.Models
 
         public int? ReportsTo { get; set; }
 
-        [StringLength(255)]
-        public string PhotoPath { get; set; }
-
    
         public virtual ICollection<Employees> Employees1 { get; set; }
 
