@@ -55,7 +55,7 @@
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.56944in</Top>
             <Height>0.50292in</Height>
-            <Width>3.4375in</Width>
+            <Width>5.92709in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -70,10 +70,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.5625in</Width>
+                  <Width>1.97396in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.875in</Width>
+                  <Width>2.28646in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -278,9 +278,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSetOrderSubtotals</DataSetName>
-            <Top>1.34139in</Top>
+            <Top>1.51847in</Top>
+            <Left>0.96875in</Left>
             <Height>0.43in</Height>
-            <Width>3.4375in</Width>
+            <Width>4.26042in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -303,7 +304,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Left>2.35292in</Left>
+            <Top>0.01389in</Top>
+            <Left>4.84251in</Left>
             <Height>0.5in</Height>
             <Width>1.08458in</Width>
             <ZIndex>2</ZIndex>
@@ -333,10 +335,10 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>1.77139in</Height>
+        <Height>2.36514in</Height>
         <Style />
       </Body>
-      <Width>3.47917in</Width>
+      <Width>5.97917in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

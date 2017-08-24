@@ -61,9 +61,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>textbox1</rd:DefaultName>
-            <Top>0.62777in</Top>
+            <Top>0.95069in</Top>
+            <Left>0.02083in</Left>
             <Height>0.43in</Height>
-            <Width>5.21875in</Width>
+            <Width>5.83334in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -219,7 +220,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Units In Stockw</Value>
+                                  <Value>Units In Stock</Value>
                                   <Style>
                                     <FontFamily />
                                     <FontSize>12pt</FontSize>
@@ -683,9 +684,9 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSetProductsAboveAveragePrice</DataSetName>
-            <Top>1.22806in</Top>
-            <Left>0.02083in</Left>
-            <Height>0.96125in</Height>
+            <Top>1.75931in</Top>
+            <Left>0.65625in</Left>
+            <Height>0.96124in</Height>
             <Width>5.19792in</Width>
             <ZIndex>1</ZIndex>
             <Style />
@@ -704,12 +705,12 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Left>4.08333in</Left>
+            <Left>5.09375in</Left>
             <Height>0.5in</Height>
             <Width>1.13542in</Width>
             <ZIndex>2</ZIndex>
@@ -739,10 +740,10 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>2.35597in</Height>
+        <Height>3.92888in</Height>
         <Style />
       </Body>
-      <Width>5.28125in</Width>
+      <Width>6.22917in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

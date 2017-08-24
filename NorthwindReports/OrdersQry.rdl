@@ -127,7 +127,7 @@
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.51681in</Top>
             <Height>0.64159in</Height>
-            <Width>15.5625in</Width>
+            <Width>14.42709in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -142,10 +142,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>0.70833in</Width>
+                  <Width>0.5in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.78321in</Width>
+                  <Width>0.55404in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.82292in</Width>
@@ -160,7 +160,7 @@
                   <Width>0.69792in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.79362in</Width>
+                  <Width>0.39779in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.63542in</Width>
@@ -178,7 +178,7 @@
                   <Width>0.98958in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.66667in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.80208in</Width>
@@ -1866,7 +1866,7 @@
             <DataSetName>DataSetOrdersQry</DataSetName>
             <Top>1.16763in</Top>
             <Height>0.43in</Height>
-            <Width>15.59375in</Width>
+            <Width>14.42709in</Width>
             <ZIndex>1</ZIndex>
             <Style />
           </Tablix>
@@ -1884,12 +1884,13 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Left>14.26041in</Left>
+            <Top>0in</Top>
+            <Left>12.8125in</Left>
             <Height>0.50292in</Height>
             <Width>1.33334in</Width>
             <ZIndex>2</ZIndex>
@@ -1921,7 +1922,7 @@
         <Height>1.77471in</Height>
         <Style />
       </Body>
-      <Width>15.59375in</Width>
+      <Width>14.52083in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

@@ -49,19 +49,19 @@ from  [Products by Category]</CommandText>
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.24459in</Width>
+                  <Width>1.26125in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.28125in</Width>
+                  <Width>2.32084in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.23125in</Width>
+                  <Width>0.75in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.10625in</Width>
+                  <Width>0.71042in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>0.90833in</Width>
+                  <Width>1.05208in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -867,111 +867,104 @@ from  [Products by Category]</CommandText>
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet1ProductsByCategory</DataSetName>
-            <Top>0.18in</Top>
+            <Top>1.555in</Top>
             <Height>0.68in</Height>
-            <Width>5.77167in</Width>
+            <Width>6.09459in</Width>
             <Style />
           </Tablix>
+          <Image Name="Image1">
+            <Source>Embedded</Source>
+            <Value>kr</Value>
+            <Sizing>FitProportional</Sizing>
+            <Height>0.5in</Height>
+            <Width>0.5in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Products By Category</Value>
+                    <Style>
+                      <FontFamily>Times New Roman</FontFamily>
+                      <FontSize>24pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>textbox1</rd:DefaultName>
+            <Top>0.56944in</Top>
+            <Height>0.43in</Height>
+            <Width>6.09459in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Format(Now, "dd.MM.yyyy")</Value>
+                    <Style>
+                      <FontFamily>Arial</FontFamily>
+                      <FontSize>12pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Left>4.84251in</Left>
+            <Height>0.5in</Height>
+            <Width>1.25208in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>0.95375in</Height>
-        <Style />
+        <Height>2.235in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
       </Body>
-      <Width>5.85417in</Width>
+      <Width>6.17709in</Width>
       <Page>
-        <PageHeader>
-          <Height>1in</Height>
-          <PrintOnFirstPage>true</PrintOnFirstPage>
-          <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Textbox Name="Textbox8">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=FormatDateTime(DateValue("11.08.2017"))</Value>
-                      <Style>
-                        <FontFamily>Arial</FontFamily>
-                        <FontSize>12pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Left>4.51959in</Left>
-              <Height>0.5in</Height>
-              <Width>1.25208in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Middle</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Image Name="Image1">
-              <Source>Embedded</Source>
-              <Value>kr</Value>
-              <Sizing>FitProportional</Sizing>
-              <Height>0.5in</Height>
-              <Width>0.5in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-              </Style>
-            </Image>
-            <Textbox Name="textbox1">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Products By Category</Value>
-                      <Style>
-                        <FontFamily>Times New Roman</FontFamily>
-                        <FontSize>24pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>textbox1</rd:DefaultName>
-              <Top>0.54167in</Top>
-              <Height>0.43in</Height>
-              <Width>5.77167in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </PageHeader>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>
         <TopMargin>1in</TopMargin>

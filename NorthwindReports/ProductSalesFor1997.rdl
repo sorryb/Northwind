@@ -59,7 +59,7 @@
             <rd:DefaultName>textbox1</rd:DefaultName>
             <Top>0.59374in</Top>
             <Height>0.60709in</Height>
-            <Width>4.55681in</Width>
+            <Width>6.22917in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -74,13 +74,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.33333in</Width>
+                  <Width>1.26041in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.57292in</Width>
+                  <Width>2.78125in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.65056in</Width>
+                  <Width>1.21306in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -185,7 +185,7 @@
                               </TextRuns>
                               <Style>
                                 <FontFamily />
-                                <TextAlign>Right</TextAlign>
+                                <TextAlign>Left</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -302,7 +302,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Left</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>ProductSales</rd:DefaultName>
@@ -355,9 +357,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSetProductSalesfor1997</DataSetName>
-            <Top>1.2425in</Top>
+            <Top>1.50292in</Top>
+            <Left>0.69792in</Left>
             <Height>0.43in</Height>
-            <Width>4.55681in</Width>
+            <Width>5.25472in</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -379,12 +382,13 @@
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Left>3.5in</Left>
+            <Top>0.03818in</Top>
+            <Left>5.17236in</Left>
             <Height>0.5in</Height>
             <Width>1.05681in</Width>
             <ZIndex>2</ZIndex>
@@ -413,10 +417,10 @@
             </Style>
           </Image>
         </ReportItems>
-        <Height>1.6725in</Height>
+        <Height>2.39125in</Height>
         <Style />
       </Body>
-      <Width>4.58334in</Width>
+      <Width>6.29167in</Width>
       <Page>
         <LeftMargin>1in</LeftMargin>
         <RightMargin>1in</RightMargin>

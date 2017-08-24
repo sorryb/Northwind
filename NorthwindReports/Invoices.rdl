@@ -265,7 +265,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -316,7 +315,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -367,7 +365,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -418,7 +415,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -469,7 +465,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -520,7 +515,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -571,7 +565,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -622,7 +615,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -673,7 +665,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -724,7 +715,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -776,7 +766,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -827,7 +816,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -878,7 +866,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -930,7 +917,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -982,7 +968,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1034,7 +1019,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1086,7 +1070,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -1138,7 +1121,6 @@
                             <RightBorder>
                               <Color>LightGrey</Color>
                             </RightBorder>
-                            <BackgroundColor>LightGrey</BackgroundColor>
                             <FontFamily />
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -2128,7 +2110,7 @@
         <Height>1.99541in</Height>
         <Style>
           <Border>
-            <Style>Solid</Style>
+            <Style>None</Style>
           </Border>
         </Style>
       </Body>
