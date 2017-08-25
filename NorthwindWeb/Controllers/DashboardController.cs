@@ -80,25 +80,28 @@ namespace NorthwindWeb.Controllers
                               join p in db.Products on od.ProductID equals p.ProductID
                               join c in db.Categories on p.CategoryID equals c.CategoryID
                               select new { od.UnitPrice, od.Quantity, od.Discount,c.CategoryName };
+            var categori = from c in db.Categories
+                           select new { c.CategoryName };
+            foreach(var item in categori)
+            {
+                DashboardGraph3 x = new DashboardGraph3();
+                x.label = item.CategoryName;
+                x.value =0;
+                list.Add(x);
+            }
             foreach (var item in salesbyyear)
             {
-                int ok = 0;
+               
                 foreach (var i in list)
                 {
                     if (i.label == item.CategoryName)
                     {
                         i.value += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
-                        ok = 1;
+                        
                         break;
                     }
                 }
-                if (ok == 0)
-                {
-                    DashboardGraph3 x = new DashboardGraph3();
-                    x.label = item.CategoryName;
-                    x.value = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
-                    list.Add(x);
-                }
+                
             }
             foreach (var i in list)
             {

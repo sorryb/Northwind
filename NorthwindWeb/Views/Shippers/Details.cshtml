@@ -1,0 +1,35 @@
+﻿@model NorthwindWeb.Models.Shippers
+
+@{
+    ViewBag.Title = "Detalii";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Detalii</h2>
+
+<div>
+    <h4>Expeditori</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nume Companie
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            Telefon
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editeaza", "Edit", new { id = Model.ShipperID }) |
+    @Html.ActionLink("Inapoi", "Index")
+</p>
