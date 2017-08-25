@@ -4,7 +4,7 @@
 }
 @model List<NorthwindWeb.ViewModels.ReportViewModel>
 
-<div class="flex">
+<div>
     <div class="navbar-default col-xs-3" role="navigation">
         <ul class="nav">
             @foreach (var report in Model)
@@ -16,6 +16,6 @@
         </ul>
     </div>
     <div class="col-xs-9">
-        <iframe name="reps" class="fill" onclick="window.open(this.location.href)"></iframe>
+        <iframe name="reps" class="fill" onclick="openReport()"></iframe>
     </div>
 </div>

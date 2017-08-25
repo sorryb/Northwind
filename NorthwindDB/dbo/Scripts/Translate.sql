@@ -2003,11 +2003,11 @@ end
 if(not exists (select * from Products where ProductID = 86))
 begin
 	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
-	values ('Recuperare dare windows phone', 1, 6, 1, 140, 0, 0, 1, 0);
+	values ('Recuperare date windows phone', 1, 6, 1, 140, 0, 0, 1, 0);
 end
 else
 begin
-	update Products	set ProductName = 'Recuperare dare windows phone', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 140, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 86;
+	update Products	set ProductName = 'Recuperare date windows phone', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 140, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 86;
 end
 
 
