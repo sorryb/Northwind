@@ -55,7 +55,7 @@ GROUP BY CategoryName</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Category Sales per </Value>
+                    <Value>Category Sales in </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>24pt</FontSize>

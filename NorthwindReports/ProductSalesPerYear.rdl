@@ -25,7 +25,7 @@ FROM       dbo.Categories INNER JOIN
                   dbo.Orders INNER JOIN
                   dbo.[Order Details] ON dbo.Orders.OrderID = dbo.[Order Details].OrderID ON dbo.Products.ProductID = dbo.[Order Details].ProductID
 WHERE     Year(dbo.Orders.ShippedDate)=@Year
-GROUP BY dbo.Categories.CategoryName, dbo.Products.ProductName</CommandText>
+GROUP BY dbo.Products.ProductName, dbo.Categories.CategoryName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -55,7 +55,7 @@ GROUP BY dbo.Categories.CategoryName, dbo.Products.ProductName</CommandText>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Product Sales per </Value>
+                    <Value>Product Sales in </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>24pt</FontSize>
