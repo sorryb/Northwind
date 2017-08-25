@@ -221,6 +221,8 @@
     <Compile Include="ViewModels\Dashboard\DashboardIndexData.cs" />
     <Compile Include="ViewModels\Dashboard\Last10Orders.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
+    <Compile Include="ViewModels\Orders\DetailsOfOrder.cs" />
+    <Compile Include="ViewModels\Orders\OrderDetali.cs" />
     <Compile Include="ViewModels\Menu.cs" />
     <Compile Include="ViewModels\Order\BigOrder.cs" />
     <Compile Include="ViewModels\Order\Order10.cs" />
@@ -424,6 +426,7 @@
     <Content Include="Views\OrderDetail\Index.cshtml" />
     <Content Include="Views\Shared\PartialPageDashboard.cshtml" />
     <Content Include="Views\Dashboard\Category.cshtml" />
+    <Content Include="Views\Orders\Edit2.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
