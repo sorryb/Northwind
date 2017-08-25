@@ -13,8 +13,23 @@
     <DataSet Name="DataSetCategorySalesfor1997">
       <Query>
         <DataSourceName>DataSourceCategorySalesfor1997</DataSourceName>
-        <CommandText>SELECT *
-  FROM [Northwind].[dbo].[Category Sales for 1997]</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@year">
+            <Value>=Parameters!year.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT        CategoryName, SUM(ProductPerYear.ProductSales) AS CategorySales
+FROM(
+      SELECT   dbo.Categories.CategoryName, dbo.Products.ProductName, 
+                      SUM(CONVERT(money, (dbo.[Order Details].UnitPrice * dbo.[Order Details].Quantity) * (1 - dbo.[Order Details].Discount) / 100) * 100) AS ProductSales
+       FROM   dbo.Categories INNER JOIN
+                     dbo.Products ON dbo.Categories.CategoryID = dbo.Products.CategoryID INNER JOIN
+                     dbo.Orders INNER JOIN
+                     dbo.[Order Details] ON dbo.Orders.OrderID = dbo.[Order Details].OrderID ON dbo.Products.ProductID = dbo.[Order Details].ProductID
+WHERE        Year(dbo.Orders.ShippedDate)=@year
+GROUP BY dbo.Categories.CategoryName, dbo.Products.ProductName
+            ) AS ProductPerYear
+GROUP BY CategoryName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -40,7 +55,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Category Sales per </Value>
+                    <Value>Category Sales in </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>24pt</FontSize>

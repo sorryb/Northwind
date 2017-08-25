@@ -161,25 +161,28 @@
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-bell fa-fw"></i> Ultimele 10 Comenzi
+                <i class="fa fa-briefcase fa-fw"></i> Ultimele 10 Comenzi
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="list-group">
+                    
                     @foreach (var item in Model.LastTen)
-                    {
-                        <a href="#" class="list-group-item">
-                        @item.OrderID
+                    {<p class= "list-group-item">
+                        @Html.ActionLink(Convert.ToString(item.OrderID),"Details","Orders",new { id = item.OrderID},null)
+
+                       
                         <span class="pull-right text-muted small">
                             <em>@item.Ago</em>
                         </span>
-                    </a> 
+                    </p> 
                     }
                     
                     
                 </div>
                 <!-- /.list-group -->
-                <a href="#" class="btn btn-default btn-block">Vizualizati toate comenzile</a>
+                @Html.ActionLink("Vizualizati toate comenzile", "Index", "Orders", null, new {@class="btn btn-default btn-block" })
+               
             </div>
             <!-- /.panel-body -->
         </div>
@@ -190,7 +193,8 @@
             </div>
             <div class="panel-body">
                 <div id="morris-donut-chart"></div>
-                <a href="#" class="btn btn-default btn-block">Vizualizati Categoriile</a>
+                @Html.ActionLink("Vizualizati Categoriile", "Index", "Product", null, new { @class = "btn btn-default btn-block" })
+               
             </div>
             <!-- /.panel-body -->
         </div>

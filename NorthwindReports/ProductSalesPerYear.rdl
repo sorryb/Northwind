@@ -13,7 +13,19 @@
     <DataSet Name="DataSetProductSalesfor1997">
       <Query>
         <DataSourceName>DataSourceProductSalesfor1997</DataSourceName>
-        <CommandText>select * from [Product Sales for 1997] order by CategoryName</CommandText>
+        <QueryParameters>
+          <QueryParameter Name="@Year">
+            <Value>=Parameters!Year.Value</Value>
+          </QueryParameter>
+        </QueryParameters>
+        <CommandText>SELECT     dbo.Categories.CategoryName, dbo.Products.ProductName, 
+                  SUM(CONVERT(money, (dbo.[Order Details].UnitPrice * dbo.[Order Details].Quantity) * (1 - dbo.[Order Details].Discount) / 100) * 100) AS ProductSales
+FROM       dbo.Categories INNER JOIN
+                  dbo.Products ON dbo.Categories.CategoryID = dbo.Products.CategoryID INNER JOIN
+                  dbo.Orders INNER JOIN
+                  dbo.[Order Details] ON dbo.Orders.OrderID = dbo.[Order Details].OrderID ON dbo.Products.ProductID = dbo.[Order Details].ProductID
+WHERE     Year(dbo.Orders.ShippedDate)=@Year
+GROUP BY dbo.Products.ProductName, dbo.Categories.CategoryName</CommandText>
         <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
       </Query>
       <Fields>
@@ -43,7 +55,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Product Sales per </Value>
+                    <Value>Product Sales in </Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontSize>24pt</FontSize>
@@ -439,7 +451,7 @@
   </ReportSections>
   <ReportParameters>
     <ReportParameter Name="Year">
-      <DataType>String</DataType>
+      <DataType>Integer</DataType>
       <Prompt>Year</Prompt>
     </ReportParameter>
   </ReportParameters>

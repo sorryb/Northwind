@@ -112,12 +112,14 @@ h3.prodpad{
     float:right !important;
 }
 
+/*change text color -- used in Create,Edit from Orders*/
 .ord-form 
 {
-    color:sandybrown;
+    color:black;
     
 }
 
+/*change from dimension -- used in Create,Edit from Orders*/
 .form{
     width:175px;
 }
@@ -127,9 +129,9 @@ h3.prodpad{
     color: black;
 }
 /*for the div containint the iframe*/
-/*.flex{
+.flex{
     display:flex;
-}*/
+}
 iframe.fill{
     height:100%;
     width:100%;
