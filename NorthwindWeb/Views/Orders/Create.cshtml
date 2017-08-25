@@ -1,13 +1,13 @@
 ﻿@model NorthwindWeb.Models.Orders
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Adauga";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <div class="container">
 
-    <h2>Create</h2>
+    <h2>Adauga</h2>
 
 
     @using (Html.BeginForm("Create", "Orders", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
@@ -15,7 +15,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Orders</h4>
+            <h4>Comenzi</h4>
             <hr />
             @Html.ValidationSummary(true)
             <div class="form-group">

@@ -1,17 +1,17 @@
 ﻿@model NorthwindWeb.ViewModels.Orders.OrderDetali
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <div class="container">
 
-    <h2>Details</h2>
+    <h2>Detalii</h2>
 
     <div>
         <div class="col-md-6">
-            <h4>Orders</h4>
+            <h4>Comenzi</h4>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
@@ -81,12 +81,12 @@
             </dl>
 
             <p>
-                @Html.ActionLink("Edit", "Edit", new { id = Model.order.OrderID }) |
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Modifica", "Edit", new { id = Model.order.OrderID }) |
+                @Html.ActionLink("Inapoi la lista", "Index")
             </p>
         </div>
         <div class="col-md-6">
-            <h4>Order_Details</h4>
+            <h4>Detalii Comenzi</h4>
             <hr />
            @foreach (var y in Model.details)
            {
@@ -120,7 +120,7 @@
                 </dt>
 
                 <dd>
-                    @y.UnitPrice
+                    @decimal.Round(y.UnitPrice ?? 0, 2).ToString() lei
                 </dd>
 
                 <dt>
@@ -131,12 +131,15 @@
                     @y.Discount
                 </dd> 
                   <p>
-                      @Html.ActionLink("Edit", "Edit2", new { OrderID = @y.OrderID, ProductID = @y.ProductID })
+                      @Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID },null )
+                      @Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, null)
                   </p>
             </dl>
            }
+            @Html.ActionLink("Adauga","Create","OrderDetail")
+
             <p>
-                @Html.ActionLink("Back to List", "Index")
+                @Html.ActionLink("Inapoi la lista", "Index")
             </p>
         </div>
     </div>

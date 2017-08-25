@@ -1,13 +1,13 @@
 ﻿@model NorthwindWeb.Models.Order_Details
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modifica";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <div class="container">
 
-    <h2>Edit</h2>
+    <h2>Modifica</h2>
 
 
     @using (Html.BeginForm("Edit", "OrderDetail", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
@@ -15,7 +15,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Order_Details</h4>
+            <h4>Detalii comanda</h4>
             <hr />
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.OrderID)
@@ -55,7 +55,7 @@
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Inapoi la lista", "Index")
     </div>
 
     @section Scripts {
