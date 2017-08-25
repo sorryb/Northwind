@@ -62,10 +62,11 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            @Html.ActionLink("Dashboard", "Index", "Dashboard")
+                           
+                            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
                         </li>
                         <li id="services">
-                            @Html.ActionLink("Servicii", "Index", "Product", new { category = "Services" }, null)
+                            @Html.ActionLink("Servicii", "Index", "Product", new { category = "Servicii" }, null)
                         </li>
                         <li id="product">
                             @Html.ActionLink("Produse", "Index", "Product")
@@ -94,8 +95,8 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
-                <div class="row flex">
-                    <div class="col-lg-12 flex">
+                <div class="row">
+                    <div class="col-lg-12">
                         @RenderBody()
                     </div>
                     <!-- /.col-lg-12 -->

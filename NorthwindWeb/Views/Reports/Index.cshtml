@@ -4,16 +4,18 @@
 }
 @model List<NorthwindWeb.ViewModels.ReportViewModel>
 
-<div class="navbar-default col-xs-3" role="navigation">
-    <ul class="nav">
-        @foreach (var report in Model)
+<div class="flex">
+    <div class="navbar-default col-xs-3" role="navigation">
+        <ul class="nav">
+            @foreach (var report in Model)
             {
-            <li>
-                <a href=@report.Link target="reps">@(report.Filename)</a>
-            </li>
-        }
-    </ul>
-</div>
-<div class="col-xs-9">
-    <iframe name="reps" class="fill" onclick="window.open(this.location.href)"></iframe>
+                <li>
+                    <a href=@report.Link target="reps">@(report.Filename)</a>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-xs-9">
+        <iframe name="reps" class="fill" onclick="window.open(this.location.href)"></iframe>
+    </div>
 </div>
