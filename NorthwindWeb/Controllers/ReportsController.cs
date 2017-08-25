@@ -10,7 +10,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult Index()
         {
 
-            string reportServer = "Reports_SQLEXPRESS";
+            string reportServer = "reportserver_SSRS";
             string dirpath = Path.GetFullPath(Path.Combine(Server.MapPath("~"), @"../NorthwindReports"));
 
             List<ViewModels.ReportViewModel> reports = new List<ViewModels.ReportViewModel>();
@@ -18,7 +18,7 @@ namespace NorthwindWeb.Controllers
             foreach (var filepath in Directory.GetFiles(dirpath, "*rdl"))
             {
                 string filename = Path.GetFileNameWithoutExtension(filepath);
-                string link = "http://localhost/" + reportServer + "/Pages/ReportViewer.aspx?%2fNorthwindReports%2f" + filename + "&rs:Command=Render";
+                string link = "http://localhost/" + reportServer + "/Pages/ReportViewer.aspx?%2fNorthwindReports%2f" + filename.Replace(' ','+') + "&rs:Command=Render";
                 temp = new ViewModels.ReportViewModel(link, filename);
                 reports.Add(temp);
             }
