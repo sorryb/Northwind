@@ -1910,6 +1910,8 @@ begin
 	set identity_insert Categories off;
 end
 else
-	update Categories set CategoryName='Servicii',Description='Services that we offer' where CategoryID=5
+begin
+	update Categories set CategoryName='Servicii',Description='Services that we offer' where CategoryID=6
+end
 delete from Categories where CategoryID between 7 and 8
 go
