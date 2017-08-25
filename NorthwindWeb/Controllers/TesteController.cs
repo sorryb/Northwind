@@ -3,23 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Microsoft.Reporting.WebForms;
+using System.Configuration;
+using System.IO;
 namespace NorthwindWeb.Controllers
 {
     public class TesteController : Controller
     {
         private Models.NorthwindModel db = new Models.NorthwindModel();
         // GET: Teste
-        public string Index()
+        public ActionResult Index()
         {
-            string test = "";
-            IQueryable asd = db.Products.Select(x => x.ProductName);
-                foreach(var item in asd)
-            {
-                test = test + item;
+            string serverurl = "http://localhost/" + ConfigurationManager.AppSettings.Get("ReportServer") + "/";
+            List<ReportViewer> reports = new List<ReportViewer>();
 
+            string dirpath = Path.GetFullPath(Path.Combine(Server.MapPath("~"), @"../NorthwindReports"));
+            ReportViewer rep;
+            foreach (var filepath in Directory.GetFiles(dirpath, "*rdl"))
+            {
+                rep = new ReportViewer()
+                {
+                    ProcessingMode = ProcessingMode.Remote
+                };
+
+                string filename = Path.GetFileNameWithoutExtension(filepath);
+
+                rep.ServerReport.ReportServerUrl = new Uri(serverurl);
+                rep.ServerReport.ReportPath = "/NorthwindReports/" + filename;
+                rep.ServerReport.DisplayName = filename;
+                reports.Add(rep);
             }
-            return test;
+            ViewBag.reports = reports;
+
+            return View();
         }
+
+
     }
 }
