@@ -424,6 +424,7 @@
     <Content Include="Views\OrderDetail\Index.cshtml" />
     <Content Include="Views\Shared\PartialPageDashboard.cshtml" />
     <Content Include="Views\Dashboard\Category.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
