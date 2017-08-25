@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container crudstyle">
     <h2>Index</h2>
@@ -30,9 +30,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().Region)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().PostalCode)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
@@ -66,9 +63,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Region)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PostalCode)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Country)

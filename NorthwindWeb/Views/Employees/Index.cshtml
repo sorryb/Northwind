@@ -32,28 +32,13 @@
                 @Html.DisplayNameFor(model => model.FirstOrDefault().HireDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Region)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().PostalCode)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FirstOrDefault().HomePhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Extension)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Notes)
             </th>
             <th></th>
         </tr>
@@ -80,28 +65,13 @@
                     @Html.DisplayFor(modelItem => item.HireDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Region)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PostalCode)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Country)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HomePhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Extension)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
