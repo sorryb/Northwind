@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using System.IO;
+using System.Configuration;
 
 namespace NorthwindWeb.Controllers
 {
@@ -9,8 +10,7 @@ namespace NorthwindWeb.Controllers
         // GET: Reports
         public ActionResult Index()
         {
-
-            string reportServer = "reportserver_SSRS";
+            string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
             string dirpath = Path.GetFullPath(Path.Combine(Server.MapPath("~"), @"../NorthwindReports"));
 
             List<ViewModels.ReportViewModel> reports = new List<ViewModels.ReportViewModel>();
