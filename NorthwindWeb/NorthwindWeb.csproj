@@ -426,6 +426,7 @@
     <Content Include="Views\OrderDetail\Index.cshtml" />
     <Content Include="Views\Shared\PartialPageDashboard.cshtml" />
     <Content Include="Views\Dashboard\Category.cshtml" />
+    <Content Include="Views\Orders\Edit2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

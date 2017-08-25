@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <div class="container">
@@ -36,14 +36,6 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.order.Shipper.CompanyName)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.order.OrderDate)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.order.OrderDate)
                 </dd>
 
                 <dt>
@@ -96,61 +88,54 @@
         <div class="col-md-6">
             <h4>Order_Details</h4>
             <hr />
-             @foreach (var y in Model.details)
-             {<div>
-                <ul class="dl-horizontal">
-                    <li>@y.OrderID</li>
-                    <li>@y.ProductID</li>
-                    <li>Cantitate pe unitate: @y.Quantity</li>
-                    <li>In stoc: @y.UnitPrice</li>
-                </ul>
-            </div>
-
-             }
-            @*<dl class="dl-horizontal">
+           @foreach (var y in Model.details)
+           {
+              <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.details.Order.CustomerID)
+                    OrderID 
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.details.Order.CustomerID)
+                    @y.OrderID
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.details.Product.ProductName)
+                    ProductID 
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.details.Product.ProductName)
+                    @y.ProductID
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.details.UnitPrice)
+                    Quantity 
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.details.UnitPrice)
+                   @y.Quantity
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.details.Quantity)
+                    UnitPrice 
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.details.Quantity)
+                    @y.UnitPrice
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.details.Discount)
+                    Discount 
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.details)
-                </dd>
-
-            </dl>*@
+                    @y.Discount
+                </dd> 
+                  <p>
+                      @Html.ActionLink("Edit", "Edit2", new { OrderID = @y.OrderID, ProductID = @y.ProductID })
+                  </p>
+            </dl>
+           }
             <p>
-                @Html.ActionLink("Edit", "Edit", new { id = Model.order.OrderID }) |
                 @Html.ActionLink("Back to List", "Index")
             </p>
         </div>

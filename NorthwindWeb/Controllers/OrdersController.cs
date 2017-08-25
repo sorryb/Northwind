@@ -46,7 +46,7 @@ namespace NorthwindWeb.Controllers
 
             var ordet = from od in db.Order_Details
                         where (od.OrderID == id)
-                        select new { od.OrderID,od.ProductID,od.Quantity,od.UnitPrice};
+                        select new { od.OrderID,od.ProductID,od.Quantity,od.UnitPrice, od.Discount };
 
             List<DetailsOfOrder> list = new List<DetailsOfOrder>();
 
@@ -59,6 +59,7 @@ namespace NorthwindWeb.Controllers
                 x.ProductID = item.ProductID;
                 x.Quantity = item.Quantity;
                 x.UnitPrice = item.UnitPrice;
+                x.Discount = item.Discount;
 
 
                 list.Add(x);
@@ -132,6 +133,37 @@ namespace NorthwindWeb.Controllers
             ViewBag.EmployeeID = new SelectList(db.Employees, "EmployeeID", "LastName", orders.EmployeeID);
             ViewBag.ShipVia = new SelectList(db.Shippers, "ShipperID", "CompanyName", orders.ShipVia);
             return View(orders);
+        }
+
+        public async Task<ActionResult> Edit2(int? OrderID, int? ProductID)
+        {
+            Order_Details orderdetail = await db.Order_Details.FindAsync(OrderID, ProductID);
+            if (orderdetail == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID", orderdetail.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", orderdetail.ProductID);
+            return View(orderdetail);
+
+        }
+
+        // POST: OrderDetail/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit2([Bind(Include = "OrderID,ProductID,UnitPrice,Quantity,Discount")] Order_Details order_Details)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(order_Details).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID", order_Details.OrderID);
+            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", order_Details.ProductID);
+            return View(order_Details);
         }
 
         // GET: Orders/Delete/5
