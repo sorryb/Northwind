@@ -1910,6 +1910,124 @@ begin
 	set identity_insert Categories off;
 end
 else
-	update Categories set CategoryName='Servicii',Description='Services that we offer' where CategoryID=5
+begin
+	update Categories set CategoryName='Servicii',Description='Services that we offer' where CategoryID=6
+end
 delete from Categories where CategoryID between 7 and 8
 go
+
+--Insert 10 services
+if(not exists (select * from Products where ProductID = 78))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Diagnosticare', 1, 6, 1, 60, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Diagnosticare', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 60, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 78;
+end
+
+if(not exists (select * from Products where ProductID = 79))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Inlocuire Baterie', 1, 6, 1, 120, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Inlocuire Baterie', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 120, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 79;
+end
+
+if(not exists (select * from Products where ProductID = 80))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Inlocuire ecran', 1, 6, 1, 400, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Inlocuire ecran', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 400, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 80;
+end
+
+if(not exists (select * from Products where ProductID = 81))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Inlocuire folie de protectie', 1, 6, 1, 70, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Inlocuire folie de protectie', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 70, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 81;
+end
+
+if(not exists (select * from Products where ProductID = 82))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Inlocuire placa de baza', 1, 6, 1, 900, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Inlocuire placa de baza', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 900, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 82;
+end
+
+if(not exists (select * from Products where ProductID = 83))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Instalare android', 1, 6, 1, 80, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Instalare android', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 80, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 83;
+end
+
+
+if(not exists (select * from Products where ProductID = 84))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Instalare IOS', 1, 6, 1, 120, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Instalare IOS', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 120, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 84;
+end
+
+
+if(not exists (select * from Products where ProductID = 85))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Instalare windows phone', 1, 6, 1, 80, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Instalare windows phone', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 80, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 85;
+end
+
+
+if(not exists (select * from Products where ProductID = 86))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Recuperare dare windows phone', 1, 6, 1, 140, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Recuperare dare windows phone', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 140, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 86;
+end
+
+
+if(not exists (select * from Products where ProductID = 87))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Recuperare date android', 1, 6, 1, 120, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Recuperare date android', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 120, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 87;
+end
+
+
+if(not exists (select * from Products where ProductID = 88))
+begin
+	insert into Products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued)
+	values ('Recuperare date iOS', 1, 6, 1, 160, 0, 0, 1, 0);
+end
+else
+begin
+	update Products	set ProductName = 'Recuperare date iOS', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 160, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 88;
+end

@@ -32,7 +32,7 @@ namespace NorthwindWeb.Controllers
                 count++;
                 if(category == a.CategoryName)
                 {
-                    ViewBag.title = a.CategoryName;
+                    ViewBag.title = ViewBag.category = a.CategoryName;
                     categID = count;
                 }
             }
