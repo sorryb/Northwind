@@ -1,0 +1,80 @@
+﻿@model NorthwindWeb.ViewModels.RoleInfoViewModel 
+
+
+@{
+    //CoreBankingManager.Controllers.AccountController ctrl = new CoreBankingManager.Controllers.AccountController();// put this to rapid navigation to controller 
+    //ctrl.RoleMembership();
+    ViewBag.Title = "Management membri pentru rolul ";
+    Layout = "~/Views/Shared/_LayoutDataTable.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title <font color=red>@Model.Name </font>  .</h1>
+    <h2> </h2>
+</hgroup>
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+        $('#UsersInRole').dataTable({ bJQueryUI: true, "bAutoWidth": false, "sPaginationType": "full_numbers", "oLanguage": { "oPaginate": { "sFirst": "&lt;&lt;", "sLast": ">>", "sNext": ">", "sPrevious": "&lt;" } } })
+    
+
+    });
+       
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+    <legend> Modificare </legend>
+       Adauga user la rolul @Model.Name   
+    </fieldset>
+
+    @*{
+        @Html.RenderAction("AddUsersToRole", new { roleName = Model.Name });
+}*@ 
+    <fieldset >
+    <legend> Adaugare utilizatori </legend>
+      <div class="editor-field" >
+        @Html.DropDownList("UserList", ViewData["UsersNotInRole"] as IEnumerable<System.Web.Mvc.SelectListItem>, "Alege un user", new { @style = "font-size:150%" }) 
+
+        <input name="submit" id = "submit" type="submit" value="Adauga" />
+      </div>
+    </fieldset>
+}
+    <fieldset>
+    <legend>Utilizatori existenti </legend>
+   
+       @*{
+           @Html.RenderAction("UsersInRole", new { roleName = Model.Name });
+}*@
+      <table id="UsersInRole" class="display">
+    <thead>
+            <tr>
+                <th>
+                    Stergere
+                </th>
+                <th>
+                    Utilizator
+                </th>
+            </tr>
+    </thead>
+        @foreach (var item in ViewData["UsersInRole"] as IEnumerable<System.Web.Mvc.SelectListItem>)
+        {  
+            <tr>
+                <td>
+                    @Html.ActionLink("Sterge", "DeleteFromRole", new { userName = item.Value, roleName = Request["roleName"] }
+                    , new { onclick = "if (!confirm('Doriti sa stergeti ?')) return false;" }) 
+                </td>
+                <td>
+                    @item.Value  
+                </td>
+            </tr>  
+        }  
+
+        </table>
+      
+    </fieldset>
+

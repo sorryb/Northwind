@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+
 using NorthwindWeb.Models;
 using NorthwindWeb.ViewModels;
+using System.Security.Claims;
+using System.Web;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -23,7 +27,7 @@ namespace NorthwindWeb.Controllers
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +39,9 @@ namespace NorthwindWeb.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -62,6 +66,7 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
+
         //
         // POST: /Account/Login
         [HttpPost]
@@ -76,7 +81,7 @@ namespace NorthwindWeb.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -121,7 +126,7 @@ namespace NorthwindWeb.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -152,12 +157,12 @@ namespace NorthwindWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -403,6 +408,416 @@ namespace NorthwindWeb.Controllers
         {
             return View();
         }
+        //-------------------------------------------------------------------------manage users account and roles-----------------------------------------
+
+        //[Authorize(Roles = "Admins")]
+        public ActionResult Index()
+        {
+            var context = new ApplicationDbContext();
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+
+            List<UserInfoViewModel> userInfoViewModel = new List<UserInfoViewModel>();
+            foreach (var user in userManager.Users)
+                userInfoViewModel.Add(new UserInfoViewModel()
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    //LastActiveDateTime = user.LastActivityDate,
+                    //IsOnline = user.IsOnline,
+                    //IsLockedOut = user.IsLockedOut
+                });
+            return View(userInfoViewModel.AsQueryable());
+        }
+
+        // **************************************
+        // URL: /Account/ChangeUser
+        // **************************************
+        [Authorize]
+        public async Task<ActionResult> ChangeUser(string userName)
+        {
+            RegisterViewModel model = new RegisterViewModel();
+
+            var user = await UserManager.FindByNameAsync(userName);
+
+            model.Email = user.Email;
+            model.UserName = user.UserName;
+
+            ViewBag.UserName = user.UserName;
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> ChangeUser(RegisterViewModel model)
+        {
+            IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
+
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByNameAsync(model.UserName);
+
+
+                isChanged = UserManager.Update(user);
+
+                if (isChanged.Succeeded)
+                    return RedirectToAction("Index", "Home");
+                else
+                    return RedirectToAction("Index");
+
+            }
+
+            // If we got this far, something failed, redisplay form
+            //ViewBag.PasswordLength = UserManager.PasswordValidator.
+
+            return View(model);
+        }
+
+        [Authorize]
+        public async Task<ActionResult> Delete(string userName)
+        {
+            IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
+
+            var user = await UserManager.FindByNameAsync(userName);
+
+            if (!String.IsNullOrEmpty(userName))
+                isDeleted = UserManager.Delete(user);
+
+
+            if (isDeleted.Succeeded)
+                return RedirectToAction("Index", "Home");
+            else
+                return RedirectToAction("Index");
+
+        }
+
+        //[Authorize(Roles = "Admins")]
+        public ActionResult RolesIndex()
+        {
+
+            var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+            List<RoleInfoViewModel> roleInfoViewModel = new List<RoleInfoViewModel>();
+
+            foreach (var role in roleManager.Roles)
+                roleInfoViewModel.Add(new RoleInfoViewModel()
+                {
+                    Name = role.Name
+                });
+
+            return View("RolesIndex", roleInfoViewModel.AsQueryable());
+
+        }
+
+        [Authorize]
+        public ActionResult CreateRole()
+        {
+            return View();
+        }
+
+        #region No Role Creation Dinamicaly
+        //[Authorize]
+        //[HttpPost]
+        //public ActionResult CreateRole(RoleInfoViewModel roleInfo)
+        //{
+        //    IdentityResult isCreated = null;
+        //    ApplicationDbContext context = new ApplicationDbContext();
+
+        //    using (context)
+        //    {
+        //        var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+        //        if (!roleManager.RoleExists(roleInfo.Name))
+        //        {
+
+        //            // first we create Admin rool   
+        //            var role = new IdentityRole();
+        //            role.Name = roleInfo.Name;
+
+        //            isCreated = roleManager.Create(role);
+
+        //            if (ViewData.Keys.Contains("RoleExists")) ViewData.Remove("RoleExists");
+
+        //            ViewData["Success"] = "Role Created";
+        //        }
+        //        else
+        //            ViewData["RoleExists"] = "Un rol cu acest nume deja exista!";
+        //    }
+
+        //    if (isCreated.Succeeded)
+        //        return RedirectToAction("RolesIndex");
+        //    else
+        //        return RedirectToAction("Index", "Home");
+        //} 
+        #endregion
+
+        //[Authorize]
+        //public ActionResult RoleDelete(string roleName)
+        //{
+        //    IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
+        //    ApplicationDbContext context = new ApplicationDbContext();
+
+        //    using (context)
+        //    {
+        //        var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+        //        if (roleManager.RoleExists(roleName))
+        //        {
+        //            IdentityRole role = roleManager.FindByName(roleName);
+        //            isDeleted = roleManager.Delete(role);
+        //        }
+        //    }
+
+        //    if (isDeleted.Succeeded)
+        //        return RedirectToAction("RolesIndex");
+        //    else
+        //        return RedirectToAction("Index", "Home");
+        //}
+
+
+        public ActionResult UsersInRole(string roleName)
+        {
+            var context = new ApplicationDbContext();
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+
+            List<UserInfoViewModel> userInfoViewModel = new List<UserInfoViewModel>();
+
+            foreach (var user in userManager.Users)
+            {
+
+                if (userManager.IsInRole(user.Id, roleName))
+                    userInfoViewModel.Add(new UserInfoViewModel()
+                    {
+                        UserName = user.UserName,
+                        Email = user.Email,
+                        //LastActiveDateTime = user.LastActivityDate,
+                        //IsOnline = user.IsOnline,
+                        //IsLockedOut = user.IsLockedOut
+                    });
+            }
+
+            return View(userInfoViewModel.AsQueryable());
+        }
+
+        [HttpPost]
+        public ActionResult RoleMembership(RoleInfoViewModel roleInfo)
+        {
+            //var roleName = Request["name"];
+            //var userName = Request.Form["UserList"];
+            //if (!string.IsNullOrEmpty(userName) && !Roles.IsUserInRole(userName, roleName))
+            //    Roles.AddUsersToRole(new string[] { userName }, roleName);
+
+
+            ////return View(roleInfo);
+            ////return View(new RoleInfoModel() { Name = roleName });
+            return RoleMembership();
+        }
+
+        //[Authorize(Roles = "Admins")]
+        [HttpGet]
+        public ActionResult RoleMembership()
+        {
+            //string roleName = Request["roleName"] != null ? Request["roleName"].ToString() : Roles.GetRolesForUser(User.Identity.Name)[0];
+            string roleName = Request["roleName"] != null ? Request["roleName"].ToString() : "Admins";
+            //var usersInRole = from C in Roles.GetUsersInRole(roleName).AsQueryable() select C.ToLower();
+
+            //var allUsers = Membership.GetAllUsers();
+            List<SelectListItem> selectItemsUserNotInRole = new List<SelectListItem>();
+            List<SelectListItem> selectItemsUserInRole = new List<SelectListItem>();
+            List<SelectListItem> selectItemsAllUser = new List<SelectListItem>();
+
+            var context = new ApplicationDbContext();
+
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            List<ApplicationUser> users = userManager.Users.ToList();
+
+            foreach (ApplicationUser user in users)
+            {
+
+                if (!userManager.IsInRole(user.Id, roleName))
+                    selectItemsUserNotInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
+                else
+                    selectItemsUserInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
+
+                selectItemsAllUser.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
+
+                //userManager.Dispose();
+            }
+
+
+            ViewData["UsersNotInRole"] = selectItemsUserNotInRole;
+            ViewData["AllUsers"] = selectItemsAllUser;
+            ViewData["UsersInRole"] = selectItemsUserInRole;
+
+            return View(new RoleInfoViewModel() { Name = roleName });
+        }
+
+        //[Authorize]
+        public ActionResult AddUsersToRole()
+        {
+            string roleName = (string)Request["roleName"];
+            string userNameList = (string)Request["UserList"];
+
+
+            //Roles.AddUserToRole(userName, roleName);
+
+            var context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            try
+            {
+                foreach (string userName in new string[] { userNameList })
+                {
+                    var user = UserManager.FindByName(userName);
+                    UserManager.AddToRole(user.Id, roleName);
+                }
+
+                context.SaveChanges();
+            }
+            catch
+            {
+                throw;
+            }
+
+            return RedirectToAction("RoleMembership", new { name = roleName, roleName = roleName });
+
+            //var usersInRole = from C in Roles.GetUsersInRole(roleName).AsQueryable() select C.ToLower();
+            //var allUsers = Membership.GetAllUsers();
+            //List<SelectListItem> selectItems = new List<SelectListItem>();
+            //foreach (MembershipUser user in allUsers)
+            //{
+            //    if (!usersInRole.Contains(user.UserName.ToLower()))
+            //        selectItems.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
+            //}
+
+            //ViewData["UsersNotInRole"] = selectItems;
+            ////return View();
+            //return View("RoleMembership",new RoleInfoModel() { Name = roleName });
+        }
+
+        [HttpGet]
+        public ActionResult DeleteFromRole()
+        {
+            var roleName = Request["roleName"];
+            var userName = Request["userName"];
+
+            var account = new AccountController();
+            var context = new ApplicationDbContext();
+
+            ApplicationUser user = context.Users.Where(u => u.UserName.Equals(userName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+
+            if (account.UserManager.IsInRole(user.Id, roleName))
+            {
+                account.UserManager.RemoveFromRole(user.Id, roleName);
+                ViewBag.ResultMessage = "Role removed from this user successfully !";
+            }
+            else
+            {
+                ViewBag.ResultMessage = "This user doesn't belong to selected role.";
+            }
+            // prepopulat roles for the view dropdown
+            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            ViewBag.Roles = list;
+
+            return RedirectToAction("RoleMembership", new { name = roleName, roleName = roleName });
+        }
+
+
+        public enum ManageMessageId
+        {
+            AddPhoneSuccess,
+            ChangePasswordSuccess,
+            SetTwoFactorSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+            RemovePhoneSuccess,
+            Error
+        }
+
+        //
+        // GET: /Account/Manage
+        [Authorize]
+        public async Task<ActionResult> Manage(ManageMessageId? message)
+        {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Parola dvs. a fost schimbata."
+                : message == ManageMessageId.SetPasswordSuccess ? "Parola dvs. a fost setata."
+                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
+                : message == ManageMessageId.Error ? "An error has occurred."
+                : "";
+            ViewBag.HasLocalPassword = User.Identity.IsAuthenticated;
+
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
+            var otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
+            ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
+
+
+            ViewBag.ReturnUrl = Url.Action("Manage");
+
+            return View();
+
+            //return View(new ManageLoginsViewModel
+            //{
+            //    CurrentLogins = userLogins,
+            //    OtherLogins = otherLogins
+            //});
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> Manage(ChangePasswordViewModel model)
+        {
+            bool hasLocalAccount = User.Identity.IsAuthenticated;
+            ViewBag.HasLocalPassword = hasLocalAccount;
+            ViewBag.ReturnUrl = Url.Action("Manage");
+
+            if (hasLocalAccount)
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                        if (user != null)
+                        {
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        }
+                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                    }
+                }
+            }
+            else
+            {
+                // User does not have a local password so remove any validation errors caused by a missing
+                // OldPassword field
+                ModelState state = ModelState["OldPassword"];
+                if (state != null)
+                {
+                    state.Errors.Clear();
+                }
+
+            }
+
+            // ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+
+            return View(model);
+        }
+
 
         protected override void Dispose(bool disposing)
         {
@@ -482,5 +897,19 @@ namespace NorthwindWeb.Controllers
             }
         }
         #endregion
+    }
+
+    /// <summary>
+    /// Return a list of roles.
+    /// </summary>
+    public static class Extentions
+    {
+        public static List<string> Roles(this ClaimsIdentity identity)
+        {
+            return identity.Claims
+                           .Where(c => c.Type == ClaimTypes.Role)
+                           .Select(c => c.Value)
+                           .ToList();
+        }
     }
 }

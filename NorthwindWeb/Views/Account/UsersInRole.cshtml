@@ -1,0 +1,26 @@
+﻿@model IEnumerable<NorthwindWeb.ViewModels.UserInfoViewModel> 
+
+<p>
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            UserName
+        </th>
+    </tr>
+
+@foreach (var item in Model) {  
+    <tr>
+        <td>
+            @Html.ActionLink("Sterge din Rol", "DeleteFromRole", new { userName = item.UserName, roleName = Request["roleName"] }
+            , new {onclick="if (!confirm('Doriti sa stergeti ?')) return false;" }) 
+        </td>
+        <td>
+            @item.UserName  
+        </td>
+    </tr>  
+ }  
+
+</table>
+

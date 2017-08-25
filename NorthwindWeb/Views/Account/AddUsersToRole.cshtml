@@ -1,0 +1,7 @@
+﻿@model NorthwindWeb.ViewModels.UserInfoViewModel
+
+<fieldset>
+<legend> Adaugare utilizatori </legend>
+    @Html.DropDownList("UserList", ViewData["UsersNotInRole"] as IEnumerable<System.Web.Mvc.SelectListItem>, "Alege un user") 
+    <input name="submit" id = "submit" type="submit" value="Adauga user la  rol"  />
+</fieldset>

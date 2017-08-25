@@ -1,0 +1,47 @@
+﻿@model IEnumerable<NorthwindWeb.ViewModels.RoleInfoViewModel> 
+
+@{
+    ViewBag.Title = "Lista roluri";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+
+<p>
+    @Html.ActionLink("Rol nou", "CreateRole")  
+</p>
+<table id="RolesTable" class="table">
+    <thead>
+    <tr>
+        <th>
+            Stergere
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Membri in Rol
+        </th>
+    </tr>
+    </thead>
+@foreach (var item in Model) {  
+    <tr>
+        <td>
+            @*@Html.ActionLink("Delete", "RoleDelete", new { roleName = item.Name }, new  {onclick="if (!confirm('Confirm Delete?')) return false;" })*@ 
+            <a onclick="alert('Nu aveti dreptul de a efectua aceasta operatie!')"> Delete</a>
+        </td>
+        <td>
+            @item.Name  
+        </td>
+        <td>
+            @Html.ActionLink("Membrii", "RoleMembership", new { roleName = item.Name, name=item.Name })  
+        </td>
+    </tr>  
+  }  
+
+</table>
+
+

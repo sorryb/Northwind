@@ -1,0 +1,72 @@
+﻿@model IEnumerable<NorthwindWeb.ViewModels.UserInfoViewModel>
+
+@{
+    ViewBag.Title = "Lista utilizatori";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+
+
+
+
+<p>
+    @Html.ActionLink("Utilizator nou", "Register")  
+</p>
+<table id="UsersTable" class="table" >
+    <thead>
+    <tr>
+        <th></th>
+        <th>
+            UserName
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            LastActiveDateTime
+        </th>
+        <th>
+            IsLockedOut
+        </th>
+        <th>
+            IsOnline
+        </th>
+        <th>
+            Sterge
+        </th>
+    </tr>
+</thead>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.ActionLink("Manage", "ChangeUser", new { userName = item.UserName }, new { onclick = "if (!confirm('Sunteti sigur ca doriti sa-l modificati pe ' + item.UserName'?')) return false;" }) 
+        </td>
+        <td>
+            @item.UserName  
+        </td>
+        <td>
+            @item.Email  
+        </td>
+        <td>
+            @String.Format("{0:g}", item.LastActiveDateTime)  
+        </td>
+        <td>          
+            @(item.IsLockedOut ? "Yes" : "No") 
+        </td>
+        <td>
+            @(item.IsOnline ? "Yes":"No" ) 
+        </td>
+        <td>
+            @Html.ActionLink("Sterge", "Delete", new { userName = item.UserName }, new { onclick = "if (!confirm('Sunteti sigur ca doriti sa-l stergeti ?')) return false;" }) 
+        </td>
+    </tr>  
+ } 
+
+</table>
+
+
+
