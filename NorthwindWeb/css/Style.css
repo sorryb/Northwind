@@ -129,9 +129,9 @@ h3.prodpad{
     color: black;
 }
 /*for the div containint the iframe*/
-.flex{
+/*.flex{
     display:flex;
-}
+}*/
 iframe.fill{
     height:100%;
     width:100%;
