@@ -59,10 +59,10 @@ namespace NorthwindWeb.ViewModels
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parolă")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Tine-ma minte pe acest computer")]
         public bool RememberMe { get; set; }
     }
 
@@ -74,14 +74,14 @@ namespace NorthwindWeb.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} trebuie să contină cel putin {2} caractere.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parolă")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmă parola")]
+        [Compare("Password", ErrorMessage = "Parola si parola de confirmare nu se potrivesc.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -93,14 +93,14 @@ namespace NorthwindWeb.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = " {0} trebuie să contină cel putin {2} caractere.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parolă")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmă parola")]
+        [Compare("Parolă", ErrorMessage = "Parola si parola de confirmare nu se potrivesc.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
