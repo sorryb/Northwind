@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,6 +46,11 @@
                 @Html.ActionLink(" Studio Phone Silver", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
             </div>
 
+            <ul class="nav navbar-top-links navbar-right">
+                @Html.Partial("_LoginPartial")
+                   
+            </ul>
+
             <!-- /.navbar-left-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -73,7 +78,7 @@
                         </li>
                         
                         <li id="category" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorii <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categori Produse<b class="caret"></b></a>
                             <ul  class="nav nav-second-level">
                                
                                @{Html.RenderAction("Menu", "Home");}
@@ -83,8 +88,26 @@
                         <li id="orders">
                             @Html.ActionLink("Comenzi", "Index", "Orders")
                         </li>
-                        <li id="reports">
+                        <li id="customers">
                             @Html.ActionLink("Rapoarte", "Index", "Reports")
+                        </li>
+                        <li id="reports">
+                            @Html.ActionLink("Clienti","Index", "Customers")
+                        </li>
+                        <li id="reports">
+                            @Html.ActionLink("Angajati", "Index", "Employees")
+                        </li>
+                        <li id="reports">
+                            @Html.ActionLink("Categori", "Index", "Categories")
+                        </li>
+                        <li id="reports">
+                            @Html.ActionLink("Furnizori", "Index", "Suppliers")
+                        </li>
+                        <li id="reports">
+                            @Html.ActionLink("Expeditori", "Index", "Shippers")
+                        </li>
+                        <li id="reports">
+                            @Html.ActionLink("Regiuni", "Index", "Regions")
                         </li>
                     </ul>
                 </div>
