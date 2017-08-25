@@ -18,3 +18,7 @@ function getCartCount() {
 function getCartProduct(i) {
     return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
 }
+
+$(document).ready(function () {
+    $("#myCarousel").carousel({ interval: 5000 });
+})
