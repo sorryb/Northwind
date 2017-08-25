@@ -22,3 +22,7 @@ function getCartProduct(i) {
 $(document).ready(function () {
     $("#myCarousel").carousel({ interval: 5000 });
 })
+
+function openReport() {
+
+}

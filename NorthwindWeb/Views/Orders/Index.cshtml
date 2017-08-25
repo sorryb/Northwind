@@ -6,10 +6,10 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container">
-    <h2>Orders</h2>
+    <h2>Comenzi</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Adauga", "Create")
     </p>
     <table class="table">
         <tr>
@@ -68,9 +68,9 @@
                     @Html.DisplayFor(modelItem => item.ShipCountry)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.OrderID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.OrderID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.OrderID })
+                    @Html.ActionLink("Modifica", "Edit", new { id = item.OrderID }) 
+                    @Html.ActionLink("Detalii", "Details", new { id = item.OrderID }) 
+                    @Html.ActionLink("Sterge", "Delete", new { id = item.OrderID })
                 </td>
             </tr>
         }
