@@ -10,7 +10,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult Index()
         {
 
-            string reportServer = "reportserver_SSRS";
+            string reportServer = "ReportServer_SQLEXPRESS";
             string dirpath = Path.GetFullPath(Path.Combine(Server.MapPath("~"), @"../NorthwindReports"));
 
             List<ViewModels.ReportViewModel> reports = new List<ViewModels.ReportViewModel>();
