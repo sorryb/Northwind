@@ -168,14 +168,17 @@
                 <div class="list-group">
                     
                     @foreach (var item in Model.LastTen)
-                    {<p class= "list-group-item">
-                        @Html.ActionLink(Convert.ToString(item.OrderID),"Details","Orders",new { id = item.OrderID},null)
-
+                    {
                        
-                        <span class="pull-right text-muted small">
-                            <em>@item.Ago</em>
-                        </span>
-                    </p> 
+
+                         <a href="@Url.Action("Details","Orders",new { id = item.OrderID},null)" class="list-group-item">
+                             @item.OrderID
+                             <span class="pull-right text-muted small">
+                                 <em>@item.Ago</em>
+                             </span>
+                         </a>
+                        
+                    
                     }
                     
                     
