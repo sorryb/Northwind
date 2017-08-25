@@ -180,6 +180,7 @@
     <Compile Include="Context\ApplicationDataContext.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
@@ -194,6 +195,8 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\ShippersController.cs" />
+    <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\TesteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -428,6 +431,21 @@
     <Content Include="Views\Dashboard\Category.cshtml" />
     <Content Include="Views\Orders\Edit2.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Shippers\Create.cshtml" />
+    <Content Include="Views\Shippers\Delete.cshtml" />
+    <Content Include="Views\Shippers\Details.cshtml" />
+    <Content Include="Views\Shippers\Edit.cshtml" />
+    <Content Include="Views\Shippers\Index.cshtml" />
+    <Content Include="Views\Suppliers\Create.cshtml" />
+    <Content Include="Views\Suppliers\Delete.cshtml" />
+    <Content Include="Views\Suppliers\Details.cshtml" />
+    <Content Include="Views\Suppliers\Edit.cshtml" />
+    <Content Include="Views\Suppliers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

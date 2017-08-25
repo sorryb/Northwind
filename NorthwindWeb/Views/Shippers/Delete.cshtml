@@ -1,0 +1,41 @@
+﻿@model NorthwindWeb.Models.Shippers
+
+@{
+    ViewBag.Title = "Sterge";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Sterge</h2>
+
+<h3>Esti sigur ca vrei sa-l stergi?</h3>
+<div>
+    <h4>Expeditor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nume Companie
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+
+        <dt>
+            Telefon
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sterge" class="btn btn-default" /> |
+            @Html.ActionLink("Inapoi", "Index")
+        </div>
+    }
+</div>
