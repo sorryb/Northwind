@@ -18,7 +18,7 @@ namespace NorthwindWeb.Controllers
         
 
 
-        public ActionResult Index()
+        public ActionResult Index1()
         {
             DashboardIndexData viewModel = new DashboardIndexData();
 
