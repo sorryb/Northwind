@@ -1,14 +1,16 @@
 ﻿@model NorthwindWeb.Models.Order_Details
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+
 <div class="container">
-    <h2>Create</h2>
+
+    <h2>Edit</h2>
 
 
-    @using (Html.BeginForm("Create", "OrderDetail", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
+    @using (Html.BeginForm("Edit2", "Orders", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
     {
         @Html.AntiForgeryToken()
 
@@ -16,21 +18,9 @@
             <h4>Order_Details</h4>
             <hr />
             @Html.ValidationSummary(true)
-            <div class="form-group">
-                @Html.LabelFor(model => model.OrderID, "OrderID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("OrderID", (IEnumerable<SelectListItem>)ViewBag.OrderID, htmlAttributes: new { @class = "form" })
-                    @Html.ValidationMessageFor(model => model.OrderID)
-                </div>
-            </div>
+            @Html.HiddenFor(model => model.OrderID)
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ProductID, "ProductName", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("ProductID", (IEnumerable<SelectListItem>)ViewBag.ProductID, htmlAttributes: new { @class = "form" })
-                    @Html.ValidationMessageFor(model => model.ProductID)
-                </div>
-            </div>
+            @Html.HiddenFor(model => model.ProductID)
 
             <div class="form-group">
                 @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -58,7 +48,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -68,8 +58,8 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 
-
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }
+
 </div>

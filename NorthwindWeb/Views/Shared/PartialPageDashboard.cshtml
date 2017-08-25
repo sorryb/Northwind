@@ -1,7 +1,9 @@
-﻿@*@{Html.RenderAction("Menu", "Home")}
-@model NorthwindWeb.ViewModels.Menu;
+﻿@{Html.RenderAction("Menu", "Home");}
 
-@foreach(var item in Model)
+
+@*@foreach (var item in ViewBag.menu)
 {
-
+    <li>
+        @Html.ActionLink("Index", "Product", new { category = item })
+    </li>
 };*@

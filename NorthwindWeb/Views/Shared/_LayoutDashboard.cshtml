@@ -11,7 +11,7 @@
     @*<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">*@
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <!-- MetisMenu CSS -->
-
+    <link href="~/css/Style.css" rel="stylesheet" />
     <link href="~/css/metisMenu/metisMenu.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
 
@@ -22,7 +22,7 @@
 
     <link href="~/css/morris.css" rel="stylesheet" />
     <link href="~/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/css/Style.css" rel="stylesheet" />
+   
     @*<link href="~/css/Dashboard.css" rel="stylesheet" />*@
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -62,7 +62,8 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            @Html.ActionLink("Dashboard", "Index", "Dashboard")
+                           
+                            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
                         </li>
                         <li id="services">
                             @Html.ActionLink("Servicii", "Index", "Product", new { category = "Services" }, null)
@@ -70,39 +71,17 @@
                         <li id="product">
                             @Html.ActionLink("Produse", "Index", "Product")
                         </li>
-                        <li id="category">
-                            @Html.ActionLink("Categori", "Category", "Dashboard")
-                        </li>
-                        @*<li id="category" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categori <b class="caret"></b></a>
+                        
+                        <li id="category" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorii <b class="caret"></b></a>
                             <ul  class="nav nav-second-level">
-                                <li>
-                                    @Html.ActionLink("Clasic", "Index", "Product", new { category = "Classic" }, null)
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Smartphone", "Index", "Product", new { category = "Smartphone" }, null)
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Accesorii", "Index", "Product", new { category = "Accesorii" }, null)
-                                </li>
-                                <li>
-                                    @Html.ActionLink("Gadgeturi", "Index", "Product", new { category = "Gadgeturi" }, null)
-                                </li>
-                                <li>
-                                    @Html.ActionLink("eBook readers", "Index", "Product", new { category = "eBookReaders" }, null)
-                                </li>
+                               
+                               @{Html.RenderAction("Menu", "Home");}
+                               
                             </ul>
-                        </li>*@
-                        <li id="orders">
-                            @Html.ActionLink("Comenzii", "Index", "Product")
                         </li>
-                        <li id="blog" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
-                            <ul class="nav nav-second-level">
-                                <li id="bloghome1">
-                                    @Html.ActionLink("Lista Comenzi", "Home1", "Orders")
-                                </li>
-                            </ul>
+                        <li id="orders">
+                            @Html.ActionLink("Comenzi", "Index", "Orders")
                         </li>
                         <li id="reports">
                             @Html.ActionLink("Rapoarte", "Index", "Reports")
@@ -116,8 +95,8 @@
         <!-- Page Content -->
         <div id="page-wrapper">
             <div class="container-fluid">
-                <div class="row flex">
-                    <div class="col-lg-12 flex">
+                <div class="row">
+                    <div class="col-lg-12">
                         @RenderBody()
                     </div>
                     <!-- /.col-lg-12 -->

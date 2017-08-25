@@ -1,10 +1,9 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+    Layout =null;
 }
-
 @model System.Collections.Generic.List<System.String>
 
-<ul  class="nav nav-second-level">
+<ul class="nav nav-second-level">
     @foreach (var item in Model)
     {
         <li>
@@ -13,5 +12,3 @@
     }
 
 </ul>
-
-

@@ -20,8 +20,7 @@ namespace NorthwindWeb.Controllers
  
         public ActionResult Index(int page = 1)
         {
-            var order_Details = db.Order_Details.Include(o => o.Order).Include(o => o.Product).OrderBy(o =>
-            o.OrderID);
+            var order_Details = db.Order_Details.Include(o => o.Order).Include(o => o.Product).OrderBy(o=>o.OrderID);
           
             int pageSize = 15;
             int pageNumber = page;
