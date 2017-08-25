@@ -33,10 +33,6 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> Details(int id)
         {
             OrderDetali viewModel = new OrderDetali();
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Orders orders = await db.Orders.FindAsync(id);
             if (orders == null)
             {

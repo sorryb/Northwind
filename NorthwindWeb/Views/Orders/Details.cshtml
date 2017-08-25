@@ -88,6 +88,8 @@
         <div class="col-md-6">
             <h4>Detalii Comenzi</h4>
             <hr />
+            @Html.ActionLink("Adauga", "Create", "OrderDetail")
+            <hr />
            @foreach (var y in Model.details)
            {
               <dl class="dl-horizontal">
@@ -131,12 +133,12 @@
                     @y.Discount
                 </dd> 
                   <p>
-                      @Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID },null )
+                      @Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID },null ) |
                       @Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, null)
                   </p>
             </dl>
            }
-            @Html.ActionLink("Adauga","Create","OrderDetail")
+           
 
             <p>
                 @Html.ActionLink("Inapoi la lista", "Index")
