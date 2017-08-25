@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +22,7 @@
 
     <link href="~/css/morris.css" rel="stylesheet" />
     <link href="~/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-   
+
     @*<link href="~/css/Dashboard.css" rel="stylesheet" />*@
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,6 +46,11 @@
                 @Html.ActionLink(" Studio Phone Silver", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
             </div>
 
+            <ul class="nav navbar-top-links navbar-right">
+                @Html.Partial("_LoginPartial")
+                   
+            </ul>
+
             <!-- /.navbar-left-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
@@ -62,7 +67,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                           
+
                             @Html.ActionLink("Dashboard", "Index1", "Dashboard")
                         </li>
                         <li id="services">
@@ -71,13 +76,13 @@
                         <li id="product">
                             @Html.ActionLink("Produse", "Index", "Product")
                         </li>
-                        
+
                         <li id="category" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorii <b class="caret"></b></a>
-                            <ul  class="nav nav-second-level">
-                               
-                               @{Html.RenderAction("Menu", "Home");}
-                               
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorii Produse<b class="caret"></b></a>
+                            <ul class="nav nav-second-level">
+
+                                @{Html.RenderAction("Menu", "Home");}
+
                             </ul>
                         </li>
                         <li id="orders">
@@ -85,6 +90,24 @@
                         </li>
                         <li id="reports">
                             @Html.ActionLink("Rapoarte", "Index", "Reports")
+                        </li>
+                        <li id="customers">
+                            @Html.ActionLink("Clienti","Index", "Customers")
+                        </li>
+                        <li id="employees">
+                            @Html.ActionLink("Angajati", "Index", "Employees")
+                        </li>
+                        <li id="categories">
+                            @Html.ActionLink("Categori", "Index", "Categories")
+                        </li>
+                        <li id="suppliers">
+                            @Html.ActionLink("Furnizori", "Index", "Suppliers")
+                        </li>
+                        <li id="shippers">
+                            @Html.ActionLink("Expeditori", "Index", "Shippers")
+                        </li>
+                        <li id="regions">
+                            @Html.ActionLink("Regiuni", "Index", "Regions")
                         </li>
                     </ul>
                 </div>
@@ -119,25 +142,38 @@
     <!-- Custom Theme JavaScript -->
     <script src="~/js/raphael/raphael.min.js"></script>
     <script src="~/js/morrisjs/morris.min.js"></script>
-    <script src="~/js/morrisjs/morris-data.js"></script>
-    <script src="~/js/dist/sb-admin-2.js"></script> 
-    @*<script>
-        $.ajax({
-            url: '@Html.Raw(@Url.Action("Menu", "Home"))',
-            dataType: 'json',
-            cache: false,
-            success: function (data) {
-                $(data).each(function (i, el) {
-                    @{string i};
-                    @i=el;
-                        var x = '<li id=' + el + '>' +@(Html.ActionLink(i.ToString(), "Index", "Product", new { category =i }, null))+'</li>'
-                    $("#category").append(x);
+    <div id="sc">
 
-                });
+    </div>
+    <script>
+   
+        if (window.location.href.search("Dashboard") != -1) {
+            var my_awesome_script = document.createElement('script');
 
-            }
-        });
-    </script>*@
+            var host = 'http://' + window.location.host + '/js/morrisjs/morris-data.js';
+            my_awesome_script.setAttribute('src', host);
+
+            document.getElementById("sc").appendChild(my_awesome_script);
+        }
+    </script>
+    <script src="~/js/dist/sb-admin-2.js"></script>
+        @*<script>
+            $.ajax({
+                url: '@Html.Raw(@Url.Action("Menu", "Home"))',
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    $(data).each(function (i, el) {
+                        @{string i};
+                        @i=el;
+                            var x = '<li id=' + el + '>' +@(Html.ActionLink(i.ToString(), "Index", "Product", new { category =i }, null))+'</li>'
+                        $("#category").append(x);
+
+                    });
+
+                }
+            });
+        </script>*@
     <!-- section scripts from _Layout-->
     @RenderSection("scripts", required: false)
 

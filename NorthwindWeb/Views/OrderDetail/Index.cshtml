@@ -8,10 +8,10 @@
 
 <div class="container">
 
-    <h2>Orders Details</h2>
+    <h2>Detalii comenzi</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Adauga", "Create")
     </p>
     <table class="table">
         <tr>
@@ -52,9 +52,9 @@
                     @Html.DisplayFor(modelItem => item.Discount)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { OrderID = item.OrderID, ProductID = item.ProductID}) |
-                    @Html.ActionLink("Details", "Details", new { OrderID = item.OrderID, ProductID = item.ProductID }) |
-                    @Html.ActionLink("Delete", "Delete", new { OrderID = item.OrderID, ProductID = item.ProductID })
+                    @Html.ActionLink("Modifica", "Edit", new { OrderID = item.OrderID, ProductID = item.ProductID}) |
+                    @Html.ActionLink("Detalii", "Details", new { OrderID = item.OrderID, ProductID = item.ProductID }) |
+                    @Html.ActionLink("Sterge", "Delete", new { OrderID = item.OrderID, ProductID = item.ProductID })
                 </td>
             </tr>
         }

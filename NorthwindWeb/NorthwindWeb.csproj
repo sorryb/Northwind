@@ -193,6 +193,7 @@
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RegionsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ShippersController.cs" />
@@ -335,6 +336,17 @@
     <Content Include="images\Services\mesagerie-vocala.jpg" />
     <Content Include="images\Services\mobiledata.jpg" />
     <Content Include="images\Services\SMS-Marketing.png" />
+    <Content Include="images\Servicii\78.jpg" />
+    <Content Include="images\Servicii\79.jpg" />
+    <Content Include="images\Servicii\80.jpg" />
+    <Content Include="images\Servicii\81.jpg" />
+    <Content Include="images\Servicii\82.jpg" />
+    <Content Include="images\Servicii\83.jpg" />
+    <Content Include="images\Servicii\84.jpg" />
+    <Content Include="images\Servicii\85.jpg" />
+    <Content Include="images\Servicii\86.jpg" />
+    <Content Include="images\Servicii\87.jpg" />
+    <Content Include="images\Servicii\88.jpg" />
     <Content Include="images\share-magazin-online.png" />
     <Content Include="images\smartphone.jpg" />
     <Content Include="images\Smartphone\62.jpg" />
@@ -427,10 +439,9 @@
     <Content Include="Views\OrderDetail\Details.cshtml" />
     <Content Include="Views\OrderDetail\Edit.cshtml" />
     <Content Include="Views\OrderDetail\Index.cshtml" />
-    <Content Include="Views\Shared\PartialPageDashboard.cshtml" />
-    <Content Include="Views\Dashboard\Category.cshtml" />
-    <Content Include="Views\Orders\Edit2.cshtml" />
+   
     <Content Include="Views\Home\Menu.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
@@ -446,10 +457,16 @@
     <Content Include="Views\Suppliers\Details.cshtml" />
     <Content Include="Views\Suppliers\Edit.cshtml" />
     <Content Include="Views\Suppliers\Index.cshtml" />
+=======
+    <Content Include="Views\Regions\Create.cshtml" />
+    <Content Include="Views\Regions\Delete.cshtml" />
+    <Content Include="Views\Regions\Details.cshtml" />
+    <Content Include="Views\Regions\Edit.cshtml" />
+    <Content Include="Views\Regions\Index.cshtml" />
+>>>>>>> b3b58f44e8fb698fdcb1195d514f65cf5cc180a3
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="images\Servicii\" />
     <Folder Include="Views\Teste\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,16 +1,16 @@
 ﻿@model NorthwindWeb.Models.Order_Details
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
 <div class="container">
 
-    <h2>Details</h2>
+    <h2>Detalii</h2>
 
     <div>
-        <h4>Order_Details</h4>
+        <h4>Detalii Comanda</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -56,8 +56,8 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Modifica", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Inapoi la lista", "Index")
     </p>
 
 </div>

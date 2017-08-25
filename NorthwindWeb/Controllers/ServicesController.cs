@@ -29,14 +29,16 @@ namespace NorthwindWeb.Controllers
 
             //take the names of first 4 products
             viewModel.top4name = (from p in db.Products
+                                  where (p.CategoryID==6)
                                   orderby p.ProductID
                                   select p.ProductName).Take(4);
 
             //take first 4 products
             var products = (from p in db.Products
-                           join c in db.Categories on p.CategoryID equals c.CategoryID
-                           join s in db.Suppliers on p.SupplierID equals s.SupplierID
-                           select new
+                            where (p.CategoryID == 6)
+                            join c in db.Categories on p.CategoryID equals c.CategoryID
+                            join s in db.Suppliers on p.SupplierID equals s.SupplierID
+                            select new
                            {
                                p.ProductName,
                                s.CompanyName,
@@ -70,6 +72,7 @@ namespace NorthwindWeb.Controllers
 
             //take last 3 products
             var productsOrderByDesc = (from p in db.Products
+                           where (p.CategoryID == 6)
                            join c in db.Categories on p.CategoryID equals c.CategoryID
                            join s in db.Suppliers on p.SupplierID equals s.SupplierID
                            orderby p.ProductID descending
