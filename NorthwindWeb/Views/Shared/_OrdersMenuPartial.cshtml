@@ -13,11 +13,15 @@
                             <li id="orders">
                                 @Html.ActionLink("Lista Comenzi", "Home1", "Order")
                             </li>
+                            <li id="userOrders">
+                                @Html.ActionLink("Comenzi '" + User.Identity.GetUserName() +"'", "Home1", "Order")
+                            </li>
                         </ul>
                     </li>
                     if (userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
         {
                     <li id="dashboard">
+                        
                         @Html.ActionLink("Dashboard", "Index1", "Dashboard")
                     </li>
         }
