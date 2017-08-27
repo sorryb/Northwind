@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using NorthwindWeb.Models
+@using NorthwindWeb.Context
+@{
+    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+    }
+@if (Request.IsAuthenticated)
+{
+                    <li id="blog" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li id="orders">
+                                @Html.ActionLink("Lista Comenzi", "Home1", "Order")
+                            </li>
+                        </ul>
+                    </li>
+                    if (userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
+        {
+                    <li id="dashboard">
+                        @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+                    </li>
+        }
+}
+

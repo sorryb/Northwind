@@ -455,10 +455,9 @@
     <Content Include="Views\OrderDetail\Index.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Teste\Index.cshtml" />
+    <Content Include="Views\Shared\_OrdersMenuPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="images\Servicii\" />
     <Content Include="Views\Categories\Create.cshtml" />
     <Content Include="Views\Categories\Delete.cshtml" />
     <Content Include="Views\Categories\Details.cshtml" />
@@ -490,7 +489,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Teste\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -17,7 +17,7 @@ using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -410,7 +410,7 @@ namespace NorthwindWeb.Controllers
         }
         //-------------------------------------------------------------------------manage users account and roles-----------------------------------------
 
-        //[Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Admins")]
         public ActionResult Index()
         {
             var context = new ApplicationDbContext();
@@ -474,7 +474,7 @@ namespace NorthwindWeb.Controllers
             return View(model);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string userName)
         {
             IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
@@ -492,7 +492,7 @@ namespace NorthwindWeb.Controllers
 
         }
 
-        //[Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Admins")]
         public ActionResult RolesIndex()
         {
 
@@ -656,7 +656,7 @@ namespace NorthwindWeb.Controllers
             return View(new RoleInfoViewModel() { Name = roleName });
         }
 
-        //[Authorize]
+        [Authorize(Roles = "Admins")]
         public ActionResult AddUsersToRole()
         {
             string roleName = (string)Request["roleName"];
@@ -700,6 +700,7 @@ namespace NorthwindWeb.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admins")]
         public ActionResult DeleteFromRole()
         {
             var roleName = Request["roleName"];
