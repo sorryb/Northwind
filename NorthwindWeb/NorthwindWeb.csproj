@@ -709,6 +709,7 @@
     <Content Include="Views\Territories\Details.cshtml" />
     <Content Include="Views\Territories\Edit.cshtml" />
     <Content Include="Views\Territories\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutReports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
