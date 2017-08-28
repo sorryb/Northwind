@@ -14,14 +14,15 @@ using NorthwindWeb.ViewModels.Orders;
 
 namespace NorthwindWeb.Controllers
 {
+    //[Authorize(Roles ="Admin")]
     public class OrdersController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Orders
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string search="", int page = 1)
         {
-            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).OrderBy(o=>
+            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(x => x.OrderID.ToString().Contains(search)).OrderBy(o=>
             o.OrderID);
 
             int pageSize = 15;
@@ -62,6 +63,7 @@ namespace NorthwindWeb.Controllers
 
             }
             viewModel.details = list;
+            ViewBag.orderid = id;
             return View(viewModel);
         }
 

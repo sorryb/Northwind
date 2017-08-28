@@ -8,14 +8,29 @@
 <div class="container">
 
     <h2>Detalii</h2>
-
+    <hr />
+    <ol class="breadcrumb">
+        <li>
+            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+        </li>
+        <li>
+            @Html.ActionLink("Comenzi", "Index", "Orders")
+        </li>
+        <li class="active">Detalii</li>
+    </ol>
     <div>
         <div class="col-md-6">
             <h4>Comenzi</h4>
             <hr />
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.order.Customer.CompanyName)
+                    Id comanda
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model=>model.order.OrderID)
+                </dd>
+                <dt>
+                    Nume Companie
                 </dt>
 
                 <dd>
@@ -23,7 +38,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.order.Employee.LastName)
+                   Prenume
                 </dt>
 
                 <dd>
@@ -31,7 +46,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.order.Shipper.CompanyName)
+                  Nume Companie
                 </dt>
 
                 <dd>
@@ -39,7 +54,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.order.ShippedDate)
+                 Data livrarii
                 </dt>
 
                 <dd>
@@ -47,7 +62,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.order.ShipName)
+                   Numele livrarii
                 </dt>
 
                 <dd>
@@ -55,7 +70,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.order.ShipAddress)
+               Adresa livrarii
                 </dt>
 
                 <dd>
@@ -63,7 +78,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.order.ShipCity)
+                    Oras
                 </dt>
 
                 <dd>
@@ -71,7 +86,7 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.order.ShipCountry)
+                    Tara
                 </dt>
 
                 <dd>
@@ -86,23 +101,16 @@
             </p>
         </div>
         <div class="col-md-6">
-            <h4>Detalii Comenzi</h4>
+            <h4>Detalii Comanda</h4>
             <hr />
-            @Html.ActionLink("Adauga", "Create", "OrderDetail")
+            @Html.ActionLink("Adauga", "Create", "OrderDetail",new { id=ViewBag.orderid },null)
             <hr />
            @foreach (var y in Model.details)
            {
               <dl class="dl-horizontal">
-                <dt>
-                    OrderID 
-                </dt>
-
-                <dd>
-                    @y.OrderID
-                </dd>
 
                 <dt>
-                    ProductID 
+                   Id-ul Produsului 
                 </dt>
 
                 <dd>
@@ -110,7 +118,7 @@
                 </dd>
 
                 <dt>
-                    Quantity 
+                   Cantitate
                 </dt>
 
                 <dd>
@@ -118,7 +126,7 @@
                 </dd>
 
                 <dt>
-                    UnitPrice 
+                    Preț unitar 
                 </dt>
 
                 <dd>

@@ -12,6 +12,7 @@ using PagedList;
 
 namespace NorthwindWeb.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class OrderDetailController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -41,9 +42,10 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: OrderDetail/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID");
+            ViewBag.orderid = id;
+            //ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID");
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName");
             return View();
         }
@@ -53,8 +55,9 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "OrderID,ProductID,UnitPrice,Quantity,Discount")] Order_Details order_Details)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,UnitPrice,Quantity,Discount")] Order_Details order_Details,int id)
         {
+            order_Details.OrderID = id;
             if (ModelState.IsValid)
             {
                 db.Order_Details.Add(order_Details);
@@ -62,7 +65,7 @@ namespace NorthwindWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID", order_Details.OrderID);
+            //ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID", order_Details.OrderID);
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", order_Details.ProductID);
             return View(order_Details);
         }

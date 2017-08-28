@@ -8,9 +8,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using PagedList;
+using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
+    //[Authorize(Roles ="Admin")]
     public class RegionsController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -18,7 +21,8 @@ namespace NorthwindWeb.Controllers
         // GET: Regions
         public async Task<ActionResult> Index()
         {
-            return View(await db.Regions.ToListAsync());
+            var region= db.Regions.OrderBy(r=>r.RegionID);
+            return View(await region.ToListAsync());
         }
 
         // GET: Regions/Details/5
@@ -28,12 +32,34 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            RegionIndex viewModel = new RegionIndex();
             Region region = await db.Regions.FindAsync(id);
             if (region == null)
             {
                 return HttpNotFound();
             }
-            return View(region);
+            viewModel.region = region;
+
+            var ter = from t in db.Territories
+                        where (t.RegionID == id)
+                        select new { t.TerritoryID,t.TerritoryDescription };
+
+            List<RegionDetails> list = new List<RegionDetails>();
+
+            
+            foreach (var item in ter)
+            {
+                RegionDetails x = new RegionDetails();
+
+                x.TerritoryID = item.TerritoryID;
+                x.TerritoryDescription = item.TerritoryDescription;
+
+                list.Add(x);
+
+            }
+            viewModel.details = list;
+            ViewBag.regionid = id;
+            return View(viewModel);
         }
 
         // GET: Regions/Create

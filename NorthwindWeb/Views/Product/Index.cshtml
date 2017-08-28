@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<NorthwindWeb.Models.Products>
+﻿@model List<NorthwindWeb.Models.Products>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Produse";
@@ -6,88 +6,82 @@
 }
 <h2>Produse</h2>
 
-<p>
+<br/>
+<div class="">
     <button class="btn btn-default">@Html.ActionLink("Adauga Produs", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Nume Categorie
-        </th>
-        <th>
-            Nume Companie
-        </th>
-        <th>
-            Nume Produs
-        </th>
-        <th>
-            Cantitate
-        </th>
-        <th>
-            Pret
-        </th>
-        <th>
-            In Stoc
-        </th>
-        <th>
-            Pe Comezi
-        </th>
-        <th>
-            Stoc limita
-        </th>
-        <th>
-            Indisponibil
-        </th>
-        <th>
-            Optiuni
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    <form action="~/Controllers/Product/Index">
+        <div class="input-group cssencapsulate">
+            <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<br/>
+<table id="MyTable" class="table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantityPerUnit)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitsInStock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReorderLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discontinued)
-            </td>
-            <td>
-                @Html.ActionLink("Modifica", "Edit", new { id = item.ProductID }) |
-                @Html.ActionLink("Detalii", "Details", new { id = item.ProductID }) |
-                @Html.ActionLink("Sterge", "Delete", new { id = item.ProductID })
-            </td>
+            <th>
+                Nume Produs
+            </th>
+            <th>
+                Pret
+            </th>
+            <th>
+                In Stoc
+            </th>
+            <th>
+                Pe Comezi
+            </th>
+            <th>
+                Stoc limita
+            </th>
+            <th>
+                Indisponibil
+            </th>
+            <th>
+                Sterge
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.ProductName, "Details", new { id = item.ProductID })
+                    @*@Html.DisplayFor(modelItem => item.ProductName)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReorderLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discontinued)
+                </td>
+                <td>
+                    <a href="@Url.Action("Delete", new { id = item.ProductID })" ><i class="fa fa-remove"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
 
 </table>
-<div class="row text-center">
-    <div class="col-lg-12">
-        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
+@*<div class="row text-center">
+        <div class="col-lg-12">
+            Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
 
-        @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { category = ViewBag.category, page }))
-    </div>
-</div>
+            @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { category = ViewBag.category, page }))
+        </div>
+    </div>*@

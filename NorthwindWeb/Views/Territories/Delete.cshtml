@@ -1,0 +1,57 @@
+﻿@model NorthwindWeb.Models.Territories
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<div class="container">
+    <h2>Sterge</h2>
+    <hr />
+    <ol class="breadcrumb">
+        <li>
+            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+        </li>
+        <li>
+            @Html.ActionLink("Regiuni", "Index", "Regions")
+        </li>
+        <li>
+            @Html.ActionLink("Detalii", "Details", "Regions", new { id = Model.RegionID }, null)
+        </li>
+        <li class="active">Sterge</li>
+    </ol>
+
+    <h3>Sigur vrei sa stergi?</h3>
+    <div>
+        <h4>Teritorii</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Region.RegionDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Region.RegionDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TerritoryDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TerritoryDescription)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Sterge" class="btn btn-default" /> |
+                @Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, null)
+            </div>
+        }
+    </div>
+
+</div>
