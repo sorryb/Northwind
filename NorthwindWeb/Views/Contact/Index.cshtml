@@ -34,20 +34,20 @@
                 <div class="row">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group col-lg-4">
-                        <label for="input1">Last Name</label><br />
-                     @* <input type="text" id="input1" class="form-control" name="contact_name" value="@Request.Form["LastName"]"> *@
+                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label" })<br />
+                   <!-- <input type="text" id="input1" class="form-control" name="contact_name" > -->
                           @Html.TextBoxFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                           @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })   
                     </div>
                     <div class="form-group col-lg-4">
 
-                        <label for="input2">First Name </label><br />
-                       @*  <input type="email" id="input2" class="form-control" name="contact_email" value="@Request.Form["FirstName"]">*@
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })<br />
+                    <!--   <input type="email" id="input2" class="form-control" name="contact_email" > -->
                           @Html.TextBoxFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                           @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-lg-4">
-                        <label for="input3">Age</label><br />
+                       @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label" })<br />
                     <!-- <input type="phone" id="input3" class="form-control" name="contact_phone"> --> 
                         @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
