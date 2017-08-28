@@ -6,38 +6,42 @@ using System.Web.Mvc;
 using Microsoft.Reporting.WebForms;
 using System.Configuration;
 using System.IO;
+using System.Web.UI.WebControls;
+
 namespace NorthwindWeb.Controllers
 {
     public class TesteController : Controller
     {
         private Models.NorthwindModel db = new Models.NorthwindModel();
         // GET: Teste
-        public ActionResult Index()
+        public ActionResult Index(int id=0)
         {
-            string serverurl = "http://localhost/" + ConfigurationManager.AppSettings.Get("ReportServer") + "/";
-            List<ReportViewer> reports = new List<ReportViewer>();
+            List<string> filenames = new List<string>();
 
             string dirpath = Path.GetFullPath(Path.Combine(Server.MapPath("~"), @"../NorthwindReports"));
-            ReportViewer rep;
             foreach (var filepath in Directory.GetFiles(dirpath, "*rdl"))
             {
-                rep = new ReportViewer()
-                {
-                    ProcessingMode = ProcessingMode.Remote
-                };
-
                 string filename = Path.GetFileNameWithoutExtension(filepath);
-
-                rep.ServerReport.ReportServerUrl = new Uri(serverurl);
-                rep.ServerReport.ReportPath = "/NorthwindReports/" + filename;
-                rep.ServerReport.DisplayName = filename;
-                reports.Add(rep);
+                filenames.Add(filename);
             }
-            ViewBag.reports = reports;
+            ViewBag.filenames = filenames;
+            string serverurl = "http://localhost/" + ConfigurationManager.AppSettings.Get("ReportServer") + "/";
+            ReportViewer rep = new ReportViewer()
+            {
+                ProcessingMode = ProcessingMode.Remote,
+                //Width = Unit.Percentage(100),
+                //Height = Unit.Percentage(100),
+                ZoomMode = ZoomMode.PageWidth,
+                AsyncRendering = true,
+                ID = "asdf"
+                
+            };
+            rep.ServerReport.ReportServerUrl = new Uri(serverurl);
+            rep.ServerReport.ReportPath = "/NorthwindReports/" + filenames.ElementAt(id);
+            rep.ServerReport.DisplayName = filenames.ElementAt(id);
+            ViewBag.rep = rep;
 
             return View();
         }
-
-
     }
 }

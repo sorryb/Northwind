@@ -16,13 +16,6 @@
             <h4>Detalii comanda</h4>
             <hr />
             @Html.ValidationSummary(true)
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.OrderID, "OrderID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("OrderID", (IEnumerable<SelectListItem>)ViewBag.OrderID, htmlAttributes: new { @class = "form" })
-                    @Html.ValidationMessageFor(model => model.OrderID)
-                </div>
-            </div>*@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.ProductID, "ProductName", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -65,7 +58,7 @@
     }
 
     <div>
-        @*@Html.ActionLink("Inapoi", "Details","Orders", new { id = Model.OrderID }, null)*@
+        @Html.ActionLink("Inapoi", "Details","Orders", new { id = ViewBag.orderid}, null)
     </div>
 
 
