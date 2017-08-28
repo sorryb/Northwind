@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 
 
 namespace NorthwindWeb.Controllers
-{
+{   [Authorize]
     public class DashboardController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
