@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<NorthwindWeb.Models.Products>
+﻿@model List<NorthwindWeb.Models.Products>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Produse";
@@ -9,6 +9,7 @@
 <br/>
 <div class="">
     <button class="btn btn-default">@Html.ActionLink("Adauga Produs", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+<<<<<<< HEAD
     <form action="~/Controllers/Product/Index">
         <div class="input-group cssencapsulate">
             <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
@@ -21,6 +22,9 @@
     </form>
 </div>
 <br/>
+=======
+</p>
+>>>>>>> 4360fb20a2d1f11fe523311a1e96bc3826e1b0b7
 <table id="MyTable" class="table">
     <thead>
         <tr>
@@ -58,7 +62,8 @@
                     @Html.DisplayFor(modelItem => item.Category.CategoryName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
+                    @Html.ActionLink(item.ProductName, "Details", new { id = item.ProductID })
+                    @*@Html.DisplayFor(modelItem => item.ProductName)*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -77,7 +82,6 @@
                 </td>
                 <td>
                     @Html.ActionLink("Modifica", "Edit", new { id = item.ProductID }) |
-                    @Html.ActionLink("Detalii", "Details", new { id = item.ProductID }) |
                     @Html.ActionLink("Sterge", "Delete", new { id = item.ProductID })
                 </td>
             </tr>
@@ -85,10 +89,10 @@
     </tbody>
 
 </table>
-<div class="row text-center">
+@*<div class="row text-center">
     <div class="col-lg-12">
         Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
 
         @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { category = ViewBag.category, page }))
     </div>
-</div>
+</div>*@
