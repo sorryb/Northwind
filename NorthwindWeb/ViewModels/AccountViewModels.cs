@@ -68,7 +68,7 @@ namespace NorthwindWeb.ViewModels
         [Display(Name = "Parola")]
         public string Password { get; set; }
 
-        [Display(Name = "Aminteste-ma ?")]
+        [Display(Name = "Tine-ma minte")]
         public bool RememberMe { get; set; }
     }
 
@@ -77,7 +77,7 @@ namespace NorthwindWeb.ViewModels
     /// </summary>
     public class UserInfoViewModel
     {
-        [Display(Name = "User Name")]
+        [Display(Name = "Nume utilizator")]
         public string UserName { get; set; }
 
         [DataType(DataType.EmailAddress)]
@@ -113,7 +113,7 @@ namespace NorthwindWeb.ViewModels
         //public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
-        [Display(Name = "User name")]
+        [Display(Name = "Nume utilizator")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
@@ -124,11 +124,11 @@ namespace NorthwindWeb.ViewModels
         [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
         [ValidatePasswordLength]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirmare parola")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Cele doua parole introduse nu se potrivesc !")]
         public string ConfirmPassword { get; set; }
     }
@@ -143,12 +143,12 @@ namespace NorthwindWeb.ViewModels
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Parola")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Confirmare parola")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Cele doua parole introduse nu se potrivesc !")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
