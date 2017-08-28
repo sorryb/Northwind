@@ -204,6 +204,7 @@
     <Compile Include="Controllers\OrderDetailController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
+    <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
@@ -456,6 +457,11 @@
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Teste\Index.cshtml" />
     <Content Include="Views\Shared\_OrdersMenuPartial.cshtml" />
+    <Content Include="Views\Persons\Create.cshtml" />
+    <Content Include="Views\Persons\Delete.cshtml" />
+    <Content Include="Views\Persons\Details.cshtml" />
+    <Content Include="Views\Persons\Edit.cshtml" />
+    <Content Include="Views\Persons\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
