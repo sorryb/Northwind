@@ -25,6 +25,9 @@
 
     @*<link href="~/css/Dashboard.css" rel="stylesheet" />*@
 
+    <!--Data tables-->
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -47,8 +50,9 @@
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
-                @Html.Partial("_LoginPartial")
-                   
+                <li>
+                    @Html.Partial("_LoginPartial")
+                </li>    
             </ul>
 
             <!-- /.navbar-left-links -->
@@ -57,12 +61,18 @@
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
                             <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                               
+                                <form id="searchInput" action='@Url.Action("Search", "Dashboard")'>
+                                    <div class="input-group">
+                                        <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-default" type="submit">
+                                                <i class="glyphicon glyphicon-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                               
                             </div>
                             <!-- /input-group -->
                         </li>
@@ -164,23 +174,9 @@
         }
     </script>
     <script src="~/js/dist/sb-admin-2.js"></script>
-        @*<script>
-            $.ajax({
-                url: '@Html.Raw(@Url.Action("Menu", "Home"))',
-                dataType: 'json',
-                cache: false,
-                success: function (data) {
-                    $(data).each(function (i, el) {
-                        @{string i};
-                        @i=el;
-                            var x = '<li id=' + el + '>' +@(Html.ActionLink(i.ToString(), "Index", "Product", new { category =i }, null))+'</li>'
-                        $("#category").append(x);
-
-                    });
-
-                }
-            });
-        </script>*@
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/js/datatable.js"></script>
+     
     <!-- section scripts from _Layout-->
     @RenderSection("scripts", required: false)
 

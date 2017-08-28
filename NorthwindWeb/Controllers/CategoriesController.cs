@@ -16,9 +16,9 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Categories
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string search = "")
         {
-            return View(await db.Categories.ToListAsync());
+            return View(await db.Categories.Where(x=>x.CategoryName.Contains(search)).ToListAsync());
         }
 
         // GET: Categories/Details/5

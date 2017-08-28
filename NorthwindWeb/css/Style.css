@@ -50,6 +50,10 @@ img[class~=products] {
     padding: 5px 5px 5px 5px;
 }
 
+/*search icon in product. weerd position resolve*/
+.cssencapsulate > .input-group-btn {
+    width: auto !important;
+}
 /*white and rounded background*/
 [class~=whiterounded] {
     border-radius: 20px;
@@ -108,15 +112,27 @@ h3.prodpad{
     top: -30px;
 }
 
-.form-control {
-    float:right !important;
+/*put search left in crud view*/
+.crudFormButtonLeftOfSearch {
+    float: left;
+}
+    .crudFormButtonLeftOfSearch:after {
+        clear: left;
+    }
+
+/*padding left 10px*/
+.paddingLeftTen {
+    padding-left: 10px;
 }
 
+.form-control {
+    float: right !important;
+}
+
+
 /*change text color -- used in Create,Edit from Orders*/
-.ord-form 
-{
-    color:black;
-    
+.ord-form {
+    color: black;
 }
 
 /*change from dimension -- used in Create,Edit from Orders*/
@@ -133,9 +149,10 @@ h3.prodpad{
     display:flex;
 }
 iframe.fill{
-    height:93vh;
+    height:90vh;
     width:100%;
 }
+
 [class~=particularEmployees] {
     margin: 20px;
 }

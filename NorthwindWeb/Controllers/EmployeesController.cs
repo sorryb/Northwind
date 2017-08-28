@@ -17,11 +17,12 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Employees
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(string search = "", int page = 1)
         {
-            var employees = db.Employees.Include(e => e.Employee1).OrderBy(x => x.EmployeeID);
+            var employees = db.Employees.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search)).Include(e => e.Employee1).OrderBy(x => x.EmployeeID);
             int pageSize = 15;
             int pageNumber = page;
+            ViewBag.search = search;
             return View(employees.ToPagedList(pageNumber, pageSize));
         }
 

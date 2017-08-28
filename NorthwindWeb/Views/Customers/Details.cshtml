@@ -4,97 +4,95 @@
     ViewBag.Title = "Detalii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container crudstyle">
-    <h2>Detalii</h2>
+<h2>Detalii</h2>
 
-    <div>
-        <h4>Client</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Nume Companie
-            </dt>
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nume Companie
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.CompanyName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
 
-            <dt>
-                Nume Contact
-            </dt>
+        <dt>
+            Nume Contact
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ContactName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ContactName)
+        </dd>
 
-            <dt>
-                Pozitie
-            </dt>
+        <dt>
+            Pozitie
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ContactTitle)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ContactTitle)
+        </dd>
 
-            <dt>
-                Adresa
-            </dt>
+        <dt>
+            Adresa
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
 
-            <dt>
-                Oras
-            </dt>
+        <dt>
+            Oras
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
 
-            <dt>
-                Regiune
-            </dt>
+        <dt>
+            Regiune
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Region)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Region)
+        </dd>
 
-            <dt>
-                Cod Postal
-            </dt>
+        <dt>
+            Cod Postal
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.PostalCode)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
 
-            <dt>
-                Tara
-            </dt>
+        <dt>
+            Tara
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Country)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
 
-            <dt>
-                Telefon
-            </dt>
+        <dt>
+            Telefon
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Phone)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
 
-            <dt>
-                Fax
-            </dt>
+        <dt>
+            Fax
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Fax)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Fax)
+        </dd>
 
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Modifica", "Edit", new { id = Model.CustomerID }) |
-        @Html.ActionLink("Inapoi", "Index")
-    </p>
+    </dl>
 </div>
+<p>
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.CustomerID }) |
+    @Html.ActionLink("Inapoi", "Index")
+</p>
