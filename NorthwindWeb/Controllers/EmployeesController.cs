@@ -12,7 +12,7 @@ using PagedList;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admins")]
     public class EmployeesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
