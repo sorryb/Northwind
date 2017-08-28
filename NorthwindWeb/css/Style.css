@@ -112,6 +112,19 @@ h3.prodpad{
     top: -30px;
 }
 
+/*put search left in crud view*/
+.crudFormButtonLeftOfSearch {
+    float: left;
+}
+    .crudFormButtonLeftOfSearch:after {
+        clear: left;
+    }
+
+/*padding left 10px*/
+.paddingLeftTen {
+    padding-left: 10px;
+}
+
 .form-control {
     float: right !important;
 }
