@@ -1,91 +1,93 @@
 ﻿@model PagedList.IPagedList<NorthwindWeb.Models.Products>
 @using PagedList.Mvc;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Produse";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container crudstyle">
-    <h2>Index</h2>
+<h2>Produse</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
+<p>
+    <button class="btn btn-default">@Html.ActionLink("Adauga Produs", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nume Categorie
+        </th>
+        <th>
+            Nume Companie
+        </th>
+        <th>
+            Nume Produs
+        </th>
+        <th>
+            Cantitate
+        </th>
+        <th>
+            Pret
+        </th>
+        <th>
+            In Stoc
+        </th>
+        <th>
+            Pe Comezi
+        </th>
+        <th>
+            Stoc limita
+        </th>
+        <th>
+            Indisponibil
+        </th>
+        <th>
+            Optiuni
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Category.CategoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Supplier.CompanyName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().QuantityPerUnit)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitsInStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitsOnOrder)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ReorderLevel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Discontinued)
-            </th>
-            <th></th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsInStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReorderLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discontinued)
+            </td>
+            <td>
+                @Html.ActionLink("Modifica", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Detalii", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Sterge", "Delete", new { id = item.ProductID })
+            </td>
         </tr>
+    }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuantityPerUnit)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitsInStock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UnitsOnOrder)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReorderLevel)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Discontinued)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
-                </td>
-            </tr>
-        }
+</table>
+<div class="row text-center">
+    <div class="col-lg-12">
+        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
 
-    </table>
-    <div class="row text-center">
-        <div class="col-lg-12">
-            Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
-
-            @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new {category = ViewBag.category, page }))
-        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { category = ViewBag.category, page }))
     </div>
 </div>
