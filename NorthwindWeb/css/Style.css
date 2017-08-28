@@ -133,7 +133,15 @@ h3.prodpad{
     display:flex;
 }
 iframe.fill{
-    height:93vh;
+    height:80vh;
+    width:100%;
+}
+#asdf{
+    height:100%;
+    width:100%;
+}
+#ReportVierer1{
+    height:100%;
     width:100%;
 }
 [class~=particularEmployees] {

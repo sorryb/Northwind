@@ -1,0 +1,38 @@
+﻿@model NorthwindWeb.Models.Territories
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<div class="container">
+
+    <h2>Detalii</h2>
+
+    <div>
+        <h4>Teritorii</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Region.RegionDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Region.RegionDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TerritoryDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TerritoryDescription)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Modifica", "Edit", new { id = Model.TerritoryID }) |
+        @Html.ActionLink("Inapoi", "Index")
+    </p>
+
+</div>
