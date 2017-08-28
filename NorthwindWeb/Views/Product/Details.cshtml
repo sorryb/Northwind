@@ -4,89 +4,87 @@
     ViewBag.Title = "Detalii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container crudstyle">
-    <h2>Detalii</h2>
+<h2>Detalii</h2>
 
-    <div>
-        <h4>Produs</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                Nume Categorie
-            </dt>
+<div>
+    <h4>Produs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nume Categorie
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Category.CategoryName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
 
-            <dt>
-                Nume Companie
-            </dt>
+        <dt>
+            Nume Companie
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Supplier.CompanyName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.CompanyName)
+        </dd>
 
-            <dt>
-                Nume Produs
-            </dt>
+        <dt>
+            Nume Produs
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ProductName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
 
-            <dt>
-                Cantitate
-            </dt>
+        <dt>
+            Cantitate
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.QuantityPerUnit)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.QuantityPerUnit)
+        </dd>
 
-            <dt>
-                Pret
-            </dt>
+        <dt>
+            Pret
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitPrice)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
 
-            <dt>
-                In Srtoc
-            </dt>
+        <dt>
+            In Srtoc
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitsInStock)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.UnitsInStock)
+        </dd>
 
-            <dt>
-                Pe Comenzi
-            </dt>
+        <dt>
+            Pe Comenzi
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitsOnOrder)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.UnitsOnOrder)
+        </dd>
 
-            <dt>
-                Stoc limita
-            </dt>
+        <dt>
+            Stoc limita
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ReorderLevel)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ReorderLevel)
+        </dd>
 
-            <dt>
-                Indisponibil
-            </dt>
+        <dt>
+            Indisponibil
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Discontinued)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Discontinued)
+        </dd>
 
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Modifica", "Edit", new { id = Model.ProductID }) |
-        @Html.ActionLink("Inapoi", "Index")
-    </p>
+    </dl>
 </div>
+<p>
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Inapoi", "Index")
+</p>
