@@ -8,7 +8,19 @@
 <div class="container">
 
     <h2>Modifica</h2>
-
+    <hr />
+    <ol class="breadcrumb">
+        <li>
+            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+        </li>
+        <li>
+            @Html.ActionLink("Comenzi", "Index", "Orders")
+        </li>
+        <li>
+            @Html.ActionLink("Detalii", "Details", "Orders", new { id = Model.OrderID }, null)
+        </li>
+        <li class="active">Modifica</li>
+    </ol>
 
     @using (Html.BeginForm("Edit", "OrderDetail", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
     {

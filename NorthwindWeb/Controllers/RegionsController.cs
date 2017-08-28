@@ -13,6 +13,7 @@ using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
+    //[Authorize(Roles ="Admin")]
     public class RegionsController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
