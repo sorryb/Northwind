@@ -1,27 +1,64 @@
-﻿@model NorthwindWeb.Models.Region
+﻿@model NorthwindWeb.ViewModels.RegionIndex
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+<div class="container">
 
-<h2>Details</h2>
+    <h2>Detalii</h2>
 
-<div>
-    <h4>Region</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.RegionDescription)
-        </dt>
+    <div>
+        <div class="col-md-6">
+            <h4>Regiune</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.region.RegionDescription)
+                </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.RegionDescription)
-        </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.region.RegionDescription)
+                </dd>
 
-    </dl>
+            </dl>
+            <p>
+                @Html.ActionLink("Modifica", "Edit", new { id = Model.region.RegionID }) |
+                @Html.ActionLink("Inapoi la lista", "Index")
+            </p>
+        </div>
+        <div class="col-md-6">
+            <h4>Teritorii</h4>
+            <hr />
+            @Html.ActionLink("Adauga", "Create", "Territories", new { id = ViewBag.regionid }, null)
+            <hr />
+            @foreach (var y in Model.details)
+            {
+                <dl class="dl-horizontal">
+                    <dt>
+                        TerritoryID
+                    </dt>
+                    <dd>
+                        @y.TerritoryID
+                    </dd>
+                    <dt>
+                        TerritoryDescription
+                    </dt>
+                    <dd>
+                        @y.TerritoryDescription
+                    </dd>
+                </dl>
+
+                <p>
+                    @Html.ActionLink("Modifica", "Edit", "Territories", new { id = @y.TerritoryID }, null) |
+                    @Html.ActionLink("Sterge", "Delete", "Territories", new { id = @y.TerritoryID }, null)
+
+                </p>
+            }
+            <p>
+                @Html.ActionLink("Inapoi la lista", "Index")
+            </p>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.RegionID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

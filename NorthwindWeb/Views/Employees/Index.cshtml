@@ -14,31 +14,22 @@
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().LastName)
+                Nume
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().FirstName)
+                Prenume
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Title)
+                Pozitie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().TitleOfCourtesy)
+                Oras
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().BirthDate)
+                Tara
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().HireDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().HomePhone)
+                Telefon
             </th>
             <th></th>
         </tr>
@@ -56,15 +47,6 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TitleOfCourtesy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BirthDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HireDate)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.City)
                 </td>
                 <td>
@@ -74,9 +56,9 @@
                     @Html.DisplayFor(modelItem => item.HomePhone)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.EmployeeID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeID })
+                    @Html.ActionLink("Modifica", "Edit", new { id = item.EmployeeID }) |
+                    @Html.ActionLink("Detalii", "Details", new { id = item.EmployeeID }) |
+                    @Html.ActionLink("Sterge", "Delete", new { id = item.EmployeeID })
                 </td>
             </tr>
         }

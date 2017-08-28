@@ -1,92 +1,90 @@
 ﻿@model NorthwindWeb.Models.Products
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container crudstyle">
-    <h2>Details</h2>
+<h2>Detalii</h2>
 
-    <div>
-        <h4>Products</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Category.CategoryName)
-            </dt>
+<div>
+    <h4>Produs</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nume Categorie
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Category.CategoryName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Supplier.CompanyName)
-            </dt>
+        <dt>
+            Nume Companie
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Supplier.CompanyName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Supplier.CompanyName)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </dt>
+        <dt>
+            Nume Produs
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ProductName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.QuantityPerUnit)
-            </dt>
+        <dt>
+            Cantitate
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.QuantityPerUnit)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.QuantityPerUnit)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </dt>
+        <dt>
+            Pret
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitPrice)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.UnitsInStock)
-            </dt>
+        <dt>
+            In Srtoc
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitsInStock)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.UnitsInStock)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.UnitsOnOrder)
-            </dt>
+        <dt>
+            Pe Comenzi
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.UnitsOnOrder)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.UnitsOnOrder)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.ReorderLevel)
-            </dt>
+        <dt>
+            Stoc limita
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ReorderLevel)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ReorderLevel)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Discontinued)
-            </dt>
+        <dt>
+            Indisponibil
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Discontinued)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Discontinued)
+        </dd>
 
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    </dl>
 </div>
+<p>
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Inapoi", "Index")
+</p>

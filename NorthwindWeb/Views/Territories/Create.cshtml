@@ -1,4 +1,4 @@
-﻿@model NorthwindWeb.Models.Region
+﻿@model NorthwindWeb.Models.Territories
 
 @{
     ViewBag.Title = "Create";
@@ -13,24 +13,25 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Regiune</h4>
+            <h4>Territorii</h4>
             <hr />
             @Html.ValidationSummary(true)
             <div class="form-group">
-                @Html.LabelFor(model => model.RegionID, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TerritoryID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.RegionID)
-                    @Html.ValidationMessageFor(model => model.RegionID)
+                    @Html.EditorFor(model => model.TerritoryID)
+                    @Html.ValidationMessageFor(model => model.TerritoryID)
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.RegionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TerritoryDescription, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.RegionDescription)
-                    @Html.ValidationMessageFor(model => model.RegionDescription)
+                    @Html.EditorFor(model => model.TerritoryDescription)
+                    @Html.ValidationMessageFor(model => model.TerritoryDescription)
                 </div>
             </div>
+
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -41,7 +42,7 @@
     }
 
     <div>
-        @Html.ActionLink("Inapoi la lista", "Index")
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = ViewBag.regionid }, null)
     </div>
 </div>
 

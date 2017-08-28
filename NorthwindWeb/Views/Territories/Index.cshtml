@@ -1,0 +1,40 @@
+﻿@model IEnumerable<NorthwindWeb.Models.Territories>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Adauga", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Region.RegionDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TerritoryDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Region.RegionDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TerritoryDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Modifica", "Edit", new { id=item.TerritoryID }) |
+            @Html.ActionLink("Detalii", "Details", new { id=item.TerritoryID }) |
+            @Html.ActionLink("Sterge", "Delete", new { id=item.TerritoryID })
+        </td>
+    </tr>
+}
+
+</table>

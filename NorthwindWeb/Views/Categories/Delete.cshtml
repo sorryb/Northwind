@@ -1,19 +1,19 @@
 ﻿@model NorthwindWeb.Models.Categories
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Sterte";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Sterge</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Esti sigur ca vrei sa-l stergi?</h3>
 <div>
-    <h4>Categories</h4>
+    <h4>Categorie</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.CategoryName)
+            Nume Categorie
         </dt>
 
         <dd>
@@ -21,7 +21,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            Descriere
         </dt>
 
         <dd>
@@ -34,8 +34,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Sterge" class="btn btn-default" /> |
+            <button class="btn btn-default">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
         </div>
     }
 </div>
