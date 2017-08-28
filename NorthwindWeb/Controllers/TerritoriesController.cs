@@ -8,135 +8,117 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
-using PagedList;
-using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
-    public class RegionsController : Controller
+    public class TerritoriesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
 
-        // GET: Regions
+        // GET: Territories
         public async Task<ActionResult> Index()
         {
-            var region= db.Regions.OrderBy(r=>r.RegionID);
-            return View(await region.ToListAsync());
+            var territories = db.Territories.Include(t => t.Region);
+            return View(await territories.ToListAsync());
         }
 
-        // GET: Regions/Details/5
-        public async Task<ActionResult> Details(int? id)
+        // GET: Territories/Details/5
+        public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            RegionIndex viewModel = new RegionIndex();
-            Region region = await db.Regions.FindAsync(id);
-            if (region == null)
+            Territories territories = await db.Territories.FindAsync(id);
+            if (territories == null)
             {
                 return HttpNotFound();
             }
-            viewModel.region = region;
-
-            var ter = from t in db.Territories
-                        where (t.RegionID == id)
-                        select new { t.TerritoryID,t.TerritoryDescription };
-
-            List<RegionDetails> list = new List<RegionDetails>();
-
-            
-            foreach (var item in ter)
-            {
-                RegionDetails x = new RegionDetails();
-
-                x.TerritoryID = item.TerritoryID;
-                x.TerritoryDescription = item.TerritoryDescription;
-
-                list.Add(x);
-
-            }
-            viewModel.details = list;
-            ViewBag.regionid = id;
-            return View(viewModel);
+            return View(territories);
         }
 
-        // GET: Regions/Create
-        public ActionResult Create()
+        // GET: Territories/Create
+        public ActionResult Create(int? id)
         {
+            ViewBag.regionid = id;
+            //ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription");
             return View();
         }
 
-        // POST: Regions/Create
+        // POST: Territories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "RegionID,RegionDescription")] Region region)
+        public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories,int id)
         {
+            territories.RegionID = id;
             if (ModelState.IsValid)
             {
-                db.Regions.Add(region);
+                db.Territories.Add(territories);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(region);
+            //ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
+            return View(territories);
         }
 
-        // GET: Regions/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        // GET: Territories/Edit/5
+        public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Region region = await db.Regions.FindAsync(id);
-            if (region == null)
+            Territories territories = await db.Territories.FindAsync(id);
+            if (territories == null)
             {
                 return HttpNotFound();
             }
-            return View(region);
+            ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
+            return View(territories);
         }
 
-        // POST: Regions/Edit/5
+        // POST: Territories/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "RegionID,RegionDescription")] Region region)
+        public async Task<ActionResult> Edit([Bind(Include = "TerritoryID,TerritoryDescription,RegionID")] Territories territories)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(region).State = EntityState.Modified;
+                db.Entry(territories).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(region);
+            ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
+            return View(territories);
         }
 
-        // GET: Regions/Delete/5
-        public async Task<ActionResult> Delete(int? id)
+        // GET: Territories/Delete/5
+        public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Region region = await db.Regions.FindAsync(id);
-            if (region == null)
+            Territories territories = await db.Territories.FindAsync(id);
+            if (territories == null)
             {
                 return HttpNotFound();
             }
-            return View(region);
+            return View(territories);
         }
 
-        // POST: Regions/Delete/5
+        // POST: Territories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            Region region = await db.Regions.FindAsync(id);
-            db.Regions.Remove(region);
+            Territories territories = await db.Territories.FindAsync(id);
+            db.Territories.Remove(territories);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

@@ -211,6 +211,7 @@
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ShippersController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
+    <Compile Include="Controllers\TerritoriesController.cs" />
     <Compile Include="Controllers\TesteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -248,6 +249,8 @@
     <Compile Include="ViewModels\Order\OrderProduct.cs" />
     <Compile Include="ViewModels\Order\ProductCategory.cs" />
     <Compile Include="ViewModels\ProductServices.cs" />
+    <Compile Include="ViewModels\RegionDetails.cs" />
+    <Compile Include="ViewModels\RegionIndex.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\ServicesIndex.cs" />
     <Compile Include="ViewModels\ViewProductCategoryS.cs" />
@@ -456,6 +459,11 @@
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Teste\Index.cshtml" />
     <Content Include="Views\Shared\_OrdersMenuPartial.cshtml" />
+    <Content Include="Views\Territories\Create.cshtml" />
+    <Content Include="Views\Territories\Delete.cshtml" />
+    <Content Include="Views\Territories\Details.cshtml" />
+    <Content Include="Views\Territories\Edit.cshtml" />
+    <Content Include="Views\Territories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
