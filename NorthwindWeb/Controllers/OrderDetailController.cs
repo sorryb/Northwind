@@ -12,6 +12,7 @@ using PagedList;
 
 namespace NorthwindWeb.Controllers
 {
+    //[Authorize(Roles = "Admin")]
     public class OrderDetailController : Controller
     {
         private NorthwindModel db = new NorthwindModel();

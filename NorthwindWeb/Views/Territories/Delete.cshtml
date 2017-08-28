@@ -6,6 +6,19 @@
 }
 <div class="container">
     <h2>Sterge</h2>
+    <hr />
+    <ol class="breadcrumb">
+        <li>
+            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+        </li>
+        <li>
+            @Html.ActionLink("Regiuni", "Index", "Regions")
+        </li>
+        <li>
+            @Html.ActionLink("Detalii", "Details", "Regions", new { id = Model.RegionID }, null)
+        </li>
+        <li class="active">Sterge</li>
+    </ol>
 
     <h3>Sigur vrei sa stergi?</h3>
     <div>
