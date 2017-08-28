@@ -50,6 +50,10 @@ img[class~=products] {
     padding: 5px 5px 5px 5px;
 }
 
+/*search icon in product. weerd position resolve*/
+.cssencapsulate > .input-group-btn {
+    width: auto !important;
+}
 /*white and rounded background*/
 [class~=whiterounded] {
     border-radius: 20px;
