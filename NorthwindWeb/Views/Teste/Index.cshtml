@@ -1,19 +1,22 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Teste";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 @using ReportViewerForMvc
-<h2>Teste</h2>
-@{
-    int i = 0;
 
-    foreach (var report in ViewBag.reports as List<Microsoft.Reporting.WebForms.ReportViewer>)
-    {
-        i++;
-        @Html.ReportViewer(report);
-        if (i == 2)
-        {
-            break;
+<div class="navbar-default col-md-3">
+    <ul class="nav">
+        @{ int i = 0;
+            foreach (var filename in ViewBag.filenames as List<string>)
+            {
+                <li>
+                    @Html.ActionLink(filename, "index", "Teste", new { id = i }, null)
+                </li>
+                i++;
+            }
         }
-    }
-}
+    </ul>
+</div>
+<div class="col-md-9">
+    @Html.ReportViewer(ViewBag.rep as Microsoft.Reporting.WebForms.ReportViewer,htmlAttributes:new { @class="fill" })
+</div>
