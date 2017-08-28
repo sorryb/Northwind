@@ -4,9 +4,21 @@
     ViewBag.Title = "Produse";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<h2>Produse @ViewBag.category</h2>
 
-<br/>
+
+@if (!string.IsNullOrEmpty(ViewBag.category))
+{
+    <h2>
+        <a href=@Url.Action("Index", "Product")>Produse</a> / @ViewBag.category
+    </h2>
+}
+else
+{
+    <h2>Produse</h2>
+}
+
+
+<br />
 <div class="">
     <button class="btn btn-default">@Html.ActionLink("Adauga Produs", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
     <form action="~/Controllers/Product/Index">
@@ -20,7 +32,7 @@
         </div>
     </form>
 </div>
-<br/>
+<br />
 <table id="MyTable" class="table">
     <thead>
         <tr>
@@ -70,7 +82,7 @@
                     @Html.DisplayFor(modelItem => item.Discontinued)
                 </td>
                 <td>
-                    <a href="@Url.Action("Delete", new { id = item.ProductID })" ><i class="fa fa-remove"></i></a>
+                    <a href="@Url.Action("Delete", new { id = item.ProductID })"><i class="fa fa-remove"></i></a>
                 </td>
             </tr>
         }
