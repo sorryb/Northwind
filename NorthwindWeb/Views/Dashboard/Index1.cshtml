@@ -159,7 +159,19 @@
         </div>
     </div>
     <div class="col-lg-4">
+        <!-- /.panel -->
         <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe categori
+            </div>
+            <div class="panel-body">
+                <div id="morris-donut-chart"></div>
+                @Html.ActionLink("Vizualizati Categoriile", "Index", "Product", null, new { @class = "btn btn-default btn-block" })
+               
+            </div>
+            <!-- /.panel-body -->
+        </div>
+                <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-briefcase fa-fw"></i> Ultimele 10 Comenzi
             </div>
@@ -185,18 +197,6 @@
                 </div>
                 <!-- /.list-group -->
                 @Html.ActionLink("Vizualizati toate comenzile", "Index", "Orders", null, new {@class="btn btn-default btn-block" })
-               
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe categori
-            </div>
-            <div class="panel-body">
-                <div id="morris-donut-chart"></div>
-                @Html.ActionLink("Vizualizati Categoriile", "Index", "Product", null, new { @class = "btn btn-default btn-block" })
                
             </div>
             <!-- /.panel-body -->

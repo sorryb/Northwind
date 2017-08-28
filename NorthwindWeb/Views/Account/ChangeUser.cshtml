@@ -1,0 +1,64 @@
+﻿@model NorthwindWeb.ViewModels.RegisterViewModel
+@{
+    ViewBag.Title = "Modificare";
+}
+
+<hgroup class="title">
+    <h2>Schimbare cont existent.</h2>
+</hgroup>
+
+<div class="row">
+
+        <section id="ChangeForm">
+            @using (Html.BeginForm()) 
+            {
+                @Html.AntiForgeryToken()
+                <h4>&nbsp;&nbsp;&nbsp;&nbsp;Modificare utilizator @ViewBag.UserName</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-offset-4 col-md-1  control-label" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" ,autofocus="true"})
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-offset-4 col-md-1 control-label" })
+                    <div class="col-md-5">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-offset-4 col-md-1 control-label" })
+                    <div class="col-md-5">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-offset-4 col-md-1 control-label" })
+                    <div class="col-md-5">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            
+                <div class="form-group">
+                    <div class="col-md-offset-5 col-md-7">
+                       <input type="submit" value="Modificare"  class="btn btn-default"/>
+                    </div>
+                </div>
+
+            }
+        </section>
+  
+
+</div>
+
+
+<!--@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}-->

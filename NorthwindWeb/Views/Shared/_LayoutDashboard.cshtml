@@ -67,20 +67,19 @@
                             <!-- /input-group -->
                         </li>
                         <li>
+                            <a href='@Url.Action("Index1", "Dashboard")' ><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 
-                            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+                            <!--@Html.ActionLink("Dashboard", "Index1", "Dashboard")-->
                         </li>
                         <li id="services">
                             @Html.ActionLink("Servicii", "Index", "Product", new { category = "Servicii" }, null)
                         </li>
-                        <li id="product">
-                            @Html.ActionLink("Produse", "Index", "Product")
-                        </li>
-
                         <li id="category" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorii Produse<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produse<b class="caret"></b></a>
                             <ul class="nav nav-second-level">
-
+                                <li id="product">
+                                    @Html.ActionLink("Toate", "Index", "Product")
+                                </li>
                                 @{Html.RenderAction("Menu", "Home");}
 
                             </ul>
@@ -108,6 +107,14 @@
                         </li>
                         <li id="regions">
                             @Html.ActionLink("Regiuni", "Index", "Regions")
+                        </li>
+                        <li id="users">
+                            <a href='@Url.Action("Index", "Account")' ><i class="fa fa-user fa-fw"></i> Utilizatori</a>
+                            <!--@Html.ActionLink("Utilizatori", "Index", "Account")-->
+                        </li>
+                        <li id="roles">
+                            <a href='@Url.Action("RolesIndex", "Account")' ><i class="fa fa-gift fa-fw"></i> Roluri</a>
+                            <!--@Html.ActionLink("Roluri", "RolesIndex", "Account")-->
                         </li>
                     </ul>
                 </div>

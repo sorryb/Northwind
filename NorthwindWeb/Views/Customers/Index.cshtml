@@ -2,43 +2,39 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Clienti";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container crudstyle">
-    <h2>Index</h2>
+    <h2>Clienti</h2>
 
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <button class="btn btn-default">@Html.ActionLink("Adauga Client", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+        
     </p>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().CompanyName)
+                Nume Companie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ContactName)
+                Nume Contact
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ContactTitle)
+                Pozitie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
+                Oras
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().City)
+                Tara
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Region)
+                Telefon
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Fax)
+                Optiuni
             </th>
             <th></th>
         </tr>
@@ -56,13 +52,7 @@
                     @Html.DisplayFor(modelItem => item.ContactTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Region)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Country)
@@ -71,12 +61,9 @@
                     @Html.DisplayFor(modelItem => item.Phone)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Fax)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.CustomerID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.CustomerID })
+                    @Html.ActionLink("Modifica", "Edit", new { id = item.CustomerID }) |
+                    @Html.ActionLink("Detalii", "Details", new { id = item.CustomerID }) |
+                    @Html.ActionLink("Sterge", "Delete", new { id = item.CustomerID })
                 </td>
             </tr>
         }
@@ -84,7 +71,7 @@
     </table>
     <div class="row text-center">
         <div class="col-lg-12">
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
 
             @Html.PagedListPager(Model, page => Url.Action("Index", "Customers", new { page }))
         </div>

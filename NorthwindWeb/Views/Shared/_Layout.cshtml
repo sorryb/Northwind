@@ -38,9 +38,6 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="dashboard">
-                        @Html.ActionLink("Dashboard", "Index1", "Dashboard")
-                    </li>
                     <li id="services">
                         @Html.ActionLink("Servicii", "Index", "Services")
                     </li>
@@ -62,19 +59,12 @@
                             <li id="24columnportfolio">
                                 @Html.ActionLink("eBook readers", "Products", "Products", new { category = "eBook Reader" }, null)
                             </li>
-                            <li id="24columnportfolio">
+                            <li id="25columnportfolio">
                                 @Html.ActionLink("Servicii", "Products", "Products", new { category = "Servicii" }, null)
                             </li>
                         </ul>
                     </li>
-                    <li id="blog" class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li id="bloghome1">
-                                @Html.ActionLink("Lista Comenzi", "Home1", "Order")
-                            </li>
-                        </ul>
-                    </li>
+                    @Html.Partial("_OrdersMenuPartial")
                     <li id="others" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alte informatii <b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -88,7 +78,7 @@
                                 @Html.ActionLink("Intrebari frecvente", "Faq", "Other")
                             </li>
                         </ul>
-
+                    </li>
 
                     <li id="about">
                         @Html.ActionLink("Despre noi", "Index", "About")
@@ -114,8 +104,11 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                    @Html.Partial("_LoginPartial")
+                        </li>
                 </ul>
-                @Html.Partial("_LoginPartial")
+                
             </div>
             <!-- /.navbar-collapse -->
         </div>

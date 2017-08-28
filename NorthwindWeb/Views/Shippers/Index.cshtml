@@ -1,0 +1,45 @@
+﻿@model IEnumerable<NorthwindWeb.Models.Shippers>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Expeditori</h2>
+
+<p>
+    <button class="btn btn-default">@Html.ActionLink("Adauga Expeditor", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+    
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nume Companie
+        </th>
+        <th>
+            Telefon
+        </th>
+
+        <th>
+            Optiuni
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.ActionLink("Modifica", "Edit", new { id=item.ShipperID }) |
+            @Html.ActionLink("Detalii", "Details", new { id=item.ShipperID }) |
+            @Html.ActionLink("Sterge", "Delete", new { id=item.ShipperID })
+        </td>
+    </tr>
+}
+
+</table>

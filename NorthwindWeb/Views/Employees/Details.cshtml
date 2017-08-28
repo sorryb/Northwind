@@ -1,19 +1,19 @@
 ﻿@model NorthwindWeb.Models.Employees
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container crudstyle">
-    <h2>Details</h2>
+    <h2>Detalii</h2>
 
     <div>
-        <h4>Employees</h4>
+        <h4>Angajat</h4>
         <hr />
         <dl class="dl-horizontal">
 
             <dt>
-                @Html.DisplayNameFor(model => model.LastName)
+                Nume
             </dt>
 
             <dd>
@@ -21,7 +21,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
+                Prenume
             </dt>
 
             <dd>
@@ -29,7 +29,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Title)
+                Pozitie
             </dt>
 
             <dd>
@@ -37,7 +37,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.TitleOfCourtesy)
+                Metoda de adresare
             </dt>
 
             <dd>
@@ -45,7 +45,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.BirthDate)
+                Data nasterii
             </dt>
 
             <dd>
@@ -53,7 +53,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.HireDate)
+                Data angajarii
             </dt>
 
             <dd>
@@ -61,7 +61,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Address)
+                Adresa
             </dt>
 
             <dd>
@@ -69,7 +69,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.City)
+                Oras
             </dt>
 
             <dd>
@@ -94,7 +94,7 @@
             </dd>*@
             
             <dt>
-                @Html.DisplayNameFor(model => model.PostalCode)
+                Cod Postal
             </dt>
 
             <dd>
@@ -102,7 +102,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Country)
+                Oras
             </dt>
 
             <dd>
@@ -110,7 +110,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.HomePhone)
+                Telefon
             </dt>
 
             <dd>
@@ -118,7 +118,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Extension)
+                Interior
             </dt>
 
             <dd>
@@ -126,7 +126,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Notes)
+                Note
             </dt>
 
             <dd>
@@ -138,7 +138,7 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeID }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }) |
+        @Html.ActionLink("Inapoi", "Index")
     </p>
 </div>

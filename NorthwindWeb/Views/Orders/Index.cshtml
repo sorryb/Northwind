@@ -79,7 +79,7 @@
 
     <div class="row text-center">
         <div class="col-lg-12">
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
 
             @Html.PagedListPager(Model, page => Url.Action("Index", "Orders", new { page }))
         </div>

@@ -124,7 +124,7 @@
                     </tbody>
                 </table>
             }
-            Page @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) of @Model.page.PageCount
+            Pagina @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) din @Model.page.PageCount
             @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
            
         </div>

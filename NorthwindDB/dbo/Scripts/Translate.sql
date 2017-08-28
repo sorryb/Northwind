@@ -1868,6 +1868,8 @@ update Suppliers
 	HomePage = 'www.mediagalaxy.ro'
 where CompanyName = 'Tokyo Traders';
 
+delete from Suppliers where CompanyName like 'Cooperativa de Quesos%';
+
 
 delete from Suppliers where CompanyName like 'Cooperativa de Quesos %' and CompanyName like '%Las Cabras';
 delete from Suppliers where CompanyName like 'Mayumi%';
@@ -1911,7 +1913,7 @@ begin
 end
 else
 begin
-	update Categories set CategoryName='Servicii',Description='Services that we offer' where CategoryID=6
+	update Categories set CategoryName='Servicii',Description='Servicii oferite' where CategoryID=6
 end
 delete from Categories where CategoryID between 7 and 8
 go

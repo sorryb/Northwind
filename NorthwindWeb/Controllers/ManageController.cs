@@ -11,7 +11,7 @@ using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

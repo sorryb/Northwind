@@ -1,0 +1,72 @@
+﻿@model IEnumerable<NorthwindWeb.Models.Suppliers>
+
+@{
+    ViewBag.Title = "Furnizori";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Furnizori</h2>
+
+<p>
+    <button class="btn btn-default">@Html.ActionLink("Adauga Furnizor", "Create", null, htmlAttributes : new { style = "text-decoration: none;color:black;" })</button> 
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nume Companie
+        </th>
+        <th>
+            Nume Contact
+        </th>
+        <th>
+            Pozitie
+        </th>
+        <th>
+           Adresa
+        </th>
+        <th>
+            Oras
+        </th>
+        <th>
+            Tara
+        </th>
+        <th>
+            Telefon
+        </th>
+        <th>
+            Optiuni
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.ActionLink("Modifica", "Edit", new { id = item.SupplierID }) |
+            @Html.ActionLink("Detalii", "Details", new { id = item.SupplierID }) |
+            @Html.ActionLink("Sterge", "Delete", new { id = item.SupplierID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,21 +1,21 @@
-﻿@model NorthwindWeb.Models.IndexViewModel
+﻿@model NorthwindWeb.ViewModels.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Schimbare date utilizator";
 }
 
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
-    <h4>Change your account settings</h4>
+    <h4>Setari cont</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>Password:</dt>
+        <dt>Parola:</dt>
         <dd>
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
+                @Html.ActionLink("Schimbare parola ", "ChangePassword")
             }
             else
             {
@@ -23,11 +23,11 @@
             }
             ]
         </dd>
-        <dt>External Logins:</dt>
+<!--        <dt>External Logins:</dt>
         <dd>
             @Model.Logins.Count [
             @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
+        </dd>-->
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
              
@@ -56,7 +56,7 @@
                 }
             </dd>
         *@
-        <dt>Two-Factor Authentication:</dt>
+<!--        <dt>Two-Factor Authentication:</dt>
         <dd>
             <p>
                 There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
@@ -82,6 +82,6 @@
                         </text>
                     }
                 }*@
-        </dd>
+        </dd>-->
     </dl>
 </div>

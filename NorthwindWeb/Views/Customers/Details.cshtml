@@ -1,18 +1,18 @@
 ﻿@model NorthwindWeb.Models.Customers
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Detalii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container crudstyle">
-    <h2>Details</h2>
+    <h2>Detalii</h2>
 
     <div>
-        <h4>Customers</h4>
+        <h4>Client</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.CompanyName)
+                Nume Companie
             </dt>
 
             <dd>
@@ -20,7 +20,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.ContactName)
+                Nume Contact
             </dt>
 
             <dd>
@@ -28,7 +28,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.ContactTitle)
+                Pozitie
             </dt>
 
             <dd>
@@ -36,7 +36,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Address)
+                Adresa
             </dt>
 
             <dd>
@@ -44,7 +44,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.City)
+                Oras
             </dt>
 
             <dd>
@@ -52,7 +52,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Region)
+                Regiune
             </dt>
 
             <dd>
@@ -60,7 +60,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PostalCode)
+                Cod Postal
             </dt>
 
             <dd>
@@ -68,7 +68,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Country)
+                Tara
             </dt>
 
             <dd>
@@ -76,7 +76,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Phone)
+                Telefon
             </dt>
 
             <dd>
@@ -84,7 +84,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Fax)
+                Fax
             </dt>
 
             <dd>
@@ -94,7 +94,7 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.CustomerID }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Modifica", "Edit", new { id = Model.CustomerID }) |
+        @Html.ActionLink("Inapoi", "Index")
     </p>
 </div>
