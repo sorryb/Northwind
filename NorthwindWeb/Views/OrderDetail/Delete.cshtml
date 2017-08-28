@@ -8,6 +8,19 @@
 <div class="container">
 
     <h2>Sterge</h2>
+    <hr />
+    <ol class="breadcrumb">
+        <li>
+            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+        </li>
+        <li>
+            @Html.ActionLink("Comenzi", "Index", "Orders")
+        </li>
+        <li>
+            @Html.ActionLink("Detalii", "Details", "Orders", new { id = Model.OrderID }, null)
+        </li>
+        <li class="active">Sterge</li>
+    </ol>
 
     <h3>Sigur vrei sa stergi?</h3>
     <div>
