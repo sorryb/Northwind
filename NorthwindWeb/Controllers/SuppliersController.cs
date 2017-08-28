@@ -11,6 +11,7 @@ using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class SuppliersController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
