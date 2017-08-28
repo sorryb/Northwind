@@ -109,14 +109,13 @@ h3.prodpad{
 }
 
 .form-control {
-    float:right !important;
+    float: right !important;
 }
 
+
 /*change text color -- used in Create,Edit from Orders*/
-.ord-form 
-{
-    color:black;
-    
+.ord-form {
+    color: black;
 }
 
 /*change from dimension -- used in Create,Edit from Orders*/
@@ -133,7 +132,7 @@ h3.prodpad{
     display:flex;
 }
 iframe.fill{
-    height:80vh;
+    height:90vh;
     width:100%;
 }
 

@@ -86,6 +86,9 @@
                     <li id="contact">
                         @Html.ActionLink("Contact", "Index", "Contact")
                     </li>
+                    <li>
+                        @Html.Partial("_LoginPartial")
+                    </li>
 
                     <li id="other" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-search"></i><b class="caret"></b></a>
@@ -104,10 +107,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                    @Html.Partial("_LoginPartial")
-                        </li>
-                </ul>
+
+</ul>
                 
             </div>
             <!-- /.navbar-collapse -->

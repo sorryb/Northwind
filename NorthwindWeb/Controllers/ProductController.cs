@@ -21,17 +21,18 @@ namespace NorthwindWeb.Controllers
         {
             IOrderedQueryable<Products> products;
             ViewBag.category = category;
+
             if (category.Equals(""))
             {
-               products = db.Products.Include(p => p.Category).Include(p => p.Supplier).OrderBy(x => x.ProductID);
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
             }
             else
             {
-                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category)).OrderBy(x => x.ProductID);
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category) && p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
             }
-            int pageSize = 15;
-            int pageNumber = page;
-            return View(products.ToPagedList(pageNumber, pageSize));
+            //int pageSize = 15;
+            //int pageNumber = page;
+            return View(products.ToList());
         }
 
         // GET: Product/Details/5
