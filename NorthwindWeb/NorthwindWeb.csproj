@@ -208,7 +208,6 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
-    <Compile Include="Controllers\SearchEngineController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ShippersController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
@@ -227,7 +226,6 @@
     <Compile Include="Models\Persons.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\Region.cs" />
-    <Compile Include="Models\SearchEngineModel.cs" />
     <Compile Include="Models\Shippers.cs" />
     <Compile Include="Models\Suppliers.cs" />
     <Compile Include="Models\Territories.cs" />
@@ -240,6 +238,7 @@
     <Compile Include="ViewModels\Dashboard\DashboardGraph3.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardIndexData.cs" />
     <Compile Include="ViewModels\Dashboard\Last10Orders.cs" />
+    <Compile Include="ViewModels\Dashboard\LocateSearch.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\Orders\DetailsOfOrder.cs" />
     <Compile Include="ViewModels\Orders\OrderDetali.cs" />
@@ -426,13 +425,10 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\SearchAutoComplete.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -462,6 +458,7 @@
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Teste\Index.cshtml" />
     <Content Include="Views\Shared\_OrdersMenuPartial.cshtml" />
+    <Content Include="Views\Dashboard\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
@@ -492,7 +489,6 @@
     <Content Include="Views\Account\RoleMembership.cshtml" />
     <Content Include="Views\Account\RolesIndex.cshtml" />
     <Content Include="Views\Account\UsersInRole.cshtml" />
-    <Content Include="Views\SearchEngine\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

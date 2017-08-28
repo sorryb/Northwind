@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+@model System.Collections.Generic.List<NorthwindWeb.ViewModels.Dashboard.LocateSearch>
+
+
+
+@foreach (var item in Model)
+{
+        <a href="@Url.Action("Details", item.Controller, new { id = item.ID }, null)" class="list-group-item">
+            @Html.DisplayFor(modelItem => item.WhereFound)
+            <span class="pull-right text-muted small">
+                <em>@item.Controller</em>
+            </span>
+        </a>
+}
+
+
+
