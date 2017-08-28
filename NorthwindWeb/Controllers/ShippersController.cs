@@ -16,9 +16,9 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Shippers
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string search = "")
         {
-            return View(await db.Shippers.ToListAsync());
+            return View(await db.Shippers.Where(x => x.CompanyName.Contains(search)).ToListAsync());
         }
 
         // GET: Shippers/Details/5
