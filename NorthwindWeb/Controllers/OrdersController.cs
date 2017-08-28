@@ -62,6 +62,7 @@ namespace NorthwindWeb.Controllers
 
             }
             viewModel.details = list;
+            ViewBag.orderid = id;
             return View(viewModel);
         }
 

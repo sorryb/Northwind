@@ -9,6 +9,9 @@
 
 <p>
     <button class="btn btn-default">@Html.ActionLink("Adauga Furnizor", "Create", null, htmlAttributes : new { style = "text-decoration: none;color:black;" })</button> 
+    <div id="dashsearch">
+        
+    </div>
 </p>
 <table class="table">
     <tr>
@@ -62,7 +65,7 @@
             @Html.DisplayFor(modelItem => item.Phone)
         </td>
         <td>
-            @Html.ActionLink("Editeaza", "Edit", new { id = item.SupplierID }) |
+            @Html.ActionLink("Modifica", "Edit", new { id = item.SupplierID }) |
             @Html.ActionLink("Detalii", "Details", new { id = item.SupplierID }) |
             @Html.ActionLink("Sterge", "Delete", new { id = item.SupplierID })
         </td>

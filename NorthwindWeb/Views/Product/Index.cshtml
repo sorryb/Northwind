@@ -1,47 +1,46 @@
 ﻿@model PagedList.IPagedList<NorthwindWeb.Models.Products>
 @using PagedList.Mvc;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Produse";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container crudstyle">
-    <h2>Index</h2>
+<h2>Produse</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
+<p>
+    <button class="btn btn-default">@Html.ActionLink("Adauga Produs", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+
+</p>
+<<<<<<< HEAD
+<table id="MyTable" class="table">
+    <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Category.CategoryName)
+                Nume Categorie
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Supplier.CompanyName)
+                Nume Produs
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ProductName)
+                Pret
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().QuantityPerUnit)
+                In Stoc
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitPrice)
+                Pe Comezi
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitsInStock)
+                Stoc limita
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().UnitsOnOrder)
+                Indisponibil
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().ReorderLevel)
+                Optiuni
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Discontinued)
-            </th>
-            <th></th>
         </tr>
-
+    </thead>
+    <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -49,13 +48,7 @@
                     @Html.DisplayFor(modelItem => item.Category.CategoryName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Supplier.CompanyName)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuantityPerUnit)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -73,19 +66,19 @@
                     @Html.DisplayFor(modelItem => item.Discontinued)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+                    @Html.ActionLink("Modifica", "Edit", new { id = item.ProductID }) |
+                    @Html.ActionLink("Detalii", "Details", new { id = item.ProductID }) |
+                    @Html.ActionLink("Sterge", "Delete", new { id = item.ProductID })
                 </td>
             </tr>
         }
+    </tbody>
 
-    </table>
-    <div class="row text-center">
-        <div class="col-lg-12">
-            Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
+</table>
+<div class="row text-center">
+    <div class="col-lg-12">
+        Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
 
-            @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new {category = ViewBag.category, page }))
-        </div>
+        @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { category = ViewBag.category, page }))
     </div>
 </div>

@@ -15,6 +15,12 @@
             <hr />
             <dl class="dl-horizontal">
                 <dt>
+                    @Html.DisplayNameFor(model=>model.order.OrderID)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model=>model.order.OrderID)
+                </dd>
+                <dt>
                     @Html.DisplayNameFor(model => model.order.Customer.CompanyName)
                 </dt>
 
@@ -86,20 +92,13 @@
             </p>
         </div>
         <div class="col-md-6">
-            <h4>Detalii Comenzi</h4>
+            <h4>Detalii Comanda</h4>
             <hr />
-            @Html.ActionLink("Adauga", "Create", "OrderDetail")
+            @Html.ActionLink("Adauga", "Create", "OrderDetail",new { id=ViewBag.orderid },null)
             <hr />
            @foreach (var y in Model.details)
            {
               <dl class="dl-horizontal">
-                <dt>
-                    OrderID 
-                </dt>
-
-                <dd>
-                    @y.OrderID
-                </dd>
 
                 <dt>
                     ProductID 
