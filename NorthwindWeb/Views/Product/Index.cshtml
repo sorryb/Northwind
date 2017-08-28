@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
-
 @if (!string.IsNullOrEmpty(ViewBag.category))
 {
     <h2>
@@ -19,10 +18,12 @@ else
 
 
 <br />
-<div class="">
-    <button class="btn btn-default">@Html.ActionLink("Adauga Produs", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-    <form action="~/Controllers/Product/Index">
-        <div class="input-group cssencapsulate">
+
+<br />
+<div>
+    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Adauga Produs", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+    <form action="/Product/Index">
+        <div class="input-group cssencapsulate paddingLeftTen">
             <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
             <div class="input-group-btn">
                 <button class="btn btn-default" type="submit">
@@ -33,6 +34,7 @@ else
     </form>
 </div>
 <br />
+
 <table id="MyTable" class="table">
     <thead>
         <tr>

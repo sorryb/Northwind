@@ -4,79 +4,78 @@
     ViewBag.Title = "Detalii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container crudstyle">
-    <h2>Detalii</h2>
+<h2>Detalii</h2>
 
-    <div>
-        <h4>Angajat</h4>
-        <hr />
-        <dl class="dl-horizontal">
+<div>
+    <h4>Angajat</h4>
+    <hr />
+    <dl class="dl-horizontal">
 
-            <dt>
-                Nume
-            </dt>
+        <dt>
+            Nume
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
 
-            <dt>
-                Prenume
-            </dt>
+        <dt>
+            Prenume
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
 
-            <dt>
-                Pozitie
-            </dt>
+        <dt>
+            Pozitie
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
 
-            <dt>
-                Metoda de adresare
-            </dt>
+        <dt>
+            Metoda de adresare
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.TitleOfCourtesy)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.TitleOfCourtesy)
+        </dd>
 
-            <dt>
-                Data nasterii
-            </dt>
+        <dt>
+            Data nasterii
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.BirthDate)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
 
-            <dt>
-                Data angajarii
-            </dt>
+        <dt>
+            Data angajarii
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.HireDate)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.HireDate)
+        </dd>
 
-            <dt>
-                Adresa
-            </dt>
+        <dt>
+            Adresa
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
 
-            <dt>
-                Oras
-            </dt>
+        <dt>
+            Oras
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
 
-            @*<dt>
+        @*<dt>
                 @Html.DisplayNameFor(model => model.Region)
             </dt>
 
@@ -92,53 +91,52 @@
                     }
                 }
             </dd>*@
-            
-            <dt>
-                Cod Postal
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.PostalCode)
-            </dd>
+        <dt>
+            Cod Postal
+        </dt>
 
-            <dt>
-                Oras
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Country)
-            </dd>
+        <dt>
+            Oras
+        </dt>
 
-            <dt>
-                Telefon
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.HomePhone)
-            </dd>
+        <dt>
+            Telefon
+        </dt>
 
-            <dt>
-                Interior
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HomePhone)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Extension)
-            </dd>
+        <dt>
+            Interior
+        </dt>
 
-            <dt>
-                Note
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Extension)
+        </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Notes)
-            </dd>
+        <dt>
+            Note
+        </dt>
 
-            <dt>
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
 
-        </dl>
-    </div>
-    <p>
-        @Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }) |
-        @Html.ActionLink("Inapoi", "Index")
-    </p>
+        <dt>
+
+    </dl>
 </div>
+<p>
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }) |
+    @Html.ActionLink("Inapoi", "Index")
+</p>
