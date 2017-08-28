@@ -1,22 +1,27 @@
 ﻿@model IEnumerable<NorthwindWeb.Models.Categories>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Categorii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Categorii</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button class="btn btn-default">@Html.ActionLink("Adauga Categorie", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+    
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
+            Nume Categorie
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Descriere
+        </th>
+
+        <th>
+            Optiuni
         </th>
         <th></th>
     </tr>
@@ -30,9 +35,9 @@
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryID })
+            @Html.ActionLink("Modifica", "Edit", new { id=item.CategoryID }) |
+            @Html.ActionLink("Detalii", "Details", new { id=item.CategoryID }) |
+            @Html.ActionLink("Sterge", "Delete", new { id=item.CategoryID })
         </td>
     </tr>
 }

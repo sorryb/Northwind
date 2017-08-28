@@ -1,11 +1,11 @@
 ﻿@model NorthwindWeb.Models.Products
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modifica";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <div class="container crudstyle">
-    <h2>Edit</h2>
+    <h2>Modifica</h2>
 
 
     @using (Html.BeginForm())
@@ -13,13 +13,13 @@
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-            <h4>Products</h4>
+            <h4>Produs</h4>
             <hr />
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.ProductID)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Nume Produs</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ProductName)
                     @Html.ValidationMessageFor(model => model.ProductName)
@@ -27,7 +27,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.SupplierID, "SupplierID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>ID Furnizor</strong></span>
                 <div class="col-md-10">
                     @Html.DropDownList("SupplierID", String.Empty)
                     @Html.ValidationMessageFor(model => model.SupplierID)
@@ -35,7 +35,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CategoryID, "CategoryID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>ID Categorie</strong></span>
                 <div class="col-md-10">
                     @Html.DropDownList("CategoryID", String.Empty)
                     @Html.ValidationMessageFor(model => model.CategoryID)
@@ -43,7 +43,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.QuantityPerUnit, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Cantitate</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.QuantityPerUnit)
                     @Html.ValidationMessageFor(model => model.QuantityPerUnit)
@@ -51,7 +51,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Pret</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.UnitPrice)
                     @Html.ValidationMessageFor(model => model.UnitPrice)
@@ -59,7 +59,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.UnitsInStock, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>In Stoc</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.UnitsInStock)
                     @Html.ValidationMessageFor(model => model.UnitsInStock)
@@ -67,7 +67,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.UnitsOnOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Pe Comenzi</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.UnitsOnOrder)
                     @Html.ValidationMessageFor(model => model.UnitsOnOrder)
@@ -75,7 +75,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ReorderLevel, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Stoc limita</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ReorderLevel)
                     @Html.ValidationMessageFor(model => model.ReorderLevel)
@@ -83,7 +83,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Discontinued, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Indisponibil</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Discontinued)
                     @Html.ValidationMessageFor(model => model.Discontinued)
@@ -92,14 +92,14 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Salveaza" class="btn btn-default" />
                 </div>
             </div>
         </div>
     }
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Inapoi", "Index")
     </div>
 
     @section Scripts {
