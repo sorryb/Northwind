@@ -17,7 +17,7 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Product
-        public ActionResult Index(string category = "", int page = 1)
+        public ActionResult Index(string category = "", string search = "", int page = 1)
         {
             IOrderedQueryable<Products> products;
             ViewBag.category = category;
