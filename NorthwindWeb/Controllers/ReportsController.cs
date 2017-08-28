@@ -8,6 +8,7 @@ namespace NorthwindWeb.Controllers
     public class ReportsController : Controller
     {
         // GET: Reports
+        [Authorize]
         public ActionResult Index()
         {
             string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
