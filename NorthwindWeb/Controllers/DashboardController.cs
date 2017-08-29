@@ -12,7 +12,8 @@ using Newtonsoft.Json;
 
 
 namespace NorthwindWeb.Controllers
-{   [Authorize]
+{   
+    [Authorize(Roles = "Admins")]
     public class DashboardController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
