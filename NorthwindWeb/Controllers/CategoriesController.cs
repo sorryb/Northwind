@@ -11,7 +11,7 @@ using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins")]
+    [Authorize]
     public class CategoriesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -38,6 +38,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Categories/Create
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
@@ -48,6 +49,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "CategoryID,CategoryName,Description")] Categories categories)
         {
             if (ModelState.IsValid)
@@ -61,6 +63,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Categories/Edit/5
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,6 +83,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "CategoryID,CategoryName,Description")] Categories categories)
         {
             if (ModelState.IsValid)
@@ -92,6 +96,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Categories/Delete/5
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -109,6 +114,7 @@ namespace NorthwindWeb.Controllers
         // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Categories categories = await db.Categories.FindAsync(id);

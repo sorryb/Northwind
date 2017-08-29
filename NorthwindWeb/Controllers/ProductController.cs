@@ -12,7 +12,7 @@ using PagedList;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins")]
+    [Authorize]
     public class ProductController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -52,6 +52,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Product/Create
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
@@ -64,6 +65,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products)
         {
             if (ModelState.IsValid)
@@ -79,6 +81,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Product/Edit/5
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -100,6 +103,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products)
         {
             if (ModelState.IsValid)
@@ -115,6 +119,7 @@ namespace NorthwindWeb.Controllers
 
         // GET: Product/Delete/5
         //TODO Delete from related tables
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -132,6 +137,7 @@ namespace NorthwindWeb.Controllers
         // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Products products = await db.Products.FindAsync(id);

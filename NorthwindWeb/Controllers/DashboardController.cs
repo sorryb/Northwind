@@ -12,14 +12,15 @@ using Newtonsoft.Json;
 
 
 namespace NorthwindWeb.Controllers
-{   [Authorize]
+{   
+    [Authorize(Roles = "Admins")]
     public class DashboardController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
 
 
 
-        public ActionResult Index1()
+        public ActionResult Home()
         {
             DashboardIndexData viewModel = new DashboardIndexData();
 
@@ -272,9 +273,9 @@ namespace NorthwindWeb.Controllers
            
         }
 
-        public ActionResult Graph1()
+        public ActionResult MorrisArea()
         {
-            List<DashboardGraph1> list = new List<DashboardGraph1>();
+            List<DashboardMorrisArea> list = new List<DashboardMorrisArea>();
             var salesbyyear = from o in db.Orders
                               join od in db.Order_Details on o.OrderID equals od.OrderID
                               select new { od.UnitPrice, od.Quantity, od.Discount, o.OrderDate };
@@ -292,7 +293,7 @@ namespace NorthwindWeb.Controllers
                 }
                 if (ok == 0)
                 {
-                    DashboardGraph1 x = new DashboardGraph1();
+                    DashboardMorrisArea x = new DashboardMorrisArea();
                     x.Year = Convert.ToString(Convert.ToDateTime(item.OrderDate).Year);
                     x.Sales = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
                     list.Add(x);
@@ -306,16 +307,16 @@ namespace NorthwindWeb.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Graph2()
+        public ActionResult MorrisBar()
         {
 
 
             return Json(Table(), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Graph3()
+        public ActionResult MorrisDonut()
         {
-            List<DashboardGraph3> list = new List<DashboardGraph3>();
+            List<DashboardMorrisDonut> list = new List<DashboardMorrisDonut>();
             var salesbyyear = from od in db.Order_Details
                               join p in db.Products on od.ProductID equals p.ProductID
                               join c in db.Categories on p.CategoryID equals c.CategoryID
@@ -324,7 +325,7 @@ namespace NorthwindWeb.Controllers
                            select new { c.CategoryName };
             foreach (var item in categori)
             {
-                DashboardGraph3 x = new DashboardGraph3();
+                DashboardMorrisDonut x = new DashboardMorrisDonut();
                 x.label = item.CategoryName;
                 x.value = 0;
                 list.Add(x);
@@ -351,9 +352,9 @@ namespace NorthwindWeb.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        private List<DashboardGraph2> Table()
+        private List<DashboardMorrisBar> Table()
         {
-            List<DashboardGraph2> list = new List<DashboardGraph2>();
+            List<DashboardMorrisBar> list = new List<DashboardMorrisBar>();
             var salesbyyear = from o in db.Orders
                               join od in db.Order_Details on o.OrderID equals od.OrderID
                               select new { od.UnitPrice, od.Quantity, od.Discount, o.OrderDate };
@@ -378,7 +379,7 @@ namespace NorthwindWeb.Controllers
                 }
                 if (ok == 0)
                 {
-                    DashboardGraph2 x = new DashboardGraph2();
+                    DashboardMorrisBar x = new DashboardMorrisBar();
                     x.Year = Convert.ToString(Convert.ToDateTime(item.OrderDate).Year);
                     if (t == 1) { x.a = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
                     else if (t == 2) { x.b = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
