@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<NorthwindWeb.Models.Orders>
+﻿@model List<NorthwindWeb.Models.Orders>
 @using PagedList.Mvc;
 
 @{
@@ -11,77 +11,83 @@
     <p>
         @Html.ActionLink("Adauga", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                Nume Companie
-            </th>
-            <th>
-                Nume Angajat
-            </th>
-            <th>
-                Expeditor
-            </th>
-            <th>
-                Data Expediere
-            </th>
-            <th>
-                Nume Expeditor
-            </th>
-            <th>
-                Adresa
-            </th>
-            <th>
-                Oras
-            </th>
-            <th>
-                Tara
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <table id="MyTable" class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Customer.CompanyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Shipper.CompanyName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShippedDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShipName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShipAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShipCity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShipCountry)
-                </td>
-                <td>
-                    @Html.ActionLink("Modifica", "Edit", new { id = item.OrderID }) 
-                    @Html.ActionLink("Detalii", "Details", new { id = item.OrderID }) 
-                    @Html.ActionLink("Sterge", "Delete", new { id = item.OrderID })
-                </td>
+                <th>
+                    Nume Companie
+                </th>
+                <th>
+                    Nume Angajat
+                </th>
+                <th>
+                    Expeditor
+                </th>
+                <th>
+                    Data livrare
+                </th>
+                <th>
+                    Nume Expeditor
+                </th>
+                <th>
+                    Adresa
+                </th>
+                <th>
+                    Oras
+                </th>
+                <th>
+                    Tara
+                </th>
+                <th>
+                    Sterge
+                </th>
             </tr>
-        }
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Customer.CompanyName, "Details", new { id = item.OrderID })
+                        @*@Html.DisplayFor(modelItem => item.Customer.CompanyName)*@
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shipper.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShippedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipCity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipCountry)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Delete", new { id = item.OrderID })"><i class="fa fa-remove"></i></a>
+                        @*@Html.ActionLink("Sterge", "Delete", new { id = item.OrderID })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
 
     </table>
 
-    <div class="row text-center">
+    @*<div class="row text-center">
         <div class="col-lg-12">
             Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
 
             @Html.PagedListPager(Model, page => Url.Action("Index", "Orders", new { page }))
         </div>
-    </div>
+    </div>*@
 </div>

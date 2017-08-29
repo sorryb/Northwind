@@ -12,13 +12,23 @@ using PagedList;
 
 namespace NorthwindWeb.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admins")]
+    /// <summary>
+    /// OrderDetail Controller. For table Order_Details
+    /// </summary>
     public class OrderDetailController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
 
         // GET: OrderDetail
- 
+
+        /// <summary>
+        /// Returns a paged list with all order-details
+        /// </summary>
+        /// <param name="page">Required for paged list to work</param>
+        /// 
+        /// <returns>PagedList</returns>
+
         public ActionResult Index(int page = 1)
         {
             var order_Details = db.Order_Details.Include(o => o.Order).Include(o => o.Product).OrderBy(o=>o.OrderID);

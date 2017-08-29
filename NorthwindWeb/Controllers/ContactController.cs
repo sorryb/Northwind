@@ -1,6 +1,6 @@
 ﻿using NorthwindWeb.Models;
 using System.Web.Mvc;
-
+using System.Linq;
 namespace NorthwindWeb.Controllers
 {
     public class ContactController : Controller
@@ -8,7 +8,7 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         public ActionResult Index()
-        {                                                                                                     
+        {
             return View();
         }
 
@@ -23,17 +23,15 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons persons)
+        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons person)
         {
-
             if (ModelState.IsValid)
             {
-                db.Persons.Add(persons);
+                person.ID = db.Persons.Count() + 1;
+                db.Persons.Add(person);
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-
-            return View(persons);
+            return RedirectToAction("Index");
 
         }
     }

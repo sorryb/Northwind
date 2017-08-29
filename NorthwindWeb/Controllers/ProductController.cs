@@ -118,6 +118,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Product/Delete/5
+        //TODO Delete from related tables
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
