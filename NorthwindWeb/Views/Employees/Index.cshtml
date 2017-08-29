@@ -7,7 +7,15 @@
 
 
 <h2>Angajati</h2>
-
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+   
+    <li class="active">Angajati</li>
+</ol>
+<hr />
 <br />
 <div>
     <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Adauga Angajat", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
@@ -43,6 +51,9 @@
         <th>
             Telefon
         </th>
+        <th>
+            Sterge
+        </th>
         <th></th>
     </tr>
 
@@ -50,7 +61,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.ActionLink(item.LastName, "Details", new { id = item.EmployeeID })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
@@ -68,9 +79,7 @@
                 @Html.DisplayFor(modelItem => item.HomePhone)
             </td>
             <td>
-                @Html.ActionLink("Modifica", "Edit", new { id = item.EmployeeID }) |
-                @Html.ActionLink("Detalii", "Details", new { id = item.EmployeeID }) |
-                @Html.ActionLink("Sterge", "Delete", new { id = item.EmployeeID })
+                <a href="@Url.Action("Delete", new { id = item.EmployeeID })"><i class="fa fa-remove"></i></a>
             </td>
         </tr>
     }

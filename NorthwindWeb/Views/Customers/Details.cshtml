@@ -5,10 +5,20 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <h2>Detalii</h2>
-
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Clienti", "Index", "Orders")
+    </li>
+    <li class="active">Detalii</li>
+</ol>
 <div>
     <h4>Client</h4>
     <hr />
+  
     <dl class="dl-horizontal">
         <dt>
             Nume Companie
