@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using PagedList;
+using System.Web.Helpers;
 
 namespace NorthwindWeb.Controllers
 {
@@ -152,6 +153,37 @@ namespace NorthwindWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Product by Json
+        public  JsonResult JsonTest(string category = "", string search = "", int page = 1)
+        {
+            IOrderedQueryable<Products> products;
+            ViewBag.category = category;
+
+            if (category.Equals(""))
+            {
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
+            }
+            else
+            {
+                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category) && p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
+            }
+            //int pageSize = 15;
+            //int pageNumber = page;
+        
+            
+            /*Select what wee need in table*/
+            return Json(
+                products.Select(x => new {
+                    ProductName = x.ProductName,
+                    Price = x.UnitPrice,
+                    InStock = x.UnitsInStock,
+                    OnOrders = x.UnitsOnOrder,
+                    ReorderLevel = x.ReorderLevel,
+                    Discontinued = x.Discontinued
+                })
+                , JsonRequestBehavior.AllowGet);
         }
     }
 }
