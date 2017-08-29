@@ -6,8 +6,16 @@
 }
 
 <h2>Categorii</h2>
-
-<br />
+<hr />
+<ol class="breadcrumb">
+  
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+   
+    <li class="active">Categorii</li>
+</ol>
+<hr />
 <div>
     <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Adauga Categorii", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
     <form action="/Categories/Index">
@@ -32,7 +40,7 @@
         </th>
 
         <th>
-            Optiuni
+            Sterge
         </th>
         <th></th>
     </tr>
@@ -40,15 +48,13 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
+            @Html.ActionLink(item.CategoryName, "Details", new { id = item.CategoryID })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Description)
         </td>
         <td>
-            @Html.ActionLink("Modifica", "Edit", new { id=item.CategoryID }) |
-            @Html.ActionLink("Detalii", "Details", new { id=item.CategoryID }) |
-            @Html.ActionLink("Sterge", "Delete", new { id=item.CategoryID })
+            <a href="@Url.Action("Delete", new { id = item.CategoryID })"><i class="fa fa-remove"></i></a>
         </td>
     </tr>
 }

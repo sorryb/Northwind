@@ -6,7 +6,15 @@
 }
 
 <h2>Expeditori</h2>
-
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+   
+    <li class="active">Expeditori</li>
+</ol>
+<hr />
 <br />
 <div>
     <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Adauga Expeditor", "Create", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>

@@ -6,28 +6,40 @@
 }
 
 <h2>Detalii</h2>
-
+<hr />
 <div>
+    <ol class="breadcrumb">
+        <li>
+            @Html.ActionLink("Dashboard", "Home", "Dashboard")
+        </li>
+        <li>
+            @Html.ActionLink("Categorii", "Index", "Orders")
+        </li>
+        <li class="active">Detalii</li>
+    </ol>
     <h4>Categorie</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-           Nume Categorie
-        </dt>
+   
+    
 
-        <dd>
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
+        <dl class="dl-horizontal">
+            <dt>
+                Nume Categorie
+            </dt>
 
-        <dt>
-            Descriere
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CategoryName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dt>
+                Descriere
+            </dt>
 
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+
+        </dl>
 </div>
 <p>
     @Html.ActionLink("Modifica", "Edit", new { id = Model.CategoryID }) |
