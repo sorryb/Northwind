@@ -14,26 +14,30 @@ using NorthwindWeb.ViewModels.Orders;
 
 namespace NorthwindWeb.Controllers
 {
-    //[Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admins")]
+    /// <summary>
+    /// Orders Controller. For table Orders
+    /// </summary>
     public class OrdersController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Orders
-        public ActionResult Index(string search="", int page = 1)
+        public ActionResult Index( int page = 1)
         {
-            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(x => x.OrderID.ToString().Contains(search)).OrderBy(o=>
+            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).OrderBy(o=>
             o.OrderID);
 
-            int pageSize = 15;
-            int pageNumber = page;
-            return View(orders.ToPagedList(pageNumber, pageSize));
+            //int pageSize = 15;
+            //int pageNumber = page;
+            return View(orders.ToList());
         }
             
-        // GET: Orders/Details/5
+        // GET: Orders/Details
         public async Task<ActionResult> Details(int id)
         {
             OrderDetali viewModel = new OrderDetali();
+            //take details of orders
             Orders orders = await db.Orders.FindAsync(id);
             if (orders == null)
             {
@@ -41,13 +45,14 @@ namespace NorthwindWeb.Controllers
             }
             viewModel.order = orders;
 
+            //take order-details of orders
             var ordet = from od in db.Order_Details
                         where (od.OrderID == id)
                         select new { od.OrderID,od.ProductID,od.Quantity,od.UnitPrice, od.Discount };
 
             List<DetailsOfOrder> list = new List<DetailsOfOrder>();
 
-            //lopp in first 4 products 
+            //lopp in all order-details
             foreach (var item in ordet)
             {
                 DetailsOfOrder x = new DetailsOfOrder();

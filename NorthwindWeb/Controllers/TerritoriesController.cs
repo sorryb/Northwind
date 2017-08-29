@@ -11,7 +11,10 @@ using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
-    //[Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admins")]
+    /// <summary>
+    /// Territories Controller. For table Territories
+    /// </summary>
     public class TerritoriesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
