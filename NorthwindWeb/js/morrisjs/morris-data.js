@@ -1,4 +1,5 @@
 $(function () {
+    //Recovers jsons and completes the tables in the dashboard
     $.ajax({
         url: 'MorrisArea',
         dataType: 'json',

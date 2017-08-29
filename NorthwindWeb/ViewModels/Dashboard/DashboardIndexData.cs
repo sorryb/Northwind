@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace NorthwindWeb.ViewModels.Dashboard
 {/// <summary>
-/// The data model sent by the DashboardController to Index
+/// The data model sent by the DashboardController to Home
 /// </summary>
     public class DashboardIndexData
     {
@@ -16,8 +16,8 @@ namespace NorthwindWeb.ViewModels.Dashboard
         public int NumberProductsSold{get;set;}
         public int NumberEmployees { get; set; }
         public int NumberCustomers { get; set; }
-        public IEnumerable<DashboardMorrisBar> Tabel { get; set; }
-        public IEnumerable<Last10Orders> LastTen { get; set; }
+        public IEnumerable<DashboardMorrisBar> SalesPerQuarter { get; set; }
+        public IEnumerable<LastTenOrders> LastTenOrders { get; set; }
 
     }
 }

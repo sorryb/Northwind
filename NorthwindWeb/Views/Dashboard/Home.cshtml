@@ -102,17 +102,18 @@
 
 <div class="row">
     <div class="col-lg-8">
+        <!--Sales by Year-->
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe ani ($)
             </div>
-            <!-- /.panel-heading -->
+            <!--Morris Area panel/ sales by year-->
             <div class="panel-body">
                 <div id="morris-area-chart"></div>
             </div>
             <!-- /.panel-body -->
         </div>
-
+        <!--Sales by Quarter-->
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe trimestru ($)
@@ -121,6 +122,7 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="row">
+                    <!--Sales by Quarter table-->
                     <div class="col-lg-12">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
@@ -133,73 +135,77 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(var item in Model.Tabel)
+                                    @foreach (var item in Model.SalesPerQuarter)
                                     {
-                                    <tr>
-                                        <td>@item.Year</td>
-                                        <td>@item.a</td>
-                                        <td>@item.b</td>
-                                        <td>@item.c</td>
-                                    </tr>
+                                        <tr>
+                                            <td>@item.Year</td>
+                                            <td>@item.a</td>
+                                            <td>@item.b</td>
+                                            <td>@item.c</td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
                         </div>
                         <!-- /.table-responsive -->
                     </div>
-                    <!-- /.col-lg-4 (nested) -->
+                   <!--Morris bar panel/ sales by quarter-->
                     <div class="col-lg-12">
                         <div id="morris-bar-chart"></div>
                     </div>
-                    <!-- /.col-lg-8 (nested) -->
                 </div>
-                <!-- /.row -->
+
             </div>
-            <!-- /.panel-body -->
+
         </div>
     </div>
+    <!--Sales by Category-->
     <div class="col-lg-4">
-        <!-- /.panel -->
+        <!--Sales by Category-->
         <div class="panel panel-default">
+            <!--Sales by Category panel -->
             <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe categori ($)
             </div>
+            <!--Morris Donut panel/ sales by category-->
             <div class="panel-body">
                 <div id="morris-donut-chart"></div>
                 @Html.ActionLink("Vizualizati Categoriile", "Index", "Product", null, new { @class = "btn btn-default btn-block" })
-               
+
             </div>
-            <!-- /.panel-body -->
+
+            
         </div>
-                <div class="panel panel-default">
+        <!--Last Ten Orders panel-->
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-briefcase fa-fw"></i> Ultimele 10 Comenzi
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div class="list-group">
-                    
-                    @foreach (var item in Model.LastTen)
-                    {
-                       
 
-                         <a href="@Url.Action("Details","Orders",new { id = item.OrderID},null)" class="list-group-item">
-                             @item.OrderID
-                             <span class="pull-right text-muted small">
-                                 <em>@item.Ago</em>
-                             </span>
-                         </a>
-                        
-                    
+                    @foreach (var item in Model.LastTenOrders)
+                    {
+
+
+                        <a href="@Url.Action("Details","Orders",new { id = item.OrderID},null)" class="list-group-item">
+                            @item.OrderID
+                            <span class="pull-right text-muted small">
+                                <em>@item.Ago</em>
+                            </span>
+                        </a>
+
+
                     }
-                    
-                    
+
+
                 </div>
-                <!-- /.list-group -->
-                @Html.ActionLink("Vizualizati toate comenzile", "Index", "Orders", null, new {@class="btn btn-default btn-block" })
-               
+                <!--view all Orders-->
+                @Html.ActionLink("Vizualizati toate comenzile", "Index", "Orders", null, new { @class = "btn btn-default btn-block" })
+
             </div>
-            <!-- /.panel-body -->
+
         </div>
     </div>
 

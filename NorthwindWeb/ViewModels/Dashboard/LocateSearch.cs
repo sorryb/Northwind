@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels.Dashboard
-{
+{/// <summary>
+/// Data model returned by dashboard search
+/// </summary>
     public class LocateSearch
     {
         public string ID { get; set; }

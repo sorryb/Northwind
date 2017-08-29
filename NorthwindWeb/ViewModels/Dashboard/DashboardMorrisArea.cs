@@ -5,8 +5,10 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels.Dashboard
-{
-   
+{/// <summary>
+ /// The data model for the MorrisArea graph
+ /// </summary>
+
     public class DashboardMorrisArea
     {
        

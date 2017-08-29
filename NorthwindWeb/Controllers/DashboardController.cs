@@ -12,14 +12,19 @@ using Newtonsoft.Json;
 
 
 namespace NorthwindWeb.Controllers
-{   
+{   /// <summary>
+/// 
+/// </summary>
     [Authorize(Roles = "Admins")]
     public class DashboardController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
 
 
-
+        /// <summary>
+        /// The action that creates the data for the dashboard page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Home()
         {
             DashboardIndexData viewModel = new DashboardIndexData();
@@ -28,36 +33,41 @@ namespace NorthwindWeb.Controllers
             viewModel.NumberProductsSold = NumberProductsSold();
             viewModel.NumberEmployees = NumberEmployees();
             viewModel.NumberCustomers = NumberCustomers();
-            viewModel.Tabel = Table();
-            viewModel.LastTen = LastTen();
+            viewModel.SalesPerQuarter = SalesByQuarter();
+            viewModel.LastTenOrders = LastTen();
 
             return View(viewModel);
         }
-
+        /// <summary>
+        /// Creates a list of data from the database containing the search parameter
+        /// </summary>
+        /// <param name="search">The parameter to be searched for</param>
+        /// <returns></returns>
         public ActionResult Search(string search)
         {
             List<LocateSearch> list = new List<LocateSearch>();
+            //The test returns false if no search is entered
             if (!String.IsNullOrEmpty(search))
-            {
+            {//Test each table for match 
                 var category = db.Categories;
                 foreach (var item in category)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.CategoryID).Contains(search))
+                    if (Convert.ToString(item.CategoryID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.CategoryID);
                         x.WhereFound = "CategoryID: " +Convert.ToString(item.CategoryID);
                         x.Controller = "Categories";
                         list.Add(x);
                     }
-                    else if(item.CategoryName.Contains(search))
+                    else if(item.CategoryName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.CategoryID);
                         x.WhereFound = "CategoryName: " + item.CategoryName;
                         x.Controller = "Categories";
                         list.Add(x);
                     }
-                    else if(item.Description.Contains(search))
+                    else if(item.Description.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.CategoryID);
                         x.WhereFound = "Description: " + item.Description;
@@ -70,21 +80,21 @@ namespace NorthwindWeb.Controllers
                 foreach (var item in suppliers)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.SupplierID).Contains(search))
+                    if (Convert.ToString(item.SupplierID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.SupplierID);
                         x.WhereFound = "CategoryID: " + Convert.ToString(item.SupplierID);
                         x.Controller = "Suppliers";
                         list.Add(x);
                     }
-                    else if (item.CompanyName.Contains(search))
+                    else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.SupplierID);
                         x.WhereFound = "CompanyName: " + item.CompanyName;
                         x.Controller = "Suppliers";
                         list.Add(x);
                     }
-                    else if (item.ContactName.Contains(search))
+                    else if (item.ContactName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.SupplierID);
                         x.WhereFound = "ContactName: " + item.ContactName;
@@ -97,14 +107,14 @@ namespace NorthwindWeb.Controllers
                 foreach (var item in product)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.ProductID).Contains(search))
+                    if (Convert.ToString(item.ProductID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.ProductID);
                         x.WhereFound = "ProductID: " + Convert.ToString(item.ProductID);
                         x.Controller = "Product";
                         list.Add(x);
                     }
-                    else if (item.ProductName.Contains(search))
+                    else if (item.ProductName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.ProductID);
                         x.WhereFound = "ProductName: " + item.ProductName;
@@ -118,21 +128,21 @@ namespace NorthwindWeb.Controllers
                 foreach (var item in order)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.OrderID).Contains(search))
+                    if (Convert.ToString(item.OrderID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.OrderID);
                         x.WhereFound = "OrderID: " + Convert.ToString(item.OrderID);
                         x.Controller = "Orders";
                         list.Add(x);
                     }
-                    else if (Convert.ToString(item.OrderDate).Contains(search))
+                    else if (Convert.ToString(item.OrderDate).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.OrderID);
                         x.WhereFound = "OrderDate: " + Convert.ToString(item.OrderDate);
                         x.Controller = "Orders";
                         list.Add(x);
                     }
-                    else if (item.ShipName.Contains(search))
+                    else if (item.ShipName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.OrderID);
                         x.WhereFound = "ShipName: " + item.ShipName;
@@ -145,21 +155,21 @@ namespace NorthwindWeb.Controllers
                 foreach (var item in customers)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.CustomerID).Contains(search))
+                    if (Convert.ToString(item.CustomerID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.CustomerID);
                         x.WhereFound = "CustomerID: " + Convert.ToString(item.CustomerID);
                         x.Controller = "Customers";
                         list.Add(x);
                     }
-                    else if (item.CompanyName.Contains(search))
+                    else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.CustomerID);
                         x.WhereFound = "CompanyName: " + item.CompanyName;
                         x.Controller = "Customers";
                         list.Add(x);
                     }
-                    else if (item.ContactName.Contains(search))
+                    else if (item.ContactName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.CustomerID);
                         x.WhereFound = "ContactName: " + item.ContactName;
@@ -172,14 +182,14 @@ namespace NorthwindWeb.Controllers
                 foreach (var item in region)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.RegionID).Contains(search))
+                    if (Convert.ToString(item.RegionID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.RegionID);
                         x.WhereFound = "RegionID: " + Convert.ToString(item.RegionID);
                         x.Controller = "Regions";
                         list.Add(x);
                     }
-                    else if (item.RegionDescription.Contains(search))
+                    else if (item.RegionDescription.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.RegionID);
                         x.WhereFound = "RegionDescription: " + item.RegionDescription;
@@ -193,21 +203,21 @@ namespace NorthwindWeb.Controllers
                 foreach (var item in employees)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.EmployeeID).Contains(search))
+                    if (Convert.ToString(item.EmployeeID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.EmployeeID);
                         x.WhereFound = "EmployeeID: " + Convert.ToString(item.EmployeeID);
                         x.Controller = "Employees";
                         list.Add(x);
                     }
-                    else if (item.LastName.Contains(search))
+                    else if (item.LastName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.EmployeeID);
                         x.WhereFound = "LastName: " + item.LastName;
                         x.Controller = "Employees";
                         list.Add(x);
                     }
-                    else if (item.FirstName.Contains(search))
+                    else if (item.FirstName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.EmployeeID);
                         x.WhereFound = "FirstName: " + item.FirstName;
@@ -220,14 +230,14 @@ namespace NorthwindWeb.Controllers
                 foreach (var item in shippers)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.ShipperID).Contains(search))
+                    if (Convert.ToString(item.ShipperID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.ShipperID);
                         x.WhereFound = "ShipperID: " + Convert.ToString(item.ShipperID);
                         x.Controller = "Shippers";
                         list.Add(x);
                     }
-                    else if (item.CompanyName.Contains(search))
+                    else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.ShipperID);
                         x.WhereFound = "CompanyName: " + item.CompanyName;
@@ -241,14 +251,14 @@ namespace NorthwindWeb.Controllers
                 foreach (var item in territories)
                 {
                     LocateSearch x = new LocateSearch();
-                    if (Convert.ToString(item.TerritoryID).Contains(search))
+                    if (Convert.ToString(item.TerritoryID).ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.TerritoryID);
                         x.WhereFound = "TerritoryID: " + Convert.ToString(item.TerritoryID);
                         x.Controller = "Territories";
                         list.Add(x);
                     }
-                    else if (item.TerritoryDescription.Contains(search))
+                    else if (item.TerritoryDescription.ToLower().Contains(search.ToLower()))
                     {
                         x.ID = Convert.ToString(item.TerritoryID);
                         x.WhereFound = "TerritoryDescription: " + item.TerritoryDescription;
@@ -260,11 +270,13 @@ namespace NorthwindWeb.Controllers
                 }
 
             }
-            if (list.Count == 0)
+            //In case he did not find returns Not Found
+            if (list.Count < 1)
             {
                 LocateSearch x = new LocateSearch();
                 x.WhereFound = "Not Found";
                 x.Controller = "Dashboard";
+                list.Add(x);
             }
             
             return View(list);
@@ -272,13 +284,17 @@ namespace NorthwindWeb.Controllers
 
            
         }
-
+        /// <summary>
+        /// Returns a json with the data required for the MorrisArea table on the dashboard page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult MorrisArea()
         {
             List<DashboardMorrisArea> list = new List<DashboardMorrisArea>();
             var salesbyyear = from o in db.Orders
                               join od in db.Order_Details on o.OrderID equals od.OrderID
                               select new { od.UnitPrice, od.Quantity, od.Discount, o.OrderDate };
+            //Calculates sales each year
             foreach (var item in salesbyyear)
             {
                 int ok = 0;
@@ -291,6 +307,7 @@ namespace NorthwindWeb.Controllers
                         break;
                     }
                 }
+                //test return true if item->year is not in list
                 if (ok == 0)
                 {
                     DashboardMorrisArea x = new DashboardMorrisArea();
@@ -299,6 +316,7 @@ namespace NorthwindWeb.Controllers
                     list.Add(x);
                 }
             }
+            //Rounds the value to two decimal places
             foreach (var i in list)
             {
                 i.Sales = decimal.Round(i.Sales, 2);
@@ -306,14 +324,20 @@ namespace NorthwindWeb.Controllers
 
             return Json(list, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Returns a json with the data required for the MorrisBar table on the dashboard page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult MorrisBar()
         {
 
 
-            return Json(Table(), JsonRequestBehavior.AllowGet);
+            return Json(SalesByQuarter(), JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// Returns a json with the data required for the MorrisDonut table on the dashboard page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult MorrisDonut()
         {
             List<DashboardMorrisDonut> list = new List<DashboardMorrisDonut>();
@@ -321,15 +345,17 @@ namespace NorthwindWeb.Controllers
                               join p in db.Products on od.ProductID equals p.ProductID
                               join c in db.Categories on p.CategoryID equals c.CategoryID
                               select new { od.UnitPrice, od.Quantity, od.Discount, c.CategoryName };
-            var categori = from c in db.Categories
+            var category = from c in db.Categories
                            select new { c.CategoryName };
-            foreach (var item in categori)
+            //select all category
+            foreach (var item in category)
             {
                 DashboardMorrisDonut x = new DashboardMorrisDonut();
                 x.label = item.CategoryName;
                 x.value = 0;
                 list.Add(x);
             }
+            //Calculate sales by year for all category
             foreach (var item in salesbyyear)
             {
 
@@ -344,6 +370,7 @@ namespace NorthwindWeb.Controllers
                 }
 
             }
+            //Rounds the value to two decimal places
             foreach (var i in list)
             {
                 i.value = decimal.Round(i.value, 2);
@@ -352,41 +379,45 @@ namespace NorthwindWeb.Controllers
             return Json(list, JsonRequestBehavior.AllowGet);
         }
 
-        private List<DashboardMorrisBar> Table()
+        private List<DashboardMorrisBar> SalesByQuarter()
         {
             List<DashboardMorrisBar> list = new List<DashboardMorrisBar>();
             var salesbyyear = from o in db.Orders
                               join od in db.Order_Details on o.OrderID equals od.OrderID
                               select new { od.UnitPrice, od.Quantity, od.Discount, o.OrderDate };
+            //Divides year and quarter and calculates sales
             foreach (var item in salesbyyear)
             {
-                int t;
-                if (Convert.ToDateTime(item.OrderDate).Month <= 4) { t = 1; }
-                else if (Convert.ToDateTime(item.OrderDate).Month <= 8) { t = 2; }
-                else { t = 3; }
+                int quarter;
+                //Determine quarter
+                if (Convert.ToDateTime(item.OrderDate).Month <= 4) { quarter = 1; }
+                else if (Convert.ToDateTime(item.OrderDate).Month <= 8) { quarter = 2; }
+                else { quarter = 3; }
                 int ok = 0;
                 foreach (var i in list)
                 {
                     if (int.Parse(i.Year) == Convert.ToDateTime(item.OrderDate).Year)
                     {
-                        if (t == 1) { i.a += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
-                        else if (t == 2) { i.b += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                        if (quarter == 1) { i.a += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                        else if (quarter == 2) { i.b += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
                         else { i.c += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
 
                         ok = 1;
                         break;
                     }
                 }
+                //test return true if item->quarter not exist yet in item->year 
                 if (ok == 0)
                 {
                     DashboardMorrisBar x = new DashboardMorrisBar();
                     x.Year = Convert.ToString(Convert.ToDateTime(item.OrderDate).Year);
-                    if (t == 1) { x.a = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
-                    else if (t == 2) { x.b = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                    if (quarter == 1) { x.a = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                    else if (quarter == 2) { x.b = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
                     else { x.c = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
                     list.Add(x);
                 }
             }
+            //Rounds the value to two decimal places
             foreach (var i in list)
             {
                 {
@@ -435,14 +466,14 @@ namespace NorthwindWeb.Controllers
             return c;
         }
 
-        private List<Last10Orders> LastTen()
+        private List<LastTenOrders> LastTen()
         {
-            List<Last10Orders> list = new List<Last10Orders>();
+            List<LastTenOrders> list = new List<LastTenOrders>();
             var order = (from o in db.Orders
                          select new { o.OrderID, o.OrderDate }).OrderByDescending(o => o.OrderDate).Take(10);
             foreach (var item in order)
             {
-                Last10Orders x = new Last10Orders();
+                LastTenOrders x = new LastTenOrders();
                 x.OrderID = item.OrderID;
                 var y = DateTime.Now - Convert.ToDateTime(item.OrderDate);
                 if (y.TotalMinutes <= 60) { x.Ago = "Acum " + Convert.ToString(y.TotalMinutes) + " Minute"; }
