@@ -29,7 +29,7 @@ namespace NorthwindWeb.Controllers
             if (ModelState.IsValid)
             {
                 db.Persons.Add(persons);
-                 db.SaveChanges();
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
