@@ -2,7 +2,9 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 @model System.Collections.Generic.List<NorthwindWeb.ViewModels.Dashboard.LocateSearch>
-
+@{
+    ViewBag.Title = "Search";
+}
 <!--Test checks if there are no matches for the search-->
 @if ((Model.Count == 1) && (Model[0].Controller == "Dashboard"))
 {
