@@ -11,10 +11,13 @@
     <hr />
     <ol class="breadcrumb">
         <li>
-            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+            @Html.ActionLink("Dashboard", "Home", "Dashboard")
         </li>
         <li>
             @Html.ActionLink("Comenzi", "Index", "Orders")
+        </li>
+        <li>
+            @Html.ActionLink("Detalii","Details","Orders", new { id = Model.OrderID },null)
         </li>
         <li class="active">Modifica</li>
     </ol>
@@ -47,7 +50,6 @@
 
             <div class="form-group">
                 <span class="control-label col-md-2 bold"><strong>Data comanda</strong></span>
-                <span class="control-label col-md-2 bold"><strong>Data comenzii</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.OrderDate)
                     @Html.ValidationMessageFor(model => model.OrderDate)
@@ -63,7 +65,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ShippedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Data livrarii</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ShippedDate)
                     @Html.ValidationMessageFor(model => model.ShippedDate)
@@ -87,7 +89,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ShipName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Nume Expeditor</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ShipName)
                     @Html.ValidationMessageFor(model => model.ShipName)
@@ -95,7 +97,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ShipAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Adresa</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ShipAddress)
                     @Html.ValidationMessageFor(model => model.ShipAddress)
@@ -119,7 +121,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ShipPostalCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Cod postal</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ShipPostalCode)
                     @Html.ValidationMessageFor(model => model.ShipPostalCode)

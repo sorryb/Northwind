@@ -9,7 +9,7 @@
     <hr />
     <ol class="breadcrumb">
         <li>
-            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+            @Html.ActionLink("Dashboard", "Home", "Dashboard")
         </li>
         <li>
             @Html.ActionLink("Regiuni", "Index", "Regions")
@@ -27,7 +27,7 @@
             <hr />
             @Html.ValidationSummary(true)
             <div class="form-group">
-                @Html.LabelFor(model => model.RegionID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Regiune</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.RegionID)
                     @Html.ValidationMessageFor(model => model.RegionID)
@@ -35,7 +35,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.RegionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <span class="control-label col-md-2 bold"><strong>Descriere Regiune</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.RegionDescription)
                     @Html.ValidationMessageFor(model => model.RegionDescription)

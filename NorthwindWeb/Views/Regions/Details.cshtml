@@ -10,7 +10,7 @@
     <hr />
     <ol class="breadcrumb">
         <li>
-            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+            @Html.ActionLink("Dashboard", "Home", "Dashboard")
         </li>
         <li>
             @Html.ActionLink("Regiuni", "Index", "Regions")
@@ -24,7 +24,7 @@
             <hr />
             <dl class="dl-horizontal">
                 <dt>
-                    @Html.DisplayNameFor(model => model.region.RegionDescription)
+                   Descriere Regiune
                 </dt>
 
                 <dd>
@@ -46,13 +46,13 @@
             {
                 <dl class="dl-horizontal">
                     <dt>
-                        TerritoryID
+                        Teritorii
                     </dt>
                     <dd>
                         @y.TerritoryID
                     </dd>
                     <dt>
-                        TerritoryDescription
+                        Descriere teritorii
                     </dt>
                     <dd>
                         @y.TerritoryDescription

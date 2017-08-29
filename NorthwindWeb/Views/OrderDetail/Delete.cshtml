@@ -11,7 +11,7 @@
     <hr />
     <ol class="breadcrumb">
         <li>
-            @Html.ActionLink("Dashboard", "Index1", "Dashboard")
+            @Html.ActionLink("Dashboard", "Home", "Dashboard")
         </li>
         <li>
             @Html.ActionLink("Comenzi", "Index", "Orders")
@@ -22,13 +22,13 @@
         <li class="active">Sterge</li>
     </ol>
 
-    <h3>Sigur vrei sa stergi?</h3>
+    <h3>Sigur doresti sa stergi?</h3>
     <div>
         <h4>Detalii comanda</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.Order.CustomerID)
+                Id client
             </dt>
 
             <dd>
@@ -36,7 +36,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Product.ProductName)
+                Nume produs
             </dt>
 
             <dd>
@@ -44,7 +44,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.UnitPrice)
+                Pret unitar
             </dt>
 
             <dd>
@@ -52,7 +52,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Quantity)
+                Cantitate
             </dt>
 
             <dd>
@@ -60,7 +60,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.Discount)
+                Discount
             </dt>
 
             <dd>

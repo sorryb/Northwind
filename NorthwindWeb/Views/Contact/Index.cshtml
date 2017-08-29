@@ -14,7 +14,7 @@
         </div>
         <div class="col-lg-12">
             <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
-            <iframe width="100%" scrolling="no" height="400px" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2846.710625275883!2d26.1061385158562!3d44.48010397910156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b202797a54bac1%3A0x365f39e7d7ef7166!2sKepler-Rominfo!5e0!3m2!1sro!2sro!4v1503048554459" marginwidth="0" marginheight="0"></iframe>
+            <iframe width="100%" scrolling="no" height="400" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2846.710625275883!2d26.1061385158562!3d44.48010397910156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b202797a54bac1%3A0x365f39e7d7ef7166!2sKepler-Rominfo!5e0!3m2!1sro!2sro!4v1503048554459" marginwidth="0" marginheight="0"></iframe>
             
          
           
@@ -26,7 +26,7 @@
             <p>Pentru a evita filtrele de junk mail, în cazul în care ne contactați prima dată, vă rugăm să folosiți formularul de mai jos. În acest fel vă asigurați că mesajul dumnevoastră va ajunge la noi. Vă mulțumim.</p>
 
 
-       @using (Html.BeginForm())
+       @using (Html.BeginForm("Create", "Contact", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
        {
              @Html.AntiForgeryToken()
            
@@ -34,20 +34,20 @@
                 <div class="row">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group col-lg-4">
-                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label" })<br />
+                        <label>Last Name </label><br />
                    <!-- <input type="text" id="input1" class="form-control" name="contact_name" > -->
                           @Html.TextBoxFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                           @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })   
                     </div>
                     <div class="form-group col-lg-4">
 
-                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })<br />
+                         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })<br />
                     <!--   <input type="email" id="input2" class="form-control" name="contact_email" > -->
                           @Html.TextBoxFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                           @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-lg-4">
-                       @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label" })<br />
+                        @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label" })<br />
                     <!-- <input type="phone" id="input3" class="form-control" name="contact_phone"> --> 
                         @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
@@ -59,8 +59,7 @@
                             
                     </div>
                         <div class="form-group col-lg-12">
-                         <!-- <input type="hidden" value="contact" name="save"> -->
-                            <button class="btn btn-primary" type="submit">Submit</button>
+                           <button class="btn btn-primary" type="submit">Submit</button>
                         </div>
                     </div>
 

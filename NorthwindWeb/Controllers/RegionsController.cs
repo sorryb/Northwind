@@ -13,7 +13,10 @@ using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
-    //[Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admins")]
+    /// <summary>
+    /// Regions Controller. For table Region
+    /// </summary>
     public class RegionsController : Controller
     {
         private NorthwindModel db = new NorthwindModel();

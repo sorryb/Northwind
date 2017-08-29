@@ -94,6 +94,14 @@ namespace NorthwindWeb.Models
             modelBuilder.Entity<Territories>()
                 .Property(e => e.TerritoryDescription)
                 .IsFixedLength();
+
+            modelBuilder.Entity<Persons>()
+                .Property(e => e.LastName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Persons>()
+                .Property(e => e.FirstName)
+                .IsUnicode(false);
         }
     }
 }

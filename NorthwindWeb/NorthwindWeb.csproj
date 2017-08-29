@@ -235,18 +235,18 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\CustomizeViewEngine.cs" />
-    <Compile Include="ViewModels\Dashboard\DashboardGraph1.cs" />
-    <Compile Include="ViewModels\Dashboard\DashboardGraph2.cs" />
-    <Compile Include="ViewModels\Dashboard\DashboardGraph3.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardMorrisArea.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardMorrisBar.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardMorrisDonut.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardIndexData.cs" />
-    <Compile Include="ViewModels\Dashboard\Last10Orders.cs" />
+    <Compile Include="ViewModels\Dashboard\LastTenOrders.cs" />
     <Compile Include="ViewModels\Dashboard\LocateSearch.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="ViewModels\Orders\DetailsOfOrder.cs" />
     <Compile Include="ViewModels\Orders\OrderDetali.cs" />
     <Compile Include="ViewModels\Menu.cs" />
     <Compile Include="ViewModels\Order\BigOrder.cs" />
-    <Compile Include="ViewModels\Order\Order10.cs" />
+    <Compile Include="ViewModels\Order\OrderTen.cs" />
     <Compile Include="ViewModels\Order\OrderInfo.cs" />
     <Compile Include="ViewModels\Order\OrderIndexData.cs" />
     <Compile Include="ViewModels\Order\OrderProduct.cs" />
@@ -432,6 +432,7 @@
     <Content Include="css\metisMenu\metisMenu.min.css" />
     <Content Include="css\modern-business.css" />
     <Content Include="css\Order.css" />
+    <Content Include="css\product.css" />
     <Content Include="css\Style.css" />
     <Content Include="css\alt info 2.css" />
     <Content Include="favicon.ico" />
@@ -567,7 +568,6 @@
     <Content Include="images\wpid-nokia-logo.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
-    <Content Include="js\datatable.js" />
     <Content Include="js\dist\sb-admin-2.js" />
     <Content Include="js\dist\sb-admin-2.min.js" />
     <Content Include="js\jquery.js" />
@@ -584,7 +584,6 @@
     <Content Include="Content\DataTables\css\semanticui.scss" />
     <Content Include="Content\DataTables\css\mixins.scss" />
     <Content Include="Content\DataTables\css\common.scss" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
@@ -662,18 +661,10 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.7-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.js" />
     <Content Include="Scripts\jquery-1.7.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\product.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -832,7 +823,7 @@
     <Content Include="css\font-awesome\scss\_stacked.scss" />
     <Content Include="css\font-awesome\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\BROMPREPROD1.pubxml" />
-    <Content Include="Views\Dashboard\Index1.cshtml" />
+    <Content Include="Views\Dashboard\Home.cshtml" />
     <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
