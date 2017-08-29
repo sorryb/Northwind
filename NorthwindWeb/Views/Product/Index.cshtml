@@ -4,7 +4,20 @@
     ViewBag.Title = "Produse";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<h2>Produse</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.category))
+{
+    <h2>
+        <a href=@Url.Action("Index", "Product")>Produse</a> / @ViewBag.category
+    </h2>
+}
+else
+{
+    <h2>Produse</h2>
+}
+
+
+<br />
 
 <br />
 <div>
@@ -22,7 +35,7 @@
 </div>
 <br />
 
-<table id="MyTable" class="table">
+<table id="MyTable" class="table dtr-inline">
     <thead>
         <tr>
             <th>
@@ -54,7 +67,6 @@
             <tr>
                 <td>
                     @Html.ActionLink(item.ProductName, "Details", new { id = item.ProductID })
-                    @*@Html.DisplayFor(modelItem => item.ProductName)*@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.UnitPrice)
@@ -72,17 +84,10 @@
                     @Html.DisplayFor(modelItem => item.Discontinued)
                 </td>
                 <td>
-                    <a href="@Url.Action("Delete", new { id = item.ProductID })" ><i class="fa fa-remove"></i></a>
+                    <a href="@Url.Action("Delete", new { id = item.ProductID })"><i class="fa fa-remove"></i></a>
                 </td>
             </tr>
         }
     </tbody>
 
 </table>
-@*<div class="row text-center">
-        <div class="col-lg-12">
-            Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) din @Model.PageCount
-
-            @Html.PagedListPager(Model, page => Url.Action("Index", "Product", new { category = ViewBag.category, page }))
-        </div>
-    </div>*@

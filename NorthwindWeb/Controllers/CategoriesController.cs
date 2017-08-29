@@ -11,6 +11,7 @@ using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
+    [Authorize(Roles = "Admins")]
     public class CategoriesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
