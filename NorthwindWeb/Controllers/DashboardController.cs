@@ -9,6 +9,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using PagedList;
 
 
 namespace NorthwindWeb.Controllers
@@ -42,9 +43,23 @@ namespace NorthwindWeb.Controllers
         /// Creates a list of data from the database containing the search parameter
         /// </summary>
         /// <param name="search">The parameter to be searched for</param>
+        /// <param name="page"></param>
+        /// <param name="currentFilter"></param>
         /// <returns></returns>
-        public ActionResult Search(string search)
+        
+        public ActionResult Search(string search,int? page, string currentFilter)
         {
+            var viewModel = new DashboardSearchData();
+            // test null if in search control
+            if (search != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+            ViewBag.CurrentFilter = search;
             List<LocateSearch> list = new List<LocateSearch>();
             //The test returns false if no search is entered
             if (!String.IsNullOrEmpty(search))
@@ -55,6 +70,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.CategoryID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.CategoryID);
                         x.WhereFound = "CategoryID: " +Convert.ToString(item.CategoryID);
                         x.Controller = "Categories";
@@ -62,6 +78,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if(item.CategoryName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.CategoryID);
                         x.WhereFound = "CategoryName: " + item.CategoryName;
                         x.Controller = "Categories";
@@ -69,6 +86,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if(item.Description.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.CategoryID);
                         x.WhereFound = "Description: " + item.Description;
                         x.Controller = "Categories";
@@ -82,6 +100,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.SupplierID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.SupplierID);
                         x.WhereFound = "CategoryID: " + Convert.ToString(item.SupplierID);
                         x.Controller = "Suppliers";
@@ -89,6 +108,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.SupplierID);
                         x.WhereFound = "CompanyName: " + item.CompanyName;
                         x.Controller = "Suppliers";
@@ -96,6 +116,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.ContactName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.SupplierID);
                         x.WhereFound = "ContactName: " + item.ContactName;
                         x.Controller = "Suppliers";
@@ -109,6 +130,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.ProductID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.ProductID);
                         x.WhereFound = "ProductID: " + Convert.ToString(item.ProductID);
                         x.Controller = "Product";
@@ -116,6 +138,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.ProductName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.ProductID);
                         x.WhereFound = "ProductName: " + item.ProductName;
                         x.Controller = "Product";
@@ -130,6 +153,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.OrderID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.OrderID);
                         x.WhereFound = "OrderID: " + Convert.ToString(item.OrderID);
                         x.Controller = "Orders";
@@ -137,6 +161,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (Convert.ToString(item.OrderDate).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.OrderID);
                         x.WhereFound = "OrderDate: " + Convert.ToString(item.OrderDate);
                         x.Controller = "Orders";
@@ -144,6 +169,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.ShipName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.OrderID);
                         x.WhereFound = "ShipName: " + item.ShipName;
                         x.Controller = "Orders";
@@ -157,6 +183,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.CustomerID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.CustomerID);
                         x.WhereFound = "CustomerID: " + Convert.ToString(item.CustomerID);
                         x.Controller = "Customers";
@@ -164,6 +191,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.CustomerID);
                         x.WhereFound = "CompanyName: " + item.CompanyName;
                         x.Controller = "Customers";
@@ -171,6 +199,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.ContactName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.CustomerID);
                         x.WhereFound = "ContactName: " + item.ContactName;
                         x.Controller = "Customers";
@@ -184,6 +213,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.RegionID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.RegionID);
                         x.WhereFound = "RegionID: " + Convert.ToString(item.RegionID);
                         x.Controller = "Regions";
@@ -191,6 +221,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.RegionDescription.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.RegionID);
                         x.WhereFound = "RegionDescription: " + item.RegionDescription;
                         x.Controller = "Regions";
@@ -205,6 +236,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.EmployeeID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.EmployeeID);
                         x.WhereFound = "EmployeeID: " + Convert.ToString(item.EmployeeID);
                         x.Controller = "Employees";
@@ -212,6 +244,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.LastName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.EmployeeID);
                         x.WhereFound = "LastName: " + item.LastName;
                         x.Controller = "Employees";
@@ -219,6 +252,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.FirstName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.EmployeeID);
                         x.WhereFound = "FirstName: " + item.FirstName;
                         x.Controller = "Employees";
@@ -232,6 +266,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.ShipperID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.ShipperID);
                         x.WhereFound = "ShipperID: " + Convert.ToString(item.ShipperID);
                         x.Controller = "Shippers";
@@ -239,6 +274,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.ShipperID);
                         x.WhereFound = "CompanyName: " + item.CompanyName;
                         x.Controller = "Shippers";
@@ -253,6 +289,7 @@ namespace NorthwindWeb.Controllers
                     LocateSearch x = new LocateSearch();
                     if (Convert.ToString(item.TerritoryID).ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.TerritoryID);
                         x.WhereFound = "TerritoryID: " + Convert.ToString(item.TerritoryID);
                         x.Controller = "Territories";
@@ -260,6 +297,7 @@ namespace NorthwindWeb.Controllers
                     }
                     else if (item.TerritoryDescription.ToLower().Contains(search.ToLower()))
                     {
+                        x.Position = list.Count() + 1;
                         x.ID = Convert.ToString(item.TerritoryID);
                         x.WhereFound = "TerritoryDescription: " + item.TerritoryDescription;
                         x.Controller = "Territories";
@@ -278,8 +316,12 @@ namespace NorthwindWeb.Controllers
                 x.Controller = "Dashboard";
                 list.Add(x);
             }
-            
-            return View(list);
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+            viewModel.MatchesCount = list.Count();
+            viewModel.MatchesFound=list.ToPagedList(pageNumber, pageSize);
+            viewModel.MatchesFoundPaged= list.ToPagedList(pageNumber, pageSize);
+            return View(viewModel);
 
 
            

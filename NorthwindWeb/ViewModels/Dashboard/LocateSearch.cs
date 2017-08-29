@@ -9,6 +9,7 @@ namespace NorthwindWeb.ViewModels.Dashboard
 /// </summary>
     public class LocateSearch
     {
+        public int Position { get; set; }
         public string ID { get; set; }
         public string WhereFound { get; set; }
         public string Controller { get; set; }

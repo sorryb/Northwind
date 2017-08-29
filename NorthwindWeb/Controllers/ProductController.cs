@@ -172,11 +172,12 @@ namespace NorthwindWeb.Controllers
             }
             //int pageSize = 15;
             //int pageNumber = page;
-        
-            
+
+
             /*Select what wee need in table*/
             return Json(
                 products.Select(x => new {
+                    ID = x.ProductID,
                     ProductName = x.ProductName,
                     Price = x.UnitPrice,
                     InStock = x.UnitsInStock,
