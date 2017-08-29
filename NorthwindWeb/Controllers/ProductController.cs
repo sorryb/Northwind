@@ -114,6 +114,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Product/Delete/5
+        //TODO Delete from related tables
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
