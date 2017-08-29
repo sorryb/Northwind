@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿/*find correct pathc for search*/
 function searchPath() {
     var path = window.location.href;
@@ -13,17 +14,22 @@ function searchPath() {
 /*add from json (product/jsontest) in table, when we search, a list of all products (that contain search.value) come to table and local we make pagedlist*/
 $(document).ready(function () {
     $('#MyTable').DataTable({
-        "serverside": true,
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
         "ajax": {
             "type": "GET",
             "url": searchPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
-                $.each(json, function (index, item){
+                $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ProductName = '<a href= "' + searchPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
-                });
-                return json;
+                    return json;
+                })
             }
         },
         "columns": [
@@ -33,7 +39,7 @@ $(document).ready(function () {
             { 'data': 'OnOrders' },
             { 'data': 'ReorderLevel' },
             { 'data': 'Discontinued' },
-            { 'data': 'DeleteLink'}
+            { 'data': 'DeleteLink' }
         ]
 
     });

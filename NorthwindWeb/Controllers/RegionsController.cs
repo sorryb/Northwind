@@ -22,10 +22,10 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Regions
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string search = "")
         {
-            var region= db.Regions.OrderBy(r=>r.RegionID);
-            return View(await region.ToListAsync());
+            
+            return View(await db.Regions.Where(r=>r.RegionDescription.Contains(search)).ToListAsync());
         }
 
         // GET: Regions/Details/5

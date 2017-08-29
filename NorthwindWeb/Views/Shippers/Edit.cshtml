@@ -6,7 +6,16 @@
 }
 
 <h2>Modifica</h2>
-
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Expeditori", "Index", "Orders")
+    </li>
+    <li class="active">Modifica</li>
+</ol>
 
 @using (Html.BeginForm())
 {
@@ -15,6 +24,7 @@
     <div class="form-horizontal">
         <h4>Expeditor</h4>
         <hr />
+       
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.ShipperID)
 
