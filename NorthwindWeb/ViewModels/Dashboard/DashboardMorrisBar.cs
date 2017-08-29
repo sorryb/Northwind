@@ -4,7 +4,9 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels.Dashboard
-{
+{/// <summary>
+/// The data model for the MorrisBar graph
+/// </summary>
     public class DashboardMorrisBar
     {
         public string Year { get; set; }
