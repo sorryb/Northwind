@@ -568,7 +568,6 @@
     <Content Include="images\wpid-nokia-logo.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
-    <Content Include="js\datatable.js" />
     <Content Include="js\dist\sb-admin-2.js" />
     <Content Include="js\dist\sb-admin-2.min.js" />
     <Content Include="js\jquery.js" />
