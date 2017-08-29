@@ -26,6 +26,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons persons)
         {
 
+
             if (ModelState.IsValid)
             {
                 db.Persons.Add(persons);
