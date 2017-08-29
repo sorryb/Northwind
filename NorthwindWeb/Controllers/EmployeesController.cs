@@ -12,7 +12,7 @@ using PagedList;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins")]
+    [Authorize]
     public class EmployeesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -43,6 +43,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Employees/Create
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             ViewBag.ReportsTo = new SelectList(db.Employees, "EmployeeID", "LastName");
@@ -54,6 +55,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "EmployeeID,LastName,FirstName,Title,TitleOfCourtesy,BirthDate,HireDate,Address,City,Region,PostalCode,Country,HomePhone,Extension,Notes,ReportsTo")] Employees employees)
         {
             if (ModelState.IsValid)
@@ -68,6 +70,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Employees/Edit/5
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,6 +91,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,LastName,FirstName,Title,TitleOfCourtesy,BirthDate,HireDate,Address,City,Region,PostalCode,Country,HomePhone,Extension,Notes,ReportsTo")] Employees employees)
         {
             if (ModelState.IsValid)
@@ -101,6 +105,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Employees/Delete/5
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -118,6 +123,7 @@ namespace NorthwindWeb.Controllers
         // POST: Employees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Employees employees = await db.Employees.FindAsync(id);

@@ -11,7 +11,7 @@ using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins")]
+    [Authorize]
     public class ShippersController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -38,6 +38,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Shippers/Create
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
@@ -48,6 +49,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "ShipperID,CompanyName,Phone")] Shippers shippers)
         {
             if (ModelState.IsValid)
@@ -61,6 +63,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Shippers/Edit/5
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,6 +83,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "ShipperID,CompanyName,Phone")] Shippers shippers)
         {
             if (ModelState.IsValid)
@@ -92,6 +96,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Shippers/Delete/5
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -109,6 +114,7 @@ namespace NorthwindWeb.Controllers
         // POST: Shippers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Shippers shippers = await db.Shippers.FindAsync(id);
