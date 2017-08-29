@@ -832,7 +832,7 @@
     <Content Include="css\font-awesome\scss\_stacked.scss" />
     <Content Include="css\font-awesome\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\BROMPREPROD1.pubxml" />
-    <Content Include="Views\Dashboard\Index1.cshtml" />
+    <Content Include="Views\Dashboard\Home.cshtml" />
     <Content Include="Views\Shared\_LayoutDashboard.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />

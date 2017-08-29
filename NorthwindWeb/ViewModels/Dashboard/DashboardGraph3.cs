@@ -5,10 +5,10 @@ using System.Web;
 
 namespace NorthwindWeb.ViewModels.Dashboard
 {
-    public class DashboardGraph3
+    public class DashboardMorrisDonut
     {
         public string label { get; set; }
         public decimal value { get; set; }
-        public DashboardGraph3() { }
+        public DashboardMorrisDonut() { }
     }
 }

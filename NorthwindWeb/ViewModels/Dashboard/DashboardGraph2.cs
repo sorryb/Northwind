@@ -5,12 +5,12 @@ using System.Web;
 
 namespace NorthwindWeb.ViewModels.Dashboard
 {
-    public class DashboardGraph2
+    public class DashboardMorrisBar
     {
         public string Year { get; set; }
         public decimal a { get; set; }
         public decimal b { get; set; }
         public decimal c { get; set; }
-        public DashboardGraph2() {}
+        public DashboardMorrisBar() {}
     }
 }

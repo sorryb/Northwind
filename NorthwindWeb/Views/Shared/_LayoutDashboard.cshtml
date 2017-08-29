@@ -77,9 +77,9 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href='@Url.Action("Index1", "Dashboard")'><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href='@Url.Action("Home", "Dashboard")'><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 
-                            <!--@Html.ActionLink("Dashboard", "Index1", "Dashboard")-->
+                            <!--@Html.ActionLink("Dashboard", "Home", "Dashboard")-->
                         </li>
                         
                         <li id="services">
@@ -170,7 +170,7 @@
     </div>
     <script>
 
-        if (window.location.href.search("Dashboard") != -1) {
+        if (window.location.href.search("Dashboard/Home") != -1) {
             var my_awesome_script = document.createElement('script');
 
             var host = 'http://' + window.location.host + '/js/morrisjs/morris-data.js';

@@ -1,6 +1,6 @@
 $(function () {
     $.ajax({
-        url: 'Graph1',
+        url: 'MorrisArea',
         dataType: 'json',
         cache: false,
         success: function (data) {
@@ -18,7 +18,7 @@ $(function () {
         }
     });
     $.ajax({
-        url: 'Graph3',
+        url: 'MorrisDonut',
         dataType: 'json',
         cache: false,
         success: function (data) {
@@ -31,7 +31,7 @@ $(function () {
 
     })
     $.ajax({
-        url: 'Graph2',
+        url: 'MorrisBar',
         dataType: 'json',
         cache: false,
         success: function (data) {

@@ -7,11 +7,11 @@ using System.Web;
 namespace NorthwindWeb.ViewModels.Dashboard
 {
    
-    public class DashboardGraph1
+    public class DashboardMorrisArea
     {
        
         public string Year { get; set; }
         public decimal Sales { get; set; }
-        public DashboardGraph1() {}
+        public DashboardMorrisArea() {}
     }
 }
