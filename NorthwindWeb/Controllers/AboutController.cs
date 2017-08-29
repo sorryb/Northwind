@@ -6,6 +6,11 @@ namespace NorthwindWeb.Controllers
     public class AboutController : Controller
     {
         NorthwindModel db = new NorthwindModel();
+        //
+        /// <summary>
+        /// Select the first 6 employees
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
 

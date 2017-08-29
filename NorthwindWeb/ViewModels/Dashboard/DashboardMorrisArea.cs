@@ -5,13 +5,15 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels.Dashboard
-{
-   
-    public class DashboardGraph1
+{/// <summary>
+ /// The data model for the MorrisArea graph
+ /// </summary>
+
+    public class DashboardMorrisArea
     {
        
         public string Year { get; set; }
         public decimal Sales { get; set; }
-        public DashboardGraph1() {}
+        public DashboardMorrisArea() {}
     }
 }

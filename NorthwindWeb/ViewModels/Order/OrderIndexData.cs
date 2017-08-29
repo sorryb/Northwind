@@ -12,7 +12,7 @@ namespace NorthwindWeb.ViewModels
         public IEnumerable<OrderInfo> Order { get; set; }
         public IEnumerable<OrderProduct> Order_Detail { get; set; }
         public IEnumerable<ProductCategory> Product { get; set; }
-        public IEnumerable<Order10> Order10 { get; set; }
+        public IEnumerable<OrderTen> Order10 { get; set; }
         public BigOrder Comand { get; set; }
     }
 }

@@ -3,9 +3,18 @@
 }
 @model System.Collections.Generic.List<NorthwindWeb.ViewModels.Dashboard.LocateSearch>
 
-
-
-@foreach (var item in Model)
+<!--Test checks if there are no matches for the search-->
+@if ((Model.Count == 1) && (Model[0].Controller == "Dashboard"))
+{
+    <a href="@Url.Action("Home", Model[0].Controller, null)" class="list-group-item">
+        @Html.DisplayFor(modelItem => Model[0].WhereFound)
+        
+    </a>
+}
+//if exist marches
+else
+{
+foreach (var item in Model)
 {
         <a href="@Url.Action("Details", item.Controller, new { id = item.ID }, null)" class="list-group-item">
             @Html.DisplayFor(modelItem => item.WhereFound)
@@ -13,6 +22,7 @@
                 <em>@item.Controller</em>
             </span>
         </a>
+}
 }
 
 

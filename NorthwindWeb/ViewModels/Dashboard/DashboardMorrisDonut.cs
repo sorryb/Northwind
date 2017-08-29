@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels.Dashboard
-{
-    public class DashboardGraph3
+{/// <summary>
+///  The data model for the MorrisDonut graph
+/// </summary>
+    public class DashboardMorrisDonut
     {
         public string label { get; set; }
         public decimal value { get; set; }
-        public DashboardGraph3() { }
+        public DashboardMorrisDonut() { }
     }
 }

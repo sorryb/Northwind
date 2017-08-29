@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 
 namespace NorthwindWeb.ViewModels.Dashboard
-{
-    public class Last10Orders
+{/// <summary>
+/// The data required for the table of the last 10 commands in the dashboard
+/// </summary>
+    public class LastTenOrders
     {
         public int OrderID { get; set; }
+        // How long ago the order was placed
         public string Ago { get; set; }
-        public Last10Orders() { }
+        public LastTenOrders() { }
     }
 }

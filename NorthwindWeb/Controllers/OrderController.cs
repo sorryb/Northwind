@@ -47,7 +47,7 @@ namespace NorthwindWeb.Controllers
             viewModel.Order = Orders(search);
             viewModel.Comand = BigComand();
 
-            viewModel.Order10 = ListOrder10();
+            viewModel.Order10 = ListTenOrder();
             // test null if orders not selected in page
             if (orderID == 0) { orderID = null; }
             if (orderID != null)
@@ -74,7 +74,7 @@ namespace NorthwindWeb.Controllers
 
         }
 
-        private List<Order10> ListOrder10()
+        private List<OrderTen> ListTenOrder()
         {
             var order10 = (from o in db.Orders
                            join od in db.Order_Details on o.OrderID equals od.OrderID
@@ -83,11 +83,11 @@ namespace NorthwindWeb.Controllers
                               .OrderByDescending(x => x.Cost)
                               .Take(10);
             ;
-            List<Order10> list = new List<Order10>();
+            List<OrderTen> list = new List<OrderTen>();
 
             foreach (var item in order10)
             {
-                Order10 x = new Order10();
+                OrderTen x = new OrderTen();
 
                 x.OrderID = item.OrderID;
                 x.Cost = decimal.Round(item.Cost, 2);
@@ -99,39 +99,47 @@ namespace NorthwindWeb.Controllers
 
         private List<OrderInfo> Orders(string search)
         {
+            List<OrderInfo> orders = new List<OrderInfo>();
             var order = (from o in db.Orders
                          join c in db.Customers on o.CustomerID equals c.CustomerID
                          join s in db.Shippers on o.ShipVia equals s.ShipperID
                          select new { o.OrderID, o.OrderDate, c.CompanyName, ShipperName = s.CompanyName })
-                       ;
+                       .OrderBy(i => i.OrderID);
+            //Filter orders if a text has been entered
             if (!String.IsNullOrEmpty(search))
             {
-                int i;
-                if (int.TryParse(search, out  i))
+                foreach (var item in order)
                 {
-                    order = order.Where(s => s.OrderID == i);
-                }
-                else
-                {
-                    order = order.Where(s => s.ShipperName.Contains(search));
+                    if ((Convert.ToString(item.OrderID).Contains(search)) || (item.ShipperName.ToLower().Contains(search.ToLower())))
+                    {
+                        OrderInfo x = new OrderInfo();
+
+                        x.OrderID = item.OrderID;
+                        DateTime t = Convert.ToDateTime(item.OrderDate);
+                        x.OrderDate = t.Day.ToString() + "." + t.Month + "." + t.Year;
+                        x.CompanyName = item.CompanyName;
+                        x.ShipperName = item.ShipperName;
+                        orders.Add(x);
+                    }
                 }
             }
-            order.OrderBy(i => i.OrderID);
-            List<OrderInfo> comenzi = new List<OrderInfo>();
-
-            foreach (var item in order)
+            else
             {
-                OrderInfo x = new OrderInfo();
 
-                x.OrderID = item.OrderID;
-                DateTime t = Convert.ToDateTime(item.OrderDate);
-                x.OrderDate = t.Day.ToString() + "." + t.Month + "." + t.Year;
-                x.CompanyName = item.CompanyName;
-                x.ShipperName = item.ShipperName;
-                comenzi.Add(x);
+                foreach (var item in order)
+                {
+                    OrderInfo x = new OrderInfo();
 
+                    x.OrderID = item.OrderID;
+                    DateTime t = Convert.ToDateTime(item.OrderDate);
+                    x.OrderDate = t.Day.ToString() + "." + t.Month + "." + t.Year;
+                    x.CompanyName = item.CompanyName;
+                    x.ShipperName = item.ShipperName;
+                    orders.Add(x);
+
+                }
             }
-            return comenzi;
+            return orders;
         }
 
         private BigOrder BigComand()
