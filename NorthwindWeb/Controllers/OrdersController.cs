@@ -23,14 +23,11 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Orders
-        public ActionResult Index( int page = 1)
+        public ActionResult Index(string search = "")
         {
-            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).OrderBy(o=>
-            o.OrderID);
-
-            //int pageSize = 15;
-            //int pageNumber = page;
-            return View(orders.ToList());
+            return View(db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o=>o.OrderID.ToString().Contains(search)).OrderBy(o=>o.OrderID));
+            
+          
         }
             
         // GET: Orders/Details
