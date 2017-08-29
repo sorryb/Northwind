@@ -239,6 +239,7 @@
     <Compile Include="ViewModels\Dashboard\DashboardMorrisBar.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardMorrisDonut.cs" />
     <Compile Include="ViewModels\Dashboard\DashboardIndexData.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardSearchData.cs" />
     <Compile Include="ViewModels\Dashboard\LastTenOrders.cs" />
     <Compile Include="ViewModels\Dashboard\LocateSearch.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />

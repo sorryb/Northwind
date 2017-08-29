@@ -1,25 +1,26 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-@model System.Collections.Generic.List<NorthwindWeb.ViewModels.Dashboard.LocateSearch>
+@model NorthwindWeb.ViewModels.Dashboard.DashboardSearchData
 @{
     ViewBag.Title = "Search";
 }
+@using PagedList.Mvc;
 <!--Test checks if there are no matches for the search-->
-@if ((Model.Count == 1) && (Model[0].Controller == "Dashboard"))
+@if ((Model.MatchesFound.Count() == 1) && (Model.MatchesFound.First().Controller == "Dashboard"))
 {
-    <a href="@Url.Action("Home", Model[0].Controller, null)" class="list-group-item">
-        @Html.DisplayFor(modelItem => Model[0].WhereFound)
+    <a href="@Url.Action("Home", Model.MatchesFound.First().Controller, null)" class="list-group-item">
+        @Html.DisplayFor(modelItem => Model.MatchesFound.First().WhereFound)
         
     </a>
 }
 //if exist marches
 else
-{
-foreach (var item in Model)
-{
+{<h1>@Model.MatchesCount Rezultate</h1>
+    foreach (var item in Model.MatchesFound)
+    {
         <a href="@Url.Action("Details", item.Controller, new { id = item.ID }, null)" class="list-group-item">
-            @Html.DisplayFor(modelItem => item.WhereFound)
+            @Html.DisplayFor(modelItem => item.Position) @Html.DisplayFor(modelItem => item.WhereFound)
             <span class="pull-right text-muted small">
                 <em>@item.Controller</em>
             </span>
@@ -27,5 +28,7 @@ foreach (var item in Model)
 }
 }
 
+Pagina @(Model.MatchesFoundPaged.PageCount < Model.MatchesFoundPaged.PageNumber ? 0 : Model.MatchesFoundPaged.PageNumber) din @Model.MatchesFoundPaged.PageCount
+@Html.PagedListPager(Model.MatchesFoundPaged, page => Url.Action("Search", new { page, currentFilter = ViewBag.CurrentFilter }))
 
 

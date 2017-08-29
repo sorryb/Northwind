@@ -52,6 +52,8 @@
                     }
                 </tbody>
             </table>
+            Pagina @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) din @Model.page.PageCount
+            @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
             @if (Model.Order_Detail != null)
             {<hr>
                 <h3>Detali Comanda</h3>
@@ -124,8 +126,7 @@
                     </tbody>
                 </table>
             }
-            Pagina @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) din @Model.page.PageCount
-            @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
+            
            
         </div>
         <div class="col-lg-4">
