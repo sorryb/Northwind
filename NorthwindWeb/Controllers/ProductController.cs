@@ -8,13 +8,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using NorthwindWeb.Models.Interfaces;
 using PagedList;
 using System.Web.Helpers;
 
 namespace NorthwindWeb.Controllers
 {
+
     [Authorize]
-    public class ProductController : Controller
+    public class ProductController : Controller, IJsonTableFill
     {
         private NorthwindModel db = new NorthwindModel();
 
@@ -157,22 +159,9 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Product by Json
-        public  JsonResult JsonTest(string category = "", string search = "", int page = 1)
+        public JsonResult JsonTableFill(string search = "")
         {
-            IOrderedQueryable<Products> products;
-            ViewBag.category = category;
-
-            if (category.Equals(""))
-            {
-                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
-            }
-            else
-            {
-                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category) && p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
-            }
-            //int pageSize = 15;
-            //int pageNumber = page;
-
+            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
 
             /*Select what wee need in table*/
             return Json(

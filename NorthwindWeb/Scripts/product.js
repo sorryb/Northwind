@@ -1,13 +1,27 @@
-﻿
+﻿/*find correct pathc for search*/
+function searchPath() {
+    var path = window.location.href;
+    var a = path.split("/");
+    if (path.search("http://") + 1) {
+        return a[0] + '/' + a[1] + '/' + a[2] + '/' + a[3];
+    }
+    else {
+        return a[0] + '/' + a[1];
+    }
+}
+
+/*add from json (product/jsontest) in table, when we search, a list of all products (that contain search.value) come to table and local we make pagedlist*/
 $(document).ready(function () {
     $('#MyTable').DataTable({
+        "serverside": true,
         "ajax": {
             "type": "GET",
-            "url": "/Product/JsonTest",
+            "url": searchPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json, function (index, item){
-                    item.DeleteLink = '<a href= "/Product/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >'
+                    item.DeleteLink = '<a href= "' + searchPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.ProductName = '<a href= "' + searchPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
                 });
                 return json;
             }
@@ -24,3 +38,5 @@ $(document).ready(function () {
 
     });
 });
+
+//todo schimba numele coloanelor pentru a se potriivi
