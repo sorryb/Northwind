@@ -185,66 +185,12 @@ namespace NorthwindWeb.Controllers
 
 
 
-        private const int TOTAL_ROWS = 995;
-        private static readonly List<DataItem> _data = CreateData();
-
-        public class DataItem
-        {
-            public string Name { get; set; }
-            public string Age { get; set; }
-            public string DoB { get; set; }
-        }
-
-        public class DataTableData
-        {
-            public int draw { get; set; }
-            public int recordsTotal { get; set; }
-            public int recordsFiltered { get; set; }
-            public List<DataItem> data { get; set; }
-        }
-
-        // here we simulate data from a database table.
-        // !!!!DO NOT DO THIS IN REAL APPLICATION !!!!
-        private static List<DataItem> CreateData()
-        {
-            Random rnd = new Random();
-            List<DataItem> list = new List<DataItem>();
-            for (int i = 1; i <= TOTAL_ROWS; i++)
-            {
-                DataItem item = new DataItem();
-                item.Name = "Name_" + i.ToString().PadLeft(5, '0');
-                DateTime dob = new DateTime(1900 + rnd.Next(1, 100), rnd.Next(1, 13), rnd.Next(1, 28));
-                item.Age = ((DateTime.Now - dob).Days / 365).ToString();
-                item.DoB = dob.ToShortDateString();
-                list.Add(item);
-            }
-            return list;
-        }
-
-        private int SortString(string s1, string s2, string sortDirection)
-        {
-            return sortDirection == "asc" ? s1.CompareTo(s2) : s2.CompareTo(s1);
-        }
-
-        private int SortInteger(string s1, string s2, string sortDirection)
-        {
-            int i1 = int.Parse(s1);
-            int i2 = int.Parse(s2);
-            return sortDirection == "asc" ? i1.CompareTo(i2) : i2.CompareTo(i1);
-        }
-
-        private int SortDateTime(string s1, string s2, string sortDirection)
-        {
-            DateTime d1 = DateTime.Parse(s1);
-            DateTime d2 = DateTime.Parse(s2);
-            return sortDirection == "asc" ? d1.CompareTo(d2) : d2.CompareTo(d1);
-        }
-
+        
         // here we simulate SQL search, sorting and paging operations
         // !!!! DO NOT DO THIS IN REAL APPLICATION !!!!
-        private List<DataItem> FilterData(ref int recordFiltered, int start, int length, string search, int sortColumn, string sortDirection)
+        private IQueryable FilterData(ref int recordFiltered, int start, int length, string search, int sortColumn, string sortDirection)
         {
-            List<DataItem> list = new List<DataItem>();
+            IQueryable list = new List<DataItem>();
             if (search == null)
             {
                 list = _data;
@@ -285,10 +231,12 @@ namespace NorthwindWeb.Controllers
             return list;
         }
 
-
         // GET: Product by Json
         public JsonResult JsonTestServerSide(int draw, int start, int length)
         {
+            const int TOTAL_ROWS = 999;
+
+
             string search = Request.QueryString["search[value]"];
             int sortColumn = -1;
             string sortDirection = "asc";
@@ -307,12 +255,82 @@ namespace NorthwindWeb.Controllers
                 sortDirection = Request.QueryString["order[0][dir]"];
             }
 
-            DataTableData dataTableData = new DataTableData();
-            dataTableData.draw = draw;
-            dataTableData.recordsTotal = TOTAL_ROWS;
-            int recordsFiltered = 0;
-            dataTableData.data = FilterData(ref recordsFiltered, start, length, search, sortColumn, sortDirection);
-            dataTableData.recordsFiltered = recordsFiltered;
+            var list = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search));
+
+            //order list
+            switch (sortColumn)
+            {
+                case 0: //first column
+                    if(sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.ProductName);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.ProductName);
+                    }
+                    break;
+                case 1: //second column
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.UnitPrice);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.UnitPrice);
+                    }
+                    break;
+                case 2: // and so on
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.UnitsInStock);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.UnitsInStock);
+                    }
+                    break;
+                case 3:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.UnitsOnOrder);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.UnitsOnOrder);
+                    }
+                    break;
+                case 4:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.ReorderLevel);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.ReorderLevel);
+                    }
+                    break;
+                case 5:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.Discontinued);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.Discontinued);
+                    }
+                    break;
+            }
+            
+            //objet that whill be sent to client
+            JsonDataTableObject dataTableData = new JsonDataTableObject()
+            {
+                draw = draw,
+                recordsTotal = TOTAL_ROWS,
+                data = list,
+                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+
+            };
 
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
