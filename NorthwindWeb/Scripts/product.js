@@ -147,7 +147,7 @@ $(document).ready(function () {
 
     });
 });
-/*add from json in table Customers*/
+/*add from json in table Categories*/
 $(document).ready(function () {
     $('#CategoriesTable').DataTable({
         "responsive": true,
@@ -170,7 +170,7 @@ $(document).ready(function () {
         },
         "columns": [
             { 'data': 'CategoryName' },
-            { 'data': 'Description' }
+            { 'data': 'Description' },
             { 'data': 'DeleteLink' }
         ]
 
