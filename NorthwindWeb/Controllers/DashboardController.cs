@@ -440,9 +440,9 @@ namespace NorthwindWeb.Controllers
                 {
                     if (int.Parse(itemDashboardMorrisBarData.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
                     {
-                        if (quarter == 1) { itemDashboardMorrisBarData.a += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
-                        else if (quarter == 2) { itemDashboardMorrisBarData.b += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
-                        else { itemDashboardMorrisBarData.c += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                        if (quarter == 1) { itemDashboardMorrisBarData.dashboardMorrisBarColumA += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                        else if (quarter == 2) { itemDashboardMorrisBarData.dashboardMorrisBarColumB += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                        else { itemDashboardMorrisBarData.dashboardMorrisBarColumC += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
 
                         alreadyExistQuarter = 1;
                         break;
@@ -453,9 +453,9 @@ namespace NorthwindWeb.Controllers
                 {
                     DashboardMorrisBar dashboardMorrisBarElement = new DashboardMorrisBar();
                     dashboardMorrisBarElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
-                    if (quarter == 1) { dashboardMorrisBarElement.a = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
-                    else if (quarter == 2) { dashboardMorrisBarElement.b = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
-                    else { dashboardMorrisBarElement.c = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                    if (quarter == 1) { dashboardMorrisBarElement.dashboardMorrisBarColumA = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                    else if (quarter == 2) { dashboardMorrisBarElement.dashboardMorrisBarColumB = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                    else { dashboardMorrisBarElement.dashboardMorrisBarColumC = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
                     dashboardMorrisBarData.Add(dashboardMorrisBarElement);
                 }
             }
@@ -463,9 +463,9 @@ namespace NorthwindWeb.Controllers
             foreach (var itemDashboardMorrisBarData in dashboardMorrisBarData)
             {
                 {
-                    itemDashboardMorrisBarData.a = decimal.Round(itemDashboardMorrisBarData.a, 2);
-                    itemDashboardMorrisBarData.b = decimal.Round(itemDashboardMorrisBarData.b, 2);
-                    itemDashboardMorrisBarData.c = decimal.Round(itemDashboardMorrisBarData.c, 2);
+                    itemDashboardMorrisBarData.dashboardMorrisBarColumA = decimal.Round(itemDashboardMorrisBarData.dashboardMorrisBarColumA, 2);
+                    itemDashboardMorrisBarData.dashboardMorrisBarColumB = decimal.Round(itemDashboardMorrisBarData.dashboardMorrisBarColumB, 2);
+                    itemDashboardMorrisBarData.dashboardMorrisBarColumC = decimal.Round(itemDashboardMorrisBarData.dashboardMorrisBarColumC, 2);
                 }
             }
             return dashboardMorrisBarData;
