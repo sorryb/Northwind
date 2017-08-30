@@ -14,7 +14,6 @@ function searchPath() {
 /*add from json (product/jsontest) in table, when we search, a list of all products (that contain search.value) come to table and local we make pagedlist*/
 $(document).ready(function () {
     $('#MyTable').DataTable({
-        "serverSide": true,
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
