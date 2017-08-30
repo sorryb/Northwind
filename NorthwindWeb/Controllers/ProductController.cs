@@ -22,22 +22,11 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Product
-        public ActionResult Index(string category = "", string search = "", int page = 1)
+        public ActionResult Index(string category = "")
         {
-            IOrderedQueryable<Products> products;
+            //category from browser adress is used also in JsonTableFill action
             ViewBag.category = category;
-
-            if (category.Equals(""))
-            {
-                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
-            }
-            else
-            {
-                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category) && p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
-            }
-            //int pageSize = 15;
-            //int pageNumber = page;
-            return View(products.ToList());
+            return View();
         }
 
         // GET: Product/Details/5
@@ -165,7 +154,7 @@ namespace NorthwindWeb.Controllers
         {
             const int TOTAL_ROWS = 999;
 
-
+            string category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
             string search = Request.QueryString["search[value]"] ?? "";
             int sortColumn = -1;
             string sortDirection = "asc";
@@ -185,7 +174,7 @@ namespace NorthwindWeb.Controllers
             }
 
             //list of product that contain "search"
-            var list = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search));
+            var list = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search) && p.Category.CategoryName.Contains(category));
 
             //order list
             switch (sortColumn)
