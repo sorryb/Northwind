@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using PagedList;
 using NorthwindWeb.ViewModels.Orders;
+using NorthwindWeb.Models.Interfaces;
+
 
 
 namespace NorthwindWeb.Controllers
@@ -18,7 +20,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Orders Controller. For table Orders
     /// </summary>
-    public class OrdersController : Controller
+    public class OrdersController : Controller, IJsonTableFill
     {
         private NorthwindModel db = new NorthwindModel();
 
@@ -170,6 +172,25 @@ namespace NorthwindWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        
+        // GET: Orders by Json
+        public JsonResult JsonTableFill(string search = "")
+        {
+            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)).OrderBy(o => o.OrderID);
+
+            /*Select what wee need in table*/
+            return Json(
+                orders.Select(x => new {
+                    ID = x.OrderID,
+                    LastName = x.Employee.LastName,
+                    CompanyName = x.Shipper.CompanyName,
+                    ShippedDate = x.ShippedDate.ToString(),
+                    ShipName = x.ShipName,
+                    ShipAddress = x.ShipAddress
+                    
+                })
+                , JsonRequestBehavior.AllowGet);
         }
     }
 }
