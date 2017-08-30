@@ -14,11 +14,12 @@ using NorthwindWeb.ViewModels;
 using System.Security.Claims;
 using System.Web;
 using NorthwindWeb.Context;
+using NorthwindWeb.Models.Interfaces;
 
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : Controller, IJsonTableFill
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -839,6 +840,37 @@ namespace NorthwindWeb.Controllers
 
             base.Dispose(disposing);
         }
+        public JsonResult JsonTableFill(string search = "")
+        {
+            var context = new ApplicationDbContext();
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+
+            List<UserInfoViewModel> userInfoViewModel = new List<UserInfoViewModel>();
+            foreach (var user in userManager.Users)
+                userInfoViewModel.Add(new UserInfoViewModel()
+                {
+                    UserName = user.UserName,
+                    Email = user.Email
+                    //LastActiveDateTime = user.LastActivityDate,
+                    //IsOnline = user.IsOnline,
+                    //IsLockedOut = user.IsLockedOut
+                });
+            foreach (var user in userInfoViewModel)
+            {
+                user.LastActiveDateTime = Convert.ToDateTime(String.Format("{0:g}", user.LastActiveDateTime));
+                user.IsLockedOut = user.IsLockedOut ? true : false;
+                user.IsOnline = user.IsOnline ? true : false;
+            }
+
+
+            /*Select what wee need in table*/
+            return Json(
+                userInfoViewModel.AsQueryable()
+                
+                , JsonRequestBehavior.AllowGet);
+        }
 
         #region Helpers
         // Used for XSRF protection when adding external logins
@@ -913,4 +945,5 @@ namespace NorthwindWeb.Controllers
                            .ToList();
         }
     }
+
 }

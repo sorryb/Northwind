@@ -39,7 +39,8 @@
         </th>
     </tr>
 </thead>
-@foreach (var item in Model)
+    <tbody></tbody>
+@*@foreach (var item in Model)
 {
     <tr>
         <td>
@@ -64,7 +65,7 @@
             @Html.ActionLink("Sterge", "Delete", new { userName = item.UserName }, new { onclick = "if (!confirm('Sunteti sigur ca doriti sa-l stergeti ?')) return false;" }) 
         </td>
     </tr>  
- } 
+ }*@ 
 
 </table>
 
