@@ -45,3 +45,38 @@ $(document).ready(function () {
     });
 });
 
+
+/*add from json in table Employees*/
+$(document).ready(function () {
+    $('#EmployeesTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.ID = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.EmployeeID + '</a >';
+                })
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'LastName' },
+            { 'data': 'FirstName' }, 
+            { 'data': 'Title' },
+            { 'data': 'City' },
+            { 'data': 'Country' },
+            { 'data': 'HomePhone' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+});
+
