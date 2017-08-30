@@ -135,5 +135,25 @@ namespace NorthwindWeb.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Employees by Json
+        public JsonResult JsonTableFill(string search = "")
+        { 
+            var customers = db.Customers.OrderBy(x => x.CustomerID).Where(x => x.CompanyName.Contains(search));
+
+            /*Select what wee need in table*/
+            return Json(
+                customers.Select(x => new {
+                    ID = x.CustomerID,
+                    CompanyName = x.CompanyName,
+                    ContactName = x.ContactName,
+                    ContactTitle = x.ContactTitle,
+                    City = x.City,
+                    Country = x.Country,
+                    Phone = x.Phone
+                   
+                })
+                , JsonRequestBehavior.AllowGet);
+        }
     }
 }
