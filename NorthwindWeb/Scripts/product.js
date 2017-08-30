@@ -130,6 +130,7 @@ $(document).ready(function () {
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json, function (index, item) {
+                    item.ShippedDate = item.ShippedDate.replace("12:00AM", "");
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ID = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ID + '</a >';
                 })
