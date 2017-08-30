@@ -3,17 +3,20 @@
 function searchControllerPath() {
     var path = window.location.href;
     var a = path.split("/");
-    if (path.search("http://") + 1) {
-        return a[0] + '/' + a[1] + '/' + a[2] + '/' + a[3];
+    if (path.indexOf("http://") + 1) {
+        return a[0] + '//' + a[2] + '/' + (a[3].split("?"))[0];
     }
     else {
         return a[0] + '/' + a[1];
     }
 }
 
-/*add from json (product/jsontest) in table, when we search, a list of all products (that contain search.value) come to table and local we make pagedlist*/
 $(document).ready(function () {
-    $('#MyTable').DataTable({
+
+    /*datatable handler with server side implementation for product*/
+    $('#Product').DataTable({
+        "processing": true,
+        "serverSide": true,
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -25,11 +28,11 @@ $(document).ready(function () {
             "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
-                $.each(json, function (index, item) {
+                $.each(json.data, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
-                });
-                return json;
+                })
+                return json.data;
             }
         },
         "columns": [
@@ -41,13 +44,8 @@ $(document).ready(function () {
             { 'data': 'Discontinued' },
             { 'data': 'DeleteLink' }
         ]
-
     });
-});
 
-
-/*add from json in table Employees*/
-$(document).ready(function () {
     $('#EmployeesTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -78,11 +76,9 @@ $(document).ready(function () {
         ]
 
     });
-});
 
 
-/*add from json in table Customers*/
-$(document).ready(function () {
+    /*add from json in table Customers*/
     $('#CustomersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -113,10 +109,8 @@ $(document).ready(function () {
         ]
 
     });
-});
 
-/*add from json in table Orders*/
-$(document).ready(function () {
+    /*add from json in table Orders*/
     $('#OrdersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -148,8 +142,7 @@ $(document).ready(function () {
         ]
 
     });
-});
-$(document).ready(function () {
+
     $('#Suppliers').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -183,7 +176,6 @@ $(document).ready(function () {
         ]
 
     });
-});
 
 /*add from json in table Shippers*/
 $(document).ready(function () {
@@ -243,9 +235,7 @@ $(document).ready(function () {
         ]
 
     });
-});
-/*add from json in table User*/
-$(document).ready(function () {
+    /*add from json in table User*/
     $('#UsersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -263,7 +253,9 @@ $(document).ready(function () {
                        else { item.IsLockedOut = "No"; }
                     if (item.IsOnline) { item.IsOnline = "Yes"; }
                     else { item.IsOnline = "No"; }
-                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
+                    var date = Date.parse(item.LastActiveString);
+                    item.LastActiveDate = new Date(date);
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
                     item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/>Manage</a >';
                 })
                   
@@ -274,13 +266,14 @@ $(document).ready(function () {
             { 'data': 'Manage' },
             { 'data': 'UserName' },
             { 'data': 'Email' },
-            { 'data': 'LastActiveDateTime' },
+            { 'data': 'LastActiveDate' },
             { 'data': 'IsLockedOut' },
             { 'data': 'IsOnline' },
             { 'data': 'DeleteLink' }
         ]
 
     });
+    
 });
 
 /*add from json in table Regions*/

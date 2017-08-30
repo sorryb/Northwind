@@ -175,9 +175,9 @@ namespace NorthwindWeb.Controllers
         }
         
         // GET: Orders by Json
-        public JsonResult JsonTableFill(string search = "")
+        public JsonResult JsonTableFill()
         {
-            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)).OrderBy(o => o.OrderID);
+            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).OrderBy(o => o.OrderID);
 
             /*Select what wee need in table*/
             return Json(
