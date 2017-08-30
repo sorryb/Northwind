@@ -243,4 +243,42 @@ $(document).ready(function () {
 
     });
 });
+/*add from json in table User*/
+$(document).ready(function () {
+    $('#UsersTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    if (item.IsLockedOut) { item.IsLockedOut = "Yes"; }
+                       else { item.IsLockedOut = "No"; }
+                    if (item.IsOnline) { item.IsOnline = "Yes"; }
+                    else { item.IsOnline = "No"; }
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
+                    item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/>Manage</a >';
+                })
+                  
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'Manage' },
+            { 'data': 'UserName' },
+            { 'data': 'Email' },
+            { 'data': 'LastActiveDateTime' },
+            { 'data': 'IsLockedOut' },
+            { 'data': 'IsOnline' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+});
 
