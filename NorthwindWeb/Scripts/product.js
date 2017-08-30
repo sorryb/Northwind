@@ -185,8 +185,9 @@ $(document).ready(function () {
     });
 });
 
+/*add from json in table Shippers*/
 $(document).ready(function () {
-    $('#Shippers').DataTable({
+    $('#ShippersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -213,7 +214,7 @@ $(document).ready(function () {
 
     });
 });
-/*add from json in table Customers*/
+
 /*add from json in table Categories*/
 $(document).ready(function () {
     $('#CategoriesTable').DataTable({
@@ -276,6 +277,35 @@ $(document).ready(function () {
             { 'data': 'LastActiveDateTime' },
             { 'data': 'IsLockedOut' },
             { 'data': 'IsOnline' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+});
+
+/*add from json in table Regions*/
+$(document).ready(function () {
+    $('#RegionsTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.RegionDescription = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.RegionDescription + '</a >';
+                });
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'RegionDescription' },
             { 'data': 'DeleteLink' }
         ]
 
