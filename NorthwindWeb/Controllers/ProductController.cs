@@ -11,6 +11,7 @@ using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
 using PagedList;
 using System.Web.Helpers;
+using NorthwindWeb.Models.ServerClientCommunication;
 
 namespace NorthwindWeb.Controllers
 {
@@ -165,7 +166,8 @@ namespace NorthwindWeb.Controllers
 
             /*Select what wee need in table*/
             return Json(
-                products.Select(x => new {
+                products.Select(x => new
+                {
                     ID = x.ProductID,
                     ProductName = x.ProductName,
                     Price = x.UnitPrice,
@@ -175,6 +177,34 @@ namespace NorthwindWeb.Controllers
                     Discontinued = x.Discontinued
                 })
                 , JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Product by Json
+        public JsonResult JsonTestServerSide(
+            string search = ""
+            )
+        {
+            JsonDataTableObject dataSendedToClient = new JsonDataTableObject()
+            {
+                data = db.Products.Include(p => p.Category).Include(p => p.Supplier)
+                .Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID)
+                .Select(x => new
+                {
+                    ID = x.ProductID,
+                    ProductName = x.ProductName,
+                    Price = x.UnitPrice,
+                    InStock = x.UnitsInStock,
+                    OnOrders = x.UnitsOnOrder,
+                    ReorderLevel = x.ReorderLevel,
+                    Discontinued = x.Discontinued
+                }),
+                recordsTotal = 5,
+                recordsFiltered = 4,
+                draw = 1
+            };
+
+            /*Select what wee need in table*/
+            return Json(dataSendedToClient, JsonRequestBehavior.AllowGet);
         }
     }
 }
