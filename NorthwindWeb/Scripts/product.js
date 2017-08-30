@@ -211,3 +211,33 @@ $(document).ready(function () {
 
     });
 });
+/*add from json in table Customers*/
+$(document).ready(function () {
+    $('#CategoriesTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.CategoryName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CategoryName + '</a >';
+                })
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'CategoryName' },
+            { 'data': 'Description' }
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+});
+

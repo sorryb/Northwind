@@ -10,9 +10,9 @@ namespace NorthwindWeb.ViewModels.Dashboard
     public class DashboardMorrisBar
     {
         public string Year { get; set; }
-        public decimal a { get; set; }
-        public decimal b { get; set; }
-        public decimal c { get; set; }
+        public decimal dashboardMorrisBarColumA { get; set; }
+        public decimal dashboardMorrisBarColumB { get; set; }
+        public decimal dashboardMorrisBarColumC { get; set; }
         public DashboardMorrisBar() {}
     }
 }

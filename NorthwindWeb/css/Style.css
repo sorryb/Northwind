@@ -1,20 +1,15 @@
 ﻿body {
     font-family: Tahoma;
 }
-
-.contentcenter {
-    margin-left: auto;
-    margin-right: auto;
-}
-
+/*products images*/
 img[class~=products] {
     max-width: 100%;
-    max-height:225px;
+    max-height: 225px;
 }
 
 /*text large used in products view*/
 [class~=textlarge] {
-    font-size:large;
+    font-size: large;
 }
 
 /*text color in products page*/
@@ -31,17 +26,17 @@ img[class~=products] {
 
 /*global shop cart container*/
 .shopcartcontainer {
-    position:absolute;
+    position: absolute;
     padding: 20px 25px 0px 20px;
-    right:0px;
+    right: 0px;
 }
 
 /*container for product shop cart*/
 .shopcartcontainer-products {
     position: absolute;
     padding: 20px 25px 0px 20px;
-    left:0px;
-    color:white;
+    left: 0px;
+    color: white;
 }
 
 /*shop icon dimension*/
@@ -86,7 +81,7 @@ img[class~=products] {
     width: auto;
     margin: 0px;
     padding: 0px 2px 0px 2px;
-    color:black;
+    color: black;
 }
 
 /*change color of text -- used in Views-Home-Index*/
@@ -94,8 +89,8 @@ img[class~=products] {
     color: #2b3e50;
 }
 
-h3.prodpad{
-    padding-left:40px;
+h3.prodpad {
+    padding-left: 40px;
 }
 
 /*change dimensions of images -- used in Views-Services-Index*/
@@ -116,6 +111,7 @@ h3.prodpad{
 .crudFormButtonLeftOfSearch {
     float: left;
 }
+
     .crudFormButtonLeftOfSearch:after {
         clear: left;
     }
@@ -124,7 +120,7 @@ h3.prodpad{
 .paddingLeftTen {
     padding-left: 10px;
 }
-
+/*search in products*/
 .form-control {
     float: right !important;
 }
@@ -136,21 +132,18 @@ h3.prodpad{
 }
 
 /*change from dimension -- used in Create,Edit from Orders*/
-.form{
-    width:175px;
+.form {
+    width: 175px;
 }
 
 /*black text for crud input and select*/
 [class~=crudstyle] input, [class~=crudstyle] select {
     color: black;
 }
-/*for the div containint the iframe*/
-.flex{
-    display:flex;
-}
-iframe.fill{
-    height:90vh;
-    width:100%;
+/*report iframe*/
+iframe.fill {
+    height: 90vh;
+    width: 100%;
 }
 
 [class~=particularEmployees] {
