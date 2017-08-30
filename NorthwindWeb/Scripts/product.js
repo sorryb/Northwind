@@ -47,6 +47,7 @@ $(document).ready(function () {
 
     /*testing server side*/
     $('#Test').DataTable({
+        "processing": true,
         "serverSide": true,
         "responsive": true,
         "autoWidth": false,
