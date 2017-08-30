@@ -414,22 +414,8 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public ActionResult Index()
         {
-            var context = new ApplicationDbContext();
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
-
-            List<UserInfoViewModel> userInfoViewModel = new List<UserInfoViewModel>();
-            foreach (var user in userManager.Users)
-                userInfoViewModel.Add(new UserInfoViewModel()
-                {
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    //LastActiveDateTime = user.LastActivityDate,
-                    //IsOnline = user.IsOnline,
-                    //IsLockedOut = user.IsLockedOut
-                });
-            return View(userInfoViewModel.AsQueryable());
+            
+            return View();
         }
 
         // **************************************
@@ -877,7 +863,7 @@ namespace NorthwindWeb.Controllers
             {
                 
                 user.LastActiveDateTime = Convert.ToDateTime(String.Format("{0:g}", user.LastActiveDateTime));
-                user.LastActiveString = user.LastActiveDateTime.ToUniversalTime().ToString();
+                user.LastActiveString = Convert.ToString(user.LastActiveDateTime);
                 user.IsLockedOut = user.IsLockedOut ? true : false;
                 user.IsOnline = user.IsOnline ? true : false;
             }
@@ -890,6 +876,28 @@ namespace NorthwindWeb.Controllers
                 , JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult JsonTableRolesFill()
+        {
+            var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+            var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+            List<RoleInfoViewModel> roleInfoViewModel = new List<RoleInfoViewModel>();
+
+            foreach (var role in roleManager.Roles)
+                roleInfoViewModel.Add(new RoleInfoViewModel()
+                {
+                    Name = role.Name
+                });
+
+           
+
+
+            /*Select what wee need in table*/
+            return Json(
+                roleInfoViewModel.AsQueryable()
+
+                , JsonRequestBehavior.AllowGet);
+        }
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

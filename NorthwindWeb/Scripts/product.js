@@ -47,6 +47,8 @@ $(document).ready(function () {
     });
 
     $('#EmployeesTable').DataTable({
+        "processing": true,
+        "serverSide": true,
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -58,11 +60,11 @@ $(document).ready(function () {
             "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
-                $.each(json, function (index, item) {
+                $.each(json.data, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.LastName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.LastName + '</a >';
                 });
-                return json;
+                return json.data;
             }
         },
         "columns": [
@@ -177,7 +179,9 @@ $(document).ready(function () {
 
     });
 
-    $('#Shippers').DataTable({
+/*add from json in table Shippers*/
+$(document).ready(function () {
+    $('#ShippersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -203,8 +207,10 @@ $(document).ready(function () {
         ]
 
     });
+});
 
-    /*add from json in table Categories*/
+/*add from json in table Categories*/
+$(document).ready(function () {
     $('#CategoriesTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -250,6 +256,7 @@ $(document).ready(function () {
                     if (item.IsOnline) { item.IsOnline = "Yes"; }
                     else { item.IsOnline = "No"; }
                     var date = Date.parse(item.LastActiveString);
+                    
                     item.LastActiveDate = new Date(date);
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
                     item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/>Manage</a >';
@@ -270,5 +277,34 @@ $(document).ready(function () {
 
     });
     
+});
+
+/*add from json in table Regions*/
+$(document).ready(function () {
+    $('#RegionsTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.RegionDescription = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.RegionDescription + '</a >';
+                });
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'RegionDescription' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
 });
 

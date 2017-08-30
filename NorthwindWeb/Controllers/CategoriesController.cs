@@ -118,6 +118,7 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Categories categories = await db.Categories.FindAsync(id);
+ 
             db.Categories.Remove(categories);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
