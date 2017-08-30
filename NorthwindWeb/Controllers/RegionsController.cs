@@ -153,5 +153,20 @@ namespace NorthwindWeb.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Orders by Json
+        public JsonResult JsonTableFill(string search = "")
+        {
+            var regions = db.Regions.Include(p => p.RegionDescription).Where(r => r.RegionDescription.Contains(search));
+            
+            /*Select what wee need in table*/
+            return Json(
+                regions.Select(x => new {
+                    ID = x.RegionID,
+                    RegionDescription = x.RegionDescription
+                 
+                })
+                , JsonRequestBehavior.AllowGet);
+        }
     }
 }

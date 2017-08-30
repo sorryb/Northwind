@@ -86,12 +86,15 @@ namespace NorthwindWeb.ViewModels
 
         [Display(Name = "Last Active Date/Time")]
         public DateTime LastActiveDateTime { get; set; }
+        public string LastActiveString { get; set; }
 
         [Display(Name = "User Locked?")]
         public bool IsLockedOut { get; set; }
 
         [Display(Name = "Online?")]
         public bool IsOnline { get; set; }
+
+        
     }
 
     public class RegisterViewModel

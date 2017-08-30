@@ -3,8 +3,8 @@
 function searchControllerPath() {
     var path = window.location.href;
     var a = path.split("/");
-    if (path.search("http://") + 1) {
-        return a[0] + '/' + a[1] + '/' + a[2] + '/' + a[3];
+    if (path.indexOf("http://") + 1) {
+        return a[0] + '//' + a[2] + '/' + (a[3].split("?"))[0];
     }
     else {
         return a[0] + '/' + a[1];
@@ -179,7 +179,9 @@ $(document).ready(function () {
 
     });
 
-    $('#Shippers').DataTable({
+/*add from json in table Shippers*/
+$(document).ready(function () {
+    $('#ShippersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -205,8 +207,10 @@ $(document).ready(function () {
         ]
 
     });
+});
 
-    /*add from json in table Categories*/
+/*add from json in table Categories*/
+$(document).ready(function () {
     $('#CategoriesTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -251,7 +255,9 @@ $(document).ready(function () {
                        else { item.IsLockedOut = "No"; }
                     if (item.IsOnline) { item.IsOnline = "Yes"; }
                     else { item.IsOnline = "No"; }
-                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
+                    var date = Date.parse(item.LastActiveString);
+                    item.LastActiveDate = new Date(date);
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
                     item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/>Manage</a >';
                 })
                   
@@ -262,7 +268,7 @@ $(document).ready(function () {
             { 'data': 'Manage' },
             { 'data': 'UserName' },
             { 'data': 'Email' },
-            { 'data': 'LastActiveDateTime' },
+            { 'data': 'LastActiveDate' },
             { 'data': 'IsLockedOut' },
             { 'data': 'IsOnline' },
             { 'data': 'DeleteLink' }
@@ -270,5 +276,34 @@ $(document).ready(function () {
 
     });
     
+});
+
+/*add from json in table Regions*/
+$(document).ready(function () {
+    $('#RegionsTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.RegionDescription = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.RegionDescription + '</a >';
+                });
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'RegionDescription' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
 });
 
