@@ -1,6 +1,6 @@
 
 ﻿/*find correct pathc for search*/
-function searchPath() {
+function searchControllerPath() {
     var path = window.location.href;
     var a = path.split("/");
     if (path.search("http://") + 1) {
@@ -22,12 +22,12 @@ $(document).ready(function () {
         ],
         "ajax": {
             "type": "GET",
-            "url": searchPath() + "/JsonTableFill",
+            "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json, function (index, item) {
-                    item.DeleteLink = '<a href= "' + searchPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                    item.ProductName = '<a href= "' + searchPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
                 })
                 return json;
             }
@@ -45,4 +45,3 @@ $(document).ready(function () {
     });
 });
 
-//todo schimba numele coloanelor pentru a se potriivi
