@@ -159,85 +159,14 @@ namespace NorthwindWeb.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Product by Json
-        public JsonResult JsonTableFill(string search = "")
-        {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
-
-            /*Select what wee need in table*/
-            return Json(
-                products.Select(x => new
-                {
-                    ID = x.ProductID,
-                    ProductName = x.ProductName,
-                    Price = x.UnitPrice,
-                    InStock = x.UnitsInStock,
-                    OnOrders = x.UnitsOnOrder,
-                    ReorderLevel = x.ReorderLevel,
-                    Discontinued = x.Discontinued
-                })
-                , JsonRequestBehavior.AllowGet);
-        }
-
-
-
-
-
-
-
-        
-        // here we simulate SQL search, sorting and paging operations
-        // !!!! DO NOT DO THIS IN REAL APPLICATION !!!!
-        private IQueryable FilterData(ref int recordFiltered, int start, int length, string search, int sortColumn, string sortDirection)
-        {
-            IQueryable list = new List<DataItem>();
-            if (search == null)
-            {
-                list = _data;
-            }
-            else
-            {
-                // simulate search
-                foreach (DataItem dataItem in _data)
-                {
-                    if (dataItem.Name.ToUpper().Contains(search.ToUpper()) ||
-                        dataItem.Age.ToString().Contains(search.ToUpper()) ||
-                        dataItem.DoB.ToString().Contains(search.ToUpper()))
-                    {
-                        list.Add(dataItem);
-                    }
-                }
-            }
-
-            // simulate sort
-            if (sortColumn == 0)
-            {// sort Name
-                list.Sort((x, y) => SortString(x.Name, y.Name, sortDirection));
-            }
-            else if (sortColumn == 1)
-            {// sort Age
-                list.Sort((x, y) => SortInteger(x.Age, y.Age, sortDirection));
-            }
-            else if (sortColumn == 2)
-            {   // sort DoB
-                list.Sort((x, y) => SortDateTime(x.DoB, y.DoB, sortDirection));
-            }
-
-            recordFiltered = list.Count;
-
-            // get just one page of data
-            list = list.GetRange(start, Math.Min(length, list.Count - start));
-
-            return list;
-        }
 
         // GET: Product by Json
-        public JsonResult JsonTestServerSide(int draw, int start, int length)
+        public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
 
 
-            string search = Request.QueryString["search[value]"];
+            string search = Request.QueryString["search[value]"] ?? "";
             int sortColumn = -1;
             string sortDirection = "asc";
             if (length == -1)
@@ -255,13 +184,17 @@ namespace NorthwindWeb.Controllers
                 sortDirection = Request.QueryString["order[0][dir]"];
             }
 
+            //list of product that contain "search"
             var list = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search));
 
             //order list
             switch (sortColumn)
             {
+                case -1: //sort by first column
+                    goto FirstColumn;
                 case 0: //first column
-                    if(sortDirection == "asc")
+                    FirstColumn:
+                    if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.ProductName);
                     }
@@ -326,8 +259,17 @@ namespace NorthwindWeb.Controllers
             JsonDataTableObject dataTableData = new JsonDataTableObject()
             {
                 draw = draw,
-                recordsTotal = TOTAL_ROWS,
-                data = list,
+                recordsTotal = db.Products.Count(),
+                data = list.Skip(start).Take(length).Select(x => new
+                {
+                    ID = x.ProductID,
+                    ProductName = x.ProductName,
+                    Price = x.UnitPrice,
+                    InStock = x.UnitsInStock,
+                    OnOrders = x.UnitsOnOrder,
+                    ReorderLevel = x.ReorderLevel,
+                    Discontinued = x.Discontinued
+                }),
                 recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
 
             };

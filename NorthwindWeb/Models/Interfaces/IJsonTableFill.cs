@@ -4,6 +4,6 @@ namespace NorthwindWeb.Models.Interfaces
 {
     public interface IJsonTableFill
     {
-        JsonResult JsonTableFill(string search = "");
+        JsonResult JsonTableFill(int draw, int start, int length);
     }
 }

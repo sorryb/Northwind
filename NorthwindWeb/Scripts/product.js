@@ -11,42 +11,10 @@ function searchControllerPath() {
     }
 }
 
-/*add from json (product/jsontest) in table, when we search, a list of all products (that contain search.value) come to table and local we make pagedlist*/
 $(document).ready(function () {
+
+    /*datatable handler with server side implementation for product*/
     $('#Product').DataTable({
-        "responsive": true,
-        "autoWidth": false,
-        "columnDefs": [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
-        ],
-        "ajax": {
-            "type": "GET",
-            "url": searchControllerPath() + "/JsonTableFill",
-            "dataSrc": function (json) {
-                //Make your callback here.
-                $.each(json, function (index, item) {
-                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                    item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
-                })
-                return json;
-            }
-        },
-        "columns": [
-            { 'data': 'ProductName' },
-            { 'data': 'Price' },
-            { 'data': 'InStock' },
-            { 'data': 'OnOrders' },
-            { 'data': 'ReorderLevel' },
-            { 'data': 'Discontinued' },
-            { 'data': 'DeleteLink' }
-        ]
-
-    });
-
-
-    /*testing server side*/
-    $('#Test').DataTable({
         "processing": true,
         "serverSide": true,
         "responsive": true,
@@ -57,7 +25,7 @@ $(document).ready(function () {
         ],
         "ajax": {
             "type": "GET",
-            "url": searchControllerPath() + "/JsonTestServerSide",
+            "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
@@ -76,7 +44,6 @@ $(document).ready(function () {
             { 'data': 'Discontinued' },
             { 'data': 'DeleteLink' }
         ]
-
     });
 });
 
