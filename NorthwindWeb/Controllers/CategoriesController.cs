@@ -131,5 +131,21 @@ namespace NorthwindWeb.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // GET: Categories by Json
+        public JsonResult JsonTableFill(string search = "")
+        {
+            var categories = db.Categories.Where(x => x.CategoryName.Contains(search));
+
+            /*Select what wee need in table*/
+            return Json(
+               categories.Select(x => new {
+                    ID = x.CategoryID,
+                    CategoryName = x.CategoryName,
+                    Description = x.Description
+
+               })
+                , JsonRequestBehavior.AllowGet);
+        }
     }
 }
