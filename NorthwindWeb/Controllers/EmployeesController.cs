@@ -141,7 +141,7 @@ namespace NorthwindWeb.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Product by Json
+        // GET: Employees by Json
         public JsonResult JsonTableFill(string search = "")
         {
             var employees = db.Employees.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search)).Include(e => e.Employee1).OrderBy(x => x.EmployeeID);
@@ -149,6 +149,7 @@ namespace NorthwindWeb.Controllers
             /*Select what wee need in table*/
             return Json(
                 employees.Select(x => new {
+                    ID= x.EmployeeID,
                     LastName = x.LastName,
                     FirstName = x.FirstName,
                     Title = x.Title,
