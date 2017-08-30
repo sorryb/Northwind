@@ -115,6 +115,7 @@ $(document).ready(function () {
     });
 });
 
+/*add from json in table Orders*/
 $(document).ready(function () {
     $('#OrdersTable').DataTable({
         "responsive": true,
