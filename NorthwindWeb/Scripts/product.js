@@ -249,7 +249,9 @@ $(document).ready(function () {
                        else { item.IsLockedOut = "No"; }
                     if (item.IsOnline) { item.IsOnline = "Yes"; }
                     else { item.IsOnline = "No"; }
-                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
+                    var date = Date.parse(item.LastActiveString);
+                    item.LastActiveDate = new Date(date);
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
                     item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/>Manage</a >';
                 })
                   
@@ -260,7 +262,7 @@ $(document).ready(function () {
             { 'data': 'Manage' },
             { 'data': 'UserName' },
             { 'data': 'Email' },
-            { 'data': 'LastActiveDateTime' },
+            { 'data': 'LastActiveDate' },
             { 'data': 'IsLockedOut' },
             { 'data': 'IsOnline' },
             { 'data': 'DeleteLink' }

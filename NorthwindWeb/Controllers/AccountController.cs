@@ -494,6 +494,22 @@ namespace NorthwindWeb.Controllers
         }
 
         [Authorize(Roles = "Admins")]
+        public ActionResult DeleteUser(string userName)
+        {
+            var context = new ApplicationDbContext();
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            UserInfoViewModel userDelete = new UserInfoViewModel();
+            if (!String.IsNullOrEmpty(userName))
+            {
+                userDelete.UserName=userManager.Users.First().UserName;
+                userDelete.Email = userManager.Users.First().Email;
+               
+            }
+            return View(userDelete);
+        }
+
+        [Authorize(Roles = "Admins")]
         public ActionResult RolesIndex()
         {
 
@@ -859,7 +875,9 @@ namespace NorthwindWeb.Controllers
                 });
             foreach (var user in userInfoViewModel)
             {
+                
                 user.LastActiveDateTime = Convert.ToDateTime(String.Format("{0:g}", user.LastActiveDateTime));
+                user.LastActiveString = user.LastActiveDateTime.ToUniversalTime().ToString();
                 user.IsLockedOut = user.IsLockedOut ? true : false;
                 user.IsOnline = user.IsOnline ? true : false;
             }
