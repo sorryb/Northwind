@@ -40,34 +40,22 @@
             </div>
             <div class="panel-body">
                 <table id="CategoriesTable" class="cell-border hover order-column">
-                    <tr>
-                        <th>
-                            Nume Categorie
-                        </th>
-                        <th>
-                            Descriere
-                        </th>
-
-                        <th>
-                            Sterge
-                        </th>
-                        <th></th>
-                    </tr>
-
-                    @*@foreach (var item in Model)
-                    {
+                    <thead>
                         <tr>
-                            <td>
-                                @Html.ActionLink(item.CategoryName, "Details", new { id = item.CategoryID })
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Delete", new { id = item.CategoryID })"><i class="fa fa-remove"></i></a>
-                            </td>
+                            <th>
+                                Nume Categorie
+                            </th>
+                            <th>
+                                Descriere
+                            </th>
+
+                            <th>
+                                Sterge
+                            </th>
+                            <th></th>
                         </tr>
-                    }*@
+                    </thead>
+                    <tbody></tbody>
 
                 </table>
             </div>

@@ -135,7 +135,7 @@ namespace NorthwindWeb.Controllers
         // GET: Categories by Json
         public JsonResult JsonTableFill(string search = "")
         {
-            var categories = db.Categories.Where(x => x.CategoryName.Contains(search));
+            var categories = db.Categories.Include(p=>p.Description).Where(x => x.CategoryName.Contains(search)).OrderBy(x => x.CategoryID);
 
             /*Select what wee need in table*/
             return Json(

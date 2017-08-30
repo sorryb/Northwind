@@ -28,7 +28,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -63,7 +63,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.LastName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.LastName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -98,7 +98,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -131,7 +131,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ID = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ID + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -163,7 +163,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -199,7 +199,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -229,7 +229,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.CategoryName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CategoryName + '</a >';
-                })
+                });
                 return json;
             }
         },
