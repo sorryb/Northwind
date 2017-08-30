@@ -13,7 +13,7 @@
             <li>
                 @Html.ActionLink("Dashboard", "Home", "Dashboard")
             </li>
-           
+
             <li class="active">Regiuni</li>
         </ol>
         <hr />
@@ -30,37 +30,51 @@
                 </div>
             </form>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4>
+                            Regiuni
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <table id="RegionsTable" class="cell-border hover order-column">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Regiune
+                                    </th>
+                                    <th>
+                                        Sterge
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                         @*@foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
 
-      
-        <table class="table">
-            <tr>
-                <th>
-                    Regiune
-                </th>
-                <th>
-                    Sterge
-                </th>
-            </tr>
+                                            @Html.ActionLink(item.RegionDescription, "Details", new { id = item.RegionID })
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                      
-                        @Html.ActionLink(item.RegionDescription, "Details", new { id = item.RegionID })
-                        
 
-                    </td>
-                    <td>
-                  
-                
-                        <a href="@Url.Action("Delete", new { id = item.RegionID })"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-            }
+                                        </td>
+                                        <td>
 
-        </table>
 
-    </div>
-</div>
+                                            <a href="@Url.Action("Delete", new { id = item.RegionID })"><i class="fa fa-remove"></i></a>
+                                        </td>
+                                    </tr>
+                                }*@
+                            </tbody>
+</table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+                </div>
+            </div>
 
