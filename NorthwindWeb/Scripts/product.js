@@ -31,8 +31,8 @@ $(document).ready(function () {
                 $.each(json.data, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
-                });
-                return json;
+                })
+                return json.data;
             }
         },
         "columns": [
