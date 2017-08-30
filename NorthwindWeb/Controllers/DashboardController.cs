@@ -65,82 +65,82 @@ namespace NorthwindWeb.Controllers
             if (!String.IsNullOrEmpty(search))
             {//Test each table for match 
                 var category = db.Categories;
-                foreach (var item in category)
+                foreach (var itemCategory in category)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.CategoryID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemCategory.CategoryID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.CategoryID);
-                        locationSearch.WhereFound = "CategoryID: " +Convert.ToString(item.CategoryID);
+                        locationSearch.ID = Convert.ToString(itemCategory.CategoryID);
+                        locationSearch.WhereFound = "CategoryID: " +Convert.ToString(itemCategory.CategoryID);
                         locationSearch.Controller = "Categories";
                         machesFount.Add(locationSearch);
                     }
-                    else if(item.CategoryName.ToLower().Contains(search.ToLower()))
+                    else if(itemCategory.CategoryName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.CategoryID);
-                        locationSearch.WhereFound = "CategoryName: " + item.CategoryName;
+                        locationSearch.ID = Convert.ToString(itemCategory.CategoryID);
+                        locationSearch.WhereFound = "CategoryName: " + itemCategory.CategoryName;
                         locationSearch.Controller = "Categories";
                         machesFount.Add(locationSearch);
                     }
-                    else if(item.Description.ToLower().Contains(search.ToLower()))
+                    else if(itemCategory.Description.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.CategoryID);
-                        locationSearch.WhereFound = "Description: " + item.Description;
+                        locationSearch.ID = Convert.ToString(itemCategory.CategoryID);
+                        locationSearch.WhereFound = "Description: " + itemCategory.Description;
                         locationSearch.Controller = "Categories";
                         machesFount.Add(locationSearch);
                     }
 
                 }
                 var suppliers = db.Suppliers;
-                foreach (var item in suppliers)
+                foreach (var itemSuppliers in suppliers)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.SupplierID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemSuppliers.SupplierID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.SupplierID);
-                        locationSearch.WhereFound = "CategoryID: " + Convert.ToString(item.SupplierID);
+                        locationSearch.ID = Convert.ToString(itemSuppliers.SupplierID);
+                        locationSearch.WhereFound = "CategoryID: " + Convert.ToString(itemSuppliers.SupplierID);
                         locationSearch.Controller = "Suppliers";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.CompanyName.ToLower().Contains(search.ToLower()))
+                    else if (itemSuppliers.CompanyName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.SupplierID);
-                        locationSearch.WhereFound = "CompanyName: " + item.CompanyName;
+                        locationSearch.ID = Convert.ToString(itemSuppliers.SupplierID);
+                        locationSearch.WhereFound = "CompanyName: " + itemSuppliers.CompanyName;
                         locationSearch.Controller = "Suppliers";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.ContactName.ToLower().Contains(search.ToLower()))
+                    else if (itemSuppliers.ContactName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.SupplierID);
-                        locationSearch.WhereFound = "ContactName: " + item.ContactName;
+                        locationSearch.ID = Convert.ToString(itemSuppliers.SupplierID);
+                        locationSearch.WhereFound = "ContactName: " + itemSuppliers.ContactName;
                         locationSearch.Controller = "Suppliers";
                         machesFount.Add(locationSearch);
                     }
 
                 }
                 var product = db.Products;
-                foreach (var item in product)
+                foreach (var itemProduct in product)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.ProductID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemProduct.ProductID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.ProductID);
-                        locationSearch.WhereFound = "ProductID: " + Convert.ToString(item.ProductID);
+                        locationSearch.ID = Convert.ToString(itemProduct.ProductID);
+                        locationSearch.WhereFound = "ProductID: " + Convert.ToString(itemProduct.ProductID);
                         locationSearch.Controller = "Product";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.ProductName.ToLower().Contains(search.ToLower()))
+                    else if (itemProduct.ProductName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.ProductID);
-                        locationSearch.WhereFound = "ProductName: " + item.ProductName;
+                        locationSearch.ID = Convert.ToString(itemProduct.ProductID);
+                        locationSearch.WhereFound = "ProductName: " + itemProduct.ProductName;
                         locationSearch.Controller = "Product";
                         machesFount.Add(locationSearch);
                     }
@@ -148,82 +148,82 @@ namespace NorthwindWeb.Controllers
 
                 }
                 var order = db.Orders;
-                foreach (var item in order)
+                foreach (var itemOrder in order)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.OrderID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemOrder.OrderID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.OrderID);
-                        locationSearch.WhereFound = "OrderID: " + Convert.ToString(item.OrderID);
+                        locationSearch.ID = Convert.ToString(itemOrder.OrderID);
+                        locationSearch.WhereFound = "OrderID: " + Convert.ToString(itemOrder.OrderID);
                         locationSearch.Controller = "Orders";
                         machesFount.Add(locationSearch);
                     }
-                    else if (Convert.ToString(item.OrderDate).ToLower().Contains(search.ToLower()))
+                    else if (Convert.ToString(itemOrder.OrderDate).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.OrderID);
-                        locationSearch.WhereFound = "OrderDate: " + Convert.ToString(item.OrderDate);
+                        locationSearch.ID = Convert.ToString(itemOrder.OrderID);
+                        locationSearch.WhereFound = "OrderDate: " + Convert.ToString(itemOrder.OrderDate);
                         locationSearch.Controller = "Orders";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.ShipName.ToLower().Contains(search.ToLower()))
+                    else if (itemOrder.ShipName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.OrderID);
-                        locationSearch.WhereFound = "ShipName: " + item.ShipName;
+                        locationSearch.ID = Convert.ToString(itemOrder.OrderID);
+                        locationSearch.WhereFound = "ShipName: " + itemOrder.ShipName;
                         locationSearch.Controller = "Orders";
                         machesFount.Add(locationSearch);
                     }
 
                 }
                 var customers = db.Customers;
-                foreach (var item in customers)
+                foreach (var itemCustomers in customers)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.CustomerID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemCustomers.CustomerID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.CustomerID);
-                        locationSearch.WhereFound = "CustomerID: " + Convert.ToString(item.CustomerID);
+                        locationSearch.ID = Convert.ToString(itemCustomers.CustomerID);
+                        locationSearch.WhereFound = "CustomerID: " + Convert.ToString(itemCustomers.CustomerID);
                         locationSearch.Controller = "Customers";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.CompanyName.ToLower().Contains(search.ToLower()))
+                    else if (itemCustomers.CompanyName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.CustomerID);
-                        locationSearch.WhereFound = "CompanyName: " + item.CompanyName;
+                        locationSearch.ID = Convert.ToString(itemCustomers.CustomerID);
+                        locationSearch.WhereFound = "CompanyName: " + itemCustomers.CompanyName;
                         locationSearch.Controller = "Customers";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.ContactName.ToLower().Contains(search.ToLower()))
+                    else if (itemCustomers.ContactName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.CustomerID);
-                        locationSearch.WhereFound = "ContactName: " + item.ContactName;
+                        locationSearch.ID = Convert.ToString(itemCustomers.CustomerID);
+                        locationSearch.WhereFound = "ContactName: " + itemCustomers.ContactName;
                         locationSearch.Controller = "Customers";
                         machesFount.Add(locationSearch);
                     }
 
                 }
                 var region = db.Regions;
-                foreach (var item in region)
+                foreach (var itemRegion in region)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.RegionID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemRegion.RegionID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.RegionID);
-                        locationSearch.WhereFound = "RegionID: " + Convert.ToString(item.RegionID);
+                        locationSearch.ID = Convert.ToString(itemRegion.RegionID);
+                        locationSearch.WhereFound = "RegionID: " + Convert.ToString(itemRegion.RegionID);
                         locationSearch.Controller = "Regions";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.RegionDescription.ToLower().Contains(search.ToLower()))
+                    else if (itemRegion.RegionDescription.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.RegionID);
-                        locationSearch.WhereFound = "RegionDescription: " + item.RegionDescription;
+                        locationSearch.ID = Convert.ToString(itemRegion.RegionID);
+                        locationSearch.WhereFound = "RegionDescription: " + itemRegion.RegionDescription;
                         locationSearch.Controller = "Regions";
                         machesFount.Add(locationSearch);
                     }
@@ -231,52 +231,52 @@ namespace NorthwindWeb.Controllers
 
                 }
                 var employees = db.Employees;
-                foreach (var item in employees)
+                foreach (var itemEmployees in employees)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.EmployeeID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemEmployees.EmployeeID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.EmployeeID);
-                        locationSearch.WhereFound = "EmployeeID: " + Convert.ToString(item.EmployeeID);
+                        locationSearch.ID = Convert.ToString(itemEmployees.EmployeeID);
+                        locationSearch.WhereFound = "EmployeeID: " + Convert.ToString(itemEmployees.EmployeeID);
                         locationSearch.Controller = "Employees";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.LastName.ToLower().Contains(search.ToLower()))
+                    else if (itemEmployees.LastName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.EmployeeID);
-                        locationSearch.WhereFound = "LastName: " + item.LastName;
+                        locationSearch.ID = Convert.ToString(itemEmployees.EmployeeID);
+                        locationSearch.WhereFound = "LastName: " + itemEmployees.LastName;
                         locationSearch.Controller = "Employees";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.FirstName.ToLower().Contains(search.ToLower()))
+                    else if (itemEmployees.FirstName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.EmployeeID);
-                        locationSearch.WhereFound = "FirstName: " + item.FirstName;
+                        locationSearch.ID = Convert.ToString(itemEmployees.EmployeeID);
+                        locationSearch.WhereFound = "FirstName: " + itemEmployees.FirstName;
                         locationSearch.Controller = "Employees";
                         machesFount.Add(locationSearch);
                     }
 
                 }
                 var shippers = db.Shippers;
-                foreach (var item in shippers)
+                foreach (var itemShippers in shippers)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.ShipperID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemShippers.ShipperID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.ShipperID);
-                        locationSearch.WhereFound = "ShipperID: " + Convert.ToString(item.ShipperID);
+                        locationSearch.ID = Convert.ToString(itemShippers.ShipperID);
+                        locationSearch.WhereFound = "ShipperID: " + Convert.ToString(itemShippers.ShipperID);
                         locationSearch.Controller = "Shippers";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.CompanyName.ToLower().Contains(search.ToLower()))
+                    else if (itemShippers.CompanyName.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.ShipperID);
-                        locationSearch.WhereFound = "CompanyName: " + item.CompanyName;
+                        locationSearch.ID = Convert.ToString(itemShippers.ShipperID);
+                        locationSearch.WhereFound = "CompanyName: " + itemShippers.CompanyName;
                         locationSearch.Controller = "Shippers";
                         machesFount.Add(locationSearch);
                     }
@@ -284,22 +284,22 @@ namespace NorthwindWeb.Controllers
 
                 }
                 var territories = db.Territories;
-                foreach (var item in territories)
+                foreach (var itemTerritories in territories)
                 {
                     LocateSearch locationSearch = new LocateSearch();
-                    if (Convert.ToString(item.TerritoryID).ToLower().Contains(search.ToLower()))
+                    if (Convert.ToString(itemTerritories.TerritoryID).ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.TerritoryID);
-                        locationSearch.WhereFound = "TerritoryID: " + Convert.ToString(item.TerritoryID);
+                        locationSearch.ID = Convert.ToString(itemTerritories.TerritoryID);
+                        locationSearch.WhereFound = "TerritoryID: " + Convert.ToString(itemTerritories.TerritoryID);
                         locationSearch.Controller = "Territories";
                         machesFount.Add(locationSearch);
                     }
-                    else if (item.TerritoryDescription.ToLower().Contains(search.ToLower()))
+                    else if (itemTerritories.TerritoryDescription.ToLower().Contains(search.ToLower()))
                     {
                         locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(item.TerritoryID);
-                        locationSearch.WhereFound = "TerritoryDescription: " + item.TerritoryDescription;
+                        locationSearch.ID = Convert.ToString(itemTerritories.TerritoryID);
+                        locationSearch.WhereFound = "TerritoryDescription: " + itemTerritories.TerritoryDescription;
                         locationSearch.Controller = "Territories";
                         machesFount.Add(locationSearch);
                     }
