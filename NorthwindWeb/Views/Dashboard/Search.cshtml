@@ -16,18 +16,18 @@
 }
 //if exist marches
 else
-{<h1>@Model.MatchesCount Rezultate</h1>
-    foreach (var item in Model.MatchesFound)
+{<h1>@Model.MatchesCount Rezultate pentru "@ViewBag.CurrentFilter"</h1>
+    foreach (var itemMatchesFound in Model.MatchesFound)
     {
-        <a href="@Url.Action("Details", item.Controller, new { id = item.ID }, null)" class="list-group-item">
-            @Html.DisplayFor(modelItem => item.Position) @Html.DisplayFor(modelItem => item.WhereFound)
+        <a href="@Url.Action("Details", itemMatchesFound.Controller, new { id = itemMatchesFound.ID }, null)" class="list-group-item">
+            @Html.DisplayFor(modelItem => itemMatchesFound.Position) @Html.DisplayFor(modelItem => itemMatchesFound.WhereFound)
             <span class="pull-right text-muted small">
-                <em>@item.Controller</em>
+                <em>@itemMatchesFound.Controller</em>
             </span>
         </a>
 }
 }
-
+<!--Pagination-->
 Pagina @(Model.MatchesFoundPaged.PageCount < Model.MatchesFoundPaged.PageNumber ? 0 : Model.MatchesFoundPaged.PageNumber) din @Model.MatchesFoundPaged.PageCount
 @Html.PagedListPager(Model.MatchesFoundPaged, page => Url.Action("Search", new { page, currentFilter = ViewBag.CurrentFilter }))
 

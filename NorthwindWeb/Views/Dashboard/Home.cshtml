@@ -10,6 +10,7 @@
 }
 <h1>Dashboard</h1>
 <div class="row">
+    <!--Number Total Sales-->
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -32,6 +33,7 @@
             </a>
         </div>
     </div>
+    <!--Number Total Products Sold-->
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-green">
             <div class="panel-heading">
@@ -54,6 +56,7 @@
             </a>
         </div>
     </div>
+    <!--Number Total Employees-->
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-yellow">
             <div class="panel-heading">
@@ -76,6 +79,7 @@
             </a>
         </div>
     </div>
+    <!--Number Total Customers-->
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-red">
             <div class="panel-heading">
@@ -135,13 +139,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.SalesPerQuarter)
+                                    @foreach (var itemSalesPerQuarter in Model.SalesPerQuarter)
                                     {
                                         <tr>
-                                            <td>@item.Year</td>
-                                            <td>@item.a</td>
-                                            <td>@item.b</td>
-                                            <td>@item.c</td>
+                                            <td>@itemSalesPerQuarter.Year</td>
+                                            <td>@itemSalesPerQuarter.a</td>
+                                            <td>@itemSalesPerQuarter.b</td>
+                                            <td>@itemSalesPerQuarter.c</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -159,7 +163,7 @@
 
         </div>
     </div>
-    <!--Sales by Category-->
+   
     <div class="col-lg-4">
         <!--Sales by Category-->
         <div class="panel panel-default">
@@ -185,14 +189,14 @@
             <div class="panel-body">
                 <div class="list-group">
 
-                    @foreach (var item in Model.LastTenOrders)
+                    @foreach (var itemLastTenOrders in Model.LastTenOrders)
                     {
 
 
-                        <a href="@Url.Action("Details","Orders",new { id = item.OrderID},null)" class="list-group-item">
-                            @item.OrderID
+                        <a href="@Url.Action("Details","Orders",new { id = itemLastTenOrders.OrderID},null)" class="list-group-item">
+                            @itemLastTenOrders.OrderID
                             <span class="pull-right text-muted small">
-                                <em>@item.Ago</em>
+                                <em>@itemLastTenOrders.Ago</em>
                             </span>
                         </a>
 
