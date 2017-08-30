@@ -234,7 +234,7 @@ $(document).ready(function () {
         },
         "columns": [
             { 'data': 'CategoryName' },
-            { 'data': 'Description' }
+            { 'data': 'Description' },
             { 'data': 'DeleteLink' }
         ]
 
