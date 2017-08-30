@@ -14,9 +14,10 @@ using NorthwindWeb.Models.Interfaces;
 
 
 
+
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins")]
+    [Authorize]
     /// <summary>
     /// Orders Controller. For table Orders
     /// </summary>
@@ -49,6 +50,7 @@ namespace NorthwindWeb.Controllers
                         where (od.OrderID == id)
                         select new { od.OrderID,od.ProductID,od.Quantity,od.UnitPrice, od.Discount };
 
+
             List<DetailsOfOrder> list = new List<DetailsOfOrder>();
 
             //lopp in all order-details
@@ -72,6 +74,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CompanyName");
@@ -85,6 +88,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "OrderID,CustomerID,EmployeeID,OrderDate,RequiredDate,ShippedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry")] Orders orders)
         {
             if (ModelState.IsValid)
@@ -103,6 +107,7 @@ namespace NorthwindWeb.Controllers
 
 
         // GET: Orders/Edit/5
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -125,6 +130,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "OrderID,CustomerID,EmployeeID,OrderDate,RequiredDate,ShippedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry")] Orders orders)
         {
             if (ModelState.IsValid)
@@ -140,27 +146,67 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
-            if (id == null)
+
+            if(id==null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return HttpNotFound();
             }
+            OrderDetali viewModel = new OrderDetali();
+            //take details of orders
             Orders orders = await db.Orders.FindAsync(id);
             if (orders == null)
             {
                 return HttpNotFound();
             }
-            return View(orders);
+            viewModel.order = orders;
+
+            //take order-details of orders
+            var ordet = from od in db.Order_Details
+                        where (od.OrderID == id)
+                        select new { od.OrderID, od.ProductID, od.Quantity, od.UnitPrice, od.Discount };
+
+
+            List<DetailsOfOrder> list = new List<DetailsOfOrder>();
+
+            //lopp in all order-details
+            foreach (var item in ordet)
+            {
+                DetailsOfOrder x = new DetailsOfOrder();
+
+                x.OrderID = item.OrderID;
+                x.ProductID = item.ProductID;
+                x.Quantity = item.Quantity;
+                x.UnitPrice = item.UnitPrice;
+                x.Discount = item.Discount;
+
+
+                list.Add(x);
+
+            }
+            viewModel.details = list;
+            ViewBag.orderid = id;
+
+            return View(viewModel);
         }
 
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+
+
+            var details = db.Order_Details.Where(x=>x.OrderID==id);
+            foreach(var orderdet in details)
+                db.Order_Details.Remove(orderdet);
+
             Orders orders = await db.Orders.FindAsync(id);
             db.Orders.Remove(orders);
+
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
