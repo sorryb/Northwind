@@ -3,7 +3,7 @@ function searchPath() {
     var path = window.location.href;
     var a = path.split("/");
     if (path.search("http://") + 1) {
-        return a[0] + '/' + a[1] + '/' + a[2] + '/' + a[3];
+        return a[0] + '//' + a[2] + '/' + a[3];
     }
     else {
         return a[0] + '/' + a[1];
