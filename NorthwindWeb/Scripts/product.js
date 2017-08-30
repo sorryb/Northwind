@@ -148,3 +148,98 @@ $(document).ready(function () {
 
     });
 });
+$(document).ready(function () {
+    $('#Suppliers').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
+                })
+                return json;
+            }
+        },
+        "columns": [
+            {
+                'data': 'CompanyName'
+            },
+            { 'data': 'ContactName' },
+            { 'data': 'ContactTitle' },
+            { 'data': 'Address' },
+            { 'data': 'City' },
+            { 'data': 'Country' },
+            { 'data': 'Phone' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+});
+
+$(document).ready(function () {
+    $('#Shippers').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
+                })
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'CompanyName' },
+            { 'data': 'Phone' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+});
+/*add from json in table Customers*/
+/*add from json in table Categories*/
+$(document).ready(function () {
+    $('#CategoriesTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.CategoryName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CategoryName + '</a >';
+                })
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'CategoryName' },
+            { 'data': 'Description' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+});
+

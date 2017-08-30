@@ -40,7 +40,7 @@ $(function () {
                 element: 'morris-bar-chart',
                 data: data,
                 xkey: ['Year'],
-                ykeys: ['a', 'b', 'c'],
+                ykeys: ['dashboardMorrisBarColumA', 'dashboardMorrisBarColumB', 'dashboardMorrisBarColumC'],
                 labels: ['Aprilie', 'August', 'Decembrie'],
                 hideHover: 'auto',
                 resize: true

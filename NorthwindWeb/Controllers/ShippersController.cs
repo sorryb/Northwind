@@ -8,11 +8,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using NorthwindWeb.Models.Interfaces;
 
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
-    public class ShippersController : Controller
+    public class ShippersController : Controller, IJsonTableFill
     {
         private NorthwindModel db = new NorthwindModel();
 
@@ -130,6 +131,20 @@ namespace NorthwindWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public JsonResult JsonTableFill(string search = "")
+        {
+            var shippers = db.Shippers.Include(p => p.Phone).Where(p => p.CompanyName.Contains(search)).OrderBy(x => x.ShipperID);
+
+            /*Select what wee need in table*/
+            return Json(
+                shippers.Select(x => new {
+                    ID = x.ShipperID,
+                    CompanyName = x.CompanyName,
+                    Phone = x.Phone
+                })
+                , JsonRequestBehavior.AllowGet);
         }
     }
 }

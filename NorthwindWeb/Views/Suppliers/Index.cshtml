@@ -30,61 +30,35 @@
     </form>
 </div>
 <br />
-<table class="table">
-    <tr>
-        <th>
-            Nume Companie
-        </th>
-        <th>
-            Nume Contact
-        </th>
-        <th>
-            Pozitie
-        </th>
-        <th>
-           Adresa
-        </th>
-        <th>
-            Oras
-        </th>
-        <th>
-            Tara
-        </th>
-        <th>
-            Telefon
-        </th>
-        <th>
-            Sterge
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.CompanyName, "Details", new { id = item.SupplierID })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactTitle)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            <a href="@Url.Action("Delete", new { id = item. SupplierID })"><i class="fa fa-remove"></i></a>
-        </td>
-    </tr>
-}
+<table id="Suppliers" class="cell-border hover order-column">
+    <thead>
+        <tr>
+            <th>
+                Nume Companie
+            </th>
+            <th>
+                Nume Contact
+            </th>
+            <th>
+                Pozitie
+            </th>
+            <th>
+                Adresa
+            </th>
+            <th>
+                Oras
+            </th>
+            <th>
+                Tara
+            </th>
+            <th>
+                Telefon
+            </th>
+            <th>
+                Sterge
+            </th>
+        </tr>
+    </thead>
+    <tbody></tbody>
 
 </table>
