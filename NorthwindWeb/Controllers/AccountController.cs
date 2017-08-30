@@ -840,7 +840,7 @@ namespace NorthwindWeb.Controllers
 
             base.Dispose(disposing);
         }
-        public JsonResult JsonTableFill(string search = "")
+        public JsonResult JsonTableFill()
         {
             var context = new ApplicationDbContext();
             var userStore = new UserStore<ApplicationUser>(context);
