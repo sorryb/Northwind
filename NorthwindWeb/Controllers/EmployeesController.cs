@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using PagedList;
+using NorthwindWeb.Models.ServerClientCommunication;
 
 namespace NorthwindWeb.Controllers
 {
@@ -142,23 +143,121 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Employees by Json
-        public JsonResult JsonTableFill(string search = "")
+        public JsonResult JsonTableFill(int draw, int start, int length)
         {
-            var employees = db.Employees.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search)).Include(e => e.Employee1).OrderBy(x => x.EmployeeID);
+            const int TOTAL_ROWS = 999;
 
-            /*Select what wee need in table*/
-            return Json(
-                employees.Select(x => new {
-                    ID= x.EmployeeID,
+
+            string search = Request.QueryString["search[value]"] ?? "";
+            int sortColumn = -1;
+            string sortDirection = "asc";
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+            //list of product that contain "search"
+            var list = db.Employees.Include(p => p.LastName).Include(p => p.Title).Include(p => p.City).Include(p => p.Country).Include(p => p.HomePhone).Where(p => p.FirstName.Contains(search));
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto FirstColumn;
+                case 0: //first column
+                    FirstColumn:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.LastName);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.LastName);
+                    }
+                    break;
+                case 1: //second column
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.FirstName);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.FirstName);
+                    }
+                    break;
+                case 2: // and so on
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.City);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.City);
+                    }
+                    break;
+                case 3:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.Title);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.Title);
+                    }
+                    break;
+                case 4:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.HomePhone);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.HomePhone);
+                    }
+                    break;
+                case 5:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.Country);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.Country);
+                    }
+                    break;
+            }
+
+            //objet that whill be sent to client
+            JsonDataTableObject dataTableData = new JsonDataTableObject()
+            {
+                draw = draw,
+                recordsTotal = db.Employees.Count(),
+                data = list.Skip(start).Take(length).Select(x => new
+                {
+                    ID = x.EmployeeID,
                     LastName = x.LastName,
                     FirstName = x.FirstName,
                     Title = x.Title,
                     City = x.City,
                     Country = x.Country,
                     HomePhone = x.HomePhone
-                    
-                })
-                , JsonRequestBehavior.AllowGet);
+
+                }),
+                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+
+            };
+
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
     }
 }
