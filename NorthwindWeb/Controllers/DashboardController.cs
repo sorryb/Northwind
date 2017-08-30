@@ -35,7 +35,7 @@ namespace NorthwindWeb.Controllers
             viewModel.NumberEmployees = NumberEmployees();
             viewModel.NumberCustomers = NumberCustomers();
             viewModel.SalesPerQuarter = SalesByQuarter();
-            viewModel.LastTenOrders = LastTen();
+            viewModel.LastTenOrders = LastTenOrder();
 
             return View(viewModel);
         }
@@ -60,89 +60,89 @@ namespace NorthwindWeb.Controllers
                 search = currentFilter;
             }
             ViewBag.CurrentFilter = search;
-            List<LocateSearch> list = new List<LocateSearch>();
+            List<LocateSearch> machesFount = new List<LocateSearch>();
             //The test returns false if no search is entered
             if (!String.IsNullOrEmpty(search))
             {//Test each table for match 
                 var category = db.Categories;
                 foreach (var item in category)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.CategoryID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.CategoryID);
-                        x.WhereFound = "CategoryID: " +Convert.ToString(item.CategoryID);
-                        x.Controller = "Categories";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.CategoryID);
+                        locationSearch.WhereFound = "CategoryID: " +Convert.ToString(item.CategoryID);
+                        locationSearch.Controller = "Categories";
+                        machesFount.Add(locationSearch);
                     }
                     else if(item.CategoryName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.CategoryID);
-                        x.WhereFound = "CategoryName: " + item.CategoryName;
-                        x.Controller = "Categories";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.CategoryID);
+                        locationSearch.WhereFound = "CategoryName: " + item.CategoryName;
+                        locationSearch.Controller = "Categories";
+                        machesFount.Add(locationSearch);
                     }
                     else if(item.Description.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.CategoryID);
-                        x.WhereFound = "Description: " + item.Description;
-                        x.Controller = "Categories";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.CategoryID);
+                        locationSearch.WhereFound = "Description: " + item.Description;
+                        locationSearch.Controller = "Categories";
+                        machesFount.Add(locationSearch);
                     }
 
                 }
                 var suppliers = db.Suppliers;
                 foreach (var item in suppliers)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.SupplierID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.SupplierID);
-                        x.WhereFound = "CategoryID: " + Convert.ToString(item.SupplierID);
-                        x.Controller = "Suppliers";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.SupplierID);
+                        locationSearch.WhereFound = "CategoryID: " + Convert.ToString(item.SupplierID);
+                        locationSearch.Controller = "Suppliers";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.SupplierID);
-                        x.WhereFound = "CompanyName: " + item.CompanyName;
-                        x.Controller = "Suppliers";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.SupplierID);
+                        locationSearch.WhereFound = "CompanyName: " + item.CompanyName;
+                        locationSearch.Controller = "Suppliers";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.ContactName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.SupplierID);
-                        x.WhereFound = "ContactName: " + item.ContactName;
-                        x.Controller = "Suppliers";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.SupplierID);
+                        locationSearch.WhereFound = "ContactName: " + item.ContactName;
+                        locationSearch.Controller = "Suppliers";
+                        machesFount.Add(locationSearch);
                     }
 
                 }
                 var product = db.Products;
                 foreach (var item in product)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.ProductID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.ProductID);
-                        x.WhereFound = "ProductID: " + Convert.ToString(item.ProductID);
-                        x.Controller = "Product";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.ProductID);
+                        locationSearch.WhereFound = "ProductID: " + Convert.ToString(item.ProductID);
+                        locationSearch.Controller = "Product";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.ProductName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.ProductID);
-                        x.WhereFound = "ProductName: " + item.ProductName;
-                        x.Controller = "Product";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.ProductID);
+                        locationSearch.WhereFound = "ProductName: " + item.ProductName;
+                        locationSearch.Controller = "Product";
+                        machesFount.Add(locationSearch);
                     }
                  
 
@@ -150,82 +150,82 @@ namespace NorthwindWeb.Controllers
                 var order = db.Orders;
                 foreach (var item in order)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.OrderID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.OrderID);
-                        x.WhereFound = "OrderID: " + Convert.ToString(item.OrderID);
-                        x.Controller = "Orders";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.OrderID);
+                        locationSearch.WhereFound = "OrderID: " + Convert.ToString(item.OrderID);
+                        locationSearch.Controller = "Orders";
+                        machesFount.Add(locationSearch);
                     }
                     else if (Convert.ToString(item.OrderDate).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.OrderID);
-                        x.WhereFound = "OrderDate: " + Convert.ToString(item.OrderDate);
-                        x.Controller = "Orders";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.OrderID);
+                        locationSearch.WhereFound = "OrderDate: " + Convert.ToString(item.OrderDate);
+                        locationSearch.Controller = "Orders";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.ShipName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.OrderID);
-                        x.WhereFound = "ShipName: " + item.ShipName;
-                        x.Controller = "Orders";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.OrderID);
+                        locationSearch.WhereFound = "ShipName: " + item.ShipName;
+                        locationSearch.Controller = "Orders";
+                        machesFount.Add(locationSearch);
                     }
 
                 }
                 var customers = db.Customers;
                 foreach (var item in customers)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.CustomerID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.CustomerID);
-                        x.WhereFound = "CustomerID: " + Convert.ToString(item.CustomerID);
-                        x.Controller = "Customers";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.CustomerID);
+                        locationSearch.WhereFound = "CustomerID: " + Convert.ToString(item.CustomerID);
+                        locationSearch.Controller = "Customers";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.CustomerID);
-                        x.WhereFound = "CompanyName: " + item.CompanyName;
-                        x.Controller = "Customers";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.CustomerID);
+                        locationSearch.WhereFound = "CompanyName: " + item.CompanyName;
+                        locationSearch.Controller = "Customers";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.ContactName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.CustomerID);
-                        x.WhereFound = "ContactName: " + item.ContactName;
-                        x.Controller = "Customers";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.CustomerID);
+                        locationSearch.WhereFound = "ContactName: " + item.ContactName;
+                        locationSearch.Controller = "Customers";
+                        machesFount.Add(locationSearch);
                     }
 
                 }
                 var region = db.Regions;
                 foreach (var item in region)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.RegionID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.RegionID);
-                        x.WhereFound = "RegionID: " + Convert.ToString(item.RegionID);
-                        x.Controller = "Regions";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.RegionID);
+                        locationSearch.WhereFound = "RegionID: " + Convert.ToString(item.RegionID);
+                        locationSearch.Controller = "Regions";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.RegionDescription.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.RegionID);
-                        x.WhereFound = "RegionDescription: " + item.RegionDescription;
-                        x.Controller = "Regions";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.RegionID);
+                        locationSearch.WhereFound = "RegionDescription: " + item.RegionDescription;
+                        locationSearch.Controller = "Regions";
+                        machesFount.Add(locationSearch);
                     }
                     
 
@@ -233,52 +233,52 @@ namespace NorthwindWeb.Controllers
                 var employees = db.Employees;
                 foreach (var item in employees)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.EmployeeID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.EmployeeID);
-                        x.WhereFound = "EmployeeID: " + Convert.ToString(item.EmployeeID);
-                        x.Controller = "Employees";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.EmployeeID);
+                        locationSearch.WhereFound = "EmployeeID: " + Convert.ToString(item.EmployeeID);
+                        locationSearch.Controller = "Employees";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.LastName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.EmployeeID);
-                        x.WhereFound = "LastName: " + item.LastName;
-                        x.Controller = "Employees";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.EmployeeID);
+                        locationSearch.WhereFound = "LastName: " + item.LastName;
+                        locationSearch.Controller = "Employees";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.FirstName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.EmployeeID);
-                        x.WhereFound = "FirstName: " + item.FirstName;
-                        x.Controller = "Employees";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.EmployeeID);
+                        locationSearch.WhereFound = "FirstName: " + item.FirstName;
+                        locationSearch.Controller = "Employees";
+                        machesFount.Add(locationSearch);
                     }
 
                 }
                 var shippers = db.Shippers;
                 foreach (var item in shippers)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.ShipperID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.ShipperID);
-                        x.WhereFound = "ShipperID: " + Convert.ToString(item.ShipperID);
-                        x.Controller = "Shippers";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.ShipperID);
+                        locationSearch.WhereFound = "ShipperID: " + Convert.ToString(item.ShipperID);
+                        locationSearch.Controller = "Shippers";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.CompanyName.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.ShipperID);
-                        x.WhereFound = "CompanyName: " + item.CompanyName;
-                        x.Controller = "Shippers";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.ShipperID);
+                        locationSearch.WhereFound = "CompanyName: " + item.CompanyName;
+                        locationSearch.Controller = "Shippers";
+                        machesFount.Add(locationSearch);
                     }
 
 
@@ -286,22 +286,22 @@ namespace NorthwindWeb.Controllers
                 var territories = db.Territories;
                 foreach (var item in territories)
                 {
-                    LocateSearch x = new LocateSearch();
+                    LocateSearch locationSearch = new LocateSearch();
                     if (Convert.ToString(item.TerritoryID).ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.TerritoryID);
-                        x.WhereFound = "TerritoryID: " + Convert.ToString(item.TerritoryID);
-                        x.Controller = "Territories";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.TerritoryID);
+                        locationSearch.WhereFound = "TerritoryID: " + Convert.ToString(item.TerritoryID);
+                        locationSearch.Controller = "Territories";
+                        machesFount.Add(locationSearch);
                     }
                     else if (item.TerritoryDescription.ToLower().Contains(search.ToLower()))
                     {
-                        x.Position = list.Count() + 1;
-                        x.ID = Convert.ToString(item.TerritoryID);
-                        x.WhereFound = "TerritoryDescription: " + item.TerritoryDescription;
-                        x.Controller = "Territories";
-                        list.Add(x);
+                        locationSearch.Position = machesFount.Count() + 1;
+                        locationSearch.ID = Convert.ToString(item.TerritoryID);
+                        locationSearch.WhereFound = "TerritoryDescription: " + item.TerritoryDescription;
+                        locationSearch.Controller = "Territories";
+                        machesFount.Add(locationSearch);
                     }
 
 
@@ -309,18 +309,18 @@ namespace NorthwindWeb.Controllers
 
             }
             //In case he did not find returns Not Found
-            if (list.Count < 1)
+            if (machesFount.Count < 1)
             {
-                LocateSearch x = new LocateSearch();
-                x.WhereFound = "Not Found";
-                x.Controller = "Dashboard";
-                list.Add(x);
+                LocateSearch notMachesFount = new LocateSearch();
+                notMachesFount.WhereFound = "Not Found";
+                notMachesFount.Controller = "Dashboard";
+                machesFount.Add(notMachesFount);
             }
             int pageSize = 20;
             int pageNumber = (page ?? 1);
-            viewModel.MatchesCount = list.Count();
-            viewModel.MatchesFound=list.ToPagedList(pageNumber, pageSize);
-            viewModel.MatchesFoundPaged= list.ToPagedList(pageNumber, pageSize);
+            viewModel.MatchesCount = machesFount.Count();
+            viewModel.MatchesFound=machesFount.ToPagedList(pageNumber, pageSize);
+            viewModel.MatchesFoundPaged= machesFount.ToPagedList(pageNumber, pageSize);
             return View(viewModel);
 
 
@@ -332,19 +332,19 @@ namespace NorthwindWeb.Controllers
         /// <returns></returns>
         public ActionResult MorrisArea()
         {
-            List<DashboardMorrisArea> list = new List<DashboardMorrisArea>();
-            var salesbyyear = from o in db.Orders
+            List<DashboardMorrisArea> dashboardMorrisAreaData = new List<DashboardMorrisArea>();
+            var salesByYear = from o in db.Orders
                               join od in db.Order_Details on o.OrderID equals od.OrderID
                               select new { od.UnitPrice, od.Quantity, od.Discount, o.OrderDate };
             //Calculates sales each year
-            foreach (var item in salesbyyear)
+            foreach (var itemSalesByYear in salesByYear)
             {
                 int ok = 0;
-                foreach (var i in list)
+                foreach (var i in dashboardMorrisAreaData)
                 {
-                    if (int.Parse(i.Year) == Convert.ToDateTime(item.OrderDate).Year)
+                    if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
                     {
-                        i.Sales += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
+                        i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
                         ok = 1;
                         break;
                     }
@@ -352,19 +352,19 @@ namespace NorthwindWeb.Controllers
                 //test return true if item->year is not in list
                 if (ok == 0)
                 {
-                    DashboardMorrisArea x = new DashboardMorrisArea();
-                    x.Year = Convert.ToString(Convert.ToDateTime(item.OrderDate).Year);
-                    x.Sales = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
-                    list.Add(x);
+                    DashboardMorrisArea dashboardMorrisAreaElement = new DashboardMorrisArea();
+                    dashboardMorrisAreaElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
+                    dashboardMorrisAreaElement.Sales = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
+                    dashboardMorrisAreaData.Add(dashboardMorrisAreaElement);
                 }
             }
             //Rounds the value to two decimal places
-            foreach (var i in list)
+            foreach (var itemDashboardMorrisAreaData in dashboardMorrisAreaData)
             {
-                i.Sales = decimal.Round(i.Sales, 2);
+                itemDashboardMorrisAreaData.Sales = decimal.Round(itemDashboardMorrisAreaData.Sales, 2);
             }
 
-            return Json(list, JsonRequestBehavior.AllowGet);
+            return Json(dashboardMorrisAreaData, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
         /// Returns a json with the data required for the MorrisBar table on the dashboard page
@@ -382,30 +382,30 @@ namespace NorthwindWeb.Controllers
         /// <returns></returns>
         public ActionResult MorrisDonut()
         {
-            List<DashboardMorrisDonut> list = new List<DashboardMorrisDonut>();
-            var salesbyyear = from od in db.Order_Details
+            List<DashboardMorrisDonut> dashboardMorrisDonutData = new List<DashboardMorrisDonut>();
+            var salesByYear = from od in db.Order_Details
                               join p in db.Products on od.ProductID equals p.ProductID
                               join c in db.Categories on p.CategoryID equals c.CategoryID
                               select new { od.UnitPrice, od.Quantity, od.Discount, c.CategoryName };
             var category = from c in db.Categories
                            select new { c.CategoryName };
             //select all category
-            foreach (var item in category)
+            foreach (var itemCategory in category)
             {
-                DashboardMorrisDonut x = new DashboardMorrisDonut();
-                x.label = item.CategoryName;
-                x.value = 0;
-                list.Add(x);
+                DashboardMorrisDonut dashboardMorrisDonutElement = new DashboardMorrisDonut();
+                dashboardMorrisDonutElement.label = itemCategory.CategoryName;
+                dashboardMorrisDonutElement.value = 0;
+                dashboardMorrisDonutData.Add(dashboardMorrisDonutElement);
             }
             //Calculate sales by year for all category
-            foreach (var item in salesbyyear)
+            foreach (var itemSalesByYear in salesByYear)
             {
 
-                foreach (var i in list)
+                foreach (var itemDashboardMorrisDonutData in dashboardMorrisDonutData)
                 {
-                    if (i.label == item.CategoryName)
+                    if (itemDashboardMorrisDonutData.label == itemSalesByYear.CategoryName)
                     {
-                        i.value += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
+                        itemDashboardMorrisDonutData.value += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
 
                         break;
                     }
@@ -413,118 +413,116 @@ namespace NorthwindWeb.Controllers
 
             }
             //Rounds the value to two decimal places
-            foreach (var i in list)
+            foreach (var itemDashboardMorrisDonutData in dashboardMorrisDonutData)
             {
-                i.value = decimal.Round(i.value, 2);
+                itemDashboardMorrisDonutData.value = decimal.Round(itemDashboardMorrisDonutData.value, 2);
             }
 
-            return Json(list, JsonRequestBehavior.AllowGet);
+            return Json(dashboardMorrisDonutData, JsonRequestBehavior.AllowGet);
         }
 
         private List<DashboardMorrisBar> SalesByQuarter()
         {
-            List<DashboardMorrisBar> list = new List<DashboardMorrisBar>();
-            var salesbyyear = from o in db.Orders
+            List<DashboardMorrisBar> dashboardMorrisBarData = new List<DashboardMorrisBar>();
+            var salesByYear = from o in db.Orders
                               join od in db.Order_Details on o.OrderID equals od.OrderID
                               select new { od.UnitPrice, od.Quantity, od.Discount, o.OrderDate };
             //Divides year and quarter and calculates sales
-            foreach (var item in salesbyyear)
+            foreach (var itemSalesByYear in salesByYear)
             {
                 int quarter;
                 //Determine quarter
-                if (Convert.ToDateTime(item.OrderDate).Month <= 4) { quarter = 1; }
-                else if (Convert.ToDateTime(item.OrderDate).Month <= 8) { quarter = 2; }
+                if (Convert.ToDateTime(itemSalesByYear.OrderDate).Month <= 4) { quarter = 1; }
+                else if (Convert.ToDateTime(itemSalesByYear.OrderDate).Month <= 8) { quarter = 2; }
                 else { quarter = 3; }
-                int ok = 0;
-                foreach (var i in list)
+                int alreadyExistQuarter = 0;
+                foreach (var itemDashboardMorrisBarData in dashboardMorrisBarData)
                 {
-                    if (int.Parse(i.Year) == Convert.ToDateTime(item.OrderDate).Year)
+                    if (int.Parse(itemDashboardMorrisBarData.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
                     {
-                        if (quarter == 1) { i.a += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
-                        else if (quarter == 2) { i.b += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
-                        else { i.c += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
+                        if (quarter == 1) { itemDashboardMorrisBarData.a += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                        else if (quarter == 2) { itemDashboardMorrisBarData.b += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                        else { itemDashboardMorrisBarData.c += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
 
-                        ok = 1;
+                        alreadyExistQuarter = 1;
                         break;
                     }
                 }
-                //test return true if item->quarter not exist yet in item->year 
-                if (ok == 0)
+                //test return true if itemSalesByYear->quarter not exist yet in itemDashboardMorrisBarData->year 
+                if (alreadyExistQuarter == 0)
                 {
-                    DashboardMorrisBar x = new DashboardMorrisBar();
-                    x.Year = Convert.ToString(Convert.ToDateTime(item.OrderDate).Year);
-                    if (quarter == 1) { x.a = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
-                    else if (quarter == 2) { x.b = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
-                    else { x.c = item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount)); }
-                    list.Add(x);
+                    DashboardMorrisBar dashboardMorrisBarElement = new DashboardMorrisBar();
+                    dashboardMorrisBarElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
+                    if (quarter == 1) { dashboardMorrisBarElement.a = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                    else if (quarter == 2) { dashboardMorrisBarElement.b = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                    else { dashboardMorrisBarElement.c = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                    dashboardMorrisBarData.Add(dashboardMorrisBarElement);
                 }
             }
             //Rounds the value to two decimal places
-            foreach (var i in list)
+            foreach (var itemDashboardMorrisBarData in dashboardMorrisBarData)
             {
                 {
-                    i.a = decimal.Round(i.a, 2);
-                    i.b = decimal.Round(i.b, 2);
-                    i.c = decimal.Round(i.c, 2);
+                    itemDashboardMorrisBarData.a = decimal.Round(itemDashboardMorrisBarData.a, 2);
+                    itemDashboardMorrisBarData.b = decimal.Round(itemDashboardMorrisBarData.b, 2);
+                    itemDashboardMorrisBarData.c = decimal.Round(itemDashboardMorrisBarData.c, 2);
                 }
             }
-            return list;
+            return dashboardMorrisBarData;
         }
 
         private decimal TotalSalesValue()
         {
-            decimal d = 0;
+            decimal totalSalesValue = 0;
             var sales = db.Order_Details;
-            foreach (var item in sales)
+            foreach (var itemSales in sales)
             {
-                d += item.Quantity * item.UnitPrice * (1 - Convert.ToDecimal(item.Discount));
+                totalSalesValue += itemSales.Quantity * itemSales.UnitPrice * (1 - Convert.ToDecimal(itemSales.Discount));
 
             }
-            d = decimal.Round(d, 2);
-            return d;
+            totalSalesValue = decimal.Round(totalSalesValue, 2);
+            return totalSalesValue;
         }
 
         private int NumberProductsSold()
         {
-            int p = 0;
+            int numberProductsSold = 0;
             var product = db.Order_Details;
-            foreach (var item in product)
+            foreach (var itemProduct in product)
             {
-                p += item.Quantity;
+                numberProductsSold += itemProduct.Quantity;
 
             }
-            return p;
+            return numberProductsSold;
         }
 
         private int NumberEmployees()
         {
-            int e = db.Employees.Count();
-            return e;
+            return db.Employees.Count();
         }
 
         private int NumberCustomers()
         {
-            int c = db.Customers.Count();
-            return c;
+           return db.Customers.Count();
         }
 
-        private List<LastTenOrders> LastTen()
+        private List<LastTenOrders> LastTenOrder()
         {
-            List<LastTenOrders> list = new List<LastTenOrders>();
+            List<LastTenOrders> lastTenOrdersData = new List<LastTenOrders>();
             var order = (from o in db.Orders
                          select new { o.OrderID, o.OrderDate }).OrderByDescending(o => o.OrderDate).Take(10);
-            foreach (var item in order)
+            foreach (var itemOrder in order)
             {
-                LastTenOrders x = new LastTenOrders();
-                x.OrderID = item.OrderID;
-                var y = DateTime.Now - Convert.ToDateTime(item.OrderDate);
-                if (y.TotalMinutes <= 60) { x.Ago = "Acum " + Convert.ToString(y.TotalMinutes) + " Minute"; }
-                else if (y.TotalHours <= 24) { x.Ago = "Acum " + Convert.ToString(y.TotalHours) + " Ore"; }
-                else if (y.TotalDays <= 30) { x.Ago = "Acum " + Convert.ToString(y.TotalHours) + " Zile"; }
-                else { x.Ago = "Cu mai mult de o luna in urma"; }
-                list.Add(x);
+                LastTenOrders lastTenOrdersElement = new LastTenOrders();
+                lastTenOrdersElement.OrderID = itemOrder.OrderID;
+                var pastTime = DateTime.Now - Convert.ToDateTime(itemOrder.OrderDate);
+                if (pastTime.TotalMinutes <= 60) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(pastTime.TotalMinutes) + " Minute"; }
+                else if (pastTime.TotalHours <= 24) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(pastTime.TotalHours) + " Ore"; }
+                else if (pastTime.TotalDays <= 30) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(pastTime.TotalHours) + " Zile"; }
+                else { lastTenOrdersElement.Ago = "Cu mai mult de o luna in urma"; }
+                lastTenOrdersData.Add(lastTenOrdersElement);
             }
-            return list;
+            return lastTenOrdersData;
 
         }
 
