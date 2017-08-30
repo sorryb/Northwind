@@ -57,11 +57,13 @@ $(document).ready(function () {
         "ajax": {
             "type": "GET",
             "url": searchControllerPath() + "/JsonTestServerSide",
-            "data": function (json) {
+            "dataSrc": function (json) {
                 //Make your callback here.
-                
-                console.log(json)
-                return json;
+                $.each(json.data, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
+                })
+                return json.data;
             }
         },
         "columns": [
