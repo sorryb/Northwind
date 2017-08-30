@@ -1,4 +1,4 @@
-﻿@model NorthwindWeb.ViewModels.OrderIndexData
+﻿@model NorthwindWeb.ViewModels.Order.OrderIndexData
 
 @using PagedList.Mvc;
 @{
@@ -22,6 +22,7 @@
     <div class="row">
         <div class="col-lg-8">
             <table class="table">
+                <!--Table with Orders-->
                 <thead class="thead">
                     <tr role="row">
                         <th>Numar Comanda</th>
@@ -30,30 +31,32 @@
                     </tr>
                 </thead>
                 <tbody class="tbody">
-                    @foreach (var item in Model.Order)
+                    @foreach (var itemOrder in Model.Order)
                     {
                         string selectedRow = "";
-                        if (item.OrderID == ViewBag.OrderID)
+                        if (itemOrder.OrderID == ViewBag.OrderID)
                         {
                             selectedRow = "selectat";
                         }
                         <tr class="@selectedRow" role="row">
                             <td>
-                                @Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { orderID = item.OrderID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                                @Html.ActionLink(Convert.ToString(itemOrder.OrderID), "Home", new { orderID = itemOrder.OrderID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
                             </td>
                             <td>
-                                @item.OrderDate
+                                @itemOrder.OrderDate
                             </td>
                             <td>
-                                @item.CompanyName
+                                @itemOrder.CompanyName
                             </td>
 
                         </tr>
                     }
                 </tbody>
             </table>
-            Pagina @(Model.page.PageCount < Model.page.PageNumber ? 0 : Model.page.PageNumber) din @Model.page.PageCount
-            @Html.PagedListPager(Model.page, page => Url.Action("Home1", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
+            <!--Pagination Orders-->
+            Pagina @(Model.Page.PageCount < Model.Page.PageNumber ? 0 : Model.Page.PageNumber) din @Model.Page.PageCount
+            @Html.PagedListPager(Model.Page, page => Url.Action("Home", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
+            <!--Table with OrdersDetails for selected Order-->
             @if (Model.Order_Detail != null)
             {<hr>
                 <h3>Detali Comanda</h3>
@@ -69,32 +72,33 @@
                     </tr>
                     </thead>
                     <tbody  class="tbody">
-                        @foreach (var item in Model.Order_Detail)
+                        @foreach (var itemOrderDetail in Model.Order_Detail)
                         {
                             string selectedRow = "";
-                            if (item.ProductID == ViewBag.ProductID)
+                            if (itemOrderDetail.ProductID == ViewBag.ProductID)
                             {
                                 selectedRow = "selectat";
                             }
                             <tr class="@selectedRow">
                                 <td>
-                                    @Html.ActionLink(item.ProductName, "Home1", new { orderID = ViewBag.OrderID, productID = item.ProductID, page = Model.page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                                    @Html.ActionLink(itemOrderDetail.ProductName, "Home", new { orderID = ViewBag.OrderID, productID = itemOrderDetail.ProductID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
                                 </td>
 
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.UnitPrice) lei
+                                    @Html.DisplayFor(modelItem => itemOrderDetail.UnitPrice) lei
                                 </td>
                                 <td>
-                                    @item.Quantity
+                                    @itemOrderDetail.Quantity
                                 </td>
                                 <td>
-                                    @(item.Discount * 100)%
+                                    @(itemOrderDetail.Discount * 100)%
                                 </td>
                             </tr>
                         }
                     </tbody>
                 </table>
             }
+            <!--Table with Product for selected OrdersDetail-->
             @if (Model.Product != null)
             {<hr>
                 <h3>
@@ -109,17 +113,17 @@
                         </tr>
                     </thead>
                     <tbody  class="tbody">
-                        @foreach (var item in Model.Product)
+                        @foreach (var itemProduct in Model.Product)
                         {
                             <tr>
                                 <td>
-                                    @item.ProductName
+                                    @itemProduct.ProductName
                                 </td>
                                 <td>
-                                    @item.CategoryName
+                                    @itemProduct.CategoryName
                                 </td>
                                 <td>
-                                    @item.UnitsInStock
+                                    @itemProduct.UnitsInStock
                                 </td>
                             </tr>
                         }
@@ -131,9 +135,10 @@
         </div>
         <div class="col-lg-4">
             <div class="well">
+                <!--Search in Orders-->
                 <h4>Cautare in comenzi</h4>
                 <div class="input-group">
-                    @using (Html.BeginForm("Home1", "Order", FormMethod.Get))
+                    @using (Html.BeginForm("Home", "Order", FormMethod.Get))
                     {                  @Html.TextBox("search", ViewBag.CurrentFilter as string)
 
                         <button type="submit" class="btn btn-default">
@@ -143,7 +148,7 @@
                 </div>
                 <!-- /input-group -->
             </div>
-            <!-- /well -->
+            <!-- The most expensive ten orders-->
             <div class="well">
                 <h4>Cele mai expensive comenzi</h4>
 
@@ -156,11 +161,11 @@
 
                             </tr>
 
-                            @foreach (var item in Model.Order10)
+                            @foreach (var itemOrderTen in Model.OrderTen)
                             {
                                 <tr>
-                                    <td>@Html.ActionLink(Convert.ToString(item.OrderID), "Home1", new { orderID = item.OrderID, search = item.OrderID })</td>
-                                    <td>@item.Cost lei</td>
+                                    <td>@Html.ActionLink(Convert.ToString(itemOrderTen.OrderID), "Home", new { orderID = itemOrderTen.OrderID, search = itemOrderTen.OrderID })</td>
+                                    <td>@itemOrderTen.Cost lei</td>
 
                                 </tr>
                             }
@@ -170,18 +175,18 @@
                    
                 </div>
             </div>
-            <!-- /well -->
+            <!-- Order with the highest number of products -->
             <div class="well">
                 <h4>Cea mai mare comanda</h4>
                 <table class="table">
                     <tr>
-                        <th>@Html.ActionLink(Convert.ToString(Model.Comand.OrderID), "Home1", new { orderID = Model.Comand.OrderID, search = Model.Comand.OrderID })</th>
-                        <th>@Model.Comand.Produse Produse</th>
+                        <th>@Html.ActionLink(Convert.ToString(Model.Command.OrderID), "Home", new { orderID = Model.Command.OrderID, search = Model.Command.OrderID })</th>
+                        <th>@Model.Command.Produse Produse</th>
 
                     </tr>
                 </table>
             </div>
-            <!-- /well -->
+           
         </div>
 
     </div>

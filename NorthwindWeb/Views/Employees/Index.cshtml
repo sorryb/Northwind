@@ -31,58 +31,36 @@
     </form>
 </div>
 <br />
-<table class="table">
-    <tr>
-        <th>
-            Nume
-        </th>
-        <th>
-            Prenume
-        </th>
-        <th>
-            Pozitie
-        </th>
-        <th>
-            Oras
-        </th>
-        <th>
-            Tara
-        </th>
-        <th>
-            Telefon
-        </th>
-        <th>
-            Sterge
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table id="EmployeesTable" class="table">
+    <thead>
         <tr>
-            <td>
-                @Html.ActionLink(item.LastName, "Details", new { id = item.EmployeeID })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HomePhone)
-            </td>
-            <td>
-                <a href="@Url.Action("Delete", new { id = item.EmployeeID })"><i class="fa fa-remove"></i></a>
-            </td>
+            <th>
+                Nume
+            </th>
+            <th>
+                Prenume
+            </th>
+            <th>
+                Pozitie
+            </th>
+            <th>
+                Oras
+            </th>
+            <th>
+                Tara
+            </th>
+            <th>
+                Telefon
+            </th>
+            <th>
+                Sterge
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
+    <tbody>
+       
+    </tbody>
 
 </table>
 <div class="row text-center">

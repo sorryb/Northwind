@@ -30,7 +30,7 @@
     </form>
     <br /><br />
 
-    <table id="MyTable" class="table">
+    <table @*id="MyTable"*@ class="table">
         <thead>
             <tr>
                 <th>
@@ -58,34 +58,7 @@
         </thead>
         <tbody>
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(item.OrderID.ToString(), "Details", new { id = item.OrderID })
-                        @*@Html.DisplayFor(modelItem => item.Customer.CompanyName)*@
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Employee.LastName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Shipper.CompanyName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ShippedDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ShipName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ShipAddress)
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Delete", new { id = item.OrderID })"><i class="fa fa-remove"></i></a>
-                        @*@Html.ActionLink("Sterge", "Delete", new { id = item.OrderID })*@
-                    </td>
-                </tr>
-            }
+          
         </tbody>
 
     </table>

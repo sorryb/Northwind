@@ -1,6 +1,6 @@
 
 ﻿/*find correct pathc for search*/
-function searchPath() {
+function searchControllerPath() {
     var path = window.location.href;
     var a = path.split("/");
     if (path.search("http://") + 1) {
@@ -14,7 +14,6 @@ function searchPath() {
 /*add from json (product/jsontest) in table, when we search, a list of all products (that contain search.value) come to table and local we make pagedlist*/
 $(document).ready(function () {
     $('#MyTable').DataTable({
-        "serverSide": true,
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -23,12 +22,12 @@ $(document).ready(function () {
         ],
         "ajax": {
             "type": "GET",
-            "url": searchPath() + "/JsonTableFill",
+            "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json, function (index, item) {
-                    item.DeleteLink = '<a href= "' + searchPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                    item.ProductName = '<a href= "' + searchPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
                 })
                 return json;
             }
@@ -46,4 +45,38 @@ $(document).ready(function () {
     });
 });
 
-//todo schimba numele coloanelor pentru a se potriivi
+
+/*add from json in table Employees*/
+$(document).ready(function () {
+    $('#EmployeesTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.ID = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.EmployeeID + '</a >';
+                })
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'LastName' },
+            { 'data': 'FirstName' }, 
+            { 'data': 'Title' },
+            { 'data': 'City' },
+            { 'data': 'Country' },
+            { 'data': 'HomePhone' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+});
+

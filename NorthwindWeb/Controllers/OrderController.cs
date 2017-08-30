@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
-using NorthwindWeb.ViewModels;
+using NorthwindWeb.ViewModels.Order;
 using PagedList;
 
 
@@ -30,7 +30,7 @@ namespace NorthwindWeb.Controllers
         /// <param name="search">The search string</param>
         /// <param name="currentFilter">Curent search</param>
         /// <returns></returns>
-        public ActionResult Home1(int? orderID, int? productID, int? page, string search, string currentFilter)
+        public ActionResult Home(int? orderID, int? productID, int? page, string search, string currentFilter)
         {
             var viewModel = new OrderIndexData();
             
@@ -45,9 +45,9 @@ namespace NorthwindWeb.Controllers
             }
             ViewBag.CurrentFilter = search;
             viewModel.Order = Orders(search);
-            viewModel.Comand = BigComand();
+            viewModel.Command = BigComand();
 
-            viewModel.Order10 = ListTenOrder();
+            viewModel.OrderTen = LastTenOrder();
             // test null if orders not selected in page
             if (orderID == 0) { orderID = null; }
             if (orderID != null)
@@ -63,38 +63,38 @@ namespace NorthwindWeb.Controllers
             {
                 ViewBag.ProductID = productID.Value;
 
-                viewModel.Product = ProdCateg(ViewBag.ProductID);
+                viewModel.Product = ProductCategory(ViewBag.ProductID);
             }
             //pagination
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-            viewModel.page = viewModel.Order.ToPagedList(pageNumber, pageSize);
+            viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
             return View(viewModel);
 
         }
 
-        private List<OrderTen> ListTenOrder()
+        private List<OrderTen> LastTenOrder()
         {
-            var order10 = (from o in db.Orders
+            var orderTen = (from o in db.Orders
                            join od in db.Order_Details on o.OrderID equals od.OrderID
                            group od by o.OrderID into x
                            select new { OrderID = x.Key, Cost = x.Sum(o => o.UnitPrice * o.Quantity) })
                               .OrderByDescending(x => x.Cost)
                               .Take(10);
             ;
-            List<OrderTen> list = new List<OrderTen>();
+            List<OrderTen> lastTenOrderData = new List<OrderTen>();
 
-            foreach (var item in order10)
+            foreach (var itemOrderTen in orderTen)
             {
-                OrderTen x = new OrderTen();
+                OrderTen lastTenOrdeElementr = new OrderTen();
 
-                x.OrderID = item.OrderID;
-                x.Cost = decimal.Round(item.Cost, 2);
-                list.Add(x);
+                lastTenOrdeElementr.OrderID = itemOrderTen.OrderID;
+                lastTenOrdeElementr.Cost = decimal.Round(itemOrderTen.Cost, 2);
+                lastTenOrderData.Add(lastTenOrdeElementr);
 
             }
-            return list;
+            return lastTenOrderData;
         }
 
         private List<OrderInfo> Orders(string search)
@@ -150,60 +150,60 @@ namespace NorthwindWeb.Controllers
                          select new { OrderID = x.Key, max = x.Sum(o=>o.Quantity) })
                                   .OrderByDescending(x => x.max)
                                   .Take(1);
-            BigOrder s=new BigOrder();
-            foreach (var item in order)
+            BigOrder bigOrder=new BigOrder();
+            foreach (var itemOrder in order)
             {
-                s.OrderID = item.OrderID;
-                s.Produse = item.max;
+                bigOrder.OrderID = itemOrder.OrderID;
+                bigOrder.Produse = itemOrder.max;
             }
-            return s;
+            return bigOrder;
         }
 
-        private List<OrderProduct> Details(int id)
+        private List<OrderProduct> Details(int orderID)
         {
-            var detali = (from o in db.Order_Details
-                          .Where(x => x.OrderID == id)
+            var details = (from o in db.Order_Details
+                          .Where(x => x.OrderID == orderID)
                           join p in db.Products on o.ProductID equals p.ProductID
                           select new { p.ProductName, o.UnitPrice,o.Quantity,o.Discount,o.ProductID })
                               
             ;
-            List<OrderProduct> list = new List<OrderProduct>();
+            List<OrderProduct> detailsData = new List<OrderProduct>();
 
-            foreach (var item in detali)
+            foreach (var itemDetails in details)
             {
-                OrderProduct x = new OrderProduct();
-                x.ProductID = item.ProductID;
-                x.ProductName = item.ProductName;
-                x.UnitPrice = item.UnitPrice;
-                x.Quantity = item.Quantity;
-                x.Discount = item.Discount;
-                list.Add(x);
+                OrderProduct orderDetails = new OrderProduct();
+                orderDetails.ProductID = itemDetails.ProductID;
+                orderDetails.ProductName = itemDetails.ProductName;
+                orderDetails.UnitPrice = itemDetails.UnitPrice;
+                orderDetails.Quantity = itemDetails.Quantity;
+                orderDetails.Discount = itemDetails.Discount;
+                detailsData.Add(orderDetails);
 
             }
-            return list;
+            return detailsData;
         }
 
-        private List<ProductCategory> ProdCateg(int id)
+        private List<ProductCategory> ProductCategory(int id)
         {
-            var detali = (from p in db.Products
+            var details = (from p in db.Products
                           .Where(x => x.ProductID == id)
                           join c in db.Categories on p.CategoryID equals c.CategoryID
                           select new { p.ProductName, c.CategoryName,p.UnitsInStock })
 
             ;
-            List<ProductCategory> list = new List<ProductCategory>();
+            List<ProductCategory> productCategoryData = new List<ProductCategory>();
 
-            foreach (var item in detali)
+            foreach (var itemDetails in details)
             {
-                ProductCategory x = new ProductCategory();
-                x.ProductName = item.ProductName;
-                x.CategoryName = item.CategoryName;
-                x.UnitsInStock = item.UnitsInStock;
+                ProductCategory productCategoryElement = new ProductCategory();
+                productCategoryElement.ProductName = itemDetails.ProductName;
+                productCategoryElement.CategoryName = itemDetails.CategoryName;
+                productCategoryElement.UnitsInStock = itemDetails.UnitsInStock;
                 
-                list.Add(x);
+                productCategoryData.Add(productCategoryElement);
 
             }
-            return list;
+            return productCategoryData;
         }
     }
 }
