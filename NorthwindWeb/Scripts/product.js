@@ -250,6 +250,7 @@ $(document).ready(function () {
                     if (item.IsOnline) { item.IsOnline = "Yes"; }
                     else { item.IsOnline = "No"; }
                     var date = Date.parse(item.LastActiveString);
+                    
                     item.LastActiveDate = new Date(date);
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
                     item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/>Manage</a >';
