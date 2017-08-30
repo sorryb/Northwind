@@ -12,7 +12,7 @@ using NorthwindWeb.Models.Interfaces;
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
-    public class SuppliersController : Controller,IJsonTableFill
+    public class SuppliersController : Controller, IJsonTableFill
     {
         private NorthwindModel db = new NorthwindModel();
 
@@ -131,9 +131,9 @@ namespace NorthwindWeb.Controllers
             }
             base.Dispose(disposing);
         }
-        public JsonResult JsonTableFill(string search = "")
+        public JsonResult JsonTableFill()
         {
-            var suppliers = db.Suppliers.Include(p => p.ContactName).Include(p => p.ContactTitle).Include(p=>p.Address).Include(p=>p.City).Include(p=>p.Country).Include(p=>p.Phone).Where(p => p.CompanyName.Contains(search)).OrderBy(x => x.SupplierID);
+            var suppliers = db.Suppliers.OrderBy(x => x.SupplierID);
 
             /*Select what wee need in table*/
             return Json(

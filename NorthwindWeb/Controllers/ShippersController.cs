@@ -133,9 +133,9 @@ namespace NorthwindWeb.Controllers
             base.Dispose(disposing);
         }
 
-        public JsonResult JsonTableFill(string search = "")
+        public JsonResult JsonTableFill()
         {
-            var shippers = db.Shippers.Include(p => p.Phone).Where(p => p.CompanyName.Contains(search)).OrderBy(x => x.ShipperID);
+            var shippers = db.Shippers.OrderBy(x => x.ShipperID);
 
             /*Select what wee need in table*/
             return Json(

@@ -11,9 +11,12 @@ function searchControllerPath() {
     }
 }
 
-/*add from json (product/jsontest) in table, when we search, a list of all products (that contain search.value) come to table and local we make pagedlist*/
 $(document).ready(function () {
-    $('#MyTable').DataTable({
+
+    /*datatable handler with server side implementation for product*/
+    $('#Product').DataTable({
+        "processing": true,
+        "serverSide": true,
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -25,11 +28,11 @@ $(document).ready(function () {
             "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
-                $.each(json, function (index, item) {
+                $.each(json.data, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
                 })
-                return json;
+                return json.data;
             }
         },
         "columns": [
@@ -41,13 +44,8 @@ $(document).ready(function () {
             { 'data': 'Discontinued' },
             { 'data': 'DeleteLink' }
         ]
-
     });
-});
 
-
-/*add from json in table Employees*/
-$(document).ready(function () {
     $('#EmployeesTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -63,7 +61,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.LastName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.LastName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -78,11 +76,9 @@ $(document).ready(function () {
         ]
 
     });
-});
 
 
-/*add from json in table Customers*/
-$(document).ready(function () {
+    /*add from json in table Customers*/
     $('#CustomersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -98,7 +94,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -113,10 +109,8 @@ $(document).ready(function () {
         ]
 
     });
-});
 
-/*add from json in table Orders*/
-$(document).ready(function () {
+    /*add from json in table Orders*/
     $('#OrdersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -130,9 +124,10 @@ $(document).ready(function () {
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json, function (index, item) {
+                    item.ShippedDate = item.ShippedDate.replace("12:00AM", "");
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ID = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ID + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -147,8 +142,7 @@ $(document).ready(function () {
         ]
 
     });
-});
-$(document).ready(function () {
+
     $('#Suppliers').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -164,7 +158,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -182,9 +176,7 @@ $(document).ready(function () {
         ]
 
     });
-});
 
-$(document).ready(function () {
     $('#Shippers').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -200,7 +192,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -211,10 +203,8 @@ $(document).ready(function () {
         ]
 
     });
-});
-/*add from json in table Customers*/
-/*add from json in table Categories*/
-$(document).ready(function () {
+
+    /*add from json in table Categories*/
     $('#CategoriesTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -230,7 +220,7 @@ $(document).ready(function () {
                 $.each(json, function (index, item) {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.CategoryName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CategoryName + '</a >';
-                })
+                });
                 return json;
             }
         },
@@ -241,9 +231,7 @@ $(document).ready(function () {
         ]
 
     });
-});
-/*add from json in table User*/
-$(document).ready(function () {
+    /*add from json in table User*/
     $('#UsersTable').DataTable({
         "responsive": true,
         "autoWidth": false,
@@ -281,5 +269,6 @@ $(document).ready(function () {
         ]
 
     });
+    
 });
 
