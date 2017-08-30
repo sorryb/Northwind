@@ -767,7 +767,7 @@
     <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Order\Home1.cshtml" />
+    <Content Include="Views\Order\Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Other\FullWidth.cshtml" />

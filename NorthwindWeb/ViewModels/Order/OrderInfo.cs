@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace NorthwindWeb.ViewModels
+namespace NorthwindWeb.ViewModels.Order
 {/// <summary>
 /// The class used to store, join between the Orders, Customers and Shippers
 /// </summary>
