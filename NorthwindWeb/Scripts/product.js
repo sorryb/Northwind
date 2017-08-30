@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿/*find correct pathc for search*/
 function searchPath() {
     var path = window.location.href;
