@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container">
+
     <h2>Modifica</h2>
     <hr />
     <ol class="breadcrumb">
@@ -45,10 +45,10 @@
     }
 
     <div>
-        <button class="btn btn-default ">@Html.ActionLink("Inapoi", "Details", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+        <button class="btn btn-default ">@Html.ActionLink("Inapoi", "Details","Regions", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
         
     </div>
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
