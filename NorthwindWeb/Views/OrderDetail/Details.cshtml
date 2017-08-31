@@ -18,7 +18,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Order.CustomerID)
+                @Html.DisplayFor(model => model.Order.CustomerID)<br />
             </dd>
 
             <dt>
@@ -26,7 +26,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Product.ProductName)
+                @Html.DisplayFor(model => model.Product.ProductName)<br />
             </dd>
 
             <dt>
@@ -34,7 +34,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.UnitPrice)
+                @Html.DisplayFor(model => model.UnitPrice)<br />
             </dd>
 
             <dt>
@@ -42,7 +42,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Quantity)
+                @Html.DisplayFor(model => model.Quantity)<br />
             </dd>
 
             <dt>
@@ -50,17 +50,15 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Discount)
+                @Html.DisplayFor(model => model.Discount)<br />
             </dd>
 
         </dl>
     </div>
     <p>
         @Html.ActionLink("Modifica", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        <button class="btn btn-default crudFormButtonLeftOfSearch">
-            @Html.ActionLink("Inapoi", "Details", "Orders",
-             new { id = ViewBag.orderid }, htmlAttributes: new { style = "text-decoration: none;color:black;" })
-    </button>
+            @Html.ActionLink("Inapoi", "Details", "Orders", new { id = ViewBag.orderid }, new { @class = "btn btn-default" })
+
     </p>
 
 

@@ -35,7 +35,7 @@
         <div class="form-group">
             <span class="control-label col-md-2 bold"><strong>Furnizor</strong></span>
             <div class="col-md-10">
-                @Html.DropDownList("SupplierID", String.Empty)
+                @Html.DropDownList("SupplierID")
                 @Html.ValidationMessageFor(model => model.SupplierID)
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="form-group">
             <span class="control-label col-md-2 bold"><strong>Categorie</strong></span>
             <div class="col-md-10">
-                @Html.DropDownList("CategoryID", String.Empty)
+                @Html.DropDownList("CategoryID")
                 @Html.ValidationMessageFor(model => model.CategoryID)
             </div>
         </div>
@@ -105,7 +105,7 @@
 }
 
 <div>
-    <button class="btn btn-default">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" }) 
 </div>
 
 @section Scripts {

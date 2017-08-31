@@ -27,14 +27,14 @@
                     Id comanda
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model=>model.order.OrderID)
+                    @Html.DisplayFor(model=>model.order.OrderID)<br />
                 </dd>
                 <dt>
                    Companie
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Customer.CompanyName)
+                    @Html.DisplayFor(model => model.order.Customer.CompanyName)<br />
                 </dd>
 
                 <dt>
@@ -42,7 +42,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Employee.LastName)
+                    @Html.DisplayFor(model => model.order.Employee.LastName)<br />
                 </dd>
 
                 <dt>
@@ -50,7 +50,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Shipper.CompanyName)
+                    @Html.DisplayFor(model => model.order.Shipper.CompanyName)<br />
                 </dd>
 
                 <dt>
@@ -58,7 +58,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShippedDate)
+                    @Html.DisplayFor(model => model.order.ShippedDate)<br />
                 </dd>
 
                 <dt>
@@ -66,7 +66,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipName)
+                    @Html.DisplayFor(model => model.order.ShipName)<br />
                 </dd>
 
                 <dt>
@@ -74,7 +74,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipAddress)
+                    @Html.DisplayFor(model => model.order.ShipAddress)<br />
                 </dd>
 
                 <dt>
@@ -82,7 +82,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipCity)
+                    @Html.DisplayFor(model => model.order.ShipCity)<br />
                 </dd>
 
                 <dt>
@@ -90,21 +90,21 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipCountry)
+                    @Html.DisplayFor(model => model.order.ShipCountry)<br />
                 </dd>
 
             </dl>
 
             <p>
-                <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit", "Orders", new { id = Model.order.OrderID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button> |   
-                <button class="btn btn-default">@Html.ActionLink("Inapoi la lista", "Index", "Orders", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>   
+               @Html.ActionLink("Modifica", "Edit", "Orders", new { id = Model.order.OrderID }, new { @class = "btn btn-default" }) |   
+               @Html.ActionLink("Inapoi la lista", "Index", "Orders", new { @class = "btn btn-default" })  
               
             </p>
         </div>
         <div class="col-md-6">
             <h4>Detalii Comanda</h4>
             <hr />
-            <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Adauga", "Create", "OrderDetail", new { id = ViewBag.orderid }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>  
+            @Html.ActionLink("Adauga", "Create", "OrderDetail", new { id = ViewBag.orderid }, new { @class = "btn btn-default" }) 
             <br /><br /><br />
            @foreach (var y in Model.details)
            {
@@ -142,9 +142,9 @@
                     @y.Discount
                 </dd> 
                   <dt>
-                      <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button> |
+                     @Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, new { @class = "btn btn-default" }) |
                   
-                      <button class="btn btn-default">@Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                      @Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, new { @class = "btn btn-default"  })
                   </dt><br />
             </dl>
            }
