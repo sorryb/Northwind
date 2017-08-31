@@ -29,7 +29,7 @@
             @Html.HiddenFor(model => model.RegionID)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.RegionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.RegionDescription,"Descriere regiune", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.RegionDescription)
                     @Html.ValidationMessageFor(model => model.RegionDescription)
@@ -45,7 +45,7 @@
     }
 
     <div>
-        <button class="btn btn-default">@Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, new { @class = "btn btn-default" })
         
     </div>
 
