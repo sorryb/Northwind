@@ -262,9 +262,7 @@ namespace NorthwindWeb.Controllers
                     Discontinued = x.Discontinued
                 }),
                 recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
-
             };
-
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
     }
