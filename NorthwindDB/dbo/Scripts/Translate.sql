@@ -2033,25 +2033,3 @@ else
 begin
 	update Products	set ProductName = 'Recuperare date iOS', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 160, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 88;
 end
-
--- add 20 order for services
-if(not exists (
-	select * from [Order Details]
-	left join Products on [Order Details].ProductID = Products.ProductID
-	left join Categories on Products.CategoryID = Categories.CategoryID
-	where Categories.CategoryName = 'Servicii'
-))
-begin
-	begin transaction
-		declare @orderID int;
-
-		declare @i int = 0;
-		while(@i < 20)
-		begin
-			
-
-			set @i = i + 1;
-		end
-
-	commit transaction;
-end

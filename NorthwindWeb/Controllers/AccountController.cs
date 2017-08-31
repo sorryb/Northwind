@@ -890,13 +890,8 @@ namespace NorthwindWeb.Controllers
                 });
 
            
-
-
             /*Select what wee need in table*/
-            return Json(
-                roleInfoViewModel.AsQueryable()
-
-                , JsonRequestBehavior.AllowGet);
+            return Json(roleInfoViewModel.AsQueryable(), JsonRequestBehavior.AllowGet);
         }
         #region Helpers
         // Used for XSRF protection when adding external logins
