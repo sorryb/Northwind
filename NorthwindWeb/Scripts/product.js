@@ -243,6 +243,8 @@ $(document).ready(function () {
         });
         /*add from json in table User*/
         $('#UsersTable').DataTable({
+            "processing": true,
+            "serverSide": true,
             "responsive": true,
             "autoWidth": false,
             "columnDefs": [
@@ -254,7 +256,7 @@ $(document).ready(function () {
                 "url": searchControllerPath() + "/JsonTableFill",
                 "dataSrc": function (json) {
                     //Make your callback here.
-                    $.each(json, function (index, item) {
+                    $.each(json.data, function (index, item) {
                         if (item.IsLockedOut) { item.IsLockedOut = "Yes"; }
                         else { item.IsLockedOut = "No"; }
                         if (item.IsOnline) { item.IsOnline = "Yes"; }
@@ -266,7 +268,7 @@ $(document).ready(function () {
                         item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/>Manage</a >';
                     })
 
-                    return json;
+                    return json.data;
                 }
             },
             "columns": [
