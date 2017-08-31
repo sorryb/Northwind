@@ -96,8 +96,8 @@
             </dl>
 
             <p>
-                <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Modifica", "Edit", "Orders", new { id = Model.order.OrderID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>   
-                <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi la lista", "Index", "Orders", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>   
+                <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit", "Orders", new { id = Model.order.OrderID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button> |   
+                <button class="btn btn-default">@Html.ActionLink("Inapoi la lista", "Index", "Orders", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>   
               
             </p>
         </div>
@@ -142,9 +142,9 @@
                     @y.Discount
                 </dd> 
                   <dt>
-                      <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                      <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button> |
                   
-                      <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                      <button class="btn btn-default">@Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
                   </dt><br />
             </dl>
            }
