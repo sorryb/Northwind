@@ -42,7 +42,7 @@
         </dl>
 </div>
 <p>
-    <button class="btn btn-default ">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>&nbsp;&nbsp;&nbsp;
-   <button class="btn btn-default ">@Html.ActionLink("Modifica", "Edit", new { id = Model.CategoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.CategoryID }, new { @class = "btn btn-default" })
    
 </p>
