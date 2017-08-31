@@ -37,10 +37,10 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
+                @Html.ActionLink("Inapoi", "Index", "Regions", new { @class = "btn btn-default" })
                 <input type="submit" value="Sterge" class="btn btn-default" /> 
-                
             </div>
            
         }
-        @Html.ActionLink("Inapoi", "Index", "Regions", new { @class = "btn btn-default" })
+       
     </div>
