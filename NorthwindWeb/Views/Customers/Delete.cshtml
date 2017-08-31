@@ -11,7 +11,7 @@
         @Html.ActionLink("Dashboard", "Home", "Dashboard")
     </li>
     <li>
-        @Html.ActionLink("Clienti", "Index", "Orders")
+        @Html.ActionLink("Clienti", "Index", "Customers")
     </li>
     <li class="active">Sterge</li>
 </ol>
@@ -109,7 +109,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Sterge" class="btn btn-default" /> |
+            <input type="submit" value="Sterge" class="btn btn-default" /> 
             <button class="btn btn-default">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
         </div>
     }

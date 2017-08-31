@@ -57,7 +57,10 @@
     </div>
     <p>
         @Html.ActionLink("Modifica", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        @Html.ActionLink("Inapoi la lista", "Index")
+        <button class="btn btn-default crudFormButtonLeftOfSearch">
+            @Html.ActionLink("Inapoi", "Details", "Orders",
+             new { id = ViewBag.orderid }, htmlAttributes: new { style = "text-decoration: none;color:black;" })
+    </button>
     </p>
 
 

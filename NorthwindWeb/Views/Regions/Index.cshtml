@@ -51,22 +51,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                         @*@foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-
-                                            @Html.ActionLink(item.RegionDescription, "Details", new { id = item.RegionID })
-
-
-                                        </td>
-                                        <td>
-
-
-                                            <a href="@Url.Action("Delete", new { id = item.RegionID })"><i class="fa fa-remove"></i></a>
-                                        </td>
-                                    </tr>
-                                }*@
+                         
                             </tbody>
 </table>
                     </div>

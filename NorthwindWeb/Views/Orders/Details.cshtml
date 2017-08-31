@@ -96,24 +96,25 @@
             </dl>
 
             <p>
-                @Html.ActionLink("Modifica", "Edit", new { id = Model.order.OrderID }) |
-                @Html.ActionLink("Inapoi la lista", "Index")
+                <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Modifica", "Edit", "Orders", new { id = Model.order.OrderID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>   
+                <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi la lista", "Index", "Orders", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>   
+              
             </p>
         </div>
         <div class="col-md-6">
             <h4>Detalii Comanda</h4>
             <hr />
-            @Html.ActionLink("Adauga", "Create", "OrderDetail",new { id=ViewBag.orderid },null)
-            <hr />
+            <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Adauga", "Create", "OrderDetail", new { id = ViewBag.orderid }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>  
+            <br /><br /><br />
            @foreach (var y in Model.details)
            {
               <dl class="dl-horizontal">
 
-                <dt>
+                <dt><br />
                    Id-ul Produsului 
                 </dt>
 
-                <dd>
+                <dd><br />
                     @y.ProductID
                 </dd>
 
@@ -140,10 +141,11 @@
                 <dd>
                     @y.Discount
                 </dd> 
-                  <p>
-                      @Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID },null ) |
-                      @Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, null)
-                  </p>
+                  <dt>
+                      <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                  
+                      <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                  </dt><br />
             </dl>
            }
            

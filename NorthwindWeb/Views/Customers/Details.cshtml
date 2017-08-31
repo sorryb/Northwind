@@ -11,7 +11,7 @@
         @Html.ActionLink("Dashboard", "Home", "Dashboard")
     </li>
     <li>
-        @Html.ActionLink("Clienti", "Index", "Orders")
+        @Html.ActionLink("Clienti", "Index", "Customers")
     </li>
     <li class="active">Detalii</li>
 </ol>
@@ -103,6 +103,7 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.CustomerID }) |
-    @Html.ActionLink("Inapoi", "Index")
+    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Modifica", "Edit", "Customers", new { id = Model.CustomerID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi", "Index", "Customers", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+
 </p>
