@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <h2>Detalii</h2>
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Produse", "Index", "Product")
+    </li>
+    <li class="active">Detalii</li>
+</ol>
 
 <div>
     <h4>Produs</h4>
@@ -85,6 +95,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.ProductID }) |
-    @Html.ActionLink("Inapoi", "Index")
+    <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit", new { id=Model.ProductID }, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button> |
+    <button class="btn btn-default">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
 </p>

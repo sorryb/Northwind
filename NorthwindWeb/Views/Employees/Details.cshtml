@@ -148,6 +148,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }) |
-    @Html.ActionLink("Inapoi", "Index")
+    <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
+    <button class="btn btn-default">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
 </p>
