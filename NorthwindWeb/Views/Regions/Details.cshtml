@@ -33,14 +33,14 @@
 
             </dl>
             <p>
-                <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Modifica", "Edit", new { id = Model.region.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-                <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi la lista", "Index",null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                <button class="btn btn-default ">@Html.ActionLink("Modifica", "Edit", new { id = Model.region.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                <button class="btn btn-default ">@Html.ActionLink("Inapoi la lista", "Index","Regions", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
             </p>
         </div>
         <div class="col-md-6">
             <h4>Teritorii</h4>
             <hr />
-            <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Adauga", "Create", "Territories", new { id = ViewBag.regionid }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+            <button class="btn btn-default ">@Html.ActionLink("Adauga", "Create", new { id = ViewBag.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
             <hr />
             @foreach (var y in Model.details)
             {<br />
@@ -61,15 +61,11 @@
 
                 <p>
                     <br />
-                    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Modifica", "Edit", "Territories", new { id = @y.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-                    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Sterge", "Delete", "Territories", new { id = @y.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                    <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit", "Territories", new { id = @y.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button> &nbsp;&nbsp;
+                    <button class="btn btn-default ">@Html.ActionLink("Sterge", "Delete", "Territories", new { id = @y.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
                 </p>
             }
-            <p>
-                <br /><br /><br />
-                <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi la lista", "Index",null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-                
-            </p>
+            
         </div>
     </div>
 </div>

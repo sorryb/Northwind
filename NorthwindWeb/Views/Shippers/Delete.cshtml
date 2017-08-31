@@ -44,10 +44,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>&nbsp;&nbsp;
+            <button class="btn btn-default">@Html.ActionLink("Inapoi", "Index","Shippers", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+
             <input type="submit" value="Sterge" class="btn btn-default" />
             
-            @*@Html.ActionLink("Inapoi", "Index")*@
         </div>
     }
 </div>
