@@ -71,7 +71,9 @@
         }
 
         <div>
-            @Html.ActionLink("Inapoi", "Details", "Orders", new { id = ViewBag.orderid }, null)
+            <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi", "Details", "Orders",
+             new { id = ViewBag.orderid }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>   
+           
         </div>
 
 

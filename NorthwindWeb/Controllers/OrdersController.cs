@@ -11,6 +11,7 @@ using NorthwindWeb.Models;
 using PagedList;
 using NorthwindWeb.ViewModels.Orders;
 using NorthwindWeb.Models.Interfaces;
+using NorthwindWeb.Models.ServerClientCommunication;
 
 
 
@@ -21,7 +22,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Orders Controller. For table Orders
     /// </summary>
-    public class OrdersController : Controller, IJsonTableFill
+    public class OrdersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
 
@@ -220,23 +221,121 @@ namespace NorthwindWeb.Controllers
             base.Dispose(disposing);
         }
         
+        
         // GET: Orders by Json
-        public JsonResult JsonTableFill()
+        public JsonResult JsonTableFill(int draw, int start, int length)
         {
-            var orders = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).OrderBy(o => o.OrderID);
+            const int TOTAL_ROWS = 999;
+            
+            string search = Request.QueryString["search[value]"] ?? "";
+            int sortColumn = -1;
+            string sortDirection = "asc";
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
 
-            /*Select what wee need in table*/
-            return Json(
-                orders.Select(x => new {
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+            //list of orders that contain "search"
+            var list = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)||o.Employee.LastName.Contains(search)||o.Shipper.CompanyName.Contains(search));
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto FirstColumn;
+                case 0: //first column
+                    FirstColumn:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.OrderID);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.OrderID);
+                    }
+                    break;
+                case 1: //second column
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.Employee.LastName);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.Employee.LastName);
+                    }
+                    break;
+                case 2: // and so on
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.Shipper.CompanyName);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.Shipper.CompanyName);
+                    }
+                    break;
+                case 3:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.ShippedDate.ToString());
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.ShippedDate.ToString());
+                    }
+                    break;
+                case 4:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.ShipName);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.ShipName);
+                    }
+                    break;
+                case 5:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.ShipAddress);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.ShipAddress);
+                    }
+                    break;
+            }
+
+            //objet that whill be sent to client
+            JsonDataTableObject dataTableData = new JsonDataTableObject()
+            {
+                draw = draw,
+                recordsTotal = db.Orders.Count(),
+                data = list.Skip(start).Take(length).Select(x => new
+                {
                     ID = x.OrderID,
                     LastName = x.Employee.LastName,
                     CompanyName = x.Shipper.CompanyName,
                     ShippedDate = x.ShippedDate.ToString(),
                     ShipName = x.ShipName,
-                    ShipAddress = x.ShipAddress
-                    
-                })
-                , JsonRequestBehavior.AllowGet);
+                    ShipAddress = x.ShipAddress,
+
+                }),
+                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+
+            };
+
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
     }
 }

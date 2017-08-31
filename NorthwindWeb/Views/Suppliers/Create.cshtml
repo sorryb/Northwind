@@ -6,7 +6,15 @@
 }
 
 <h2>Adauga</h2>
-
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Furnizori", "Index", "Suppliers")
+    </li>
+    <li class="active">Adauga</li>
+</ol>
 
 @using (Html.BeginForm()) 
 {

@@ -114,6 +114,8 @@ $(document).ready(function () {
 
     /*add from json in table Orders*/
     $('#OrdersTable').DataTable({
+        "processing": true,
+        "serverSide": true,
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -125,12 +127,12 @@ $(document).ready(function () {
             "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
-                $.each(json, function (index, item) {
+                $.each(json.data, function (index, item) {
                     item.ShippedDate = item.ShippedDate.replace("12:00AM", "");
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ID = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ID + '</a >';
                 });
-                return json;
+                return json.data;
             }
         },
         "columns": [
