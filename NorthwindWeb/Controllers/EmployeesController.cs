@@ -116,13 +116,19 @@ namespace NorthwindWeb.Controllers
             }
             return View(employees);
         }
-
+        //TODO delete from related table
         // POST: Employees/Delete/5
+        /// <summary>
+        /// Deletes an employee from the database. If the employee has orders or subordinates returns an error page.
+        /// </summary>
+        /// <param name="id">The id of the employee that is going to be deleted</param>
+        /// <returns>Index if successful, otherwise returns an error page explaining why it failed</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            //if(db.Orders.Any())
             Employees employees = await db.Employees.FindAsync(id);
             db.Employees.Remove(employees);
             await db.SaveChangesAsync();
@@ -163,7 +169,16 @@ namespace NorthwindWeb.Controllers
             }
 
             //list of product that contain "search"
-            var list = db.Employees.Include(p => p.LastName).Include(p => p.Title).Include(p => p.City).Include(p => p.Country).Include(p => p.HomePhone).Where(p => p.FirstName.Contains(search)||p.LastName.Contains(search));
+            var list = db.Employees.
+                Where
+                (p =>
+                    p.LastName.Contains(search) ||
+                    p.FirstName.Contains(search) ||
+                    p.City.Contains(search) ||
+                    p.Title.Contains(search) ||
+                    p.Country.Contains(search) ||
+                    p.HomePhone.Contains(search)
+                );
 
             //order list
             switch (sortColumn)
@@ -233,7 +248,7 @@ namespace NorthwindWeb.Controllers
                     break;
             }
 
-            //objet that whill be sent to client
+            //object that whill be sent to client
             JsonDataTableObject dataTableData = new JsonDataTableObject()
             {
                 draw = draw,
