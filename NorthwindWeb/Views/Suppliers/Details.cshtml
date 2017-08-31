@@ -112,6 +112,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.SupplierID }) |
-    @Html.ActionLink("Inapoi", "Index")
+    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Modifica", "Edit","Suppliers", new { id = Model.SupplierID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi", "Index", "Suppliers", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
 </p>
