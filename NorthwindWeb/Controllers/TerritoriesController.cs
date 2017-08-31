@@ -42,6 +42,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Territories/Create
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create(int? id)
         {
             ViewBag.regionid = id;
@@ -54,6 +55,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories,int id)
         {
             territories.RegionID = id;
@@ -69,6 +71,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Territories/Edit/5
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
@@ -89,6 +92,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "TerritoryID,TerritoryDescription,RegionID")] Territories territories)
         {
             if (ModelState.IsValid)
@@ -102,6 +106,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Territories/Delete/5
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -119,6 +124,7 @@ namespace NorthwindWeb.Controllers
         // POST: Territories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Territories territories = await db.Territories.FindAsync(id);
