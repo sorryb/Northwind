@@ -55,7 +55,7 @@
     }
 
     <div>
-        <button class="btn btn-default ">@Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+        <button class="btn btn-default ">@Html.ActionLink("Inapoi", "Details", "Regions", new { id = ViewBag.regionid }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
         @*@Html.ActionLink("Inapoi", "Details", "Regions", new { id = ViewBag.regionid }, null)*@
     </div>
 </div>
