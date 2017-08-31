@@ -19,13 +19,9 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Employees
-        public ActionResult Index(string search = "", int page = 1)
+        public ActionResult Index()
         {
-            var employees = db.Employees.Where(x => x.FirstName.Contains(search) || x.LastName.Contains(search)).Include(e => e.Employee1).OrderBy(x => x.EmployeeID);
-            int pageSize = 15;
-            int pageNumber = page;
-            ViewBag.search = search;
-            return View(employees.ToPagedList(pageNumber, pageSize));
+            return View();
         }
 
         // GET: Employees/Details/5
@@ -167,7 +163,7 @@ namespace NorthwindWeb.Controllers
             }
 
             //list of product that contain "search"
-            var list = db.Employees.Include(p => p.LastName).Include(p => p.Title).Include(p => p.City).Include(p => p.Country).Include(p => p.HomePhone).Where(p => p.FirstName.Contains(search));
+            var list = db.Employees.Include(p => p.LastName).Include(p => p.Title).Include(p => p.City).Include(p => p.Country).Include(p => p.HomePhone).Where(p => p.FirstName.Contains(search)||p.LastName.Contains(search));
 
             //order list
             switch (sortColumn)
