@@ -11,7 +11,7 @@
         @Html.ActionLink("Dashboard", "Home", "Dashboard")
     </li>
     <li>
-        @Html.ActionLink("Clienti", "Index", "Orders")
+        @Html.ActionLink("Clienti", "Index", "Customers")
     </li>
     <li class="active">Modifica</li>
 </ol>
@@ -116,7 +116,7 @@
 }
 
 <div>
-    @Html.ActionLink("Inapoi", "Index")
+    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi", "Index", "Customers", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
 </div>
 
 @section Scripts {

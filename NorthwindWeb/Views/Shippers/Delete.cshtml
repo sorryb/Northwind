@@ -12,7 +12,7 @@
         @Html.ActionLink("Dashboard", "Home", "Dashboard")
     </li>
     <li>
-        @Html.ActionLink("Expeditori", "Index", "Orders")
+        @Html.ActionLink("Expeditori", "Index", "Shippers")
     </li>
     <li class="active">Sterge</li>
 </ol>
@@ -44,8 +44,10 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Sterge" class="btn btn-default" /> |
-            @Html.ActionLink("Inapoi", "Index")
+            <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>&nbsp;&nbsp;
+            <input type="submit" value="Sterge" class="btn btn-default" />
+            
+            @*@Html.ActionLink("Inapoi", "Index")*@
         </div>
     }
 </div>
