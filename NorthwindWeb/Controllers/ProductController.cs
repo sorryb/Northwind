@@ -174,7 +174,9 @@ namespace NorthwindWeb.Controllers
             }
 
             //list of product that contain "search"
-            var list = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search) && p.Category.CategoryName.Contains(category));
+            var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)
+                .Where(p => (p.ProductName.Contains(search) || p.ProductID.ToString().Contains(search) 
+                || p.Discontinued.ToString().Contains(search)) && p.Category.CategoryName.Contains(category));
 
             //order list
             switch (sortColumn)
@@ -268,6 +270,6 @@ namespace NorthwindWeb.Controllers
     }
 
 
-
+   
 
 }
