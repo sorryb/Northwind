@@ -30,12 +30,9 @@
             @Html.DisplayFor(modelItem => item.TerritoryDescription)
         </td>
         <td>
-            <button class="btn btn-default ">@Html.ActionLink("Modifica", "Edit", new { id = item.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-            <button class="btn btn-default ">@Html.ActionLink("Detalii", "Details", new { id = item.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-            <button class="btn btn-default ">@Html.ActionLink("Sterge", "Delete", new { id = item.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-            @*@Html.ActionLink("Modifica", "Edit", new { id=item.TerritoryID }) |
-            @Html.ActionLink("Detalii", "Details", new { id=item.TerritoryID }) |
-            @Html.ActionLink("Sterge", "Delete", new { id=item.TerritoryID })*@
+           @Html.ActionLink("Modifica", "Edit", new { id=item.TerritoryID },new { @class = "btn btn-default"}) |
+    @Html.ActionLink("Detalii", "Details", new { id=item.TerritoryID },new { @class = "btn btn-default"}) |
+    @Html.ActionLink("Sterge", "Delete", new { id=item.TerritoryID },new { @class = "btn btn-default"})
         </td>
     </tr>
 }

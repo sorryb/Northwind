@@ -4,7 +4,7 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container">
+
 
     <h2>Detalii</h2>
     <hr />
@@ -33,17 +33,17 @@
 
             </dl>
             <p>
-                <button class="btn btn-default ">@Html.ActionLink("Modifica", "Edit", new { id = Model.region.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-                <button class="btn btn-default ">@Html.ActionLink("Inapoi la lista", "Index","Regions", htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                @Html.ActionLink("Inapoi la lista", "Index", "Regions", new { @class = "btn btn-default" })
+                @Html.ActionLink("Modifica", "Edit", new { id = Model.region.RegionID }, new { @class = "btn btn-default" })
             </p>
         </div>
         <div class="col-md-6">
             <h4>Teritorii</h4>
             <hr />
-            <button class="btn btn-default ">@Html.ActionLink("Adauga", "Create", new { id = ViewBag.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+            @Html.ActionLink("Adauga", "Create", "Territories", new { id = ViewBag.RegionID }, new { @class = "btn btn-default" })
             <hr />
             @foreach (var y in Model.details)
-            {<br />
+            {
                 <dl class="dl-horizontal">
                     <dt><br />
                         Teritorii
@@ -61,12 +61,12 @@
 
                 <p>
                     <br />
-                    <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit", "Territories", new { id = @y.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button> &nbsp;&nbsp;
-                    <button class="btn btn-default ">@Html.ActionLink("Sterge", "Delete", "Territories", new { id = @y.TerritoryID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+                    @Html.ActionLink("Modifica", "Edit", "Territories", new { id = @y.TerritoryID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("Sterge", "Delete", "Territories", new { id = @y.TerritoryID }, new { @class = "btn btn-default" })
                 </p>
             }
             
         </div>
     </div>
-</div>
+
 

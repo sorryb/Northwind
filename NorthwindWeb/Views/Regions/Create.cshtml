@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container">
+
     <h2>Adauga</h2>
     <hr />
     <ol class="breadcrumb">
@@ -51,9 +51,9 @@
     }
 
     <div>
-        <button class="btn btn-default ">@Html.ActionLink("Inapoi la lista", "Index", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+        @Html.ActionLink("Inapoi la lista", "Index", null, new { @class = "btn btn-default" })
     </div>
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

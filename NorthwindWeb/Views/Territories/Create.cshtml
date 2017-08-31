@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container">
+
     <h2>Adauga</h2>
     <hr />
     <ol class="breadcrumb">
@@ -15,7 +15,7 @@
             @Html.ActionLink("Regiuni", "Index", "Regions")
         </li>
         <li>
-            @Html.ActionLink("Detalii","Details","Regions", new { id = ViewBag.regionid }, null)
+            @Html.ActionLink("Teritorii","Details","Regions", new { id = ViewBag.regionid }, null)
         </li>
         <li class="active">Adauga</li>
     </ol>
@@ -55,10 +55,9 @@
     }
 
     <div>
-        <button class="btn btn-default ">@Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-        @*@Html.ActionLink("Inapoi", "Details", "Regions", new { id = ViewBag.regionid }, null)*@
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = ViewBag.regionid }, new { @class = "btn btn-default" })
     </div>
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

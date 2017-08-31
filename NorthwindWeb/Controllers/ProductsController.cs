@@ -41,7 +41,7 @@ namespace NorthwindWeb.Controllers
             products = from prod in db.Products
                        join cat in db.Categories on prod.CategoryID equals cat.CategoryID
                        join supp in db.Suppliers on prod.SupplierID equals supp.SupplierID
-                       where (categID>0 ? prod.CategoryID.Value == categID : true) && prod.ProductName.Contains(search)
+                       where (categID>0 ? prod.CategoryID == categID : true) && prod.ProductName.Contains(search)
                        orderby prod.ProductName ascending
                        select new ViewModels.ViewProductCategoryS
                        {
