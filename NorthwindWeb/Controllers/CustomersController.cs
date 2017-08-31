@@ -125,6 +125,16 @@ namespace NorthwindWeb.Controllers
             db.Customers.Remove(customers);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+            //var order = db.Orders.Any(id.);
+            //if (order == )
+            //{
+            //    Customers customers = await db.Customers.FindAsync(id);
+            //    db.Customers.Remove(customers);
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Index");
+            //}
+            //else
+            //    return RedirectToAction("Details");
         }
 
         protected override void Dispose(bool disposing)
