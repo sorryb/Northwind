@@ -28,7 +28,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CompanyName)
+            @Html.DisplayFor(model => model.CompanyName)<br />
         </dd>
 
         <dt>
@@ -36,7 +36,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ContactName)
+            @Html.DisplayFor(model => model.ContactName)<br />
         </dd>
 
         <dt>
@@ -44,7 +44,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ContactTitle)
+            @Html.DisplayFor(model => model.ContactTitle)<br />
         </dd>
 
         <dt>
@@ -52,7 +52,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.Address)<br />
         </dd>
 
         <dt>
@@ -60,7 +60,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.City)
+            @Html.DisplayFor(model => model.City)<br />
         </dd>
 
         <dt>
@@ -68,7 +68,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Region)
+            @Html.DisplayFor(model => model.Region)<br />
         </dd>
 
         <dt>
@@ -76,7 +76,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PostalCode)
+            @Html.DisplayFor(model => model.PostalCode)<br />
         </dd>
 
         <dt>
@@ -84,7 +84,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Country)
+            @Html.DisplayFor(model => model.Country)<br />
         </dd>
 
         <dt>
@@ -92,7 +92,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Phone)
+            @Html.DisplayFor(model => model.Phone)<br />
         </dd>
 
         <dt>
@@ -100,7 +100,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Fax)
+            @Html.DisplayFor(model => model.Fax)<br />
         </dd>
 
         <dt>
@@ -108,7 +108,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HomePage)
+            @Html.DisplayFor(model => model.HomePage)<br />
         </dd>
 
     </dl>
@@ -118,8 +118,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Sterge" class="btn btn-default" /> |
-            <button class="btn btn-default">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
+            <input type="submit" value="Sterge" class="btn btn-default" /> 
+           @Html.ActionLink("Inapoi", "Index", null, new {  @class="btn btn-default" })
         </div>
     }
 </div>
