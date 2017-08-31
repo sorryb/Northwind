@@ -306,5 +306,40 @@ $(document).ready(function () {
             ]
 
         });
-   
+     /*add from json in table Role*/
+        $('#RolesTable').DataTable({
+            //"processing": true,
+            //"serverSide": true,
+            "responsive": true,
+            "autoWidth": false,
+            "columnDefs": [
+                { responsivePriority: 1, targets: 0 },
+                { responsivePriority: 2, targets: -1 }
+            ],
+            "ajax": {
+                "type": "GET",
+                "url": searchControllerPath() + "/JsonTableRolesFill",
+                "dataSrc": function (json) {
+                    //Make your callback here.
+                    $.each(json, function (index, item) {
+                        item.Delete = '<a onclick="alert('+"'Nu aveti dreptul de a efectua aceasta operatie!'"+')"/> <i class="fa fa-remove"></i></a >';
+                        item.Membership = '<a href= "' + searchControllerPath() + '/RoleMembership?roleName ='+ item.Name+'&name='+item.Name+'"/>Membrii</a >';
+                    })
+                   
+                    return json;
+                }
+            },
+            "columns": [
+                { 'data': 'Delete' },
+                { 'data': 'Name' },
+                { 'data': 'Membership' }
+            ]
+
+        });
+        $(".alerte").click(function () {
+            alert("Nu aveti dreptul de a efectua aceasta operatie!");
+        })
+        function testalert() {
+            alert("Nu aveti dreptul de a efectua aceasta operatie!");
+        }
 });
