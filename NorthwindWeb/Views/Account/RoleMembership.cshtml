@@ -57,9 +57,11 @@
         {  
             <tr>
                 <td>
-                    @Html.ActionLink("Sterge", "DeleteFromRole", new { userName = item.Value, roleName = Request["roleName"] }
-                    , new { onclick = "if (!confirm('Doriti sa stergeti ?')) return false;" }) 
-                </td>
+                    <button class="btn btn-default crudFormButtonLeftOfSearch">
+                        @Html.ActionLink("Sterge", "DeleteFromRole", new { userName = item.Value, roleName = Request["roleName"] }
+                    , htmlAttributes: new { style = "text-decoration: none;color:black;" , onclick = "if (!confirm('Doriti sa stergeti ?')) return false;" })
+                        </button>
+</td>
                 <td>
                     @item.Value  
                 </td>
