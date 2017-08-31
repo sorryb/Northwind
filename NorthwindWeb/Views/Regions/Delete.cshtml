@@ -37,8 +37,8 @@
             @Html.AntiForgeryToken()
 
             <div class="form-actions no-color">
-                <input type="submit" value="Sterge" class="btn btn-default" /> |
-                @Html.ActionLink("Inapoi la lista", "Index")
+                <input type="submit" value="Sterge" class="btn btn-default" /> 
+                <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Inapoi", "Details", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
             </div>
         }
     </div>
