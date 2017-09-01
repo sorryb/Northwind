@@ -16,7 +16,8 @@
                 <b>Exception:</b> @Model.Exception.Message<br />
                 <b>Controller:</b> @Model.ControllerName<br />
                 <b>Action:</b> @Model.ActionName<br /><br /><br />
-                @Html.ActionLink("Inapoi", Model.ActionName, Model.ControllerName,null, new {@class= "btn btn-default" })
+                <a class= "btn btn-default" href="@Request.Url.AbsoluteUri">Inapoi</a>
+                
             </p>
         </div>
     }
