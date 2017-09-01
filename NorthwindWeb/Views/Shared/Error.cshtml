@@ -14,9 +14,13 @@
             <p>
                 <br /><br /><br />
                 <b>Exception:</b> @Model.Exception.Message<br />
-                <b>Controller:</b> @Model.ControllerName<br />
-                <b>Action:</b> @Model.ActionName<br /><br /><br />
-                <a class= "btn btn-default" href="@Request.Url.AbsoluteUri">Inapoi</a>
+                @if ( User.IsInRole("Admins"))
+                {
+                    <b>Controller:</b> @Model.ControllerName<br />
+                    <b>Action:</b> @Model.ActionName<br /><br /><br />
+                    <a class= "btn btn-default" href="@Request.Url.AbsoluteUri">Inapoi</a>
+                
+                }
                 
             </p>
         </div>
