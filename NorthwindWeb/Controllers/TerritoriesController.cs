@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -127,31 +128,19 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-
-            //db.Database.SqlQuery<string>($@"
-            //    delete from EmployeeTerritories 
-            //    where EmployeeID in 
-            //    (
-            //        select EmployeeID from EmployeeTerritories
-            //        left join Employees on EmployeeTerritories.EmployeeID=Employees.EmployeeID
-            //        where Employees.EmployeeID={id}
-            //    )
-            //", null)
-
             Territories territories = await db.Territories.FindAsync(id);
-            //var employee = db.EmployeeTerritories.Any(o => o.TerritoriesID == id);
+        
+            try { 
             db.Territories.Remove(territories);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+            }
+            catch
+            {
+                throw new DeleteException("Nu poti sterge teritoriul deoarece are constrangeri.");
+            }
 
-            //if TerritoriesID from EmployeeTerritories is different from TerritoriesID from Territories: delete, else return in (Details in Region ) ErrorPage
-            //if (!employee)
-            //{
-            //    db.Territories.Remove(territories);
-            //    await db.SaveChangesAsync();
-            //    return RedirectToAction("Details", "Regions", new { id = id });
-            //}
-            //else { return RedirectToAction("Details", "Regions", new { id = id }); }
+           
         }
 
         protected override void Dispose(bool disposing)
