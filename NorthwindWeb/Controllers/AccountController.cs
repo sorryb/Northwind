@@ -925,10 +925,12 @@ namespace NorthwindWeb.Controllers
                 user.IsLockedOut = user.IsLockedOut ? true : false;
                 user.IsOnline = user.IsOnline ? true : false;
             }
-            //string searchBool = "";
-            //if ("no".Contains(search)) { searchBool = "false"; }
-            //else if ("yes".Contains(search)) { searchBool = "true"; }
-            userInfoViewModel = userInfoViewModel.Where(p => (p.UserName.ToLower().Contains(search.ToLower()) || p.Email.ToLower().Contains(search.ToLower()) || Convert.ToString(p.LastActiveDateTime).ToLower().Contains(search.ToLower()))).ToList();
+            
+            string searchBool = "bool";
+            if ("no".Contains(search)) { searchBool = "false"; }
+            else if ("yes".Contains(search)) { searchBool = "true"; }
+            userInfoViewModel = userInfoViewModel.Where(u => (u.UserName.ToLower().Contains(search.ToLower()) || u.Email.ToLower().Contains(search.ToLower()) || Convert.ToString(u.LastActiveDateTime).ToLower().Contains(search.ToLower())
+            || Convert.ToString(u.IsLockedOut).ToLower().Contains(searchBool.ToLower()) || Convert.ToString(u.IsOnline).ToLower().Contains(searchBool.ToLower()))).ToList();
 
 
             //order list

@@ -9,10 +9,12 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
+using NorthwindWeb.Models.ServerClientCommunication;
+
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
-    public class SuppliersController : Controller, IJsonTableFill
+    public class SuppliersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
 
@@ -131,14 +133,138 @@ namespace NorthwindWeb.Controllers
             }
             base.Dispose(disposing);
         }
-        public JsonResult JsonTableFill()
-        {
-            var suppliers = db.Suppliers.OrderBy(x => x.SupplierID);
+        //public JsonResult JsonTableFill()
+        //{
+        //    var suppliers = db.Suppliers.OrderBy(x => x.SupplierID);
 
-            /*Select what wee need in table*/
-            return Json(
-                suppliers.Select(x => new {
-                    ID = x.SupplierID,
+        //    /*Select what wee need in table*/
+        //    return Json(
+        //        suppliers.Select(x => new {
+        //            ID = x.SupplierID,
+        //            CompanyName = x.CompanyName,
+        //            ContactName = x.ContactName,
+        //            ContactTitle = x.ContactTitle,
+        //            Address = x.Address,
+        //            City = x.City,
+        //            Country = x.Country,
+        //            Phone = x.Phone
+        //        })
+        //        , JsonRequestBehavior.AllowGet);
+        //}
+        public JsonResult JsonTableFill(int draw, int start, int length)
+        {
+            const int TOTAL_ROWS = 999;
+
+           
+            string search = Request.QueryString["search[value]"] ?? "";
+            int sortColumn = -1;
+            string sortDirection = "asc";
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+            //list of product that contain "search"
+            var suppliersInfo = db.Suppliers.OrderBy(x => x.SupplierID).Where(s =>  s.CompanyName.Contains(search) || s.ContactName.Contains(search)
+            || s.ContactTitle.Contains(search) || s.Address.Contains(search) || s.City.Contains(search) || s.Country.Contains(search) || s.Phone.Contains(search));
+
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto FirstColumn;
+                case 0: //first column
+                FirstColumn:
+                    if (sortDirection == "asc")
+                    {
+                        suppliersInfo = suppliersInfo.OrderBy(x => x.CompanyName);
+                    }
+                    else
+                    {
+                        suppliersInfo = suppliersInfo.OrderByDescending(x => x.CompanyName);
+                    }
+                    break;
+                case 1: //second column
+                    if (sortDirection == "asc")
+                    {
+                        suppliersInfo = suppliersInfo.OrderBy(x => x.ContactName);
+                    }
+                    else
+                    {
+                        suppliersInfo = suppliersInfo.OrderByDescending(x => x.ContactName);
+                    }
+                    break;
+                case 2: // and so on
+                    if (sortDirection == "asc")
+                    {
+                        suppliersInfo = suppliersInfo.OrderBy(x => x.ContactTitle);
+                    }
+                    else
+                    {
+                        suppliersInfo = suppliersInfo.OrderByDescending(x => x.ContactTitle);
+                    }
+                    break;
+                case 3:
+                    if (sortDirection == "asc")
+                    {
+                        suppliersInfo = suppliersInfo.OrderBy(x => x.Address);
+                    }
+                    else
+                    {
+                        suppliersInfo = suppliersInfo.OrderByDescending(x => x.Address);
+                    }
+                    break;
+                case 4:
+                    if (sortDirection == "asc")
+                    {
+                        suppliersInfo = suppliersInfo.OrderBy(x => x.City);
+                    }
+                    else
+                    {
+                        suppliersInfo = suppliersInfo.OrderByDescending(x => x.City);
+                    }
+                    break;
+                case 5:
+                    if (sortDirection == "asc")
+                    {
+                        suppliersInfo = suppliersInfo.OrderBy(x => x.Country);
+                    }
+                    else
+                    {
+                        suppliersInfo = suppliersInfo.OrderByDescending(x => x.Country);
+                    }
+                    break;
+                case 6:
+                    if (sortDirection == "asc")
+                    {
+                        suppliersInfo = suppliersInfo.OrderBy(x => x.Phone);
+                    }
+                    else
+                    {
+                        suppliersInfo = suppliersInfo.OrderByDescending(x => x.Phone);
+                    }
+                    break;
+            }
+
+            //objet that whill be sent to client
+            JsonDataTableObject dataTableData = new JsonDataTableObject()
+            {
+                draw = draw,
+                recordsTotal = db.Suppliers.Count(),
+                data = suppliersInfo.Skip(start).Take(length).Select(x => new
+                {
+                    SupplierID = x.SupplierID,
                     CompanyName = x.CompanyName,
                     ContactName = x.ContactName,
                     ContactTitle = x.ContactTitle,
@@ -146,8 +272,10 @@ namespace NorthwindWeb.Controllers
                     City = x.City,
                     Country = x.Country,
                     Phone = x.Phone
-                })
-                , JsonRequestBehavior.AllowGet);
+                }),
+                recordsFiltered = suppliersInfo.Count(), //need to be below data(ref recordsFiltered)
+            };
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
     }
 }

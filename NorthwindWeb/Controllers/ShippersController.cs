@@ -119,9 +119,19 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Shippers shippers = await db.Shippers.FindAsync(id);
-            db.Shippers.Remove(shippers);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            var orders= db.Orders.Any(o => o.ShipVia == id);
+            //db.Shippers.Remove(shippers);
+            //await db.SaveChangesAsync();
+            //return RedirectToAction("Index");
+
+            //if ShipVia from Orders is different delete, else return in (Details in Shippers ) ErrorPage
+            if (!orders)
+            {
+                db.Shippers.Remove(shippers);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else { return RedirectToAction("Details", new { id = id }); }
         }
 
         protected override void Dispose(bool disposing)
