@@ -224,6 +224,7 @@
     <Compile Include="Models\Customers.cs" />
     <Compile Include="Models\CustomerDemographics.cs" />
     <Compile Include="Models\Employees.cs" />
+    <Compile Include="Models\ExceptionHandler\DeleteException.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Interfaces\IJsonTableFill.cs" />
     <Compile Include="Models\NorthwindModel.cs" />
@@ -746,6 +747,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -12,6 +12,7 @@ using NorthwindWeb.Models.Interfaces;
 using PagedList;
 using System.Web.Helpers;
 using NorthwindWeb.Models.ServerClientCommunication;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
