@@ -633,15 +633,16 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         public ActionResult RoleMembership(RoleInfoViewModel roleInfo)
         {
-            //var roleName = Request["name"];
-            //var userName = Request.Form["UserList"];
-            //var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            //if (!string.IsNullOrEmpty(userName))
-            //return AddUsersToRole();
-            //userManager.GetRoles(User.Identity.GetUserId());
-            ////Roles.IsUserInRole(userName, roleName)
-            ////return View(roleInfo);
-            ////return View(new RoleInfoModel() { Name = roleName });
+            var roleName = Request["name"];
+            var userName = Request.Form["UserList"];
+            var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var currentUser = userManager.FindByName(userName);
+            if (!string.IsNullOrEmpty(userName)&& !userManager.IsInRole(currentUser.Id, roleName))
+                return AddUsersToRole();
+           
+            //Roles.IsUserInRole(userName, roleName)
+            //return View(roleInfo);
+            //return View(new RoleInfoModel() { Name = roleName });
 
             return RoleMembership();
         }
