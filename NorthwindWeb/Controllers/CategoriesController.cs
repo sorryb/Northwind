@@ -118,10 +118,18 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Categories categories = await db.Categories.FindAsync(id);
- 
-            db.Categories.Remove(categories);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            var product = db.Products.Any(o => o.CategoryID == id);
+            //db.Categories.Remove(categories);
+            //await db.SaveChangesAsync();
+            //return RedirectToAction("Index");
+
+            if (!product)
+            {
+                db.Categories.Remove(categories);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else { return RedirectToAction("Details", new { id = id }); }
         }
 
         protected override void Dispose(bool disposing)
