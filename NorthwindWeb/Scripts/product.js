@@ -35,7 +35,7 @@ $(document).ready(function () {
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
-                    item.DeleteLink = '<i class="fa fa-remove something" onclick="deleteIcon(' + item.ID + ')" style="color:red"></i>';
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
                 })
                 return json.data;
