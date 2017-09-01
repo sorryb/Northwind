@@ -129,6 +129,15 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             //if(db.Orders.Any())
+            //db.Database.SqlQuery<string>($@"
+            //    delete from EmployeeTerritories 
+            //    where EmployeeID in 
+            //    (
+            //        select EmployeeID from EmployeeTerritories
+            //        left join Employees on EmployeeTerritories.EmployeeID=Employees.EmployeeID
+            //        where Employees.EmployeeID={id}
+            //    )
+            //", null)
             Employees employees = await db.Employees.FindAsync(id);
             db.Employees.Remove(employees);
             await db.SaveChangesAsync();
