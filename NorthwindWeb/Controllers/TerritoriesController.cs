@@ -128,9 +128,19 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Territories territories = await db.Territories.FindAsync(id);
+            //var employee = db.EmployeeTerritories.Any(o => o.TerritoriesID == id);
             db.Territories.Remove(territories);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
+
+            //if TerritoriesID from EmployeeTerritories is different from TerritoriesID from Territories: delete, else return in (Details in Region ) ErrorPage
+            //if (!employee)
+            //{
+            //    db.Territories.Remove(territories);
+            //    await db.SaveChangesAsync();
+            //    return RedirectToAction("Details", "Regions", new { id = id });
+            //}
+            //else { return RedirectToAction("Details", "Regions", new { id = id }); }
         }
 
         protected override void Dispose(bool disposing)
