@@ -636,12 +636,11 @@ namespace NorthwindWeb.Controllers
             var roleName = Request["name"];
             var userName = Request.Form["UserList"];
             if (!string.IsNullOrEmpty(userName) && !Roles.IsUserInRole(userName, roleName))
-                return AddUsersToRole();
+                Roles.AddUsersToRole(new string[] { userName }, roleName);
 
 
             //return View(roleInfo);
             //return View(new RoleInfoModel() { Name = roleName });
-          
             return RoleMembership();
         }
 
