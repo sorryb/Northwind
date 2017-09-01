@@ -20,8 +20,8 @@
 <hr />
 
 <div>
-    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Rol nou", "CreateRole",null, htmlAttributes: new { style = "text-decoration:none; color:#333" })</button>
-
+    @*<button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Rol nou", "CreateRole",null, htmlAttributes: new { style = "text-decoration:none; color:#333" })</button>*@
+    @Html.ActionLink("Rol nou", "CreateRole", null, new { @class= "btn btn-default" })
 </div>
 <br />
 <br />

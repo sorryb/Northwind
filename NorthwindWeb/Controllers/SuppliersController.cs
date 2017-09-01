@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -119,10 +120,17 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Suppliers suppliers = await db.Suppliers.FindAsync(id);
-            db.Suppliers.Remove(suppliers);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {             
+                    Suppliers suppliers = await db.Suppliers.FindAsync(id);
+                    db.Suppliers.Remove(suppliers);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+            }
+            catch(Exception)
+            {
+                throw new DeleteException("Nu puteti sterge un furnizor cu comenzi alocate");
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -133,24 +141,7 @@ namespace NorthwindWeb.Controllers
             }
             base.Dispose(disposing);
         }
-        //public JsonResult JsonTableFill()
-        //{
-        //    var suppliers = db.Suppliers.OrderBy(x => x.SupplierID);
-
-        //    /*Select what wee need in table*/
-        //    return Json(
-        //        suppliers.Select(x => new {
-        //            ID = x.SupplierID,
-        //            CompanyName = x.CompanyName,
-        //            ContactName = x.ContactName,
-        //            ContactTitle = x.ContactTitle,
-        //            Address = x.Address,
-        //            City = x.City,
-        //            Country = x.Country,
-        //            Phone = x.Phone
-        //        })
-        //        , JsonRequestBehavior.AllowGet);
-        //}
+   
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;

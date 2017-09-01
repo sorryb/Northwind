@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -119,19 +120,17 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Shippers shippers = await db.Shippers.FindAsync(id);
-            var orders= db.Orders.Any(o => o.ShipVia == id);
-            //db.Shippers.Remove(shippers);
-            //await db.SaveChangesAsync();
-            //return RedirectToAction("Index");
-
-            //if ShipVia from Orders is different delete, else return in (Details in Shippers ) ErrorPage
-            if (!orders)
+            
+            try 
             {
                 db.Shippers.Remove(shippers);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            else { return RedirectToAction("Details", new { id = id }); }
+            catch
+            {
+                throw new DeleteException("Nu poti sterge expeditorul deoarece are constrangeri.");
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -16,6 +16,7 @@ using System.Web;
 using NorthwindWeb.Context;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
+using System.Web.Security;
 
 namespace NorthwindWeb.Controllers
 {
@@ -522,63 +523,85 @@ namespace NorthwindWeb.Controllers
         }
 
         #region No Role Creation Dinamicaly
-        //[Authorize]
-        //[HttpPost]
-        //public ActionResult CreateRole(RoleInfoViewModel roleInfo)
-        //{
-        //    IdentityResult isCreated = null;
-        //    ApplicationDbContext context = new ApplicationDbContext();
+        [Authorize]
+        [HttpPost]
+        public ActionResult CreateRole(RoleInfoViewModel roleInfo)
+        {
+            IdentityResult isCreated = null;
+            ApplicationDbContext context = new ApplicationDbContext();
 
-        //    using (context)
-        //    {
-        //        var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            using (context)
+            {
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-        //        if (!roleManager.RoleExists(roleInfo.Name))
-        //        {
+                if (!roleManager.RoleExists(roleInfo.Name))
+                {
 
-        //            // first we create Admin rool   
-        //            var role = new IdentityRole();
-        //            role.Name = roleInfo.Name;
+                    // first we create Admin rool   
+                    var role = new IdentityRole();
+                    role.Name = roleInfo.Name;
 
-        //            isCreated = roleManager.Create(role);
+                    isCreated = roleManager.Create(role);
 
-        //            if (ViewData.Keys.Contains("RoleExists")) ViewData.Remove("RoleExists");
+                    if (ViewData.Keys.Contains("RoleExists")) ViewData.Remove("RoleExists");
 
-        //            ViewData["Success"] = "Role Created";
-        //        }
-        //        else
-        //            ViewData["RoleExists"] = "Un rol cu acest nume deja exista!";
-        //    }
+                    ViewData["Success"] = "Role Created";
+                }
+                else
+                    ViewData["RoleExists"] = "Un rol cu acest nume deja exista!";
+            }
 
-        //    if (isCreated.Succeeded)
-        //        return RedirectToAction("RolesIndex");
-        //    else
-        //        return RedirectToAction("Index", "Home");
-        //} 
+            if (isCreated.Succeeded)
+                return RedirectToAction("RolesIndex");
+            else
+                return RedirectToAction("Index", "Home");
+        }
         #endregion
 
-        //[Authorize]
-        //public ActionResult RoleDelete(string roleName)
-        //{
-        //    IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
-        //    ApplicationDbContext context = new ApplicationDbContext();
+        [Authorize]
+        public ActionResult RoleDelete(string roleName)
+        {
+            List<SelectListItem> selectItemsUserInRole = new List<SelectListItem>();
+            ApplicationDbContext context = new ApplicationDbContext();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            List<ApplicationUser> users = userManager.Users.ToList();
 
-        //    using (context)
-        //    {
-        //        var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            foreach (ApplicationUser user in users)
+            {
 
-        //        if (roleManager.RoleExists(roleName))
-        //        {
-        //            IdentityRole role = roleManager.FindByName(roleName);
-        //            isDeleted = roleManager.Delete(role);
-        //        }
-        //    }
+                if (userManager.IsInRole(user.Id, roleName))
+                    selectItemsUserInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
 
-        //    if (isDeleted.Succeeded)
-        //        return RedirectToAction("RolesIndex");
-        //    else
-        //        return RedirectToAction("Index", "Home");
-        //}
+               
+
+                //userManager.Dispose();
+            }
+            if (selectItemsUserInRole.Count()==0)
+            {
+                IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
+
+
+                using (context)
+                {
+                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+                    if (roleManager.RoleExists(roleName))
+                    {
+                        IdentityRole role = roleManager.FindByName(roleName);
+                        isDeleted = roleManager.Delete(role);
+                    }
+                }
+
+                if (isDeleted.Succeeded)
+                    return RedirectToAction("RolesIndex");
+                else
+                    return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                throw new Exception("Nu puteti sterge roluri cu utilizatori alocati");
+            }
+        }
 
 
         public ActionResult UsersInRole(string roleName)
@@ -606,18 +629,18 @@ namespace NorthwindWeb.Controllers
 
             return View(userInfoViewModel.AsQueryable());
         }
-
+     
         [HttpPost]
         public ActionResult RoleMembership(RoleInfoViewModel roleInfo)
         {
-            //var roleName = Request["name"];
-            //var userName = Request.Form["UserList"];
-            //if (!string.IsNullOrEmpty(userName) && !Roles.IsUserInRole(userName, roleName))
-            //    Roles.AddUsersToRole(new string[] { userName }, roleName);
+            var roleName = Request["name"];
+            var userName = Request.Form["UserList"];
+            if (!string.IsNullOrEmpty(userName) && !Roles.IsUserInRole(userName, roleName))
+                Roles.AddUsersToRole(new string[] { userName }, roleName);
 
 
-            ////return View(roleInfo);
-            ////return View(new RoleInfoModel() { Name = roleName });
+            //return View(roleInfo);
+            //return View(new RoleInfoModel() { Name = roleName });
             return RoleMembership();
         }
 
@@ -843,39 +866,7 @@ namespace NorthwindWeb.Controllers
 
             base.Dispose(disposing);
         }
-        //public JsonResult JsonTableFill()
-        //{
-        //    var context = new ApplicationDbContext();
-        //    var userStore = new UserStore<ApplicationUser>(context);
-        //    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
-
-        //    List<UserInfoViewModel> userInfoViewModel = new List<UserInfoViewModel>();
-        //    foreach (var user in userManager.Users)
-        //        userInfoViewModel.Add(new UserInfoViewModel()
-        //        {
-        //            UserName = user.UserName,
-        //            Email = user.Email
-        //            //LastActiveDateTime = user.LastActivityDate,
-        //            //IsOnline = user.IsOnline,
-        //            //IsLockedOut = user.IsLockedOut
-        //        });
-        //    foreach (var user in userInfoViewModel)
-        //    {
-                
-        //        user.LastActiveDateTime = Convert.ToDateTime(String.Format("{0:g}", user.LastActiveDateTime));
-        //        user.LastActiveString = Convert.ToString(user.LastActiveDateTime);
-        //        user.IsLockedOut = user.IsLockedOut ? true : false;
-        //        user.IsOnline = user.IsOnline ? true : false;
-        //    }
-
-
-        //    /*Select what wee need in table*/
-        //    return Json(
-        //        userInfoViewModel.AsQueryable()
-                
-        //        , JsonRequestBehavior.AllowGet);
-        //}
+   
 
 
         public JsonResult JsonTableFill(int draw, int start, int length)
@@ -992,38 +983,57 @@ namespace NorthwindWeb.Controllers
                 
             }
             //objet that whill be sent to client
-            JsonDataTableObjectList dataTableData = new JsonDataTableObjectList()
+            JsonDataTableUserList dataTableData = new JsonDataTableUserList()
             {
                 draw = draw,
                 recordsTotal = userManager.Users.Count(),
                 data= new List<UserInfoViewModel>(),
-                //data = userInfoViewModel.Skip(start).Take(length).Select(x => new
-                //{
-                //    UserName = x.UserName,
-                //    Email = x.Email,
-                //    LastActiveDateTime = x.LastActiveDateTime,
-                //    LastActiveString = x.LastActiveString,
-                //    IsLockedOut = x.IsLockedOut,
-                //    IsOnline = x.IsOnline
-                //}),
                 recordsFiltered = userInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
             };
-            foreach(var item in userInfoViewModel.Skip(start).Take(length))
+            foreach(var itemUserInfoViewModel in userInfoViewModel.Skip(start).Take(length))
             {
-                UserInfoViewModel x = new UserInfoViewModel();
-                x.UserName = item.UserName;
-                x.Email = item.Email;
-                x.LastActiveDateTime = item.LastActiveDateTime;
-                x.LastActiveString = item.LastActiveString;
-                x.IsLockedOut = item.IsLockedOut;
-                x.IsOnline = item.IsOnline;
-                dataTableData.data.Add(x);
+                UserInfoViewModel userInfo = new UserInfoViewModel();
+                userInfo.UserName = itemUserInfoViewModel.UserName;
+                userInfo.Email = itemUserInfoViewModel.Email;
+                userInfo.LastActiveDateTime = itemUserInfoViewModel.LastActiveDateTime;
+                userInfo.LastActiveString = itemUserInfoViewModel.LastActiveString;
+                userInfo.IsLockedOut = itemUserInfoViewModel.IsLockedOut;
+                userInfo.IsOnline = itemUserInfoViewModel.IsOnline;
+                dataTableData.data.Add(userInfo);
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult JsonTableRolesFill()
+     
+        public JsonResult JsonTableRolesFill(int draw, int start, int length)
         {
+            const int TOTAL_ROWS = 999;
+
+
+            string search = Request.QueryString["search[value]"] ?? "";
+            int sortColumn = -1;
+            string sortDirection = "asc";
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+
+            var context = new ApplicationDbContext();
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+
             var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
@@ -1034,10 +1044,45 @@ namespace NorthwindWeb.Controllers
                 {
                     Name = role.Name
                 });
+            
+            roleInfoViewModel = roleInfoViewModel.Where(r=>r.Name.ToLower().Contains(search.ToLower())).ToList();
 
-           
-            /*Select what wee need in table*/
-            return Json(roleInfoViewModel.AsQueryable(), JsonRequestBehavior.AllowGet);
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto FirstColumn;
+                case 1: //first column
+                FirstColumn:
+                    if (sortDirection == "asc")
+                    {
+                        roleInfoViewModel = roleInfoViewModel.OrderBy(x => x.Name).ToList();
+                    }
+                    else
+                    {
+                        roleInfoViewModel = roleInfoViewModel.OrderByDescending(x => x.Name).ToList();
+                    }
+                    break;
+                
+
+            }
+            //objet that whill be sent to client
+            JsonDataTableRoleList dataTableData = new JsonDataTableRoleList()
+            {
+                draw = draw,
+                recordsTotal = roleManager.Roles.Count(),
+                data = new List<RoleInfoViewModel>(),
+                
+                recordsFiltered = roleInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
+            };
+            foreach (var item in roleInfoViewModel.Skip(start).Take(length))
+            {
+                RoleInfoViewModel roleInfo = new RoleInfoViewModel();
+                roleInfo.Name = item.Name;
+                dataTableData.data.Add(roleInfo);
+            }
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
         #region Helpers
         // Used for XSRF protection when adding external logins

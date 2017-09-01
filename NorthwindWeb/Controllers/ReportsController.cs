@@ -28,10 +28,10 @@ namespace NorthwindWeb.Controllers
             string userId = ConfigurationManager.AppSettings.Get("userId");
             string password = ConfigurationManager.AppSettings.Get("password");
 
-            
 
-            //doc = web.Load($"{reportServer}?%2f{reportServerDir}",proxyHost,proxyPort,userId,password);
-            doc= web.Load($"{reportServer}?%2f{reportServerDir}","POST", new WebProxy(new Uri(proxyHost),false,new string[] { reportServer }),new NetworkCredential(userId,password));
+
+            doc = web.Load($"{reportServer}?%2f{reportServerDir}", proxyHost, proxyPort, userId, password);
+            //doc= web.Load($"{reportServer}?%2f{reportServerDir}","POST", new WebProxy(new Uri(proxyHost),false,new string[] { reportServer }),new NetworkCredential(userId,password));
 
             var links = doc.DocumentNode.SelectNodes("//a");
             var links2 = links.Skip(1);

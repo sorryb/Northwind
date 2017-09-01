@@ -35,7 +35,7 @@ $(document).ready(function () {
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
-                    item.DeleteLink = '<i class="fa fa-remove something" onclick="deleteIcon(' + item.ID + ')" style="color:red"></i>';
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
                     item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
                 })
                 return json.data;
@@ -320,8 +320,8 @@ $(document).ready(function () {
         });
      /*add from json in table Role*/
         $('#RolesTable').DataTable({
-            //"processing": true,
-            //"serverSide": true,
+            "processing": true,
+            "serverSide": true,
             "responsive": true,
             "autoWidth": false,
             "columnDefs": [
@@ -333,12 +333,12 @@ $(document).ready(function () {
                 "url": searchControllerPath() + "/JsonTableRolesFill",
                 "dataSrc": function (json) {
                     //Make your callback here.
-                    $.each(json, function (index, item) {
-                        item.Delete = '<a onclick="alert('+"'Nu aveti dreptul de a efectua aceasta operatie!'"+')"/> <i class="fa fa-remove"></i></a >';
-                        item.Membership = '<a href= "' + searchControllerPath() + '/RoleMembership?roleName ='+ item.Name+'&name='+item.Name+'"/>Membrii</a >';
+                    $.each(json.data, function (index, item) {
+                        item.Delete = '<a href= "' + searchControllerPath() + '/RoleDelete?roleName=' + item.Name + '" onclick="if (!confirm('+"'Doriti sa stergeti ?'"+')) return false;"/> <i class="fa fa-remove"></i></a >';
+                        item.Membership = '<a href= "' + searchControllerPath() + '/RoleMembership?roleName='+ item.Name+'&name='+item.Name+'"/>Membrii</a >';
                     })
                    
-                    return json;
+                    return json.data;
                 }
             },
             "columns": [
@@ -348,10 +348,5 @@ $(document).ready(function () {
             ]
 
         });
-        $(".alerte").click(function () {
-            alert("Nu aveti dreptul de a efectua aceasta operatie!");
-        })
-        function testalert() {
-            alert("Nu aveti dreptul de a efectua aceasta operatie!");
-        }
+    
 });
