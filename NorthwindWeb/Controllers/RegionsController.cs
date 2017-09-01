@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using PagedList;
 using NorthwindWeb.ViewModels;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -146,19 +147,18 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Region region = await db.Regions.FindAsync(id);
-            var terrritories = db.Territories.Any(o => o.RegionID == id);
-            //db.Regions.Remove(region);
-            //await db.SaveChangesAsync();
-            //return RedirectToAction("Index");
-
-            //if RegionID from Territories is different from RegionID from Region: delete, else return in (Details in Region ) ErrorPage
-            if (!terrritories)
+            
+            try 
             {
                 db.Regions.Remove(region);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            else { return RedirectToAction("Details", new { id = id }); }
+            catch
+            {
+            throw new DeleteException("Nu poti sterge regiunea deoarece are constrangeri.");
+            }
+           
         }
 
         protected override void Dispose(bool disposing)
