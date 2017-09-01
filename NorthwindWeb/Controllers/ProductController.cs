@@ -25,6 +25,10 @@ namespace NorthwindWeb.Controllers
         // GET: Product
         public ActionResult Index(string category = "")
         {
+            
+                throw new DeleteException("acesta este un test");
+            
+
             //category from browser adress is used also in JsonTableFill action
             ViewBag.category = category;
             return View();
