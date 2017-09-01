@@ -127,6 +127,17 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
+
+            //db.Database.SqlQuery<string>($@"
+            //    delete from EmployeeTerritories 
+            //    where EmployeeID in 
+            //    (
+            //        select EmployeeID from EmployeeTerritories
+            //        left join Employees on EmployeeTerritories.EmployeeID=Employees.EmployeeID
+            //        where Employees.EmployeeID={id}
+            //    )
+            //", null)
+
             Territories territories = await db.Territories.FindAsync(id);
             //var employee = db.EmployeeTerritories.Any(o => o.TerritoriesID == id);
             db.Territories.Remove(territories);
