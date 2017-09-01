@@ -125,19 +125,18 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
 
-            var order = db.Orders.Any(o => o.CustomerID == id);
-           
-                if (!order)
-                {
-                    Customers customers = await db.Customers.FindAsync(id);
-                    db.Customers.Remove(customers);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-            
-            else
+            //var order = db.Orders.Any(o => o.CustomerID == id);
+            try
             {
-                throw new DeleteException("Clientul nu poate fi sters deoarece el are una sau mai multe comenzi.");
+                Customers customers = await db.Customers.FindAsync(id);
+                db.Customers.Remove(customers);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            catch
+            {
+                throw new DeleteException("Clientul nu poate fi sters deoarece are una sau mai multe comenzi.");
             }
         }
 
