@@ -7,6 +7,7 @@ using Microsoft.Reporting.WebForms;
 using System.Configuration;
 using System.IO;
 using System.Web.UI.WebControls;
+using HtmlAgilityPack;
 
 namespace NorthwindWeb.Controllers
 {
@@ -16,6 +17,9 @@ namespace NorthwindWeb.Controllers
         // GET: Teste
         public ActionResult Index(int id=0)
         {
+
+
+
             List<string> filenames = new List<string>();
 
             string dirpath = Path.GetFullPath(Path.Combine(Server.MapPath("~"), @"../NorthwindReports"));
@@ -25,10 +29,10 @@ namespace NorthwindWeb.Controllers
                 filenames.Add(filename);
             }
             ViewBag.filenames = filenames;
-            string serverurl = "http://localhost/" + ConfigurationManager.AppSettings.Get("ReportServer") + "/";
+            string serverurl = ConfigurationManager.AppSettings.Get("ReportServer") + "/";
             ReportViewer rep = new ReportViewer()
             {
-                ProcessingMode = ProcessingMode.Remote,
+                ProcessingMode = ProcessingMode.Local,
                 //Width = Unit.Percentage(100),
                 //Height = Unit.Percentage(100),
                 ZoomMode = ZoomMode.PageWidth,
@@ -40,6 +44,7 @@ namespace NorthwindWeb.Controllers
             rep.ServerReport.ReportPath = "/NorthwindReports/" + filenames.ElementAt(id);
             rep.ServerReport.DisplayName = filenames.ElementAt(id);
             ViewBag.rep = rep;
+
 
             return View();
         }

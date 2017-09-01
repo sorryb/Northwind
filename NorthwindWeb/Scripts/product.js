@@ -11,6 +11,12 @@ function searchControllerPath() {
     }
 }
 
+//delete product dialog
+function deleteIcon(id) {
+    var dialog = $("#dialog").dialog();
+
+}
+
 $(document).ready(function () {
 
     /*datatable handler with server side implementation for product*/
@@ -29,7 +35,7 @@ $(document).ready(function () {
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
-                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.DeleteLink = '<i class="fa fa-remove something" onclick="deleteIcon(' + item.ID + ')" style="color:red"></i>';
                     item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
                 })
                 return json.data;

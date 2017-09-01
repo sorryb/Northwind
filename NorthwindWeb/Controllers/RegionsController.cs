@@ -147,16 +147,18 @@ namespace NorthwindWeb.Controllers
         {
             Region region = await db.Regions.FindAsync(id);
             var terrritories = db.Territories.Any(o => o.RegionID == id);
-            db.Regions.Remove(region);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-            //if (!terrritories)
-            //{
-            //    db.Regions.Remove(region);
-            //    await db.SaveChangesAsync();
-            //    return RedirectToAction("Index");
-            //}
-            //else{ return RedirectToAction("Index"); }
+            //db.Regions.Remove(region);
+            //await db.SaveChangesAsync();
+            //return RedirectToAction("Index");
+
+            //if RegionID from Territories is different from RegionID from Region: delete, else return in (Details in Region ) ErrorPage
+            if (!terrritories)
+            {
+                db.Regions.Remove(region);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            else { return RedirectToAction("Details", new { id = id }); }
         }
 
         protected override void Dispose(bool disposing)
