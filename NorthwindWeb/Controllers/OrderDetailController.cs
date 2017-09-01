@@ -128,12 +128,15 @@ namespace NorthwindWeb.Controllers
         // POST: OrderDetail/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int? OrderID, int? ProductID)
         {
-            Order_Details order_Details = await db.Order_Details.FindAsync(id);
-            db.Order_Details.Remove(order_Details);
+            var details = db.Order_Details.Where(x => x.OrderID == OrderID && x.ProductID==ProductID);
+            foreach (var orderdet in details)
+                db.Order_Details.Remove(orderdet);
+
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Orders");
+
         }
 
         protected override void Dispose(bool disposing)

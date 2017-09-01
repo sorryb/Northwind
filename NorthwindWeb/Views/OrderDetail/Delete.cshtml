@@ -75,9 +75,8 @@
 
             <div class="form-actions no-color">
                 <input type="submit" value="Sterge" class="btn btn-default" /> |
-                <button class="btn btn-default">@Html.ActionLink("Inapoi", "Details", "Orders",
-             new { id = Model.OrderID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })
-                </button>                
+                @Html.ActionLink("Inapoi", "Details", "Orders", new { @class = "btn btn-default" })
+               
             </div>
         }
     </div>

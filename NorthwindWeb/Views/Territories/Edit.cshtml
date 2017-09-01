@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container">
+
     <h2>Modifica</h2>
     <hr />
     <ol class="breadcrumb">
@@ -55,9 +55,9 @@
     }
 
     <div>
-        <button class="btn btn-default">@Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, new { @class = "btn btn-default" })
     </div>
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

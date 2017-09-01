@@ -27,7 +27,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.LastName)<br />
         </dd>
 
         <dt>
@@ -35,7 +35,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.FirstName)<br />
         </dd>
 
         <dt>
@@ -43,7 +43,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Title)<br />
         </dd>
 
         <dt>
@@ -51,7 +51,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TitleOfCourtesy)
+            @Html.DisplayFor(model => model.TitleOfCourtesy)<br />
         </dd>
 
         <dt>
@@ -59,7 +59,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BirthDate)
+            @Html.DisplayFor(model => model.BirthDate)<br />
         </dd>
 
         <dt>
@@ -67,7 +67,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HireDate)
+            @Html.DisplayFor(model => model.HireDate)<br />
         </dd>
 
         <dt>
@@ -75,7 +75,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.Address)<br />
         </dd>
 
         <dt>
@@ -83,7 +83,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.City)
+            @Html.DisplayFor(model => model.City)<br />
         </dd>
 
         @*<dt>
@@ -148,6 +148,6 @@
     </dl>
 </div>
 <p>
-    <button class="btn btn-default">@Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
-    <button class="btn btn-default">@Html.ActionLink("Inapoi", "Index", null, htmlAttributes: new { style = "text-decoration:none; color:#333" }) </button>
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }, new { @class = "btn btn-default" }) 
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
 </p>

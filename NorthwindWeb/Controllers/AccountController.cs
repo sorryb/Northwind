@@ -15,11 +15,12 @@ using System.Security.Claims;
 using System.Web;
 using NorthwindWeb.Context;
 using NorthwindWeb.Models.Interfaces;
+using NorthwindWeb.Models.ServerClientCommunication;
 
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
-    public class AccountController : Controller, IJsonTableFill
+    public class AccountController : Controller, IJsonTableFillServerSide
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -842,8 +843,65 @@ namespace NorthwindWeb.Controllers
 
             base.Dispose(disposing);
         }
-        public JsonResult JsonTableFill()
+        //public JsonResult JsonTableFill()
+        //{
+        //    var context = new ApplicationDbContext();
+        //    var userStore = new UserStore<ApplicationUser>(context);
+        //    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+
+        //    List<UserInfoViewModel> userInfoViewModel = new List<UserInfoViewModel>();
+        //    foreach (var user in userManager.Users)
+        //        userInfoViewModel.Add(new UserInfoViewModel()
+        //        {
+        //            UserName = user.UserName,
+        //            Email = user.Email
+        //            //LastActiveDateTime = user.LastActivityDate,
+        //            //IsOnline = user.IsOnline,
+        //            //IsLockedOut = user.IsLockedOut
+        //        });
+        //    foreach (var user in userInfoViewModel)
+        //    {
+                
+        //        user.LastActiveDateTime = Convert.ToDateTime(String.Format("{0:g}", user.LastActiveDateTime));
+        //        user.LastActiveString = Convert.ToString(user.LastActiveDateTime);
+        //        user.IsLockedOut = user.IsLockedOut ? true : false;
+        //        user.IsOnline = user.IsOnline ? true : false;
+        //    }
+
+
+        //    /*Select what wee need in table*/
+        //    return Json(
+        //        userInfoViewModel.AsQueryable()
+                
+        //        , JsonRequestBehavior.AllowGet);
+        //}
+
+
+        public JsonResult JsonTableFill(int draw, int start, int length)
         {
+            const int TOTAL_ROWS = 999;
+
+            
+            string search = Request.QueryString["search[value]"] ?? "";
+            int sortColumn = -1;
+            string sortDirection = "asc";
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+            
             var context = new ApplicationDbContext();
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
@@ -861,19 +919,105 @@ namespace NorthwindWeb.Controllers
                 });
             foreach (var user in userInfoViewModel)
             {
-                
+
                 user.LastActiveDateTime = Convert.ToDateTime(String.Format("{0:g}", user.LastActiveDateTime));
                 user.LastActiveString = Convert.ToString(user.LastActiveDateTime);
                 user.IsLockedOut = user.IsLockedOut ? true : false;
                 user.IsOnline = user.IsOnline ? true : false;
             }
+            //string searchBool = "";
+            //if ("no".Contains(search)) { searchBool = "false"; }
+            //else if ("yes".Contains(search)) { searchBool = "true"; }
+            userInfoViewModel = userInfoViewModel.Where(p => (p.UserName.ToLower().Contains(search.ToLower()) || p.Email.ToLower().Contains(search.ToLower()) || Convert.ToString(p.LastActiveDateTime).ToLower().Contains(search.ToLower()))).ToList();
 
 
-            /*Select what wee need in table*/
-            return Json(
-                userInfoViewModel.AsQueryable()
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto FirstColumn;
+                case 1: //first column
+                    FirstColumn:
+                    if (sortDirection == "asc")
+                    {
+                      userInfoViewModel = userInfoViewModel.OrderBy(x => x.UserName).ToList();
+                    }
+                    else
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.UserName).ToList();
+                    }
+                    break;
+                case 2: //second column
+                    if (sortDirection == "asc")
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderBy(x => x.Email).ToList();
+                    }
+                    else
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.Email).ToList();
+                    }
+                    break;
+                case 3: // and so on
+                    if (sortDirection == "asc")
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderBy(x => x.LastActiveDateTime).ToList();
+                    }
+                    else
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.LastActiveDateTime).ToList();
+                    }
+                    break;
+                case 4:
+                    if (sortDirection == "asc")
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderBy(x => x.IsLockedOut).ToList();
+                    }
+                    else
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.IsLockedOut).ToList();
+                    }
+                    break;
+                case 5:
+                    if (sortDirection == "asc")
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderBy(x => x.IsOnline).ToList();
+                    }
+                    else
+                    {
+                        userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.IsOnline).ToList();
+                    }
+                    break;
                 
-                , JsonRequestBehavior.AllowGet);
+            }
+            //objet that whill be sent to client
+            JsonDataTableObjectList dataTableData = new JsonDataTableObjectList()
+            {
+                draw = draw,
+                recordsTotal = userManager.Users.Count(),
+                data= new List<UserInfoViewModel>(),
+                //data = userInfoViewModel.Skip(start).Take(length).Select(x => new
+                //{
+                //    UserName = x.UserName,
+                //    Email = x.Email,
+                //    LastActiveDateTime = x.LastActiveDateTime,
+                //    LastActiveString = x.LastActiveString,
+                //    IsLockedOut = x.IsLockedOut,
+                //    IsOnline = x.IsOnline
+                //}),
+                recordsFiltered = userInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
+            };
+            foreach(var item in userInfoViewModel.Skip(start).Take(length))
+            {
+                UserInfoViewModel x = new UserInfoViewModel();
+                x.UserName = item.UserName;
+                x.Email = item.Email;
+                x.LastActiveDateTime = item.LastActiveDateTime;
+                x.LastActiveString = item.LastActiveString;
+                x.IsLockedOut = item.IsLockedOut;
+                x.IsOnline = item.IsOnline;
+                dataTableData.data.Add(x);
+            }
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult JsonTableRolesFill()

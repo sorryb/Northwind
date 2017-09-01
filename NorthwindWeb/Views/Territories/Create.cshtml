@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container">
+
     <h2>Adauga</h2>
     <hr />
     <ol class="breadcrumb">
@@ -55,10 +55,9 @@
     }
 
     <div>
-        <button class="btn btn-default ">@Html.ActionLink("Inapoi", "Details", "Regions", new { id = ViewBag.regionid }, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
-        @*@Html.ActionLink("Inapoi", "Details", "Regions", new { id = ViewBag.regionid }, null)*@
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = ViewBag.regionid }, new { @class = "btn btn-default" })
     </div>
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
