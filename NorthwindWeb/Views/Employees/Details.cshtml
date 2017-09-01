@@ -11,7 +11,7 @@
         @Html.ActionLink("Dashboard", "Home", "Dashboard")
     </li>
     <li>
-        @Html.ActionLink("Angajati", "Index", "Orders")
+        @Html.ActionLink("Angajati", "Index", "Employees")
     </li>
     <li class="active">Detalii</li>
 </ol>
@@ -27,7 +27,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.LastName)<br />
         </dd>
 
         <dt>
@@ -35,7 +35,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.FirstName)<br />
         </dd>
 
         <dt>
@@ -43,7 +43,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Title)
+            @Html.DisplayFor(model => model.Title)<br />
         </dd>
 
         <dt>
@@ -51,7 +51,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TitleOfCourtesy)
+            @Html.DisplayFor(model => model.TitleOfCourtesy)<br />
         </dd>
 
         <dt>
@@ -59,7 +59,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BirthDate)
+            @Html.DisplayFor(model => model.BirthDate)<br />
         </dd>
 
         <dt>
@@ -67,7 +67,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HireDate)
+            @Html.DisplayFor(model => model.HireDate)<br />
         </dd>
 
         <dt>
@@ -75,7 +75,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.Address)<br />
         </dd>
 
         <dt>
@@ -83,7 +83,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.City)
+            @Html.DisplayFor(model => model.City)<br />
         </dd>
 
         @*<dt>
@@ -108,7 +108,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.PostalCode)
+            @Html.DisplayFor(model => model.PostalCode)<br />
         </dd>
 
         <dt>
@@ -116,7 +116,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Country)
+            @Html.DisplayFor(model => model.Country)<br />
         </dd>
 
         <dt>
@@ -124,7 +124,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.HomePhone)
+            @Html.DisplayFor(model => model.HomePhone)<br />
         </dd>
 
         <dt>
@@ -132,7 +132,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Extension)
+            @Html.DisplayFor(model => model.Extension)<br />
         </dd>
 
         <dt>
@@ -140,7 +140,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Notes)
+            @Html.DisplayFor(model => model.Notes)<br />
         </dd>
 
         <dt>
@@ -148,6 +148,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }) |
-    @Html.ActionLink("Inapoi", "Index")
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }, new { @class = "btn btn-default" }) 
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
 </p>

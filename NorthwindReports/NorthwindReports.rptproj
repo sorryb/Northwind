@@ -85,7 +85,7 @@
       <Options>
         <OutputPath>bin\Debug</OutputPath>
         <TargetServerVersion>SSRS2016</TargetServerVersion>
-        <TargetServerURL>http://localhost/ReportServer_SQLEXPRESS</TargetServerURL>
+        <TargetServerURL>http://localhost/Reports_SQLEXPRESS</TargetServerURL>
         <TargetFolder>NorthwindReports</TargetFolder>
         <TargetDataSourceFolder>Data Sources</TargetDataSourceFolder>
         <TargetDatasetFolder>Datasets</TargetDatasetFolder>

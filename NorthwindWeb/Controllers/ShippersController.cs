@@ -8,11 +8,13 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using NorthwindWeb.Models.Interfaces;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
-    public class ShippersController : Controller
+    public class ShippersController : Controller, IJsonTableFill
     {
         private NorthwindModel db = new NorthwindModel();
 
@@ -118,9 +120,17 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Shippers shippers = await db.Shippers.FindAsync(id);
-            db.Shippers.Remove(shippers);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            
+            try 
+            {
+                db.Shippers.Remove(shippers);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                throw new DeleteException("Nu poti sterge expeditorul deoarece are constrangeri.");
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -130,6 +140,20 @@ namespace NorthwindWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public JsonResult JsonTableFill()
+        {
+            var shippers = db.Shippers.OrderBy(x => x.ShipperID);
+
+            /*Select what wee need in table*/
+            return Json(
+                shippers.Select(x => new {
+                    ID = x.ShipperID,
+                    CompanyName = x.CompanyName,
+                    Phone = x.Phone
+                })
+                , JsonRequestBehavior.AllowGet);
         }
     }
 }

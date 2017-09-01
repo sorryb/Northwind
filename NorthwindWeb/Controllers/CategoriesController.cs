@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -118,9 +119,17 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Categories categories = await db.Categories.FindAsync(id);
-            db.Categories.Remove(categories);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            
+            try
+            {
+                db.Categories.Remove(categories);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                throw new DeleteException("Nu poti sterge categoria deoarece are constrangeri.");
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -130,6 +139,22 @@ namespace NorthwindWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Categories by Json
+        public JsonResult JsonTableFill(string search = "")
+        {
+            var categories = db.Categories.Include(p=>p.Description).Where(x => x.CategoryName.Contains(search)).OrderBy(x => x.CategoryID);
+
+            /*Select what wee need in table*/
+            return Json(
+               categories.Select(x => new {
+                    ID = x.CategoryID,
+                    CategoryName = x.CategoryName,
+                    Description = x.Description
+
+               })
+                , JsonRequestBehavior.AllowGet);
         }
     }
 }

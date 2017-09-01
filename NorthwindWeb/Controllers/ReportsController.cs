@@ -2,6 +2,11 @@
 using System.Web.Mvc;
 using System.IO;
 using System.Configuration;
+using HtmlAgilityPack;
+using System.Linq;
+using System.Net;
+using Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution;
+using System;
 
 namespace NorthwindWeb.Controllers
 {
@@ -12,14 +17,34 @@ namespace NorthwindWeb.Controllers
         public ActionResult Index()
         {
             string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
-            string dirpath = Path.GetFullPath(Path.Combine(Server.MapPath("~"), @"../NorthwindReports"));
+            string reportServerDir = ConfigurationManager.AppSettings.Get("ReportServerDirectory");
+
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument doc = new HtmlDocument();
+
+            string proxyHost = ConfigurationManager.AppSettings.Get("proxyHost");
+            string proxyPortString = ConfigurationManager.AppSettings.Get("proxyPort");
+            int proxyPort = !string.IsNullOrEmpty(proxyPortString) ? Convert.ToInt32(proxyPortString) : 80;
+            string userId = ConfigurationManager.AppSettings.Get("userId");
+            string password = ConfigurationManager.AppSettings.Get("password");
+
+
+
+            doc = web.Load($"{reportServer}?%2f{reportServerDir}", proxyHost, proxyPort, userId, password);
+            //doc= web.Load($"{reportServer}?%2f{reportServerDir}","POST", new WebProxy(new Uri(proxyHost),false,new string[] { reportServer }),new NetworkCredential(userId,password));
+
+            var links = doc.DocumentNode.SelectNodes("//a");
+            var links2 = links.Skip(1);
+
+
 
             List<ViewModels.ReportViewModel> reports = new List<ViewModels.ReportViewModel>();
             ViewModels.ReportViewModel temp;
-            foreach (var filepath in Directory.GetFiles(dirpath, "*rdl"))
+
+            foreach (var linkloop in links2)
             {
-                string filename = Path.GetFileNameWithoutExtension(filepath);
-                string link = "http://localhost/" + reportServer + "/Pages/ReportViewer.aspx?%2fNorthwindReports%2f" + filename.Replace(' ','+') + "&rs:Command=Render&rc:zoom=Page%20Width";
+                string filename = linkloop.InnerHtml;
+                string link = $"{reportServer}/Pages/ReportViewer.aspx{linkloop.Attributes.FirstOrDefault().DeEntitizeValue}&rc:zoom=Page%20Width";
                 temp = new ViewModels.ReportViewModel(link, filename);
                 reports.Add(temp);
             }

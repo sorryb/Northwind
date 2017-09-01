@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using PagedList;
 using NorthwindWeb.ViewModels;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -66,6 +67,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Regions/Create
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
@@ -76,6 +78,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "RegionID,RegionDescription")] Region region)
         {
             if (ModelState.IsValid)
@@ -89,6 +92,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Regions/Edit/5
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -108,6 +112,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "RegionID,RegionDescription")] Region region)
         {
             if (ModelState.IsValid)
@@ -120,6 +125,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Regions/Delete/5
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,12 +143,22 @@ namespace NorthwindWeb.Controllers
         // POST: Regions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Region region = await db.Regions.FindAsync(id);
-            db.Regions.Remove(region);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            
+            try 
+            {
+                db.Regions.Remove(region);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+            throw new DeleteException("Nu poti sterge regiunea deoarece are constrangeri.");
+            }
+           
         }
 
         protected override void Dispose(bool disposing)
@@ -152,6 +168,21 @@ namespace NorthwindWeb.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Orders by Json
+        public JsonResult JsonTableFill(string search = "")
+        {
+            var regions = db.Regions.Include(p => p.RegionDescription).Where(r => r.RegionDescription.Contains(search));
+            
+            /*Select what wee need in table*/
+            return Json(
+                regions.Select(x => new {
+                    ID = x.RegionID,
+                    RegionDescription = x.RegionDescription
+                 
+                })
+                , JsonRequestBehavior.AllowGet);
         }
     }
 }

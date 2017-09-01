@@ -27,54 +27,54 @@
                     Id comanda
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model=>model.order.OrderID)
+                    @Html.DisplayFor(model=>model.order.OrderID)<br />
                 </dd>
+                <dt>
+                   Companie
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.order.Customer.CompanyName)<br />
+                </dd>
+
+                <dt>
+                    Prenume
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.order.Employee.LastName)<br />
+                </dd>
+
                 <dt>
                     Nume Companie
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Customer.CompanyName)
+                    @Html.DisplayFor(model => model.order.Shipper.CompanyName)<br />
                 </dd>
 
                 <dt>
-                   Prenume
+                    Data livrarii
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Employee.LastName)
+                    @Html.DisplayFor(model => model.order.ShippedDate)<br />
                 </dd>
 
                 <dt>
-                  Nume Companie
+                    Numele livrarii
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Shipper.CompanyName)
+                    @Html.DisplayFor(model => model.order.ShipName)<br />
                 </dd>
 
                 <dt>
-                 Data livrarii
+                    Adresa livrarii
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShippedDate)
-                </dd>
-
-                <dt>
-                   Numele livrarii
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.order.ShipName)
-                </dd>
-
-                <dt>
-               Adresa livrarii
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.order.ShipAddress)
+                    @Html.DisplayFor(model => model.order.ShipAddress)<br />
                 </dd>
 
                 <dt>
@@ -82,7 +82,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipCity)
+                    @Html.DisplayFor(model => model.order.ShipCity)<br />
                 </dd>
 
                 <dt>
@@ -90,30 +90,31 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipCountry)
+                    @Html.DisplayFor(model => model.order.ShipCountry)<br />
                 </dd>
 
             </dl>
 
             <p>
-                @Html.ActionLink("Modifica", "Edit", new { id = Model.order.OrderID }) |
-                @Html.ActionLink("Inapoi la lista", "Index")
+               @Html.ActionLink("Modifica", "Edit", "Orders", new { id = Model.order.OrderID }, new { @class = "btn btn-default" }) |   
+               @Html.ActionLink("Inapoi la lista", "Index", "Orders", new { @class = "btn btn-default" })  
+              
             </p>
         </div>
         <div class="col-md-6">
             <h4>Detalii Comanda</h4>
             <hr />
-            @Html.ActionLink("Adauga", "Create", "OrderDetail",new { id=ViewBag.orderid },null)
-            <hr />
+            @Html.ActionLink("Adauga", "Create", "OrderDetail", new { id = ViewBag.orderid }, new { @class = "btn btn-default" }) 
+            <br /><br /><br />
            @foreach (var y in Model.details)
            {
               <dl class="dl-horizontal">
 
-                <dt>
+                <dt><br />
                    Id-ul Produsului 
                 </dt>
 
-                <dd>
+                <dd><br />
                     @y.ProductID
                 </dd>
 
@@ -140,17 +141,14 @@
                 <dd>
                     @y.Discount
                 </dd> 
-                  <p>
-                      @Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID },null ) |
-                      @Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, null)
-                  </p>
+                  <dt>
+                     @Html.ActionLink("Modifica", "Edit","OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, new { @class = "btn btn-default" }) |
+                  
+                      @Html.ActionLink("Sterge", "Delete", "OrderDetail", new { OrderID = @y.OrderID, ProductID = @y.ProductID }, new { @class = "btn btn-default"  })
+                  </dt><br />
             </dl>
            }
            
-
-            <p>
-                @Html.ActionLink("Inapoi la lista", "Index")
-            </p>
         </div>
     </div>
 

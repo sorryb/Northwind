@@ -1,9 +1,25 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    Layout = "_Layout.cshtml";
+    ViewBag.Title = "Eroare";
 }
+<div class="list-header clearfix container">
+    <span style="font-size:60px;font-weight:bold;color:#ff6a00">Eroare</span>
+</div>
+<div class="list-sfs-holder container">
+    @if (Model != null && HttpContext.Current.IsDebuggingEnabled)
+    {
+        <div>
+            <br /><br /><br />
+            <b>Mesaj:</b> @Model.Exception.Message<br />
+            @if (User.IsInRole("Admins"))
+            {
+                <b>Controller:</b> @Model.ControllerName<br />
+                    <b>Action:</b> @Model.ActionName<br /><br /><br />
+                    <a class="btn btn-default" href="@Request.Url.AbsoluteUri">Inapoi</a>
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
+            }
+        </div>
+    }
+</div>

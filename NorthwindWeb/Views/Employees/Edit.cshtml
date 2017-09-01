@@ -14,7 +14,7 @@
         @Html.ActionLink("Dashboard", "Home", "Dashboard")
     </li>
     <li>
-        @Html.ActionLink("Angajati", "Index", "Orders")
+        @Html.ActionLink("Angajati", "Index", "Employees")
     </li>
     <li class="active">Modifica</li>
 </ol>
@@ -167,7 +167,7 @@
 }
 
 <div>
-    @Html.ActionLink("Inapoi", "Index")
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" }) 
 </div>
 
 @section Scripts {

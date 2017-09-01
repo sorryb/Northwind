@@ -28,7 +28,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.CategoryName)
+                @Html.DisplayFor(model => model.CategoryName)<br />
             </dd>
 
             <dt>
@@ -36,12 +36,13 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Description)
+                @Html.DisplayFor(model => model.Description)<br />
             </dd>
 
         </dl>
 </div>
 <p>
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.CategoryID }) |
-    @Html.ActionLink("Inapoi", "Index")
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.CategoryID }, new { @class = "btn btn-default" })
+   
 </p>

@@ -13,8 +13,21 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Dashboard", "Home", "Dashboard")
+            </li>
+            <li>
+                @Html.ActionLink("Categorii", "Index", "Categories")
+            </li>
+            <li class="active">Adauga</li>
+            
+            
+        </ol>
+        <hr />
         <h4>Categorie</h4>
         <hr />
+
         @Html.ValidationSummary(true)
         <div class="form-group">
             <span class="control-label col-md-2 bold"><strong>Nume Categorie</strong></span>
@@ -41,7 +54,7 @@
 }
 
 <div>
-    @Html.ActionLink("Inapoi", "Index")
+    @Html.ActionLink("Inapoi", "Index",null , new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {

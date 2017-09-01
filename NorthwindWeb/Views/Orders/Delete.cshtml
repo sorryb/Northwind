@@ -1,4 +1,4 @@
-﻿@model NorthwindWeb.Models.Orders
+﻿@model NorthwindWeb.ViewModels.Orders.OrderDetali
 
 @{
     ViewBag.Title = "Sterge";
@@ -17,81 +17,66 @@
         <li class="active">Sterge</li>
     </ol>
 
-    <h3>Sigur doresti sa stergi?</h3>
+    <h3>Sigur doresti sa stergi aceasta comanda si detaliile ei?</h3>
     <div>
+    <div class="col-md-6">
         <h4>Comenzi</h4>
         <hr />
         <dl class="dl-horizontal">
+            <dt>
+                Id Comanda
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.order.OrderID)
+            </dd>
+
+            <dt>
+                Companie
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.order.Customer.CompanyName)
+            </dd>
+
+            <dt>
+                Prenume
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.order.Employee.LastName)
+            </dd>
+
             <dt>
                 Nume Companie
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Customer.CompanyName)
+                @Html.DisplayFor(model => model.order.Shipper.CompanyName)
             </dd>
 
             <dt>
-                Nume Angajat
+                Data livrarii
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Employee.LastName)
+                @Html.DisplayFor(model => model.order.ShippedDate)
             </dd>
 
             <dt>
-                Expeditor
+                Numele livrarii
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.Shipper.CompanyName)
+                @Html.DisplayFor(model => model.order.ShipName)
             </dd>
 
             <dt>
-                Data comanda
+                Adresa livrarii
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.OrderDate)
-            </dd>
-
-            <dt>
-                Data ceruta
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.RequiredDate)
-            </dd>
-
-            <dt>
-                Data livrare
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ShippedDate)
-            </dd>
-
-            <dt>
-                Incarcatura
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Freight)
-            </dd>
-
-            <dt>
-                Nume Expeditor
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ShipName)
-            </dd>
-
-            <dt>
-                Adresa
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ShipAddress)
+                @Html.DisplayFor(model => model.order.ShipAddress)
             </dd>
 
             <dt>
@@ -99,23 +84,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.ShipCity)
-            </dd>
-
-            <dt>
-                Regiune
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ShipRegion)
-            </dd>
-
-            <dt>
-                Cod postal
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ShipPostalCode)
+                @Html.DisplayFor(model => model.order.ShipCity)
             </dd>
 
             <dt>
@@ -123,10 +92,53 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.ShipCountry)
+                @Html.DisplayFor(model => model.order.ShipCountry)
             </dd>
 
         </dl>
+      </div>
+        <div class="col-md-6">
+            <h4>Detalii Comanda</h4>
+            <hr />
+            @foreach (var y in Model.details)
+            {
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        Id-ul Produsului
+                    </dt>
+
+                    <dd>
+                        @y.ProductID
+                    </dd>
+
+                    <dt>
+                        Cantitate
+                    </dt>
+
+                    <dd>
+                        @y.Quantity
+                    </dd>
+
+                    <dt>
+                        Preț unitar
+                    </dt>
+
+                    <dd>
+                        @decimal.Round(y.UnitPrice ?? 0, 2).ToString() lei
+                    </dd>
+
+                    <dt>
+                        Discount
+                    </dt>
+
+                    <dd>
+                        @y.Discount
+                    </dd>
+                </dl>
+            }
+
+        </div>
 
         @using (Html.BeginForm())
         {
@@ -134,7 +146,7 @@
 
             <div class="form-actions no-color">
                 <input type="submit" value="Sterge" class="btn btn-default" /> |
-                @Html.ActionLink("Inapoi la lista", "Index")
+      @Html.ActionLink("Inapoi la lista", "Index", "Orders", new { @class = "btn btn-default" }) 
             </div>
         }
     </div>

@@ -11,14 +11,14 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li id="orders">
-                                @Html.ActionLink("Lista Comenzi", "Home1", "Order")
+                                @Html.ActionLink("Lista Comenzi", "Home", "Order")
                             </li>
                             <li id="userOrders">
-                                @Html.ActionLink("Comenzi '" + User.Identity.GetUserName() +"'", "Home1", "Order")
+                                @Html.ActionLink("Comenzi '" + User.Identity.GetUserName() +"'", "Home", "Order")
                             </li>
                         </ul>
                     </li>
-                    if (userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
+                    if (userManager.IsInRole(User.Identity.GetUserId(),"Admins"))
         {
                     <li id="dashboard">
                         

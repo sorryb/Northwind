@@ -1,9 +1,8 @@
-﻿@model NorthwindWeb.Models.Categories
-
-@{
-    ViewBag.Title = "Sterge";
+﻿@{
+    ViewBag.Title = "Delete User";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+@model NorthwindWeb.ViewModels.UserInfoViewModel
 
 <h2>Sterge</h2>
 <hr />
@@ -12,42 +11,43 @@
         @Html.ActionLink("Dashboard", "Home", "Dashboard")
     </li>
     <li>
-        @Html.ActionLink("Categorii", "Index", "Orders")
+        @Html.ActionLink("Utilizatorii", "Index", "Account")
     </li>
     <li class="active">Sterge</li>
 </ol>
 
 <h3>Esti sigur ca vrei sa-l stergi?</h3>
 <div>
-    <h4>Categorie</h4>
+    <h4>User</h4>
     <hr />
-    
+
     <dl class="dl-horizontal">
         <dt>
-            Nume Categorie
+           User
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CategoryName)
+            @Html.DisplayFor(model => model.UserName)
         </dd>
 
         <dt>
-            Descriere
+           Email
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            @Html.ActionLink("Inapoi", "Index", "Categories", new { @class = "btn btn-default" })
-            <input type="submit" value="Sterge" class="btn btn-default" /> 
-            
+            @Html.ActionLink("Sterge", "Delete", new { userName = Model.UserName },new { @class= "btn btn-default" })  
+            @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
         </div>
     }
 </div>
+

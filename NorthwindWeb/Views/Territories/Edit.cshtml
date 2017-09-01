@@ -1,10 +1,10 @@
 ﻿@model NorthwindWeb.Models.Territories
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modifica";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container">
+
     <h2>Modifica</h2>
     <hr />
     <ol class="breadcrumb">
@@ -31,7 +31,7 @@
             @Html.ValidationSummary(true)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TerritoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TerritoryID,"ID Teritoriu", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.TerritoryID)
                     @Html.ValidationMessageFor(model => model.TerritoryID)
@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TerritoryDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TerritoryDescription,"Descriere Teritoriu", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.TerritoryDescription)
                     @Html.ValidationMessageFor(model => model.TerritoryDescription)
@@ -55,9 +55,9 @@
     }
 
     <div>
-        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, null)
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, new { @class = "btn btn-default" })
     </div>
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

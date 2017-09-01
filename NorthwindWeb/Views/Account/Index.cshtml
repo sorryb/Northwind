@@ -6,67 +6,91 @@
 }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
+    <h1>@ViewBag.Title</h1>
 </hgroup>
 
 
 
+<ol class="breadcrumb">
 
-<p>
-    @Html.ActionLink("Utilizator nou", "Register")  
-</p>
-<table id="UsersTable" class="table" >
-    <thead>
-    <tr>
-        <th></th>
-        <th>
-            UserName
-        </th>
-        <th>
-            Email
-        </th>
-        <th>
-            LastActiveDateTime
-        </th>
-        <th>
-            IsLockedOut
-        </th>
-        <th>
-            IsOnline
-        </th>
-        <th>
-            Sterge
-        </th>
-    </tr>
-</thead>
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.ActionLink("Manage", "ChangeUser", new { userName = item.UserName }, new { onclick = "if (!confirm('Sunteti sigur ca doriti sa-l modificati pe ' + item.UserName'?')) return false;" }) 
-        </td>
-        <td>
-            @item.UserName  
-        </td>
-        <td>
-            @item.Email  
-        </td>
-        <td>
-            @String.Format("{0:g}", item.LastActiveDateTime)  
-        </td>
-        <td>          
-            @(item.IsLockedOut ? "Yes" : "No") 
-        </td>
-        <td>
-            @(item.IsOnline ? "Yes":"No" ) 
-        </td>
-        <td>
-            @Html.ActionLink("Sterge", "Delete", new { userName = item.UserName }, new { onclick = "if (!confirm('Sunteti sigur ca doriti sa-l stergeti ?')) return false;" }) 
-        </td>
-    </tr>  
- } 
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
 
-</table>
+    <li class="active">Utilizatori</li>
+</ol>
+<hr />
+<div>
+    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Utilizator nou", "Register", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
 
+</div>
+<br />
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    Utilizatori
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table id="UsersTable" class="table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                UserName
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                LastActiveDateTime
+                            </th>
+                            <th>
+                                IsLockedOut
+                            </th>
+                            <th>
+                                IsOnline
+                            </th>
+                            <th>
+                                Sterge
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    @*@foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("Manage", "ChangeUser", new { userName = item.UserName }, new { onclick = "if (!confirm('Sunteti sigur ca doriti sa-l modificati pe ' + item.UserName'?')) return false;" })
+                                </td>
+                                <td>
+                                    @item.UserName
+                                </td>
+                                <td>
+                                    @item.Email
+                                </td>
+                                <td>
+                                    @String.Format("{0:g}", item.LastActiveDateTime)
+                                </td>
+                                <td>
+                                    @(item.IsLockedOut ? "Yes" : "No")
+                                </td>
+                                <td>
+                                    @(item.IsOnline ? "Yes":"No" )
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sterge", "Delete", new { userName = item.UserName }, new { onclick = "if (!confirm('Sunteti sigur ca doriti sa-l stergeti ?')) return false;" })
+                                </td>
+                            </tr>
+                         }*@
 
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
 

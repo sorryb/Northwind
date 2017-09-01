@@ -6,7 +6,15 @@
 }
 
 <h2>Adauga</h2>
-
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Expeditori", "Index", "Shippers")
+    </li>
+    <li class="active">Adauga</li>
+</ol>
 
 @using (Html.BeginForm()) 
 {
@@ -41,7 +49,7 @@
 }
 
 <div>
-    @Html.ActionLink("Inapoi", "Index")
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<NorthwindWeb.Models.Territories>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Teritorii";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 
@@ -30,9 +30,9 @@
             @Html.DisplayFor(modelItem => item.TerritoryDescription)
         </td>
         <td>
-            @Html.ActionLink("Modifica", "Edit", new { id=item.TerritoryID }) |
-            @Html.ActionLink("Detalii", "Details", new { id=item.TerritoryID }) |
-            @Html.ActionLink("Sterge", "Delete", new { id=item.TerritoryID })
+           @Html.ActionLink("Modifica", "Edit", new { id=item.TerritoryID },new { @class = "btn btn-default"}) |
+    @Html.ActionLink("Detalii", "Details", new { id=item.TerritoryID },new { @class = "btn btn-default"}) |
+    @Html.ActionLink("Sterge", "Delete", new { id=item.TerritoryID },new { @class = "btn btn-default"})
         </td>
     </tr>
 }

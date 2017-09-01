@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NorthwindWeb.ViewModels.RoleInfoViewModel> 
+﻿@model IEnumerable<NorthwindWeb.ViewModels.RoleInfoViewModel>
 
 @{
     ViewBag.Title = "Lista roluri";
@@ -9,39 +9,48 @@
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 
+<ol class="breadcrumb">
 
-<p>
-    @Html.ActionLink("Rol nou", "CreateRole")  
-</p>
-<table id="RolesTable" class="table">
-    <thead>
-    <tr>
-        <th>
-            Stergere
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Membri in Rol
-        </th>
-    </tr>
-    </thead>
-@foreach (var item in Model) {  
-    <tr>
-        <td>
-            @*@Html.ActionLink("Delete", "RoleDelete", new { roleName = item.Name }, new  {onclick="if (!confirm('Confirm Delete?')) return false;" })*@ 
-            <a onclick="alert('Nu aveti dreptul de a efectua aceasta operatie!')"> Delete</a>
-        </td>
-        <td>
-            @item.Name  
-        </td>
-        <td>
-            @Html.ActionLink("Membrii", "RoleMembership", new { roleName = item.Name, name=item.Name })  
-        </td>
-    </tr>  
-  }  
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
 
-</table>
+    <li class="active">Roluri</li>
+</ol>
+<hr />
 
+<div>
+    @*<button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Rol nou", "CreateRole",null, htmlAttributes: new { style = "text-decoration:none; color:#333" })</button>*@
+    @Html.ActionLink("Rol nou", "CreateRole", null, new { @class= "btn btn-default" })
+</div>
+<br />
+<br />
+<br />
 
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>
+            Roluri
+        </h4>
+    </div>
+    <div class="panel-body">
+        <table id="RolesTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Stergere
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Membri in Rol
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+
+        </table>
+
+    </div>
+</div>

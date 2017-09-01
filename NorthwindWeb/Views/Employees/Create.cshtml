@@ -5,7 +5,16 @@
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
 <h2>Adauga</h2>
-
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Angajati", "Index", "Employees")
+    </li>
+    <li class="active">Adauga</li>
+</ol>
 
 @using (Html.BeginForm())
 {
@@ -152,7 +161,7 @@
 }
 
 <div>
-    @Html.ActionLink("Inapoi", "Index")
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" }) 
 </div>
 
 @section Scripts {

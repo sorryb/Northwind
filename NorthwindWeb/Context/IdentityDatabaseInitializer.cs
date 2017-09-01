@@ -12,7 +12,7 @@ namespace NorthwindWeb.Context
     /// </summary>
     public class IdentityDatabaseInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
-
+        NorthwindModel db = new NorthwindModel();
         /// <summary>
         /// Seed database ; fill tables.
         /// </summary>
@@ -32,47 +32,63 @@ namespace NorthwindWeb.Context
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
-                // In Startup iam creating first Admin Role and creating a default Admin User    
-                if (!roleManager.RoleExists("Admins"))
+            // In Startup iam creating first Admin Role and creating a default Admin User    
+            if (!roleManager.RoleExists("Admins"))
+            {
+
+                // first we create Admin rool   
+                var role = new IdentityRole();
+                role.Name = "Admins";
+                roleManager.Create(role);
+
+                //Here we create a Admin super user who will maintain the website                  
+
+                var user = new ApplicationUser();
+                user.UserName = "admin";
+                user.Email = "admin@gmail.com";
+                AddUser(userManager, user, "123456");
+
+                //-create a user for tests
+                var testUser = new ApplicationUser();
+                testUser.UserName = "tester";
+                testUser.Email = "Tester_1@gmail.com";
+                AddUser(userManager, testUser, "Tester_1");
+
+
+            }
+
+            // creating Creating Manager role    
+            if (!roleManager.RoleExists("Managers"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Managers";
+                roleManager.Create(role);
+
+            }
+
+            // creating Creating Employee role    
+            if (!roleManager.RoleExists("Employees"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Employees";
+                roleManager.Create(role);
+
+                var employees = db.Employees;
+
+                foreach(var itemEmployee in employees)
                 {
+                    var employee = new ApplicationUser();
+                    employee.UserName = itemEmployee.FirstName+itemEmployee.LastName;
+                    employee.Email = itemEmployee.FirstName+"@gmail.com";
+                    userManager.Create(employee, itemEmployee.FirstName + itemEmployee.LastName);
+                    
+                    var currentUser = userManager.FindByName(itemEmployee.FirstName+itemEmployee.LastName);
 
-                    // first we create Admin rool   
-                    var role = new IdentityRole();
-                    role.Name = "Admins";
-                    roleManager.Create(role);
-
-                    //Here we create a Admin super user who will maintain the website                  
-
-                    var user = new ApplicationUser();
-                    user.UserName = "admin";
-                    user.Email = "admin@gmail.com";
-                    AddUser(userManager, user, "123456");
-
-                    //-create a user for tests
-                    var testUser = new ApplicationUser();
-                    testUser.UserName = "tester";
-                    testUser.Email = "Tester_1@gmail.com";
-                    AddUser(userManager, testUser, "Tester_1");
+                    var rol=userManager.AddToRole(currentUser.Id, "Employees");
                 }
 
-                // creating Creating Manager role    
-                if (!roleManager.RoleExists("Managers"))
-                {
-                    var role = new IdentityRole();
-                    role.Name = "Managers";
-                    roleManager.Create(role);
+            }
 
-                }
-
-                // creating Creating Employee role    
-                if (!roleManager.RoleExists("Employees"))
-                {
-                    var role = new IdentityRole();
-                    role.Name = "Employees";
-                    roleManager.Create(role);
-
-                }
-            
         }
 
         private static void AddUser(UserManager<ApplicationUser> userManager, ApplicationUser user, string userPWD)

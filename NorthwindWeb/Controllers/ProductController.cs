@@ -11,32 +11,23 @@ using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
 using PagedList;
 using System.Web.Helpers;
+using NorthwindWeb.Models.ServerClientCommunication;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
 
     [Authorize]
-    public class ProductController : Controller, IJsonTableFill
+    public class ProductController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Product
-        public ActionResult Index(string category = "", string search = "", int page = 1)
+        public ActionResult Index(string category = "")
         {
-            IOrderedQueryable<Products> products;
+            //category from browser adress is used also in JsonTableFill action
             ViewBag.category = category;
-
-            if (category.Equals(""))
-            {
-                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
-            }
-            else
-            {
-                products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.Category.CategoryName.Equals(category) && p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
-            }
-            //int pageSize = 15;
-            //int pageNumber = page;
-            return View(products.ToList());
+            return View();
         }
 
         // GET: Product/Details/5
@@ -125,6 +116,7 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -135,6 +127,7 @@ namespace NorthwindWeb.Controllers
                 return HttpNotFound();
             }
             return View(products);
+
         }
 
         // POST: Product/Delete/5
@@ -143,10 +136,17 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Products products = await db.Products.FindAsync(id);
-            db.Products.Remove(products);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                Products products = await db.Products.FindAsync(id);
+                db.Products.Remove(products);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                throw new DeleteException("Acest produs nu a putut fi sters. ID produs: " + id + ". Este posibil ca acest produs sa fie pe comenzi. Ia in considerare si varianta de a-l face indisponibil");
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -158,14 +158,111 @@ namespace NorthwindWeb.Controllers
             base.Dispose(disposing);
         }
 
-        // GET: Product by Json
-        public JsonResult JsonTableFill(string search = "")
-        {
-            var products = db.Products.Include(p => p.Category).Include(p => p.Supplier).Where(p => p.ProductName.Contains(search)).OrderBy(x => x.ProductID);
 
-            /*Select what wee need in table*/
-            return Json(
-                products.Select(x => new {
+        // GET: Product by Json
+        public JsonResult JsonTableFill(int draw, int start, int length)
+        {
+            const int TOTAL_ROWS = 999;
+
+            string category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
+            string search = Request.QueryString["search[value]"] ?? "";
+            int sortColumn = -1;
+            string sortDirection = "asc";
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+            //list of product that contain "search"
+            var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)
+                .Where(p => (p.ProductName.Contains(search) || p.ProductID.ToString().Contains(search)
+                || p.Discontinued.ToString().Contains(search) || p.Supplier.CompanyName.Contains(search)) && p.Category.CategoryName.Contains(category));
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto FirstColumn;
+                case 0: //first column
+                    FirstColumn:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.ProductName);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.ProductName);
+                    }
+                    break;
+                case 1: //second column
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.UnitPrice);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.UnitPrice);
+                    }
+                    break;
+                case 2: // and so on
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.UnitsInStock);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.UnitsInStock);
+                    }
+                    break;
+                case 3:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.UnitsOnOrder);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.UnitsOnOrder);
+                    }
+                    break;
+                case 4:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.ReorderLevel);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.ReorderLevel);
+                    }
+                    break;
+                case 5:
+                    if (sortDirection == "asc")
+                    {
+                        list = list.OrderBy(x => x.Discontinued);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.Discontinued);
+                    }
+                    break;
+            }
+
+            //objet that whill be sent to client
+            JsonDataTableObject dataTableData = new JsonDataTableObject()
+            {
+                draw = draw,
+                recordsTotal = db.Products.Count(),
+                data = list.Skip(start).Take(length).Select(x => new
+                {
                     ID = x.ProductID,
                     ProductName = x.ProductName,
                     Price = x.UnitPrice,
@@ -173,8 +270,14 @@ namespace NorthwindWeb.Controllers
                     OnOrders = x.UnitsOnOrder,
                     ReorderLevel = x.ReorderLevel,
                     Discontinued = x.Discontinued
-                })
-                , JsonRequestBehavior.AllowGet);
+                }),
+                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+            };
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
     }
+
+
+
+
 }

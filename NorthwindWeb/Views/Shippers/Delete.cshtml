@@ -12,7 +12,7 @@
         @Html.ActionLink("Dashboard", "Home", "Dashboard")
     </li>
     <li>
-        @Html.ActionLink("Expeditori", "Index", "Orders")
+        @Html.ActionLink("Expeditori", "Index", "Shippers")
     </li>
     <li class="active">Sterge</li>
 </ol>
@@ -44,8 +44,9 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Sterge" class="btn btn-default" /> |
-            @Html.ActionLink("Inapoi", "Index")
+            @Html.ActionLink("Inapoi", "Index", "Shippers", new { @class = "btn btn-default" })
+            <input type="submit" value="Sterge" class="btn btn-default" />
+            
         </div>
     }
 </div>

@@ -1,10 +1,10 @@
 ﻿@model NorthwindWeb.Models.Region
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Modifica";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
-<div class="container">
+
     <h2>Modifica</h2>
     <hr />
     <ol class="breadcrumb">
@@ -29,7 +29,7 @@
             @Html.HiddenFor(model => model.RegionID)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.RegionDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.RegionDescription,"Descriere regiune", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.RegionDescription)
                     @Html.ValidationMessageFor(model => model.RegionDescription)
@@ -45,9 +45,10 @@
     }
 
     <div>
-        @Html.ActionLink("Inapoi la lista", "Index")
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, new { @class = "btn btn-default" })
+        
     </div>
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -10,6 +10,7 @@
 }
 <h1>Dashboard</h1>
 <div class="row">
+    <!--Number Total Sales-->
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -32,6 +33,7 @@
             </a>
         </div>
     </div>
+    <!--Number Total Products Sold-->
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-green">
             <div class="panel-heading">
@@ -54,6 +56,7 @@
             </a>
         </div>
     </div>
+    <!--Number Total Employees-->
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-yellow">
             <div class="panel-heading">
@@ -76,6 +79,7 @@
             </a>
         </div>
     </div>
+    <!--Number Total Customers-->
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-red">
             <div class="panel-heading">
@@ -135,13 +139,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.SalesPerQuarter)
+                                    @foreach (var itemSalesPerQuarter in Model.SalesPerQuarter)
                                     {
                                         <tr>
-                                            <td>@item.Year</td>
-                                            <td>@item.a</td>
-                                            <td>@item.b</td>
-                                            <td>@item.c</td>
+                                            <td>@itemSalesPerQuarter.Year</td>
+                                            <td>@itemSalesPerQuarter.dashboardMorrisBarColumA</td>
+                                            <td>@itemSalesPerQuarter.dashboardMorrisBarColumB</td>
+                                            <td>@itemSalesPerQuarter.dashboardMorrisBarColumC</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -159,18 +163,19 @@
 
         </div>
     </div>
-    <!--Sales by Category-->
+   
     <div class="col-lg-4">
         <!--Sales by Category-->
         <div class="panel panel-default">
             <!--Sales by Category panel -->
             <div class="panel-heading">
-                <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe categori ($)
+                <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe categorii de produse($)
             </div>
             <!--Morris Donut panel/ sales by category-->
             <div class="panel-body">
                 <div id="morris-donut-chart"></div>
-                @Html.ActionLink("Vizualizati Categoriile", "Index", "Product", null, new { @class = "btn btn-default btn-block" })
+
+                @Html.ActionLink("Vizualizati Produsele", "Index", "Product", null, new { @class = "btn btn-default btn-block" })
 
             </div>
 
@@ -185,14 +190,14 @@
             <div class="panel-body">
                 <div class="list-group">
 
-                    @foreach (var item in Model.LastTenOrders)
+                    @foreach (var itemLastTenOrders in Model.LastTenOrders)
                     {
 
 
-                        <a href="@Url.Action("Details","Orders",new { id = item.OrderID},null)" class="list-group-item">
-                            @item.OrderID
+                        <a href="@Url.Action("Details","Orders",new { id = itemLastTenOrders.OrderID},null)" class="list-group-item">
+                            @itemLastTenOrders.OrderID
                             <span class="pull-right text-muted small">
-                                <em>@item.Ago</em>
+                                <em>@itemLastTenOrders.Ago</em>
                             </span>
                         </a>
 
