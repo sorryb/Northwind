@@ -25,10 +25,6 @@ namespace NorthwindWeb.Controllers
         // GET: Product
         public ActionResult Index(string category = "")
         {
-            
-                throw new DeleteException("acesta este un test");
-            
-
             //category from browser adress is used also in JsonTableFill action
             ViewBag.category = category;
             return View();
@@ -120,6 +116,7 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -130,6 +127,7 @@ namespace NorthwindWeb.Controllers
                 return HttpNotFound();
             }
             return View(products);
+
         }
 
         // POST: Product/Delete/5
@@ -138,10 +136,17 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Products products = await db.Products.FindAsync(id);
-            db.Products.Remove(products);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                Products products = await db.Products.FindAsync(id);
+                db.Products.Remove(products);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                throw new DeleteException("Acest produs nu a putut fi sters. ID produs: " + id + ". Este posibil ca acest produs sa fie pe comenzi. Ia in considerare si varianta de a-l face indisponibil");
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -180,7 +185,7 @@ namespace NorthwindWeb.Controllers
 
             //list of product that contain "search"
             var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)
-                .Where(p => (p.ProductName.Contains(search) || p.ProductID.ToString().Contains(search) 
+                .Where(p => (p.ProductName.Contains(search) || p.ProductID.ToString().Contains(search)
                 || p.Discontinued.ToString().Contains(search) || p.Supplier.CompanyName.Contains(search)) && p.Category.CategoryName.Contains(category));
 
             //order list
@@ -250,7 +255,7 @@ namespace NorthwindWeb.Controllers
                     }
                     break;
             }
-            
+
             //objet that whill be sent to client
             JsonDataTableObject dataTableData = new JsonDataTableObject()
             {
@@ -273,6 +278,6 @@ namespace NorthwindWeb.Controllers
     }
 
 
-   
+
 
 }
