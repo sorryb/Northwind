@@ -137,15 +137,7 @@ namespace NorthwindWeb.Controllers
                     throw new DeleteException("Angajatul nu poate fi sters pentru ca detine comenzi");
                 if (employees.Employees1.Any())
                     throw new DeleteException("Angajatul nu poate fi sters pentru ca angajati in subordine");
-                //db.Database.SqlQuery<string>($@"
-                //    delete from EmployeeTerritories 
-                //    where EmployeeID in 
-                //    (
-                //        select EmployeeID from EmployeeTerritories
-                //        left join Employees on EmployeeTerritories.EmployeeID=Employees.EmployeeID
-                //        where Employees.EmployeeID={id}
-                //    )
-                //", null);
+                employees.Territories.Clear();
                 db.Employees.Remove(employees);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
