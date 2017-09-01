@@ -31,6 +31,7 @@
     <legend> Adaugare utilizatori </legend>
       <div class="editor-field" >
         @Html.DropDownList("UserList", ViewData["UsersNotInRole"] as IEnumerable<System.Web.Mvc.SelectListItem>, "Alege un user", new { @style = "font-size:150%" }) 
+        
 
         <input name="submit" id = "submit" type="submit" value="Adauga" />
       </div>

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using PagedList;
 using NorthwindWeb.Models.ServerClientCommunication;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -128,20 +129,23 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            //if(db.Orders.Any())
-            //db.Database.SqlQuery<string>($@"
-            //    delete from EmployeeTerritories 
-            //    where EmployeeID in 
-            //    (
-            //        select EmployeeID from EmployeeTerritories
-            //        left join Employees on EmployeeTerritories.EmployeeID=Employees.EmployeeID
-            //        where Employees.EmployeeID={id}
-            //    )
-            //", null)
+
             Employees employees = await db.Employees.FindAsync(id);
-            db.Employees.Remove(employees);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            try
+            {
+                if (employees.Orders.Any())
+                    throw new DeleteException("Angajatul nu poate fi sters pentru ca detine comenzi");
+                if (employees.Employees1.Any())
+                    throw new DeleteException("Angajatul nu poate fi sters pentru ca angajati in subordine");
+                employees.Territories.Clear();
+                db.Employees.Remove(employees);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            catch (DeleteException e)
+            {
+                throw e;
+            }
         }
 
         protected override void Dispose(bool disposing)
