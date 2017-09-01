@@ -2033,3 +2033,84 @@ else
 begin
 	update Products	set ProductName = 'Recuperare date iOS', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 160, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 88;
 end
+
+drop table #CustomersIDSelect;
+drop table #ServicesIDRow;
+
+-- add 20 order for services
+if(not exists (
+	select * from [Order Details]
+	left join Products on [Order Details].ProductID = Products.ProductID
+	left join Categories on Products.CategoryID = Categories.CategoryID
+	where Categories.CategoryName = 'Servicii'
+))
+begin
+	begin transaction
+		--declare variable for orders
+		declare @orderID int;
+		declare @serviceID int = 0;
+		declare @customerRow int = 0;
+		declare @employeeID int = 0;
+		declare @shipperID int = 0;
+
+		SELECT Customers.CustomerID,Customers.[Address], City, Region, PostalCode, Country, ROW_NUMBER() OVER (ORDER BY CustomerID) AS 'RowNumber' into #CustomersIDSelect
+		FROM Customers;
+
+		select ProductID, UnitPrice, ROW_NUMBER() OVER (ORDER BY ProductID) AS 'RowNumber' into #ServicesIDRow 
+		from Products left join Categories on Products.CategoryID = Categories.CategoryID where CategoryName = 'Servicii';
+				
+		--with this while we add orders
+		declare @i int = 0;
+		while(@i < 20)
+		begin
+			
+			--insert 20 orders
+			insert into Orders Values(
+				(select CustomerID from #CustomersIDSelect where RowNumber = @customerRow%(select count(CustomerID) from Customers) + 1), --customerID
+				(@employeeID%(select count(Employees.EmployeeID) from Employees) + 1), --EmployeeID
+				'2015-01-01', --orderDate
+				'2015-010-01', --RequiredDate
+				'2015-06-01', --ShippedDate
+				(@shipperID%(select count(Shippers.ShipperID) from Shippers) + 1), --ShiperID
+				1, --incarcatura
+				'Servicii', --nume transport
+				(select [Address] from #CustomersIDSelect where RowNumber = (@customerRow%(select count(CustomerID) from #CustomersIDSelect) + 1)),
+				(select City from #CustomersIDSelect where RowNumber = (@customerRow%(select count(CustomerID) from #CustomersIDSelect) + 1)),
+				(select Region from #CustomersIDSelect where RowNumber = (@customerRow%(select count(CustomerID) from #CustomersIDSelect) + 1)),
+				(select PostalCode from #CustomersIDSelect where RowNumber = (@customerRow%(select count(CustomerID) from #CustomersIDSelect) + 1)),
+				(select Country from #CustomersIDSelect where RowNumber = (@customerRow%(select count(CustomerID) from #CustomersIDSelect) + 1))
+			);
+			
+			
+			--declare variable for order detail 
+			set @orderID = (select max(Orders.OrderID) from Orders);
+			--while for order details
+			declare @ii int = 0;
+			while(@ii < 5)
+			begin
+				insert into [Order Details] values(
+				@orderID,
+				(select ProductID from #ServicesIDRow where RowNumber = (@serviceID%(select count(ProductID) from #ServicesIDRow) + 1)),
+				(select UnitPrice from #ServicesIDRow where RowNumber = (@serviceID%(select count(ProductID) from #ServicesIDRow) + 1)),
+				1,
+				0
+				)
+				update Products 
+					set UnitsOnOrder = UnitsOnOrder + 1 
+					where ProductID = (select ProductID from [Order Details] where OrderID = @orderID and ProductID = (select ProductID from #ServicesIDRow where RowNumber = (@serviceID%(select count(ProductID) from #ServicesIDRow) + 1)));
+				set @ii = @ii + 1;
+			end
+
+			--increment
+			set @shipperID = @shipperID + 1;
+			set @employeeID = @employeeID + 1;
+			set @customerRow = @customerRow + 1;
+
+			set @i = @i + 1;
+		end
+		if(@@ERROR != 0)
+		begin
+			rollback transaction
+		end
+	commit transaction;
+end
