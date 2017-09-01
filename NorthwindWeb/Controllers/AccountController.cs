@@ -16,6 +16,7 @@ using System.Web;
 using NorthwindWeb.Context;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
+using System.Web.Security;
 
 namespace NorthwindWeb.Controllers
 {
@@ -522,39 +523,39 @@ namespace NorthwindWeb.Controllers
         }
 
         #region No Role Creation Dinamicaly
-        //[Authorize]
-        //[HttpPost]
-        //public ActionResult CreateRole(RoleInfoViewModel roleInfo)
-        //{
-        //    IdentityResult isCreated = null;
-        //    ApplicationDbContext context = new ApplicationDbContext();
+        [Authorize]
+        [HttpPost]
+        public ActionResult CreateRole(RoleInfoViewModel roleInfo)
+        {
+            IdentityResult isCreated = null;
+            ApplicationDbContext context = new ApplicationDbContext();
 
-        //    using (context)
-        //    {
-        //        var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            using (context)
+            {
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-        //        if (!roleManager.RoleExists(roleInfo.Name))
-        //        {
+                if (!roleManager.RoleExists(roleInfo.Name))
+                {
 
-        //            // first we create Admin rool   
-        //            var role = new IdentityRole();
-        //            role.Name = roleInfo.Name;
+                    // first we create Admin rool   
+                    var role = new IdentityRole();
+                    role.Name = roleInfo.Name;
 
-        //            isCreated = roleManager.Create(role);
+                    isCreated = roleManager.Create(role);
 
-        //            if (ViewData.Keys.Contains("RoleExists")) ViewData.Remove("RoleExists");
+                    if (ViewData.Keys.Contains("RoleExists")) ViewData.Remove("RoleExists");
 
-        //            ViewData["Success"] = "Role Created";
-        //        }
-        //        else
-        //            ViewData["RoleExists"] = "Un rol cu acest nume deja exista!";
-        //    }
+                    ViewData["Success"] = "Role Created";
+                }
+                else
+                    ViewData["RoleExists"] = "Un rol cu acest nume deja exista!";
+            }
 
-        //    if (isCreated.Succeeded)
-        //        return RedirectToAction("RolesIndex");
-        //    else
-        //        return RedirectToAction("Index", "Home");
-        //} 
+            if (isCreated.Succeeded)
+                return RedirectToAction("RolesIndex");
+            else
+                return RedirectToAction("Index", "Home");
+        }
         #endregion
 
         [Authorize]
@@ -628,18 +629,18 @@ namespace NorthwindWeb.Controllers
 
             return View(userInfoViewModel.AsQueryable());
         }
-
+     
         [HttpPost]
         public ActionResult RoleMembership(RoleInfoViewModel roleInfo)
         {
-            //var roleName = Request["name"];
-            //var userName = Request.Form["UserList"];
-            //if (!string.IsNullOrEmpty(userName) && !Roles.IsUserInRole(userName, roleName))
-            //    Roles.AddUsersToRole(new string[] { userName }, roleName);
+            var roleName = Request["name"];
+            var userName = Request.Form["UserList"];
+            if (!string.IsNullOrEmpty(userName) && !Roles.IsUserInRole(userName, roleName))
+                Roles.AddUsersToRole(new string[] { userName }, roleName);
 
 
-            ////return View(roleInfo);
-            ////return View(new RoleInfoModel() { Name = roleName });
+            //return View(roleInfo);
+            //return View(new RoleInfoModel() { Name = roleName });
             return RoleMembership();
         }
 
@@ -1003,23 +1004,7 @@ namespace NorthwindWeb.Controllers
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
-        //public JsonResult JsonTableRolesFill()
-        //{
-        //    var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-        //    var roleManager = new RoleManager<IdentityRole>(roleStore);
-
-        //    List<RoleInfoViewModel> roleInfoViewModel = new List<RoleInfoViewModel>();
-
-        //    foreach (var role in roleManager.Roles)
-        //        roleInfoViewModel.Add(new RoleInfoViewModel()
-        //        {
-        //            Name = role.Name
-        //        });
-
-           
-        //    /*Select what wee need in table*/
-        //    return Json(roleInfoViewModel.AsQueryable(), JsonRequestBehavior.AllowGet);
-        //}
+     
         public JsonResult JsonTableRolesFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;

@@ -20,7 +20,7 @@
             @Html.LabelFor(model => model.Name) 
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Name) 
+            @Html.TextBoxFor(model => model.Name, htmlAttributes: new { style = "text-decoration:none; color:#333" }) 
             @Html.ValidationMessageFor(model => model.Name) 
         </div>
 
@@ -30,7 +30,7 @@
     </fieldset>
 }
 
-@section Scripts {
+@*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-}
+}*@
 
