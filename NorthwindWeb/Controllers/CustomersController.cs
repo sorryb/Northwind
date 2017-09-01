@@ -11,6 +11,7 @@ using NorthwindWeb.Models;
 using PagedList;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.Interfaces;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -123,21 +124,21 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            //Customers customers = await db.Customers.FindAsync(id);
-            //db.Customers.Remove(customers);
-            //await db.SaveChangesAsync();
-            //return RedirectToAction("Index");
 
             var order = db.Orders.Any(o => o.CustomerID == id);
-            if (!order)
-            {
-                Customers customers = await db.Customers.FindAsync(id);
-                db.Customers.Remove(customers);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+           
+                if (!order)
+                {
+                    Customers customers = await db.Customers.FindAsync(id);
+                    db.Customers.Remove(customers);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
+                }
+            
             else
-                return RedirectToAction("Index","Orders");
+            {
+                throw new DeleteException("Clientul nu poate fi sters deoarece el are una sau mai multe comenzi.");
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -156,6 +156,8 @@ $(document).ready(function () {
     });
 
     $('#Suppliers').DataTable({
+        "processing": true,
+        "serverSide": true,
         "responsive": true,
         "autoWidth": false,
         "columnDefs": [
@@ -167,17 +169,15 @@ $(document).ready(function () {
             "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
-                $.each(json, function (index, item) {
-                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                    item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
+                $.each(json.data, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.SupplierID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.SupplierID + '"/>' + item.CompanyName + '</a >';
                 });
-                return json;
+                return json.data;
             }
         },
         "columns": [
-            {
-                'data': 'CompanyName'
-            },
+            { 'data': 'CompanyName' },
             { 'data': 'ContactName' },
             { 'data': 'ContactTitle' },
             { 'data': 'Address' },

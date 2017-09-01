@@ -16,8 +16,12 @@
                 <b>Exception:</b> @Model.Exception.Message<br />
                 <b>Controller:</b> @Model.ControllerName<br />
                 <b>Action:</b> @Model.ActionName<br /><br /><br />
+<<<<<<< HEAD
                 <a class= "btn btn-default" href="@Request.Url.AbsoluteUri">Inapoi</a>
                 
+=======
+                @Html.ActionLink("Inapoi", Model.ActionName, Model.ControllerName, null,htmlAttributes: new {@class= "btn btn-default" })
+>>>>>>> 6cfae9d14647c5d86260e5078175d8bd2efdc050
             </p>
         </div>
     }
