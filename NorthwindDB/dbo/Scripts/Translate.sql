@@ -2099,6 +2099,7 @@ begin
 					set UnitsOnOrder = UnitsOnOrder + 1 
 					where ProductID = (select ProductID from [Order Details] where OrderID = @orderID and ProductID = (select ProductID from #ServicesIDRow where RowNumber = (@serviceID%(select count(ProductID) from #ServicesIDRow) + 1)));
 				set @ii = @ii + 1;
+				set @serviceID = @serviceID + 1;
 			end
 
 			--increment
@@ -2114,3 +2115,4 @@ begin
 		end
 	commit transaction;
 end
+
