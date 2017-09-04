@@ -145,7 +145,13 @@ namespace NorthwindWeb.Controllers
             }
             catch (Exception e)
             {
-                throw new DeleteException("Acest produs nu a putut fi sters. ID produs: " + id + ". Este posibil ca acest produs sa fie pe comenzi. Ia in considerare si varianta de a-l face indisponibil");
+                string listOrders = "";
+                var ordersWhitProductID = db.Order_Details.Include(s => s.Order).Include(s => s.Product).Where(s => s.ProductID == id).Select(s => new { s.OrderID });
+                foreach(var i in ordersWhitProductID)
+                {
+                    listOrders = i.OrderID + ", ";
+                }
+                throw new DeleteException("Acest produs nu a putut fi sters deoarece se afla pe urmatoarele comenzi: " + listOrders + " .Ia in considerare si varianta de a-l face indisponibil");
             }
         }
 
