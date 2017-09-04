@@ -35,6 +35,7 @@ namespace NorthwindWeb.Controllers
             List<ViewModels.ReportViewModel> reports = new List<ViewModels.ReportViewModel>();
             ViewModels.ReportViewModel temp;
 
+            //loops through each <a> in links2 and records the reports' href and filename
             foreach (var linkloop in links2)
             {
                 string filename = linkloop.InnerHtml;

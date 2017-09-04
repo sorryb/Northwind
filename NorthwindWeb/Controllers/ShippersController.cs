@@ -14,6 +14,9 @@ using NorthwindWeb.Models.ExceptionHandler;
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
+    /// <summary>
+    /// Shippers Controller. For table Shippers
+    /// </summary>
     public class ShippersController : Controller, IJsonTableFill
     {
         private NorthwindModel db = new NorthwindModel();
@@ -31,6 +34,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Shipper
             Shippers shippers = await db.Shippers.FindAsync(id);
             if (shippers == null)
             {
@@ -72,6 +76,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Shipper
             Shippers shippers = await db.Shippers.FindAsync(id);
             if (shippers == null)
             {
@@ -105,6 +110,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Shipper
             Shippers shippers = await db.Shippers.FindAsync(id);
             if (shippers == null)
             {
@@ -119,6 +125,7 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            //take details of Shipper
             Shippers shippers = await db.Shippers.FindAsync(id);
             
             try 
@@ -132,22 +139,13 @@ namespace NorthwindWeb.Controllers
                 string list = "";
                 var orderid = db.Orders.Include(x => x.Shipper).Where(x => x.ShipVia == id).Select(x => new { x.OrderID });
                 foreach (var i in orderid)
-                {
+                {   //lopp in all OrderID
                     list = list + i.OrderID.ToString() + ", ";
                 }
                 throw new DeleteException("Nu poti sterge expeditorul deoarece contine angajati cu id-urile:\n" + list + "\n Pentru a putea sterge acest expeditor trebuie sterse comenzile si detaliile lor.");
             }
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
+        
         public JsonResult JsonTableFill()
         {
             var shippers = db.Shippers.OrderBy(x => x.ShipperID);
@@ -160,6 +158,15 @@ namespace NorthwindWeb.Controllers
                     Phone = x.Phone
                 })
                 , JsonRequestBehavior.AllowGet);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
