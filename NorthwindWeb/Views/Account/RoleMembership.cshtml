@@ -20,7 +20,7 @@
     @Html.ValidationSummary()
 
     <fieldset>
-    <legend> Modificare </legend>
+    
        Adauga user la rolul @Model.Name   
     </fieldset>
 
@@ -32,18 +32,19 @@
       <div class="editor-field" >
         @Html.DropDownList("UserList", ViewData["UsersNotInRole"] as IEnumerable<System.Web.Mvc.SelectListItem>, "Alege un user", new { @style = "font-size:150%" }) 
         
-
-        <input name="submit" id = "submit" type="submit" value="Adauga" />
       </div>
+        <br />
+        <input name="submit" id="submit" type="submit" value="Adauga" class="btn btn-default" />
+        @Html.ActionLink("Inapoi", "RolesIndex", null, new { @class = "btn btn-default" })
     </fieldset>
 }
     <fieldset>
-    <legend>Utilizatori existenti </legend>
+   <br />
    
        @*{
            @Html.RenderAction("UsersInRole", new { roleName = Model.Name });
 }*@
-      <table id="UsersInRole" class="table">
+      @*<table id="UsersInRole" class="table">
     <thead>
             <tr>
                 <th>
@@ -53,8 +54,8 @@
                     Utilizator
                 </th>
             </tr>
-    </thead>
-        @foreach (var item in ViewData["UsersInRole"] as IEnumerable<System.Web.Mvc.SelectListItem>)
+    </thead>*@
+        @*@foreach (var item in ViewData["UsersInRole"] as IEnumerable<System.Web.Mvc.SelectListItem>)
         {  
             <tr>
                 <td>
@@ -67,9 +68,35 @@
                     @item.Value  
                 </td>
             </tr>  
-        }  
+        }*@  
 
-        </table>
+        @*</table>*@
       
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    Utilizatori cu rolul @Model.Name
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table id="UsersInRole" class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Stergere
+                            </th>
+                            <th>
+                                Utilizator
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+
+            </div>
+        </div>
     </fieldset>
+
 

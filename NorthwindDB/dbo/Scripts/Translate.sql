@@ -2034,8 +2034,6 @@ begin
 	update Products	set ProductName = 'Recuperare date iOS', SupplierID = 1, CategoryID = 6, QuantityPerUnit = 1, UnitPrice = 160, UnitsOnOrder = 0, ReorderLevel = 1 where ProductID = 88;
 end
 
-drop table #CustomersIDSelect;
-drop table #ServicesIDRow;
 
 -- add 20 order for services
 if(not exists (
@@ -2068,9 +2066,9 @@ begin
 			insert into Orders Values(
 				(select CustomerID from #CustomersIDSelect where RowNumber = @customerRow%(select count(CustomerID) from Customers) + 1), --customerID
 				(@employeeID%(select count(Employees.EmployeeID) from Employees) + 1), --EmployeeID
-				'2015-01-01', --orderDate
-				'2015-010-01', --RequiredDate
-				'2015-06-01', --ShippedDate
+				'1998-01-01', --orderDate
+				'1998-02-01', --RequiredDate
+				'1998-06-01', --ShippedDate
 				(@shipperID%(select count(Shippers.ShipperID) from Shippers) + 1), --ShiperID
 				1, --incarcatura
 				'Servicii', --nume transport

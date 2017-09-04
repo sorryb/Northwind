@@ -26,12 +26,15 @@
                 <li>
                     @Html.ActionLink("Home", "Index", "Home")
                 </li>
-                <li>@Html.ActionLink("Despre noi", "Index", "About")
+                <li>
+                    @Html.ActionLink("Despre noi", "Index", "About")
                 </li>
-                <li>@Html.ActionLink("Servicii", "Index", "Services")
+                <li>
+                    @Html.ActionLink("Servicii", "Index", "Services")
                    
                 </li>
-                <li>@Html.ActionLink("Contact", "Index", "Contact")
+                <li>
+                    @Html.ActionLink("Contact", "Index", "Contact")
                 </li>
 
 
@@ -43,14 +46,12 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li> @Html.ActionLink("Promotii", "Products", "Products")</li>
-                        <li>@Html.ActionLink("Telefoane", "Products", "Products", new { category = "Smartphone" },null)</li>
-                   
+                        <li> @Html.ActionLink("Promotii","Products", "Products")</li>
+                        <li>@Html.ActionLink("Telefoane", "Products", "Products", new { category = "Smartphone" }, null)</li>                  
                     </ul>
                 </li>
 
-
-                
+              
                 
 
 
@@ -61,7 +62,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li> @Html.ActionLink("Intrebari despre servicii", "Faq", "Other")</li>
-                        <li>@Html.ActionLink("Sunt client nou", "Register", "Account")</li>
+                        <li> @Html.ActionLink("Sunt client nou", "Register", "Account")</li>
                         <li><a href="mailto:cineva@exemplu.com?subject=Nelamuriri">Contacteaza-ne</a></li>
 
                     </ul>
