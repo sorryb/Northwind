@@ -37,6 +37,7 @@ namespace NorthwindWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             RegionIndex viewModel = new RegionIndex();
+            //take details of Region
             Region region = await db.Regions.FindAsync(id);
             if (region == null)
             {
@@ -44,21 +45,21 @@ namespace NorthwindWeb.Controllers
             }
             viewModel.region = region;
 
-            var ter = from t in db.Territories
+            var teritory = from t in db.Territories
                         where (t.RegionID == id)
                         select new { t.TerritoryID,t.TerritoryDescription };
 
             List<RegionDetails> list = new List<RegionDetails>();
 
-            
-            foreach (var item in ter)
+            //lopp in all territories
+            foreach (var item in teritory)
             {
-                RegionDetails x = new RegionDetails();
+                RegionDetails regionDetail = new RegionDetails();
 
-                x.TerritoryID = item.TerritoryID;
-                x.TerritoryDescription = item.TerritoryDescription;
+                regionDetail.TerritoryID = item.TerritoryID;
+                regionDetail.TerritoryDescription = item.TerritoryDescription;
 
-                list.Add(x);
+                list.Add(regionDetail);
 
             }
             viewModel.details = list;
@@ -99,6 +100,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Region
             Region region = await db.Regions.FindAsync(id);
             if (region == null)
             {
@@ -132,6 +134,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Region
             Region region = await db.Regions.FindAsync(id);
             if (region == null)
             {
@@ -146,6 +149,7 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            //take details of Region
             Region region = await db.Regions.FindAsync(id);
 
             try
@@ -157,8 +161,9 @@ namespace NorthwindWeb.Controllers
             catch
             {
             string list = "";
-            var territoryid = db.Territories.Include(x => x.Region).Where(x => x.RegionID == id).Select(x => new { x.TerritoryDescription });
-            foreach (var i in territoryid)
+            var territoryId = db.Territories.Include(x => x.Region).Where(x => x.RegionID == id).Select(x => new { x.TerritoryDescription });
+                //lopp in all territories
+                foreach (var i in territoryId)
             {
                 list = list + i.TerritoryDescription + "\n ";
             }
@@ -167,16 +172,7 @@ namespace NorthwindWeb.Controllers
             }
 
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
+        
         // GET: Orders by Json
         public JsonResult JsonTableFill(string search = "")
         {
@@ -190,6 +186,15 @@ namespace NorthwindWeb.Controllers
                  
                 })
                 , JsonRequestBehavior.AllowGet);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
