@@ -129,7 +129,13 @@ namespace NorthwindWeb.Controllers
             }
             catch
             {
-                throw new DeleteException("Nu poti sterge expeditorul deoarece are constrangeri.");
+                string list = "";
+                var orderid = db.Orders.Include(x => x.Shipper).Where(x => x.ShipVia == id).Select(x => new { x.OrderID });
+                foreach (var i in orderid)
+                {
+                    list = list + i.OrderID.ToString() + ", ";
+                }
+                throw new DeleteException("Nu poti sterge expeditorul deoarece contine angajati cu id-urile:\n" + list + "\n Pentru a putea sterge acest expeditor trebuie sterse comenzile si detaliile lor.");
             }
         }
 

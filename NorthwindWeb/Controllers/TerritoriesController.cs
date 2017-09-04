@@ -129,18 +129,20 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Territories territories = await db.Territories.FindAsync(id);
-        
-            try { 
-            db.Territories.Remove(territories);
+
+            try
+            {
+                db.Territories.Remove(territories);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
             }
             catch
             {
-                throw new DeleteException("Nu poti sterge teritoriul deoarece are constrangeri.");
+               
+                throw new DeleteException("Nu poti sterge teritoriul deoarece contine angajati. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii.");
             }
 
-           
+
         }
 
         protected override void Dispose(bool disposing)
