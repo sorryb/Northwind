@@ -117,7 +117,6 @@ namespace NorthwindWeb.Controllers
             }
             return View(employees);
         }
-        //TODO delete from related table
         // POST: Employees/Delete/5
         /// <summary>
         /// Deletes an employee from the database. If the employee has orders or subordinates returns an error page.
