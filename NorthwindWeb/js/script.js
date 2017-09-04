@@ -1,7 +1,7 @@
 ﻿//Local Storage Class
-function CartProducts(idProdus, cantitate) {
+function CartProducts(idProdus, quantity) {
     this.idProdus = idProdus;
-    this.cantitate = cantitate;
+    this.quantity = quantity;
 }
 
 //add product in cart
@@ -44,13 +44,13 @@ function getCartProducts() {
     -Index: va afisa intreg cos
     -JsonShopCart: va trimite catre client un json cu obiectele din shop (vezi 5.)
     -AddOrder: va adauga order folosind json-ul din baza de date
-    -AddProduct(productID, Cantity): va adauga/modifica(daca exista) un produs
+    -AddProduct(productID, Quantity): va adauga/modifica(daca exista) un produs
     -DeleteProduct(productID): sterge un produs din baza de date (din json)
 5. Ne vor trebui urmatoarele obiecte:
     -ProductShopCart={
         ID --Pentru cautare in baza de date
         Category --Pentru gasirea imaginii
-        Cantity  --cantitatea ce o comanda
+        Quantity  --cantitatea ce o comanda
     }
 
 */
