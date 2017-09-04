@@ -448,6 +448,7 @@
     <Content Include="Scripts\jquery-1.7.js" />
     <Content Include="Scripts\jquery-1.7.min.js" />
     <Content Include="Scripts\product.js" />
+    <Content Include="Scripts\reports.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
