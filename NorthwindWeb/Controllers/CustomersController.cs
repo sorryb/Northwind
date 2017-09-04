@@ -133,10 +133,15 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            catch
+            catch (Exception e)
             {
-                throw new DeleteException("Clientul nu poate fi sters deoarece are una sau mai multe comenzi.");
+                string list = "";
+                var orderid = db.Orders.Include(x=>x.Customer).Where(x=>x.CustomerID == id).Select(x=>new { x.OrderID });
+                foreach(var i in orderid)
+                {
+                    list = list + i.OrderID.ToString() + ", ";
+                }
+                throw new DeleteException("Clientul nu poate fi sters deoarece are comenzile cu id-urile:" + list + ".Pentru a putea sterge acest client trebuie sterse comenzile si detaliile lor.");
             }
         }
 

@@ -10,7 +10,7 @@
             @foreach (var report in Model)
             {
                 <li>
-                    <a href=@report.Link target="reps">@(report.Filename)</a>
+                    <a class="reps" href=@report.Link target="reps">@(report.Filename)</a>
                 </li>
             }
         </ul>
@@ -19,3 +19,4 @@
         <iframe name="reps" class="fill"></iframe>
     </div>
 </div>
+
