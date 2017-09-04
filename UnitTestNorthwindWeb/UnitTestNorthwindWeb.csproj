@@ -88,6 +88,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AccountControllerTest.cs" />
     <Compile Include="HomeControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EmployeesControllerTest.cs" />
