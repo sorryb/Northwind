@@ -57,7 +57,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories,int id)
+        public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
             if (ModelState.IsValid)
@@ -129,16 +129,16 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             Territories territories = await db.Territories.FindAsync(id);
-
+            int idreg=territories.RegionID;
             try
             {
+                territories.Employees.Clear();
                 db.Territories.Remove(territories);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details","Regions",new { id=idreg });
             }
             catch
             {
-               
                 throw new DeleteException("Nu poti sterge teritoriul deoarece contine angajati. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii.");
             }
 
