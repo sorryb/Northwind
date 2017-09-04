@@ -7,12 +7,18 @@ using System.Web.Mvc;
 
 namespace UnitTestNorthwindWeb
 {
+    /// <summary>
+    /// Test Home controller.
+    /// </summary>
     [TestClass]
     public class HomeControllerTest
     {
         //Arrange
         HomeController _homeControllerUnderTest = new HomeController();
 
+        /// <summary>
+        /// Check what Index action returns.
+        /// </summary>
         [TestMethod]
         public void ReturnsIndexView()
         {
@@ -26,6 +32,9 @@ namespace UnitTestNorthwindWeb
 
         }
 
+        /// <summary>
+        /// Check what Index action returns.
+        /// </summary>
         [TestMethod]
         public void ReturnsIndexViewResult()
         {
@@ -41,6 +50,9 @@ namespace UnitTestNorthwindWeb
 
         }
 
+        /// <summary>
+        /// Check what Index viewbag returns.
+        /// </summary>
         [TestMethod]
         public void ReturnsViewBag()
         {
@@ -53,6 +65,9 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual("Northwind Phone Shop", result.ViewBag.SiteName);
         }
 
+        /// <summary>
+        /// Check Menu items from Index action .
+        /// </summary>
         [TestMethod]
         public void ReturnsMenuCategories()
         {
@@ -66,6 +81,9 @@ namespace UnitTestNorthwindWeb
             Assert.IsNotNull(model);
         }
 
+        /// <summary>
+        /// Sample test method.
+        /// </summary>
         [TestMethod]
         public void SampleTest()
         {
