@@ -27,16 +27,13 @@
                     @Html.ActionLink("Home", "Index", "Home")
                 </li>
                 <li>
-                    @*<a href="http://localhost:7035/About">Despre noi</a>*@
                     @Html.ActionLink("Despre noi", "Index", "About")
                 </li>
                 <li>
-                    @*<a href="http://localhost:7035/Services">Servicii </a>*@
                     @Html.ActionLink("Servicii", "Index", "Services")
                    
                 </li>
                 <li>
-                    @*<a href="http://localhost:7035/Contact">Contact</a>*@
                     @Html.ActionLink("Contact", "Index", "Contact")
                 </li>
 
@@ -49,16 +46,12 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>@*<a href="http://localhost:7035/Products/Products?category=Gadgeturi">Promotii</a>*@
-                        @Html.ActionLink("Promotii", "Products", "Products", new {category= Model.CategoryName })</li>
-                        <li>@*<a href="http://localhost:7035/Products/Products?category=Smartphone">Telefoane</a>*@
-                        @Html.ActionLink("Telefoane", "Products", "Products", null, new { category = "Smartphone" })</li>
-                   
+                        <li> @Html.ActionLink("Promotii","Products", "Products")</li>
+                        <li>@Html.ActionLink("Telefoane", "Products", "Products", new { category = "Smartphone" }, null)</li>                  
                     </ul>
                 </li>
 
-
-                
+              
                 
 
 
@@ -68,10 +61,8 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>@*<a href="http://localhost:7035/Other/Faq">Intrebari despre servicii</a>*@
-                            @Html.ActionLink("Intrebari despre servicii", "Faq", "Other")</li>
-                        <li>@*<a href="http://localhost:7035/Account/Register">Sunt client nou</a>*@
-                            @Html.ActionLink("Sunt client nou", "Register", "Account")</li>
+                        <li> @Html.ActionLink("Intrebari despre servicii", "Faq", "Other")</li>
+                        <li> @Html.ActionLink("Sunt client nou", "Register", "Account")</li>
                         <li><a href="mailto:cineva@exemplu.com?subject=Nelamuriri">Contacteaza-ne</a></li>
 
                     </ul>

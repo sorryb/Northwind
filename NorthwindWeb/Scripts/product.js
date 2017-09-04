@@ -348,5 +348,36 @@ $(document).ready(function () {
             ]
 
         });
+
+        /*add from json in table Role*/
+        $('#UsersInRole').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "responsive": true,
+            "autoWidth": false,
+            "columnDefs": [
+                { responsivePriority: 1, targets: 0 },
+                { responsivePriority: 2, targets: -1 }
+            ],
+            "ajax": {
+                "type": "GET",
+                "url": searchControllerPath() + "/JsonTableMembershipFill",
+                "dataSrc": function (json) {
+                    //Make your callback here.
+                    $.each(json.data, function (index, item) {
+                        item.Delete = '<a href= "' + searchControllerPath() + '/DeleteFromRole?userName=' + item.UserName + '&roleName='+json.roleName+'" onclick="if (!confirm(' + "'Doriti sa stergeti ?'" + ')) return false;"/> <i class="fa fa-remove"></i></a >';
+                       
+                    })
+
+                    return json.data;
+                }
+            },
+            "columns": [
+                { 'data': 'Delete' },
+                { 'data': 'UserName' }
+                
+            ]
+
+        });
     
 });
