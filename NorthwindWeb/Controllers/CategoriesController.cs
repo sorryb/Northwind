@@ -119,7 +119,7 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Categories categories = await db.Categories.FindAsync(id);
-            
+
             try
             {
                 db.Categories.Remove(categories);
@@ -128,7 +128,13 @@ namespace NorthwindWeb.Controllers
             }
             catch
             {
-                throw new DeleteException("Nu poti sterge categoria deoarece are constrangeri.");
+                string list = "";
+                var productid = db.Products.Include(x => x.Category).Where(x => x.CategoryID == id).Select(x => new { x.ProductName });
+                foreach (var i in productid)
+                {
+                    list = list + i.ProductName.ToString() + ",\n ";
+                }
+                throw new DeleteException("Nu poti sterge categoria deoarece are produse cu numele:\n" + list+ "\nPentru a putea sterge aceasta categorie trebuie sterse produsele.");
             }
         }
 
