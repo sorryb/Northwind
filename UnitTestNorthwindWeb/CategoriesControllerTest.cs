@@ -15,23 +15,7 @@ namespace UnitTestNorthwindWeb
         CategoriesController _CategoriesControllerUnderTest = new CategoriesController();
         NorthwindModel db = new NorthwindModel();
 
-
-        /// <summary>
-        /// Check what Index action returns.
-        /// </summary>
-        [TestMethod]
-        public void ReturnsIndexCategoryView()
-        {
-            //Arrage
-
-            //Act
-            //var result = _CategoriesControllerUnderTest.Index() as ViewResult;
-            //var model = result.Model;
-
-            //Assert
-            //Assert.IsNotNull(model);
-
-        }
+        
         /// <summary>
         /// Tests if create returns view.
         /// </summary>
@@ -55,19 +39,33 @@ namespace UnitTestNorthwindWeb
         public async System.Threading.Tasks.Task CreateCategory()
         {
             //Arrange
-            Categories CategoriesTest = new Categories() {CategoryName = "test", Description = "test" };
+            Categories CategoriesTest = new Categories() {CategoryName = "foto", Description = "foto, video" };
             //Act
             var expected = db.Categories.Count() + 1;
             await _CategoriesControllerUnderTest.Create(CategoriesTest);
             var actual = db.Categories.Count();
             var category = db.Categories.Where(e => e.CategoryName == CategoriesTest.CategoryName && e.Description == CategoriesTest.Description);
+            
             //Assert
             Assert.AreEqual(expected, actual);
 
-
-
             db.Categories.RemoveRange(category);
             db.SaveChanges();
+
+        }
+
+        /// <summary>
+        /// Sample test method.
+        /// </summary>
+        [TestMethod]
+        public void SampleTestCategory()
+        {
+            //Arrage
+
+            //Act
+
+            //Assert
+            Assert.AreEqual("CategoriesController", "CategoriesController");
         }
     }
 }
