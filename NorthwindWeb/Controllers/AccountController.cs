@@ -16,7 +16,7 @@ using System.Web;
 using NorthwindWeb.Context;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
-using System.Web.Security;
+
 
 namespace NorthwindWeb.Controllers
 {
@@ -490,8 +490,8 @@ namespace NorthwindWeb.Controllers
             UserInfoViewModel userDelete = new UserInfoViewModel();
             if (!String.IsNullOrEmpty(userName))
             {
-                userDelete.UserName=userManager.Users.First().UserName;
-                userDelete.Email = userManager.Users.First().Email;
+                userDelete.UserName=userManager.FindByName(userName).UserName;
+                userDelete.Email = userManager.FindByName(userName).Email;
                
             }
             return View(userDelete);
@@ -736,14 +736,14 @@ namespace NorthwindWeb.Controllers
             var roleName = Request["roleName"];
             var userName = Request["userName"];
 
-            var account = new AccountController();
+            //var account = new AccountController();
             var context = new ApplicationDbContext();
-
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser user = context.Users.Where(u => u.UserName.Equals(userName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
 
-            if (account.UserManager.IsInRole(user.Id, roleName))
+            if (userManager.IsInRole(user.Id, roleName))
             {
-                account.UserManager.RemoveFromRole(user.Id, roleName);
+                userManager.RemoveFromRole(user.Id, roleName);
                 ViewBag.ResultMessage = "Role removed from this user successfully !";
             }
             else
