@@ -1087,6 +1087,96 @@ namespace NorthwindWeb.Controllers
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult JsonTableMembershipFill(int draw, int start, int length)
+        {
+           
+            const int TOTAL_ROWS = 999;
+
+            
+            string search = Request.QueryString["search[value]"] ?? "";
+            int sortColumn = -1;
+            string sortDirection = "asc";
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+            
+            string roleName = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["roleName"] != null ? HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["roleName"].ToString() : "Admins";
+           
+
+
+            List<UserInfoViewModel> selectItemsUserInRole = new List<UserInfoViewModel>();
+
+
+            var context = new ApplicationDbContext();
+
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            List<ApplicationUser> users = userManager.Users.ToList();
+
+            foreach (ApplicationUser user in users)
+            {
+
+                if (userManager.IsInRole(user.Id, roleName))
+
+                    selectItemsUserInRole.Add(new UserInfoViewModel() { UserName = user.UserName });
+
+
+            }
+
+            
+            var numberUsersInRole = selectItemsUserInRole.Count();
+            selectItemsUserInRole = selectItemsUserInRole.Where(r => r.UserName.ToLower().Contains(search.ToLower())).ToList();
+
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto FirstColumn;
+                case 1: //first column
+                    FirstColumn:
+                    if (sortDirection == "asc")
+                    {
+                        selectItemsUserInRole = selectItemsUserInRole.OrderBy(x => x.UserName).ToList();
+                    }
+                    else
+                    {
+                        selectItemsUserInRole = selectItemsUserInRole.OrderByDescending(x => x.UserName).ToList();
+                    }
+                    break;
+
+
+            }
+            //objet that whill be sent to client
+            JsonDataTableUserList dataTableData = new JsonDataTableUserList()
+            {
+                draw = draw,
+                recordsTotal = numberUsersInRole,
+                data = new List<UserInfoViewModel>(),
+
+                recordsFiltered = selectItemsUserInRole.Count(), //need to be below data(ref recordsFiltered)
+                roleName = roleName,
+            };
+            foreach (var userInRole in selectItemsUserInRole.Skip(start).Take(length))
+            {
+                UserInfoViewModel user = new UserInfoViewModel();
+                user.UserName = userInRole.UserName;
+                dataTableData.data.Add(user);
+            }
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
+        }
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
