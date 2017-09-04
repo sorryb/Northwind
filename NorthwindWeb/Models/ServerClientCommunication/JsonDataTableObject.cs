@@ -62,7 +62,10 @@ namespace NorthwindWeb.Models.ServerClientCommunication
         /// you can inform the user of this error by passing back the error message to be displayed using this parameter.
         /// </summary>
         public string error { get; set; }
-
+        /// <summary>
+        /// Optional:Only used if want users assigned to a role
+        /// </summary>
+        public string roleName { get; set; }
     }
 
     public class JsonDataTableRoleList
