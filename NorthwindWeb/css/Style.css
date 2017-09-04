@@ -7,6 +7,11 @@ img[class~=products] {
     max-height: 225px;
 }
 
+/*make li without point*/
+.liWithoutPoint {
+    list-style-type: none;
+}
+
 /*text large used in products view*/
 [class~=textlarge] {
     font-size: large;

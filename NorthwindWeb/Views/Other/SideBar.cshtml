@@ -52,7 +52,7 @@
                         <li>@*<a href="http://localhost:7035/Products/Products?category=Gadgeturi">Promotii</a>*@
                         @Html.ActionLink("Promotii", "Products", "Products", new {category= Model.CategoryName })</li>
                         <li>@*<a href="http://localhost:7035/Products/Products?category=Smartphone">Telefoane</a>*@
-                        @Html.ActionLink("Telefoane", "Products", "Products", new { category = "Smartphone" })</li>
+                        @Html.ActionLink("Telefoane", "Products", "Products", null, new { category = "Smartphone" })</li>
                    
                     </ul>
                 </li>

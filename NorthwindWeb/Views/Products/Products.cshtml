@@ -54,6 +54,16 @@
                         <li><strong>Furnizor: @Model.ElementAt(i).SuppliersName</strong></li>
                         <li><strong>In Stoc: @Model.ElementAt(i).Stock</strong></li>
                         <li><strong>In Comenzi: @Model.ElementAt(i).OnOrder</strong></li>
+                        <li class="liWithoutPoint">
+                            <div class="shopcartcontainer-products">
+                                <div class="align-middle img-circle roundedshop">
+                                    <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                    <div class="shopcart-container-text">
+                                        <span id="shopcart-productcount">+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 @if (i + 1 < itemCount)
@@ -69,6 +79,16 @@
                             <li><strong>Furnizor: @Model.ElementAt(i + 1).SuppliersName</strong></li>
                             <li><strong>In Stoc: @Model.ElementAt(i + 1).Stock</strong></li>
                             <li><strong>In Comenzi: @Model.ElementAt(i + 1).OnOrder</strong></li>
+                            <li class="liWithoutPoint">
+                                <div class="shopcartcontainer-products">
+                                    <div class="align-middle img-circle roundedshop">
+                                        <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                        <div class="shopcart-container-text">
+                                            <span id="shopcart-productcount">+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 }
