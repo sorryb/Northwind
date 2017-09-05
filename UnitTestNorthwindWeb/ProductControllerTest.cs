@@ -88,10 +88,13 @@ namespace UnitTestNorthwindWeb
         {
             var controller = new ProductController();
             var db = new NorthwindWeb.Models.NorthwindModel();
-            var product
+            var product = db.Products.First();
+            db.Dispose();
+            string name = product.ProductName;
+            product.ProductName = "asd";
+            await controller.Edit(product);
 
-            await controller.Edit(new Products() {ProductID = 1, ProductName = "asd",  });
-
+            db = new NorthwindWeb.Models.NorthwindModel();
             Assert.Equals("asd", db.Products.Where(x => x.ProductID == 1).First().ProductName);
            
         }
