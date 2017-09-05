@@ -97,6 +97,7 @@
     <Compile Include="AboutControllerTest.cs" />
     <Compile Include="CategoriesControllerTest.cs" />
     <Compile Include="OrdersControllerTest.cs" />
+    <Compile Include="ShipperControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
