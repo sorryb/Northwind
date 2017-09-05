@@ -154,13 +154,13 @@ namespace UnitTestNorthwindWeb
         public void ReturnsConfirmEmailViewResult()
         {
             //Arrage
-            
+            var testId = _accountController.ConfirmEmail("user", "1234");
             //Act
             var result = _accountController.ConfirmEmail("user","1234");
 
             //Assert
             
-            Assert.AreEqual(5, result.Id);
+            Assert.AreEqual(testId.Id+1, result.Id);
 
         }
 
@@ -197,5 +197,176 @@ namespace UnitTestNorthwindWeb
 
             Assert.IsInstanceOfType(result, typeof(ActionResult));
         }
+
+        ///<summary>
+        /// Check what ResetPasswordConfirmation action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsResetPasswordConfirmationViewResult()
+        {
+            //Arrage
+
+            //Act
+            var result = _accountController.ResetPasswordConfirmation();
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
+
+        ///<summary>
+        /// Check what SendCode action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsSendCodeViewResult()
+        {
+            //Arrage
+
+            //Act
+            var result = _accountController.SendCode("url",true);
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+        ///<summary>
+        /// Check what SendCodePost action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsSendCodePostViewResult()
+        {
+            //Arrage
+            SendCodeViewModel sendCode = new SendCodeViewModel();
+            //Act
+            var result = _accountController.SendCode(sendCode);
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+        ///<summary>
+        /// Check what ExternalLoginCallback action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsExternalLoginCallbackViewResult()
+        {
+            //Arrage
+            
+            //Act
+            var result = _accountController.ExternalLoginCallback("url");
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+        ///<summary>
+        /// Check what ExternalLoginConfirmationPost action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsExternalLoginConfirmationPostViewResult()
+        {
+            //Arrage
+            ExternalLoginConfirmationViewModel model = new ExternalLoginConfirmationViewModel();
+            //Act
+            var result = _accountController.ExternalLoginConfirmation(model,"url");
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+        ///<summary>
+        /// Check what ExternalLoginFailure action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsExternalLoginFailureViewResult()
+        {
+            //Arrage
+           
+            //Act
+            var result = _accountController.ExternalLoginFailure();
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
+
+        ///<summary>
+        /// Check what Account Index action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsAccountIndexViewResult()
+        {
+            //Arrage
+
+            //Act
+            var result = _accountController.Index();
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
+
+        ///<summary>
+        /// Check what ChangeUser action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsChangeUserViewResult()
+        {
+            //Arrage
+
+            //Act
+            var result = _accountController.ChangeUser("user");
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+        ///<summary>
+        /// Check what ChangeUserPost action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsChangeUserPostViewResult()
+        {
+            //Arrage
+            RegisterViewModel model = new RegisterViewModel();
+            //Act
+            var result = _accountController.ChangeUser(model);
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+        ///<summary>
+        /// Check what Delete action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsDeleteViewResult()
+        {
+            //Arrage
+            RegisterViewModel model = new RegisterViewModel();
+            //Act
+            var result = _accountController.Delete("user");
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+      
     }
 }

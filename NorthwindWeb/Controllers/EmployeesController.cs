@@ -19,12 +19,21 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
+        /// <summary>
+        /// Displays a page with all the employees in the database.
+        /// </summary>
+        /// <returns>Employees index view</returns>
         // GET: Employees
         public ActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Displays a page showing all the information about one employee.
+        /// </summary>
+        /// <param name="id">The id of the employee whose information to show</param>
+        /// <returns>Employees details view</returns>
         // GET: Employees/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -75,7 +84,11 @@ namespace NorthwindWeb.Controllers
             ViewBag.ReportsTo = new SelectList(db.Employees, "EmployeeID", "LastName", employees.ReportsTo);
             return View(employees);
         }
-
+        /// <summary>
+        /// Returns the view containing the form necessary for editing an existing employee.
+        /// </summary>
+        /// <param name="id">The id of the employee that is going to be edited</param>
+        /// <returns>Employees edit view</returns>
         // GET: Employees/Edit/5
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
@@ -96,6 +109,14 @@ namespace NorthwindWeb.Controllers
         // POST: Employees/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Updates the database 
+        /// changing the fields of
+        /// the employee whose id is equal to the id of the provided employees parameter
+        /// to those of the parameter.
+        /// </summary>
+        /// <param name="employees">The changed employee.</param>
+        /// <returns>Employees index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
@@ -170,6 +191,13 @@ namespace NorthwindWeb.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Function used to control the dashboard datatables from the server
+        /// </summary>
+        /// <param name="draw"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <returns>A JSON filtered employees list.</returns>
         // GET: Employees by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {

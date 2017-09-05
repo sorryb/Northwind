@@ -17,10 +17,10 @@ namespace UnitTestNorthwindWeb
             //Arrange
 
             //Act
-            var result = _ReportsControllerUnderTest.Index() as ViewResult;
+            var result = _ReportsControllerUnderTest.Index();
 
             //Assert
-            Assert.AreEqual("Index", result.ViewName);
+            Assert.IsNotNull(result);
         }
     }
 }

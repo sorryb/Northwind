@@ -12,6 +12,10 @@ namespace NorthwindWeb.Controllers
 {
     public class ReportsController : Controller
     {
+        /// <summary>
+        /// Displays a page containing a navbar with a list of reports from a remote report server provided in web.config
+        /// </summary>
+        /// <returns>Reports index view</returns>
         // GET: Reports
         [Authorize]
         public ActionResult Index()
