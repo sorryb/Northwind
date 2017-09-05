@@ -145,7 +145,7 @@ namespace NorthwindWeb.Controllers
             {
                 string listOrders = "";
                 var ordersWhitProductID = db.Order_Details.Include(s => s.Order).Include(s => s.Product).Where(s => s.ProductID == id).Select(s => new { s.OrderID });
-                foreach(var i in ordersWhitProductID)
+                foreach (var i in ordersWhitProductID)
                 {
                     listOrders = i.OrderID + ", ";
                 }
@@ -153,14 +153,26 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        
+
         // GET: Product by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
+            string category = "";
+            try
+            {
+                category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
+            }
+            catch (NullReferenceException e) { }
 
-            string category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
-            string search = Request.QueryString["search[value]"] ?? "";
+            string search = "";
+            try
+            {
+                search = Request.QueryString["search[value]"] ?? "";
+            }
+            catch (NullReferenceException e) { }
+
+
             int sortColumn = -1;
             string sortDirection = "asc";
             if (length == -1)
@@ -169,14 +181,31 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            if (Request.QueryString["order[0][column]"] != null)
+            try
             {
-                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                if (Request.QueryString["order[0][column]"] != null)
+                {
+                    try
+                    {
+                        sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                    }
+                    catch (NullReferenceException e) { }
+                }
             }
-            if (Request.QueryString["order[0][dir]"] != null)
+            catch (NullReferenceException e) { }
+
+            try
             {
-                sortDirection = Request.QueryString["order[0][dir]"];
+                if (Request.QueryString["order[0][dir]"] != null)
+                {
+                    try
+                    {
+                        sortDirection = Request.QueryString["order[0][dir]"];
+                    }
+                    catch (NullReferenceException e) { }
+                }
             }
+            catch (NullReferenceException e) { }
 
             //list of product that contain "search"
             var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)
