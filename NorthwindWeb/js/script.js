@@ -29,22 +29,27 @@ function getCartProducts() {
 
 /*
 * numerele nu reprezinta pasii cronologici ce trebuie facuti
-1. salvam product chart intr-un array json
+1. salvam product list intr-un array json
     -daca este logat il luam din database
     -daca nu este logat il luam din local
 2. la fiecare incarcare de pagina trebuie sa verificam daca userul este logat si daca local sunt produse
-    -daca local sunt produse atunci va trebui sa il intrebam daca isi adauga produsele pe server
-    -produsele locale vor fi sterse indiferent de ce selecteaza (trebuie sa ii spunem asta)
+    -daca local sunt produse atunci va trebui sa adaugam produsele pe server
+    -produsele locale vor fi sterse
 3. la plasarea comenzii:
     -verificam daca este logat
         -daca este atunci trimitem apelam o actiune ce ia json-ul din server
         -daca nu este conectat atunci il trimitem la pagina de autentificate (si ar trebui sa facem a.i. de aici sa il redirectioneze inapoi spre a trimite comanda)
-                    jsonul datorita pct 2 va fi luat tot de pe server
+            jsonul datorita pct 2 va fi luat tot de pe server
 4. trebuie sa avem un controller shop
     -Index: va afisa intreg cos
     -JsonShopCart: va trimite catre client un json cu obiectele din shop (vezi 5.)
     -AddOrder: va adauga order folosind json-ul din baza de date
     -AddProduct(productID, Quantity): va adauga/modifica(daca exista) un produs
+    -AddListProduct: dupa ce se logheaza ia json, trece prin fiecare produs, vede ca e disponibil si ca exista si il baga pe server.
+        daca da return ProductShopResponse.error=0
+        daca nu return ProductShopResponse.error=1 si detaliile necesare
+        
+        
     -DeleteProduct(productID): sterge un produs din baza de date (din json)
 5. Ne vor trebui urmatoarele obiecte:
     -ProductShopCart={
@@ -52,6 +57,14 @@ function getCartProducts() {
         Category --Pentru gasirea imaginii
         Quantity  --cantitatea ce o comanda
     }
+    -ProductShopResponse{
+        bool error --in caz ca a fost vreo eroare
+        string errorTitle
+        string errorMessage
+        listaProduese --neadaugate pe server        
+}
+
+
 
 */
 
