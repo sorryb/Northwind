@@ -112,7 +112,7 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Updates the database 
         /// changing the fields of
-        /// the employee whose id is equal to the id of the supplied employees parameter
+        /// the employee whose id is equal to the id of the provided employees parameter
         /// to those of the parameter.
         /// </summary>
         /// <param name="employees">The changed employee.</param>
