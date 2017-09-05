@@ -41,6 +41,10 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Employees/Create
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new employee.
+        /// </summary>
+        /// <returns>Create view.</returns>
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
@@ -51,6 +55,11 @@ namespace NorthwindWeb.Controllers
         // POST: Employees/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Inserts an employee into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="employees">The employee entity to be inserted</param>
+        /// <returns>If successful returns employees index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
@@ -103,6 +112,11 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Employees/Delete/5
+        /// <summary>
+        /// Displays a confirmation page for the following delete.
+        /// </summary>
+        /// <param name="id">The employee that is going to be deleted.</param>
+        /// <returns>Delete view</returns>
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
@@ -119,10 +133,10 @@ namespace NorthwindWeb.Controllers
         }
         // POST: Employees/Delete/5
         /// <summary>
-        /// Deletes an employee from the database. If the employee has orders or subordinates returns an error page.
+        /// Deletes an employee from the database. The employee must not have orders or subordinates
         /// </summary>
         /// <param name="id">The id of the employee that is going to be deleted</param>
-        /// <returns>Index if successful, otherwise returns an error page explaining why it failed</returns>
+        /// <returns>Employees index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]

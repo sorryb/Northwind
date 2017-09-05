@@ -13,6 +13,9 @@ using NorthwindWeb.Models.ExceptionHandler;
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
+    /// <summary>
+    /// Categories Controller. For table Categories
+    /// </summary>
     public class CategoriesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -30,6 +33,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
             if (categories == null)
             {
@@ -71,6 +75,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
             if (categories == null)
             {
@@ -104,6 +109,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
             if (categories == null)
             {
@@ -118,6 +124,7 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            //take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
 
             try
@@ -129,23 +136,17 @@ namespace NorthwindWeb.Controllers
             catch
             {
                 string list = "";
-                var productid = db.Products.Include(x => x.Category).Where(x => x.CategoryID == id).Select(x => new { x.ProductName });
-                foreach (var i in productid)
+                var productId = db.Products.Include(x => x.Category).Where(x => x.CategoryID == id).Select(x => new { x.ProductName });
+                foreach (var i in productId)
                 {
+                    //lopp in ProductName
                     list = list + i.ProductName.ToString() + ",\n ";
                 }
                 throw new DeleteException("Nu poti sterge categoria deoarece are produse cu numele:\n" + list+ "\nPentru a putea sterge aceasta categorie trebuie sterse produsele.");
             }
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
 
         // GET: Categories by Json
         public JsonResult JsonTableFill(string search = "")
@@ -161,6 +162,15 @@ namespace NorthwindWeb.Controllers
 
                })
                 , JsonRequestBehavior.AllowGet);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

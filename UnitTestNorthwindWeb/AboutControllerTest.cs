@@ -14,7 +14,7 @@ namespace UnitTestNorthwindWeb
     public class AboutControllerTest
     {
         //Arrange
-        AboutController _aboutControllerUnderTest = new AboutController();
+        AboutController _AboutControllerUnderTest = new AboutController();
 
         /// <summary>
         /// Check what Index action returns.
@@ -25,7 +25,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _aboutControllerUnderTest.Index() as ViewResult;
+            var result = _AboutControllerUnderTest.Index() as ViewResult;
 
             //Assert
             Assert.IsInstanceOfType(result, typeof(ViewResult));
@@ -41,7 +41,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _aboutControllerUnderTest.Index() as ViewResult;
+            var result = _AboutControllerUnderTest.Index() as ViewResult;
 
             //Assert
 
@@ -58,7 +58,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var aboutus = _aboutControllerUnderTest.Index() as ViewResult;
+            var aboutus = _AboutControllerUnderTest.Index() as ViewResult;
             var model = aboutus.Model;
 
             //Assert
@@ -69,7 +69,7 @@ namespace UnitTestNorthwindWeb
         /// Sample test method.
         /// </summary>
         [TestMethod]
-        public void SampleTest()
+        public void SampleTestAboutUs()
         {
             //Arrage
 
