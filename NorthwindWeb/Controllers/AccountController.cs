@@ -280,16 +280,16 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        }
+        ////
+        //// POST: /Account/ExternalLogin
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ExternalLogin(string provider, string returnUrl)
+        //{
+        //    // Request a redirect to the external login provider
+        //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+        //}
 
         //
         // GET: /Account/SendCode
@@ -853,25 +853,6 @@ namespace NorthwindWeb.Controllers
         }
 
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
    
 
         //return a list of users
@@ -1240,6 +1221,25 @@ namespace NorthwindWeb.Controllers
             }
         }
         #endregion
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
+
+                if (_signInManager != null)
+                {
+                    _signInManager.Dispose();
+                    _signInManager = null;
+                }
+            }
+
+            base.Dispose(disposing);
+        }
     }
 
     /// <summary>

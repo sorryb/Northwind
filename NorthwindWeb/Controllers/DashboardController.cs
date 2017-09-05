@@ -516,9 +516,9 @@ namespace NorthwindWeb.Controllers
                 LastTenOrders lastTenOrdersElement = new LastTenOrders();
                 lastTenOrdersElement.OrderID = itemOrder.OrderID;
                 var pastTime = DateTime.Now - Convert.ToDateTime(itemOrder.OrderDate);
-                if (pastTime.TotalMinutes <= 60) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(pastTime.TotalMinutes) + " Minute"; }
-                else if (pastTime.TotalHours <= 24) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(pastTime.TotalHours) + " Ore"; }
-                else if (pastTime.TotalDays <= 30) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(pastTime.TotalHours) + " Zile"; }
+                if (pastTime.TotalMinutes <= 60) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(decimal.Round(Convert.ToDecimal(pastTime.TotalMinutes),0)) + " de Minute"; }
+                else if (pastTime.TotalHours <= 24) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(decimal.Round(Convert.ToDecimal(pastTime.TotalHours), 0)) + " Ore"; }
+                else if (pastTime.TotalDays <= 30) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(decimal.Round(Convert.ToDecimal(pastTime.TotalDays),0)) + " Zile"; }
                 else { lastTenOrdersElement.Ago = "Cu mai mult de o luna in urma"; }
                 lastTenOrdersData.Add(lastTenOrdersElement);
             }
