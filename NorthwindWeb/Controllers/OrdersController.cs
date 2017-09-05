@@ -225,14 +225,14 @@ namespace NorthwindWeb.Controllers
         // GET: Orders by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
-            const int TOTAL_ROWS = 999;
+            const int totalRows = 999;
             
             string search = Request.QueryString["search[value]"] ?? "";
             int sortColumn = -1;
             string sortDirection = "asc";
             if (length == -1)
             {
-                length = TOTAL_ROWS;
+                length = totalRows;
             }
 
             // note: we only sort one column at a time

@@ -11,12 +11,12 @@ using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
 using PagedList;
 using System.Web.Helpers;
-using NorthwindWeb.Models.ServerClientCommunication;using NorthwindWeb.Models.ExceptionHandler;
+using NorthwindWeb.Models.ServerClientCommunication;
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
 
-    [Authorize]
     public class ProductController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
@@ -45,7 +45,6 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Product/Create
-        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
@@ -154,16 +153,7 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-
+        
         // GET: Product by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
@@ -280,9 +270,15 @@ namespace NorthwindWeb.Controllers
             };
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
     }
-
-
-
 
 }

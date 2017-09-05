@@ -91,10 +91,14 @@
     <Compile Include="AccountControllerTest.cs" />
     <Compile Include="HomeControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProductControllerTest.cs" />
     <Compile Include="EmployeesControllerTest.cs" />
     <Compile Include="ReportsControllerTest.cs" />
     <Compile Include="AboutControllerTest.cs" />
     <Compile Include="CategoriesControllerTest.cs" />
+    <Compile Include="OrdersControllerTest.cs" />
+    <Compile Include="ShipperControllerTest.cs" />
+    <Compile Include="RegionsControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
