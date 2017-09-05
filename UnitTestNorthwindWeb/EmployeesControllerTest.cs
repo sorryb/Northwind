@@ -14,8 +14,9 @@ namespace UnitTestNorthwindWeb
         EmployeesController _EmployeesControllerUnderTest = new EmployeesController();
         NorthwindModel _db = new NorthwindModel();
 
+
         /// <summary>
-        /// Tests if create returns view.
+        /// Tests if Create returns View.
         /// </summary>
         [TestMethod]
         public void CreateReturnsView()
@@ -28,8 +29,9 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.IsNotNull(result);
         }
+
         /// <summary>
-        /// Tests if create inserts into database.
+        /// Tests if Create inserts into database.
         /// </summary>
         /// <returns></returns>
         [TestMethod]
@@ -42,16 +44,15 @@ namespace UnitTestNorthwindWeb
             var expected = _db.Employees.Count() + 1;
             await _EmployeesControllerUnderTest.Create(employeeTest);
             var actual = _db.Employees.Count();
-            var employees = _db.Employees.Where(e => e.LastName == employeeTest.LastName && e.FirstName == employeeTest.FirstName);
 
             //Assert
             Assert.AreEqual(expected, actual);
 
-            _db.Employees.RemoveRange(employees);
-            _db.SaveChanges();
+            DeleteTestFromDb();
         }
+
         /// <summary>
-        /// Tests if delete returns view
+        /// Tests if Delete returns View
         /// </summary>
         /// <returns></returns>
         [TestMethod]
@@ -71,12 +72,11 @@ namespace UnitTestNorthwindWeb
 
 
 
-            var employees = _db.Employees.Where(e => e.LastName == employeeTest.LastName && e.FirstName == employeeTest.FirstName);
-            _db.Employees.RemoveRange(employees);
-            _db.SaveChanges();
+            DeleteTestFromDb();
         }
+
         /// <summary>
-        /// Tests if delete deletes
+        /// Tests if Delete deletes.
         /// </summary>
         [TestMethod]
         public async System.Threading.Tasks.Task DeleteDeletesAsync()
@@ -93,6 +93,51 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.AreEqual(expected, actual);
         }
+
+        /// <summary>
+        /// Tests if Details returns View
+        /// </summary>
+        [TestMethod]
+        public async System.Threading.Tasks.Task DetailsReturnsViewAsync()
+        {
+            //Arrange
+            Employees employeeTest = new Employees() { LastName = "test", FirstName = "test" };
+            await _EmployeesControllerUnderTest.Create(employeeTest);
+            //Act
+            var result = _EmployeesControllerUnderTest.Details(employeeTest.EmployeeID);
+            //Assert
+            Assert.IsNotNull(result);
+
+            DeleteTestFromDb();
+        }
+
+        /// <summary>
+        /// Tests if Edit returns View
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod]
+        public async System.Threading.Tasks.Task EditReturnsViewAsync()
+        {
+            //Arrange
+            Employees employeeTest = new Employees() { FirstName = "test", LastName = "test" };
+            await _EmployeesControllerUnderTest.Create(employeeTest);
+
+            //Act
+            var result = _EmployeesControllerUnderTest.Edit(employeeTest.EmployeeID);
+
+            //Assert
+            Assert.IsNotNull(result);
+
+
+
+            DeleteTestFromDb();
+
+        }
+
+        /// <summary>
+        /// Tests if Edit edits.
+        /// </summary>
+        /// <returns></returns>
         [TestMethod]
         public async System.Threading.Tasks.Task EditEditsAsync()
         {
@@ -116,8 +161,38 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.AreEqual(expectedEmployee, actualEmployee);
 
+            DeleteTestFromDb();
+        }
 
-            var employees = _db.Employees.Where(e => (e.LastName == "test1" && e.FirstName == "test1") || (e.LastName == "test2" && e.LastName == "test2"));
+        /// <summary>
+        /// Tests if index returns view
+        /// </summary>
+        [TestMethod]
+        public void IndexReturnsView()
+        {
+            //Arrange
+
+            //Act
+            var result = _EmployeesControllerUnderTest.Index();
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        private void DeleteTestFromDb()
+        {
+            var employees = _db.Employees.Where(e => e.LastName.Contains("test"));
             _db.Employees.RemoveRange(employees);
             _db.SaveChanges();
         }
