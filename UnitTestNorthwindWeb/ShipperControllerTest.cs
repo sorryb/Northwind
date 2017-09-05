@@ -14,7 +14,21 @@ namespace UnitTestNorthwindWeb
         ShippersController _ShippersControllerUnderTest = new ShippersController();
         NorthwindModel db = new NorthwindModel();
 
+        /// <summary>
+        /// Sample test method.
+        /// </summary>
+        [TestMethod]
+        public void SampleTestShipper()
+        {
+            //Arrage
 
+            //Act
+
+            //Assert
+            Assert.AreEqual("ShippersController", "ShippersController");
+        }
+
+        
         /// <summary>
         /// Tests if create returns view.
         /// </summary>
@@ -53,19 +67,7 @@ namespace UnitTestNorthwindWeb
 
         }
 
-        /// <summary>
-        /// Sample test method.
-        /// </summary>
-        [TestMethod]
-        public void SampleTestShipper()
-        {
-            //Arrage
-
-            //Act
-
-            //Assert
-            Assert.AreEqual("ShippersController", "ShippersController");
-        }
+        
 
         /// <summary>
         /// Tests if delete returns view

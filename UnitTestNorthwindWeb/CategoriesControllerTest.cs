@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NorthwindWeb.Controllers;
 using NorthwindWeb.Models;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 using System.Linq;
 
 
@@ -15,7 +16,20 @@ namespace UnitTestNorthwindWeb
         CategoriesController _CategoriesControllerUnderTest = new CategoriesController();
         NorthwindModel db = new NorthwindModel();
 
-        
+        /// <summary>
+        /// Sample test method.
+        /// </summary>
+        [TestMethod]
+        public void SampleTestCategory()
+        {
+            //Arrage
+
+            //Act
+
+            //Assert
+            Assert.AreEqual("CategoriesController", "CategoriesController");
+        }
+
         /// <summary>
         /// Tests if create returns view.
         /// </summary>
@@ -54,19 +68,7 @@ namespace UnitTestNorthwindWeb
 
         }
 
-        /// <summary>
-        /// Sample test method.
-        /// </summary>
-        [TestMethod]
-        public void SampleTestCategory()
-        {
-            //Arrage
-
-            //Act
-
-            //Assert
-            Assert.AreEqual("CategoriesController", "CategoriesController");
-        }
+        
 
         /// <summary>
         /// Tests if delete returns view
