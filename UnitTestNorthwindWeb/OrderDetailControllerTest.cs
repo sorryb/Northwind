@@ -74,13 +74,23 @@ namespace UnitTestNorthwindWeb
         public async Task OrderDetailReturnsDetails()
         {
             //Arrage
+            Orders OrderTest = new Orders() { OrderID = 22, CustomerID = "ALFKI", EmployeeID = 3 };
+            Order_Details detailsTest = new Order_Details() { ProductID = 20, UnitPrice = 23, Quantity = 12, Discount = 1, Order = OrderTest };
+            await _detailsControllerUnderTest.Create(detailsTest, OrderTest.OrderID);
 
             //Act
-            var result = await _detailsControllerUnderTest.Details(10249,14) as ViewResult;
-            var model = result.Model;
+            var result = await _detailsControllerUnderTest.Details(OrderTest.OrderID, detailsTest.ProductID) as ViewResult;
 
             //Assert
-            Assert.IsNotNull(model);
+            Assert.IsNotNull(result);
+
+            var details = db.Order_Details.Where(o => o.OrderID == detailsTest.OrderID && o.ProductID == detailsTest.ProductID && o.UnitPrice == detailsTest.UnitPrice && o.Quantity == detailsTest.Quantity && o.Discount == detailsTest.Discount);
+            var orders = db.Orders.Find(OrderTest.OrderID);
+            foreach (var orderdet in details)
+                db.Order_Details.Remove(orderdet);
+
+            db.Orders.Remove(orders);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -106,18 +116,24 @@ namespace UnitTestNorthwindWeb
         public async Task OrderDetailReturnsCreateCreates()
         {
             //Arrange
-            Order_Details OrderTest = new Order_Details() { ProductID = 17,UnitPrice=23,Quantity=12,Discount=1};
+            Orders OrderTest = new Orders() { OrderID = 22, CustomerID = "ALFKI", EmployeeID = 3 };
+            Order_Details detailsTest = new Order_Details() { ProductID = 17,UnitPrice=23,Quantity=12,Discount=1,Order=OrderTest};
+           
             //Act
             var expected = db.Order_Details.Count() + 1;
-            await _detailsControllerUnderTest.Create(OrderTest,10249);
+            await _detailsControllerUnderTest.Create(detailsTest,OrderTest.OrderID);
             var actual = db.Order_Details.Count();
-            var details = db.Order_Details.Where(o => o.OrderID == OrderTest.OrderID && o.ProductID == OrderTest.ProductID && o.UnitPrice==OrderTest.UnitPrice && o.Quantity==OrderTest.Quantity && o.Discount==OrderTest.Discount);
+            var details = db.Order_Details.Where(o => o.OrderID == detailsTest.OrderID && o.ProductID == detailsTest.ProductID && o.UnitPrice==detailsTest.UnitPrice && o.Quantity==detailsTest.Quantity && o.Discount==detailsTest.Discount);
+            var orders = db.Orders.Find(OrderTest.OrderID);
+            
             //Assert
             Assert.AreEqual(expected, actual);
 
 
             foreach (var orderdet in details)
                 db.Order_Details.Remove(orderdet);
+
+            db.Orders.Remove(orders);
             db.SaveChanges();
         }
 
@@ -128,12 +144,23 @@ namespace UnitTestNorthwindWeb
         public async Task OrderDetailReturnsEdit()
         {
             //Arrage
+            Orders OrderTest = new Orders() { OrderID = 22, CustomerID = "ALFKI", EmployeeID = 3 };
+            Order_Details detailsTest = new Order_Details() { ProductID = 20, UnitPrice = 23, Quantity = 12, Discount = 1, Order = OrderTest };
+            await _detailsControllerUnderTest.Create(detailsTest, OrderTest.OrderID);
 
             //Act
-            var result = await _detailsControllerUnderTest.Edit(10249,14) as ViewResult;
+            var result = await _detailsControllerUnderTest.Edit(OrderTest.OrderID,detailsTest.ProductID) as ViewResult;
 
             //Assert
             Assert.IsNotNull(result);
+
+            var details = db.Order_Details.Where(o => o.OrderID == detailsTest.OrderID && o.ProductID == detailsTest.ProductID && o.UnitPrice == detailsTest.UnitPrice && o.Quantity == detailsTest.Quantity && o.Discount == detailsTest.Discount);
+            var orders = db.Orders.Find(OrderTest.OrderID);
+            foreach (var orderdet in details)
+                db.Order_Details.Remove(orderdet);
+
+            db.Orders.Remove(orders);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -143,8 +170,9 @@ namespace UnitTestNorthwindWeb
         public async Task OrderDetailReturnsEditEdits()
         {
             //Arrange
-            Order_Details detailsTest = new Order_Details() {ProductID = 20, UnitPrice = 23, Quantity = 12, Discount = 1 };
-            await _detailsControllerUnderTest.Create(detailsTest,10249);
+            Orders OrderTest = new Orders() { OrderID = 22, CustomerID = "ALFKI", EmployeeID = 3 };
+            Order_Details detailsTest = new Order_Details() {ProductID = 20, UnitPrice = 23, Quantity = 12, Discount = 1,Order=OrderTest };
+            await _detailsControllerUnderTest.Create(detailsTest,OrderTest.OrderID);
             db.Entry(detailsTest).State = System.Data.Entity.EntityState.Added;
 
             var expectedDetails = db.Order_Details.Find(detailsTest.OrderID,detailsTest.ProductID);
@@ -163,9 +191,12 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual(expectedDetails, actualDetails);
 
 
-            var details = db.Order_Details.Where(o => (o.OrderID == 10249 && o.ProductID == 20 && o.UnitPrice == 23 && o.Quantity == 12 && o.Discount==1) || (o.OrderID == 10249 && o.ProductID == 20 && o.UnitPrice == 43 && o.Quantity == 22 && o.Discount==1));
+            var details = db.Order_Details.Where(o => o.OrderID == detailsTest.OrderID && o.ProductID == detailsTest.ProductID && o.UnitPrice == detailsTest.UnitPrice && o.Quantity == detailsTest.Quantity && o.Discount == detailsTest.Discount);
+            var orders = db.Orders.Find(OrderTest.OrderID);
             foreach (var orderdet in details)
                 db.Order_Details.Remove(orderdet);
+
+            db.Orders.Remove(orders);
             db.SaveChanges();
 
         }
@@ -178,8 +209,9 @@ namespace UnitTestNorthwindWeb
         public async Task OrderDetailReturnsDelete()
         {
             //Arrange
-            Order_Details detailsTest = new Order_Details() { ProductID = 17, UnitPrice = 23, Quantity = 12, Discount = 1 };
-            await _detailsControllerUnderTest.Create(detailsTest,10249);
+            Orders OrderTest = new Orders() { OrderID = 22, CustomerID = "ALFKI", EmployeeID = 3 };
+            Order_Details detailsTest = new Order_Details() { ProductID = 17, UnitPrice = 23, Quantity = 12, Discount = 1 ,Order=OrderTest};
+            await _detailsControllerUnderTest.Create(detailsTest,OrderTest.OrderID);
 
             //Act
             var result = _detailsControllerUnderTest.Delete(detailsTest.OrderID,detailsTest.ProductID);
@@ -190,8 +222,11 @@ namespace UnitTestNorthwindWeb
 
 
             var details = db.Order_Details.Where(o => o.OrderID == detailsTest.OrderID && o.ProductID == detailsTest.ProductID&&o.UnitPrice==detailsTest.UnitPrice&&o.Quantity==detailsTest.Quantity&&o.Discount==detailsTest.Discount);
+            var orders = db.Orders.Find(OrderTest.OrderID);
             foreach (var orderdet in details)
                 db.Order_Details.Remove(orderdet);
+
+            db.Orders.Remove(orders);
             db.SaveChanges();
         }
 
@@ -202,8 +237,9 @@ namespace UnitTestNorthwindWeb
         public async Task OrderDetailReturnsDeleteDeletes()
         {
             //Arrange
-            Order_Details detailsTest = new Order_Details() { ProductID = 17, UnitPrice = 23, Quantity = 12, Discount = 1 };
-            await _detailsControllerUnderTest.Create(detailsTest,10249);
+            Orders OrderTest = new Orders() { OrderID = 22, CustomerID = "ALFKI", EmployeeID = 3 };
+            Order_Details detailsTest = new Order_Details() { ProductID = 17, UnitPrice = 23, Quantity = 12, Discount = 1 ,Order=OrderTest};
+            await _detailsControllerUnderTest.Create(detailsTest,OrderTest.OrderID);
             int expected = db.Order_Details.Count() - 1;
 
             //Act
@@ -212,6 +248,14 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(expected, actual);
+
+            var details = db.Order_Details.Where(o => o.OrderID == detailsTest.OrderID && o.ProductID == detailsTest.ProductID && o.UnitPrice == detailsTest.UnitPrice && o.Quantity == detailsTest.Quantity && o.Discount == detailsTest.Discount);
+            var orders = db.Orders.Find(OrderTest.OrderID);
+            foreach (var orderdet in details)
+                db.Order_Details.Remove(orderdet);
+
+            db.Orders.Remove(orders);
+            db.SaveChanges();
         }
     }
 }
