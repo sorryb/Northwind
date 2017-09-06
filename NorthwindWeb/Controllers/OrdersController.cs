@@ -26,6 +26,11 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
+        /// <summary>
+        /// Displays a page with all the orders in the database.
+        /// </summary>
+        /// <param name="search">The search look to find something asked</param>
+        /// <returns>Orders index view</returns>
         // GET: Orders
         public ActionResult Index(string search = "")
         {
@@ -33,7 +38,12 @@ namespace NorthwindWeb.Controllers
             
           
         }
-            
+
+        /// <summary>
+        /// Displays a page showing all the information about one order and its order-details.
+        /// </summary>
+        /// <param name="id">The id of the order whose information to show</param>
+        /// <returns>Orders details view</returns>
         // GET: Orders/Details
         public async Task<ActionResult> Details(int id)
         {
@@ -47,33 +57,37 @@ namespace NorthwindWeb.Controllers
             viewModel.order = orders;
 
             //take order-details of orders
-            var ordet = from od in db.Order_Details
+            var orderDetail = from od in db.Order_Details
                         where (od.OrderID == id)
                         select new { od.OrderID,od.ProductID,od.Quantity,od.UnitPrice, od.Discount };
 
 
-            List<DetailsOfOrder> list = new List<DetailsOfOrder>();
+            List<DetailsOfOrder> listOfDetails = new List<DetailsOfOrder>();
 
             //lopp in all order-details
-            foreach (var item in ordet)
+            foreach (var itemInOrderDetail in orderDetail)
             {
-                DetailsOfOrder x = new DetailsOfOrder();
+                DetailsOfOrder order = new DetailsOfOrder();
 
-                x.OrderID = item.OrderID;
-                x.ProductID = item.ProductID;
-                x.Quantity = item.Quantity;
-                x.UnitPrice = item.UnitPrice;
-                x.Discount = item.Discount;
+                order.OrderID = itemInOrderDetail.OrderID;
+                order.ProductID = itemInOrderDetail.ProductID;
+                order.Quantity = itemInOrderDetail.Quantity;
+                order.UnitPrice = itemInOrderDetail.UnitPrice;
+                order.Discount = itemInOrderDetail.Discount;
 
 
-                list.Add(x);
+                listOfDetails.Add(order);
 
             }
-            viewModel.details = list;
+            viewModel.details = listOfDetails;
             ViewBag.orderid = id;
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new order.
+        /// </summary>
+        /// <returns>Create view.</returns>
         // GET: Orders/Create
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
@@ -84,6 +98,11 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Inserts an order into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="orders">The order entity to be inserted</param>
+        /// <returns>If successful returns orders index view, else goes back to form.</returns>
         // POST: Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -107,6 +126,11 @@ namespace NorthwindWeb.Controllers
 
 
 
+        /// <summary>
+        /// Returns the view containing the form necessary for editing an existing order.
+        /// </summary>
+        /// <param name="id">The id of the order that is going to be edited</param>
+        /// <returns>Orders edit view</returns>
         // GET: Orders/Edit/5
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
@@ -126,6 +150,13 @@ namespace NorthwindWeb.Controllers
             return View(orders);
         }
 
+        /// <summary>
+        /// Updates the database 
+        /// changing the fields of the order whose id is equal to the id of the provided orders parameter
+        /// to those of the parameter.
+        /// </summary>
+        /// <param name="orders">The changed order.</param>
+        /// <returns>Orders index view</returns>
         // POST: Orders/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -146,6 +177,11 @@ namespace NorthwindWeb.Controllers
             return View(orders);
         }
 
+        /// <summary>
+        /// Displays a confirmation page for the following delete.
+        /// </summary>
+        /// <param name="id">The order that is going to be deleted.</param>
+        /// <returns>Delete view</returns>
         // GET: Orders/Delete/5
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
@@ -165,34 +201,39 @@ namespace NorthwindWeb.Controllers
             viewModel.order = orders;
 
             //take order-details of orders
-            var ordet = from od in db.Order_Details
+            var orderDetail = from od in db.Order_Details
                         where (od.OrderID == id)
                         select new { od.OrderID, od.ProductID, od.Quantity, od.UnitPrice, od.Discount };
 
 
-            List<DetailsOfOrder> list = new List<DetailsOfOrder>();
+            List<DetailsOfOrder> listOfDetails = new List<DetailsOfOrder>();
 
             //lopp in all order-details
-            foreach (var item in ordet)
+            foreach (var itemInOrderDetail in orderDetail)
             {
-                DetailsOfOrder x = new DetailsOfOrder();
+                DetailsOfOrder order = new DetailsOfOrder();
 
-                x.OrderID = item.OrderID;
-                x.ProductID = item.ProductID;
-                x.Quantity = item.Quantity;
-                x.UnitPrice = item.UnitPrice;
-                x.Discount = item.Discount;
+                order.OrderID = itemInOrderDetail.OrderID;
+                order.ProductID = itemInOrderDetail.ProductID;
+                order.Quantity = itemInOrderDetail.Quantity;
+                order.UnitPrice = itemInOrderDetail.UnitPrice;
+                order.Discount = itemInOrderDetail.Discount;
 
 
-                list.Add(x);
+                listOfDetails.Add(order);
 
             }
-            viewModel.details = list;
+            viewModel.details = listOfDetails;
             ViewBag.orderid = id;
 
             return View(viewModel);
         }
 
+        /// <summary>
+        /// Deletes an order from the database. The order will be deleted along with its details
+        /// </summary>
+        /// <param name="id">The id of the order that is going to be deleted</param>
+        /// <returns>Orders index view</returns>
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -202,8 +243,8 @@ namespace NorthwindWeb.Controllers
 
 
             var details = db.Order_Details.Where(x=>x.OrderID==id);
-            foreach(var orderdet in details)
-                db.Order_Details.Remove(orderdet);
+            foreach(var orderDet in details)
+                db.Order_Details.Remove(orderDet);
 
             Orders orders = await db.Orders.FindAsync(id);
             db.Orders.Remove(orders);
@@ -220,14 +261,28 @@ namespace NorthwindWeb.Controllers
             }
             base.Dispose(disposing);
         }
-        
-        
+
+
+        /// <summary>
+        /// Function used to control the dashboard datatables from the server
+        /// </summary>
+        /// <param name="draw"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <returns>A JSON filtered orders list.</returns>
         // GET: Orders by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
-            const int totalRows = 999;
-            
-            string search = Request.QueryString["search[value]"] ?? "";
+            const int totalRows = 999;          
+
+            string search = "";
+            try
+            {
+                search = Request.QueryString["search[value]"] ?? "";
+            }
+            catch (NullReferenceException e) { }
+
+
             int sortColumn = -1;
             string sortDirection = "asc";
             if (length == -1)
@@ -236,17 +291,39 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            if (Request.QueryString["order[0][column]"] != null)
+            try
             {
-                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                if (Request.QueryString["order[0][column]"] != null)
+                {
+                    try
+                    {
+                        sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                    }
+                    catch (NullReferenceException e) { }
+                }
             }
-            if (Request.QueryString["order[0][dir]"] != null)
+            catch (NullReferenceException e) { }
+
+            try
             {
-                sortDirection = Request.QueryString["order[0][dir]"];
+                if (Request.QueryString["order[0][dir]"] != null)
+                {
+                    try
+                    {
+                        sortDirection = Request.QueryString["order[0][dir]"];
+                    }
+                    catch (NullReferenceException e) { }
+                }
             }
+            catch (NullReferenceException e) { }
 
             //list of orders that contain "search"
-            var list = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)||o.Employee.LastName.Contains(search)||o.Shipper.CompanyName.Contains(search));
+            var list = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)||
+                                        o.Employee.LastName.Contains(search)||
+                                        o.Shipper.CompanyName.Contains(search)||
+                                        o.ShippedDate.ToString().Contains(search)||
+                                        o.ShipName.Contains(search)||
+                                        o.ShipAddress.Contains(search));
 
             //order list
             switch (sortColumn)

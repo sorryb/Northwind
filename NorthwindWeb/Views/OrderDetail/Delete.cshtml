@@ -73,9 +73,9 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color">
-                <input type="submit" value="Sterge" class="btn btn-default" /> |
-                @Html.ActionLink("Inapoi", "Details", "Orders", new { @class = "btn btn-default" })
+            <div class="form-actions no-color">     
+                @Html.ActionLink("Inapoi", "Details", "Orders", new { id = Model.OrderID }, new { @class = "btn btn-default" }) | 
+                <input type="submit" value="Sterge" class="btn btn-default" /> 
                
             </div>
         }
