@@ -10,16 +10,26 @@ namespace NorthwindWeb.Models.ShopCart
     /// <summary>
     /// Contains the response for shopcart from server
     /// </summary>
-    public class ProductShopResponse
+    /// <typeparam name="DataType">IQueriable if we have a proper database or string of json from another database</typeparam>
+    public class ProductShopResponse<DataType>
     {
         /// <summary>
         /// contains all errors
         /// </summary>
         public enum  ErrorType
         {
+            /// <summary>
+            /// no error found
+            /// </summary>
             NoError,
+            /// <summary>
+            /// a unknown type of error ocure
+            /// </summary>
             UnknownError,
-            InvalidProduct
+            /// <summary>
+            /// order contains some invalid data
+            /// </summary>
+            InvalidOrder
         }
 
         /// <summary>
@@ -28,10 +38,18 @@ namespace NorthwindWeb.Models.ShopCart
         ErrorType Error { get; set; } = ErrorType.NoError;
 
         /// <summary>
-        /// message
+        /// Title of message
         /// </summary>
         string MessageTitle { get; set; }
+
+        /// <summary>
+        /// Message
+        /// </summary>
         string MessageText { get; set; }
-        IQueryable<ProductShopCart> ProductList { get; set; }
+
+        /// <summary>
+        /// Data about product that will be sent to client
+        /// </summary>
+        DataType data { get; set; }
     }
 }

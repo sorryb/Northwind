@@ -56,12 +56,14 @@ function getCartProducts() {
         ID --Pentru cautare in baza de date
         Category --Pentru gasirea imaginii
         Quantity  --cantitatea ce o comanda
+        UnitPrice
+        TotalPrice
     }
     -ProductShopResponse{
         bool Error --in caz ca a fost vreo eroare
         MessageTitle messageTitle
         MessageText messageText
-        ProductList --neadaugate pe server
+        data --neadaugate pe server
 }
 
 
