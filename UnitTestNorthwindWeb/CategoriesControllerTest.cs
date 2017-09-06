@@ -192,7 +192,7 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual(expectedCategory, actualCategory);
 
 
-            var category = db.Categories.Where(c => (c.CategoryName == "video" && c.Description == "camere video") || (c.CategoryName == "foto" && c.Description == "aparat foto"));
+            var category = db.Categories.Where(c => (c.CategoryName == "video") || (c.CategoryName == "foto"));
             db.Categories.RemoveRange(category);
             db.SaveChanges();
         }
