@@ -13,7 +13,7 @@ namespace UnitTestNorthwindWeb
     public class CategoriesControllerTest
     {
         //Arrange
-        CategoriesController _CategoriesControllerUnderTest = new CategoriesController();
+        CategoriesController _categoriesControllerTest = new CategoriesController();
         NorthwindModel db = new NorthwindModel();
 
         /// <summary>
@@ -31,6 +31,58 @@ namespace UnitTestNorthwindWeb
         }
 
         /// <summary>
+        /// Check what Index action returns.
+        /// </summary>
+        [TestMethod]
+        public void CategoryReturnsIndexView()
+        {
+            //Arrage
+
+            //Act
+            var result = _categoriesControllerTest.Index("");
+
+            //Assert
+            Assert.IsNotNull(result);
+
+        }
+
+        /// <summary>
+        /// Check what Index action returns.
+        /// </summary>
+        [TestMethod]
+        public void CategoryReturnsIndexViewResult()
+        {
+            //Arrage
+
+            //Act
+            var result = _categoriesControllerTest.Index("");
+
+            //Assert
+            Assert.IsNotNull(result);
+
+
+        }
+
+        
+
+        /// <summary>
+        /// Check Details items from Index action .
+        /// </summary>
+        [TestMethod]
+        public async Task CategoryReturnsDetails()
+        {
+            //Arrage
+            Categories categoriesTest = new Categories() { CategoryName = "Accesorii" };
+            //Act
+            var result = await _categoriesControllerTest.Details(categoriesTest.CategoryID) ;
+            
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
+
+        /// <summary>
         /// Tests if create returns view.
         /// </summary>
         [TestMethod]
@@ -39,7 +91,7 @@ namespace UnitTestNorthwindWeb
             //Arrange
 
             //Act
-            var result = _CategoriesControllerUnderTest.Create() as ViewResult;
+            var result = _categoriesControllerTest.Create() ;
 
             //Assert
             Assert.IsNotNull(result);
@@ -53,10 +105,10 @@ namespace UnitTestNorthwindWeb
         public async System.Threading.Tasks.Task CategoryCreate()
         {
             //Arrange
-            Categories CategoriesTest = new Categories() {CategoryID=14,CategoryName = "foto", Description = "foto, video" };
+            Categories CategoriesTest = new Categories() {CategoryID=14, CategoryName = "foto", Description = "foto, video" };
             //Act
             var expected = db.Categories.Count() + 1;
-            await _CategoriesControllerUnderTest.Create(CategoriesTest);
+            await _categoriesControllerTest.Create(CategoriesTest);
             var actual = db.Categories.Count();
             var category = db.Categories.Where(c => c.CategoryName == CategoriesTest.CategoryName && c.Description == CategoriesTest.Description);
             
@@ -65,7 +117,6 @@ namespace UnitTestNorthwindWeb
 
             db.Categories.RemoveRange(category);
             db.SaveChanges();
-
         }
 
         
@@ -75,21 +126,17 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task CategoryDeleteReturnsViewAsync()
+        public async System.Threading.Tasks.Task CategoryDeleteReturnsView()
         {
             //Arrange
             Categories categoriesTest = new Categories() { CategoryName = "foto", Description = "foto, video" };
-            await _CategoriesControllerUnderTest.Create(categoriesTest);
+            await _categoriesControllerTest.Create(categoriesTest);
 
             //Act
-            var result = _CategoriesControllerUnderTest.Delete(categoriesTest.CategoryID);
+            var result = _categoriesControllerTest.Delete(categoriesTest.CategoryID);
 
             //Assert
             Assert.IsNotNull(result);
-
-
-
-
 
             var category = db.Categories.Where(c => c.CategoryName == categoriesTest.CategoryName && c.Description == categoriesTest.Description);
             db.Categories.RemoveRange(category);
@@ -100,30 +147,31 @@ namespace UnitTestNorthwindWeb
         /// Tests if delete deletes
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task CategoryDeleteDeletesAsync()
+        public async System.Threading.Tasks.Task CategoryDeleteDeletes()
         {
             //Arrange
             Categories categoriesTest = new Categories() { CategoryName = "foto", Description = "foto, video" };
-            await _CategoriesControllerUnderTest.Create(categoriesTest);
+            await _categoriesControllerTest.Create(categoriesTest);
             int expected = db.Categories.Count() - 1;
 
             //Act
-            await _CategoriesControllerUnderTest.DeleteConfirmed(categoriesTest.CategoryID);
+            await _categoriesControllerTest.DeleteConfirmed(categoriesTest.CategoryID);
             int actual = db.Categories.Count();
 
             //Assert
             Assert.AreEqual(expected, actual);
         }
 
+        
         /// <summary>
         /// Tests if edit works
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task EditEditsAsync()
+        public async System.Threading.Tasks.Task EditEdits()
         {
             //Arrange
             Categories categoriesTest = new Categories() { CategoryName = "video", Description = "camere video" };
-            await _CategoriesControllerUnderTest.Create(categoriesTest);
+            await _categoriesControllerTest.Create(categoriesTest);
             db.Entry(categoriesTest).State = System.Data.Entity.EntityState.Added;
 
             var expectedCategory = db.Categories.Find(categoriesTest.CategoryID);
@@ -134,7 +182,7 @@ namespace UnitTestNorthwindWeb
             db = new NorthwindModel();
 
             //Act
-            await _CategoriesControllerUnderTest.Edit(categoriesTest);
+            await _categoriesControllerTest.Edit(categoriesTest);
             db.Entry(categoriesTest).State = System.Data.Entity.EntityState.Modified;
             var actualCategory = db.Categories.Find(categoriesTest.CategoryID);
         
