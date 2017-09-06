@@ -23,8 +23,6 @@ function AddToCart(productToAdd) {
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
 }
 
-
-
 //count number of product in shopcart
 function getCartCount() {
     //if is loged maybe we return a variable, or we return a json from server and when we update it send it back to server
@@ -36,8 +34,6 @@ function getCartProducts() {
     //also we need to see how we manage this
     return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
 }
-
-
 
 /*
 * numerele nu reprezinta pasii cronologici ce trebuie facuti
@@ -60,8 +56,6 @@ function getCartProducts() {
     -AddListProduct: dupa ce se logheaza ia json, trece prin fiecare produs, vede ca e disponibil si ca exista si il baga pe server.
         daca da return ProductShopResponse.error=0
         daca nu return ProductShopResponse.error=1 si detaliile necesare
-        
-        
     -DeleteProduct(productID): sterge un produs din baza de date (din json)
 5. Ne vor trebui urmatoarele obiecte:
     -ProductShopCart={
@@ -77,7 +71,4 @@ function getCartProducts() {
         MessageText messageText
         data --neadaugate pe server
 }
-
-
-
 */
