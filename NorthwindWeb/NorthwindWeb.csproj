@@ -214,6 +214,7 @@
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ShippersController.cs" />
+    <Compile Include="Controllers\ShopCartController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\TerritoriesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -234,6 +235,8 @@
     <Compile Include="Models\Region.cs" />
     <Compile Include="Models\ServerClientCommunication\JsonDataTableObject.cs" />
     <Compile Include="Models\Shippers.cs" />
+    <Compile Include="Models\ShopCart\ProductShopCart.cs" />
+    <Compile Include="Models\ShopCart\ProductShopResponse.cs" />
     <Compile Include="Models\Suppliers.cs" />
     <Compile Include="Models\Territories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -440,6 +443,7 @@
     <Content Include="js\raphael\raphael.js" />
     <Content Include="js\raphael\raphael.min.js" />
     <Content Include="js\script.js" />
+    <Content Include="js\ShopCart.js" />
     <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\DataTables\dataTables.responsive.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
@@ -523,6 +527,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ShopCart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
