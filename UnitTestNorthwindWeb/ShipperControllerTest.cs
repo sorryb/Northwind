@@ -187,6 +187,7 @@ namespace UnitTestNorthwindWeb
             db.Dispose();
             shipperTest.CompanyName = "Nero Express";
             shipperTest.Phone = "0240-222-222";
+            db = new NorthwindModel();
 
             //Act
             await _shippersControllerTest.Edit(shipperTest);

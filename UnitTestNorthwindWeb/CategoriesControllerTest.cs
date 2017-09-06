@@ -131,7 +131,7 @@ namespace UnitTestNorthwindWeb
         public async Task CategoryDeleteReturnsView()
         {
             //Arrange
-            Categories categoriesTest = new Categories() { CategoryName = "foto", Description = "foto, video" };
+            Categories categoriesTest = new Categories() { CategoryName = "foto"};
             await _categoriesControllerTest.Create(categoriesTest);
 
             //Act
@@ -140,7 +140,7 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.IsNotNull(result);
 
-            var category = db.Categories.Where(c => c.CategoryName == categoriesTest.CategoryName && c.Description == categoriesTest.Description);
+            var category = db.Categories.Where(c => c.CategoryName == categoriesTest.CategoryName);
             db.Categories.RemoveRange(category);
             db.SaveChanges();
         }
@@ -180,6 +180,7 @@ namespace UnitTestNorthwindWeb
 
             db.Dispose();
             categoriesTest.CategoryName = "video";
+            db = new NorthwindModel();
 
             //Act
             await _categoriesControllerTest.Edit(categoriesTest);

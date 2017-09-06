@@ -64,7 +64,7 @@ namespace NorthwindWeb.Controllers
             {
                 db.Territories.Add(territories);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details","Regions",new { id=id });
             }
             
             return View(territories);
@@ -104,11 +104,6 @@ namespace NorthwindWeb.Controllers
             }
             ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
             return View(territories);
-        }
-
-        public Task Create(Territories territoryTest)
-        {
-            throw new NotImplementedException();
         }
 
         // GET: Territories/Delete/5
