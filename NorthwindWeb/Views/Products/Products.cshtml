@@ -14,7 +14,7 @@
                         @using (Html.BeginForm("Products", "Products", new
                         {
                             category = ViewBag.title
-                        }, FormMethod.Post, htmlAttributes: new { id = "searchInput"}))
+                        }, FormMethod.Post, htmlAttributes: new { id = "searchInput" }))
                         {
                             <div class="input-group classusedjusthere">
                                 <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
@@ -56,7 +56,7 @@
                         <li><strong>In Comenzi: @Model.ElementAt(i).OnOrder</strong></li>
                         <li class="liWithoutPoint">
                             <div class="shopcartcontainer-products">
-                                <div class="align-middle img-circle roundedshop">
+                                <div class="align-middle img-circle roundedshop" onclick="AddToCart(new CartProducts(@Model.ElementAt(i).ProductID,1,'@Model.ElementAt(i).CategoryName'))">
                                     <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
                                     <div class="shopcart-container-text">
                                         <span id="shopcart-productcount">+</span>
@@ -81,7 +81,7 @@
                             <li><strong>In Comenzi: @Model.ElementAt(i + 1).OnOrder</strong></li>
                             <li class="liWithoutPoint">
                                 <div class="shopcartcontainer-products">
-                                    <div class="align-middle img-circle roundedshop">
+                                    <div class="align-middle img-circle roundedshop" onclick="AddToCart(new CartProducts(@Model.ElementAt(i+1).ProductID,1,'@Model.ElementAt(i+1).CategoryName'))">
                                         <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
                                         <div class="shopcart-container-text">
                                             <span id="shopcart-productcount">+</span>
