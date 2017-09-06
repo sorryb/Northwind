@@ -27,7 +27,7 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         /// <summary>
-        /// Displays a page with all the orders in the database.
+        /// Displays a page with all the orders existing in the database.
         /// </summary>
         /// <param name="search">The search look to find something asked</param>
         /// <returns>Orders index view</returns>
