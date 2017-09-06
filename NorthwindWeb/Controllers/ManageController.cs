@@ -11,7 +11,7 @@ using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -372,6 +372,11 @@ namespace NorthwindWeb.Controllers
                 return user.PhoneNumber != null;
             }
             return false;
+        }
+
+        public object Index()
+        {
+            throw new NotImplementedException();
         }
 
         public enum ManageMessageId

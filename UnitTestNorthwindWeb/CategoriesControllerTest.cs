@@ -190,7 +190,7 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual(expectedCategory, actualCategory);
 
 
-            var category = db.Categories.Where(c => (c.CategoryName == "video" ) || (c.CategoryName == "foto" ));
+            var category = db.Categories.Where(c => (c.CategoryName == "video") || (c.CategoryName == "foto"));
             db.Categories.RemoveRange(category);
             db.SaveChanges();
         }

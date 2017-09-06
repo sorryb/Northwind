@@ -5,6 +5,7 @@ using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
+using NorthwindWeb.Models.ServerClientCommunication;
 
 namespace UnitTestNorthwindWeb
 {
@@ -209,6 +210,29 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// Unit test for json response to fill dinamic datatable
+        /// </summary>
+        [TestMethod]
+        public void JsonTableFill()
+        {
+            //Arrange
+            var controller = new OrdersController();
+            var db = new NorthwindModel();
+            var ordersCount = db.Orders.Count();
+            int draw = 1;
+            int row = 20;
+
+            //Act
+            var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
+
+            //Assert
+            Assert.AreEqual(jsonData.draw, draw);
+            Assert.AreEqual(jsonData.recordsTotal, ordersCount);
+            Assert.IsTrue(jsonData.recordsFiltered <= ordersCount);
+            db.Dispose();
         }
     }
 }

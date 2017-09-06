@@ -64,7 +64,7 @@
             </dd>
 
             <dt>
-                Numele livrarii
+                Nume Expeditor
             </dt>
 
             <dd>
@@ -96,6 +96,15 @@
             </dd>
 
         </dl>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                @Html.ActionLink("Inapoi la lista", "Index", "Orders", new { @class = "btn btn-default" }) | 
+                <input type="submit" value="Sterge" class="btn btn-default" />
+            </div>
+        }
       </div>
         <div class="col-md-6">
             <h4>Detalii Comanda</h4>
@@ -140,14 +149,6 @@
 
         </div>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-actions no-color">
-                <input type="submit" value="Sterge" class="btn btn-default" /> |
-      @Html.ActionLink("Inapoi la lista", "Index", "Orders", new { @class = "btn btn-default" }) 
-            </div>
-        }
+        
     </div>
 
