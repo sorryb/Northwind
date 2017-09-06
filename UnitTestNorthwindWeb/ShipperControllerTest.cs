@@ -202,27 +202,6 @@ namespace UnitTestNorthwindWeb
             db.Shippers.RemoveRange(shipper);
             db.SaveChanges();
         }
-
-        /// <summary>
-        /// Unit test for json response to fill dinamic datatable
-        /// </summary>//cu eroare
-        [TestMethod]
-        public void ShipperJsonTableFill()
-        {
-            ////Arrange
-            //var controller = new ShippersController();
-            //var shipperCount = db.Shippers.Count();
-            //int draw = 1;
-            //int row = 20;
-
-            ////Act
-            //var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
-
-            ////Assert
-            //Assert.AreEqual(jsonData.draw, draw);
-            //Assert.AreEqual(jsonData.recordsTotal, shipperCount);
-            //Assert.IsTrue(jsonData.recordsFiltered <= shipperCount);
-            //db.Dispose();
-        }
+        
     }
 }

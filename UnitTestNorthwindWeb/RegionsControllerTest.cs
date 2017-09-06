@@ -209,27 +209,6 @@ namespace UnitTestNorthwindWeb
             db.Regions.RemoveRange(region);
             db.SaveChanges();
         }
-
-        /// <summary>
-        /// Unit test for json response to fill dinamic datatable
-        /// </summary>//cu eroare
-        [TestMethod]
-        public void RegionJsonTableFill()
-        {
-            ////Arrange
-            //var controller = new RegionsController();
-            //var regionCount = db.Regions.Count();
-            //int draw = 1;
-            //int row = 20;
-
-            ////Act
-            //var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
-
-            ////Assert
-            //Assert.AreEqual(jsonData.draw, draw);
-            //Assert.AreEqual(jsonData.recordsTotal, regionCount);
-            //Assert.IsTrue(jsonData.recordsFiltered <= regionCount);
-            //db.Dispose();
-        }
+        
     }
 }
