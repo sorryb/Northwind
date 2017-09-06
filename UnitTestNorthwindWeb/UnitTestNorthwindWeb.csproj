@@ -114,6 +114,7 @@
     <Compile Include="ContactController.cs" />
     <Compile Include="TerritoriesControllerTest.cs" />
     <Compile Include="SupplierController.cs" />
+    <Compile Include="ServicesControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

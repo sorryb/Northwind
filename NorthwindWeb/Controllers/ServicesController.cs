@@ -52,19 +52,19 @@ namespace NorthwindWeb.Controllers
             List<ProductServices> listOfProducts = new List<ProductServices>();
 
             //lopp in first 4 products 
-            foreach (var item in products)
+            foreach (var itemInProducts in products)
             {
-                ProductServices x = new ProductServices();
+                ProductServices product = new ProductServices();
 
-                x.ProductName = item.ProductName;
-                x.CategoryName = item.CategoryName;
-                x.CompanyName = item.CompanyName;
-                x.QuantityPerUnit = item.QuantityPerUnit;
-                x.UnitPrice = item.UnitPrice;
-                x.UnitsInStock = item.UnitsInStock;
-                x.UnitsOnOrder = item.UnitsOnOrder;
+                product.ProductName = itemInProducts.ProductName;
+                product.CategoryName = itemInProducts.CategoryName;
+                product.CompanyName = itemInProducts.CompanyName;
+                product.QuantityPerUnit = itemInProducts.QuantityPerUnit;
+                product.UnitPrice = itemInProducts.UnitPrice;
+                product.UnitsInStock = itemInProducts.UnitsInStock;
+                product.UnitsOnOrder = itemInProducts.UnitsOnOrder;
 
-                listOfProducts.Add(x);
+                listOfProducts.Add(product);
 
             }
             viewModel.top4products = listOfProducts;
@@ -91,20 +91,20 @@ namespace NorthwindWeb.Controllers
             List<ProductServices> listOfProductsOrderByDesc = new List<ProductServices>();
 
             //loop in last 3 products
-            foreach (var item in productsOrderByDesc)
+            foreach (var itemInProductsDesc in productsOrderByDesc)
             {
-                ProductServices y = new ProductServices();
+                ProductServices product = new ProductServices();
 
-                y.ProductName = item.ProductName;
-                y.ProductID = item.ProductID;
-                y.CategoryName = item.CategoryName;
-                y.CompanyName = item.CompanyName;
-                y.QuantityPerUnit = item.QuantityPerUnit;
-                y.UnitPrice = item.UnitPrice;
-                y.UnitsInStock = item.UnitsInStock;
-                y.UnitsOnOrder = item.UnitsOnOrder;
+                product.ProductName = itemInProductsDesc.ProductName;
+                product.ProductID = itemInProductsDesc.ProductID;
+                product.CategoryName = itemInProductsDesc.CategoryName;
+                product.CompanyName = itemInProductsDesc.CompanyName;
+                product.QuantityPerUnit = itemInProductsDesc.QuantityPerUnit;
+                product.UnitPrice = itemInProductsDesc.UnitPrice;
+                product.UnitsInStock = itemInProductsDesc.UnitsInStock;
+                product.UnitsOnOrder = itemInProductsDesc.UnitsOnOrder;
 
-                listOfProductsOrderByDesc.Add(y);
+                listOfProductsOrderByDesc.Add(product);
 
             }
             viewModel.last3 = listOfProductsOrderByDesc;

@@ -5,6 +5,8 @@ using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
+using NorthwindWeb.Models.ServerClientCommunication;
+
 namespace UnitTestNorthwindWeb
 {
     /// <summary>
@@ -22,7 +24,7 @@ namespace UnitTestNorthwindWeb
             /// Check what Index action returns.
             /// </summary>
         [TestMethod]
-        public void ReturnsIndexView()
+        public void CustomersReturnsIndexView()
         {
             //Arrage
 
@@ -37,7 +39,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index action returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsIndexViewResult()
+        public void CustomersReturnsIndexViewResult()
         {
             //Arrage
 
@@ -55,7 +57,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index viewbag returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsViewBag()
+        public void CustomersReturnsViewBag()
         {
 
             //Arrage
@@ -71,7 +73,7 @@ namespace UnitTestNorthwindWeb
         /// Check Details items from Index action .
         /// </summary>
         [TestMethod]
-        public async Task ReturnsDetails()
+        public async Task CustomersReturnsDetails()
         {
             //Arrage
 
@@ -87,7 +89,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if create returns view.
         /// </summary>
         [TestMethod]
-        public void ReturnsCreate()
+        public void CustomersReturnsCreate()
         {
 
             //Arrage
@@ -103,7 +105,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if create inserts into database.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsCreateCreates()
+        public async Task CustomersReturnsCreateCreates()
         {
             //Arrange
             Customers customerTest = new Customers() { CustomerID="AABBC",CompanyName="test" };
@@ -125,7 +127,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if edit returns view.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsEdit()
+        public async Task CustomersReturnsEdit()
         {
             //Arrage
 
@@ -140,7 +142,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if edit make changes into database.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsEditEdits()
+        public async Task CustomersReturnsEditEdits()
         {
             //Arrange
             Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
@@ -173,7 +175,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async Task ReturnsDelete()
+        public async Task CustomersReturnsDelete()
         {
             //Arrange
             Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
@@ -195,7 +197,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if delete deletes
         /// </summary>
         [TestMethod]
-        public async Task ReturnsDeleteDeletes()
+        public async Task CustomersReturnsDeleteDeletes()
         {
             //Arrange
             Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
@@ -208,6 +210,29 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(expected, actual);
+        }
+
+        /// <summary>
+        /// Unit test for json response to fill dinamic datatable
+        /// </summary>
+        [TestMethod]
+        public void CustomersJsonTableFill()
+        {
+            //Arrange
+            var controller = new CustomersController();
+            var db = new NorthwindModel();
+            var customersCount = db.Customers.Count();
+            int draw = 1;
+            int row = 20;
+
+            //Act
+            var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
+
+            //Assert
+            Assert.AreEqual(jsonData.draw, draw);
+            Assert.AreEqual(jsonData.recordsTotal, customersCount);
+            Assert.IsTrue(jsonData.recordsFiltered <= customersCount);
+            db.Dispose();
         }
     }
     
