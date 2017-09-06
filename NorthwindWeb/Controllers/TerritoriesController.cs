@@ -106,6 +106,11 @@ namespace NorthwindWeb.Controllers
             return View(territories);
         }
 
+        public Task Create(Territories territoryTest)
+        {
+            throw new NotImplementedException();
+        }
+
         // GET: Territories/Delete/5
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string id)

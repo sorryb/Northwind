@@ -1,10 +1,12 @@
-﻿using System;
+﻿using NorthwindWeb.Models.ServerClientCommunication;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NorthwindWeb.Controllers;
+using System.Threading.Tasks;
 using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Linq;
-using System.Threading.Tasks;
+using System;
+
 
 
 namespace UnitTestNorthwindWeb
@@ -103,7 +105,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task ShipperCreate()
+        public async Task ShipperCreate()
         {
             //Arrange
             Shippers shipperTest = new Shippers() { ShipperID=4, CompanyName="Nero", Phone="0240-555-555" };
@@ -111,7 +113,7 @@ namespace UnitTestNorthwindWeb
             var expected = db.Shippers.Count() + 1;
             await _shippersControllerTest.Create(shipperTest);
             var actual = db.Shippers.Count();
-            var shipper = db.Shippers.Where(c => c.CompanyName == shipperTest.CompanyName && c.Phone == shipperTest.Phone);
+            var shipper = db.Shippers.Where(s => s.CompanyName == shipperTest.CompanyName && s.Phone == shipperTest.Phone);
 
             //Assert
             Assert.AreEqual(expected, actual);
@@ -128,7 +130,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task ShipperDeleteReturnsView()
+        public async Task ShipperDeleteReturnsView()
         {
             //Arrange
             Shippers shipperTest = new Shippers() { CompanyName = "Nero", Phone = "0240-555-555" };
@@ -144,7 +146,7 @@ namespace UnitTestNorthwindWeb
 
 
 
-            var category = db.Shippers.Where(c => c.CompanyName == shipperTest.CompanyName && c.Phone == shipperTest.Phone);
+            var category = db.Shippers.Where(s => s.CompanyName == shipperTest.CompanyName && s.Phone == shipperTest.Phone);
             db.Shippers.RemoveRange(category);
             db.SaveChanges();
         }
@@ -153,7 +155,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if delete deletes
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task ShipperDeleteDeletes()
+        public async Task ShipperDeleteDeletes()
         {
             //Arrange
             Shippers shipperTest = new Shippers() { CompanyName = "Nero", Phone = "0240-555-555" };
@@ -173,7 +175,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if edit works
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task ShipperEditEdits()
+        public async Task ShipperEditEdits()
         {
             //Arrange
             Shippers shipperTest = new Shippers() { CompanyName = "Express", Phone = "0240-111-111" };
@@ -196,9 +198,31 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual(expectedShipper, actualShipper);
 
 
-            var shipper = db.Shippers.Where(c => (c.CompanyName == "Express" && c.Phone == "0240-111-111") || (c.CompanyName == "Nero Express" && c.Phone == "0240-222-222"));
+            var shipper = db.Shippers.Where(s => (s.CompanyName == "Express" && s.Phone == "0240-111-111") || (s.CompanyName == "Nero Express" && s.Phone == "0240-222-222"));
             db.Shippers.RemoveRange(shipper);
             db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Unit test for json response to fill dinamic datatable
+        /// </summary>//cu eroare
+        [TestMethod]
+        public void ProductJsonTableFill()
+        {
+            ////Arrange
+            //var controller = new ShippersController();
+            //var shipperCount = db.Shippers.Count();
+            //int draw = 1;
+            //int row = 20;
+
+            ////Act
+            //var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
+
+            ////Assert
+            //Assert.AreEqual(jsonData.draw, draw);
+            //Assert.AreEqual(jsonData.recordsTotal, shipperCount);
+            //Assert.IsTrue(jsonData.recordsFiltered <= shipperCount);
+            //db.Dispose();
         }
     }
 }
