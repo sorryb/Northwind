@@ -40,7 +40,7 @@
                         }
                         <tr class="@selectedRow" role="row">
                             <td>
-                                @Html.ActionLink(Convert.ToString(itemOrder.OrderID), "Home", new { orderID = itemOrder.OrderID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                                @Html.ActionLink(Convert.ToString(itemOrder.OrderID), "HomeAdmin", new { orderID = itemOrder.OrderID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
                             </td>
                             <td>
                                 @itemOrder.OrderDate
@@ -55,7 +55,7 @@
             </table>
             <!--Pagination Orders-->
             Pagina @(Model.Page.PageCount < Model.Page.PageNumber ? 0 : Model.Page.PageNumber) din @Model.Page.PageCount
-            @Html.PagedListPager(Model.Page, page => Url.Action("Home", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
+            @Html.PagedListPager(Model.Page, page => Url.Action("HomeAdmin", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
             <!--Table with OrdersDetails for selected Order-->
             @if (Model.Order_Detail != null)
             {<hr>
@@ -81,7 +81,7 @@
                             }
                             <tr class="@selectedRow">
                                 <td>
-                                    @Html.ActionLink(itemOrderDetail.ProductName, "Home", new { orderID = ViewBag.OrderID, productID = itemOrderDetail.ProductID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                                    @Html.ActionLink(itemOrderDetail.ProductName, "HomeAdmin", new { orderID = ViewBag.OrderID, productID = itemOrderDetail.ProductID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
                                 </td>
 
                                 <td>
@@ -138,7 +138,7 @@
                 <!--Search in Orders-->
                 <h4>Cautare in comenzi</h4>
                 <div class="input-group">
-                    @using (Html.BeginForm("Home", "Order", FormMethod.Get))
+                    @using (Html.BeginForm("HomeAdmin", "Order", FormMethod.Get))
                     {                  @Html.TextBox("search", ViewBag.CurrentFilter as string)
 
                         <button type="submit" class="btn btn-default">
@@ -164,7 +164,7 @@
                             @foreach (var itemOrderTen in Model.OrderTen)
                             {
                                 <tr>
-                                    <td>@Html.ActionLink(Convert.ToString(itemOrderTen.OrderID), "Home", new { orderID = itemOrderTen.OrderID, search = itemOrderTen.OrderID })</td>
+                                    <td>@Html.ActionLink(Convert.ToString(itemOrderTen.OrderID), "HomeAdmin", new { orderID = itemOrderTen.OrderID, search = itemOrderTen.OrderID })</td>
                                     <td>@itemOrderTen.Cost lei</td>
 
                                 </tr>
@@ -180,7 +180,7 @@
                 <h4>Cea mai mare comanda</h4>
                 <table class="table">
                     <tr>
-                        <th>@Html.ActionLink(Convert.ToString(Model.Command.OrderID), "Home", new { orderID = Model.Command.OrderID, search = Model.Command.OrderID })</th>
+                        <th>@Html.ActionLink(Convert.ToString(Model.Command.OrderID), "HomeAdmin", new { orderID = Model.Command.OrderID, search = Model.Command.OrderID })</th>
                         <th>@Model.Command.Produse Produse</th>
 
                     </tr>

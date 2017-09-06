@@ -1,9 +1,13 @@
-﻿using System;
+﻿using NorthwindWeb.Models.ServerClientCommunication;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NorthwindWeb.Controllers;
+using System.Threading.Tasks;
 using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Linq;
+using System;
+
+
 
 namespace UnitTestNorthwindWeb
 {
@@ -11,34 +15,85 @@ namespace UnitTestNorthwindWeb
     public class RegionsControllerTest
     {
         //Arrange
-        RegionsController _RegionsControllerUnderTest = new RegionsController();
+        RegionsController _regionsControllerTest = new RegionsController();
         NorthwindModel db = new NorthwindModel();
 
         /// <summary>
         /// Sample test method.
         /// </summary>
         [TestMethod]
-        public void SampleTestRegion()
+        public void RegionSampleTest()
         {
             //Arrage
 
             //Act
 
             //Assert
-            Assert.AreEqual("RegionsController", "Regionsontroller");
+            Assert.AreEqual("RegionsController", "RegionsController");
         }
+
+        /// <summary>
+        /// Check what Index action returns.
+        /// </summary>
+        [TestMethod]
+        public void RegionReturnsIndexView()
+        {
+            //Arrage
+
+            //Act
+            var result = _regionsControllerTest.Index("");
+
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
+        /// <summary>
+        /// Check what Index action returns.
+        /// </summary>
+        [TestMethod]
+        public void RegionReturnsIndexViewResult()
+        {
+            //Arrage
+
+            //Act
+            var result = _regionsControllerTest.Index("");
+
+            //Assert
+            Assert.IsNotNull(result);
+
+
+        }
+
+
+        /// <summary>
+        /// Check Details items from Index action .
+        /// </summary>
+        [TestMethod]
+        public async Task RegionReturnsDetails()
+        {
+            //Arrage
+            Region regionTest = new Region() { RegionDescription = "Acasa" };
+            //Act
+            var result = await _regionsControllerTest.Details(regionTest.RegionID) ;
+            
+
+            //Assert
+            Assert.IsNotNull(result);
+        }
+
 
 
         /// <summary>
         /// Tests if create returns view.
         /// </summary>
         [TestMethod]
-        public void CreateReturnsViewRegions()
+        public void RegionsCreateReturnsView()
         {
             //Arrange
 
             //Act
-            var result = _RegionsControllerUnderTest.Create() as ViewResult;
+            var result = _regionsControllerTest.Create() as ViewResult;
 
             //Assert
             Assert.IsNotNull(result);
@@ -49,15 +104,15 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task CreateRegion()
+        public async Task RegionCreate()
         {
             //Arrange
-            Region regionTest = new Region() { RegionID = 4, RegionDescription = "Acasa" };
+            Region regionTest = new Region() { RegionDescription = "Acasa" };
             //Act
             var expected = db.Regions.Count() + 1;
-            await _RegionsControllerUnderTest.Create(regionTest);
+            await _regionsControllerTest.Create(regionTest);
             var actual = db.Regions.Count();
-            var region = db.Regions.Where(c => c.RegionDescription == regionTest.RegionDescription );
+            var region = db.Regions.Where(r => r.RegionDescription == regionTest.RegionDescription );
 
             //Assert
             Assert.AreEqual(expected, actual);
@@ -74,14 +129,14 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task DeleteReturnsViewRegionsAsync()
+        public async Task RegionsDeleteReturnsView()
         {
             //Arrange
             Region regionTest = new Region() { RegionDescription = "Acasa" };
-            await _RegionsControllerUnderTest.Create(regionTest);
+            await _regionsControllerTest.Create(regionTest);
 
             //Act
-            var result = _RegionsControllerUnderTest.Delete(regionTest.RegionID);
+            var result = _regionsControllerTest.Delete(regionTest.RegionID);
 
             //Assert
             Assert.IsNotNull(result);
@@ -90,7 +145,7 @@ namespace UnitTestNorthwindWeb
 
 
 
-            var region = db.Regions.Where(c => c.RegionDescription == regionTest.RegionDescription);
+            var region = db.Regions.Where(r => r.RegionDescription == regionTest.RegionDescription);
             db.Regions.RemoveRange(region);
             db.SaveChanges();
         }
@@ -99,30 +154,31 @@ namespace UnitTestNorthwindWeb
         /// Tests if delete deletes
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task DeleteDeletesRegionAsync()
+        public async Task RegionDeleteDeletes()
         {
             //Arrange
             Region regionTest = new Region() { RegionDescription = "Acasa" };
-            await _RegionsControllerUnderTest.Create(regionTest);
-            int expected = db.Shippers.Count() - 1;
+            await _regionsControllerTest.Create(regionTest);
+            int expected = db.Regions.Count() - 1;
 
             //Act
-            await _RegionsControllerUnderTest.DeleteConfirmed(regionTest.RegionID);
-            int actual = db.Shippers.Count();
+            await _regionsControllerTest.DeleteConfirmed(regionTest.RegionID);
+            int actual = db.Regions.Count();
 
             //Assert
             Assert.AreEqual(expected, actual);
         }
 
+       
         /// <summary>
         /// Tests if edit works
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task EditEditsShipperAsync()
+        public async System.Threading.Tasks.Task RegionEditEdits()
         {
             //Arrange
             Region regionTest = new Region() { RegionDescription = "Aici" };
-            await _RegionsControllerUnderTest.Create(regionTest);
+            await _regionsControllerTest.Create(regionTest);
             db.Entry(regionTest).State = System.Data.Entity.EntityState.Added;
 
             var expectedRegion = db.Regions.Find(regionTest.RegionID);
@@ -132,7 +188,7 @@ namespace UnitTestNorthwindWeb
             db = new NorthwindModel();
 
             //Act
-            await _RegionsControllerUnderTest.Edit(regionTest);
+            await _regionsControllerTest.Edit(regionTest);
             db.Entry(regionTest).State = System.Data.Entity.EntityState.Modified;
             var actualRegion = db.Regions.Find(regionTest.RegionID);
 
@@ -140,9 +196,31 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual(expectedRegion, actualRegion);
 
 
-            var region = db.Regions.Where(c => (c.RegionDescription == "Aici") || (c.RegionDescription == "Acolo"));
+            var region = db.Regions.Where(r => (r.RegionDescription == "Aici") || (r.RegionDescription == "Acolo"));
             db.Regions.RemoveRange(region);
             db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Unit test for json response to fill dinamic datatable
+        /// </summary>//cu eroare
+        [TestMethod]
+        public void ProductJsonTableFill()
+        {
+            ////Arrange
+            //var controller = new RegionsController();
+            //var regionCount = db.Regions.Count();
+            //int draw = 1;
+            //int row = 20;
+
+            ////Act
+            //var jsonData = controller.JsonTableFill( draw, 0, row).Data as JsonDataTableObject;
+
+            ////Assert
+            //Assert.AreEqual(jsonData.draw, draw);
+            //Assert.AreEqual(jsonData.recordsTotal, regionCount);
+            //Assert.IsTrue(jsonData.recordsFiltered <= regionCount);
+            //db.Dispose();
         }
     }
 }

@@ -425,6 +425,7 @@ namespace NorthwindWeb.Controllers
         // **************************************
         //data to change user
         [Authorize]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> ChangeUser(string userName)
         {
             RegisterViewModel model = new RegisterViewModel();
@@ -440,6 +441,7 @@ namespace NorthwindWeb.Controllers
         }
         //Change User
         [HttpPost]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> ChangeUser(RegisterViewModel model)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");

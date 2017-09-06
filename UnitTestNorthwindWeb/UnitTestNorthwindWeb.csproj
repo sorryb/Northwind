@@ -95,7 +95,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AccountControllerTest.cs" />
+    <Compile Include="DashboardControllerTest.cs" />
     <Compile Include="HomeControllerTest.cs" />
+    <Compile Include="OtherControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductControllerTest.cs" />
     <Compile Include="EmployeesControllerTest.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="ProductsController.cs" />
     <Compile Include="ManageController.cs" />
     <Compile Include="ContactController.cs" />
+    <Compile Include="TerritoriesControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
