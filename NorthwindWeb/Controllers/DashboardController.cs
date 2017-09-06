@@ -72,28 +72,34 @@ namespace NorthwindWeb.Controllers
                     {
                         locationSearch.Position = machesFount.Count() + 1;
                         locationSearch.ID = Convert.ToString(itemCategory.CategoryID);
-                        locationSearch.WhereFound = "CategoryID: " +Convert.ToString(itemCategory.CategoryID);
+                        locationSearch.WhereFound = "CategoryID: " + Convert.ToString(itemCategory.CategoryID);
                         locationSearch.Controller = "Categories";
                         machesFount.Add(locationSearch);
                     }
-                    else if(itemCategory.CategoryName.ToLower().Contains(search.ToLower()))
+                    else if (itemCategory.CategoryName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemCategory.CategoryID);
-                        locationSearch.WhereFound = "CategoryName: " + itemCategory.CategoryName;
-                        locationSearch.Controller = "Categories";
-                        machesFount.Add(locationSearch);
+                        if (itemCategory.CategoryName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemCategory.CategoryID);
+                            locationSearch.WhereFound = "CategoryName: " + itemCategory.CategoryName;
+                            locationSearch.Controller = "Categories";
+                            machesFount.Add(locationSearch);
+                        }
                     }
-                    else if(itemCategory.Description.ToLower().Contains(search.ToLower()))
+                    else if (itemCategory.Description != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemCategory.CategoryID);
-                        locationSearch.WhereFound = "Description: " + itemCategory.Description;
-                        locationSearch.Controller = "Categories";
-                        machesFount.Add(locationSearch);
+                        if (itemCategory.Description.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemCategory.CategoryID);
+                            locationSearch.WhereFound = "Description: " + itemCategory.Description;
+                            locationSearch.Controller = "Categories";
+                            machesFount.Add(locationSearch);
+                        }
                     }
 
-                }
+                    }
                 var suppliers = db.Suppliers;
                 foreach (var itemSuppliers in suppliers)
                 {
@@ -106,24 +112,30 @@ namespace NorthwindWeb.Controllers
                         locationSearch.Controller = "Suppliers";
                         machesFount.Add(locationSearch);
                     }
-                    else if (itemSuppliers.CompanyName.ToLower().Contains(search.ToLower()))
+                    else if (itemSuppliers.CompanyName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemSuppliers.SupplierID);
-                        locationSearch.WhereFound = "CompanyName: " + itemSuppliers.CompanyName;
-                        locationSearch.Controller = "Suppliers";
-                        machesFount.Add(locationSearch);
+                        if (itemSuppliers.CompanyName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemSuppliers.SupplierID);
+                            locationSearch.WhereFound = "CompanyName: " + itemSuppliers.CompanyName;
+                            locationSearch.Controller = "Suppliers";
+                            machesFount.Add(locationSearch);
+                        }
                     }
-                    else if (itemSuppliers.ContactName.ToLower().Contains(search.ToLower()))
+                    else if (itemSuppliers.ContactName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemSuppliers.SupplierID);
-                        locationSearch.WhereFound = "ContactName: " + itemSuppliers.ContactName;
-                        locationSearch.Controller = "Suppliers";
-                        machesFount.Add(locationSearch);
+                        if (itemSuppliers.ContactName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemSuppliers.SupplierID);
+                            locationSearch.WhereFound = "ContactName: " + itemSuppliers.ContactName;
+                            locationSearch.Controller = "Suppliers";
+                            machesFount.Add(locationSearch);
+                        }
                     }
 
-                }
+                    }
                 var product = db.Products;
                 foreach (var itemProduct in product)
                 {
@@ -136,13 +148,16 @@ namespace NorthwindWeb.Controllers
                         locationSearch.Controller = "Product";
                         machesFount.Add(locationSearch);
                     }
-                    else if (itemProduct.ProductName.ToLower().Contains(search.ToLower()))
+                    else if (itemProduct.ProductName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemProduct.ProductID);
-                        locationSearch.WhereFound = "ProductName: " + itemProduct.ProductName;
-                        locationSearch.Controller = "Product";
-                        machesFount.Add(locationSearch);
+                        if (itemProduct.ProductName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemProduct.ProductID);
+                            locationSearch.WhereFound = "ProductName: " + itemProduct.ProductName;
+                            locationSearch.Controller = "Product";
+                            machesFount.Add(locationSearch);
+                        }
                     }
                  
 
@@ -159,23 +174,28 @@ namespace NorthwindWeb.Controllers
                         locationSearch.Controller = "Orders";
                         machesFount.Add(locationSearch);
                     }
-                    else if (Convert.ToString(itemOrder.OrderDate).ToLower().Contains(search.ToLower()))
+                    else if (itemOrder.OrderDate != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemOrder.OrderID);
-                        locationSearch.WhereFound = "OrderDate: " + Convert.ToString(itemOrder.OrderDate);
-                        locationSearch.Controller = "Orders";
-                        machesFount.Add(locationSearch);
+                        if (Convert.ToString(itemOrder.OrderDate).ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemOrder.OrderID);
+                            locationSearch.WhereFound = "OrderDate: " + Convert.ToString(itemOrder.OrderDate);
+                            locationSearch.Controller = "Orders";
+                            machesFount.Add(locationSearch);
+                        }
                     }
-                    else if (itemOrder.ShipName.ToLower().Contains(search.ToLower()))
+                    else if (itemOrder.ShipName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemOrder.OrderID);
-                        locationSearch.WhereFound = "ShipName: " + itemOrder.ShipName;
-                        locationSearch.Controller = "Orders";
-                        machesFount.Add(locationSearch);
+                        if (itemOrder.ShipName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemOrder.OrderID);
+                            locationSearch.WhereFound = "ShipName: " + itemOrder.ShipName;
+                            locationSearch.Controller = "Orders";
+                            machesFount.Add(locationSearch);
+                        }
                     }
-
                 }
                 var customers = db.Customers;
                 foreach (var itemCustomers in customers)
@@ -189,21 +209,27 @@ namespace NorthwindWeb.Controllers
                         locationSearch.Controller = "Customers";
                         machesFount.Add(locationSearch);
                     }
-                    else if (itemCustomers.CompanyName.ToLower().Contains(search.ToLower()))
+                    else if (itemCustomers.CompanyName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemCustomers.CustomerID);
-                        locationSearch.WhereFound = "CompanyName: " + itemCustomers.CompanyName;
-                        locationSearch.Controller = "Customers";
-                        machesFount.Add(locationSearch);
+                        if (itemCustomers.CompanyName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemCustomers.CustomerID);
+                            locationSearch.WhereFound = "CompanyName: " + itemCustomers.CompanyName;
+                            locationSearch.Controller = "Customers";
+                            machesFount.Add(locationSearch);
+                        }
                     }
-                    else if (itemCustomers.ContactName.ToLower().Contains(search.ToLower()))
+                    else if (itemCustomers.ContactName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemCustomers.CustomerID);
-                        locationSearch.WhereFound = "ContactName: " + itemCustomers.ContactName;
-                        locationSearch.Controller = "Customers";
-                        machesFount.Add(locationSearch);
+                        if (itemCustomers.ContactName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemCustomers.CustomerID);
+                            locationSearch.WhereFound = "ContactName: " + itemCustomers.ContactName;
+                            locationSearch.Controller = "Customers";
+                            machesFount.Add(locationSearch);
+                        }
                     }
 
                 }
@@ -219,13 +245,16 @@ namespace NorthwindWeb.Controllers
                         locationSearch.Controller = "Regions";
                         machesFount.Add(locationSearch);
                     }
-                    else if (itemRegion.RegionDescription.ToLower().Contains(search.ToLower()))
+                    else if (itemRegion.RegionDescription != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemRegion.RegionID);
-                        locationSearch.WhereFound = "RegionDescription: " + itemRegion.RegionDescription;
-                        locationSearch.Controller = "Regions";
-                        machesFount.Add(locationSearch);
+                        if (itemRegion.RegionDescription.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemRegion.RegionID);
+                            locationSearch.WhereFound = "RegionDescription: " + itemRegion.RegionDescription;
+                            locationSearch.Controller = "Regions";
+                            machesFount.Add(locationSearch);
+                        }
                     }
                     
 
@@ -242,21 +271,27 @@ namespace NorthwindWeb.Controllers
                         locationSearch.Controller = "Employees";
                         machesFount.Add(locationSearch);
                     }
-                    else if (itemEmployees.LastName.ToLower().Contains(search.ToLower()))
+                    else if (itemEmployees.LastName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemEmployees.EmployeeID);
-                        locationSearch.WhereFound = "LastName: " + itemEmployees.LastName;
-                        locationSearch.Controller = "Employees";
-                        machesFount.Add(locationSearch);
+                        if (itemEmployees.LastName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemEmployees.EmployeeID);
+                            locationSearch.WhereFound = "LastName: " + itemEmployees.LastName;
+                            locationSearch.Controller = "Employees";
+                            machesFount.Add(locationSearch);
+                        }
                     }
-                    else if (itemEmployees.FirstName.ToLower().Contains(search.ToLower()))
+                    else if (itemEmployees.FirstName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemEmployees.EmployeeID);
-                        locationSearch.WhereFound = "FirstName: " + itemEmployees.FirstName;
-                        locationSearch.Controller = "Employees";
-                        machesFount.Add(locationSearch);
+                        if (itemEmployees.FirstName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemEmployees.EmployeeID);
+                            locationSearch.WhereFound = "FirstName: " + itemEmployees.FirstName;
+                            locationSearch.Controller = "Employees";
+                            machesFount.Add(locationSearch);
+                        }
                     }
 
                 }
@@ -272,13 +307,16 @@ namespace NorthwindWeb.Controllers
                         locationSearch.Controller = "Shippers";
                         machesFount.Add(locationSearch);
                     }
-                    else if (itemShippers.CompanyName.ToLower().Contains(search.ToLower()))
+                    else if (itemShippers.CompanyName != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemShippers.ShipperID);
-                        locationSearch.WhereFound = "CompanyName: " + itemShippers.CompanyName;
-                        locationSearch.Controller = "Shippers";
-                        machesFount.Add(locationSearch);
+                        if (itemShippers.CompanyName.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemShippers.ShipperID);
+                            locationSearch.WhereFound = "CompanyName: " + itemShippers.CompanyName;
+                            locationSearch.Controller = "Shippers";
+                            machesFount.Add(locationSearch);
+                        }
                     }
 
 
@@ -295,13 +333,16 @@ namespace NorthwindWeb.Controllers
                         locationSearch.Controller = "Territories";
                         machesFount.Add(locationSearch);
                     }
-                    else if (itemTerritories.TerritoryDescription.ToLower().Contains(search.ToLower()))
+                    else if (itemTerritories.TerritoryDescription != null)
                     {
-                        locationSearch.Position = machesFount.Count() + 1;
-                        locationSearch.ID = Convert.ToString(itemTerritories.TerritoryID);
-                        locationSearch.WhereFound = "TerritoryDescription: " + itemTerritories.TerritoryDescription;
-                        locationSearch.Controller = "Territories";
-                        machesFount.Add(locationSearch);
+                        if (itemTerritories.TerritoryDescription.ToLower().Contains(search.ToLower()))
+                        {
+                            locationSearch.Position = machesFount.Count() + 1;
+                            locationSearch.ID = Convert.ToString(itemTerritories.TerritoryID);
+                            locationSearch.WhereFound = "TerritoryDescription: " + itemTerritories.TerritoryDescription;
+                            locationSearch.Controller = "Territories";
+                            machesFount.Add(locationSearch);
+                        }
                     }
 
 
@@ -330,7 +371,7 @@ namespace NorthwindWeb.Controllers
         /// Returns a json with the data required for the MorrisArea table on the dashboard page
         /// </summary>
         /// <returns></returns>
-        public ActionResult MorrisArea()
+        public JsonResult MorrisArea()
         {
             List<DashboardMorrisArea> dashboardMorrisAreaData = new List<DashboardMorrisArea>();
             var salesByYear = from o in db.Orders
@@ -370,7 +411,7 @@ namespace NorthwindWeb.Controllers
         /// Returns a json with the data required for the MorrisBar table on the dashboard page
         /// </summary>
         /// <returns></returns>
-        public ActionResult MorrisBar()
+        public JsonResult MorrisBar()
         {
 
 
@@ -380,7 +421,7 @@ namespace NorthwindWeb.Controllers
         /// Returns a json with the data required for the MorrisDonut table on the dashboard page
         /// </summary>
         /// <returns></returns>
-        public ActionResult MorrisDonut()
+        public JsonResult MorrisDonut()
         {
             List<DashboardMorrisDonut> dashboardMorrisDonutData = new List<DashboardMorrisDonut>();
             var salesByYear = from od in db.Order_Details

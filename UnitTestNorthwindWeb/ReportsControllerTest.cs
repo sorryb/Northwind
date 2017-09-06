@@ -12,7 +12,7 @@ namespace UnitTestNorthwindWeb
         ReportsController _ReportsControllerUnderTest = new ReportsController();
 
         [TestMethod]
-        public void IndexReturnsView()
+        public void ReportsIndexReturnsView()
         {
             //Arrange
 
