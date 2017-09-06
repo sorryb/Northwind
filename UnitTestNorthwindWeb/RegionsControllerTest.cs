@@ -111,7 +111,7 @@ namespace UnitTestNorthwindWeb
         public async Task RegionCreate()
         {
             //Arrange
-            Region regionTest = new Region() {RegionID=100, RegionDescription = "Acasa" };
+            Region regionTest = new Region() {RegionID=70, RegionDescription = "Acasa" };
             //Act
             var expected = db.Regions.Count() + 1;
             await _regionsControllerTest.Create(regionTest);
@@ -120,7 +120,7 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(expected, actual);
-
+            var regions = db.Regions.Where(r => r.RegionDescription.Contains("Acasa"));
             db.Regions.RemoveRange(region);
             db.SaveChanges();
 
@@ -144,11 +144,7 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.IsNotNull(result);
-
-
-
-
-
+            
             var region = db.Regions.Where(r => r.RegionDescription == regionTest.RegionDescription);
             db.Regions.RemoveRange(region);
             db.SaveChanges();
@@ -171,8 +167,7 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(expected, actual);
-
-
+            
             var region = db.Regions.Where(r => r.RegionDescription == regionTest.RegionDescription);
             db.Regions.RemoveRange(region);
             db.SaveChanges();
@@ -209,6 +204,28 @@ namespace UnitTestNorthwindWeb
             db.Regions.RemoveRange(region);
             db.SaveChanges();
         }
-        
+
+
+        /// <summary>
+        /// Unit test for json response to fill dinamic datatable
+        /// </summary>
+        [TestMethod]
+        public void RegionJsonTableFill()
+        {
+            //Arrange
+            var controller = new RegionsController();
+            var db = new NorthwindModel();
+            var regionCount = db.Regions.Count();
+            
+
+            //Act
+            var jsonData = controller.JsonTableFill("").Data as IQueryable<RegionData>;
+
+            //Assert
+            Assert.AreEqual(db.Regions.Count(), jsonData.Count());
+
+            db.Dispose();
+        }
+
     }
 }

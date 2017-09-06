@@ -232,7 +232,10 @@
     <Compile Include="Models\Persons.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\Region.cs" />
+    <Compile Include="Models\ServerClientCommunication\CategoriesData.cs" />
     <Compile Include="Models\ServerClientCommunication\JsonDataTableObject.cs" />
+    <Compile Include="Models\ServerClientCommunication\RegionData.cs" />
+    <Compile Include="Models\ServerClientCommunication\ShipperData.cs" />
     <Compile Include="Models\Shippers.cs" />
     <Compile Include="Models\Suppliers.cs" />
     <Compile Include="Models\Territories.cs" />
