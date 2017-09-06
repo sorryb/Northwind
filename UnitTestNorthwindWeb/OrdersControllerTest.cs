@@ -23,7 +23,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index action returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsIndexView()
+        public void OrdersReturnsIndexView()
         {
             //Arrage
 
@@ -38,7 +38,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index action returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsIndexViewResult()
+        public void OrdersReturnsIndexViewResult()
         {
             //Arrage
 
@@ -56,7 +56,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index viewbag returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsViewBag()
+        public void OrdersReturnsViewBag()
         {
 
         //Arrage
@@ -72,7 +72,7 @@ namespace UnitTestNorthwindWeb
         /// Check Details items from Index action .
         /// </summary>
         [TestMethod]
-        public async Task ReturnsDetails()
+        public async Task OrdersReturnsDetails()
         {
             //Arrage
 
@@ -88,7 +88,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if create returns view.
         /// </summary>
         [TestMethod]
-        public void ReturnsCreate()
+        public void OrdersReturnsCreate()
         {
 
             //Arrage
@@ -104,7 +104,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if create inserts into database.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsCreateCreates()
+        public async Task OrdersReturnsCreateCreates()
         {
             //Arrange
             Orders OrderTest = new Orders() {OrderID=22, CustomerID= "ALFKI", EmployeeID=3};
@@ -126,7 +126,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if edit returns view.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsEdit()
+        public async Task OrdersReturnsEdit()
         {
             //Arrage
 
@@ -141,7 +141,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if edit make changes into database.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsEditEdits()
+        public async Task OrdersReturnsEditEdits()
         {
             //Arrange
             Orders orderTest = new Orders() { OrderID = 222, EmployeeID = 3 };
@@ -174,7 +174,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async Task ReturnsDelete()
+        public async Task OrdersReturnsDelete()
         {
             //Arrange
             Orders orderTest = new Orders() { OrderID = 222, EmployeeID = 3 };
@@ -197,7 +197,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if delete deletes
         /// </summary>
         [TestMethod]
-        public async Task ReturnsDeleteDeletes()
+        public async Task OrdersReturnsDeleteDeletes()
         {
             //Arrange
             Orders orderTest = new Orders() { OrderID = 222, EmployeeID = 3 };
@@ -216,7 +216,7 @@ namespace UnitTestNorthwindWeb
         /// Unit test for json response to fill dinamic datatable
         /// </summary>
         [TestMethod]
-        public void JsonTableFill()
+        public void OrdersJsonTableFill()
         {
             //Arrange
             var controller = new OrdersController();

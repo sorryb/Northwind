@@ -23,7 +23,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index action returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsIndexView()
+        public void ServicesReturnsIndexView()
         {
             //Arrage
 
@@ -38,7 +38,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index action returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsIndexViewResult()
+        public void ServicesReturnsIndexViewResult()
         {
             //Arrage
 
@@ -52,7 +52,7 @@ namespace UnitTestNorthwindWeb
         }
 
         [TestMethod]
-        public void ReturnsModel()
+        public void ServicesReturnsModel()
         {
             //Arrange
 
@@ -67,7 +67,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index viewbag returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsViewBag()
+        public void ServicesReturnsViewBag()
         {
 
             //Arrage

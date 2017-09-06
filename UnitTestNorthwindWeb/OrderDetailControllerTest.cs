@@ -22,7 +22,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index action returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsIndexView()
+        public void OrderDetailReturnsIndexView()
         {
             //Arrage
 
@@ -37,7 +37,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index action returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsIndexViewResult()
+        public void OrderDetailReturnsIndexViewResult()
         {
             //Arrage
 
@@ -55,7 +55,7 @@ namespace UnitTestNorthwindWeb
         /// Check what Index viewbag returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsViewBag()
+        public void OrderDetailReturnsViewBag()
         {
 
             //Arrage
@@ -71,7 +71,7 @@ namespace UnitTestNorthwindWeb
         /// Check Details items from Index action .
         /// </summary>
         [TestMethod]
-        public async Task ReturnsDetails()
+        public async Task OrderDetailReturnsDetails()
         {
             //Arrage
 
@@ -87,7 +87,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if create returns view.
         /// </summary>
         [TestMethod]
-        public void ReturnsCreate()
+        public void OrderDetailReturnsCreate()
         {
 
             //Arrage
@@ -103,7 +103,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if create inserts into database.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsCreateCreates()
+        public async Task OrderDetailReturnsCreateCreates()
         {
             //Arrange
             Order_Details OrderTest = new Order_Details() { ProductID = 17,UnitPrice=23,Quantity=12,Discount=1};
@@ -125,7 +125,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if edit returns view.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsEdit()
+        public async Task OrderDetailReturnsEdit()
         {
             //Arrage
 
@@ -140,7 +140,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if edit make changes into database.
         /// </summary>
         [TestMethod]
-        public async Task ReturnsEditEdits()
+        public async Task OrderDetailReturnsEditEdits()
         {
             //Arrange
             Order_Details detailsTest = new Order_Details() {ProductID = 20, UnitPrice = 23, Quantity = 12, Discount = 1 };
@@ -175,7 +175,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async Task ReturnsDelete()
+        public async Task OrderDetailReturnsDelete()
         {
             //Arrange
             Order_Details detailsTest = new Order_Details() { ProductID = 17, UnitPrice = 23, Quantity = 12, Discount = 1 };
@@ -199,7 +199,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if delete deletes
         /// </summary>
         [TestMethod]
-        public async Task ReturnsDeleteDeletes()
+        public async Task OrderDetailReturnsDeleteDeletes()
         {
             //Arrange
             Order_Details detailsTest = new Order_Details() { ProductID = 17, UnitPrice = 23, Quantity = 12, Discount = 1 };
