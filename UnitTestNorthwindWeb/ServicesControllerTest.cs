@@ -51,6 +51,9 @@ namespace UnitTestNorthwindWeb
 
         }
 
+        /// <summary>
+        /// Check what Index action returns.
+        /// </summary>
         [TestMethod]
         public void ServicesReturnsModel()
         {
