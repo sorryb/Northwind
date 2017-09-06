@@ -6,12 +6,24 @@ function CartProducts(idProdus, quantity, category) {
 }
 
 //add product in cart
-function AddToCart(product) {
+function AddToCart(productToAdd) {
     //need to check if this customer is loged in
-    var x = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
-    x.push(product);
-    localStorage.setItem("cart", JSON.stringify(x));
+    var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
+    var add = true;
+    for (var i = 0; i < productsInStorage.length; i++) {
+        if (productsInStorage[i].IdProdus == productToAdd.IdProdus) {
+            add = false;
+            break;
+        }
+    }
+    if (add)
+        productsInStorage.push(productToAdd);
+    else
+        productsInStorage[i].quantity++;
+    localStorage.setItem("cart", JSON.stringify(productsInStorage));
 }
+
+
 
 //count number of product in shopcart
 function getCartCount() {
