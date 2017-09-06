@@ -185,7 +185,6 @@ namespace UnitTestNorthwindWeb
 
             db.Dispose();
             regionTest.RegionDescription = "Acolo";
-            db = new NorthwindModel();
 
             //Act
             await _regionsControllerTest.Edit(regionTest);
@@ -205,7 +204,7 @@ namespace UnitTestNorthwindWeb
         /// Unit test for json response to fill dinamic datatable
         /// </summary>//cu eroare
         [TestMethod]
-        public void ProductJsonTableFill()
+        public void RegionJsonTableFill()
         {
             ////Arrange
             //var controller = new RegionsController();
@@ -214,7 +213,7 @@ namespace UnitTestNorthwindWeb
             //int row = 20;
 
             ////Act
-            //var jsonData = controller.JsonTableFill( draw, 0, row).Data as JsonDataTableObject;
+            //var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
 
             ////Assert
             //Assert.AreEqual(jsonData.draw, draw);
