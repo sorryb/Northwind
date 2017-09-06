@@ -16,6 +16,9 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// ProductController is controller that we use to show all product for Admins, Manager, Employees
+    /// </summary>
     [Authorize(Roles = "Admins, Manager, Employees")]
     public class ProductController : Controller, IJsonTableFillServerSide
     {
@@ -154,7 +157,13 @@ namespace NorthwindWeb.Controllers
         }
 
 
-        // GET: Product by Json
+        /// <summary>
+        /// send back a JsonDataTableObject as json with all the information that wee need to populate datatable
+        /// </summary>
+        /// <param name="draw">Draw order. Client send a draw id in request to keep track of asincron response</param>
+        /// <param name="start">Start from this item</param>
+        /// <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+        /// <returns>JsonDataTableObject</returns>
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;

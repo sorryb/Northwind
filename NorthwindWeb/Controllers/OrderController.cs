@@ -86,7 +86,7 @@ namespace NorthwindWeb.Controllers
         /// <param name="search">The search string</param>
         /// <param name="currentFilter">Curent search</param>
         /// <returns></returns>
-        [Authorize(Roles="Managers,Admins")]
+        [Authorize(Roles="Managers, Admins")]
         
         public ActionResult HomeAdmin(int? orderID, int? productID, int? page, string search, string currentFilter)
         {

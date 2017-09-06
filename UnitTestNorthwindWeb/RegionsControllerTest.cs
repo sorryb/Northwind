@@ -73,13 +73,17 @@ namespace UnitTestNorthwindWeb
         public async Task RegionReturnsDetails()
         {
             //Arrage
-            Region regionTest = new Region() { RegionDescription = "Acasa" };
+            Region regionTest = new Region() { RegionID = 100, RegionDescription = "Acasa" };
             //Act
             var result = await _regionsControllerTest.Details(regionTest.RegionID) ;
             
 
             //Assert
             Assert.IsNotNull(result);
+
+            var region = db.Regions.Where(r => r.RegionDescription == regionTest.RegionDescription);
+            db.Regions.RemoveRange(region);
+            db.SaveChanges();
         }
 
 
@@ -107,7 +111,7 @@ namespace UnitTestNorthwindWeb
         public async Task RegionCreate()
         {
             //Arrange
-            Region regionTest = new Region() { RegionDescription = "Acasa" };
+            Region regionTest = new Region() {RegionID=100, RegionDescription = "Acasa" };
             //Act
             var expected = db.Regions.Count() + 1;
             await _regionsControllerTest.Create(regionTest);
@@ -132,7 +136,7 @@ namespace UnitTestNorthwindWeb
         public async Task RegionsDeleteReturnsView()
         {
             //Arrange
-            Region regionTest = new Region() { RegionDescription = "Acasa" };
+            Region regionTest = new Region() { RegionID = 60, RegionDescription = "Acasa" };
             await _regionsControllerTest.Create(regionTest);
 
             //Act
@@ -157,7 +161,7 @@ namespace UnitTestNorthwindWeb
         public async Task RegionDeleteDeletes()
         {
             //Arrange
-            Region regionTest = new Region() { RegionDescription = "Acasa" };
+            Region regionTest = new Region() { RegionID = 100, RegionDescription = "Acasa" };
             await _regionsControllerTest.Create(regionTest);
             int expected = db.Regions.Count() - 1;
 
@@ -167,6 +171,11 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(expected, actual);
+
+
+            var region = db.Regions.Where(r => r.RegionDescription == regionTest.RegionDescription);
+            db.Regions.RemoveRange(region);
+            db.SaveChanges();
         }
 
        
@@ -177,7 +186,7 @@ namespace UnitTestNorthwindWeb
         public async System.Threading.Tasks.Task RegionEditEdits()
         {
             //Arrange
-            Region regionTest = new Region() { RegionDescription = "Aici" };
+            Region regionTest = new Region() { RegionID = 100, RegionDescription = "Aici" };
             await _regionsControllerTest.Create(regionTest);
             db.Entry(regionTest).State = System.Data.Entity.EntityState.Added;
 
@@ -185,6 +194,7 @@ namespace UnitTestNorthwindWeb
 
             db.Dispose();
             regionTest.RegionDescription = "Acolo";
+            db = new NorthwindModel();
 
             //Act
             await _regionsControllerTest.Edit(regionTest);
@@ -199,27 +209,6 @@ namespace UnitTestNorthwindWeb
             db.Regions.RemoveRange(region);
             db.SaveChanges();
         }
-
-        /// <summary>
-        /// Unit test for json response to fill dinamic datatable
-        /// </summary>//cu eroare
-        [TestMethod]
-        public void RegionJsonTableFill()
-        {
-            ////Arrange
-            //var controller = new RegionsController();
-            //var regionCount = db.Regions.Count();
-            //int draw = 1;
-            //int row = 20;
-
-            ////Act
-            //var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
-
-            ////Assert
-            //Assert.AreEqual(jsonData.draw, draw);
-            //Assert.AreEqual(jsonData.recordsTotal, regionCount);
-            //Assert.IsTrue(jsonData.recordsFiltered <= regionCount);
-            //db.Dispose();
-        }
+        
     }
 }
