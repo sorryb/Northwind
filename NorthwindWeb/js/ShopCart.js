@@ -16,7 +16,7 @@ function AddToCart(product) {
 //count number of product in shopcart
 function getCartCount() {
     //if is loged maybe we return a variable, or we return a json from server and when we update it send it back to server
-    return (localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array()).Lenght;
+    return (localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : new Array().length);
 }
 
 //get array of products
