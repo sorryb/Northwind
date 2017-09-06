@@ -106,19 +106,19 @@ namespace UnitTestNorthwindWeb
         [TestMethod]
         public async Task CategoryCreate()
         {
-            ////Arrange
-            //Categories CategoriesTest = new Categories() {CategoryID=14, CategoryName = "foto", Description = "foto, video" };
-            ////Act
-            //var expected = db.Categories.Count() + 1;
-            //await _categoriesControllerTest.Create(CategoriesTest);
-            //var actual = db.Categories.Count();
-            //var category = db.Categories.Where(c => c.CategoryName == CategoriesTest.CategoryName && c.Description == CategoriesTest.Description);
+            //Arrange
+            Categories CategoriesTest = new Categories() {CategoryID=14, CategoryName = "foto"};
+            //Act
+            var expected = db.Categories.Count() + 1;
+            await _categoriesControllerTest.Create(CategoriesTest);
+            var actual = db.Categories.Count();
+            var category = db.Categories.Where(c => c.CategoryName == CategoriesTest.CategoryName);
             
-            ////Assert
-            //Assert.AreEqual(expected, actual);
+            //Assert
+            Assert.AreEqual(expected, actual);
 
-            //db.Categories.RemoveRange(category);
-            //db.SaveChanges();
+            db.Categories.RemoveRange(category);
+            db.SaveChanges();
         }
 
         
@@ -130,19 +130,19 @@ namespace UnitTestNorthwindWeb
         [TestMethod]
         public async Task CategoryDeleteReturnsView()
         {
-            ////Arrange
-            //Categories categoriesTest = new Categories() { CategoryName = "foto", Description = "foto, video" };
-            //await _categoriesControllerTest.Create(categoriesTest);
+            //Arrange
+            Categories categoriesTest = new Categories() { CategoryName = "foto", Description = "foto, video" };
+            await _categoriesControllerTest.Create(categoriesTest);
 
-            ////Act
-            //var result = _categoriesControllerTest.Delete(categoriesTest.CategoryID);
+            //Act
+            var result = _categoriesControllerTest.Delete(categoriesTest.CategoryID);
 
-            ////Assert
-            //Assert.IsNotNull(result);
+            //Assert
+            Assert.IsNotNull(result);
 
-            //var category = db.Categories.Where(c => c.CategoryName == categoriesTest.CategoryName && c.Description == categoriesTest.Description);
-            //db.Categories.RemoveRange(category);
-            //db.SaveChanges();
+            var category = db.Categories.Where(c => c.CategoryName == categoriesTest.CategoryName && c.Description == categoriesTest.Description);
+            db.Categories.RemoveRange(category);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -172,16 +172,14 @@ namespace UnitTestNorthwindWeb
         public async Task CategoryEditEdits()
         {
             //Arrange
-            Categories categoriesTest = new Categories() { CategoryName = "video", Description = "camere video" };
+            Categories categoriesTest = new Categories() { CategoryName = "foto" };
             await _categoriesControllerTest.Create(categoriesTest);
             db.Entry(categoriesTest).State = System.Data.Entity.EntityState.Added;
 
             var expectedCategory = db.Categories.Find(categoriesTest.CategoryID);
 
             db.Dispose();
-            categoriesTest.CategoryName = "foto";
-            categoriesTest.Description = "aparat foto";
-            db = new NorthwindModel();
+            categoriesTest.CategoryName = "video";
 
             //Act
             await _categoriesControllerTest.Edit(categoriesTest);
@@ -192,7 +190,7 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual(expectedCategory, actualCategory);
 
 
-            var category = db.Categories.Where(c => (c.CategoryName == "video" && c.Description == "camere video") || (c.CategoryName == "foto" && c.Description == "aparat foto"));
+            var category = db.Categories.Where(c => (c.CategoryName == "video") || (c.CategoryName == "foto"));
             db.Categories.RemoveRange(category);
             db.SaveChanges();
         }
@@ -201,7 +199,7 @@ namespace UnitTestNorthwindWeb
         /// Unit test for json response to fill dinamic datatable
         /// </summary>//cu eroare
         [TestMethod]
-        public void ProductJsonTableFill()
+        public void CategoryJsonTableFill()
         {
             ////Arrange
             //var controller = new CategoriesController();

@@ -16,10 +16,19 @@ using NorthwindWeb.Models.ExceptionHandler;
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
+    /// <summary>
+    /// Customers Controller. For table Customers
+    /// </summary>
     public class CustomersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
 
+        /// <summary>
+        /// Displays a page with all the customers in the database.
+        /// </summary>
+        /// <param name="search">The search look to find something asked</param>
+        /// <param name="page">Required for paged list to work</param>
+        /// <returns>Customers index view</returns>
         // GET: Customers
         public ActionResult Index(string search = "", int page = 1)
         {
@@ -29,6 +38,11 @@ namespace NorthwindWeb.Controllers
             return View(db.Customers.OrderBy(x => x.CustomerID).Where(x => x.CompanyName.Contains(search)).ToPagedList(pageNumber, pageSize));
         }
 
+        /// <summary>
+        /// Displays a page showing all the information about one customer.
+        /// </summary>
+        /// <param name="id">The id of the customer whose information to show</param>
+        /// <returns>Customers details view</returns>
         // GET: Customers/Details/5
         public async Task<ActionResult> Details(string id)
         {
@@ -44,6 +58,10 @@ namespace NorthwindWeb.Controllers
             return View(customers);
         }
 
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new customer.
+        /// </summary>
+        /// <returns>Create view.</returns>
         // GET: Customers/Create
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
@@ -51,6 +69,11 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Inserts an customer into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="customers">The customer entity to be inserted</param>
+        /// <returns>If successful returns customers index view, else goes back to form.</returns>
         // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -69,6 +92,11 @@ namespace NorthwindWeb.Controllers
             return View(customers);
         }
 
+        /// <summary>
+        /// Returns the view containing the form necessary for editing an existing customer.
+        /// </summary>
+        /// <param name="id">The id of the customer that is going to be edited</param>
+        /// <returns>Customers edit view</returns>
         // GET: Customers/Edit/5
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(string id)
@@ -85,6 +113,13 @@ namespace NorthwindWeb.Controllers
             return View(customers);
         }
 
+        /// <summary>
+        /// Updates the database 
+        /// changing the fields of the customer whose id is equal to the id of the provided customers parameter
+        /// to those of the parameter.
+        /// </summary>
+        /// <param name="customers">The changed customer.</param>
+        /// <returns>Customers index view</returns>
         // POST: Customers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -102,6 +137,11 @@ namespace NorthwindWeb.Controllers
             return View(customers);
         }
 
+        /// <summary>
+        /// Displays a confirmation page for the following delete.
+        /// </summary>
+        /// <param name="id">The customer that is going to be deleted.</param>
+        /// <returns>Delete view</returns>
         // GET: Customers/Delete/5
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string id)
@@ -118,6 +158,11 @@ namespace NorthwindWeb.Controllers
             return View(customers);
         }
 
+        /// <summary>
+        /// Deletes an customer from the database. The customer will be deleted only if he does not have orders.
+        /// </summary>
+        /// <param name="id">The id of the customer that is going to be deleted</param>
+        /// <returns>Customers index view</returns>
         // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -154,31 +199,67 @@ namespace NorthwindWeb.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Function used to control the dashboard datatables from the server
+        /// </summary>
+        /// <param name="draw"></param>
+        /// <param name="start"></param>
+        /// <param name="length"></param>
+        /// <returns>A JSON filtered customers list.</returns>
         // GET: Customers by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
-            const int TOTAL_ROWS = 999;
+            const int totalRows = 999;
 
-            string search = Request.QueryString["search[value]"] ?? "";
+            string search = "";
+            try
+            {
+                search = Request.QueryString["search[value]"] ?? "";
+            }
+            catch (NullReferenceException e) { }
+
+
             int sortColumn = -1;
             string sortDirection = "asc";
             if (length == -1)
             {
-                length = TOTAL_ROWS;
+                length = totalRows;
             }
 
             // note: we only sort one column at a time
-            if (Request.QueryString["order[0][column]"] != null)
+            try
             {
-                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                if (Request.QueryString["order[0][column]"] != null)
+                {
+                    try
+                    {
+                        sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                    }
+                    catch (NullReferenceException e) { }
+                }
             }
-            if (Request.QueryString["order[0][dir]"] != null)
+            catch (NullReferenceException e) { }
+
+            try
             {
-                sortDirection = Request.QueryString["order[0][dir]"];
+                if (Request.QueryString["order[0][dir]"] != null)
+                {
+                    try
+                    {
+                        sortDirection = Request.QueryString["order[0][dir]"];
+                    }
+                    catch (NullReferenceException e) { }
+                }
             }
+            catch (NullReferenceException e) { }
 
             //list of customers that contain "search"
-            var list = db.Customers.Where(x => x.CompanyName.Contains(search)||x.ContactName.Contains(search)||x.ContactTitle.Contains(search));
+            var list = db.Customers.Where(x => x.CompanyName.Contains(search)||
+                                          x.ContactName.Contains(search)||
+                                          x.ContactTitle.Contains(search)||
+                                          x.City.Contains(search)||
+                                          x.Country.Contains(search)||
+                                          x.Phone.Contains(search));
 
             //order list
             switch (sortColumn)
@@ -189,16 +270,6 @@ namespace NorthwindWeb.Controllers
                     FirstColumn:
                     if (sortDirection == "asc")
                     {
-                        list = list.OrderBy(x => x.CustomerID);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.CustomerID);
-                    }
-                    break;
-                case 1: //second column
-                    if (sortDirection == "asc")
-                    {
                         list = list.OrderBy(x => x.CompanyName);
                     }
                     else
@@ -206,7 +277,8 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.CompanyName);
                     }
                     break;
-                case 2: // and so on
+
+                case 1: //second column
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.ContactName);
@@ -216,7 +288,7 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.ContactName);
                     }
                     break;
-                case 3:
+                case 2: // and so on
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.ContactTitle);
@@ -226,7 +298,7 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.ContactTitle);
                     }
                     break;
-                case 4:
+                case 3:
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.City);
@@ -236,7 +308,7 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.City);
                     }
                     break;
-                case 5:
+                case 4:
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.Country);
@@ -246,7 +318,7 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.Country);
                     }
                     break;
-                case 6:
+                case 5:
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.Phone);
@@ -256,6 +328,8 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.Phone);
                     }
                     break;
+               
+                    
             }
 
             //objet that whill be sent to client

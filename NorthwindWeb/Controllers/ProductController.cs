@@ -16,7 +16,7 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
-
+    [Authorize(Roles = "Admins, Manager, Employees")]
     public class ProductController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();

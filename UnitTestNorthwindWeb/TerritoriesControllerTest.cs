@@ -154,17 +154,17 @@ namespace UnitTestNorthwindWeb
         [TestMethod]
         public async Task TerritoryDeleteDeletes()
         {
-            ////Arrange
-            //Territories territoryTest = new Territories() { TerritoryDescription = "Acasa" };
-            //await _territoriesControllerTest.Create(territoryTest);
-            //int expected = db.Territories.Count() - 1;
+            //Arrange
+            Territories territoryTest = new Territories() { TerritoryDescription = "Acasa" };
+            await _territoriesControllerTest.Create(territoryTest);
+            int expected = db.Territories.Count() - 1;
 
-            ////Act
-            //await _territoriesControllerTest.DeleteConfirmed(territoryTest.TerritoryID);
-            //int actual = db.Territories.Count();
+            //Act
+            await _territoriesControllerTest.DeleteConfirmed(territoryTest.TerritoryID);
+            int actual = db.Territories.Count();
 
-            ////Assert
-            //Assert.AreEqual(expected, actual);
+            //Assert
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -174,36 +174,35 @@ namespace UnitTestNorthwindWeb
         [TestMethod]
         public async Task TerritoryEditEdits()
         {
-            ////Arrange
-            //Territories territoryTest = new Territories() { TerritoryDescription = "Aici" };
-            //await _territoriesControllerTest.Create(territoryTest);
-            //db.Entry(territoryTest).State = System.Data.Entity.EntityState.Added;
+            //Arrange
+            Territories territoryTest = new Territories() { TerritoryDescription = "Aici" };
+            await _territoriesControllerTest.Create(territoryTest);
+            db.Entry(territoryTest).State = System.Data.Entity.EntityState.Added;
 
-            //var expectedTerritory = db.Territories.Find(territoryTest.TerritoryID);
+            var expectedTerritory = db.Territories.Find(territoryTest.TerritoryID);
 
-            //db.Dispose();
-            //territoryTest.TerritoryDescription = "Acolo";
-            //db = new NorthwindModel();
+            db.Dispose();
+            territoryTest.TerritoryDescription = "Acolo";
 
-            ////Act
-            //await _territoriesControllerTest.Edit(territoryTest);
-            //db.Entry(territoryTest).State = System.Data.Entity.EntityState.Modified;
-            //var actualTerritory = db.Territories.Find(territoryTest.TerritoryID);
+            //Act
+            await _territoriesControllerTest.Edit(territoryTest);
+            db.Entry(territoryTest).State = System.Data.Entity.EntityState.Modified;
+            var actualTerritory = db.Territories.Find(territoryTest.TerritoryID);
 
-            ////Assert
-            //Assert.AreEqual(expectedTerritory, actualTerritory);
+            //Assert
+            Assert.AreEqual(expectedTerritory, actualTerritory);
 
 
-            //var territory = db.Territories.Where(t => (t.TerritoryDescription == "Aici") || (t.TerritoryDescription == "Acolo"));
-            //db.Territories.RemoveRange(territory);
-            //db.SaveChanges();
+            var territory = db.Territories.Where(t => (t.TerritoryDescription == "Aici") || (t.TerritoryDescription == "Acolo"));
+            db.Territories.RemoveRange(territory);
+            db.SaveChanges();
         }
 
         /// <summary>
         /// Unit test for json response to fill dinamic datatable
         /// </summary>//cu eroare
         [TestMethod]
-        public void ProductJsonTableFill()
+        public void ShipperJsonTableFill()
         {
             ////Arrange
             //var controller = new TerritoriesController();

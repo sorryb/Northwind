@@ -48,6 +48,12 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -91,6 +97,7 @@
     <Compile Include="AccountControllerTest.cs" />
     <Compile Include="DashboardControllerTest.cs" />
     <Compile Include="HomeControllerTest.cs" />
+    <Compile Include="OtherControllerTest.cs" />
     <Compile Include="OrderControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProductControllerTest.cs" />
@@ -103,7 +110,12 @@
     <Compile Include="RegionsControllerTest.cs" />
     <Compile Include="CustomersControllerTest.cs" />
     <Compile Include="OrderDetailControllerTest.cs" />
+    <Compile Include="ProductsController.cs" />
+    <Compile Include="ManageController.cs" />
+    <Compile Include="ContactController.cs" />
     <Compile Include="TerritoriesControllerTest.cs" />
+    <Compile Include="SupplierController.cs" />
+    <Compile Include="ServicesControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -114,6 +126,9 @@
       <Project>{8a429c64-6d6d-40f8-94f1-b32290b184ae}</Project>
       <Name>NorthwindWeb</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

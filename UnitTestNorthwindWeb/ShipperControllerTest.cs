@@ -187,7 +187,6 @@ namespace UnitTestNorthwindWeb
             db.Dispose();
             shipperTest.CompanyName = "Nero Express";
             shipperTest.Phone = "0240-222-222";
-            db = new NorthwindModel();
 
             //Act
             await _shippersControllerTest.Edit(shipperTest);
@@ -207,7 +206,7 @@ namespace UnitTestNorthwindWeb
         /// Unit test for json response to fill dinamic datatable
         /// </summary>//cu eroare
         [TestMethod]
-        public void ProductJsonTableFill()
+        public void ShipperJsonTableFill()
         {
             ////Arrange
             //var controller = new ShippersController();
