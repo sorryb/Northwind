@@ -20,9 +20,9 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Suppliers
-        public async Task<ActionResult> Index(string search = "")
+        public ActionResult Index()
         {
-            return View(await db.Suppliers.Where(x => x.CompanyName.Contains(search)).ToListAsync());
+            return View();
         }
 
         // GET: Suppliers/Details/5
@@ -121,13 +121,13 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             try
-            {             
-                    Suppliers suppliers = await db.Suppliers.FindAsync(id);
-                    db.Suppliers.Remove(suppliers);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
+            {
+                Suppliers suppliers = await db.Suppliers.FindAsync(id);
+                db.Suppliers.Remove(suppliers);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw new DeleteException("Nu puteti sterge un furnizor cu comenzi alocate");
             }
@@ -141,13 +141,18 @@ namespace NorthwindWeb.Controllers
             }
             base.Dispose(disposing);
         }
-   
+
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
 
-           
-            string search = Request.QueryString["search[value]"] ?? "";
+            string search = "";
+            try
+            {
+                search = Request.QueryString["search[value]"] ?? "";
+            }
+            catch (NullReferenceException e) { }
+
             int sortColumn = -1;
             string sortDirection = "asc";
             if (length == -1)
@@ -156,17 +161,26 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            if (Request.QueryString["order[0][column]"] != null)
+            try
             {
-                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                if (Request.QueryString["order[0][column]"] != null)
+                {
+                    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                }
             }
-            if (Request.QueryString["order[0][dir]"] != null)
+            catch (NullReferenceException e) { }
+
+            try
             {
-                sortDirection = Request.QueryString["order[0][dir]"];
+                if (Request.QueryString["order[0][dir]"] != null)
+                {
+                    sortDirection = Request.QueryString["order[0][dir]"];
+                }
             }
+            catch (NullReferenceException e) { }
 
             //list of product that contain "search"
-            var suppliersInfo = db.Suppliers.OrderBy(x => x.SupplierID).Where(s =>  s.CompanyName.Contains(search) || s.ContactName.Contains(search)
+            var suppliersInfo = db.Suppliers.OrderBy(x => x.SupplierID).Where(s => s.CompanyName.Contains(search) || s.ContactName.Contains(search)
             || s.ContactTitle.Contains(search) || s.Address.Contains(search) || s.City.Contains(search) || s.Country.Contains(search) || s.Phone.Contains(search));
 
 
@@ -176,7 +190,7 @@ namespace NorthwindWeb.Controllers
                 case -1: //sort by first column
                     goto FirstColumn;
                 case 0: //first column
-                FirstColumn:
+                    FirstColumn:
                     if (sortDirection == "asc")
                     {
                         suppliersInfo = suppliersInfo.OrderBy(x => x.CompanyName);
