@@ -155,7 +155,8 @@ namespace NorthwindWeb.Controllers
 
             /*Select what wee need in table*/
             return Json(
-               categories.Select(x => new {
+               categories.Select(x => new NorthwindWeb.Models.ServerClientCommunication.CategoriesData
+               {
                     ID = x.CategoryID,
                     CategoryName = x.CategoryName,
                     Description = x.Description

@@ -195,6 +195,27 @@ namespace UnitTestNorthwindWeb
             db.Categories.RemoveRange(category);
             db.SaveChanges();
         }
-        
+
+
+        /// <summary>
+        /// Unit test for json response to fill dinamic datatable
+        /// </summary>
+        [TestMethod]
+        public void CategoryJsonTableFill()
+        {
+            //Arrange
+            var controller = new CategoriesController();
+            var db = new NorthwindModel();
+            var categoryCount = db.Categories.Count();
+
+
+            //Act
+            var jsonData = controller.JsonTableFill("").Data as IQueryable<CategoriesData>;
+
+            //Assert
+            Assert.AreEqual(db.Categories.Count(), jsonData.Count());
+
+            db.Dispose();
+        }
     }
 }

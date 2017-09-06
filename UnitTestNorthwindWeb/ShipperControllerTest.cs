@@ -66,7 +66,7 @@ namespace UnitTestNorthwindWeb
 
 
         }
-        
+
 
         /// <summary>
         /// Check Details items from Index action .
@@ -77,8 +77,8 @@ namespace UnitTestNorthwindWeb
             //Arrage
             Shippers shipperTest = new Shippers() { CompanyName = "FAN Courier" };
             //Act
-            var result = await _shippersControllerTest.Details(shipperTest.ShipperID) ;
-            
+            var result = await _shippersControllerTest.Details(shipperTest.ShipperID);
+
 
             //Assert
             Assert.IsNotNull(result);
@@ -108,7 +108,7 @@ namespace UnitTestNorthwindWeb
         public async Task ShipperCreate()
         {
             //Arrange
-            Shippers shipperTest = new Shippers() { ShipperID=4, CompanyName="Nero", Phone="0240-555-555" };
+            Shippers shipperTest = new Shippers() { ShipperID = 4, CompanyName = "Nero", Phone = "0240-555-555" };
             //Act
             var expected = db.Shippers.Count() + 1;
             await _shippersControllerTest.Create(shipperTest);
@@ -123,7 +123,7 @@ namespace UnitTestNorthwindWeb
 
         }
 
-        
+
 
         /// <summary>
         /// Tests if delete returns view
@@ -169,7 +169,7 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.AreEqual(expected, actual);
         }
-        
+
 
         /// <summary>
         /// Tests if edit works
@@ -202,6 +202,27 @@ namespace UnitTestNorthwindWeb
             db.Shippers.RemoveRange(shipper);
             db.SaveChanges();
         }
-        
+
+        /// <summary>
+        /// Unit test for json response to fill dinamic datatable
+        /// </summary>
+        [TestMethod]
+        public void ShipperJsonTableFill()
+        {
+            //Arrange
+            var controller = new ShippersController();
+            var db = new NorthwindModel();
+            var shipperCount = db.Shippers.Count();
+
+
+            //Act
+            var jsonData = controller.JsonTableFill().Data as IQueryable<ShipperData>;
+
+            //Assert
+            Assert.AreEqual(db.Shippers.Count(), jsonData.Count());
+
+            db.Dispose();
+
+        }
     }
 }

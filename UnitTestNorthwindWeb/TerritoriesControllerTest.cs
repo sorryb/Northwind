@@ -92,11 +92,11 @@ namespace UnitTestNorthwindWeb
             //Arrange
 
             //Act
-            //var result = _territoriesControllerTest.Create() as ViewResult;
+            var result = _territoriesControllerTest.Create(100) as ViewResult;
 
 
             //Assert
-            //Assert.IsNotNull(result);
+            Assert.IsNotNull(result);
         }
         
         /// <summary>
@@ -106,20 +106,22 @@ namespace UnitTestNorthwindWeb
         [TestMethod]
         public async Task TerritoryCreate()
         {
-            ////Arrange
-            //Territories territoryTest = new Territories() {TerritoryID="50",TerritoryDescription = "Acasa" };
-            ////Act
-            //var expected = db.Territories.Count() + 1;
-            //await _territoriesControllerTest.Create(territoryTest);
-            //var actual = db.Territories.Count();
-            //var territory = db.Territories.Where(t => t.TerritoryID == territoryTest.TerritoryID && t.TerritoryDescription == territoryTest.TerritoryDescription);
+            //Arrange
+            Region regionTest = new Region() { RegionID = 100, RegionDescription = "test" };
+            Territories territoryTest = new Territories() { TerritoryID = "102", TerritoryDescription = "Acasa", Region = regionTest };
+            
+            //Act
+            var expected = db.Territories.Count() + 1;
+            await _territoriesControllerTest.Create(territoryTest, regionTest.RegionID);
+            var actual = db.Territories.Count();
+            var territory = db.Territories.Where(t => t.TerritoryID == territoryTest.TerritoryID && t.TerritoryDescription == territoryTest.TerritoryDescription);
 
-            ////Assert
-            //Assert.AreEqual(expected, actual);
+            //Assert
+            Assert.AreEqual(expected, actual);
 
-            //var territories = db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));
-            //db.Territories.RemoveRange(territories);
-            //db.SaveChanges();
+            var territories = db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));
+            db.Territories.RemoveRange(territories);
+            db.SaveChanges();
 
         }
 
@@ -132,19 +134,20 @@ namespace UnitTestNorthwindWeb
         [TestMethod]
         public async Task TerritoryDeleteReturnsView()
         {
-            ////Arrange
-            //Territories territoryTest = new Territories() { TerritoryDescription = "Acasa" };
-            //await _territoriesControllerTest.Create(territoryTest);
+            //Arrange
+            Region regionTest = new Region() { RegionID = 100, RegionDescription = "test" };
+            Territories territoryTest = new Territories() { TerritoryID = "102", TerritoryDescription = "Acasa", Region = regionTest };
+            await _territoriesControllerTest.Create(territoryTest, regionTest.RegionID);
 
-            ////Act
-            //var result = _territoriesControllerTest.Delete(territoryTest.TerritoryID);
+            //Act
+            var result = _territoriesControllerTest.Delete(territoryTest.TerritoryID);
 
-            ////Assert
-            //Assert.IsNotNull(result);
+            //Assert
+            Assert.IsNotNull(result);
 
-            //var territory =db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));
-            //db.Territories.RemoveRange(territory);
-            //db.SaveChanges();
+            var territory = db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));
+            db.Territories.RemoveRange(territory);
+            db.SaveChanges();
 
         }
 
@@ -155,7 +158,7 @@ namespace UnitTestNorthwindWeb
         public async Task TerritoryDeleteDeletes()
         {
             //Arrange
-            Region regionTest = new Region() { RegionID = 100,RegionDescription="test" };
+            Region regionTest = new Region() { RegionID = 88,RegionDescription="test" };
             Territories territoryTest = new Territories() {TerritoryID="102", TerritoryDescription = "Acasa",Region=regionTest };
             await _territoriesControllerTest.Create(territoryTest,regionTest.RegionID);
             int expected = db.Territories.Count() - 1;

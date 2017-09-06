@@ -180,7 +180,7 @@ namespace NorthwindWeb.Controllers
             
             /*Select what wee need in table*/
             return Json(
-                regions.Select(x => new {
+                regions.Select(x => new NorthwindWeb.Models.ServerClientCommunication.RegionData {
                     ID = x.RegionID,
                     RegionDescription = x.RegionDescription
                  
