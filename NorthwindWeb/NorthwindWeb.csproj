@@ -216,7 +216,6 @@
     <Compile Include="Controllers\ShippersController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\TerritoriesController.cs" />
-    <Compile Include="Controllers\TesteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -476,7 +475,6 @@
     <Content Include="Views\OrderDetail\Edit.cshtml" />
     <Content Include="Views\OrderDetail\Index.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
-    <Content Include="Views\Teste\Index.cshtml" />
     <Content Include="Views\Shared\_OrdersMenuPartial.cshtml" />
     <Content Include="Views\Persons\Create.cshtml" />
     <Content Include="Views\Persons\Delete.cshtml" />
@@ -491,6 +489,7 @@
     <Content Include="Views\Shared\_LayoutReports.cshtml" />
     <Content Include="Views\Dashboard\Search.cshtml" />
     <Content Include="Views\Account\DeleteUser.cshtml" />
+    <Content Include="Views\Order\HomeAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />

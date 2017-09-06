@@ -3,6 +3,9 @@ using System.Web.Mvc;
 using System.Linq;
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// Contact Controller. From table Persons
+    /// </summary>
     public class ContactController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -24,7 +27,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons person)
-        {
+        {//create person from Form
             if (ModelState.IsValid)
             {
                 person.ID = db.Persons.Count() + 1;

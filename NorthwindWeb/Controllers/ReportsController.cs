@@ -12,6 +12,10 @@ namespace NorthwindWeb.Controllers
 {
     public class ReportsController : Controller
     {
+        /// <summary>
+        /// Displays a page containing a navbar with a list of reports from a remote report server provided in web.config
+        /// </summary>
+        /// <returns>Reports index view</returns>
         // GET: Reports
         [Authorize]
         public ActionResult Index()
@@ -36,6 +40,7 @@ namespace NorthwindWeb.Controllers
             List<ViewModels.ReportViewModel> reports = new List<ViewModels.ReportViewModel>();
             ViewModels.ReportViewModel temp;
 
+            //loops through each <a> in links2 and records the reports' href and filename
             foreach (var linkloop in links2)
             {
                 string filename = linkloop.InnerHtml;

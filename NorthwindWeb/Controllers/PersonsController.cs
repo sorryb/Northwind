@@ -10,6 +10,10 @@ using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
+    [Authorize]
+    /// <summary>
+    /// Persons Controller. For table Persons
+    /// </summary>
     public class PersonsController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -27,6 +31,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Persons
             Persons persons = db.Persons.Find(id);
             if (persons == null)
             {
@@ -36,6 +41,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Persons/Create
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
@@ -46,6 +52,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons persons)
         {
             if (ModelState.IsValid)
@@ -59,6 +66,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Persons/Edit/5
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +86,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,Age")] Persons persons)
         {
             if (ModelState.IsValid)
@@ -90,6 +99,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Persons/Delete/5
+        [Authorize(Roles = "Admins")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,8 +115,10 @@ namespace NorthwindWeb.Controllers
         }
 
         // POST: Persons/Delete/5
+        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public ActionResult DeleteConfirmed(int id)
         {
             Persons persons = db.Persons.Find(id);

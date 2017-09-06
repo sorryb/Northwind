@@ -11,10 +11,10 @@ namespace UnitTestNorthwindWeb
     /// Test Home controller.
     /// </summary>
     [TestClass]
-    public class HomeControllerTest
+    public class AboutControllerTest
     {
         //Arrange
-        HomeController _homeControllerUnderTest = new HomeController();
+        AboutController _AboutControllerUnderTest = new AboutController();
 
         /// <summary>
         /// Check what Index action returns.
@@ -25,10 +25,10 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _homeControllerUnderTest.Index() as ViewResult;
+            var result = _AboutControllerUnderTest.Index() as ViewResult;
 
             //Assert
-            Assert.AreEqual("Index", result.ViewName);
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
 
         }
 
@@ -41,12 +41,11 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _homeControllerUnderTest.Index() as ViewResult;
+            var result = _AboutControllerUnderTest.Index() as ViewResult;
 
             //Assert
 
             Assert.IsInstanceOfType(result, typeof(ViewResult));
-
 
         }
 
@@ -54,28 +53,13 @@ namespace UnitTestNorthwindWeb
         /// Check what Index viewbag returns.
         /// </summary>
         [TestMethod]
-        public void ReturnsViewBag()
+        public void ReturnsAboutUs()
         {
             //Arrage
 
             //Act
-            var result = _homeControllerUnderTest.Index() as ViewResult;
-
-            //Assert
-            Assert.AreEqual("Northwind Phone Shop", result.ViewBag.SiteName);
-        }
-
-        /// <summary>
-        /// Check Menu items from Index action .
-        /// </summary>
-        [TestMethod]
-        public void ReturnsMenuCategories()
-        {
-            //Arrage
-
-            //Act
-            var result = _homeControllerUnderTest.Menu() as ViewResult;
-            var model = result.Model;
+            var aboutus = _AboutControllerUnderTest.Index() as ViewResult;
+            var model = aboutus.Model;
 
             //Assert
             Assert.IsNotNull(model);
@@ -85,14 +69,14 @@ namespace UnitTestNorthwindWeb
         /// Sample test method.
         /// </summary>
         [TestMethod]
-        public void SampleTest()
+        public void SampleTestAboutUs()
         {
             //Arrage
 
             //Act
 
             //Assert
-            Assert.AreEqual("HomeController", "HomeController");
+            Assert.AreEqual("AboutController", "AboutController");
         }
     }
 }

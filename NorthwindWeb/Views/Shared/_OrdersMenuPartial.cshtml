@@ -10,9 +10,12 @@
                     <li id="blog" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                            @if (userManager.IsInRole(User.Identity.GetUserId(),"Admins") || userManager.IsInRole(User.Identity.GetUserId(), "Managers"))
+                            {
                             <li id="orders">
-                                @Html.ActionLink("Lista Comenzi", "Home", "Order")
+                                @Html.ActionLink("Lista Comenzi", "HomeAdmin", "Order")
                             </li>
+                            }
                             <li id="userOrders">
                                 @Html.ActionLink("Comenzi '" + User.Identity.GetUserName() +"'", "Home", "Order")
                             </li>

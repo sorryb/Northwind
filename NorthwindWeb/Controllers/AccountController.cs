@@ -280,16 +280,16 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/ExternalLogin
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
-        {
-            // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
-        }
+        ////
+        //// POST: /Account/ExternalLogin
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult ExternalLogin(string provider, string returnUrl)
+        //{
+        //    // Request a redirect to the external login provider
+        //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+        //}
 
         //
         // GET: /Account/SendCode
@@ -423,7 +423,9 @@ namespace NorthwindWeb.Controllers
         // **************************************
         // URL: /Account/ChangeUser
         // **************************************
+        //data to change user
         [Authorize]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> ChangeUser(string userName)
         {
             RegisterViewModel model = new RegisterViewModel();
@@ -437,8 +439,9 @@ namespace NorthwindWeb.Controllers
 
             return View(model);
         }
-
+        //Change User
         [HttpPost]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> ChangeUser(RegisterViewModel model)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
@@ -462,7 +465,7 @@ namespace NorthwindWeb.Controllers
 
             return View(model);
         }
-
+        //delete user
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string userName)
         {
@@ -480,7 +483,7 @@ namespace NorthwindWeb.Controllers
                 return RedirectToAction("Index");
 
         }
-
+        //view user to delete
         [Authorize(Roles = "Admins")]
         public ActionResult DeleteUser(string userName)
         {
@@ -496,7 +499,7 @@ namespace NorthwindWeb.Controllers
             }
             return View(userDelete);
         }
-
+        //View list of role
         [Authorize(Roles = "Admins")]
         public ActionResult RolesIndex()
         {
@@ -523,6 +526,7 @@ namespace NorthwindWeb.Controllers
         }
 
         #region No Role Creation Dinamicaly
+        //create a new role
         [Authorize]
         [HttpPost]
         public ActionResult CreateRole(RoleInfoViewModel roleInfo)
@@ -557,7 +561,7 @@ namespace NorthwindWeb.Controllers
                 return RedirectToAction("Index", "Home");
         }
         #endregion
-
+        //delete role
         [Authorize]
         public ActionResult RoleDelete(string roleName)
         {
@@ -603,7 +607,7 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-
+        //user assingned to role
         public ActionResult UsersInRole(string roleName)
         {
             var context = new ApplicationDbContext();
@@ -629,7 +633,7 @@ namespace NorthwindWeb.Controllers
 
             return View(userInfoViewModel.AsQueryable());
         }
-     
+        //select and additing user to role
         [HttpPost]
         public ActionResult RoleMembership(RoleInfoViewModel roleInfo)
         {
@@ -646,7 +650,7 @@ namespace NorthwindWeb.Controllers
 
             return RoleMembership();
         }
-
+        //user in role
         //[Authorize(Roles = "Admins")]
         [HttpGet]
         public ActionResult RoleMembership()
@@ -685,7 +689,7 @@ namespace NorthwindWeb.Controllers
 
             return View(new RoleInfoViewModel() { Name = roleName });
         }
-
+        //add user to role
         [Authorize(Roles = "Admins")]
         public ActionResult AddUsersToRole()
         {
@@ -729,6 +733,7 @@ namespace NorthwindWeb.Controllers
             //return View("RoleMembership",new RoleInfoModel() { Name = roleName });
         }
 
+        //debunk the user from the role
         [HttpGet]
         [Authorize(Roles = "Admins")]
         public ActionResult DeleteFromRole()
@@ -768,7 +773,7 @@ namespace NorthwindWeb.Controllers
             RemovePhoneSuccess,
             Error
         }
-
+        // Change users password
         //
         // GET: /Account/Manage
         [Authorize]
@@ -803,7 +808,7 @@ namespace NorthwindWeb.Controllers
             //});
         }
 
-
+        // Manage users password
         [Authorize]
         [HttpPost]
         public async Task<ActionResult> Manage(ChangePasswordViewModel model)
@@ -850,28 +855,9 @@ namespace NorthwindWeb.Controllers
         }
 
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
-
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
    
 
-
+        //return a list of users
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
@@ -1007,7 +993,7 @@ namespace NorthwindWeb.Controllers
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
-     
+        //return a list a roles
         public JsonResult JsonTableRolesFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
@@ -1079,15 +1065,16 @@ namespace NorthwindWeb.Controllers
                 
                 recordsFiltered = roleInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
             };
-            foreach (var item in roleInfoViewModel.Skip(start).Take(length))
+            foreach (var role in roleInfoViewModel.Skip(start).Take(length))
             {
                 RoleInfoViewModel roleInfo = new RoleInfoViewModel();
-                roleInfo.Name = item.Name;
+                roleInfo.Name = role.Name;
                 dataTableData.data.Add(roleInfo);
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
+        //returns a list of users assigned to role
         public JsonResult JsonTableMembershipFill(int draw, int start, int length)
         {
            
@@ -1177,6 +1164,7 @@ namespace NorthwindWeb.Controllers
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
@@ -1235,6 +1223,25 @@ namespace NorthwindWeb.Controllers
             }
         }
         #endregion
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (_userManager != null)
+                {
+                    _userManager.Dispose();
+                    _userManager = null;
+                }
+
+                if (_signInManager != null)
+                {
+                    _signInManager.Dispose();
+                    _signInManager = null;
+                }
+            }
+
+            base.Dispose(disposing);
+        }
     }
 
     /// <summary>

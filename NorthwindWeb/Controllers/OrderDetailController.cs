@@ -20,7 +20,6 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
-        // GET: OrderDetail
 
         /// <summary>
         /// Returns a paged list with all order-details
@@ -28,7 +27,7 @@ namespace NorthwindWeb.Controllers
         /// <param name="page">Required for paged list to work</param>
         /// 
         /// <returns>PagedList</returns>
-
+        // GET: OrderDetail
         public ActionResult Index(int page = 1)
         {
             var order_Details = db.Order_Details.Include(o => o.Order).Include(o => o.Product).OrderBy(o=>o.OrderID);
@@ -38,6 +37,11 @@ namespace NorthwindWeb.Controllers
             return View(order_Details.ToPagedList(pageNumber, pageSize));
         }
 
+        /// <summary>
+        /// Displays a page showing all the information about one order-detail.
+        /// </summary>
+        /// <param name="id">The id of the order-detail whose information to show</param>
+        /// <returns>Orders-details details view</returns>
         // GET: OrderDetail/Details/5
         public async Task<ActionResult> Details(int? OrderID, int? ProductID)
         {
@@ -51,6 +55,10 @@ namespace NorthwindWeb.Controllers
             return View(orderdetail);
         }
 
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new order-detail.
+        /// </summary>
+        /// <returns>Create view.</returns>
         // GET: OrderDetail/Create
         public ActionResult Create(int? id)
         {
@@ -60,6 +68,12 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Inserts an order-detail into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="order_Details">The order-detail entity to be inserted</param>
+        /// <param name="id">The order id for which order-details are made</param>
+        /// <returns>If successful returns orders-details index view, else goes back to form.</returns>
         // POST: OrderDetail/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -80,6 +94,12 @@ namespace NorthwindWeb.Controllers
             return View(order_Details);
         }
 
+        /// <summary>
+        /// Returns the view containing the form necessary for editing an existing order-detail.
+        /// </summary>
+        /// <param name="OrderID">The OrderID of the order-detail that is going to be edited</param>
+        /// <param name="ProductID">The ProductID of the order-detail that is going to be edited</param>
+        /// <returns>Orders-details edit view</returns>
         // GET: OrderDetail/Edit/5
         public async Task<ActionResult> Edit(int? OrderID,int? ProductID)
         {
@@ -94,6 +114,13 @@ namespace NorthwindWeb.Controllers
 
         }
 
+        /// <summary>
+        /// Updates the database 
+        /// changing the fields of the order-detail whose id is equal to the id of the provided orders-details parameter
+        /// to those of the parameter.
+        /// </summary>
+        /// <param name="order_Details">The changed order-detail.</param>
+        /// <returns>Orders-details index view</returns>
         // POST: OrderDetail/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -112,6 +139,12 @@ namespace NorthwindWeb.Controllers
             return View(order_Details);
         }
 
+        /// <summary>
+        /// Displays a confirmation page for the following delete.
+        /// </summary>
+        /// <param name="OrderID">The OrderID of the order-detail that is going to be deleted.</param>
+        /// <param name="ProductID">The ProductID of the order-detail that is going to be deleted.</param>
+        /// <returns>Delete view</returns>
         // GET: OrderDetail/Delete/5
         public async Task<ActionResult> Delete(int? OrderID, int? ProductID)
         {
@@ -125,6 +158,12 @@ namespace NorthwindWeb.Controllers
             return View(orderdetail);
         }
 
+        /// <summary>
+        /// Deletes an order-detail from the database. 
+        /// </summary>
+        /// <param name="OrderID">The OrderID of the order-detail that is going to be deleted.</param>
+        /// <param name="ProductID">The ProductID of the order-detail that is going to be deleted.</param>
+        /// <returns>Orders index view</returns>
         // POST: OrderDetail/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

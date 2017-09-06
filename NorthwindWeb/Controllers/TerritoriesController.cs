@@ -34,6 +34,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -47,7 +48,6 @@ namespace NorthwindWeb.Controllers
         public ActionResult Create(int? id)
         {
             ViewBag.regionid = id;
-            //ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories,int id)
+        public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
             if (ModelState.IsValid)
@@ -66,8 +66,7 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
-            //ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
+            
             return View(territories);
         }
 
@@ -79,6 +78,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -106,6 +106,11 @@ namespace NorthwindWeb.Controllers
             return View(territories);
         }
 
+        public Task Create(Territories territoryTest)
+        {
+            throw new NotImplementedException();
+        }
+
         // GET: Territories/Delete/5
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string id)
@@ -114,6 +119,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -128,17 +134,18 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
+            //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
-
+            int idRegion=territories.RegionID;
             try
             {
+                territories.Employees.Clear();
                 db.Territories.Remove(territories);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details","Regions",new { id=idRegion });
             }
             catch
             {
-               
                 throw new DeleteException("Nu poti sterge teritoriul deoarece contine angajati. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii.");
             }
 
