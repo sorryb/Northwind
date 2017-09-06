@@ -147,6 +147,8 @@ namespace UnitTestNorthwindWeb
 
             var territory = db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));
             db.Territories.RemoveRange(territory);
+            var regions = db.Regions.Where(t => t.RegionDescription.Contains(regionTest.RegionDescription));
+            db.Regions.RemoveRange(regions);
             db.SaveChanges();
 
         }
