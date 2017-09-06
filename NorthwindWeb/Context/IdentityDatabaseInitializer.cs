@@ -83,14 +83,13 @@ namespace NorthwindWeb.Context
                     userManager.Create(employee, itemEmployee.FirstName + itemEmployee.LastName);
                     
                     var currentUser = userManager.FindByName(itemEmployee.FirstName+itemEmployee.LastName);
-                    if (itemEmployee.ReportsTo != null)
+                    if (itemEmployee.ReportsTo == null)
                     {
+                        var rolManagers = userManager.AddToRole(currentUser.Id, "Managers");
+                    }
+                    
                         var rol = userManager.AddToRole(currentUser.Id, "Employees");
-                    }
-                    else
-                    {
-                        var rol = userManager.AddToRole(currentUser.Id, "Managers");
-                    }
+                    
                 }
 
             }
