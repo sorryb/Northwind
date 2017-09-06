@@ -35,7 +35,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task CreateCreatesAsync()
+        public async System.Threading.Tasks.Task EmployeesCreateCreatesAsync()
         {
             //Arrange
             Employees employeeTest = new Employees() { EmployeeID = 1000, LastName = "test", FirstName = "test" };
@@ -56,7 +56,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task DeleteReturnsViewAsync()
+        public async System.Threading.Tasks.Task EmployeesDeleteReturnsViewAsync()
         {
             //Arrange
             Employees employeeTest = new Employees() { LastName = "test", FirstName = "test" };
@@ -79,7 +79,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if Delete deletes.
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task DeleteDeletesAsync()
+        public async System.Threading.Tasks.Task EmployeesDeleteDeletesAsync()
         {
             //Arrange
             Employees employeeTest = new Employees() { LastName = "test", FirstName = "test" };
@@ -98,7 +98,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if Details returns View
         /// </summary>
         [TestMethod]
-        public async System.Threading.Tasks.Task DetailsReturnsViewAsync()
+        public async System.Threading.Tasks.Task EmployeesDetailsReturnsViewAsync()
         {
             //Arrange
             Employees employeeTest = new Employees() { LastName = "test", FirstName = "test" };
@@ -116,7 +116,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task EditReturnsViewAsync()
+        public async System.Threading.Tasks.Task EmployeesEditReturnsViewAsync()
         {
             //Arrange
             Employees employeeTest = new Employees() { FirstName = "test", LastName = "test" };
@@ -139,7 +139,7 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        public async System.Threading.Tasks.Task EditEditsAsync()
+        public async System.Threading.Tasks.Task EmployeesEditEditsAsync()
         {
             //Arrange
             Employees employeeTest = new Employees() { LastName = "test1", FirstName = "test1" };
@@ -168,7 +168,7 @@ namespace UnitTestNorthwindWeb
         /// Tests if index returns view
         /// </summary>
         [TestMethod]
-        public void IndexReturnsView()
+        public void EmployeesIndexReturnsView()
         {
             //Arrange
 
