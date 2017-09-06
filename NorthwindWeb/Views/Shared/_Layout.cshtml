@@ -11,6 +11,10 @@
     <link href="@Url.Content("/css/modern-business.css")" rel="stylesheet">
     <link href="@Url.Content("/css/alt info 2.css")" rel="stylesheet">
     <link href="@Url.Content("/css/Style.css")" rel="stylesheet">
+    <!--Data tables-->
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/responsive.dataTables.min.css" rel="stylesheet" />
+
 
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -143,12 +147,16 @@
 
     </div>
     <!-- /.container -->
+    <script src="~/js/jquery.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
-    <script src="@Url.Content("/js/bootstrap.js")"></script>
     <script src="@Url.Content("/js/script.js")"></script>
+
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.js"></script>
+
     <script src="~/js/ShopCart.js"></script>
+    <script src="~/js/ShopCartDataTable.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>
