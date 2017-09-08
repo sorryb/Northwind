@@ -56,8 +56,10 @@
                         <li><strong>In Comenzi: @Model.ElementAt(i).OnOrder</strong></li>
                         <li class="liWithoutPoint">
                             <div class="shopcartcontainer-products">
-                                <div class="align-middle img-circle roundedshop" onclick="AddToCart(new CartProducts(@Model.ElementAt(i).ProductID,1,'@Model.ElementAt(i).CategoryName'))">
-                                    <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                <div class="align-middle img-circle roundedshop">
+                                    <a href="javascript:" onclick="AddToCart(new CartProducts(@Model.ElementAt(i).ProductID,1,'@Model.ElementAt(i).CategoryName'))" class="shopcart-link">
+                                        <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                    </a>
                                     <div class="shopcart-container-text">
                                         <span id="shopcart-productcount">+</span>
                                     </div>
@@ -81,8 +83,10 @@
                             <li><strong>In Comenzi: @Model.ElementAt(i + 1).OnOrder</strong></li>
                             <li class="liWithoutPoint">
                                 <div class="shopcartcontainer-products">
-                                    <div class="align-middle img-circle roundedshop" onclick="AddToCart(new CartProducts(@Model.ElementAt(i+1).ProductID,1,'@Model.ElementAt(i+1).CategoryName'))">
-                                        <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                    <div class="align-middle img-circle roundedshop">
+                                        <a href="javascript:" onclick="AddToCart(new CartProducts(@Model.ElementAt(i+1).ProductID,1,'@Model.ElementAt(i+1).CategoryName'))" class="shopcart-link">
+                                            <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                        </a>
                                         <div class="shopcart-container-text">
                                             <span id="shopcart-productcount">+</span>
                                         </div>

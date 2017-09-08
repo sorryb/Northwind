@@ -154,3 +154,11 @@ iframe.fill {
 [class~=particularEmployees] {
     margin: 20px;
 }
+/*for the shopcart icon so the image won't be the same color as the background*/
+.shopcart-link {
+    color: white;
+}
+
+    .shopcart-link:hover {
+        color: white;
+    }
