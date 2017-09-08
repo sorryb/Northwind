@@ -1,8 +1,7 @@
 ﻿//Local Storage Class
-function CartProducts(idProdus, quantity, category) {
-    this.IdProdus = idProdus;
-    this.Category = category;
-    this.quantity = quantity;
+function CartProducts(productId, quantity) {
+    this.ID = productId;
+    this.Quantity = quantity;
 }
 
 //add product in cart
@@ -10,8 +9,9 @@ function AddToCart(productToAdd) {
     //need to check if this customer is loged in
     var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
     var add = true;
-    for (var i = 0; i < productsInStorage.length; i++) {
-        if (productsInStorage[i].IdProdus == productToAdd.IdProdus) {
+    var i = 0;
+    for (; i < productsInStorage.length; i++) {
+        if (productsInStorage[i].ID == productToAdd.ID) {
             add = false;
             break;
         }
@@ -19,7 +19,7 @@ function AddToCart(productToAdd) {
     if (add)
         productsInStorage.push(productToAdd);
     else
-        productsInStorage[i].quantity++;
+        productsInStorage[i].Quantity++;
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
 }
 
