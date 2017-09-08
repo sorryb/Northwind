@@ -26,35 +26,27 @@ namespace NorthwindWeb.Models.ShopCart
     /// </summary>
     public class ProductShopCartDetailed : ProductShopCart
     {
-        private NorthwindModel dbContext = null;
+        public NorthwindModel dbContext { get; set; }
 
-        /// <summary>
-        /// ProductShopCartDerailed
-        /// </summary>
-        /// <param name="northwindLocalContext">Curent context of northwind database</param>
-        public ProductShopCartDetailed(NorthwindModel northwindLocalContext)
-        {
-            this.dbContext = northwindLocalContext;
-        }
         /// <summary>
         /// Get category of this product
         /// </summary>
-        string ProductName
+        public string ProductName
         {
             get
             {
-                return dbContext.Products.Where(x => x.ProductID == ID).Select(x => x.ProductName).FirstOrDefault();
+                return dbContext.Products.Find(ID).ProductName;
             }
         }
 
         /// <summary>
         /// get unit price of this product
         /// </summary>
-        decimal UnitPrice
+        public decimal UnitPrice
         {
             get
             {
-                return dbContext.Products.Where(x => x.ProductID == ID).Select(x => x.UnitPrice).FirstOrDefault() ?? 9999999;
+                return dbContext.Products.Find(ID).UnitPrice ?? 9999999;
             }
         }
 

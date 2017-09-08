@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.Models.ServerClientCommunication;
+using Newtonsoft.Json.Linq;
+using NorthwindWeb.Models.ShopCart;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 
 namespace NorthwindWeb.Controllers
 {
@@ -18,7 +22,6 @@ namespace NorthwindWeb.Controllers
         /// <returns></returns>
         public ActionResult Index(string json)
         {
-
             return View();
         }
 
@@ -27,6 +30,12 @@ namespace NorthwindWeb.Controllers
             string json = Request.QueryString["json"] ?? "";
 
             const int TOTAL_ROWS = 999;
+
+            var cartProducts =JsonConvert.DeserializeObject<List<ProductShopCartDetailed>>(json).AsQueryable();
+            foreach(var product in cartProducts)
+            {
+                product.dbContext = db;
+            }
 
             string search = "";
             try
@@ -63,7 +72,7 @@ namespace NorthwindWeb.Controllers
             catch (NullReferenceException) { }
 
             //list of product that contain "search"
-            var list = db.Products.Where(p => (p.ProductName.Contains(search)));
+            var list = cartProducts.Where(p => p.ProductName.Contains(search));
 
             //order list
             switch (sortColumn)
@@ -84,6 +93,16 @@ namespace NorthwindWeb.Controllers
                 case 1: //second column
                     if (sortDirection == "asc")
                     {
+                        list = list.OrderBy(x => x.Quantity);
+                    }
+                    else
+                    {
+                        list = list.OrderByDescending(x => x.Quantity);
+                    }
+                    break;
+                case 2: // and so on
+                    if (sortDirection == "asc")
+                    {
                         list = list.OrderBy(x => x.UnitPrice);
                     }
                     else
@@ -91,64 +110,32 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.UnitPrice);
                     }
                     break;
-                case 2: // and so on
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.UnitsInStock);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.UnitsInStock);
-                    }
-                    break;
                 case 3:
                     if (sortDirection == "asc")
                     {
-                        list = list.OrderBy(x => x.UnitsOnOrder);
+                        list = list.OrderBy(x => (x.UnitPrice * x.Quantity));
                     }
                     else
                     {
-                        list = list.OrderByDescending(x => x.UnitsOnOrder);
+                        list = list.OrderByDescending(x => (x.UnitPrice * x.Quantity));
                     }
                     break;
-                case 4:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.ReorderLevel);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.ReorderLevel);
-                    }
-                    break;
-                case 5:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.Discontinued);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.Discontinued);
-                    }
-                    break;
-
             }
+
+
 
             //objet that whill be sent to client
             JsonDataTableObject dataTableData = new JsonDataTableObject()
             {
                 draw = draw,
                 recordsTotal = db.Products.Count(),
-                data = list.Skip(start).Take(length).Select(x => new
+                data = list.Skip(start).Take(length).Select(p => new
                 {
-                    ID = x.ProductID,
-                    ProductName = x.ProductName,
-                    Price = x.UnitPrice,
-                    InStock = x.UnitsInStock,
-                    OnOrders = x.UnitsOnOrder,
-                    ReorderLevel = x.ReorderLevel,
-                    Discontinued = x.Discontinued
-                }),
+                    ID = p.ID,
+                    ProductName = p.ProductName,
+                    Quantity = p.Quantity,
+                    UnitPrice = p.UnitPrice,
+                }).AsQueryable(),
                 recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
             };
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
