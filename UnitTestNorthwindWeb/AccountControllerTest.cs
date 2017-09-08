@@ -445,7 +445,7 @@ namespace UnitTestNorthwindWeb
         public void ReturnsDeleteViewResult()
         {
             //Arrage
-            RegisterViewModel model = new RegisterViewModel();
+           
             //Act
             var result = _accountController.Delete("user");
 
@@ -455,6 +455,22 @@ namespace UnitTestNorthwindWeb
             Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
         }
 
+        ///<summary>
+        /// Check what DeleteUser action returns.
+        /// </summary>
+        //[TestMethod]
+        //public void ReturnsDeleteUserViewResult()
+        //{
+        //    //Arrage
+           
+        //    //Act
+        //    var result = _accountController.DeleteUser("user");
+
+        //    //Assert
+
+
+        //    Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        //}
         ///<summary>
         /// Check what CreateRole action returns.
         /// </summary>

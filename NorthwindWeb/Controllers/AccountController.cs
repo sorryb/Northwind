@@ -497,7 +497,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult DeleteUser(string userName)
         {
             var context = new ApplicationDbContext();
-            var userStore = new UserStore<ApplicationUser>(context);
+            //var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             UserInfoViewModel userDelete = new UserInfoViewModel();
             if (!String.IsNullOrEmpty(userName))
@@ -620,7 +620,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult UsersInRole(string roleName)
         {
             var context = new ApplicationDbContext();
-            var userStore = new UserStore<ApplicationUser>(context);
+            //var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
@@ -670,7 +670,7 @@ namespace NorthwindWeb.Controllers
 
             //var allUsers = Membership.GetAllUsers();
             List<SelectListItem> selectItemsUserNotInRole = new List<SelectListItem>();
-            List<SelectListItem> selectItemsUserInRole = new List<SelectListItem>();
+            //List<SelectListItem> selectItemsUserInRole = new List<SelectListItem>();
             List<SelectListItem> selectItemsAllUser = new List<SelectListItem>();
 
             var context = new ApplicationDbContext();
@@ -683,8 +683,8 @@ namespace NorthwindWeb.Controllers
 
                 if (!userManager.IsInRole(user.Id, roleName))
                     selectItemsUserNotInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
-                else
-                    selectItemsUserInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
+                //else
+                //    selectItemsUserInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
 
                 selectItemsAllUser.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
 
@@ -694,7 +694,7 @@ namespace NorthwindWeb.Controllers
 
             ViewData["UsersNotInRole"] = selectItemsUserNotInRole;
             ViewData["AllUsers"] = selectItemsAllUser;
-            ViewData["UsersInRole"] = selectItemsUserInRole;
+            //ViewData["UsersInRole"] = selectItemsUserInRole;
 
             return View(new RoleInfoViewModel() { Name = roleName });
         }
