@@ -5,6 +5,9 @@ using System.Web;
 
 namespace NorthwindWeb.ViewModels.Orders
 {
+    /// <summary>
+    /// Keeps all order-details 
+    /// </summary>
     public class DetailsOfOrder
     {
         public int OrderID { get; set; }

@@ -180,13 +180,13 @@ namespace NorthwindWeb.Controllers
             }
             catch (Exception e)
             {
-                string list = "";
-                var orderid = db.Orders.Include(x=>x.Customer).Where(x=>x.CustomerID == id).Select(x=>new { x.OrderID });
-                foreach(var i in orderid)
+                string listOfOrders = "";
+                var orderId = db.Orders.Include(x=>x.Customer).Where(x=>x.CustomerID == id).Select(x=>new { x.OrderID });
+                foreach(var itemInOrders in orderId)
                 {
-                    list = list + i.OrderID.ToString() + ", ";
+                    listOfOrders = listOfOrders + itemInOrders.OrderID.ToString() + "\n ";
                 }
-                throw new DeleteException("Clientul nu poate fi sters deoarece are comenzile cu id-urile:" + list + ".Pentru a putea sterge acest client trebuie sterse comenzile si detaliile lor.");
+                throw new DeleteException("Clientul nu poate fi sters deoarece are comenzile cu id-urile:\n" + listOfOrders + "\nPentru a putea sterge acest client trebuie sterse comenzile si detaliile lor.");
             }
         }
 
@@ -205,7 +205,7 @@ namespace NorthwindWeb.Controllers
         /// <param name="draw"></param>
         /// <param name="start"></param>
         /// <param name="length"></param>
-        /// <returns>A JSON filtered customers list.</returns>
+        /// <returns>A JSON filtered customer list.</returns>
         // GET: Customers by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {

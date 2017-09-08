@@ -68,19 +68,19 @@
                 <h2 class="page-header">Produse</h2>
                 <ul class="nav nav-tabs" id="myTab">
                     @{int i = 1;}
-                    @foreach (var y in Model.top4name)
+                    @foreach (var itemInTop4 in Model.top4name)
                     {
                         if (i == 1)
                         {
                             <li class="active">
-                                <a data-toggle="tab" href="#@i">@y</a>
+                                <a data-toggle="tab" href="#@i">@itemInTop4</a>
                             </li>
                             <span hidden="true">@(i++)</span>
                         }
                         else
                         {
                             <li>
-                                <a data-toggle="tab" href="#@i">@y</a>
+                                <a data-toggle="tab" href="#@i">@itemInTop4</a>
                             </li>
                             <span hidden="true">@(i++)</span>
                         }
@@ -90,20 +90,20 @@
                 <div class="tab-content" id="myTabContent">
 
                     @{int j = 1;}
-                    @foreach (var y in Model.top4products)
+                    @foreach (var itemInProducts in Model.top4products)
                     {
                         if (j == 1)
                         {
                             <div id="@j" class="tab-pane fade in active">
                                 <i class="fa fa-gear pull-left fa-4x"></i>
                                 <ul>
-                                        <li>Denumire: @y.ProductName</li>
-                                        <li>Companie: @y.CompanyName</li>
-                                        <li>Categorie: @y.CategoryName</li>
-                                        <li>Cantitate pe unitate: @y.QuantityPerUnit</li>
-                                        <li>Pret unitar: @decimal.Round(y.UnitPrice ?? 0,2).ToString() lei</li>
-                                        <li>In stoc: @y.UnitsInStock</li>
-                                        <li>In comenzi: @y.UnitsOnOrder</li>
+                                        <li>Denumire: @itemInProducts.ProductName</li>
+                                        <li>Companie: @itemInProducts.CompanyName</li>
+                                        <li>Categorie: @itemInProducts.CategoryName</li>
+                                        <li>Cantitate pe unitate: @itemInProducts.QuantityPerUnit</li>
+                                        <li>Pret unitar: @decimal.Round(itemInProducts.UnitPrice ?? 0,2).ToString() lei</li>
+                                        <li>In stoc: @itemInProducts.UnitsInStock</li>
+                                        <li>In comenzi: @itemInProducts.UnitsOnOrder</li>
                                 </ul>
 
                             </div>
@@ -113,13 +113,13 @@
                             <div id="@j" class="tab-pane">
                                 <i class="fa fa-gear pull-left fa-4x"></i>
                                 <ul>
-                                    <li>Denumire: @y.ProductName</li>
-                                    <li>Companie: @y.CompanyName</li>
-                                    <li>Categorie: @y.CategoryName</li>
-                                    <li>Cantitate pe unitate: @y.QuantityPerUnit</li>
-                                    <li>Pret unitar: @decimal.Round(y.UnitPrice ?? 0, 2).ToString() lei</li>
-                                    <li>In stoc: @y.UnitsInStock</li>
-                                    <li>In comenzi: @y.UnitsOnOrder</li>
+                                    <li>Denumire: @itemInProducts.ProductName</li>
+                                    <li>Companie: @itemInProducts.CompanyName</li>
+                                    <li>Categorie: @itemInProducts.CategoryName</li>
+                                    <li>Cantitate pe unitate: @itemInProducts.QuantityPerUnit</li>
+                                    <li>Pret unitar: @decimal.Round(itemInProducts.UnitPrice ?? 0, 2).ToString() lei</li>
+                                    <li>In stoc: @itemInProducts.UnitsInStock</li>
+                                    <li>In comenzi: @itemInProducts.UnitsOnOrder</li>
                                 </ul>
 
                             </div>
@@ -138,18 +138,18 @@
                 <h2 class="page-header">Imagini produse</h2>
             </div>
 
-            @foreach (var y in Model.last3)
+            @foreach (var itemInLast3 in Model.last3)
             {
                 <div class="col-sm-4">                                      
-                    <img src="~/Images/Servicii/@(y.ProductID).jpg" class="img-services img-responsive">
-                    <h3>@y.ProductName</h3>
+                    <img src="~/Images/Servicii/@(itemInLast3.ProductID).jpg" class="img-services img-responsive">
+                    <h3>@itemInLast3.ProductName</h3>
                     <ul>                           
-                            <li>@y.CompanyName</li>
-                            <li>@y.CategoryName</li>
-                            <li>Cantitate pe unitate: @y.QuantityPerUnit</li>      
-                            <li>Pret unitar: @decimal.Round(y.UnitPrice ?? 0, 2).ToString() lei</li>
-                            <li>In stoc: @y.UnitsInStock</li>
-                            <li>In comenzi: @y.UnitsOnOrder</li>
+                            <li>@itemInLast3.CompanyName</li>
+                            <li>@itemInLast3.CategoryName</li>
+                            <li>Cantitate pe unitate: @itemInLast3.QuantityPerUnit</li>      
+                            <li>Pret unitar: @decimal.Round(itemInLast3.UnitPrice ?? 0, 2).ToString() lei</li>
+                            <li>In stoc: @itemInLast3.UnitsInStock</li>
+                            <li>In comenzi: @itemInLast3.UnitsOnOrder</li>
                     </ul>
                 </div>
             }
