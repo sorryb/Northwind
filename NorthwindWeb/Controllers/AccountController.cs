@@ -445,12 +445,16 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> ChangeUser(RegisterViewModel model)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-
+            string userName=Request["UserName"];
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.UserName);
-
-
+                var user = await UserManager.FindByNameAsync(userName);
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                
+               var result=await UserManager.RemovePasswordAsync(user.Id);
+                if(result.Succeeded)
+                { result = await UserManager.AddPasswordAsync(user.Id, model.Password); }
                 isChanged = UserManager.Update(user);
 
                 if (isChanged.Succeeded)
@@ -471,15 +475,18 @@ namespace NorthwindWeb.Controllers
         {
             IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
 
-            var user = await UserManager.FindByNameAsync(userName);
+            string curentUser=User.Identity.GetUserName();
+            ApplicationUser user = await UserManager.FindByNameAsync(userName);
 
             if (!String.IsNullOrEmpty(userName))
+            {
+                if (user.UserName == curentUser) { LogOff(); }
                 isDeleted = UserManager.Delete(user);
+            }
 
-
-            if (isDeleted.Succeeded)
-                return RedirectToAction("Index", "Home");
-            else
+            //if (isDeleted.Succeeded)
+            //    return RedirectToAction("Index", "Home");
+            //else
                 return RedirectToAction("Index");
 
         }

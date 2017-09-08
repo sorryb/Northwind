@@ -118,7 +118,9 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(expected, actual);
-
+            
+            var regions = db.Regions.Where(t => t.RegionDescription.Contains(regionTest.RegionDescription));
+            db.Regions.RemoveRange(regions);
             var territories = db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));
             db.Territories.RemoveRange(territories);
             db.SaveChanges();
@@ -145,10 +147,11 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.IsNotNull(result);
 
-            var territory = db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));
-            db.Territories.RemoveRange(territory);
+
             var regions = db.Regions.Where(t => t.RegionDescription.Contains(regionTest.RegionDescription));
             db.Regions.RemoveRange(regions);
+            var territory = db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));
+            db.Territories.RemoveRange(territory);
             db.SaveChanges();
 
         }

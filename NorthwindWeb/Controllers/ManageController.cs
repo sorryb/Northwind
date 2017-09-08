@@ -374,10 +374,10 @@ namespace NorthwindWeb.Controllers
             return false;
         }
 
-        public object Index()
-        {
-            throw new NotImplementedException();
-        }
+        //public object Index()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public enum ManageMessageId
         {

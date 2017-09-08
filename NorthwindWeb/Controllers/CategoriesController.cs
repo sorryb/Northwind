@@ -21,6 +21,7 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Categories
+        ///Enter in  Categories's details through CategoryName
         public async Task<ActionResult> Index(string search = "")
         {
             return View(await db.Categories.Where(x=>x.CategoryName.Contains(search)).ToListAsync());
@@ -33,7 +34,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //take details of Categories
+            ///take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
             if (categories == null)
             {
@@ -43,6 +44,7 @@ namespace NorthwindWeb.Controllers
         }
 
         // GET: Categories/Create
+        ///Enter in the page Create
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
@@ -55,6 +57,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
+        ///Create a new category which contain the next fields: CategoryID,CategoryName,Description and it will be saved in database
         public async Task<ActionResult> Create([Bind(Include = "CategoryID,CategoryName,Description")] Categories categories)
         {
             if (ModelState.IsValid)
@@ -69,6 +72,7 @@ namespace NorthwindWeb.Controllers
 
         // GET: Categories/Edit/5
         [Authorize(Roles = "Employees, Admins")]
+        ///Enter in the page Edit
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,6 +94,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
+        ///Modify the selected category which contain the next fields: CategoryID,CategoryName,Description and it will be saved in database
         public async Task<ActionResult> Edit([Bind(Include = "CategoryID,CategoryName,Description")] Categories categories)
         {
             if (ModelState.IsValid)
@@ -103,13 +108,14 @@ namespace NorthwindWeb.Controllers
 
         // GET: Categories/Delete/5
         [Authorize(Roles = "Admins")]
+        ///Enter in the page Delete
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //take details of Categories
+            ///take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
             if (categories == null)
             {
@@ -122,9 +128,10 @@ namespace NorthwindWeb.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
+        ///Delete the selected category 
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            //take details of Categories
+            ///take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
 
             try
@@ -139,21 +146,22 @@ namespace NorthwindWeb.Controllers
                 var productId = db.Products.Include(x => x.Category).Where(x => x.CategoryID == id).Select(x => new { x.ProductName });
                 foreach (var i in productId)
                 {
-                    //lopp in ProductName
+                    ///lopp in ProductName
                     list = list + i.ProductName.ToString() + ",\n ";
                 }
                 throw new DeleteException("Nu poti sterge categoria deoarece are produse cu numele:\n" + list+ "\nPentru a putea sterge aceasta categorie trebuie sterse produsele.");
             }
         }
 
-        
+
 
         // GET: Categories by Json
+        /// send back a JsonDataTableFill as json with all the information that wee need to populate datatable
         public JsonResult JsonTableFill(string search = "")
         {
             var categories = db.Categories.Include(p=>p.Description).Where(x => x.CategoryName.Contains(search)).OrderBy(x => x.CategoryID);
 
-            /*Select what wee need in table*/
+            ///Select what wee need in table
             return Json(
                categories.Select(x => new NorthwindWeb.Models.ServerClientCommunication.CategoriesData
                {
