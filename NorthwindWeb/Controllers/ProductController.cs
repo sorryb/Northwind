@@ -14,8 +14,10 @@ using System.Web.Helpers;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.ExceptionHandler;
 
+
 namespace NorthwindWeb.Controllers
 {
+
     /// <summary>
     /// ProductController is controller that we use to show all product for Admins, Manager, Employees
     /// </summary>
@@ -23,6 +25,7 @@ namespace NorthwindWeb.Controllers
     public class ProductController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
+
 
         // GET: Product
         public ActionResult Index(string category = "")

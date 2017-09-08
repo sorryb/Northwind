@@ -32,6 +32,9 @@ $(document).ready(function () {
         "ajax": {
             "type": "GET",
             "url": searchControllerPath() + "/JsonTableFill",
+            "data": {
+                json:
+            },
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
