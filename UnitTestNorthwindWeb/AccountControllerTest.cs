@@ -58,6 +58,23 @@ namespace UnitTestNorthwindWeb
 
         }
 
+        ///<summary>
+        /// Check what Login action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsLoginGetViewResult()
+        {
+            //Arrage
+        
+            //Act
+            var result = _accountController.Login("url");
+
+            //Assert
+
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+
+
+        }
 
         /// <summary>
         /// Check what Login viewbag returns.
@@ -182,6 +199,39 @@ namespace UnitTestNorthwindWeb
         }
 
         ///<summary>
+        /// Check what ForgotPasswordPost action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsForgotPasswordPostViewResult()
+        {
+            //Arrage
+            ForgotPasswordViewModel model =new ForgotPasswordViewModel();
+            model.Email = "asd@gmail.com";
+            //Act
+            var result = _accountController.ForgotPassword(model);
+
+            //Assert
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+        ///<summary>
+        /// Check what ForgotPasswordConfirmation action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsForgotPasswordConfirmationViewResult()
+        {
+            //Arrage
+
+            //Act
+            var result = _accountController.ForgotPassword();
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+
+        ///<summary>
         /// Check what ResetPassword action returns.
         /// </summary>
         [TestMethod]
@@ -196,6 +246,26 @@ namespace UnitTestNorthwindWeb
 
 
             Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
+
+        ///<summary>
+        /// Check what ResetPasswordPost action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsResetPasswordPostViewResult()
+        {
+            //Arrage
+            ResetPasswordViewModel model = new ResetPasswordViewModel();
+            model.Email = "ceva@gmail.com";
+            model.Password = "123456";
+            model.ConfirmPassword = "123456";
+            //Act
+            var result = _accountController.ResetPassword(model);
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
         }
 
         ///<summary>
@@ -281,6 +351,24 @@ namespace UnitTestNorthwindWeb
 
 
             Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+        ///<summary>
+        /// Check what ExternalLoginConfirmationPost action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsLogOffViewResult()
+        {
+            //Arrage
+            
+           //var login = _accountController.Login("url");
+            //Act
+            var result = _accountController.LogOff();
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
         }
 
         ///<summary>
