@@ -134,7 +134,7 @@ namespace NorthwindWeb.Controllers
                     ID = p.ID,
                     ProductName = p.ProductName,
                     Quantity = p.Quantity,
-                    UnitPrice = p.UnitPrice,
+                    UnitPrice = (int)p.UnitPrice,
                 }).AsQueryable(),
                 recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
             };

@@ -30,8 +30,8 @@ $(document).ready(function () {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
                     item.Remove = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                    item.Quantity = '<input type="number" value="' + item.Quantity + '" /> ';
-                    item["TotalPrice"] = item["UnitPrice"] * item.Quantity;
+                    item.TotalPrice=item.UnitPrice*item.Quantity;
+                    item.Quantity = '<input type="number" value="' + item.Quantity + '" onchange="ChangeQuantity(' + item.ID + ',value)" /> ';
                 })
                 return json.data;
             },
