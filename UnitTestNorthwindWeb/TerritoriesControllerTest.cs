@@ -118,8 +118,7 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(expected, actual);
-
-
+            
             var regions = db.Regions.Where(t => t.RegionDescription.Contains(regionTest.RegionDescription));
             db.Regions.RemoveRange(regions);
             var territories = db.Territories.Where(t => t.TerritoryDescription.Contains("Acasa"));

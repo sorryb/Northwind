@@ -12,7 +12,7 @@ namespace NorthwindWeb.Controllers
 {
     [Authorize]
     /// <summary>
-    /// Persons Controller. For table Persons
+    /// Persons Controller. For table Persons which is used in Contact
     /// </summary>
     public class PersonsController : Controller
     {
@@ -53,6 +53,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
+        ///Introduce a new person in database through FORM from Contact
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons persons)
         {
             if (ModelState.IsValid)

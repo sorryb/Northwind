@@ -23,9 +23,9 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Regions
+        ///Enter in  Regions's details through RegionDescription
         public async Task<ActionResult> Index(string search = "")
         {
-            
             return View(await db.Regions.Where(r=>r.RegionDescription.Contains(search)).ToListAsync());
         }
 
@@ -37,7 +37,7 @@ namespace NorthwindWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             RegionIndex viewModel = new RegionIndex();
-            //take details of Region
+            ///take details of Region
             Region region = await db.Regions.FindAsync(id);
             if (region == null)
             {
@@ -51,7 +51,7 @@ namespace NorthwindWeb.Controllers
 
             List<RegionDetails> list = new List<RegionDetails>();
 
-            //lopp in all territories
+            ///lopp in all territories
             foreach (var item in teritory)
             {
                 RegionDetails regionDetail = new RegionDetails();
@@ -69,6 +69,7 @@ namespace NorthwindWeb.Controllers
 
         // GET: Regions/Create
         [Authorize(Roles = "Employees, Admins")]
+        ///Enter in the page Create
         public ActionResult Create()
         {
             return View();
@@ -80,6 +81,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
+        ///Create a new region which contain the next fields: RegionID,RegionDescription and it will be saved in database
         public async Task<ActionResult> Create([Bind(Include = "RegionID,RegionDescription")] Region region)
         {
             if (ModelState.IsValid)
@@ -94,13 +96,14 @@ namespace NorthwindWeb.Controllers
 
         // GET: Regions/Edit/5
         [Authorize(Roles = "Employees, Admins")]
+        ///Enter in the page Edit
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //take details of Region
+            ///take details of Region
             Region region = await db.Regions.FindAsync(id);
             if (region == null)
             {
@@ -115,6 +118,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
+        ///Modify the selected region save it in database
         public async Task<ActionResult> Edit([Bind(Include = "RegionID,RegionDescription")] Region region)
         {
             if (ModelState.IsValid)
@@ -128,6 +132,7 @@ namespace NorthwindWeb.Controllers
 
         // GET: Regions/Delete/5
         [Authorize(Roles = "Admins")]
+        ///Enter in the page Delete
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -147,6 +152,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
+        ///Delete the selected region 
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             //take details of Region
@@ -172,13 +178,14 @@ namespace NorthwindWeb.Controllers
             }
 
         }
-        
+
         // GET: Orders by Json
+        /// send back a JsonDataTableFill as json with all the information that wee need to populate datatable
         public JsonResult JsonTableFill(string search = "")
         {
             var regions = db.Regions.Include(p => p.RegionDescription).Where(r => r.RegionDescription.Contains(search));
             
-            /*Select what wee need in table*/
+            ///Select what wee need in table
             return Json(
                 regions.Select(x => new NorthwindWeb.Models.ServerClientCommunication.RegionData {
                     ID = x.RegionID,
