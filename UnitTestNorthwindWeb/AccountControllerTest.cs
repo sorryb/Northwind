@@ -16,7 +16,7 @@ namespace UnitTestNorthwindWeb
     [TestClass]
     public class AccountControllerTest
     {
-        AccountController _accountController = new AccountController();
+        AccountController _accountController = new AccountController(); 
 
 
 
@@ -367,6 +367,43 @@ namespace UnitTestNorthwindWeb
             Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
         }
 
-      
+        ///<summary>
+        /// Check what CreateRole action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsCreateRoleViewResult()
+        {
+            //Arrage
+            RegisterViewModel model = new RegisterViewModel();
+            //Act
+            var result = _accountController.CreateRole();
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
+
+        ///<summary>
+        /// Check what Manage action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsManageViewResult()
+        {
+
+            //Arrage
+            ChangePasswordViewModel password = new ChangePasswordViewModel();
+            password.NewPassword = "password";
+            password.ConfirmPassword = "password";
+            //Act
+            var result = _accountController.Manage(password);
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        }
+
+  
     }
 }

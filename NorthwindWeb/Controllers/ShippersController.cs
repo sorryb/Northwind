@@ -152,7 +152,8 @@ namespace NorthwindWeb.Controllers
 
             /*Select what wee need in table*/
             return Json(
-                shippers.Select(x => new {
+                shippers.Select(x => new NorthwindWeb.Models.ServerClientCommunication.ShipperData
+                {
                     ID = x.ShipperID,
                     CompanyName = x.CompanyName,
                     Phone = x.Phone

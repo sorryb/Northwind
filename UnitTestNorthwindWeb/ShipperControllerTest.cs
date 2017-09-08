@@ -66,7 +66,7 @@ namespace UnitTestNorthwindWeb
 
 
         }
-        
+
 
         /// <summary>
         /// Check Details items from Index action .
@@ -77,8 +77,8 @@ namespace UnitTestNorthwindWeb
             //Arrage
             Shippers shipperTest = new Shippers() { CompanyName = "FAN Courier" };
             //Act
-            var result = await _shippersControllerTest.Details(shipperTest.ShipperID) ;
-            
+            var result = await _shippersControllerTest.Details(shipperTest.ShipperID);
+
 
             //Assert
             Assert.IsNotNull(result);
@@ -108,7 +108,7 @@ namespace UnitTestNorthwindWeb
         public async Task ShipperCreate()
         {
             //Arrange
-            Shippers shipperTest = new Shippers() { ShipperID=4, CompanyName="Nero", Phone="0240-555-555" };
+            Shippers shipperTest = new Shippers() { ShipperID = 4, CompanyName = "Nero", Phone = "0240-555-555" };
             //Act
             var expected = db.Shippers.Count() + 1;
             await _shippersControllerTest.Create(shipperTest);
@@ -123,7 +123,7 @@ namespace UnitTestNorthwindWeb
 
         }
 
-        
+
 
         /// <summary>
         /// Tests if delete returns view
@@ -169,7 +169,7 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.AreEqual(expected, actual);
         }
-        
+
 
         /// <summary>
         /// Tests if edit works
@@ -187,6 +187,7 @@ namespace UnitTestNorthwindWeb
             db.Dispose();
             shipperTest.CompanyName = "Nero Express";
             shipperTest.Phone = "0240-222-222";
+            db = new NorthwindModel();
 
             //Act
             await _shippersControllerTest.Edit(shipperTest);
@@ -204,24 +205,24 @@ namespace UnitTestNorthwindWeb
 
         /// <summary>
         /// Unit test for json response to fill dinamic datatable
-        /// </summary>//cu eroare
+        /// </summary>
         [TestMethod]
         public void ShipperJsonTableFill()
         {
-            ////Arrange
-            //var controller = new ShippersController();
-            //var shipperCount = db.Shippers.Count();
-            //int draw = 1;
-            //int row = 20;
+            //Arrange
+            var controller = new ShippersController();
+            var db = new NorthwindModel();
+            var shipperCount = db.Shippers.Count();
 
-            ////Act
-            //var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
 
-            ////Assert
-            //Assert.AreEqual(jsonData.draw, draw);
-            //Assert.AreEqual(jsonData.recordsTotal, shipperCount);
-            //Assert.IsTrue(jsonData.recordsFiltered <= shipperCount);
-            //db.Dispose();
+            //Act
+            var jsonData = controller.JsonTableFill().Data as IQueryable<ShipperData>;
+
+            //Assert
+            Assert.AreEqual(db.Shippers.Count(), jsonData.Count());
+
+            db.Dispose();
+
         }
     }
 }

@@ -75,13 +75,18 @@ namespace UnitTestNorthwindWeb
         public async Task OrdersReturnsDetails()
         {
             //Arrage
+            Orders orderTest = new Orders() { OrderID = 222, EmployeeID = 3 };
+            await _ordersControllerUnderTest.Create(orderTest);
 
             //Act
-            var result = await _ordersControllerUnderTest.Details(10249) as ViewResult;
-            var model = result.Model;
+            var result = await _ordersControllerUnderTest.Details(orderTest.OrderID) as ViewResult;
 
             //Assert
-            Assert.IsNotNull(model);
+            Assert.IsNotNull(result);
+
+            var orders = db.Orders.Where(o => o.OrderID == orderTest.OrderID && o.EmployeeID == orderTest.EmployeeID);
+            db.Orders.RemoveRange(orders);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -129,12 +134,18 @@ namespace UnitTestNorthwindWeb
         public async Task OrdersReturnsEdit()
         {
             //Arrage
+            Orders orderTest = new Orders() { OrderID = 222, EmployeeID = 3 };
+            await _ordersControllerUnderTest.Create(orderTest);
 
             //Act
-            var result =await _ordersControllerUnderTest.Edit(10249) as ViewResult;
+            var result =await _ordersControllerUnderTest.Edit(orderTest.OrderID) as ViewResult;
 
             //Assert
             Assert.IsNotNull(result);
+
+            var orders = db.Orders.Where(o => o.OrderID == orderTest.OrderID && o.EmployeeID == orderTest.EmployeeID);
+            db.Orders.RemoveRange(orders);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -163,7 +174,7 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual(expectedOrder, actualOrder);
 
 
-            var orders = db.Orders.Where(o => (o.OrderID==222 && o.EmployeeID == 3) || (o.OrderID==222 && o.EmployeeID == 4));
+            var orders = db.Orders.Where(o => o.OrderID == orderTest.OrderID && o.EmployeeID == orderTest.EmployeeID);
             db.Orders.RemoveRange(orders);
             db.SaveChanges();
 

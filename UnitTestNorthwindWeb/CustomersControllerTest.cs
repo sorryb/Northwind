@@ -76,13 +76,18 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsDetails()
         {
             //Arrage
+            Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
+            await _customersControllerUnderTest.Create(customerTest);
 
             //Act
-            var result = await _customersControllerUnderTest.Details("ALFKI") as ViewResult;
-            var model = result.Model;
+            var result = await _customersControllerUnderTest.Details(customerTest.CustomerID) as ViewResult;
 
             //Assert
-            Assert.IsNotNull(model);
+            Assert.IsNotNull(result);
+
+            var customers = db.Customers.Where(c => c.CustomerID == customerTest.CustomerID && c.CompanyName == customerTest.CompanyName);
+            db.Customers.RemoveRange(customers);
+            db.SaveChanges();
         }
 
         /// <summary>
@@ -130,12 +135,19 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsEdit()
         {
             //Arrage
+            Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
+            await _customersControllerUnderTest.Create(customerTest);
 
             //Act
-            var result = await _customersControllerUnderTest.Edit("ALFKI") as ViewResult;
+            var result = await _customersControllerUnderTest.Edit(customerTest.CustomerID) as ViewResult;
 
             //Assert
             Assert.IsNotNull(result);
+
+            var customers = db.Customers.Where(c => c.CustomerID == customerTest.CustomerID && c.CompanyName == customerTest.CompanyName);
+            db.Customers.RemoveRange(customers);
+            db.SaveChanges();
+
         }
 
         /// <summary>
@@ -164,7 +176,7 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual(expectedCustomer, actualCustomer);
 
 
-            var customers = db.Customers.Where(c => (c.CustomerID == "BBBBB" && c.CompanyName == "test") || (c.CustomerID == "BBBBB" && c.CompanyName == "test2"));
+            var customers = db.Customers.Where(c => c.CustomerID == customerTest.CustomerID && c.CompanyName == customerTest.CompanyName);
             db.Customers.RemoveRange(customers);
             db.SaveChanges();
 

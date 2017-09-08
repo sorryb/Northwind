@@ -131,7 +131,7 @@ namespace UnitTestNorthwindWeb
         public async Task CategoryDeleteReturnsView()
         {
             //Arrange
-            Categories categoriesTest = new Categories() { CategoryName = "foto", Description = "foto, video" };
+            Categories categoriesTest = new Categories() { CategoryName = "foto"};
             await _categoriesControllerTest.Create(categoriesTest);
 
             //Act
@@ -140,7 +140,7 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.IsNotNull(result);
 
-            var category = db.Categories.Where(c => c.CategoryName == categoriesTest.CategoryName && c.Description == categoriesTest.Description);
+            var category = db.Categories.Where(c => c.CategoryName == categoriesTest.CategoryName);
             db.Categories.RemoveRange(category);
             db.SaveChanges();
         }
@@ -180,6 +180,7 @@ namespace UnitTestNorthwindWeb
 
             db.Dispose();
             categoriesTest.CategoryName = "video";
+            db = new NorthwindModel();
 
             //Act
             await _categoriesControllerTest.Edit(categoriesTest);
@@ -195,26 +196,26 @@ namespace UnitTestNorthwindWeb
             db.SaveChanges();
         }
 
+
         /// <summary>
         /// Unit test for json response to fill dinamic datatable
-        /// </summary>//cu eroare
+        /// </summary>
         [TestMethod]
         public void CategoryJsonTableFill()
         {
-            ////Arrange
-            //var controller = new CategoriesController();
-            //var categoryCount = db.Categories.Count();
-            //int draw = 1;
-            //int row = 20;
+            //Arrange
+            var controller = new CategoriesController();
+            var db = new NorthwindModel();
+            var categoryCount = db.Categories.Count();
 
-            ////Act
-            //var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
 
-            ////Assert
-            //Assert.AreEqual(jsonData.draw, draw);
-            //Assert.AreEqual(jsonData.recordsTotal, categoryCount);
-            //Assert.IsTrue(jsonData.recordsFiltered <= categoryCount);
-            //db.Dispose();
+            //Act
+            var jsonData = controller.JsonTableFill("").Data as IQueryable<CategoriesData>;
+
+            //Assert
+            Assert.AreEqual(db.Categories.Count(), jsonData.Count());
+
+            db.Dispose();
         }
     }
 }
