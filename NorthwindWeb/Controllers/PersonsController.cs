@@ -12,7 +12,7 @@ namespace NorthwindWeb.Controllers
 {
     [Authorize]
     /// <summary>
-    /// Persons Controller. For table Persons which is used in Contact
+    /// Persons Controller. For table Persons
     /// </summary>
     public class PersonsController : Controller
     {
