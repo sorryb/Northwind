@@ -3,10 +3,13 @@ using NorthwindWeb.Models;
 using System.Linq;
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// AboutController. For the page Index from AboutUs 
+    /// </summary>
     public class AboutController : Controller
     {
         NorthwindModel db = new NorthwindModel();
-        //
+       
         /// <summary>
         /// Select the first 6 employees
         /// </summary>

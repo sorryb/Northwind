@@ -21,6 +21,7 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         // GET: Territories
+        ///Enter in  Territories through Region
         public async Task<ActionResult> Index()
         {
             var territories = db.Territories.Include(t => t.Region);
@@ -34,7 +35,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //take details of Territory
+            ///take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -45,6 +46,7 @@ namespace NorthwindWeb.Controllers
 
         // GET: Territories/Create
         [Authorize(Roles = "Employees, Admins")]
+        ///Enter in the page Create via RegionID
         public ActionResult Create(int? id)
         {
             ViewBag.regionid = id;
@@ -57,6 +59,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
+        ///Create a new territory which contain the next fields: TerritoryID,TerritoryDescription which belong of Region with RegionID selected and it will be saved in database
         public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
@@ -72,13 +75,14 @@ namespace NorthwindWeb.Controllers
 
         // GET: Territories/Edit/5
         [Authorize(Roles = "Employees, Admins")]
+        ///Enter in the page Edit
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            //take details of Territory
+            ///take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -94,6 +98,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
+        ///Modify the selected territory which belong of Region with RegionID
         public async Task<ActionResult> Edit([Bind(Include = "TerritoryID,TerritoryDescription,RegionID")] Territories territories)
         {
             if (ModelState.IsValid)
@@ -108,6 +113,7 @@ namespace NorthwindWeb.Controllers
 
         // GET: Territories/Delete/5
         [Authorize(Roles = "Admins")]
+        ///Enter in the page Delete 
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -127,9 +133,10 @@ namespace NorthwindWeb.Controllers
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
+        ///Delete the selected territory which belong of Region with RegionID
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            //take details of Territory
+            ///take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             int idRegion=territories.RegionID;
             try
