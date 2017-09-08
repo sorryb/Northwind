@@ -144,7 +144,7 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+            catch
             {
                 string listOrders = "";
                 var ordersWhitProductID = db.Order_Details.Include(s => s.Order).Include(s => s.Product).Where(s => s.ProductID == id).Select(s => new { s.OrderID });
@@ -172,14 +172,14 @@ namespace NorthwindWeb.Controllers
             {
                 category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
             }
-            catch (NullReferenceException e) { }
+            catch (NullReferenceException) { }
 
             string search = "";
             try
             {
                 search = Request.QueryString["search[value]"] ?? "";
             }
-            catch (NullReferenceException e) { }
+            catch (NullReferenceException) { }
 
 
             int sortColumn = -1;
@@ -198,10 +198,10 @@ namespace NorthwindWeb.Controllers
                     {
                         sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
                     }
-                    catch (NullReferenceException e) { }
+                    catch (NullReferenceException) { }
                 }
             }
-            catch (NullReferenceException e) { }
+            catch (NullReferenceException) { }
 
             try
             {
@@ -211,10 +211,10 @@ namespace NorthwindWeb.Controllers
                     {
                         sortDirection = Request.QueryString["order[0][dir]"];
                     }
-                    catch (NullReferenceException e) { }
+                    catch (NullReferenceException) { }
                 }
             }
-            catch (NullReferenceException e) { }
+            catch (NullReferenceException) { }
 
             //list of product that contain "search"
             var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)

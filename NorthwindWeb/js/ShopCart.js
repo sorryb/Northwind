@@ -1,7 +1,6 @@
 ﻿//Local Storage Class
-function CartProducts(idProdus, quantity, category) {
+function CartProducts(idProdus, quantity) {
     this.IdProdus = idProdus;
-    this.Category = category;
     this.quantity = quantity;
 }
 
