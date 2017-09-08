@@ -14,7 +14,7 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins, Manager, Employees")]
+    [Authorize(Roles = "Admins, Employees")]
     public class SuppliersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
@@ -27,12 +27,13 @@ namespace NorthwindWeb.Controllers
 
         // GET: Suppliers/Details/5
         public async Task<ActionResult> Details(int? id)
-        {
+        {//if a vendor has been selected
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Suppliers suppliers = await db.Suppliers.FindAsync(id);
+            //if a vendor has been found
             if (suppliers == null)
             {
                 return HttpNotFound();
@@ -54,7 +55,7 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "SupplierID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax,HomePage")] Suppliers suppliers)
-        {
+        {//if inputs data correspond to the model
             if (ModelState.IsValid)
             {
                 db.Suppliers.Add(suppliers);
@@ -68,12 +69,13 @@ namespace NorthwindWeb.Controllers
         // GET: Suppliers/Edit/5
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
-        {
+        {//if a vendor has been selected
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Suppliers suppliers = await db.Suppliers.FindAsync(id);
+            //if a vendor has been found
             if (suppliers == null)
             {
                 return HttpNotFound();
@@ -88,7 +90,7 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "SupplierID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax,HomePage")] Suppliers suppliers)
-        {
+        {//if inputs data correspond to the model
             if (ModelState.IsValid)
             {
                 db.Entry(suppliers).State = EntityState.Modified;
@@ -101,12 +103,13 @@ namespace NorthwindWeb.Controllers
         // GET: Suppliers/Delete/5
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
-        {
+        {//if a vendor has been selected
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Suppliers suppliers = await db.Suppliers.FindAsync(id);
+            //if a vendor has been found
             if (suppliers == null)
             {
                 return HttpNotFound();
@@ -119,7 +122,7 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
-        {
+        {//if the supplier exists and can be deleted
             try
             {
                 Suppliers suppliers = await db.Suppliers.FindAsync(id);
@@ -133,15 +136,7 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
+        //return a list a suppliers to complete table
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
@@ -281,6 +276,14 @@ namespace NorthwindWeb.Controllers
                 recordsFiltered = suppliersInfo.Count(), //need to be below data(ref recordsFiltered)
             };
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

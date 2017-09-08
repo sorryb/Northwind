@@ -1002,7 +1002,7 @@ namespace NorthwindWeb.Controllers
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
-        //return a list a roles to complete the table
+        //return a list a roles to complete table
         public JsonResult JsonTableRolesFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
