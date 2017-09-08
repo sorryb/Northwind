@@ -45,7 +45,7 @@ namespace NorthwindWeb.Controllers
             return View(listOfCategories);
         }
 
-
+#if DEBUG
         /// <summary>
         /// If you see this please delete it (public string CreateJsonTableObject())
         /// </summary>
@@ -55,7 +55,7 @@ namespace NorthwindWeb.Controllers
         {
             var db = new NorthwindModel();
 
-            System.IO.File.WriteAllText(path + "\\categoies.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\categories.json", new JavaScriptSerializer().Serialize(
                 db.Categories.Select(x => new
                 {
                     CategoryID = x.CategoryID,
@@ -63,7 +63,7 @@ namespace NorthwindWeb.Controllers
                     Description = x.Description,
                 }
                 )));
-            System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\customers.json", new JavaScriptSerializer().Serialize(
                 db.Customers.Select(x => new
                 {
                     CustomerID = x.CustomerID,
@@ -79,7 +79,7 @@ namespace NorthwindWeb.Controllers
                     Fax = x.Fax,
                 }
                 )));
-            System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\emploayees.json", new JavaScriptSerializer().Serialize(
                 db.Employees.Select(x => new
                 {
                     EmployeeID = x.EmployeeID,
@@ -98,16 +98,17 @@ namespace NorthwindWeb.Controllers
                     Extension = x.Extension,
                     Photo = x.Photo,
                     Notes = x.Notes,
-                    ReportsTo = x.ReportsTo
+                    ReportsTo = x.ReportsTo,
+                    Territories = x.Territories.Select(y => new { TerritoryID = y.TerritoryID })
                 })));
-            System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\territories.json", new JavaScriptSerializer().Serialize(
                 db.Territories.Select(x => new
                 {
                     TerritoryID = x.TerritoryID,
                     TerritoryDescription = x.TerritoryDescription,
                     RegionID = x.RegionID
                 })));
-            System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\suppliers.json", new JavaScriptSerializer().Serialize(
                 db.Suppliers.Select(x => new
                 {
                     SupplierID = x.SupplierID,
@@ -123,20 +124,20 @@ namespace NorthwindWeb.Controllers
                     Fax = x.Fax,
                     HomePage = x.HomePage
                 })));
-            System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\shippers.json", new JavaScriptSerializer().Serialize(
                 db.Shippers.Select(x => new
                 {
                     ShipperID = x.ShipperID,
                     CompanyName = x.CompanyName,
                     Phone = x.Phone
                 })));
-            System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\regions.json", new JavaScriptSerializer().Serialize(
                 db.Regions.Select(x => new
                 {
                     RegionID = x.RegionID,
                     RegionDescription = x.RegionDescription
                 })));
-            System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\orders.json", new JavaScriptSerializer().Serialize(
                 db.Orders.Select(x => new
                 {
                     OrderID = x.OrderID,
@@ -168,7 +169,7 @@ namespace NorthwindWeb.Controllers
                     ReorderLevel = x.ReorderLevel,
                     Discontinued = x.Discontinued
                 })));
-            System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
+            System.IO.File.WriteAllText(path + "\\orderDetails.json", new JavaScriptSerializer().Serialize(
                 db.Order_Details.Select(x => new
                 {
                     OrderID = x.OrderID,
@@ -177,11 +178,11 @@ namespace NorthwindWeb.Controllers
                     Quantity = x.Quantity,
                     Discount = x.Discount
                 })));
-
+            
             db.Dispose();
 
             return "Succes! \n Baza de date Northwind a fost salvata ca json in " + path;
         }
-
+#endif
     }
 }

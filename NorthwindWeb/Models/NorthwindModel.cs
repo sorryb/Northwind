@@ -4,12 +4,14 @@ namespace NorthwindWeb.Models
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using NorthwindWeb.Context;
 
     public partial class NorthwindModel : DbContext
     {
         public NorthwindModel()
             : base("name=NwModel")
         {
+            Database.SetInitializer(new NorthwindDatabaseInitializer());
         }
 
         public virtual DbSet<Categories> Categories { get; set; }
