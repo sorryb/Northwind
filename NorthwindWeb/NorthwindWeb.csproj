@@ -260,11 +260,11 @@
     <Compile Include="ViewModels\Order\OrderIndexData.cs" />
     <Compile Include="ViewModels\Order\OrderProduct.cs" />
     <Compile Include="ViewModels\Order\ProductCategory.cs" />
-    <Compile Include="ViewModels\ProductServices.cs" />
+    <Compile Include="ViewModels\Services\ProductServices.cs" />
     <Compile Include="ViewModels\RegionDetails.cs" />
     <Compile Include="ViewModels\RegionIndex.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
-    <Compile Include="ViewModels\ServicesIndex.cs" />
+    <Compile Include="ViewModels\Services\ServicesIndex.cs" />
     <Compile Include="ViewModels\ViewProductCategoryS.cs" />
   </ItemGroup>
   <ItemGroup>

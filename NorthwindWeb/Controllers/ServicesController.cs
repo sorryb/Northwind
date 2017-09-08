@@ -22,7 +22,7 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// take first 4 products and last 3 products with their details
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Products index view</returns>
         public ActionResult Index()
         {
             var viewModel = new ServicesIndex();

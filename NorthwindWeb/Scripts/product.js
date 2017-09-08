@@ -86,7 +86,7 @@ $(document).ready(function () {
     });
 
 
-    /*add from json in table Customers*/
+   /*datatable handler with server side implementation for customer*/
     $('#CustomersTable').DataTable({
         "processing": true,
         "serverSide": true,
@@ -120,7 +120,7 @@ $(document).ready(function () {
 
     });
 
-    /*add from json in table Orders*/
+    /*datatable handler with server side implementation for order*/
     $('#OrdersTable').DataTable({
         "processing": true,
         "serverSide": true,
