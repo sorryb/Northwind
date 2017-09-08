@@ -709,14 +709,14 @@ namespace NorthwindWeb.Controllers
             //Roles.AddUserToRole(userName, roleName);
 
             var context = new ApplicationDbContext();
-            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             try
             {
                 foreach (string userName in new string[] { userNameList })
                 {
-                    var user = UserManager.FindByName(userName);
-                    UserManager.AddToRole(user.Id, roleName);
+                    var user = userManager.FindByName(userName);
+                    userManager.AddToRole(user.Id, roleName);
                 }
 
                 context.SaveChanges();
@@ -864,9 +864,9 @@ namespace NorthwindWeb.Controllers
         }
 
 
-   
 
-        //return a list of users
+
+        //return a list of users to complete table
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
@@ -892,7 +892,7 @@ namespace NorthwindWeb.Controllers
 
             
             var context = new ApplicationDbContext();
-            var userStore = new UserStore<ApplicationUser>(context);
+           
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
@@ -1002,7 +1002,7 @@ namespace NorthwindWeb.Controllers
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
-        //return a list a roles
+        //return a list a roles to complete the table
         public JsonResult JsonTableRolesFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
@@ -1028,7 +1028,7 @@ namespace NorthwindWeb.Controllers
 
 
             var context = new ApplicationDbContext();
-            var userStore = new UserStore<ApplicationUser>(context);
+            //var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 

@@ -142,7 +142,7 @@ namespace NorthwindWeb.Controllers
                               .Take(10);
             ;
             List<OrderTen> lastTenOrderData = new List<OrderTen>();
-
+            //IQueryable->list
             foreach (var itemOrderTen in orderTen)
             {
                 OrderTen lastTenOrdeElementr = new OrderTen();
@@ -168,7 +168,7 @@ namespace NorthwindWeb.Controllers
                               .Take(10);
             ;
             List<OrderTen> lastTenOrderData = new List<OrderTen>();
-
+            //IQueryable->list
             foreach (var itemOrderTen in orderTen)
             {
                 OrderTen lastTenOrdeElementr = new OrderTen();
@@ -191,9 +191,9 @@ namespace NorthwindWeb.Controllers
                        .OrderBy(i => i.OrderID);
             //Filter orders if a text has been entered
             if (!String.IsNullOrEmpty(search))
-            {
+            { //IQueryable->list
                 foreach (var item in order)
-                {
+                {//filter the results
                     if ((Convert.ToString(item.OrderID).Contains(search)) || (item.ShipperName.ToLower().Contains(search.ToLower())))
                     {
                         OrderInfo x = new OrderInfo();
@@ -209,7 +209,7 @@ namespace NorthwindWeb.Controllers
             }
             else
             {
-
+                //IQueryable->list
                 foreach (var item in order)
                 {
                     OrderInfo x = new OrderInfo();
@@ -238,9 +238,9 @@ namespace NorthwindWeb.Controllers
                        .OrderBy(i => i.OrderID);
             //Filter orders if a text has been entered
             if (!String.IsNullOrEmpty(search))
-            {
+            {//IQueryable->list
                 foreach (var item in order)
-                {
+                {//filter the results
                     if ((Convert.ToString(item.OrderID).Contains(search)) || (item.ShipperName.ToLower().Contains(search.ToLower())))
                     {
                         OrderInfo x = new OrderInfo();
@@ -256,7 +256,7 @@ namespace NorthwindWeb.Controllers
             }
             else
             {
-
+                //IQueryable->list
                 foreach (var item in order)
                 {
                     OrderInfo x = new OrderInfo();
@@ -282,6 +282,7 @@ namespace NorthwindWeb.Controllers
                                   .OrderByDescending(x => x.max)
                                   .Take(1);
             BigOrder bigOrder = new BigOrder();
+            //IQueryable->BigOrder
             foreach (var itemOrder in order)
             {
                 bigOrder.OrderID = itemOrder.OrderID;
@@ -301,6 +302,7 @@ namespace NorthwindWeb.Controllers
                                   .OrderByDescending(x => x.max)
                                   .Take(1);
             BigOrder bigOrder = new BigOrder();
+            //IQueryable->BigOrder
             foreach (var itemOrder in order)
             {
                 bigOrder.OrderID = itemOrder.OrderID;
@@ -318,7 +320,7 @@ namespace NorthwindWeb.Controllers
 
             ;
             List<OrderProduct> detailsData = new List<OrderProduct>();
-
+            //IQueryable->list
             foreach (var itemDetails in details)
             {
                 OrderProduct orderDetails = new OrderProduct();
@@ -342,7 +344,7 @@ namespace NorthwindWeb.Controllers
 
             ;
             List<ProductCategory> productCategoryData = new List<ProductCategory>();
-
+            //IQueryable->list
             foreach (var itemDetails in details)
             {
                 ProductCategory productCategoryElement = new ProductCategory();

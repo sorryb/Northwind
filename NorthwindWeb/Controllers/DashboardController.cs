@@ -61,7 +61,7 @@ namespace NorthwindWeb.Controllers
             }
             ViewBag.CurrentFilter = search;
             List<LocateSearch> machesFount = new List<LocateSearch>();
-            //The test returns false if no search is entered
+            //The test returns false if no search is entered if the column is not null
             if (!String.IsNullOrEmpty(search))
             {//Test each table for match 
                 var category = db.Categories;
@@ -552,6 +552,7 @@ namespace NorthwindWeb.Controllers
             List<LastTenOrders> lastTenOrdersData = new List<LastTenOrders>();
             var order = (from o in db.Orders
                          select new { o.OrderID, o.OrderDate }).OrderByDescending(o => o.OrderDate).Take(10);
+            //format the message according to how long it has passed from placing orders
             foreach (var itemOrder in order)
             {
                 LastTenOrders lastTenOrdersElement = new LastTenOrders();
