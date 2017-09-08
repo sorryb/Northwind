@@ -15,66 +15,6 @@ namespace NorthwindWeb.Controllers
     {
         private Models.NorthwindModel db = new Models.NorthwindModel();
 
-
-
-        /// <summary>
-        /// If you see this please delete it (public string CreateJsonTableObject())
-        /// </summary>
-        /// <returns></returns>
-        public string CreateJsonTableObject()
-        {
-            System.IO.File.WriteAllText("d:\\Table\\products.json", new JavaScriptSerializer().Serialize(db.Products.Select(x => new {
-                ProductName = x.ProductName,
-                SupplierID = x.SupplierID,
-                CategoryID = x.CategoryID,
-                QuantityPerUnit = x.QuantityPerUnit,
-                UnitPrice = x.UnitPrice,
-                UnitsInStock = x.UnitsInStock,
-                UnitsOnOrder = x.UnitsOnOrder,
-                ReorderLevel = x.ReorderLevel,
-                Discontinued = x.Discontinued
-            })));
-            System.IO.File.WriteAllText("d:\\Table\\categoies.json", new JavaScriptSerializer().Serialize(db.Categories.Select(x => new {
-                CategoryName = x.CategoryName,
-                Description = x.Description,
-                Products = x.Products
-            })));
-            System.IO.File.WriteAllText("d:\\Table\\products.json", new JavaScriptSerializer().Serialize(db.Customers.Select(x => new {
-                CompanyName = x.CompanyName,
-                ContactName = x.ContactName,
-                ContactTitle = x.ContactTitle,
-                Address = x.Address,
-                City = x.City,
-                Region = x.Region,
-                PostalCode = x.PostalCode,
-                Country = x.Country,
-                Phone = x.Phone,
-                Fax = x.Fax
-            })));
-            System.IO.File.WriteAllText("d:\\Table\\products.json", new JavaScriptSerializer().Serialize(db.Employees.Select(x => new {
-
-            })));
-            System.IO.File.WriteAllText("d:\\Table\\products.json", new JavaScriptSerializer().Serialize(db.Products.Select(x => new {
-
-            })));
-            System.IO.File.WriteAllText("d:\\Table\\products.json", new JavaScriptSerializer().Serialize(db.Products.Select(x => new {
-
-            })));
-            System.IO.File.WriteAllText("d:\\Table\\products.json", new JavaScriptSerializer().Serialize(db.Products.Select(x => new {
-
-            })));
-            System.IO.File.WriteAllText("d:\\Table\\products.json", new JavaScriptSerializer().Serialize(db.Products.Select(x => new {
-
-            })));
-            System.IO.File.WriteAllText("d:\\Table\\products.json", new JavaScriptSerializer().Serialize(db.Products.Select(x => new {
-
-            })));
-
-            return "Succes!";
-        }
-
-
-
         /// <summary>
         /// Returns a paged list filtered by category and by name
         /// </summary>
