@@ -39,11 +39,11 @@ namespace NorthwindWeb.Models.ShopCart
         /// <summary>
         /// Get category of this product
         /// </summary>
-        string Category
+        string ProductName
         {
             get
             {
-                return dbContext.Products.Include(Category).Where(x => x.ProductID == ID).Select(x => x.Category.CategoryName).FirstOrDefault();
+                return dbContext.Products.Where(x => x.ProductID == ID).Select(x => x.ProductName).FirstOrDefault();
             }
         }
 

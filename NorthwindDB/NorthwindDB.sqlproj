@@ -103,6 +103,7 @@
     <Folder Include="dbo\Views\" />
     <Folder Include="dbo\Stored Procedures\" />
     <Folder Include="dbo\Scripts" />
+    <Folder Include="dbo\Scripts\JsonTableObject" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Orders.sql">
