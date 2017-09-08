@@ -449,8 +449,11 @@ namespace NorthwindWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(model.UserName);
-
-
+                user.Email = model.Email;
+                
+               var result=await UserManager.RemovePasswordAsync(user.Id);
+                if(result.Succeeded)
+                { result = await UserManager.AddPasswordAsync(user.Id, model.Password); }
                 isChanged = UserManager.Update(user);
 
                 if (isChanged.Succeeded)

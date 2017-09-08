@@ -7,16 +7,16 @@ namespace UnitTestNorthwindWeb
     [TestClass]
     public class ManageController
     {
-        [TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
-        public void ManageIndex()
-        {
-            //Arrange
-            var controller = new NorthwindWeb.Controllers.ManageController();
+        //[TestMethod]
+        //[ExpectedException(typeof(NotImplementedException))]
+        //public void ManageIndex()
+        //{
+        //    //Arrange
+        //    var controller = new NorthwindWeb.Controllers.ManageController();
 
-            //Act
-            var a = controller.Index();
-        }
+        //    //Act
+        //    var a = controller.Index();
+        //}
 
         [TestMethod]
         public void ManageRemoveLogin()
