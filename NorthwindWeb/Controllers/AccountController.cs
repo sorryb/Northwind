@@ -471,15 +471,18 @@ namespace NorthwindWeb.Controllers
         {
             IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
 
-            var user = await UserManager.FindByNameAsync(userName);
+            string curentUser=User.Identity.GetUserName();
+            ApplicationUser user = await UserManager.FindByNameAsync(userName);
 
             if (!String.IsNullOrEmpty(userName))
+            {
+                if (user.UserName == curentUser) { LogOff(); }
                 isDeleted = UserManager.Delete(user);
+            }
 
-
-            if (isDeleted.Succeeded)
-                return RedirectToAction("Index", "Home");
-            else
+            //if (isDeleted.Succeeded)
+            //    return RedirectToAction("Index", "Home");
+            //else
                 return RedirectToAction("Index");
 
         }
