@@ -445,10 +445,11 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> ChangeUser(RegisterViewModel model)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-
+            string userName=Request["UserName"];
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.UserName);
+                var user = await UserManager.FindByNameAsync(userName);
+                user.UserName = model.UserName;
                 user.Email = model.Email;
                 
                var result=await UserManager.RemovePasswordAsync(user.Id);
