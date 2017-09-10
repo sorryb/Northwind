@@ -51,12 +51,17 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize(Roles = "Admins")]
-        public string CreateJsonTableObject(string path = "d:\\Table")
+        public string CreateJsonTableObject(string path = "")
         {
+            if(path == "")
+            {
+                path = System.Configuration.ConfigurationManager.AppSettings["JsonDataInitializationPath"];
+            }
+
             var db = new NorthwindModel();
 
             System.IO.File.WriteAllText(path + "\\categories.json", new JavaScriptSerializer().Serialize(
-                db.Categories.Select(x => new
+                db.Categories.OrderBy(x=>x.CategoryID).Select(x => new
                 {
                     CategoryID = x.CategoryID,
                     CategoryName = x.CategoryName,
@@ -64,7 +69,7 @@ namespace NorthwindWeb.Controllers
                 }
                 )));
             System.IO.File.WriteAllText(path + "\\customers.json", new JavaScriptSerializer().Serialize(
-                db.Customers.Select(x => new
+                db.Customers.OrderBy(x => x.CustomerID).Select(x => new
                 {
                     CustomerID = x.CustomerID,
                     CompanyName = x.CompanyName,
@@ -80,7 +85,7 @@ namespace NorthwindWeb.Controllers
                 }
                 )));
             System.IO.File.WriteAllText(path + "\\emploayees.json", new JavaScriptSerializer().Serialize(
-                db.Employees.Select(x => new
+                db.Employees.OrderBy(x => x.EmployeeID).Select(x => new
                 {
                     EmployeeID = x.EmployeeID,
                     LastName = x.LastName,
@@ -102,14 +107,14 @@ namespace NorthwindWeb.Controllers
                     Territories = x.Territories.Select(y => new { TerritoryID = y.TerritoryID })
                 })));
             System.IO.File.WriteAllText(path + "\\territories.json", new JavaScriptSerializer().Serialize(
-                db.Territories.Select(x => new
+                db.Territories.OrderBy(x => x.TerritoryID).Select(x => new
                 {
                     TerritoryID = x.TerritoryID,
                     TerritoryDescription = x.TerritoryDescription,
                     RegionID = x.RegionID
                 })));
             System.IO.File.WriteAllText(path + "\\suppliers.json", new JavaScriptSerializer().Serialize(
-                db.Suppliers.Select(x => new
+                db.Suppliers.OrderBy(x => x.SupplierID).Select(x => new
                 {
                     SupplierID = x.SupplierID,
                     CompanyName = x.CompanyName,
@@ -125,20 +130,20 @@ namespace NorthwindWeb.Controllers
                     HomePage = x.HomePage
                 })));
             System.IO.File.WriteAllText(path + "\\shippers.json", new JavaScriptSerializer().Serialize(
-                db.Shippers.Select(x => new
+                db.Shippers.OrderBy(x => x.ShipperID).Select(x => new
                 {
                     ShipperID = x.ShipperID,
                     CompanyName = x.CompanyName,
                     Phone = x.Phone
                 })));
             System.IO.File.WriteAllText(path + "\\regions.json", new JavaScriptSerializer().Serialize(
-                db.Regions.Select(x => new
+                db.Regions.OrderBy(x => x.RegionID).Select(x => new
                 {
                     RegionID = x.RegionID,
                     RegionDescription = x.RegionDescription
                 })));
             System.IO.File.WriteAllText(path + "\\orders.json", new JavaScriptSerializer().Serialize(
-                db.Orders.Select(x => new
+                db.Orders.OrderBy(x => x.OrderID).Select(x => new
                 {
                     OrderID = x.OrderID,
                     CustomerID = x.CustomerID,
@@ -154,9 +159,17 @@ namespace NorthwindWeb.Controllers
                     ShipRegion = x.ShipRegion,
                     ShipPostalCode = x.ShipPostalCode,
                     ShipCountry = x.ShipCountry,
+                    Order_Details = x.Order_Details.Select(y => new
+                    {
+                        OrderID = y.OrderID,
+                        ProductID = y.ProductID,
+                        UnitPrice = y.UnitPrice,
+                        Quantity = y.Quantity,
+                        Discount = y.Discount
+                    })
                 })));
             System.IO.File.WriteAllText(path + "\\products.json", new JavaScriptSerializer().Serialize(
-                db.Products.Select(x => new
+                db.Products.OrderBy(x => x.ProductID).Select(x => new
                 {
                     ProductID = x.ProductID,
                     ProductName = x.ProductName,
@@ -168,15 +181,6 @@ namespace NorthwindWeb.Controllers
                     UnitsOnOrder = x.UnitsOnOrder,
                     ReorderLevel = x.ReorderLevel,
                     Discontinued = x.Discontinued
-                })));
-            System.IO.File.WriteAllText(path + "\\orderDetails.json", new JavaScriptSerializer().Serialize(
-                db.Order_Details.Select(x => new
-                {
-                    OrderID = x.OrderID,
-                    ProductID = x.ProductID,
-                    UnitPrice = x.UnitPrice,
-                    Quantity = x.Quantity,
-                    Discount = x.Discount
                 })));
             
             db.Dispose();
