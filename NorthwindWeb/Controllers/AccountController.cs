@@ -517,7 +517,7 @@ namespace NorthwindWeb.Controllers
         {
 
             //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-            var roleStore = new RoleStore<IdentityRole>(System.Web.HttpContext.Current.Request.GetOwinContext().Get<ApplicationDbContext>());
+            var roleStore = new RoleStore<IdentityRole>(System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>());
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
             List<RoleInfoViewModel> roleInfoViewModel = new List<RoleInfoViewModel>();
