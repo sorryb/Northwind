@@ -58,9 +58,20 @@ namespace NorthwindWeb.Controllers
 
 
 
-
-
-
+        
+       
+       public string Delete(int? id)
+        {
+            if (id != null && User.Identity.IsAuthenticated)
+            {
+                db.ShopCart.Remove(db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == id).First());
+                return "Succes";
+            }
+            else
+            {
+                return "Error";
+            }
+        }
 
 
 

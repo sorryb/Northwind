@@ -38,20 +38,34 @@ function ChangeQuantity(id, quantity) {
 }
 
 function RemoveFromCart(id) {
-    var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
-    
-    var i=0;
-    for (i = 0; i < productsInStorage.length; i++)
-    {
-        if (productsInStorage[i].ID == id)
-        {
-            break;
-        }
+    if (isLogIn) {
+        $.ajax({
+            url: searchControllerPath() + "/Delete?id=" + id,
+        })
+            .done(function (data) {
+                if (data == "Succes") {
+                    //ar trebui modificat
+                    $("#ShopCartTable").DataTable().destroy();
+                    CreateShopCartDataTable("ShopCartTable");
+                }
+                else {
+                    alert("Ceva nu a mers bine");
+                }
+            });
     }
-    productsInStorage.splice(i, 1);
-    localStorage.setItem("cart", JSON.stringify(productsInStorage));
-    $("#ShopCartTable").DataTable().destroy();
-    CreateShopCartDataTable("ShopCartTable");
+    else {
+        var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
+        var i = 0;
+        for (i = 0; i < productsInStorage.length; i++) {
+            if (productsInStorage[i].ID == id) {
+                break;
+            }
+        }
+        productsInStorage.splice(i, 1);
+        localStorage.setItem("cart", JSON.stringify(productsInStorage));
+        $("#ShopCartTable").DataTable().destroy();
+        CreateShopCartDataTable("ShopCartTable");
+    }
 }
 
 //count number of product in shopcart
