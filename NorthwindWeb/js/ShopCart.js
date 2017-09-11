@@ -5,28 +5,34 @@ function CartProducts(productId, quantity) {
 }
 var isLogIn = 0;
 
+//work
 function exportLocalShopCartToServer() {
-    if (isLogIn == 0 && localStorage.getItem("cart") != null && localStorage.getItem("cart") != "") {
-            alert("i`m here");
+    if (isLogedIn == 1 && localStorage.getItem("cart") != null && localStorage.getItem("cart") != "") {
         $.ajax({
-            url: window.location.host + "/ImportFromLocal?json="
-        }).done(function (data) {
-            if (data == "Success") {
-                localStorage.setItem("cart") = "";
-                alert("succes trebuie sters");
-            }
-            else {
-                alert("A aparut o eroare la trimiterea listei de produse locale catre server");
-            }
+            url: "http://" + window.location.host + "/ShopCart/ImportFromLocal",
+            "data": {
+                "json": localStorage.getItem("cart"),
+            },
+            dataType: "json",
+            type: "POST"
         })
+            .done(function () {
+                localStorage.setItem("cart", "");
+                alert("succes trebuie sters");
+            })
+            .fail(function () {
+                alert("A aparut o eroare la trimiterea listei de produse locale catre server");
+            })
     }
 }
+
 
 $("document").ready(function () {
     exportLocalShopCartToServer();
     UpdateShop();
 
 })
+
 
 //add product in cart
 function AddToCart(productToAdd) {
@@ -151,4 +157,3 @@ function getCartProducts() {
 function UpdateShop() {
     $("#shopcart-productcount").text(getCartCount());
 }
-
