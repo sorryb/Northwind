@@ -20,7 +20,7 @@ namespace NorthwindWeb.Controllers
         /// See the curent shop list
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index(string json)
+        public ActionResult Index()
         {
             return View();
         }

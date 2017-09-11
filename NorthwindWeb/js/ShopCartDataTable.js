@@ -8,9 +8,9 @@
         return a[0] + '/' + a[1];
     }
 }
-function CreateShopCartTable() {
+function CreateShopCartDataTable(tableId) {
     $(document).ready(function () {
-        $('#ShopCartTable').DataTable({
+        $('#' + tableId + '').DataTable({
             "processing": true,
             "serverSide": true,
             "responsive": true,
@@ -49,4 +49,4 @@ function CreateShopCartTable() {
 
     });
 }
-CreateShopCartTable();
+CreateShopCartDataTable("ShopCartTable");
