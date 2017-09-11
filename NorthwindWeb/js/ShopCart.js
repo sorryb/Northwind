@@ -3,7 +3,7 @@ function CartProducts(productId, quantity) {
     this.ID = productId;
     this.Quantity = quantity;
 }
-
+var isLogIn = 0;
 //add product in cart
 function AddToCart(productToAdd) {
     //need to check if this customer is loged in
@@ -21,6 +21,7 @@ function AddToCart(productToAdd) {
     else
         productsInStorage[i].Quantity++;
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
+    UpdateShop();
 }
 
 function ChangeQuantity(id, quantity) {
@@ -33,25 +34,32 @@ function ChangeQuantity(id, quantity) {
     }
     productsInStorage[i].Quantity = quantity;
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
-    $("#ShopCartTable").DataTable().destroy();
-    CreateShopCartDataTable("ShopCartTable");
+    var rowColumns = $(this).parent().parent().children();
+    rowColumns[3].innerHTML = rowColumns[1].firstChild.nodeValue;
+    //$("#ShopCartTable").DataTable().destroy();
+    //CreateShopCartDataTable("ShopCartTable");
 }
 
 function RemoveFromCart(id) {
-    var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
-    
-    var i=0;
-    for (i = 0; i < productsInStorage.length; i++)
-    {
-        if (productsInStorage[i].ID == id)
-        {
-            break;
+    if (!isLogIn) {
+        var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
+
+        var i = 0;
+        for (i = 0; i < productsInStorage.length; i++) {
+            if (productsInStorage[i].ID == id) {
+                break;
+            }
         }
+        productsInStorage.splice(i, 1);
+        localStorage.setItem("cart", JSON.stringify(productsInStorage));
+        $("#ShopCartTable").DataTable().destroy();
+        CreateShopCartDataTable("ShopCartTable");
     }
-    productsInStorage.splice(i, 1);
-    localStorage.setItem("cart", JSON.stringify(productsInStorage));
-    $("#ShopCartTable").DataTable().destroy();
-    CreateShopCartDataTable("ShopCartTable");
+    else
+    {
+        $.ajax(searchControllerPath() + "/Delete?id=" + id,)
+    }
+    UpdateShop();
 }
 
 //count number of product in shopcart
@@ -103,3 +111,9 @@ function getCartProducts() {
         data --neadaugate pe server
 }
 */
+
+function UpdateShop()
+{
+    $("#shopcart-productcount").text(getCartCount());
+}
+UpdateShop();

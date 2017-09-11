@@ -49,6 +49,16 @@ namespace NorthwindWeb.Models.ShopCart
                 return dbContext.Products.Find(ID).UnitPrice ?? 9999999;
             }
         }
+        /// <summary>
+        /// get the category of this product
+        /// </summary>
+        public string Category
+        {
+            get
+            {
+                return dbContext.Products.Find(ID).Category.CategoryName;
+            }
+        }
 
     }
 }
