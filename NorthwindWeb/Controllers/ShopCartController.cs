@@ -62,11 +62,32 @@ namespace NorthwindWeb.Controllers
 
 
 
+        public string ImportFromLocal(string json = "")
+        {
+            if(User.Identity.IsAuthenticated && String.IsNullOrEmpty(json))
+            {
+                var shopCartProducts = JsonConvert.DeserializeObject<List<ProductShopCart>>(json).AsQueryable();
+
+                try
+                {
+                    foreach (var shopCartProduct in shopCartProducts)
+                    {
+                        db.ShopCart.Add(new ShopCarts() { ProductID = shopCartProduct.ID, Quantity = shopCartProduct.Quantity, UserName = User.Identity.Name });
+                    }
+                }
+                catch
+                {
+                    return "Error";
+                }
+                return "Success";
+            }
+            return "Error";
+        }
 
 
-        
-       
-       public string Delete(int? id)
+
+
+        public string Delete(int? id)
         {
             if (id != null && User.Identity.IsAuthenticated)
             {
@@ -86,8 +107,8 @@ namespace NorthwindWeb.Controllers
             string json = Request.QueryString["json"] ?? "";
 
             const int TOTAL_ROWS = 999;
-
-            var list =JsonConvert.DeserializeObject<List<ProductShopCartDetailed>>(json).AsQueryable();
+            
+            var list = JsonConvert.DeserializeObject<List<ProductShopCartDetailed>>(json).AsQueryable();
             foreach (var product in list)
             {
                 product.dbContext = db;
@@ -178,7 +199,7 @@ namespace NorthwindWeb.Controllers
                 recordsTotal = db.Products.Count(),
                 data = list.Skip(start).Take(length).Select(p => new
                 {
-                    Category=p.Category,
+                    Category = p.Category,
                     ID = p.ID,
                     ProductName = p.ProductName,
                     Quantity = p.Quantity,
