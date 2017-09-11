@@ -18,6 +18,7 @@ using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
 
 
+
 namespace NorthwindWeb.Controllers
 {
     [Authorize]
@@ -52,7 +53,8 @@ namespace NorthwindWeb.Controllers
         {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                //var manager = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<UserManager<ApplicationUser>>();
+                return _userManager ?? System.Web.HttpContext.Current.Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
             private set
             {
@@ -496,14 +498,15 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public ActionResult DeleteUser(string userName)
         {
-            var context = new ApplicationDbContext();
-            //var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            //ApplicationDbContext context = new ApplicationDbContext();
+            ////var userStore = new UserStore<ApplicationUser>(context);
+            //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             UserInfoViewModel userDelete = new UserInfoViewModel();
-            if (!String.IsNullOrEmpty(userName))
+          
+            if (!String.IsNullOrEmpty(userName)&& UserManager.FindByName(userName)!= null)
             {
-                userDelete.UserName=userManager.FindByName(userName).UserName;
-                userDelete.Email = userManager.FindByName(userName).Email;
+                userDelete.UserName=UserManager.FindByName(userName).UserName;
+                userDelete.Email =UserManager.FindByName(userName).Email; 
                
             }
             return View(userDelete);
@@ -513,7 +516,8 @@ namespace NorthwindWeb.Controllers
         public ActionResult RolesIndex()
         {
 
-            var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+            //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
+            var roleStore = new RoleStore<IdentityRole>(System.Web.HttpContext.Current.Request.GetOwinContext().Get<ApplicationDbContext>());
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
             List<RoleInfoViewModel> roleInfoViewModel = new List<RoleInfoViewModel>();

@@ -5,8 +5,19 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NorthwindWeb.Controllers;
 using NorthwindWeb.Models;
 
+using NorthwindWeb;
 using System.Web.Mvc;
 using NorthwindWeb.ViewModels;
+using NorthwindWeb.Context;
+using Moq;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
+using Microsoft.Owin;
+using System.Web;
+using System.IO;
+using System.Security.Principal;
 
 namespace UnitTestNorthwindWeb
 {
@@ -16,10 +27,9 @@ namespace UnitTestNorthwindWeb
     [TestClass]
     public class AccountControllerTest
     {
-        AccountController _accountController = new AccountController(); 
 
-
-
+        AccountController _accountController = new AccountController();
+        
         /// <summary>
         /// Check what Index action returns.
         /// </summary>
@@ -37,6 +47,7 @@ namespace UnitTestNorthwindWeb
 
 
         }
+
 
         ///<summary>
         /// Check what Login action returns.
@@ -65,7 +76,7 @@ namespace UnitTestNorthwindWeb
         public void ReturnsLoginGetViewResult()
         {
             //Arrage
-        
+
             //Act
             var result = _accountController.Login("url");
 
@@ -173,11 +184,11 @@ namespace UnitTestNorthwindWeb
             //Arrage
             var testId = _accountController.ConfirmEmail("user", "1234");
             //Act
-            var result = _accountController.ConfirmEmail("user","1234");
+            var result = _accountController.ConfirmEmail("user", "1234");
 
             //Assert
-            
-            Assert.AreEqual(testId.Id+1, result.Id);
+
+            Assert.AreEqual(testId.Id + 1, result.Id);
 
         }
 
@@ -205,7 +216,7 @@ namespace UnitTestNorthwindWeb
         public void ReturnsForgotPasswordPostViewResult()
         {
             //Arrage
-            ForgotPasswordViewModel model =new ForgotPasswordViewModel();
+            ForgotPasswordViewModel model = new ForgotPasswordViewModel();
             model.Email = "asd@gmail.com";
             //Act
             var result = _accountController.ForgotPassword(model);
@@ -294,7 +305,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _accountController.SendCode("url",true);
+            var result = _accountController.SendCode("url", true);
 
             //Assert
 
@@ -326,7 +337,7 @@ namespace UnitTestNorthwindWeb
         public void ReturnsExternalLoginCallbackViewResult()
         {
             //Arrage
-            
+
             //Act
             var result = _accountController.ExternalLoginCallback("url");
 
@@ -345,7 +356,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
             ExternalLoginConfirmationViewModel model = new ExternalLoginConfirmationViewModel();
             //Act
-            var result = _accountController.ExternalLoginConfirmation(model,"url");
+            var result = _accountController.ExternalLoginConfirmation(model, "url");
 
             //Assert
 
@@ -360,8 +371,8 @@ namespace UnitTestNorthwindWeb
         public void ReturnsLogOffViewResult()
         {
             //Arrage
-            
-           //var login = _accountController.Login("url");
+
+            //var login = _accountController.Login("url");
             //Act
             var result = _accountController.LogOff();
 
@@ -378,7 +389,7 @@ namespace UnitTestNorthwindWeb
         public void ReturnsExternalLoginFailureViewResult()
         {
             //Arrage
-           
+
             //Act
             var result = _accountController.ExternalLoginFailure();
 
@@ -445,7 +456,7 @@ namespace UnitTestNorthwindWeb
         public void ReturnsDeleteViewResult()
         {
             //Arrage
-           
+
             //Act
             var result = _accountController.Delete("user");
 
@@ -458,19 +469,79 @@ namespace UnitTestNorthwindWeb
         ///<summary>
         /// Check what DeleteUser action returns.
         /// </summary>
-        //[TestMethod]
-        //public void ReturnsDeleteUserViewResult()
-        //{
-        //    //Arrage
-           
-        //    //Act
-        //    var result = _accountController.DeleteUser("user");
+        [TestMethod]
+        public void ReturnsDeleteUserViewResult()
+        {
+            //Arrage
+            HttpContext.Current = new HttpContext(
+            new HttpRequest("", "http://192.168.17.175:81/", ""),
+            new HttpResponse(new StringWriter())
+            );
 
-        //    //Assert
+            // User is logged in
+            HttpContext.Current.User = new GenericPrincipal(
+                new GenericIdentity("username"),
+                new string[0]
+                );
+
+            // User is logged out
+            HttpContext.Current.User = new GenericPrincipal(
+                new GenericIdentity(String.Empty),
+                new string[0]
+                );
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<ApplicationUserManager>(userStore.Object);
+            var authenticationManager = new Mock<IAuthenticationManager>();
+            var signInManager = new Mock<ApplicationSignInManager>(userManager.Object, authenticationManager.Object);
+
+            var accountController = new AccountController(userManager.Object, signInManager.Object);
+            //Act
+            var result = accountController.DeleteUser("admin");
+
+            //Assert
 
 
-        //    Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
-        //}
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+        }
+
+        ///<summary>
+        /// Check what RolesIndex action returns.
+        /// </summary>
+        [TestMethod]
+        public void ReturnsRolesIndexViewResult()
+        {
+            //Arrage
+            HttpContext.Current = new HttpContext(
+            new HttpRequest("", "http://192.168.17.175:81/", ""),
+            new HttpResponse(new StringWriter())
+            );
+
+            // User is logged in
+            HttpContext.Current.User = new GenericPrincipal(
+                new GenericIdentity("username"),
+                new string[0]
+                );
+
+            //// User is logged out
+            //HttpContext.Current.User = new GenericPrincipal(
+            //    new GenericIdentity(String.Empty),
+            //    new string[0]
+            //    );
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var userManager = new Mock<ApplicationUserManager>(userStore.Object);
+            var authenticationManager = new Mock<IAuthenticationManager>();
+            var signInManager = new Mock<ApplicationSignInManager>(userManager.Object, authenticationManager.Object);
+
+            var accountController = new AccountController(userManager.Object, signInManager.Object);
+
+            //Act
+            var result = accountController.RolesIndex();
+
+            //Assert
+
+
+            Assert.IsInstanceOfType(result, typeof(ActionResult));
+        }
         ///<summary>
         /// Check what CreateRole action returns.
         /// </summary>
@@ -478,7 +549,7 @@ namespace UnitTestNorthwindWeb
         public void ReturnsCreateRoleViewResult()
         {
             //Arrage
-            RegisterViewModel model = new RegisterViewModel();
+
             //Act
             var result = _accountController.CreateRole();
 
@@ -508,6 +579,24 @@ namespace UnitTestNorthwindWeb
             Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
         }
 
-  
+        ///<summary>
+        /// Check what JsonTableFill action returns.
+        /// </summary>
+        //[TestMethod]
+        //public void ReturnsJsonTableFillViewResult()
+        //{
+
+        //    //Arrage
+
+        //    //Act
+        //    var result = _accountController.JsonTableFill(1,1,2);
+
+        //    //Assert
+
+
+        //    Assert.IsInstanceOfType(result, typeof(System.Threading.Tasks.Task<ActionResult>));
+        //}
+
+
     }
 }
