@@ -3,7 +3,6 @@ function CartProducts(productId, quantity) {
     this.ID = productId;
     this.Quantity = quantity;
 }
-var isLogIn = 0;
 
 //work
 function exportLocalShopCartToServer() {
@@ -70,7 +69,7 @@ function ChangeQuantity(id, quantity) {
 
 function RemoveFromCart(id) {
 
-    if (!isLogIn) {
+    if (isLogedIn == 0) {
         var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
 
         var i = 0;

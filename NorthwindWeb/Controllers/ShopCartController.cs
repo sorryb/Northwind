@@ -102,6 +102,7 @@ namespace NorthwindWeb.Controllers
 
         public string Delete(int? id)
         {
+            //todo trebuie sa mai lucrez aici
             if (id != null && User.Identity.IsAuthenticated)
             {
                 db.ShopCart.Remove(db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == id).First());
@@ -122,20 +123,27 @@ namespace NorthwindWeb.Controllers
 
             const int TOTAL_ROWS = 999;
 
+            List<ShopCarts> asd = db.ShopCart.ToList();
+
             //init list of products in shopcart
             IQueryable<ProductShopCartDetailed> list;
             if (User.Identity.IsAuthenticated)
             {
-                list = db.ShopCart.Where(x => x.UserName == U).Select(x => new ProductShopCartDetailed { ID = x.ProductID, Quantity = x.Quantity });
+                list = from s in db.ShopCart
+                       join p in db.Products on s.ProductID equals p.ProductID
+                       join c in db.Categories on p.CategoryID equals c.CategoryID
+                       select new ProductShopCartDetailed
+                       {
+                           Category = c.CategoryName,
+                           ID = s.ProductID,
+                           ProductName = p.ProductName,
+                           Quantity = s.Quantity,
+                           UnitPrice = p.UnitPrice ?? 999999
+                       };
             }
             else
             {
                 list = JsonConvert.DeserializeObject<List<ProductShopCartDetailed>>(json).AsQueryable();
-            }
-            //add context
-            foreach (var product in list)
-            {
-                product.dbContext = db;
             }
 
 
