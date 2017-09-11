@@ -49,8 +49,7 @@ function RemoveFromCart(id) {
     productsInStorage.splice(i, 1);
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
     $("#ShopCartTable").DataTable().destroy();
-    CreateShopCartTable();
-    
+    CreateShopCartDataTable("ShopCartTable");
 }
 
 //count number of product in shopcart

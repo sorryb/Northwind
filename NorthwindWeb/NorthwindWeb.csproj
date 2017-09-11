@@ -276,10 +276,10 @@
     <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
     <Content Include="Content\DataTables\images\details_close.png" />
     <Content Include="Content\DataTables\images\details_open.png" />
-    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="images\sort_asc.png" />
     <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
-    <Content Include="Content\DataTables\images\sort_both.png" />
-    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="images\sort_both.png" />
+    <Content Include="images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\PagedList.css" />
@@ -501,6 +501,7 @@
     <Content Include="Views\Account\DeleteUser.cshtml" />
     <Content Include="Views\Order\HomeAdmin.cshtml" />
     <Content Include="Views\ShopCart\Index.cshtml" />
+    <Content Include="Views\ShopCart\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
