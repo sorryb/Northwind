@@ -33,7 +33,24 @@ function ChangeQuantity(id, quantity) {
     }
     productsInStorage[i].Quantity = quantity;
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
+}
 
+function RemoveFromCart(id) {
+    var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
+    
+    var i=0;
+    for (i = 0; i < productsInStorage.length; i++)
+    {
+        if (productsInStorage[i].ID == id)
+        {
+            break;
+        }
+    }
+    productsInStorage.splice(i, 1);
+    localStorage.setItem("cart", JSON.stringify(productsInStorage));
+    $("#ShopCartTable").DataTable().destroy();
+    CreateShopCartTable();
+    
 }
 
 //count number of product in shopcart
