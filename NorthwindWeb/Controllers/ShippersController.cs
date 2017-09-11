@@ -95,7 +95,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        ///Modify the selected shipper save it in database
+        ///Modify selected shipper and save it in database
         public async Task<ActionResult> Edit([Bind(Include = "ShipperID,CompanyName,Phone")] Shippers shippers)
         {
             if (ModelState.IsValid)
