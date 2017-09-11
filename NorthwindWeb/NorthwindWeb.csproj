@@ -501,7 +501,7 @@
     <Content Include="Views\Account\DeleteUser.cshtml" />
     <Content Include="Views\Order\HomeAdmin.cshtml" />
     <Content Include="Views\ShopCart\Index.cshtml" />
-    <Content Include="Views\ShopCart\View.cshtml" />
+    <Content Include="Views\ShopCart\ConfirmOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />

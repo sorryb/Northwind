@@ -33,6 +33,8 @@ function ChangeQuantity(id, quantity) {
     }
     productsInStorage[i].Quantity = quantity;
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
+    $("#ShopCartTable").DataTable().destroy();
+    CreateShopCartDataTable("ShopCartTable");
 }
 
 function RemoveFromCart(id) {

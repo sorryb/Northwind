@@ -25,6 +25,45 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Inserts a product in the ShopCart table.
+        /// </summary>
+        /// <param name="id">The id of the product</param>
+        /// <param name="quantity">The quantity of the product</param>
+        //[Authorize]
+        //public void Create(int id, int quantity)
+        //{
+        //    if(db.ShopCarts.)
+        //    ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductId = id, Quantity = quantity }
+        //    db.ShopCarts.Add(cart);
+        //    db.SaveChanges();
+            
+            
+        //}
+        
+        //private void Update(int id, int quantity)
+        //{
+        //    var product = db.ShopCarts.Where(x => x.ProductId = id);
+        //    product.Quantity = quantity;
+        //    db.SaveChanges();
+        //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             string json = Request.QueryString["json"] ?? "";
@@ -72,7 +111,7 @@ namespace NorthwindWeb.Controllers
             catch (NullReferenceException) { }
 
             //list of product that contain "search"
-            var list = cartProducts.Where(p => p.ProductName.Contains(search));
+            var list = cartProducts.Where(p => p.ProductName.ToLower().Contains(search.ToLower()));
 
             //order list
             switch (sortColumn)
