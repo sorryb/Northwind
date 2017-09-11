@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using NorthwindWeb.Models.ShopCart;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using Microsoft.AspNet.Identity;
 
 namespace NorthwindWeb.Controllers
 {
@@ -213,6 +214,28 @@ namespace NorthwindWeb.Controllers
 
 
 
+        [Authorize]
+        public ActionResult ConfirmCommand()
+        {
+            var shopCart = db.ShopCart;
+            string userName = User.Identity.GetUserName();
+            Orders order = new Orders();
+            foreach(var product in shopCart)
+            {
+                short quantity = 255;
+                if (product.UserName == userName)
+                {if((product.Quantity>=1)&& (product.Quantity <= 255)){ quantity = (short)product.Quantity; }
+                    order.Order_Details.Add(new Order_Details { ProductID = product.ProductID, Quantity = quantity });
+                    db.ShopCart.Remove(product);
+                }
+            }
+            int employeerId = db.Employees.Where(e => e.FirstName + e.LastName == userName).Select(e => e.EmployeeID).FirstOrDefault();
+            if (employeerId == 0) employeerId = 1;
+            order.EmployeeID = employeerId;
+            db.Orders.Add(order);
+            db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
 
         /// <summary>
         /// Dispose
