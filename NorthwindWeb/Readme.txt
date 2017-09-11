@@ -1,3 +1,4 @@
+#DataTable
 All you need to do to enable datatables is to create a table with the following structure:
 <table id="example" class="">
 	<thead>
@@ -51,3 +52,12 @@ The following classes affect the jquery script:
 	stripe
 
 A more detailed explanation can be found here https://datatables.net/manual/styling/classes.
+
+#WebConfig
+Reports configuration
+	ReportServer: the link to your report server
+	ReportServerDirectory: the folder in which your reports are stored on your report server
+	userId: the report server requires a username and a password to display it's reports
+	password: ...the password
+	If it doesn't work and you don't remember setting up a username and a password try the ones you use to log
+	in to windows.

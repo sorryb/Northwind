@@ -9,7 +9,6 @@
     }
 }
 function CreateShopCartDataTable(tableId) {
-
     $('#' + tableId + '').DataTable({
         "processing": true,
         "serverSide": true,
@@ -25,7 +24,6 @@ function CreateShopCartDataTable(tableId) {
         "ajax": {
             "type": "GET",
             "url": searchControllerPath() + "/JsonTableFill",
-
             "data": {
                 "json": localStorage.getItem("cart"),
             },
