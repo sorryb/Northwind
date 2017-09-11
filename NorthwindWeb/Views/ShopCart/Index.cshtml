@@ -1,0 +1,40 @@
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var isLogIn = @User.Identity.IsAuthenticated.ToString().ToLower();
+</script>
+<div class="container">
+<link href="~/css/cartTable.css" rel="stylesheet" />
+    <h2>Cos de Cumparaturi</h2><hr />
+
+    <table id="ShopCartTable" class="cell-border hover order-column coloronwhite">
+        <thead>
+            <tr>
+                <th>
+                    Nume Produs
+                </th>
+                <th>
+                    Cantitate
+                </th>
+                <th>
+                    Pret unitar
+                </th>
+                <th>
+                    Pret total
+                </th>
+                <th>
+                    Remove
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+
+    </table>
+    <br />
+    @Html.ActionLink("Trimite Comanda", "ConfirmCommand", "ShopCart", null, new { @class = "btn btn-default" })
+
+</div>

@@ -4,12 +4,14 @@ namespace NorthwindWeb.Models
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using NorthwindWeb.Context;
 
     public partial class NorthwindModel : DbContext
     {
         public NorthwindModel()
             : base("name=NwModel")
         {
+            Database.SetInitializer(new NorthwindDatabaseInitializer());
         }
 
         public virtual DbSet<Categories> Categories { get; set; }
@@ -24,6 +26,7 @@ namespace NorthwindWeb.Models
         public virtual DbSet<Shippers> Shippers { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
+        public virtual DbSet<ShopCarts> ShopCart { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -102,6 +105,19 @@ namespace NorthwindWeb.Models
             modelBuilder.Entity<Persons>()
                 .Property(e => e.FirstName)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<ShopCarts>()
+                .HasRequired(a => a.Products)
+                .WithMany()
+                .HasForeignKey(a => a.ProductID);
+
+            modelBuilder.Entity<ShopCarts>()
+                .Property(e => e.UserName)
+                .IsRequired();
+
+            modelBuilder.Entity<ShopCarts>()
+                .Property(e => e.Quantity)
+                .IsRequired();
         }
     }
 }

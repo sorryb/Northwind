@@ -193,6 +193,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context\ApplicationDataContext.cs" />
+    <Compile Include="Context\NorthwindDatabaseInitializer.cs" />
     <Compile Include="Context\IdentityDatabaseInitializer.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\ShippersController.cs" />
+    <Compile Include="Controllers\ShopCartController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\TerritoriesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -237,6 +239,9 @@
     <Compile Include="Models\ServerClientCommunication\RegionData.cs" />
     <Compile Include="Models\ServerClientCommunication\ShipperData.cs" />
     <Compile Include="Models\Shippers.cs" />
+    <Compile Include="Models\ShopCarts.cs" />
+    <Compile Include="Models\ShopCart\ProductShopCart.cs" />
+    <Compile Include="Models\ShopCart\ProductShopResponse.cs" />
     <Compile Include="Models\Suppliers.cs" />
     <Compile Include="Models\Territories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -272,10 +277,10 @@
     <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
     <Content Include="Content\DataTables\images\details_close.png" />
     <Content Include="Content\DataTables\images\details_open.png" />
-    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="images\sort_asc.png" />
     <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
-    <Content Include="Content\DataTables\images\sort_both.png" />
-    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="images\sort_both.png" />
+    <Content Include="images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\PagedList.css" />
@@ -283,6 +288,7 @@
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\cartTable.css" />
     <Content Include="css\Dashboard.css" />
     <Content Include="css\dist\sb-admin-2.css" />
     <Content Include="css\dist\sb-admin-2.min.css" />
@@ -443,6 +449,8 @@
     <Content Include="js\raphael\raphael.js" />
     <Content Include="js\raphael\raphael.min.js" />
     <Content Include="js\script.js" />
+    <Content Include="js\ShopCart.js" />
+    <Content Include="js\ShopCartDataTable.js" />
     <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\DataTables\dataTables.responsive.js" />
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
@@ -493,6 +501,8 @@
     <Content Include="Views\Dashboard\Search.cshtml" />
     <Content Include="Views\Account\DeleteUser.cshtml" />
     <Content Include="Views\Order\HomeAdmin.cshtml" />
+    <Content Include="Views\ShopCart\Index.cshtml" />
+    <Content Include="Views\ShopCart\ConfirmOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />

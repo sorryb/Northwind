@@ -260,7 +260,7 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.FirstName);
                     }
                     break;
-                case 2: // and so on
+                case 3: // and so on
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.City);
@@ -270,7 +270,7 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.City);
                     }
                     break;
-                case 3:
+                case 2:
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.Title);
@@ -280,7 +280,7 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.Title);
                     }
                     break;
-                case 4:
+                case 5:
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.HomePhone);
@@ -290,7 +290,7 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.HomePhone);
                     }
                     break;
-                case 5:
+                case 4:
                     if (sortDirection == "asc")
                     {
                         list = list.OrderBy(x => x.Country);

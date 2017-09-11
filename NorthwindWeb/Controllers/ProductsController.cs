@@ -3,6 +3,9 @@ using System.Web.Mvc;
 using PagedList;
 using NorthwindWeb.Models.ExceptionHandler;
 
+using System.Web.Script.Serialization;
+using System.Collections.Generic;
+
 namespace NorthwindWeb.Controllers
 {
     /// <summary>

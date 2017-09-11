@@ -7,6 +7,11 @@ img[class~=products] {
     max-height: 225px;
 }
 
+/*make li without point*/
+.liWithoutPoint {
+    list-style-type: none;
+}
+
 /*text large used in products view*/
 [class~=textlarge] {
     font-size: large;
@@ -148,4 +153,29 @@ iframe.fill {
 
 [class~=particularEmployees] {
     margin: 20px;
+}
+/*for the shopcart icon so the image won't be the same color as the background*/
+.shopcart-link {
+    color: white;
+}
+
+    .shopcart-link:hover {
+        color: white;
+    }
+
+.tablebackground {
+    background-color: #2b3e50;
+}
+
+/*no buttons on input type number*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.shopCartImage {
+    max-height: 15%;
+    max-width: 15%;
+    padding-right:5%;
 }

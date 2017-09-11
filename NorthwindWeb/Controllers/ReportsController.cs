@@ -20,6 +20,7 @@ namespace NorthwindWeb.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            
             string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
             string reportServerDir = ConfigurationManager.AppSettings.Get("ReportServerDirectory");
 

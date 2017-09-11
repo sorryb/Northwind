@@ -14,7 +14,7 @@
                         @using (Html.BeginForm("Products", "Products", new
                         {
                             category = ViewBag.title
-                        }, FormMethod.Post, htmlAttributes: new { id = "searchInput"}))
+                        }, FormMethod.Post, htmlAttributes: new { id = "searchInput" }))
                         {
                             <div class="input-group classusedjusthere">
                                 <input type="text" name="search" class="form-control searchinput" style="width:auto" placeholder="Search">
@@ -54,6 +54,18 @@
                         <li><strong>Furnizor: @Model.ElementAt(i).SuppliersName</strong></li>
                         <li><strong>In Stoc: @Model.ElementAt(i).Stock</strong></li>
                         <li><strong>In Comenzi: @Model.ElementAt(i).OnOrder</strong></li>
+                        <li class="liWithoutPoint">
+                            <div class="shopcartcontainer-products">
+                                <div class="align-middle img-circle roundedshop">
+                                    <a href="javascript:" onclick="AddToCart(new CartProducts(@Model.ElementAt(i).ProductID,1,'@Model.ElementAt(i).CategoryName'))" class="shopcart-link">
+                                        <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                    </a>
+                                    <div class="shopcart-container-text">
+                                        <span id="shopcart-productcount">+</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 @if (i + 1 < itemCount)
@@ -69,6 +81,18 @@
                             <li><strong>Furnizor: @Model.ElementAt(i + 1).SuppliersName</strong></li>
                             <li><strong>In Stoc: @Model.ElementAt(i + 1).Stock</strong></li>
                             <li><strong>In Comenzi: @Model.ElementAt(i + 1).OnOrder</strong></li>
+                            <li class="liWithoutPoint">
+                                <div class="shopcartcontainer-products">
+                                    <div class="align-middle img-circle roundedshop">
+                                        <a href="javascript:" onclick="AddToCart(new CartProducts(@Model.ElementAt(i+1).ProductID,1,'@Model.ElementAt(i+1).CategoryName'))" class="shopcart-link">
+                                            <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                                        </a>
+                                        <div class="shopcart-container-text">
+                                            <span id="shopcart-productcount">+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 }
