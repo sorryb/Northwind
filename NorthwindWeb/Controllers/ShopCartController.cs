@@ -26,27 +26,33 @@ namespace NorthwindWeb.Controllers
         }
 
         /// <summary>
-        /// Inserts a product in the ShopCart table.
+        /// Inserts or updates a product in the ShopCart table.
         /// </summary>
         /// <param name="id">The id of the product</param>
         /// <param name="quantity">The quantity of the product</param>
-        //[Authorize]
-        //public void Create(int id, int quantity)
-        //{
-        //    if(db.ShopCarts.)
-        //    ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductId = id, Quantity = quantity }
-        //    db.ShopCarts.Add(cart);
-        //    db.SaveChanges();
-            
-            
-        //}
-        
-        //private void Update(int id, int quantity)
-        //{
-        //    var product = db.ShopCarts.Where(x => x.ProductId = id);
-        //    product.Quantity = quantity;
-        //    db.SaveChanges();
-        //}
+        [Authorize]
+        public void Create(int id, int quantity)
+        {
+            if (!(db.ShopCart.Where(x => x.ProductID == id).Any()))
+            {
+                ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductID = id, Quantity = quantity };
+                db.ShopCart.Add(cart);
+                db.SaveChanges();
+            }
+            else
+            {
+                Update(id, quantity);
+            }
+        }
+
+        private void Update(int id, int quantity)
+        {
+            var cart = db.ShopCart.Where(x => x.ProductID == id).FirstOrDefault();
+            cart.Quantity = quantity;
+            db.SaveChanges();
+        }
+
+
 
 
 
@@ -81,19 +87,11 @@ namespace NorthwindWeb.Controllers
 
             const int TOTAL_ROWS = 999;
 
-            var cartProducts =JsonConvert.DeserializeObject<List<ProductShopCartDetailed>>(json).AsQueryable();
-            foreach(var product in cartProducts)
+            var list =JsonConvert.DeserializeObject<List<ProductShopCartDetailed>>(json).AsQueryable();
+            foreach (var product in list)
             {
                 product.dbContext = db;
             }
-
-            string search = "";
-            try
-            {
-                search = Request.QueryString["search[value]"] ?? "";
-            }
-            catch (NullReferenceException) { }
-
 
             int sortColumn = -1;
             string sortDirection = "asc";
@@ -122,7 +120,6 @@ namespace NorthwindWeb.Controllers
             catch (NullReferenceException) { }
 
             //list of product that contain "search"
-            var list = cartProducts.Where(p => p.ProductName.ToLower().Contains(search.ToLower()));
 
             //order list
             switch (sortColumn)
@@ -181,6 +178,7 @@ namespace NorthwindWeb.Controllers
                 recordsTotal = db.Products.Count(),
                 data = list.Skip(start).Take(length).Select(p => new
                 {
+                    Category=p.Category,
                     ID = p.ID,
                     ProductName = p.ProductName,
                     Quantity = p.Quantity,
