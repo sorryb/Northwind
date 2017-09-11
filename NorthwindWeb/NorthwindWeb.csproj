@@ -239,6 +239,7 @@
     <Compile Include="Models\ServerClientCommunication\RegionData.cs" />
     <Compile Include="Models\ServerClientCommunication\ShipperData.cs" />
     <Compile Include="Models\Shippers.cs" />
+    <Compile Include="Models\ShopCarts.cs" />
     <Compile Include="Models\ShopCart\ProductShopCart.cs" />
     <Compile Include="Models\ShopCart\ProductShopResponse.cs" />
     <Compile Include="Models\Suppliers.cs" />
