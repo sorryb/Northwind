@@ -32,7 +32,7 @@ namespace NorthwindWeb.Context
             //configuration
             string path = System.Configuration.ConfigurationManager.AppSettings["JsonDataInitializationPath"];
             bool romanianTerritories = System.Configuration.ConfigurationManager.AppSettings["RomanianTerritoriesRegions"].Equals("true");
-            bool testDatabaseValues = System.Configuration.ConfigurationManager.AppSettings["TestDatabaseValues"].Equals("true");
+            bool testDatabaseValues = System.Configuration.ConfigurationManager.AppSettings["FillDatabaseWithTestData"].Equals("true");
 
             //insert into database
             if (romanianTerritories || testDatabaseValues)
