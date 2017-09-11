@@ -1,3 +1,4 @@
+#DataTable
 All you need to do to enable datatables is to create a table with the following structure:
 <table id="example" class="">
 	<thead>
@@ -51,3 +52,7 @@ The following classes affect the jquery script:
 	stripe
 
 A more detailed explanation can be found here https://datatables.net/manual/styling/classes.
+
+#WebConfig
+
+

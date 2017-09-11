@@ -36,7 +36,7 @@ function CreateShopCartDataTable(tableId) {
                         item.Image = '<img src="~/images/' + item.Category + '/' + item.ID + '.jpg"/>';
                         item.Remove = '<a href="javascript:" onclick="RemoveFromCart(' + item.ID + ')" /> <i class="fa fa-remove"></i></a >';
                         item.TotalPrice = item.UnitPrice * item.Quantity;
-                        item.Quantity = '<input type="number" min="1" value=' + item.Quantity + ' onblur="ChangeQuantity(' + item.ID + ',value)"/> ';
+                        item.Quantity = '<input type="number" min="1" value=' + item.Quantity + ' onchange="ChangeQuantity(' + item.ID + ',value)"/> ';
                     })
                     return json.data;
                 },

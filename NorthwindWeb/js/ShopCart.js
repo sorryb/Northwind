@@ -7,7 +7,6 @@ var isLogIn = 0;
 
 function exportLocalShopCartToServer() {
     if (isLogIn == 0 && localStorage.getItem("cart") != null && localStorage.getItem("cart") != "") {
-            alert("i`m here");
         $.ajax({
             url: window.location.host + "/ImportFromLocal?json="
         }).done(function (data) {
@@ -58,10 +57,8 @@ function ChangeQuantity(id, quantity) {
     }
     productsInStorage[i].Quantity = quantity;
     localStorage.setItem("cart", JSON.stringify(productsInStorage));
-    var rowColumns = $(this).parent().parent().children();
-    rowColumns[3].innerHTML = rowColumns[1].firstChild.nodeValue;
-    //$("#ShopCartTable").DataTable().destroy();
-    //CreateShopCartDataTable("ShopCartTable");
+    $("#ShopCartTable").DataTable().destroy();
+    CreateShopCartDataTable("ShopCartTable");
 }
 
 function RemoveFromCart(id) {

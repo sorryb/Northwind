@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using System.IO;
 using System.Configuration;
 using HtmlAgilityPack;
 using System.Linq;
 using System.Net;
-using Microsoft.Reporting.WebForms.Internal.Soap.ReportingServices2005.Execution;
-using System;
+
+
 
 namespace NorthwindWeb.Controllers
 {
