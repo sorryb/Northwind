@@ -11,6 +11,7 @@ using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace NorthwindWeb.Controllers
 {
@@ -69,7 +70,7 @@ namespace NorthwindWeb.Controllers
         {
             try
             {
-                if(quantity <= 0 || quantity >= 255)
+                if (quantity <= 0 || quantity >= 255)
                 {
                     return "Error";
                 }
@@ -294,9 +295,11 @@ namespace NorthwindWeb.Controllers
         {
             var shopCart = db.ShopCart;
             string userName = User.Identity.GetUserName();
-            Orders order = new Orders();
             string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
-            if (String.IsNullOrEmpty(customerId)) return RedirectToAction("CreateCustomers", "ShopCart");
+            if (String.IsNullOrEmpty(customerId)) { db.Dispose(); return RedirectToAction("CreateCustomers", "ShopCart"); }            
+            Orders order = new Orders();
+            order.OrderID = db.Orders.Count() + 1;
+          
             order.CustomerID = customerId;
             order.OrderDate = DateTime.Now;
             foreach (var product in shopCart)
@@ -310,24 +313,22 @@ namespace NorthwindWeb.Controllers
                     }
                     var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
 
-                    Order_Details orderDetail = new Order_Details { ProductID = product.ProductID, Quantity = quantity, UnitPrice = productdetails.UnitPrice, Discount = productdetails.Discount };
-                    order.Order_Details.Add(orderDetail);
-                    db.Order_Details.Add(orderDetail);
-
-                    order.Order_Details.Add(new Order_Details
-                    {
+                    Order_Details orderDetail = new Order_Details {
                         ProductID = product.ProductID,
                         Quantity = quantity,
                         UnitPrice = productdetails.UnitPrice,
                         Discount = productdetails.Discount,
-                        OrderID = order.OrderID,
-                        Order = order
-                    });
+                        OrderID =order.OrderID
+                    };
+                    order.Order_Details.Add(orderDetail);
+                    db.Order_Details.Add(orderDetail);
+
+                   
 
                     db.ShopCart.Remove(product);
                 }
             }
-            
+
             db.Orders.Add(order);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
@@ -338,7 +339,7 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <returns>Create view.</returns>
         // GET: Customers/Create
-       
+
         public ActionResult CreateCustomers()
         {
             return View();
@@ -357,28 +358,34 @@ namespace NorthwindWeb.Controllers
         [Authorize]
         public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers)
         {
-            
-            if (String.IsNullOrEmpty(customers.Address))
+            try
             {
-                Customers custom = new Customers();
-                custom.CustomerID = User.Identity.GetUserName().Substring(0,4);
-                custom.CompanyName =  String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName;
-                custom.ContactName = User.Identity.GetUserName();
-                custom.ContactTitle = customers.ContactTitle;
-                custom.Address = customers.Address;
-                custom.City = customers.City;
-                custom.Region = customers.Region;
-                custom.PostalCode = customers.PostalCode;
-                custom.Country = customers.Country;
-                custom.Phone = customers.Phone;
-                custom.Fax = customers.Fax;
 
-
-                db.Customers.Add(custom);
-                await db.SaveChangesAsync();
-                return RedirectToAction("ConfirmCommand");
+                if (!String.IsNullOrEmpty(customers.Address) && !String.IsNullOrEmpty(customers.Phone))
+                {
+                    Customers custom = new Customers();
+                    custom.CustomerID = User.Identity.GetUserName().Substring(0, 4);
+                    custom.CompanyName = String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName;
+                    custom.ContactName = User.Identity.GetUserName();
+                    custom.ContactTitle = customers.ContactTitle;
+                    custom.Address = customers.Address;
+                    custom.City = customers.City;
+                    custom.Region = customers.Region;
+                    custom.PostalCode = customers.PostalCode;
+                    custom.Country = customers.Country;
+                    custom.Phone = customers.Phone;
+                    custom.Fax = customers.Fax;
+                    db.Customers.Add(custom);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("ConfirmCommand");
+                }
             }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
 
+            }
             return View(customers);
         }
 
