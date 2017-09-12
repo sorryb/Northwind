@@ -30,17 +30,47 @@ namespace NorthwindWeb.Models.ShopCart
         /// <summary>
         /// Get category of this product
         /// </summary>
-        public string ProductName { get; set; }
+        public string ProductName
+        {
+            get
+            {
+                return (new NorthwindModel()).Products.Find(ID).ProductName;
+            }
+            set
+            {
+
+            }
+        }
 
         /// <summary>
         /// get unit price of this product
         /// </summary>
-        public decimal UnitPrice { get; set; }
+        public decimal UnitPrice
+        {
+            get
+            {
+                return (new NorthwindModel()).Products.Find(ID).UnitPrice ?? 99999999;
+            }
+            set
+            {
+
+            }
+        }
 
         /// <summary>
         /// get the category of this product
         /// </summary>
-        public string Category { get; set; }
+        public string Category
+        {
+            get
+            {
+                return (new NorthwindModel()).Products.Find(ID).Category.CategoryName;
+            }
+            set
+            {
+
+            }
+        }
 
     }
 }

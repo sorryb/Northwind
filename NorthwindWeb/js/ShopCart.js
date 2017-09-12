@@ -17,7 +17,6 @@ function exportLocalShopCartToServer() {
         })
             .done(function () {
                 localStorage.setItem("cart", "");
-                alert("succes trebuie sters");
             })
             .fail(function () {
                 alert("A aparut o eroare la trimiterea listei de produse locale catre server");
@@ -27,7 +26,12 @@ function exportLocalShopCartToServer() {
 
 
 $("document").ready(function () {
-    exportLocalShopCartToServer();
+    if (isLogedIn)
+        if (getLocalCartCount()) {
+            var sendToServer = confirm("Aveti produse in shopcart, doriti sa le adaugam la cele din baza de date?")
+            if (sendToServer)
+                exportLocalShopCartToServer();
+        }
     UpdateShop();
 
 })
@@ -102,13 +106,27 @@ function RemoveFromCart(id) {
 }
 
 //count number of product in shopcart
-function getCartCount() {
-    //if is loged maybe we return a variable, or we return a json from server and when we update it send it back to server
-    return (localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : new Array().length);
+function getLocalCartCount() {
+    
+        return (localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : new Array().length);
+}
+//todo this
+function getServerCartCount() {
+    if (isLogedIn==1) {
+        $.ajax({
+            url: "http://" + window.location.host + "/ShopCart/GetCartCount",
+            "dataType": "json",
+        }).done(function () {
+            return 1;
+            }).fail(function () {
+                var a = 1;
+            })
+
+    }
 }
 
 //get array of products
-function getCartProducts() {
+function getLocalCartProducts() {
     //also we need to see how we manage this
     return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
 }
@@ -152,5 +170,8 @@ function getCartProducts() {
 */
 
 function UpdateShop() {
-    $("#shopcart-productcount").text(getCartCount());
+    if (isLogedIn)
+        $("#shopcart-productcount").text(getLocalCartCount());
+    else
+        $("#shopcart-productcount").text(getServerCartCount());
 }

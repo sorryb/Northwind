@@ -65,8 +65,8 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Import data from local storage when the user will log on
         /// </summary>
-        /// <param name="json">data will bbe parse as a json string</param>
-        /// <returns></returns>
+        /// <param name="json">data will be parsed as a json string</param>
+        /// <returns>"{}" on success, "Error" on fail</returns>
         public string ImportFromLocal(string json = "")
         {
             var shopCartProducts = JsonConvert.DeserializeObject<List<ProductShopCart>>(json).AsQueryable();
@@ -80,6 +80,7 @@ namespace NorthwindWeb.Controllers
                         if (db.ShopCart.Any(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID))
                         {
                             db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity = db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity + 1;
+                            //First() da exceptie daca nu gaseste nimic, FirstOrDefault() da null
                         }
                         else
                         {
@@ -106,6 +107,8 @@ namespace NorthwindWeb.Controllers
             if (id != null && User.Identity.IsAuthenticated)
             {
                 db.ShopCart.Remove(db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == id).First());
+                db.SaveChanges();
+                //La fel
                 return "Succes";
             }
             else
@@ -121,9 +124,10 @@ namespace NorthwindWeb.Controllers
             string json = Request.QueryString["json"] ?? "";
             
 
+
             const int TOTAL_ROWS = 999;
 
-            List<ShopCarts> asd = db.ShopCart.ToList();
+            
 
             //init list of products in shopcart
             IQueryable<ProductShopCartDetailed> list;
@@ -143,7 +147,10 @@ namespace NorthwindWeb.Controllers
             }
             else
             {
-                list = JsonConvert.DeserializeObject<List<ProductShopCartDetailed>>(json).AsQueryable();
+                if (json != "")
+                    list = JsonConvert.DeserializeObject<List<ProductShopCartDetailed>>(json).AsQueryable();
+                else
+                    list = new List<ProductShopCartDetailed>().AsQueryable();
             }
 
 
@@ -225,7 +232,7 @@ namespace NorthwindWeb.Controllers
 
 
 
-            //objet that whill be sent to client
+            //object that whill be sent to client
             JsonDataTableObject dataTableData = new JsonDataTableObject()
             {
                 draw = draw,
@@ -243,7 +250,12 @@ namespace NorthwindWeb.Controllers
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
-
+        public string GetCartCount()
+        {
+            if (User.Identity.IsAuthenticated)
+                return db.ShopCart.Where(x => x.UserName == User.Identity.Name).Count().ToString();
+            return "{}";
+        }
 
 
         [Authorize]
@@ -256,7 +268,11 @@ namespace NorthwindWeb.Controllers
             {
                 short quantity = 255;
                 if (product.UserName == userName)
-                {if((product.Quantity>=1)&& (product.Quantity <= 255)){ quantity = (short)product.Quantity; }
+                {
+                    if ((product.Quantity>=1)&& (product.Quantity <= 255))
+                    {
+                        quantity = (short)product.Quantity;
+                    }
                     order.Order_Details.Add(new Order_Details { ProductID = product.ProductID, Quantity = quantity });
                     db.ShopCart.Remove(product);
                 }
