@@ -10,6 +10,7 @@ using NorthwindWeb.Models.ShopCart;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Microsoft.AspNet.Identity;
+using System.Threading.Tasks;
 
 namespace NorthwindWeb.Controllers
 {
@@ -294,6 +295,9 @@ namespace NorthwindWeb.Controllers
             var shopCart = db.ShopCart;
             string userName = User.Identity.GetUserName();
             Orders order = new Orders();
+            string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
+            if (String.IsNullOrEmpty(customerId)) return RedirectToAction("CreateCustomers", "ShopCart");
+            order.CustomerID = customerId;
             order.OrderDate = DateTime.Now;
             foreach (var product in shopCart)
             {
@@ -305,6 +309,11 @@ namespace NorthwindWeb.Controllers
                         quantity = (short)product.Quantity;
                     }
                     var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
+
+                    Order_Details orderDetail = new Order_Details { ProductID = product.ProductID, Quantity = quantity, UnitPrice = productdetails.UnitPrice, Discount = productdetails.Discount };
+                    order.Order_Details.Add(orderDetail);
+                    db.Order_Details.Add(orderDetail);
+
                     order.Order_Details.Add(new Order_Details
                     {
                         ProductID = product.ProductID,
@@ -314,15 +323,63 @@ namespace NorthwindWeb.Controllers
                         OrderID = order.OrderID,
                         Order = order
                     });
+
                     db.ShopCart.Remove(product);
                 }
             }
-            int employeerId = db.Employees.Where(e => e.FirstName + e.LastName == userName).Select(e => e.EmployeeID).FirstOrDefault();
-            if (employeerId == 0) employeerId = 1;
-            order.EmployeeID = employeerId;
+            
             db.Orders.Add(order);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
+        }
+
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new customer.
+        /// </summary>
+        /// <returns>Create view.</returns>
+        // GET: Customers/Create
+       
+        public ActionResult CreateCustomers()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Inserts an customer into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="customers">The customer entity to be inserted</param>
+        /// <returns>If successful returns customers index view, else goes back to form.</returns>
+        // POST: Customers/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                Customers custom = new Customers();
+                custom.CustomerID = User.Identity.GetUserName().Substring(0,4);
+                custom.CompanyName = customers.CompanyName;
+                custom.ContactName = User.Identity.GetUserName();
+                custom.ContactTitle = customers.ContactTitle;
+                custom.Address = customers.Address;
+                custom.City = customers.City;
+                custom.Region = customers.Region;
+                custom.PostalCode = customers.PostalCode;
+                custom.Country = customers.Country;
+                custom.Phone = customers.Phone;
+                custom.Fax = customers.Fax;
+
+
+                db.Customers.Add(custom);
+                await db.SaveChangesAsync();
+                return RedirectToAction("ConfirmCommand");
+            }
+
+            return View(customers);
         }
 
         /// <summary>
