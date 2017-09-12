@@ -361,24 +361,36 @@ namespace NorthwindWeb.Controllers
             try
             {
 
-                if (!String.IsNullOrEmpty(customers.Address) && !String.IsNullOrEmpty(customers.Phone))
+                if (!String.IsNullOrEmpty(customers.Address))
                 {
-                    Customers custom = new Customers();
-                    custom.CustomerID = User.Identity.GetUserName().Substring(0, 4);
-                    custom.CompanyName = String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName;
-                    custom.ContactName = User.Identity.GetUserName();
-                    custom.ContactTitle = customers.ContactTitle;
-                    custom.Address = customers.Address;
-                    custom.City = customers.City;
-                    custom.Region = customers.Region;
-                    custom.PostalCode = customers.PostalCode;
-                    custom.Country = customers.Country;
-                    custom.Phone = customers.Phone;
-                    custom.Fax = customers.Fax;
-                    db.Customers.Add(custom);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("ConfirmCommand");
+                    if (!String.IsNullOrEmpty(customers.Phone))
+                    {
+                        Customers custom = new Customers();
+                        custom.CustomerID = User.Identity.GetUserName().Substring(0, 4);
+                        custom.CompanyName = String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName;
+                        custom.ContactName = User.Identity.GetUserName();
+                        custom.ContactTitle = customers.ContactTitle;
+                        custom.Address = customers.Address;
+                        custom.City = customers.City;
+                        custom.Region = customers.Region;
+                        custom.PostalCode = customers.PostalCode;
+                        custom.Country = customers.Country;
+                        custom.Phone = customers.Phone;
+                        custom.Fax = customers.Fax;
+                        db.Customers.Add(custom);
+                        await db.SaveChangesAsync();
+                        return RedirectToAction("ConfirmCommand");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Introduceti numarul de telefon", "");
+                    }
                 }
+                else
+                {
+                    ModelState.AddModelError("Introduceti adresa", "");
+                }
+                
             }
             catch (DataException /* dex */)
             {
