@@ -21,22 +21,33 @@ using NorthwindWeb.Models.ServerClientCommunication;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// controller for users and roles
+    /// </summary>
     [Authorize]
     public class AccountController : Controller, IJsonTableFillServerSide
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        /// <summary>
+        ///  constructor with managed empty
+        /// </summary>
         public AccountController()
         {
         }
-
+        /// <summary>
+        /// constructor with managed set
+        /// </summary>
+        /// <param name="userManager">User manager</param>
+        /// <param name="signInManager">sign in manager</param>
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
+        /// <summary>
+        ///  sign in manager
+        /// </summary>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -48,7 +59,9 @@ namespace NorthwindWeb.Controllers
                 _signInManager = value;
             }
         }
-
+        /// <summary>
+        /// User manager
+        /// </summary>
         public ApplicationUserManager UserManager
         {
             get
@@ -62,8 +75,11 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        //
-        // GET: /Account/Login
+        /// <summary>
+        /// Login result
+        /// </summary>
+        /// <param name="returnUrl">redirect to this action</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -72,8 +88,12 @@ namespace NorthwindWeb.Controllers
         }
 
 
-        //
-        // POST: /Account/Login
+        /// <summary>
+        /// Login user
+        /// </summary>
+        /// <param name="model">username, passwoard</param>
+        /// <param name="returnUrl"> redirect to this action</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -102,8 +122,13 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        //
-        // GET: /Account/VerifyCode
+        /// <summary>
+        /// send data to verify
+        /// </summary>
+        /// <param name="provider">Provider</param>
+        /// <param name="returnUrl">redirect to this action</param>
+        /// <param name="rememberMe"> save passwoard or not</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
@@ -115,8 +140,11 @@ namespace NorthwindWeb.Controllers
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        //
-        // POST: /Account/VerifyCode
+        /// <summary>
+        /// Verify if date is corect
+        /// </summary>
+        /// <param name="model">provider, code result, email, return url, save passwoard</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -145,16 +173,21 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
+        /// <summary>
+        /// send data to create new user
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
 
-        //
-        // POST: /Account/Register
+        /// <summary>
+        /// create a new user
+        /// </summary>
+        /// <param name="model">data for new user</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -183,8 +216,12 @@ namespace NorthwindWeb.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ConfirmEmail
+        /// <summary>
+        /// Confirm email
+        /// </summary>
+        /// <param name="userId">Curent user id</param>
+        /// <param name="code">validation email code</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
@@ -196,16 +233,21 @@ namespace NorthwindWeb.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
-        // GET: /Account/ForgotPassword
+        /// <summary>
+        /// announce that you forgot your password
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Account/ForgotPassword
+        /// <summary>
+        /// Forgot Password
+        /// </summary>
+        /// <param name="model">Email to send code to reset</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -232,16 +274,22 @@ namespace NorthwindWeb.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Account/ForgotPasswordConfirmation
+ 
+        /// <summary>
+        /// confirm password Forgot
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        //
-        // GET: /Account/ResetPassword
+        /// <summary>
+        /// result reset password
+        /// </summary>
+        /// <param name="code">code you received for reset</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
@@ -250,6 +298,11 @@ namespace NorthwindWeb.Controllers
 
         //
         // POST: /Account/ResetPassword
+        /// <summary>
+        /// reset password
+        /// </summary>
+        /// <param name="model">Email, password, confirm password, result</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -273,9 +326,11 @@ namespace NorthwindWeb.Controllers
             AddErrors(result);
             return View();
         }
-
-        //
-        // GET: /Account/ResetPasswordConfirmation
+        /// <summary>
+        /// confirm password reset
+        /// </summary>
+        /// <returns></returns>
+        
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
@@ -293,8 +348,13 @@ namespace NorthwindWeb.Controllers
         //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         //}
 
-        //
-        // GET: /Account/SendCode
+       
+        /// <summary>
+        /// get sendcode
+        /// </summary>
+        /// <param name="returnUrl">redirect to this action</param>
+        /// <param name="rememberMe">if you want to save your password</param>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -307,7 +367,11 @@ namespace NorthwindWeb.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
-
+        /// <summary>
+        /// code with the data of a new user
+        /// </summary>
+        /// <param name="model">data of a new user</param>
+        /// <returns></returns>
         //
         // POST: /Account/SendCode
         [HttpPost]
@@ -327,7 +391,11 @@ namespace NorthwindWeb.Controllers
             }
             return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
-
+        /// <summary>
+        /// result for external logging
+        /// </summary>
+        /// <param name="returnUrl">redirect to this action</param>
+        /// <returns></returns>
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
@@ -357,7 +425,12 @@ namespace NorthwindWeb.Controllers
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
             }
         }
-
+        /// <summary>
+        /// ExternalLoginConfirmation
+        /// </summary>
+        /// <param name="model">data for external logging</param>
+        /// <param name="returnUrl">redirect to this action</param>
+        /// <returns></returns>
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
@@ -395,9 +468,10 @@ namespace NorthwindWeb.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
-        //
-        // POST: /Account/LogOff
+        /// <summary>
+        /// LogOff
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
@@ -408,15 +482,21 @@ namespace NorthwindWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
-        // GET: /Account/ExternalLoginFailure
+      
+        /// <summary>
+        /// ExternalLoginFailure
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
         //-------------------------------------------------------------------------manage users account and roles-----------------------------------------
-
+        /// <summary>
+        /// Index of account
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = "Admins")]
         public ActionResult Index()
         {
@@ -424,11 +504,12 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
-        // **************************************
-        // URL: /Account/ChangeUser
-        // **************************************
-        //data to change user
-        [Authorize]
+  
+        /// <summary>
+        /// data to change user
+        /// </summary>
+        /// <param name="userName">identify the user with this username</param>
+        /// <returns></returns>
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> ChangeUser(string userName)
         {
@@ -443,7 +524,11 @@ namespace NorthwindWeb.Controllers
 
             return View(model);
         }
-        //Change User
+        /// <summary>
+        /// Change User
+        /// </summary>
+        /// <param name="model">User for change</param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> ChangeUser(RegisterViewModel model)
@@ -473,6 +558,11 @@ namespace NorthwindWeb.Controllers
 
             return View(model);
         }
+        /// <summary>
+        /// delete user
+        /// </summary>
+        /// <param name="userName">deletes the user with this username</param>
+        /// <returns></returns>
         //delete user
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string userName)
@@ -494,7 +584,11 @@ namespace NorthwindWeb.Controllers
                 return RedirectToAction("Index");
 
         }
-        //view user to delete
+        /// <summary>
+        /// view user to delete
+        /// </summary>
+        /// <param name="userName">Curent username</param>
+        /// <returns></returns>
         [Authorize(Roles = "Admins")]
         public ActionResult DeleteUser(string userName)
         {
@@ -511,7 +605,9 @@ namespace NorthwindWeb.Controllers
             }
             return View(userDelete);
         }
-        //View list of role
+        /// <summary>
+        /// View list of role
+        /// </summary> 
         [Authorize(Roles = "Admins")]
         public ActionResult RolesIndex()
         {
@@ -531,7 +627,9 @@ namespace NorthwindWeb.Controllers
             return View("RolesIndex", roleInfoViewModel.AsQueryable());
 
         }
-
+        /// <summary>
+        /// name a new role
+        /// </summary> 
         [Authorize]
         public ActionResult CreateRole()
         {
@@ -539,7 +637,9 @@ namespace NorthwindWeb.Controllers
         }
 
         #region No Role Creation Dinamicaly
-        //create a new role
+        /// <summary>
+        /// create a new role
+        /// </summary> 
         [Authorize]
         [HttpPost]
         public ActionResult CreateRole(RoleInfoViewModel roleInfo)
@@ -574,7 +674,9 @@ namespace NorthwindWeb.Controllers
                 return RedirectToAction("Index", "Home");
         }
         #endregion
-        //delete role
+        /// <summary>
+        /// delete role
+        /// </summary> 
         [Authorize]
         public ActionResult RoleDelete(string roleName)
         {
@@ -619,8 +721,9 @@ namespace NorthwindWeb.Controllers
                 throw new Exception("Nu puteti sterge roluri cu utilizatori alocati");
             }
         }
-
-        //user assingned to role
+        /// <summary>
+        /// user assingned to role
+        /// </summary> 
         public ActionResult UsersInRole(string roleName)
         {
             var context = new ApplicationDbContext();
@@ -646,7 +749,9 @@ namespace NorthwindWeb.Controllers
 
             return View(userInfoViewModel.AsQueryable());
         }
-        //select and additing user to role
+        /// <summary>
+        /// select and additing user to role
+        /// </summary> 
         [HttpPost]
         public ActionResult RoleMembership(RoleInfoViewModel roleInfo)
         {
@@ -663,8 +768,9 @@ namespace NorthwindWeb.Controllers
 
             return RoleMembership();
         }
-        //user in role
-        //[Authorize(Roles = "Admins")]
+        /// <summary>
+        /// user in role
+        /// </summary> 
         [HttpGet]
         public ActionResult RoleMembership()
         {
@@ -702,7 +808,9 @@ namespace NorthwindWeb.Controllers
 
             return View(new RoleInfoViewModel() { Name = roleName });
         }
-        //add user to role
+        /// <summary>
+        /// add user to role
+        /// </summary> 
         [Authorize(Roles = "Admins")]
         public ActionResult AddUsersToRole()
         {
@@ -745,8 +853,9 @@ namespace NorthwindWeb.Controllers
             ////return View();
             //return View("RoleMembership",new RoleInfoModel() { Name = roleName });
         }
-
-        //debunk the user from the role
+        /// <summary>
+        /// debunk the user from the role
+        /// </summary> 
         [HttpGet]
         [Authorize(Roles = "Admins")]
         public ActionResult DeleteFromRole()
@@ -775,20 +884,42 @@ namespace NorthwindWeb.Controllers
             return RedirectToAction("RoleMembership", new { name = roleName, roleName = roleName });
         }
 
-
+        /// <summary>
+        /// Message status
+        /// </summary> 
         public enum ManageMessageId
-        {
+        {    /// <summary>
+             /// Add Phone Success
+             /// </summary>
             AddPhoneSuccess,
+            /// <summary>
+            /// Change Password Success
+            /// </summary>
             ChangePasswordSuccess,
+            /// <summary>
+            /// Set Two Factor Success
+            /// </summary>
             SetTwoFactorSuccess,
+            /// <summary>
+            /// Set Password Success
+            /// </summary>
             SetPasswordSuccess,
+            /// <summary>
+            /// Remove Login Success
+            /// </summary>
             RemoveLoginSuccess,
+            /// <summary>
+            /// Remove Phone Success
+            /// </summary>
             RemovePhoneSuccess,
+            /// <summary>
+            /// Error
+            /// </summary>
             Error
         }
-        // Change users password
-        //
-        // GET: /Account/Manage
+        /// <summary>
+        /// Change users password
+        /// </summary> 
         [Authorize]
         public async Task<ActionResult> Manage(ManageMessageId? message)
         {
@@ -820,8 +951,9 @@ namespace NorthwindWeb.Controllers
             //    OtherLogins = otherLogins
             //});
         }
-
-        // Manage users password
+        /// <summary>
+        /// Manage users password
+        /// </summary> 
         [Authorize]
         [HttpPost]
         public async Task<ActionResult> Manage(ChangePasswordViewModel model)
@@ -870,7 +1002,9 @@ namespace NorthwindWeb.Controllers
 
 
 
-        //return a list of users to complete table
+        /// <summary>
+        /// Return a list of users to complete table
+        /// </summary>        
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
@@ -915,7 +1049,7 @@ namespace NorthwindWeb.Controllers
 
                 user.LastActiveDateTime = Convert.ToDateTime(String.Format("{0:g}", user.LastActiveDateTime));
                 user.LastActiveString = Convert.ToString(user.LastActiveDateTime);
-                user.IsLockedOut = user.IsLockedOut ? true : false;
+                //user.IsLockedOut = user.IsLockedOut ? true : false;
                 user.IsOnline = user.IsOnline ? true : false;
             }
             
@@ -930,9 +1064,9 @@ namespace NorthwindWeb.Controllers
             switch (sortColumn)
             {
                 case -1: //sort by first column
-                    goto FirstColumn;
-                case 1: //first column
-                    FirstColumn:
+                    goto Username;
+                case 2: //Username column
+                    Username:
                     if (sortDirection == "asc")
                     {
                       userInfoViewModel = userInfoViewModel.OrderBy(x => x.UserName).ToList();
@@ -942,7 +1076,7 @@ namespace NorthwindWeb.Controllers
                         userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.UserName).ToList();
                     }
                     break;
-                case 2: //second column
+                case 3: //Email column
                     if (sortDirection == "asc")
                     {
                         userInfoViewModel = userInfoViewModel.OrderBy(x => x.Email).ToList();
@@ -952,7 +1086,7 @@ namespace NorthwindWeb.Controllers
                         userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.Email).ToList();
                     }
                     break;
-                case 3: // and so on
+                case 4: // LastActiveDateTime column
                     if (sortDirection == "asc")
                     {
                         userInfoViewModel = userInfoViewModel.OrderBy(x => x.LastActiveDateTime).ToList();
@@ -962,17 +1096,17 @@ namespace NorthwindWeb.Controllers
                         userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.LastActiveDateTime).ToList();
                     }
                     break;
-                case 4:
-                    if (sortDirection == "asc")
-                    {
-                        userInfoViewModel = userInfoViewModel.OrderBy(x => x.IsLockedOut).ToList();
-                    }
-                    else
-                    {
-                        userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.IsLockedOut).ToList();
-                    }
-                    break;
-                case 5:
+                //case 4:
+                //    if (sortDirection == "asc")
+                //    {
+                //        userInfoViewModel = userInfoViewModel.OrderBy(x => x.IsLockedOut).ToList();
+                //    }
+                //    else
+                //    {
+                //        userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.IsLockedOut).ToList();
+                //    }
+                //    break;
+                case 5:// IsOnline column
                     if (sortDirection == "asc")
                     {
                         userInfoViewModel = userInfoViewModel.OrderBy(x => x.IsOnline).ToList();
@@ -999,14 +1133,16 @@ namespace NorthwindWeb.Controllers
                 userInfo.Email = itemUserInfoViewModel.Email;
                 userInfo.LastActiveDateTime = itemUserInfoViewModel.LastActiveDateTime;
                 userInfo.LastActiveString = itemUserInfoViewModel.LastActiveString;
-                userInfo.IsLockedOut = itemUserInfoViewModel.IsLockedOut;
+                //userInfo.IsLockedOut = itemUserInfoViewModel.IsLockedOut;
                 userInfo.IsOnline = itemUserInfoViewModel.IsOnline;
                 dataTableData.data.Add(userInfo);
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
-        //return a list a roles to complete table
+        /// <summary>
+        /// Return a list a roles to complete table
+        /// </summary>        
         public JsonResult JsonTableRolesFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
@@ -1087,7 +1223,9 @@ namespace NorthwindWeb.Controllers
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
-        //returns a list of users assigned to role
+        /// <summary>
+        /// Returns a list of users assigned to role
+        /// </summary>
         public JsonResult JsonTableMembershipFill(int draw, int start, int length)
         {
            
@@ -1235,6 +1373,9 @@ namespace NorthwindWeb.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
+        /// <summary>
+        ///Dispose connection
+        /// </summary>
         #endregion
         protected override void Dispose(bool disposing)
         {
@@ -1261,7 +1402,9 @@ namespace NorthwindWeb.Controllers
     /// Return a list of roles.
     /// </summary>
     public static class Extentions
-    {
+    {/// <summary>
+     /// List of roles.
+     /// </summary>
         public static List<string> Roles(this ClaimsIdentity identity)
         {
             return identity.Claims

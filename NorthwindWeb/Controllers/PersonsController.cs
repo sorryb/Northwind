@@ -18,13 +18,20 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
-        // GET: Persons
+        /// <summary>
+        /// Displays a page with all the persons in the database.
+        /// </summary>
+        /// <returns>Persons index view</returns>
         public ActionResult Index()
         {
             return View(db.Persons.ToList());
         }
 
-        // GET: Persons/Details/5
+        /// <summary>
+        /// Displays a page showing all the information about one person.
+        /// </summary>
+        /// <param name="id">The id of the person whose information to show</param>
+        /// <returns>Persons details view</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,20 +47,24 @@ namespace NorthwindWeb.Controllers
             return View(persons);
         }
 
-        // GET: Persons/Create
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new person.
+        /// </summary>
+        /// <returns>Create view.</returns>
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Persons/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Inserts a person into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="persons">The person entity to be inserted</param>
+        /// <returns>If successful returns persons index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        ///Introduce a new person in database through FORM from Contact
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons persons)
         {
             if (ModelState.IsValid)
@@ -66,7 +77,11 @@ namespace NorthwindWeb.Controllers
             return View(persons);
         }
 
-        // GET: Persons/Edit/5
+        /// <summary>
+        /// Returns the view containing the form necessary for editing an existing person.
+        /// </summary>
+        /// <param name="id">The id of the person that is going to be edited</param>
+        /// <returns>Persons edit view</returns>
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Edit(int? id)
         {
@@ -82,9 +97,11 @@ namespace NorthwindWeb.Controllers
             return View(persons);
         }
 
-        // POST: Persons/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Updates the database changing the fields of the personr whose id is equal to the id of the provided persons parameter to those of the parameter.
+        /// </summary>
+        /// <param name="shippers">The changed personr.</param>
+        /// <returns>Persons index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
@@ -99,7 +116,11 @@ namespace NorthwindWeb.Controllers
             return View(persons);
         }
 
-        // GET: Persons/Delete/5
+        /// <summary>
+        /// Displays a confirmation page for the following delete.
+        /// </summary>
+        /// <param name="id">The person that is going to be deleted.</param>
+        /// <returns>Delete view</returns>
         [Authorize(Roles = "Admins")]
         public ActionResult Delete(int? id)
         {
@@ -115,8 +136,11 @@ namespace NorthwindWeb.Controllers
             return View(persons);
         }
 
-        // POST: Persons/Delete/5
-        
+        /// <summary>
+        /// Deletes a person from the database.
+        /// </summary>
+        /// <param name="id">The id of the person that is going to be deleted</param>
+        /// <returns>Persons index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]

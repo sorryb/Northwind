@@ -271,7 +271,8 @@ $(document).ready(function () {
 
                         item.LastActiveDate = new Date(date);
                         item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
-                        item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/>Manage</a >';
+                        item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/><i>Manage</i></a >';
+                        item.Image = '<img src="/images/' + item.UserName + '.jpg" onerror="this.src=' + "'/images/default.png'" + '"  style= "width:60px;height:45px;" >';
                     })
 
                     return json.data;
@@ -279,10 +280,10 @@ $(document).ready(function () {
             },
             "columns": [
                 { 'data': 'Manage' },
+                { 'data': 'Image' },
                 { 'data': 'UserName' },
                 { 'data': 'Email' },
                 { 'data': 'LastActiveDate' },
-                { 'data': 'IsLockedOut' },
                 { 'data': 'IsOnline' },
                 { 'data': 'DeleteLink' }
             ]
