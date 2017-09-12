@@ -82,8 +82,7 @@ function AddToCart(productToAdd) {
 }
 
 function ChangeQuantity(id, quantity) {
-    if (quantity < 1 || quantity > 255)
-    {
+    if (quantity < 1 || quantity > 255) {
         $("#ShopCartTable").DataTable().destroy();
         CreateShopCartDataTable("ShopCartTable");
     }
