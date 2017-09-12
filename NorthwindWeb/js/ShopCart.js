@@ -32,6 +32,8 @@ $("document").ready(function () {
             if (sendToServer) {
                 exportLocalShopCartToServer();
             }
+            else
+                localStorage.setItem("cart", "");
         }
     UpdateShop();
 })
@@ -80,6 +82,7 @@ function AddToCart(productToAdd) {
 }
 
 function ChangeQuantity(id, quantity) {
+    //todo pe server
     var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
     var i = 0;
     for (; i < productsInStorage.length; i++) {
