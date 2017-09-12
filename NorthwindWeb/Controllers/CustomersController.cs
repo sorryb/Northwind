@@ -15,10 +15,10 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize]
     /// <summary>
     /// Customers Controller. For table Customers
     /// </summary>
+    [Authorize]    
     public class CustomersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
@@ -29,7 +29,6 @@ namespace NorthwindWeb.Controllers
         /// <param name="search">The search look to find something asked</param>
         /// <param name="page">Required for paged list to work</param>
         /// <returns>Customers index view</returns>
-        // GET: Customers
         public ActionResult Index(string search = "", int page = 1)
         {
             int pageSize = 15;
@@ -43,7 +42,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the customer whose information to show</param>
         /// <returns>Customers details view</returns>
-        // GET: Customers/Details/5
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
@@ -62,7 +60,6 @@ namespace NorthwindWeb.Controllers
         /// Returns the view containing the form neccesary for creating a new customer.
         /// </summary>
         /// <returns>Create view.</returns>
-        // GET: Customers/Create
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
@@ -74,9 +71,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="customers">The customer entity to be inserted</param>
         /// <returns>If successful returns customers index view, else goes back to form.</returns>
-        // POST: Customers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
@@ -97,7 +91,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the customer that is going to be edited</param>
         /// <returns>Customers edit view</returns>
-        // GET: Customers/Edit/5
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(string id)
         {
@@ -120,9 +113,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="customers">The changed customer.</param>
         /// <returns>Customers index view</returns>
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
@@ -142,7 +132,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The customer that is going to be deleted.</param>
         /// <returns>Delete view</returns>
-        // GET: Customers/Delete/5
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string id)
         {
@@ -163,14 +152,12 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the customer that is going to be deleted</param>
         /// <returns>Customers index view</returns>
-        // POST: Customers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
 
-            //var order = db.Orders.Any(o => o.CustomerID == id);
             try
             {
                 Customers customers = await db.Customers.FindAsync(id);
@@ -190,14 +177,7 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        
 
         /// <summary>
         /// Function used to control the dashboard datatables from the server
@@ -206,7 +186,6 @@ namespace NorthwindWeb.Controllers
         /// <param name="start"></param>
         /// <param name="length"></param>
         /// <returns>A JSON filtered customer list.</returns>
-        // GET: Customers by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int totalRows = 999;
@@ -231,11 +210,9 @@ namespace NorthwindWeb.Controllers
             {
                 if (Request.QueryString["order[0][column]"] != null)
                 {
-                    try
-                    {
+
                         sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-                    }
-                    catch (NullReferenceException e) { }
+
                 }
             }
             catch (NullReferenceException e) { }
@@ -244,11 +221,8 @@ namespace NorthwindWeb.Controllers
             {
                 if (Request.QueryString["order[0][dir]"] != null)
                 {
-                    try
-                    {
                         sortDirection = Request.QueryString["order[0][dir]"];
-                    }
-                    catch (NullReferenceException e) { }
+
                 }
             }
             catch (NullReferenceException e) { }
@@ -353,6 +327,15 @@ namespace NorthwindWeb.Controllers
             };
 
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
 

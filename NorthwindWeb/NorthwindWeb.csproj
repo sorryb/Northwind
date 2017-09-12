@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\NorthwindWeb.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -265,6 +266,9 @@
     <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
     <Content Include="Content\DataTables\images\details_close.png" />
     <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="css\CustomerStyle.css" />
+    <Content Include="images\northwind-sign.jpg" />
+    <Content Include="images\default.png" />
     <Content Include="images\sort_asc.png" />
     <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
     <Content Include="images\sort_both.png" />
@@ -310,7 +314,7 @@
     <Content Include="images\Accesorii\39.jpg" />
     <Content Include="images\Accesorii\40.jpg" />
     <Content Include="images\Accesorii\41.jpg" />
-    <Content Include="images\1.jpg" />
+    <Content Include="images\NicoletaDanciu.jpg" />
     <Content Include="images\alt2.png" />
     <Content Include="images\aple.png" />
     <Content Include="images\desc.jpg" />
@@ -325,7 +329,7 @@
     <Content Include="images\eBook Reader\7.jpg" />
     <Content Include="images\eBook Reader\8.jpg" />
     <Content Include="images\eBook Reader\9.jpg" />
-    <Content Include="images\2.jpg" />
+    <Content Include="images\AndreiFlorea.jpg" />
     <Content Include="images\Gadgeturi\63.jpg" />
     <Content Include="images\Gadgeturi\64.jpg" />
     <Content Include="images\Gadgeturi\65.jpg" />
@@ -353,8 +357,8 @@
     <Content Include="images\Home\logo-sony.jpg" />
     <Content Include="images\Home\Nokia.gif" />
     <Content Include="images\Home\samsung.jpg" />
-    <Content Include="images\3.jpg" />
-    <Content Include="images\5.jpg" />
+    <Content Include="images\IoanaLeca.jpg" />
+    <Content Include="images\StefanBucurescu.jpg" />
     <Content Include="images\Home\footer_logo.png" />
     <Content Include="images\Home\reduceri-telefoane-emag-it-mobile-days.jpg" />
     <Content Include="images\Home\smartwatch.jpg" />
@@ -404,7 +408,7 @@
     <Content Include="images\Smartphone\60.jpg" />
     <Content Include="images\Smartphone\50.jpg" />
     <Content Include="images\sony3.jpg" />
-    <Content Include="images\6.jpg" />
+    <Content Include="images\MihaiSurdu.jpg" />
     <Content Include="images\telefoane_clasice.jpg" />
     <Content Include="images\Clasice\17.jpg" />
     <Content Include="images\Clasice\20.jpg" />
@@ -420,7 +424,7 @@
     <Content Include="images\Clasice\21.jpg" />
     <Content Include="images\Clasice\13.jpg" />
     <Content Include="images\Clasice\15.jpg" />
-    <Content Include="images\4.jpg" />
+    <Content Include="images\MargaretaPescaru.jpg" />
     <Content Include="images\wpid-nokia-logo.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
