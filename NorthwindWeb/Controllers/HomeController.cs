@@ -11,8 +11,8 @@ namespace NorthwindWeb.Controllers
     public class HomeController : Controller
     {
 
-        NorthwindModel _northwindDatabase = new NorthwindModel();
-        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
+        private NorthwindModel _northwindDatabase = new NorthwindModel();
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
         /// <summary>
         /// First page in the site.
