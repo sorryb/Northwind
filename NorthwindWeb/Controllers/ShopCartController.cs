@@ -64,7 +64,26 @@ namespace NorthwindWeb.Controllers
 
 
 
-
+        public string UpdateQuantity(int id, int quantity)
+        {
+            try
+            {
+                if (db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name))
+                {
+                    db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).First().Quantity = quantity;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return "Error";
+                }
+                return "{}";
+            }
+            catch
+            {
+                return "Error";
+            }
+        }
 
 
 
