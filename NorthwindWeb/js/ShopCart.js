@@ -82,7 +82,11 @@ function AddToCart(productToAdd) {
 }
 
 function ChangeQuantity(id, quantity) {
-    if (quantity > 0 && quantity < 255) {
+    if (quantity < 1 || quantity > 255) {
+        $("#ShopCartTable").DataTable().destroy();
+        CreateShopCartDataTable("ShopCartTable");
+    }
+    else {
         if (isLogedIn == 0) {
             var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
             var i = 0;
@@ -113,10 +117,6 @@ function ChangeQuantity(id, quantity) {
                     alert("Ceva nu a mers bine");
                 });
         }
-    }
-    else {
-        $("#ShopCartTable").DataTable().destroy();
-        CreateShopCartDataTable("ShopCartTable");
     }
 }
 
