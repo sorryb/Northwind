@@ -20,14 +20,21 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
-        // GET: Categories
-        ///Enter in  Categories's details through CategoryName
+        /// <summary>
+        /// Displays a page with all the categories existing in the database.
+        /// </summary>
+        /// <param name="search">The search look to find something asked</param>
+        /// <returns>Categories index view</returns>
         public async Task<ActionResult> Index(string search = "")
         {
             return View(await db.Categories.Where(x=>x.CategoryName.Contains(search)).ToListAsync());
         }
 
-        // GET: Categories/Details/5
+        /// <summary>
+        /// Displays a page showing all the information about one category.
+        /// </summary>
+        /// <param name="id">The id of the category whose information to show</param>
+        /// <returns>Categories details view</returns>
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,21 +50,24 @@ namespace NorthwindWeb.Controllers
             return View(categories);
         }
 
-        // GET: Categories/Create
-        ///Enter in the page Create
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new category.
+        /// </summary>
+        /// <returns>Create view.</returns>
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Categories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Inserts a category into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="categories">The category entity to be inserted</param>
+        /// <returns>If successful returns categories index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        ///Create a new category which contain the next fields: CategoryID,CategoryName,Description and it will be saved in database
         public async Task<ActionResult> Create([Bind(Include = "CategoryID,CategoryName,Description")] Categories categories)
         {
             if (ModelState.IsValid)
@@ -70,9 +80,12 @@ namespace NorthwindWeb.Controllers
             return View(categories);
         }
 
-        // GET: Categories/Edit/5
+        /// <summary>
+        /// Returns the view containing the form necessary for editing an existing category.
+        /// </summary>
+        /// <param name="id">The id of the category that is going to be edited</param>
+        /// <returns>Categories edit view</returns>
         [Authorize(Roles = "Employees, Admins")]
-        ///Enter in the page Edit
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,13 +101,14 @@ namespace NorthwindWeb.Controllers
             return View(categories);
         }
 
-        // POST: Categories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Updates the database changing the fields of the category whose id is equal to the id of the provided category parameter to those of the parameter.
+        /// </summary>
+        /// <param name="categories">The changed category.</param>
+        /// <returns>Categories index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        ///Modify the selected category which contain the next fields: CategoryID,CategoryName,Description and it will be saved in database
         public async Task<ActionResult> Edit([Bind(Include = "CategoryID,CategoryName,Description")] Categories categories)
         {
             if (ModelState.IsValid)
@@ -106,16 +120,19 @@ namespace NorthwindWeb.Controllers
             return View(categories);
         }
 
-        // GET: Categories/Delete/5
+        /// <summary>
+        /// Displays a confirmation page for the following delete.
+        /// </summary>
+        /// <param name="id">The category that is going to be deleted.</param>
+        /// <returns>Delete view</returns>
         [Authorize(Roles = "Admins")]
-        ///Enter in the page Delete
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ///take details of Categories
+            //take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
             if (categories == null)
             {
@@ -124,14 +141,17 @@ namespace NorthwindWeb.Controllers
             return View(categories);
         }
 
-        // POST: Categories/Delete/5
+        /// <summary>
+        /// Deletes a category from the database. The category must not have products.
+        /// </summary>
+        /// <param name="id">The id of the category that is going to be deleted</param>
+        /// <returns>Categories index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
-        ///Delete the selected category 
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ///take details of Categories
+            //take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
 
             try
@@ -155,13 +175,16 @@ namespace NorthwindWeb.Controllers
 
 
 
-        // GET: Categories by Json
-        /// send back a JsonDataTableFill as json with all the information that wee need to populate datatable
+        /// <summary>
+        /// Function used to control the dashboard datatables local
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns>A JSON filtered categories list.</returns>
         public JsonResult JsonTableFill(string search = "")
         {
             var categories = db.Categories.Include(p=>p.Description).Where(x => x.CategoryName.Contains(search)).OrderBy(x => x.CategoryID);
 
-            ///Select what wee need in table
+            //Select what wee need in table
             return Json(
                categories.Select(x => new NorthwindWeb.Models.ServerClientCommunication.CategoriesData
                {

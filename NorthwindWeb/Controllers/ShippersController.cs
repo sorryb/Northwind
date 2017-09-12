@@ -21,21 +21,28 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
-        // GET: Shippers
-        ///Enter in  Shippers's details through CompanyName of Shippers
+        /// <summary>
+        /// Displays a page with all the shippers existing in the database.
+        /// </summary>
+        /// <param name="search">The search look to find something asked</param>
+        /// <returns>Shippers index view</returns>
         public async Task<ActionResult> Index(string search = "")
         {
             return View(await db.Shippers.Where(x => x.CompanyName.Contains(search)).ToListAsync());
         }
 
-        // GET: Shippers/Details/5
+        /// <summary>
+        /// Displays a page showing all the information about one shipper.
+        /// </summary>
+        /// <param name="id">The id of the shipper whose information to show</param>
+        /// <returns>Shippers details view</returns>
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ///take details of Shipper
+            //take details of Shipper
             Shippers shippers = await db.Shippers.FindAsync(id);
             if (shippers == null)
             {
@@ -44,21 +51,24 @@ namespace NorthwindWeb.Controllers
             return View(shippers);
         }
 
-        // GET: Shippers/Create
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new shipper.
+        /// </summary>
+        /// <returns>Create view.</returns>
         [Authorize(Roles = "Employees, Admins")]
-        ///Enter in the page Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Shippers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Inserts a shipper into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="shippers">The shipper entity to be inserted</param>
+        /// <returns>If successful returns shippers index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        ///Create a new shipper which contain the next fields: ShipperID, CompanyName, Phone and it will be saved in database
         public async Task<ActionResult> Create([Bind(Include = "ShipperID,CompanyName,Phone")] Shippers shippers)
         {
             if (ModelState.IsValid)
@@ -71,9 +81,12 @@ namespace NorthwindWeb.Controllers
             return View(shippers);
         }
 
-        // GET: Shippers/Edit/5
+        /// <summary>
+        /// Returns the view containing the form necessary for editing an existing shipper.
+        /// </summary>
+        /// <param name="id">The id of the shipper that is going to be edited</param>
+        /// <returns>Shippers edit view</returns>
         [Authorize(Roles = "Employees, Admins")]
-        ///Enter in the page Edit
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,13 +102,14 @@ namespace NorthwindWeb.Controllers
             return View(shippers);
         }
 
-        // POST: Shippers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Updates the database changing the fields of the shipper whose id is equal to the id of the provided shippers parameter to those of the parameter.
+        /// </summary>
+        /// <param name="shippers">The changed shipper.</param>
+        /// <returns>Shippers index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        ///Modify selected shipper and save it in database
         public async Task<ActionResult> Edit([Bind(Include = "ShipperID,CompanyName,Phone")] Shippers shippers)
         {
             if (ModelState.IsValid)
@@ -107,16 +121,19 @@ namespace NorthwindWeb.Controllers
             return View(shippers);
         }
 
-        // GET: Shippers/Delete/5
+        /// <summary>
+        /// Displays a confirmation page for the following delete.
+        /// </summary>
+        /// <param name="id">The shipper that is going to be deleted.</param>
+        /// <returns>Delete view</returns>
         [Authorize(Roles = "Admins")]
-        ///Enter in the page Delete by ID the shipper
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ///take details of Shipper
+            //take details of Shipper
             Shippers shippers = await db.Shippers.FindAsync(id);
             if (shippers == null)
             {
@@ -125,14 +142,17 @@ namespace NorthwindWeb.Controllers
             return View(shippers);
         }
 
-        // POST: Shippers/Delete/5
+        /// <summary>
+        /// Deletes a shipper from the database. The shipper must not have id in employees.
+        /// </summary>
+        /// <param name="id">The id of the shipper that is going to be deleted</param>
+        /// <returns>Shippers index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
-        ///Delete the selected shipper
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            ///take details of Shipper
+            //take details of Shipper
             Shippers shippers = await db.Shippers.FindAsync(id);
             
             try 
@@ -153,13 +173,16 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        // GET: Shipper by Json
-        /// send back a JsonDataTableFill as json with all the information that wee need to populate datatable
+        /// <summary>
+        /// Function used to control the dashboard datatables local
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns>A JSON filtered shipper list.</returns>
         public JsonResult JsonTableFill()
         {
             var shippers = db.Shippers.OrderBy(x => x.ShipperID);
 
-            ///Select what wee need in table
+            //Select what wee need in table
             return Json(
                 shippers.Select(x => new NorthwindWeb.Models.ServerClientCommunication.ShipperData
                 {
