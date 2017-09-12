@@ -1,4 +1,9 @@
-﻿---------------------------------------------------------------------------------------
+﻿/*
+	Northwind translate
+	Use this script to translate data from Northwind Database. (use Northwind.sql to make Northwind Database)
+*/
+
+---------------------------------------------------------------------------------------
 --		Initializare
 use Northwind;
 go
