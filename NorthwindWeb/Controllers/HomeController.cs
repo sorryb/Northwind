@@ -1,13 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
-using System.Web.Script.Serialization;
-using System.Configuration;
-using log4net;
 
 namespace NorthwindWeb.Controllers
 {
@@ -18,7 +12,7 @@ namespace NorthwindWeb.Controllers
     {
 
         NorthwindModel _northwindDatabase = new NorthwindModel();
-        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
         /// <summary>
         /// First page in the site.
@@ -57,9 +51,7 @@ namespace NorthwindWeb.Controllers
             }
             catch (Exception exception)
             {
-
                 logger.Error(exception.ToString());
-
                 return View();
             }
         }

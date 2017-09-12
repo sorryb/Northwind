@@ -11,6 +11,7 @@ namespace NorthwindWeb
     /// </summary>
     public class MvcApplication : System.Web.HttpApplication
     {
+        //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         private static ILog Log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
