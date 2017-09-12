@@ -61,3 +61,12 @@ Reports configuration
 	password: ...the password
 	If it doesn't work and you don't remember setting up a username and a password try the ones you use to log
 	in to windows.
+
+
+#Users
+Users are stored in the aspnet-Northwind-20170823114137.mdf database
+User information is encoded with aspnet.Identity
+First use of any user aspnet-Northwind-20170823114137.mdf database is initialized(ex:Login)
+There are two static users: admin, tester; rest being done for employees from the northwind database
+admin, tester are set in IdentityDatabaseInitializer appealed from ApplicationDataContext
+they are set with username, password and email, and are assigned to the Admins role
