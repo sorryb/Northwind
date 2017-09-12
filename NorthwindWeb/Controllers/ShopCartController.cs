@@ -122,12 +122,12 @@ namespace NorthwindWeb.Controllers
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             string json = Request.QueryString["json"] ?? "";
-            
+
 
 
             const int TOTAL_ROWS = 999;
 
-            
+
 
             //init list of products in shopcart
             IQueryable<ProductShopCartDetailed> list;
@@ -265,17 +265,25 @@ namespace NorthwindWeb.Controllers
             string userName = User.Identity.GetUserName();
             Orders order = new Orders();
             order.OrderDate = DateTime.Now;
-            foreach(var product in shopCart)
+            foreach (var product in shopCart)
             {
                 short quantity = 255;
                 if (product.UserName == userName)
                 {
-                    if ((product.Quantity>=1)&& (product.Quantity <= 255))
+                    if ((product.Quantity >= 1) && (product.Quantity <= 255))
                     {
                         quantity = (short)product.Quantity;
                     }
                     var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
-                    order.Order_Details.Add(new Order_Details { ProductID = product.ProductID, Quantity = quantity,UnitPrice=productdetails.UnitPrice,Discount=productdetails.Discount });
+                    order.Order_Details.Add(new Order_Details
+                    {
+                        ProductID = product.ProductID,
+                        Quantity = quantity,
+                        UnitPrice = productdetails.UnitPrice,
+                        Discount = productdetails.Discount,
+                        OrderID = order.OrderID,
+                        Order = order
+                    });
                     db.ShopCart.Remove(product);
                 }
             }
