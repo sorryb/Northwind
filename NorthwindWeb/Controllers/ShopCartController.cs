@@ -57,7 +57,7 @@ namespace NorthwindWeb.Controllers
         private void Update(int id, int quantity)
         {
             var cart = db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).FirstOrDefault();
-            cart.Quantity = quantity;
+            cart.Quantity = cart.Quantity+quantity;
             db.SaveChanges();
         }
 
