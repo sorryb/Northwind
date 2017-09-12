@@ -32,23 +32,31 @@ namespace NorthwindWeb.Controllers
         /// <param name="id">The id of the product</param>
         /// <param name="quantity">The quantity of the product</param>
         [Authorize]
-        public void Create(int id, int quantity)
+        public string Create(int id, int quantity)
         {
-            if (!(db.ShopCart.Where(x => x.ProductID == id).Any()))
+            try
             {
-                ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductID = id, Quantity = quantity };
-                db.ShopCart.Add(cart);
-                db.SaveChanges();
+                if (!(db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name)))
+                {
+                    ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductID = id, Quantity = quantity };
+                    db.ShopCart.Add(cart);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Update(id, quantity);
+                }
+                return "{}";
             }
-            else
+            catch
             {
-                Update(id, quantity);
+                return "Error";
             }
         }
 
         private void Update(int id, int quantity)
         {
-            var cart = db.ShopCart.Where(x => x.ProductID == id).FirstOrDefault();
+            var cart = db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).FirstOrDefault();
             cart.Quantity = quantity;
             db.SaveChanges();
         }
@@ -79,8 +87,7 @@ namespace NorthwindWeb.Controllers
                     {
                         if (db.ShopCart.Any(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID))
                         {
-                            db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity = db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity + 1;
-                            //First() da exceptie daca nu gaseste nimic, FirstOrDefault() da null
+                            db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity = db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity + shopCartProduct.Quantity;
                         }
                         else
                         {
@@ -109,7 +116,7 @@ namespace NorthwindWeb.Controllers
                 db.ShopCart.Remove(db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == id).First());
                 db.SaveChanges();
                 //La fel
-                return "Succes";
+                return "{}";
             }
             else
             {

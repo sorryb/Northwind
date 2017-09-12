@@ -26,35 +26,57 @@ function exportLocalShopCartToServer() {
 
 
 $("document").ready(function () {
-    if (isLogedIn)
+    if (isLogedIn == 1)
         if (getLocalCartCount()) {
-            var sendToServer = confirm("Aveti produse in shopcart, doriti sa le adaugam la cele din baza de date?")
-            if (sendToServer)
+            var sendToServer = confirm("Aveti produse in shopcart, doriti sa le adaugam la cele din baza de date?");
+            if (sendToServer) {
                 exportLocalShopCartToServer();
+            }
         }
     UpdateShop();
-
 })
 
 
 //add product in cart
 function AddToCart(productToAdd) {
-    //need to check if this customer is loged in
-    var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
-    var add = true;
-    var i = 0;
-    for (; i < productsInStorage.length; i++) {
-        if (productsInStorage[i].ID == productToAdd.ID) {
-            add = false;
-            break;
+    if (isLogedIn == 0) {
+        //need to check if this customer is loged in
+        var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
+        var add = true;
+        var i = 0;
+        for (; i < productsInStorage.length; i++) {
+            if (productsInStorage[i].ID == productToAdd.ID) {
+                add = false;
+                break;
+            }
         }
+        if (add) {
+            productsInStorage.push(productToAdd);
+        }
+        else {
+            productsInStorage[i].Quantity++;
+        }
+        localStorage.setItem("cart", JSON.stringify(productsInStorage));
+        UpdateShop();
     }
-    if (add)
-        productsInStorage.push(productToAdd);
-    else
-        productsInStorage[i].Quantity++;
-    localStorage.setItem("cart", JSON.stringify(productsInStorage));
-    UpdateShop();
+    else {
+        $.ajax({
+            url: "http://" + window.location.host + "/ShopCart/Create",
+            data: {
+                id: productToAdd.ID,
+                quantity: productToAdd.Quantity
+            }
+        })
+            .done(function () {
+                //ar trebui modificat
+                UpdateShop();
+                $("#ShopCartTable").DataTable().destroy();
+                CreateShopCartDataTable("ShopCartTable");
+            })
+            .fail(function () {
+                alert("Ceva nu a mers bine");
+            });
+    }
 }
 
 function ChangeQuantity(id, quantity) {
@@ -77,7 +99,7 @@ function RemoveFromCart(id) {
         var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
 
         var i = 0;
-        for (i = 0; i < productsInStorage.length; i++) {
+        for (; i < productsInStorage.length; i++) {
             if (productsInStorage[i].ID == id) {
                 break;
             }
@@ -91,15 +113,13 @@ function RemoveFromCart(id) {
         $.ajax({
             url: searchControllerPath() + "/Delete?id=" + id,
         })
-            .done(function (data) {
-                if (data == "Succes") {
-                    //ar trebui modificat
-                    $("#ShopCartTable").DataTable().destroy();
-                    CreateShopCartDataTable("ShopCartTable");
-                }
-                else {
-                    alert("Ceva nu a mers bine");
-                }
+            .done(function () {
+                //ar trebui modificat
+                $("#ShopCartTable").DataTable().destroy();
+                CreateShopCartDataTable("ShopCartTable");
+            })
+            .fail(function () {
+                alert("Ceva nu a mers bine");
             });
     }
     UpdateShop();
@@ -107,21 +127,20 @@ function RemoveFromCart(id) {
 
 //count number of product in shopcart
 function getLocalCartCount() {
-    
-        return (localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : new Array().length);
+
+    return (localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : new Array().length);
 }
+
 //todo this
 function getServerCartCount() {
-    if (isLogedIn==1) {
+    if (isLogedIn == 1) {
         $.ajax({
             url: "http://" + window.location.host + "/ShopCart/GetCartCount",
-            "dataType": "json",
-        }).done(function () {
-            return 1;
-            }).fail(function () {
-                var a = 1;
-            })
-
+            dataType: "json",
+            success: function (data) {
+                $("#shopcart-productcount").text(data);
+            }
+        })
     }
 }
 
@@ -170,8 +189,9 @@ function getLocalCartProducts() {
 */
 
 function UpdateShop() {
-    if (isLogedIn)
-        $("#shopcart-productcount").text(getLocalCartCount());
+    if (isLogedIn == 1)
+        getServerCartCount();
     else
-        $("#shopcart-productcount").text(getServerCartCount());
+        $("#shopcart-productcount").text(getLocalCartCount());
+
 }

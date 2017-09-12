@@ -42,7 +42,9 @@ img[class~=products] {
     padding: 20px 25px 0px 20px;
     left: 0px;
     color: white;
+    text-decoration: none;
 }
+
 
 /*shop icon dimension*/
 [class~=glyphicon-shopping-cart] {
@@ -59,6 +61,12 @@ img[class~=products] {
     border-radius: 20px;
     background-color: white;
     padding: 20px;
+}
+
+/*the shopcart icon from products*/
+.shopcartProductIcon{
+    color:white;
+    text-decoration:none;
 }
 
 /*circle for shop cart*/
@@ -157,11 +165,14 @@ iframe.fill {
 /*for the shopcart icon so the image won't be the same color as the background*/
 .shopcart-link {
     color: white;
+    text-decoration: none;
 }
 
     .shopcart-link:hover {
         color: white;
+        text-decoration: none;
     }
+
 
 .tablebackground {
     background-color: #2b3e50;
