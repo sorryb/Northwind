@@ -18,10 +18,10 @@ using NorthwindWeb.Models.ServerClientCommunication;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize]
     /// <summary>
     /// Orders Controller. For table Orders
     /// </summary>
+    [Authorize]
     public class OrdersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
@@ -31,7 +31,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="search">The search look to find something asked</param>
         /// <returns>Orders index view</returns>
-        // GET: Orders
         public ActionResult Index(string search = "")
         {
             return View(db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o=>o.OrderID.ToString().Contains(search)).OrderBy(o=>o.OrderID));
@@ -44,7 +43,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the order whose information to show</param>
         /// <returns>Orders details view</returns>
-        // GET: Orders/Details
         public async Task<ActionResult> Details(int id)
         {
             OrderDetali viewModel = new OrderDetali();
@@ -88,7 +86,6 @@ namespace NorthwindWeb.Controllers
         /// Returns the view containing the form neccesary for creating a new order.
         /// </summary>
         /// <returns>Create view.</returns>
-        // GET: Orders/Create
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
@@ -103,9 +100,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="orders">The order entity to be inserted</param>
         /// <returns>If successful returns orders index view, else goes back to form.</returns>
-        // POST: Orders/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
@@ -131,7 +125,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the order that is going to be edited</param>
         /// <returns>Orders edit view</returns>
-        // GET: Orders/Edit/5
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
@@ -157,9 +150,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="orders">The changed order.</param>
         /// <returns>Orders index view</returns>
-        // POST: Orders/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
@@ -182,7 +172,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The order that is going to be deleted.</param>
         /// <returns>Delete view</returns>
-        // GET: Orders/Delete/5
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
@@ -234,7 +223,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the order that is going to be deleted</param>
         /// <returns>Orders index view</returns>
-        // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
@@ -253,14 +241,6 @@ namespace NorthwindWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
 
         /// <summary>
@@ -270,7 +250,6 @@ namespace NorthwindWeb.Controllers
         /// <param name="start"></param>
         /// <param name="length"></param>
         /// <returns>A JSON filtered orders list.</returns>
-        // GET: Orders by Json
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int totalRows = 999;          
@@ -295,11 +274,7 @@ namespace NorthwindWeb.Controllers
             {
                 if (Request.QueryString["order[0][column]"] != null)
                 {
-                    try
-                    {
                         sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-                    }
-                    catch (NullReferenceException e) { }
                 }
             }
             catch (NullReferenceException e) { }
@@ -308,11 +283,8 @@ namespace NorthwindWeb.Controllers
             {
                 if (Request.QueryString["order[0][dir]"] != null)
                 {
-                    try
-                    {
+                    
                         sortDirection = Request.QueryString["order[0][dir]"];
-                    }
-                    catch (NullReferenceException e) { }
                 }
             }
             catch (NullReferenceException e) { }
@@ -413,6 +385,16 @@ namespace NorthwindWeb.Controllers
             };
 
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
