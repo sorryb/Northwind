@@ -40,9 +40,9 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-                
+
                 @Html.ActionLink(" Studio Phone Silver", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
-                
+
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -119,19 +119,21 @@
                     </li>
 
                 </ul>
-                
+
             </div>
             <!-- /.navbar-collapse -->
         </div>
 
         <!--shopcart icon-->
         <div class="shopcartcontainer">
-            <div class="align-middle img-circle roundedshop">
-                <a href="@Url.Action("Index","ShopCart")" class="shopcart-link"><i class="glyphicon glyphicon-shopping-cart align-middle"></i></a>
-                <div class="shopcart-container-text">
-                    <span id="shopcart-productcount">0</span>
+            <a href="@Url.Action("Index","ShopCart")" class="shopcart-link">
+                <div class="align-middle img-circle roundedshop">
+                    <i class="glyphicon glyphicon-shopping-cart align-middle"></i>
+                    <div class="shopcart-container-text">
+                        <span id="shopcart-productcount">0</span>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <!-- /.container -->
@@ -164,7 +166,7 @@
 
     <script src="~/js/ShopCart.js"></script>
     <script src="~/js/ShopCartDataTable.js"></script>
-    
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

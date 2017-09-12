@@ -33,31 +33,58 @@ namespace NorthwindWeb.Controllers
         /// <param name="id">The id of the product</param>
         /// <param name="quantity">The quantity of the product</param>
         [Authorize]
-        public void Create(int id, int quantity)
+        public string Create(int id, int quantity)
         {
-            if (!(db.ShopCart.Where(x => x.ProductID == id).Any()))
+            try
             {
-                ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductID = id, Quantity = quantity };
-                db.ShopCart.Add(cart);
-                db.SaveChanges();
+                if (!(db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name)))
+                {
+                    ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductID = id, Quantity = quantity };
+                    db.ShopCart.Add(cart);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Update(id, quantity);
+                }
+                return "{}";
             }
-            else
+            catch
             {
-                Update(id, quantity);
+                return "Error";
             }
         }
 
         private void Update(int id, int quantity)
         {
-            var cart = db.ShopCart.Where(x => x.ProductID == id).FirstOrDefault();
-            cart.Quantity = quantity;
+            var cart = db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).FirstOrDefault();
+            cart.Quantity = cart.Quantity+quantity;
             db.SaveChanges();
         }
 
 
 
 
-
+        public string UpdateQuantity(int id, int quantity)
+        {
+            try
+            {
+                if (db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name))
+                {
+                    db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).First().Quantity = quantity;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return "Error";
+                }
+                return "{}";
+            }
+            catch
+            {
+                return "Error";
+            }
+        }
 
 
 
@@ -80,8 +107,7 @@ namespace NorthwindWeb.Controllers
                     {
                         if (db.ShopCart.Any(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID))
                         {
-                            db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity = db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity + 1;
-                            //First() da exceptie daca nu gaseste nimic, FirstOrDefault() da null
+                            db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity = db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity + shopCartProduct.Quantity;
                         }
                         else
                         {
@@ -110,7 +136,7 @@ namespace NorthwindWeb.Controllers
                 db.ShopCart.Remove(db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == id).First());
                 db.SaveChanges();
                 //La fel
-                return "Succes";
+                return "{}";
             }
             else
             {
@@ -123,12 +149,12 @@ namespace NorthwindWeb.Controllers
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             string json = Request.QueryString["json"] ?? "";
-            
+
 
 
             const int TOTAL_ROWS = 999;
 
-            
+
 
             //init list of products in shopcart
             IQueryable<ProductShopCartDetailed> list;
@@ -269,19 +295,31 @@ namespace NorthwindWeb.Controllers
             if (String.IsNullOrEmpty(customerId)) return RedirectToAction("CreateCustomers", "ShopCart");
             order.CustomerID = customerId;
             order.OrderDate = DateTime.Now;
-            foreach(var product in shopCart)
+            foreach (var product in shopCart)
             {
                 short quantity = 255;
                 if (product.UserName == userName)
                 {
-                    if ((product.Quantity>=1)&& (product.Quantity <= 255))
+                    if ((product.Quantity >= 1) && (product.Quantity <= 255))
                     {
                         quantity = (short)product.Quantity;
                     }
                     var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
+<<<<<<< HEAD
                     Order_Details orderDetail = new Order_Details { ProductID = product.ProductID, Quantity = quantity, UnitPrice = productdetails.UnitPrice, Discount = productdetails.Discount };
                     order.Order_Details.Add(orderDetail);
                     db.Order_Details.Add(orderDetail);
+=======
+                    order.Order_Details.Add(new Order_Details
+                    {
+                        ProductID = product.ProductID,
+                        Quantity = quantity,
+                        UnitPrice = productdetails.UnitPrice,
+                        Discount = productdetails.Discount,
+                        OrderID = order.OrderID,
+                        Order = order
+                    });
+>>>>>>> 962b2d96f22b0c90db7cdeba277d7b56822b677e
                     db.ShopCart.Remove(product);
                 }
             }
