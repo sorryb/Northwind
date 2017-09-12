@@ -381,12 +381,12 @@ namespace NorthwindWeb.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("Introduceti numarul de telefon", "");
+                        ModelState.AddModelError("", "Introduceti numarul de telefon");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("Introduceti adresa", "");
+                    ModelState.AddModelError("", "Introduceti adresa");
                 }
                 
             }
