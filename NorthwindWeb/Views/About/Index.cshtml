@@ -44,7 +44,7 @@
         @foreach (var y in Model)
         {
             <div class="col-sm-4">
-                <img src="~/images/@(y.EmployeeID).jpg" height="250" width="270" />
+                <img src="~/images/@(y.FirstName+y.LastName).jpg" height="250" width="270" />
                 <ul>
                     <li>
                      @y.TitleOfCourtesy   @y.LastName @y.FirstName-@y.Title

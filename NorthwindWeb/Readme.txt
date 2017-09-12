@@ -71,6 +71,6 @@ Users are stored in the aspnet-Northwind-20170823114137.mdf database
 User information is encoded with aspnet.Identity
 First use of any user aspnet-Northwind-20170823114137.mdf database is initialized(ex:Login)
 There are two static users: admin, tester; rest being done for employees from the northwind database
-the default roles created at initialization are:Admins, Employees, Managers
+the default roles created at initialization are:Admins, Employees, Managers they offer different degrees of access
 admin, tester are set in IdentityDatabaseInitializer appealed from ApplicationDataContext
 they are set with username, password and email, and are assigned to the Admins role
