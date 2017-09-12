@@ -264,6 +264,7 @@ namespace NorthwindWeb.Controllers
             var shopCart = db.ShopCart;
             string userName = User.Identity.GetUserName();
             Orders order = new Orders();
+            order.OrderDate = DateTime.Now;
             foreach(var product in shopCart)
             {
                 short quantity = 255;
@@ -273,7 +274,8 @@ namespace NorthwindWeb.Controllers
                     {
                         quantity = (short)product.Quantity;
                     }
-                    order.Order_Details.Add(new Order_Details { ProductID = product.ProductID, Quantity = quantity });
+                    var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
+                    order.Order_Details.Add(new Order_Details { ProductID = product.ProductID, Quantity = quantity,UnitPrice=productdetails.UnitPrice,Discount=productdetails.Discount });
                     db.ShopCart.Remove(product);
                 }
             }
