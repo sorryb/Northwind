@@ -82,35 +82,42 @@ function AddToCart(productToAdd) {
 }
 
 function ChangeQuantity(id, quantity) {
-    if (isLogedIn == 0) {
-        var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
-        var i = 0;
-        for (; i < productsInStorage.length; i++) {
-            if (productsInStorage[i].ID == id) {
-                break;
-            }
-        }
-        productsInStorage[i].Quantity = quantity;
-        localStorage.setItem("cart", JSON.stringify(productsInStorage));
+    if (quantity < 1 || quantity > 255)
+    {
         $("#ShopCartTable").DataTable().destroy();
         CreateShopCartDataTable("ShopCartTable");
     }
     else {
-        $.ajax({
-            url: searchControllerPath() + "/UpdateQuantity",
-            data: {
-                id: id,
-                quantity: quantity
+        if (isLogedIn == 0) {
+            var productsInStorage = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
+            var i = 0;
+            for (; i < productsInStorage.length; i++) {
+                if (productsInStorage[i].ID == id) {
+                    break;
+                }
             }
-        })
-            .done(function () {
-                //ar trebui modificat
-                $("#ShopCartTable").DataTable().destroy();
-                CreateShopCartDataTable("ShopCartTable");
+            productsInStorage[i].Quantity = quantity;
+            localStorage.setItem("cart", JSON.stringify(productsInStorage));
+            $("#ShopCartTable").DataTable().destroy();
+            CreateShopCartDataTable("ShopCartTable");
+        }
+        else {
+            $.ajax({
+                url: searchControllerPath() + "/UpdateQuantity",
+                data: {
+                    id: id,
+                    quantity: quantity
+                }
             })
-            .fail(function () {
-                alert("Ceva nu a mers bine");
-            });
+                .done(function () {
+                    //ar trebui modificat
+                    $("#ShopCartTable").DataTable().destroy();
+                    CreateShopCartDataTable("ShopCartTable");
+                })
+                .fail(function () {
+                    alert("Ceva nu a mers bine");
+                });
+        }
     }
 }
 
