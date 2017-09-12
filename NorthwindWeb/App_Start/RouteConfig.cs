@@ -7,8 +7,15 @@ using System.Web.Routing;
 
 namespace NorthwindWeb
 {
+    /// <summary>
+    /// Configure route.
+    /// </summary>
     public class RouteConfig
     {
+        /// <summary>
+        /// Regiter in route table.
+        /// </summary>
+        /// <param name="routes"></param>
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
