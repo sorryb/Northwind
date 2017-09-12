@@ -305,11 +305,11 @@ namespace NorthwindWeb.Controllers
                         quantity = (short)product.Quantity;
                     }
                     var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
-<<<<<<< HEAD
+
                     Order_Details orderDetail = new Order_Details { ProductID = product.ProductID, Quantity = quantity, UnitPrice = productdetails.UnitPrice, Discount = productdetails.Discount };
                     order.Order_Details.Add(orderDetail);
                     db.Order_Details.Add(orderDetail);
-=======
+
                     order.Order_Details.Add(new Order_Details
                     {
                         ProductID = product.ProductID,
@@ -319,7 +319,7 @@ namespace NorthwindWeb.Controllers
                         OrderID = order.OrderID,
                         Order = order
                     });
->>>>>>> 962b2d96f22b0c90db7cdeba277d7b56822b677e
+
                     db.ShopCart.Remove(product);
                 }
             }
