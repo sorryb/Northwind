@@ -358,11 +358,11 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers)
         {
             
-            if (ModelState.IsValid)
+            if (String.IsNullOrEmpty(customers.Address))
             {
                 Customers custom = new Customers();
                 custom.CustomerID = User.Identity.GetUserName().Substring(0,4);
-                custom.CompanyName = customers.CompanyName;
+                custom.CompanyName =  String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName;
                 custom.ContactName = User.Identity.GetUserName();
                 custom.ContactTitle = customers.ContactTitle;
                 custom.Address = customers.Address;
