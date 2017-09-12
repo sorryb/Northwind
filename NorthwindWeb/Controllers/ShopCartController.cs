@@ -166,6 +166,7 @@ namespace NorthwindWeb.Controllers
                 list = from s in db.ShopCart
                        join p in db.Products on s.ProductID equals p.ProductID
                        join c in db.Categories on p.CategoryID equals c.CategoryID
+                       where s.UserName == User.Identity.Name
                        select new ProductShopCartDetailed
                        {
                            Category = c.CategoryName,
