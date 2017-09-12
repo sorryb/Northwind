@@ -134,12 +134,10 @@ namespace NorthwindWeb.Controllers
 
         public string Delete(int? id)
         {
-            //todo trebuie sa mai lucrez aici
             if (id != null && User.Identity.IsAuthenticated)
             {
                 db.ShopCart.Remove(db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == id).First());
                 db.SaveChanges();
-                //La fel
                 return "{}";
             }
             else
