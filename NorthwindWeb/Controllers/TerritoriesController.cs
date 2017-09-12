@@ -20,15 +20,22 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
 
-        // GET: Territories
-        ///Enter in  Territories through Region
+        /// <summary>
+        /// Displays a page with all the territories existing in the database.
+        /// </summary>
+        /// <param name="search">The search look to find something asked</param>
+        /// <returns>Territories index view</returns>
         public async Task<ActionResult> Index()
         {
             var territories = db.Territories.Include(t => t.Region);
             return View(await territories.ToListAsync());
         }
 
-        // GET: Territories/Details/5
+        /// <summary>
+        /// Displays a page showing all the information about one territory.
+        /// </summary>
+        /// <param name="id">The id of the territory whose information to show</param>
+        /// <returns>Territory details view</returns>
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
@@ -44,7 +51,10 @@ namespace NorthwindWeb.Controllers
             return View(territories);
         }
 
-        // GET: Territories/Create
+        /// <summary>
+        /// Returns the view containing the form neccesary for creating a new territory.
+        /// </summary>
+        /// <returns>Create view.</returns>
         [Authorize(Roles = "Employees, Admins")]
         ///Enter in the page Create via RegionID
         public ActionResult Create(int? id)
@@ -53,13 +63,14 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
-        // POST: Territories/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Inserts a territory into the database table. If it fails, goes back to the form.
+        /// </summary>
+        /// <param name="territories">The territory entity to be inserted</param>
+        /// <returns>If successful returns territories index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        ///Create a new territory which contain the next fields: TerritoryID,TerritoryDescription which belong of Region with RegionID selected and it will be saved in database
         public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
@@ -73,16 +84,19 @@ namespace NorthwindWeb.Controllers
             return View(territories);
         }
 
-        // GET: Territories/Edit/5
+        /// <summary>
+        /// Returns the view containing the form necessary for editing an existing territory.
+        /// </summary>
+        /// <param name="id">The id of the territory that is going to be edited</param>
+        /// <returns>Territories edit view</returns>
         [Authorize(Roles = "Employees, Admins")]
-        ///Enter in the page Edit
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ///take details of Territory
+            //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -92,13 +106,14 @@ namespace NorthwindWeb.Controllers
             return View(territories);
         }
 
-        // POST: Territories/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Updates the database changing the fields of the territory whose id is equal to the id of the provided territories parameter to those of the parameter.
+        /// </summary>
+        /// <param name="territories">The changed territory.</param>
+        /// <returns>Territories index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        ///Modify the selected territory which belong of Region with RegionID
         public async Task<ActionResult> Edit([Bind(Include = "TerritoryID,TerritoryDescription,RegionID")] Territories territories)
         {
             if (ModelState.IsValid)
@@ -111,9 +126,12 @@ namespace NorthwindWeb.Controllers
             return View(territories);
         }
 
-        // GET: Territories/Delete/5
+        /// <summary>
+        /// Displays a confirmation page for the following delete.
+        /// </summary>
+        /// <param name="id">The territory that is going to be deleted.</param>
+        /// <returns>Delete view</returns>
         [Authorize(Roles = "Admins")]
-        ///Enter in the page Delete 
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -129,11 +147,14 @@ namespace NorthwindWeb.Controllers
             return View(territories);
         }
 
-        // POST: Territories/Delete/5
+        /// <summary>
+        /// Deletes a territory from the database. The territory must not have employees.
+        /// </summary>
+        /// <param name="id">The id of the territory that is going to be deleted</param>
+        /// <returns>Territories index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
-        ///Delete the selected territory which belong of Region with RegionID
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             ///take details of Territory

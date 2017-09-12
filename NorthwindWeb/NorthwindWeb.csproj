@@ -267,6 +267,7 @@
     <Content Include="Content\DataTables\images\details_close.png" />
     <Content Include="Content\DataTables\images\details_open.png" />
     <Content Include="css\CustomerStyle.css" />
+    <Content Include="images\northwind-sign.jpg" />
     <Content Include="images\default.png" />
     <Content Include="images\sort_asc.png" />
     <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
