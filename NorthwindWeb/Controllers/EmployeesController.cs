@@ -181,7 +181,10 @@ namespace NorthwindWeb.Controllers
                 throw e;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

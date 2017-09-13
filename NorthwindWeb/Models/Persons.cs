@@ -22,6 +22,10 @@ namespace NorthwindWeb.Models
         [StringLength(255)]
         public string FirstName { get; set; }
 
-        public int? Age { get; set; }
+        [StringLength(255)]
+        public string Email { get; set; }
+
+        [StringLength(255)]
+        public string Comment { get; set; }
     }
 }
