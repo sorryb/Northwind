@@ -1,4 +1,5 @@
-﻿var translate = {
+﻿//translate reports
+var translate = {
     "Alphabeticallistofproducts": "Lista produselor in ordine alfabetica",
     "CategorySalesPerYear": "Vanzarile pe categorii pe an",
     "CurrentProductList": "Lista produselor",

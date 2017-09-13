@@ -36,8 +36,9 @@ namespace NorthwindWeb.Models
         public virtual DbSet<Territories> Territories { get; set; }
         public virtual DbSet<ShopCarts> ShopCart { get; set; }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
         /// <summary>
-        /// 
+        /// Build Information of Northwind DataBase
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

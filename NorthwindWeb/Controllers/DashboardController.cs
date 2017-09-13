@@ -13,9 +13,12 @@ using PagedList;
 
 
 namespace NorthwindWeb.Controllers
-{   /// <summary>
-/// 
-/// </summary>
+{   
+    
+    
+    /// <summary>
+    /// DashBoard Controller. Charts with actual state of the site
+    /// </summary>
     [Authorize(Roles = "Admins")]
     public class DashboardController : Controller
     {
