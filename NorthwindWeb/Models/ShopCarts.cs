@@ -31,7 +31,7 @@
         public int Quantity { get; set; }
 
         /// <summary>
-        /// 
+        /// The products contained by the shopcart
         /// </summary>
         public virtual ICollection<Products> Products { get; set; }
     }
