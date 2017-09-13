@@ -13,56 +13,67 @@
 
 <div class="row">
 
-        <section id="ChangeForm">
-            @using (Html.BeginForm()) 
-            {
+    <section id="ChangeForm">
+
+
+        @using (Html.BeginForm())
+        { <div class="row">
                 @Html.AntiForgeryToken()
                 <h4>&nbsp;&nbsp;&nbsp;&nbsp;Modificare utilizator @ViewBag.UserName</h4>
                 <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserName, new { @class = "col-lg-offset-2 col-lg-2  control-label" })
-                    <div class="col-lg-6">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" ,autofocus="true"})
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                <div class="col-md-4">
+                    <img src="/images/@(ViewBag.UserName).jpg" onerror="this.src='/images/default.png'" style="width:100%;height:100%;">
+                </div>
+                <div class="col-md-8">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2  control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", autofocus = "true" })
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-7">
+                            <input type="submit" value="Modificare" class="btn btn-default" />
+                        </div>
                     </div>
                 </div>
-            <br />
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-lg-offset-2 col-lg-2 control-label" })
-                    <div class="col-lg-6">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <br />
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-lg-offset-2 col-lg-2 control-label" })
-                    <div class="col-lg-6">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <br />
-                <div class="form-group">
-                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-lg-offset-2 col-lg-2 control-label" })
-                    <div class="col-lg-6">
-                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            <br>
-                <div class="form-group">
-                    <div class="col-lg-offset-4 col-lg-7">
-                       <input type="submit" value="Modificare"  class="btn btn-default"/>
-                    </div>
-                </div>
+            </div>
+        }
 
-            }
-        </section>
-  
+    </section>
+
 
 </div>
+
+
+
 
 
 <!--@section Scripts {
