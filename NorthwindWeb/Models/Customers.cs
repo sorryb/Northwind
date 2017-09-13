@@ -54,25 +54,25 @@ namespace NorthwindWeb.Models
         public string Address { get; set; }
 
         /// <summary>
-        /// The city from where the customer is.
+        /// The customer's city.
         /// </summary>
         [StringLength(15)]
         public string City { get; set; }
 
         /// <summary>
-        /// The region from where the customer is.
+        /// The customer's region.
         /// </summary>
         [StringLength(15)]
         public string Region { get; set; }
 
         /// <summary>
-        /// The postal code from the city of the customer.
+        /// The customer's postal code.
         /// </summary>
         [StringLength(10)]
         public string PostalCode { get; set; }
 
         /// <summary>
-        /// The country from where the customer is.
+        /// The customer's country.
         /// </summary>
         [StringLength(15)]
         public string Country { get; set; }
