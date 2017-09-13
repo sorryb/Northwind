@@ -29,7 +29,7 @@ namespace NorthwindWeb.Context
 
         private void InsertInDatabase(NorthwindModel context)
         {
-            
+
             //list of region
             List<Region> regions = new List<Region>
             {
@@ -46,48 +46,48 @@ namespace NorthwindWeb.Context
             };
 
             //add territories in regions
-            regions[0].Territories.Add(new Territories() { TerritoryID = "1", TerritoryDescription = "Timis" , RegionID =1}); 
-            regions[0].Territories.Add(new Territories() { TerritoryID = "2", TerritoryDescription = "Caras - Severin" , RegionID =1});
-            regions[1].Territories.Add(new Territories() { TerritoryID = "3", TerritoryDescription = "Botosani" , RegionID =2});
-            regions[1].Territories.Add(new Territories() { TerritoryID = "4", TerritoryDescription = "Suceava" , RegionID =2});
-            regions[2].Territories.Add(new Territories() { TerritoryID = "5", TerritoryDescription = "Bihor" , RegionID =3});
-            regions[2].Territories.Add(new Territories() { TerritoryID = "6", TerritoryDescription = "Arad" , RegionID =3});
-            regions[3].Territories.Add(new Territories() { TerritoryID = "7", TerritoryDescription = "Tulcea" , RegionID =4});
-            regions[3].Territories.Add(new Territories() { TerritoryID = "8", TerritoryDescription = "Constanta" , RegionID =4});
+            regions[0].Territories.Add(new Territories() { TerritoryID = "1", TerritoryDescription = "Timis", RegionID = 1 });
+            regions[0].Territories.Add(new Territories() { TerritoryID = "2", TerritoryDescription = "Caras - Severin", RegionID = 1 });
+            regions[1].Territories.Add(new Territories() { TerritoryID = "3", TerritoryDescription = "Botosani", RegionID = 2 });
+            regions[1].Territories.Add(new Territories() { TerritoryID = "4", TerritoryDescription = "Suceava", RegionID = 2 });
+            regions[2].Territories.Add(new Territories() { TerritoryID = "5", TerritoryDescription = "Bihor", RegionID = 3 });
+            regions[2].Territories.Add(new Territories() { TerritoryID = "6", TerritoryDescription = "Arad", RegionID = 3 });
+            regions[3].Territories.Add(new Territories() { TerritoryID = "7", TerritoryDescription = "Tulcea", RegionID = 4 });
+            regions[3].Territories.Add(new Territories() { TerritoryID = "8", TerritoryDescription = "Constanta", RegionID = 4 });
             regions[4].Territories.Add(new Territories() { TerritoryID = "9", TerritoryDescription = "Satu - Mare", RegionID = 5 });
-            regions[4].Territories.Add(new Territories() { TerritoryID = "10", TerritoryDescription = "Maramures" , RegionID =5});
-            regions[5].Territories.Add(new Territories() { TerritoryID = "11", TerritoryDescription = "Neamt" , RegionID =6});
-            regions[5].Territories.Add(new Territories() { TerritoryID = "12", TerritoryDescription = "Iasi" , RegionID =6});
-            regions[5].Territories.Add(new Territories() { TerritoryID = "13", TerritoryDescription = "Bacau" , RegionID =6});
-            regions[5].Territories.Add(new Territories() { TerritoryID = "14", TerritoryDescription = "Vaslui" , RegionID =6});
-            regions[5].Territories.Add(new Territories() { TerritoryID = "15", TerritoryDescription = "Vrancea" , RegionID =6});
-            regions[5].Territories.Add(new Territories() { TerritoryID = "16", TerritoryDescription = "Galati" , RegionID =6});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "17", TerritoryDescription = "Braila" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "18", TerritoryDescription = "Buzau" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "19", TerritoryDescription = "Calarasi" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "20", TerritoryDescription = "Prahova" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "21", TerritoryDescription = "Dambovita" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "22", TerritoryDescription = "Arges" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "23", TerritoryDescription = "Ialomita" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "24", TerritoryDescription = "Calarasi" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "25", TerritoryDescription = "Ilfov" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "26", TerritoryDescription = "Bucuresti" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "27", TerritoryDescription = "Giurgiu" , RegionID =7});
-            regions[6].Territories.Add(new Territories() { TerritoryID = "28", TerritoryDescription = "Teleorman" , RegionID =7});
-            regions[7].Territories.Add(new Territories() { TerritoryID = "29", TerritoryDescription = "Gorj" , RegionID =8});
-            regions[7].Territories.Add(new Territories() { TerritoryID = "30", TerritoryDescription = "Valcea" , RegionID =8});
-            regions[7].Territories.Add(new Territories() { TerritoryID = "31", TerritoryDescription = "Olt" , RegionID =8});
-            regions[7].Territories.Add(new Territories() { TerritoryID = "32", TerritoryDescription = "Dolj" , RegionID =8});
-            regions[7].Territories.Add(new Territories() { TerritoryID = "33", TerritoryDescription = "Mehedinti" , RegionID =8});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "34", TerritoryDescription = "Salaj" , RegionID =9});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "35", TerritoryDescription = "Bistrita - Nasaud" , RegionID =9});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "36", TerritoryDescription = "Cluj" , RegionID =9});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "37", TerritoryDescription = "Mures" , RegionID =9});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "38", TerritoryDescription = "Harghita" , RegionID =9});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "39", TerritoryDescription = "Covasna" , RegionID =9});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "40", TerritoryDescription = "Brasov" , RegionID =9});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "41", TerritoryDescription = "Sibiu" , RegionID =9});
-            regions[8].Territories.Add(new Territories() { TerritoryID = "42", TerritoryDescription = "Alba" , RegionID =9});
+            regions[4].Territories.Add(new Territories() { TerritoryID = "10", TerritoryDescription = "Maramures", RegionID = 5 });
+            regions[5].Territories.Add(new Territories() { TerritoryID = "11", TerritoryDescription = "Neamt", RegionID = 6 });
+            regions[5].Territories.Add(new Territories() { TerritoryID = "12", TerritoryDescription = "Iasi", RegionID = 6 });
+            regions[5].Territories.Add(new Territories() { TerritoryID = "13", TerritoryDescription = "Bacau", RegionID = 6 });
+            regions[5].Territories.Add(new Territories() { TerritoryID = "14", TerritoryDescription = "Vaslui", RegionID = 6 });
+            regions[5].Territories.Add(new Territories() { TerritoryID = "15", TerritoryDescription = "Vrancea", RegionID = 6 });
+            regions[5].Territories.Add(new Territories() { TerritoryID = "16", TerritoryDescription = "Galati", RegionID = 6 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "17", TerritoryDescription = "Braila", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "18", TerritoryDescription = "Buzau", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "19", TerritoryDescription = "Calarasi", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "20", TerritoryDescription = "Prahova", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "21", TerritoryDescription = "Dambovita", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "22", TerritoryDescription = "Arges", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "23", TerritoryDescription = "Ialomita", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "24", TerritoryDescription = "Calarasi", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "25", TerritoryDescription = "Ilfov", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "26", TerritoryDescription = "Bucuresti", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "27", TerritoryDescription = "Giurgiu", RegionID = 7 });
+            regions[6].Territories.Add(new Territories() { TerritoryID = "28", TerritoryDescription = "Teleorman", RegionID = 7 });
+            regions[7].Territories.Add(new Territories() { TerritoryID = "29", TerritoryDescription = "Gorj", RegionID = 8 });
+            regions[7].Territories.Add(new Territories() { TerritoryID = "30", TerritoryDescription = "Valcea", RegionID = 8 });
+            regions[7].Territories.Add(new Territories() { TerritoryID = "31", TerritoryDescription = "Olt", RegionID = 8 });
+            regions[7].Territories.Add(new Territories() { TerritoryID = "32", TerritoryDescription = "Dolj", RegionID = 8 });
+            regions[7].Territories.Add(new Territories() { TerritoryID = "33", TerritoryDescription = "Mehedinti", RegionID = 8 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "34", TerritoryDescription = "Salaj", RegionID = 9 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "35", TerritoryDescription = "Bistrita - Nasaud", RegionID = 9 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "36", TerritoryDescription = "Cluj", RegionID = 9 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "37", TerritoryDescription = "Mures", RegionID = 9 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "38", TerritoryDescription = "Harghita", RegionID = 9 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "39", TerritoryDescription = "Covasna", RegionID = 9 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "40", TerritoryDescription = "Brasov", RegionID = 9 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "41", TerritoryDescription = "Sibiu", RegionID = 9 });
+            regions[8].Territories.Add(new Territories() { TerritoryID = "42", TerritoryDescription = "Alba", RegionID = 9 });
             regions[8].Territories.Add(new Territories() { TerritoryID = "43", TerritoryDescription = "Hunedoara", RegionID = 9 });
 
             foreach (var region in regions)
@@ -112,15 +112,15 @@ namespace NorthwindWeb.Context
 
             employees[0].Territories = context.Territories.Where(x => x.TerritoryID == "12" || x.TerritoryID == "19" || x.TerritoryID == "23" || x.TerritoryID == "26" || x.TerritoryID == "27").ToList();
             employees[1].Territories = context.Territories.Where(x => x.TerritoryID == "10" || x.TerritoryID == "34" || x.TerritoryID == "35" || x.TerritoryID == "36" || x.TerritoryID == "5" || x.TerritoryID == "9").ToList();
-            employees[2].Territories = context.Territories.Where(x => x.TerritoryID == "11" || x.TerritoryID == "12" || x.TerritoryID == "3"  || x.TerritoryID == "35" || x.TerritoryID == "37" || x.TerritoryID == "38" || x.TerritoryID == "4").ToList();
+            employees[2].Territories = context.Territories.Where(x => x.TerritoryID == "11" || x.TerritoryID == "12" || x.TerritoryID == "3" || x.TerritoryID == "35" || x.TerritoryID == "37" || x.TerritoryID == "38" || x.TerritoryID == "4").ToList();
             employees[3].Territories = context.Territories.Where(x => x.TerritoryID == "11" || x.TerritoryID == "12" || x.TerritoryID == "13" || x.TerritoryID == "14" || x.TerritoryID == "16").ToList();
-            employees[4].Territories = context.Territories.Where(x => x.TerritoryID == "1"  || x.TerritoryID == "2"  || x.TerritoryID == "29" || x.TerritoryID == "33" || x.TerritoryID == "42" || x.TerritoryID == "43" || x.TerritoryID == "6").ToList();
+            employees[4].Territories = context.Territories.Where(x => x.TerritoryID == "1" || x.TerritoryID == "2" || x.TerritoryID == "29" || x.TerritoryID == "33" || x.TerritoryID == "42" || x.TerritoryID == "43" || x.TerritoryID == "6").ToList();
             employees[5].Territories = context.Territories.Where(x => x.TerritoryID == "22" || x.TerritoryID == "28" || x.TerritoryID == "29" || x.TerritoryID == "30" || x.TerritoryID == "31" || x.TerritoryID == "32" || x.TerritoryID == "33").ToList();
             employees[6].Territories = context.Territories.Where(x => x.TerritoryID == "36" || x.TerritoryID == "37" || x.TerritoryID == "38" || x.TerritoryID == "39" || x.TerritoryID == "40" || x.TerritoryID == "41" || x.TerritoryID == "42").ToList();
             employees[7].Territories = context.Territories.Where(x => x.TerritoryID == "15" || x.TerritoryID == "16" || x.TerritoryID == "17" || x.TerritoryID == "18" || x.TerritoryID == "20" || x.TerritoryID == "21" || x.TerritoryID == "25" || x.TerritoryID == "26" || x.TerritoryID == "39" || x.TerritoryID == "40" || x.TerritoryID == "7").ToList();
             employees[8].Territories = context.Territories.Where(x => x.TerritoryID == "17" || x.TerritoryID == "18" || x.TerritoryID == "20" || x.TerritoryID == "21" || x.TerritoryID == "23" || x.TerritoryID == "24" || x.TerritoryID == "26" || x.TerritoryID == "27" || x.TerritoryID == "7" || x.TerritoryID == "8").ToList();
 
-            foreach(var empolyee in employees)
+            foreach (var empolyee in employees)
             {
                 context.Employees.Add(empolyee);
                 //to keep the order
@@ -134,8 +134,8 @@ namespace NorthwindWeb.Context
                 new Shippers(){ CompanyName = "Urgent Cargus", Phone = "021 9330      "},
                 new Shippers(){ CompanyName = "FAN Courier  ", Phone = "+40742552233  " },
             };
-            
-            foreach(var shipper in shippers)
+
+            foreach (var shipper in shippers)
             {
                 context.Shippers.Add(shipper);
             }
@@ -353,57 +353,61 @@ namespace NorthwindWeb.Context
                 new Customers(){ CustomerID = "BERGS", CompanyName = "Cut Above",                 ContactName = "Varujan Puscas"      , ContactTitle = "Administrator Comenzi", Address = "Bulevardul Ion Mihalache 148B, Bucuresti", City = "Bucuresti" , Region = "Muntenia"    , PostalCode = "666708", Country = "Romania", Phone = "+40(21)2246714", Fax = "0251.413102" },
                 new Customers(){ CustomerID = "BLAUS", CompanyName = "Sears Homelife",            ContactName = "Stefan Manole"       , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 9 MAI, BACAU"                       , City = "Bacau"     , Region = "Moldova"     , PostalCode = "546708", Country = "Romania", Phone = "0740-082 824"  , Fax = "0251.413102" },
                 new Customers(){ CustomerID = "BLONP", CompanyName = "Century House",             ContactName = "Varujan Teodorescu"  , ContactTitle = "Director Marketing"   , Address = "STR. BARNUTIU SIMION nr. 67, SALAJ"      , City = "SALAJ"     , Region = "Transilvania", PostalCode = "437945", Country = "Romania", Phone = "0260-616 920"  , Fax = "0251.418803" },
-                };
-            
-            customers[0].Orders = new List<Orders> {
-                new Orders() {CustomerID = "ALFKI", EmployeeID = 2, OrderDate = new DateTime(1996, 09, 22), ShippedDate = new DateTime(1996, 10, 20), RequiredDate = new DateTime(1996, 10, 02), ShipVia = 2, Freight = (decimal?)40.26, ShipName = "Vinyl Fever", ShipAddress = "STR. 10 MAI nr. 15, DaMBOVITA", ShipCity = "Targoviste", ShipRegion = "Muntenia", ShipPostalCode = "453993", ShipCountry = "Romania"},
-                new Orders() {CustomerID = "ALFKI", EmployeeID = 1, OrderDate = new DateTime(1996, 11, 18), ShippedDate = new DateTime(1996, 12, 16), RequiredDate = new DateTime(1996, 12, 01), ShipVia = 3, Freight = (decimal?)34.88, ShipName = "Vinyl Fever", ShipAddress = "STR. 10 MAI nr. 15, DaMBOVITA", ShipCity = "Targoviste", ShipRegion = "Muntenia", ShipPostalCode = "453993", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "ALFKI", EmployeeID = 1, OrderDate = new DateTime(1996, 12, 04), ShippedDate = new DateTime(1997, 01, 01), RequiredDate = new DateTime(1996, 12, 08), ShipVia = 3, Freight = (decimal?)3.94 , ShipName = "Vinyl Fever", ShipAddress = "STR. 10 MAI nr. 15, DaMBOVITA", ShipCity = "Targoviste", ShipRegion = "Muntenia", ShipPostalCode = "453993", ShipCountry = "Romania" }
-            };
-            customers[1].Orders = new List<Orders>
-            {
-                new Orders() {CustomerID = "ANATR", EmployeeID = 8, OrderDate = new DateTime(1996, 08, 12), ShippedDate = new DateTime(1996-09-09), RequiredDate = new DateTime(1996, 08, 15), ShipVia = 2, Freight = (decimal?)25.83, ShipName = "Kash n", ShipAddress = "Strada Caraiman 3, Constanta", ShipCity = "Constanta", ShipRegion = "Dobrogea", ShipPostalCode = "907021", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "ANATR", EmployeeID = 4, OrderDate = new DateTime(1997, 02, 09), ShippedDate = new DateTime(1997-03-09), RequiredDate = new DateTime(1997, 02, 27), ShipVia = 2, Freight = (decimal?)86.53, ShipName = "Kash n", ShipAddress = "Strada Caraiman 3, Constanta", ShipCity = "Constanta", ShipRegion = "Dobrogea", ShipPostalCode = "907021", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "ANATR", EmployeeID = 4, OrderDate = new DateTime(1997, 04, 01), ShippedDate = new DateTime(1997-04-29), RequiredDate = new DateTime(1997, 04, 08), ShipVia = 2, Freight = (decimal?)65.99, ShipName = "Kash n", ShipAddress = "Strada Caraiman 3, Constanta", ShipCity = "Constanta", ShipRegion = "Dobrogea", ShipPostalCode = "907021", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "ANATR", EmployeeID = 3, OrderDate = new DateTime(1997, 08, 07), ShippedDate = new DateTime(1997-09-04), RequiredDate = new DateTime(1997, 08, 13), ShipVia = 1, Freight = (decimal?)43.90, ShipName = "Ana"   , ShipAddress = "Strada Caraiman 3, Constanta", ShipCity = "Constanta", ShipRegion = "Dobrogea", ShipPostalCode = "05021", ShipCountry = "Romania" }
-            };
-            customers[2].Orders = new List<Orders>
-            {
-                new Orders() {CustomerID = "ANTON", EmployeeID = 6, OrderDate = new DateTime(1996, 07, 31), ShippedDate = new DateTime(1996-08-28), RequiredDate = new DateTime(1996, 08, 29), ShipVia = 2, Freight = (decimal?)4.54 , ShipName = "Tech Hifi", ShipAddress = "Piata Revolutiei 3/26, Maramures", ShipCity = "Maramures", ShipRegion = "Maramures", ShipPostalCode = "873309", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "ANTON", EmployeeID = 1, OrderDate = new DateTime(1996, 10, 08), ShippedDate = new DateTime(1996-10-22), RequiredDate = new DateTime(1996, 10, 13), ShipVia = 3, Freight = (decimal?)64.86, ShipName = "Tech Hifi", ShipAddress = "Piata Revolutiei 3/26, Maramures", ShipCity = "Maramures", ShipRegion = "Maramures", ShipPostalCode = "873309", ShipCountry = "Romania" }
-            };
-            customers[3].Orders = new List<Orders>
-            {
-                new Orders() {CustomerID = "AROUT", EmployeeID = 7, OrderDate = new DateTime(1996, 10, 01), ShippedDate = new DateTime(1996-10-29), RequiredDate = new DateTime(1996, 10, 10), ShipVia = 3, Freight = (decimal?)64.50, ShipName = "Beatties"       , ShipAddress = "STR. VULCAN SAMUIL nr. 16, BEIUS", ShipCity = "BIHOR", ShipRegion = "Crisana", ShipPostalCode = "653271", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "AROUT", EmployeeID = 6, OrderDate = new DateTime(1996, 11, 14), ShippedDate = new DateTime(1996-12-12), RequiredDate = new DateTime(1996, 11, 19), ShipVia = 1, Freight = (decimal?)41.95, ShipName = "Around the Horn", ShipAddress = "Brook Farm Stratford St. Mary", ShipCity = "Colchester", ShipRegion = "Essex", ShipPostalCode = "CO7 6JX", ShipCountry = "UK" },
-                new Orders() {CustomerID = "AROUT", EmployeeID = 1, OrderDate = new DateTime(1996, 12, 08), ShippedDate = new DateTime(1997-01-05), RequiredDate = new DateTime(1996, 12, 12), ShipVia = 3, Freight = (decimal?)22.21, ShipName = "Beatties"       , ShipAddress = "STR. VULCAN SAMUIL nr. 16, BEIUS", ShipCity = "BIHOR", ShipRegion = "Crisana", ShipPostalCode = "653271", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "AROUT", EmployeeID = 1, OrderDate = new DateTime(1997, 02, 20), ShippedDate = new DateTime(1997-03-20), RequiredDate = new DateTime(1997, 02, 25), ShipVia = 2, Freight = (decimal?)25.36, ShipName = "Around the Horn", ShipAddress = "Brook Farm Stratford St. Mary", ShipCity = "Colchester", ShipRegion = "Essex", ShipPostalCode = "CO7 6JX", ShipCountry = "UK" },
-                new Orders() {CustomerID = "AROUT", EmployeeID = 2, OrderDate = new DateTime(1997, 05, 28), ShippedDate = new DateTime(1997-06-25), RequiredDate = new DateTime(1997, 06, 04), ShipVia = 1, Freight = (decimal?)83.22, ShipName = "Beatties"       , ShipAddress = "STR. VULCAN SAMUIL nr. 16, BEIUS", ShipCity = "BIHOR", ShipRegion = "Crisana", ShipPostalCode = "653271", ShipCountry = "Romania" }
-            };
-            customers[4].Orders = new List<Orders>
-            {
-                new Orders() { OrderID = 23 , CustomerID = "BERGS", EmployeeID = 1, OrderDate = new DateTime(1996, 07, 31), ShippedDate = new DateTime(1996-08-28), RequiredDate = new DateTime(1996, 08, 01), ShipVia = 1, Freight = (decimal?)136.54, ShipName = "Cut Above", ShipAddress = "Bulevardul Ion Mihalache 148B, Bucuresti", ShipCity = "Bucuresti", ShipRegion = "Muntenia", ShipPostalCode = "666708", ShipCountry = "Romania" }
-            };
-            customers[5].Orders = new List<Orders>
-            {
-                new Orders() {CustomerID = "BLAUS", EmployeeID = 1, OrderDate = new DateTime(1996, 12, 31), ShippedDate = new DateTime(1997-01-28), RequiredDate = new DateTime(1997, 01, 15), ShipVia = 3, Freight = (decimal?)83.93, ShipName = "Sears Homelife", ShipAddress = "STR. 9 MAI, BACAU", ShipCity = "Bacau", ShipRegion = "Moldova 546708", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "BLAUS", EmployeeID = 2, OrderDate = new DateTime(1997, 01, 06), ShippedDate = new DateTime(1997-02-03), RequiredDate = new DateTime(1997, 01, 29), ShipVia = 2, Freight = (decimal?)91.48, ShipName = "Sears Homelife", ShipAddress = "STR. 9 MAI, BACAU", ShipCity = "Bacau", ShipRegion = "Moldova 546708", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "BLAUS", EmployeeID = 4, OrderDate = new DateTime(1997, 04, 16), ShippedDate = new DateTime(1997-05-14), RequiredDate = new DateTime(1997, 04, 28), ShipVia = 1, Freight = (decimal?)0.15 , ShipName = "Blauer See"    , ShipAddress = "Delikatessen Forsterstr. 57 ", ShipCity = "Mannheim", ShipPostalCode = "68306", ShipCountry = "Germany" },
-            };
-            customers[6].Orders = new List<Orders>
-            {
-                new Orders() {CustomerID = "BLONP", EmployeeID = 2, OrderDate = new DateTime(1996, 07, 24), ShippedDate = new DateTime(1996-08-21), RequiredDate = new DateTime(1996, 08, 11), ShipVia = 1, Freight = (decimal?)55.28 , ShipName = "Blondel père et fils", ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipRegion = "Transilvania", ShipPostalCode = "67000", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "BLONP", EmployeeID = 4, OrderDate = new DateTime(1996, 08, 22), ShippedDate = new DateTime(1996-09-19), RequiredDate = new DateTime(1996, 09, 02), ShipVia = 1, Freight = (decimal?)7.45  , ShipName = "Century House"       , ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipRegion = "Transilvania", ShipPostalCode = "67000VRomania" },
-                new Orders() {CustomerID = "BLONP", EmployeeID = 4, OrderDate = new DateTime(1996, 11, 21), ShippedDate = new DateTime(1996-12-19), RequiredDate = new DateTime(1996, 12, 01), ShipVia = 3, Freight = (decimal?)131.70, ShipName = "Blondel père et fils", ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipPostalCode = "67000", ShipCountry = "Romania" },
-                new Orders() {CustomerID = "BLONP", EmployeeID = 1, OrderDate = new DateTime(1997, 01, 05), ShippedDate = new DateTime(1997-02-02), RequiredDate = new DateTime(1997, 01, 21), ShipVia = 1, Freight = (decimal?)34.82 , ShipName = "Century House"       , ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipRegion = "Transilvania", ShipPostalCode = "67000", ShipCountry = "Romania" }
-            };
+             };
 
             foreach(var customer in customers)
             {
-                customers.Add(customer);
+                context.Customers.Add(customer);
             }
             context.SaveChanges();
 
+            //orders
+            context.Orders.Add(new Orders() { CustomerID = "ALFKI", EmployeeID = 2, OrderDate = new DateTime(1996, 09, 22), ShippedDate = new DateTime(1996, 10, 20), RequiredDate = new DateTime(1996, 10, 02), ShipVia = 2, Freight = (decimal?)40.26, ShipName = "Vinyl Fever", ShipAddress = "STR. 10 MAI nr. 15, DaMBOVITA", ShipCity = "Targoviste", ShipRegion = "Muntenia", ShipPostalCode = "453993", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "ALFKI", EmployeeID = 1, OrderDate = new DateTime(1996, 11, 18), ShippedDate = new DateTime(1996, 12, 16), RequiredDate = new DateTime(1996, 12, 01), ShipVia = 3, Freight = (decimal?)34.88, ShipName = "Vinyl Fever", ShipAddress = "STR. 10 MAI nr. 15, DaMBOVITA", ShipCity = "Targoviste", ShipRegion = "Muntenia", ShipPostalCode = "453993", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "ALFKI", EmployeeID = 1, OrderDate = new DateTime(1996, 12, 04), ShippedDate = new DateTime(1997, 01, 01), RequiredDate = new DateTime(1996, 12, 08), ShipVia = 3, Freight = (decimal?)3.94, ShipName = "Vinyl Fever", ShipAddress = "STR. 10 MAI nr. 15, DaMBOVITA", ShipCity = "Targoviste", ShipRegion = "Muntenia", ShipPostalCode = "453993", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "ANATR", EmployeeID = 8, OrderDate = new DateTime(1996, 08, 12), ShippedDate = new DateTime(1996, 09,  09), RequiredDate = new DateTime(1996, 08, 15), ShipVia = 2, Freight = (decimal?)25.83, ShipName = "Kash n", ShipAddress = "Strada Caraiman 3, Constanta", ShipCity = "Constanta", ShipRegion = "Dobrogea", ShipPostalCode = "907021", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "ANATR", EmployeeID = 4, OrderDate = new DateTime(1997, 02, 09), ShippedDate = new DateTime(1997, 03, 09), RequiredDate = new DateTime(1997, 02, 27), ShipVia = 2, Freight = (decimal?)86.53, ShipName = "Kash n", ShipAddress = "Strada Caraiman 3, Constanta", ShipCity = "Constanta", ShipRegion = "Dobrogea", ShipPostalCode = "907021", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "ANATR", EmployeeID = 4, OrderDate = new DateTime(1997, 04, 01), ShippedDate = new DateTime(1997, 04, 29), RequiredDate = new DateTime(1997, 04, 08), ShipVia = 2, Freight = (decimal?)65.99, ShipName = "Kash n", ShipAddress = "Strada Caraiman 3, Constanta", ShipCity = "Constanta", ShipRegion = "Dobrogea", ShipPostalCode = "907021", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "ANATR", EmployeeID = 3, OrderDate = new DateTime(1997, 08, 07), ShippedDate = new DateTime(1997, 09, 04), RequiredDate = new DateTime(1997, 08, 13), ShipVia = 1, Freight = (decimal?)43.90, ShipName = "Ana", ShipAddress = "Strada Caraiman 3, Constanta", ShipCity = "Constanta", ShipRegion = "Dobrogea", ShipPostalCode = "05021", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "ANTON", EmployeeID = 6, OrderDate = new DateTime(1996, 07, 31), ShippedDate = new DateTime(1996, 08, 28), RequiredDate = new DateTime(1996, 08, 29), ShipVia = 2, Freight = (decimal?)4.54, ShipName = "Tech Hifi", ShipAddress = "Piata Revolutiei 3/26, Maramures", ShipCity = "Maramures", ShipRegion = "Maramures", ShipPostalCode = "873309", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "ANTON", EmployeeID = 1, OrderDate = new DateTime(1996, 10, 08), ShippedDate = new DateTime(1996, 10, 22), RequiredDate = new DateTime(1996, 10, 13), ShipVia = 3, Freight = (decimal?)64.86, ShipName = "Tech Hifi", ShipAddress = "Piata Revolutiei 3/26, Maramures", ShipCity = "Maramures", ShipRegion = "Maramures", ShipPostalCode = "873309", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "AROUT", EmployeeID = 7, OrderDate = new DateTime(1996, 10, 01), ShippedDate = new DateTime(1996, 10, 29), RequiredDate = new DateTime(1996, 10, 10), ShipVia = 3, Freight = (decimal?)64.50, ShipName = "Beatties", ShipAddress = "STR. VULCAN SAMUIL nr. 16, BEIUS", ShipCity = "BIHOR", ShipRegion = "Crisana", ShipPostalCode = "653271", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "AROUT", EmployeeID = 6, OrderDate = new DateTime(1996, 11, 14), ShippedDate = new DateTime(1996, 12, 12), RequiredDate = new DateTime(1996, 11, 19), ShipVia = 1, Freight = (decimal?)41.95, ShipName = "Around the Horn", ShipAddress = "Brook Farm Stratford St. Mary", ShipCity = "Colchester", ShipRegion = "Essex", ShipPostalCode = "CO7 6JX", ShipCountry = "UK" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "AROUT", EmployeeID = 1, OrderDate = new DateTime(1996, 12, 08), ShippedDate = new DateTime(1997, 01, 05), RequiredDate = new DateTime(1996, 12, 12), ShipVia = 3, Freight = (decimal?)22.21, ShipName = "Beatties", ShipAddress = "STR. VULCAN SAMUIL nr. 16, BEIUS", ShipCity = "BIHOR", ShipRegion = "Crisana", ShipPostalCode = "653271", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "AROUT", EmployeeID = 1, OrderDate = new DateTime(1997, 02, 20), ShippedDate = new DateTime(1997, 03, 20), RequiredDate = new DateTime(1997, 02, 25), ShipVia = 2, Freight = (decimal?)25.36, ShipName = "Around the Horn", ShipAddress = "Brook Farm Stratford St. Mary", ShipCity = "Colchester", ShipRegion = "Essex", ShipPostalCode = "CO7 6JX", ShipCountry = "UK" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "AROUT", EmployeeID = 2, OrderDate = new DateTime(1997, 05, 28), ShippedDate = new DateTime(1997, 06, 25), RequiredDate = new DateTime(1997, 06, 04), ShipVia = 1, Freight = (decimal?)83.22, ShipName = "Beatties", ShipAddress = "STR. VULCAN SAMUIL nr. 16, BEIUS", ShipCity = "BIHOR", ShipRegion = "Crisana", ShipPostalCode = "653271", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BERGS", EmployeeID = 1, OrderDate = new DateTime(1996, 07, 31), ShippedDate = new DateTime(1996, 08, 28), RequiredDate = new DateTime(1996, 08, 01), ShipVia = 1, Freight = (decimal?)136.54, ShipName = "Cut Above", ShipAddress = "Bulevardul Ion Mihalache 148B, Bucuresti", ShipCity = "Bucuresti", ShipRegion = "Muntenia", ShipPostalCode = "666708", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BLAUS", EmployeeID = 1, OrderDate = new DateTime(1996, 12, 31), ShippedDate = new DateTime(1997, 01, 28), RequiredDate = new DateTime(1997, 01, 15), ShipVia = 3, Freight = (decimal?)83.93, ShipName = "Sears Homelife", ShipAddress = "STR. 9 MAI, BACAU", ShipCity = "Bacau", ShipRegion = "Moldova 546708", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BLAUS", EmployeeID = 2, OrderDate = new DateTime(1997, 01, 06), ShippedDate = new DateTime(1997, 02, 03), RequiredDate = new DateTime(1997, 01, 29), ShipVia = 2, Freight = (decimal?)91.48, ShipName = "Sears Homelife", ShipAddress = "STR. 9 MAI, BACAU", ShipCity = "Bacau", ShipRegion = "Moldova 546708", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BLAUS", EmployeeID = 4, OrderDate = new DateTime(1997, 04, 16), ShippedDate = new DateTime(1997, 05, 14), RequiredDate = new DateTime(1997, 04, 28), ShipVia = 1, Freight = (decimal?)0.15, ShipName = "Blauer See", ShipAddress = "Delikatessen Forsterstr. 57 ", ShipCity = "Mannheim", ShipPostalCode = "68306", ShipCountry = "Germany" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BLONP", EmployeeID = 2, OrderDate = new DateTime(1996, 07, 24), ShippedDate = new DateTime(1996, 08, 21), RequiredDate = new DateTime(1996, 08, 11), ShipVia = 1, Freight = (decimal?)55.28, ShipName = "Blondel père et fils", ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipRegion = "Transilvania", ShipPostalCode = "67000", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BLONP", EmployeeID = 4, OrderDate = new DateTime(1996, 08, 22), ShippedDate = new DateTime(1996, 09, 19), RequiredDate = new DateTime(1996, 09, 02), ShipVia = 1, Freight = (decimal?)7.45, ShipName = "Century House", ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipRegion = "Transilvania", ShipPostalCode = "67000", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BLONP", EmployeeID = 4, OrderDate = new DateTime(1996, 11, 21), ShippedDate = new DateTime(1996, 12, 19), RequiredDate = new DateTime(1996, 12, 01), ShipVia = 3, Freight = (decimal?)131.70, ShipName = "Blondel père et fils", ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipPostalCode = "67000", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BLONP", EmployeeID = 1, OrderDate = new DateTime(1997, 01, 05), ShippedDate = new DateTime(1997, 02, 02), RequiredDate = new DateTime(1997, 01, 21), ShipVia = 1, Freight = (decimal?)34.82, ShipName = "Century House", ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipRegion = "Transilvania", ShipPostalCode = "67000", ShipCountry = "Romania" });
+            context.SaveChanges();
+            context.Orders.Add(new Orders() { CustomerID = "BLONP", EmployeeID = 1, OrderDate = new DateTime(1997, 01, 05), ShippedDate = new DateTime(1997, 02, 02), RequiredDate = new DateTime(1997, 01, 21), ShipVia = 1, Freight = (decimal?)34.82, ShipName = "Services", ShipAddress = "STR. BARNUTIU SIMION nr. 67, SALAJ", ShipCity = "SALAJ", ShipRegion = "Transilvania", ShipPostalCode = "67000", ShipCountry = "Romania" });
+            context.SaveChanges();
 
             //order details 
             List<Order_Details> orderDetails = new List<Order_Details>
@@ -411,12 +415,18 @@ namespace NorthwindWeb.Context
                 new Order_Details(){OrderID = 1, ProductID = 11, UnitPrice = 14.00M, Quantity =12 , Discount =  0   },
                 new Order_Details(){OrderID = 1, ProductID = 42, UnitPrice = 9.80M, Quantity =10 , Discount =  0   },
                 new Order_Details(){OrderID = 1, ProductID = 72, UnitPrice = 34.80M, Quantity =5  , Discount =  0   },
+                new Order_Details(){OrderID = 1, ProductID = 31, UnitPrice = 10.00M , Quantity =15 , Discount =  0.05f},
+                new Order_Details(){OrderID = 1, ProductID = 33, UnitPrice = 2.00M  , Quantity =20 , Discount =  0   },
+                new Order_Details(){OrderID = 1, ProductID = 40, UnitPrice = 14.70M , Quantity =60 , Discount =  0.05f},
                 new Order_Details(){OrderID = 2, ProductID = 14, UnitPrice = 18.60M, Quantity =9  , Discount =  0   },
                 new Order_Details(){OrderID = 2, ProductID = 51, UnitPrice = 42.40M, Quantity =40 , Discount =  0   },
                 new Order_Details(){OrderID = 2, ProductID = 41, UnitPrice = 7.70M, Quantity =10 , Discount =  0   },
                 new Order_Details(){OrderID = 3, ProductID = 51, UnitPrice = 42.40M, Quantity =35 , Discount =  0.15f},
                 new Order_Details(){OrderID = 3, ProductID = 65, UnitPrice = 16.80M, Quantity =15 , Discount =  0.15f},
                 new Order_Details(){OrderID = 3, ProductID = 22, UnitPrice = 16.80M, Quantity =6  , Discount =  0.05f},
+                new Order_Details(){OrderID = 3, ProductID = 76, UnitPrice = 14.40M , Quantity =33 , Discount =  0.05f},
+                new Order_Details(){OrderID = 3, ProductID = 71, UnitPrice = 17.20M , Quantity =20 , Discount =  0   },
+                new Order_Details(){OrderID = 3, ProductID = 72, UnitPrice = 27.80M , Quantity =7  , Discount =  0   },
                 new Order_Details(){OrderID = 4, ProductID = 57, UnitPrice = 15.60M, Quantity =15 , Discount =  0.05f},
                 new Order_Details(){OrderID = 4, ProductID = 65, UnitPrice = 16.80M, Quantity =20 , Discount =  0   },
                 new Order_Details(){OrderID = 4, ProductID = 20, UnitPrice = 64.80M, Quantity =40 , Discount =  0.05f},
@@ -426,12 +436,19 @@ namespace NorthwindWeb.Context
                 new Order_Details(){OrderID = 6, ProductID = 39, UnitPrice = 14.40M, Quantity =42 , Discount =  0   },
                 new Order_Details(){OrderID = 6, ProductID = 49, UnitPrice = 16.00M, Quantity =40 , Discount =  0   },
                 new Order_Details(){OrderID = 6, ProductID = 24, UnitPrice = 3.60M, Quantity =15 , Discount =  0.15f},
+                new Order_Details(){OrderID = 6, ProductID = 25, UnitPrice = 3.60M  , Quantity =12 , Discount =  0.05f},
+                new Order_Details(){OrderID = 6, ProductID = 59, UnitPrice = 44.00M , Quantity =6  , Discount =  0.05f},
+                new Order_Details(){OrderID = 6, ProductID = 10, UnitPrice = 24.80M , Quantity =15 , Discount =  0   },
                 new Order_Details(){OrderID = 7, ProductID = 55, UnitPrice = 19.20M, Quantity =21 , Discount =  0.15f},
                 new Order_Details(){OrderID = 7, ProductID = 74, UnitPrice = 8.00M, Quantity =21 , Discount =  0   },
                 new Order_Details(){OrderID = 7, ProductID = 2 , UnitPrice = 15.20M, Quantity =20 , Discount =  0   },
                 new Order_Details(){OrderID = 8, ProductID = 16, UnitPrice = 13.90M, Quantity =35 , Discount =  0   },
                 new Order_Details(){OrderID = 8, ProductID = 36, UnitPrice = 15.20M, Quantity =25 , Discount =  0   },
                 new Order_Details(){OrderID = 8, ProductID = 59, UnitPrice = 44.00M, Quantity =30 , Discount =  0   },
+                new Order_Details(){OrderID = 8, ProductID = 13, UnitPrice = 4.80M  , Quantity =10 , Discount =  0   },
+                new Order_Details(){OrderID = 8, ProductID = 28, UnitPrice = 36.40M , Quantity =20 , Discount =  0   },
+                new Order_Details(){OrderID = 8, ProductID = 62, UnitPrice = 39.40M , Quantity =12 , Discount =  0   },
+                new Order_Details(){OrderID = 8, ProductID = 44, UnitPrice = 15.50M , Quantity =16 , Discount =  0   },
                 new Order_Details(){OrderID = 9, ProductID = 53, UnitPrice = 26.20M, Quantity =15 , Discount =  0   },
                 new Order_Details(){OrderID = 9, ProductID = 77, UnitPrice = 10.40M, Quantity =12 , Discount =  0   },
                 new Order_Details(){OrderID = 9, ProductID = 27, UnitPrice = 35.10M, Quantity =25 , Discount =  0   },
@@ -456,6 +473,10 @@ namespace NorthwindWeb.Context
                 new Order_Details(){OrderID = 16, ProductID = 30, UnitPrice = 20.70M , Quantity =60 , Discount =  0.25f},
                 new Order_Details(){OrderID = 16, ProductID = 74, UnitPrice = 8.00M  , Quantity =36 , Discount =  0.25f},
                 new Order_Details(){OrderID = 16, ProductID = 2 , UnitPrice = 15.20M , Quantity =35 , Discount =  0   },
+                new Order_Details(){OrderID = 16, ProductID = 24, UnitPrice = 3.60M  , Quantity =12 , Discount =  0   },
+                new Order_Details(){OrderID = 16, ProductID = 55, UnitPrice = 19.20M , Quantity =20 , Discount =  0   },
+                new Order_Details(){OrderID = 16, ProductID = 75, UnitPrice = 6.20M  , Quantity =30 , Discount =  0   },
+                new Order_Details(){OrderID = 16, ProductID = 19, UnitPrice = 7.30M  , Quantity =1  , Discount =  0 },
                 new Order_Details(){OrderID = 17, ProductID = 41, UnitPrice = 7.70M , Quantity =25 , Discount =  0.15f},
                 new Order_Details(){OrderID = 17, ProductID = 17, UnitPrice = 31.20M , Quantity =30 , Discount =  0   },
                 new Order_Details(){OrderID = 17, ProductID = 70, UnitPrice = 12.00M , Quantity =20 , Discount =  0   },
@@ -468,41 +489,25 @@ namespace NorthwindWeb.Context
                 new Order_Details(){OrderID = 20, ProductID = 33, UnitPrice = 2.00M  , Quantity =60 , Discount =  0.05f},
                 new Order_Details(){OrderID = 20, ProductID = 72, UnitPrice = 27.80M , Quantity =20 , Discount =  0.05f},
                 new Order_Details(){OrderID = 20, ProductID = 36, UnitPrice = 15.20M , Quantity =30 , Discount =  0   },
+                new Order_Details(){OrderID = 20, ProductID = 59, UnitPrice = 44.00M , Quantity =15 , Discount =  0   },
+                new Order_Details(){OrderID = 20, ProductID = 63, UnitPrice = 35.10M , Quantity =8  , Discount =  0   },
+                new Order_Details(){OrderID = 20, ProductID = 73, UnitPrice = 12.00M , Quantity =25 , Discount =  0   },
+                new Order_Details(){OrderID = 20, ProductID = 17, UnitPrice = 31.20M , Quantity =15 , Discount =  0.25f},
                 new Order_Details(){OrderID = 21, ProductID = 43, UnitPrice = 36.80M , Quantity =25 , Discount =  0   },
                 new Order_Details(){OrderID = 21, ProductID = 33, UnitPrice = 2.00M  , Quantity =24 , Discount =  0   },
                 new Order_Details(){OrderID = 21, ProductID = 20, UnitPrice = 64.80M , Quantity =6  , Discount =  0   },
                 new Order_Details(){OrderID = 22, ProductID = 31, UnitPrice = 10.00M , Quantity =40 , Discount =  0   },
                 new Order_Details(){OrderID = 22, ProductID = 72, UnitPrice = 27.80M , Quantity =24 , Discount =  0   },
                 new Order_Details(){OrderID = 22, ProductID = 10, UnitPrice = 24.80M , Quantity =24 , Discount =  0.05f},
-                new Order_Details(){OrderID = 1, ProductID = 31, UnitPrice = 10.00M , Quantity =15 , Discount =  0.05f},
-                new Order_Details(){OrderID = 1, ProductID = 33, UnitPrice = 2.00M  , Quantity =20 , Discount =  0   },
-                new Order_Details(){OrderID = 1, ProductID = 40, UnitPrice = 14.70M , Quantity =60 , Discount =  0.05f},
-                new Order_Details(){OrderID = 3, ProductID = 76, UnitPrice = 14.40M , Quantity =33 , Discount =  0.05f},
-                new Order_Details(){OrderID = 3, ProductID = 71, UnitPrice = 17.20M , Quantity =20 , Discount =  0   },
-                new Order_Details(){OrderID = 3, ProductID = 72, UnitPrice = 27.80M , Quantity =7  , Discount =  0   },
-                new Order_Details(){OrderID = 6, ProductID = 24, UnitPrice = 3.60M  , Quantity =12 , Discount =  0.05f},
-                new Order_Details(){OrderID = 6, ProductID = 59, UnitPrice = 44.00M , Quantity =6  , Discount =  0.05f},
-                new Order_Details(){OrderID = 6, ProductID = 10, UnitPrice = 24.80M , Quantity =15 , Discount =  0   },
-                new Order_Details(){OrderID = 8, ProductID = 13, UnitPrice = 4.80M  , Quantity =10 , Discount =  0   },
-                new Order_Details(){OrderID = 8, ProductID = 28, UnitPrice = 36.40M , Quantity =20 , Discount =  0   },
-                new Order_Details(){OrderID = 8, ProductID = 62, UnitPrice = 39.40M , Quantity =12 , Discount =  0   },
-                new Order_Details(){OrderID = 8, ProductID = 44, UnitPrice = 15.50M , Quantity =16 , Discount =  0   },
-                new Order_Details(){OrderID = 20, ProductID = 59, UnitPrice = 44.00M , Quantity =15 , Discount =  0   },
-                new Order_Details(){OrderID = 20, ProductID = 63, UnitPrice = 35.10M , Quantity =8  , Discount =  0   },
-                new Order_Details(){OrderID = 20, ProductID = 73, UnitPrice = 12.00M , Quantity =25 , Discount =  0   },
-                new Order_Details(){OrderID = 20, ProductID = 17, UnitPrice = 31.20M , Quantity =15 , Discount =  0.25f},
-                new Order_Details(){OrderID = 16, ProductID = 24, UnitPrice = 3.60M  , Quantity =12 , Discount =  0   },
-                new Order_Details(){OrderID = 16, ProductID = 55, UnitPrice = 19.20M , Quantity =20 , Discount =  0   },
-                new Order_Details(){OrderID = 16, ProductID = 75, UnitPrice = 6.20M  , Quantity =30 , Discount =  0   },
-                new Order_Details(){OrderID = 16, ProductID = 19, UnitPrice = 7.30M  , Quantity =1  , Discount =  0 }
+                new Order_Details(){OrderID = 23, ProductID = 83, UnitPrice = 120.00M , Quantity =24 , Discount =  0.05f},
             };
-               
-            foreach(var orderDetail in orderDetails)
+
+            foreach (var orderDetail in orderDetails)
             {
                 context.Order_Details.Add(orderDetail);
             }
             context.SaveChanges();
-            
+
         }
     }
 }

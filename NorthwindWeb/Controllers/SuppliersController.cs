@@ -164,7 +164,7 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch (Exception)
+            catch
             {
                 throw new DeleteException("Nu puteti sterge un furnizor cu comenzi alocate");
             }
@@ -182,14 +182,7 @@ namespace NorthwindWeb.Controllers
             const int TOTAL_ROWS = 999;
 
             string search = "";
-            try
-            {
-                search = Request.QueryString["search[value]"] ?? "";
-            }
-            catch
-            {
-
-            }
+            search = Request.QueryString["search[value]"] ?? "";
 
             int sortColumn = -1;
             string sortDirection = "asc";
@@ -199,29 +192,15 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            try
+            if (Request.QueryString["order[0][column]"] != null)
             {
-                if (Request.QueryString["order[0][column]"] != null)
-                {
-                    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-                }
-            }
-            catch
-            {
-
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
             }
 
-            try
-            {
                 if (Request.QueryString["order[0][dir]"] != null)
                 {
                     sortDirection = Request.QueryString["order[0][dir]"];
                 }
-            }
-            catch
-            {
-
-            }
 
             //list of product that contain "search"
             var suppliersInfo = db.Suppliers.OrderBy(x => x.SupplierID).Where(s => s.CompanyName.Contains(search) || s.ContactName.Contains(search)
@@ -307,7 +286,7 @@ namespace NorthwindWeb.Controllers
             }
 
             //objet that whill be sent to client
-            JsonDataTableObject dataTableData = new JsonDataTableObject()
+            JsonDataTable dataTableData = new JsonDataTable()
             {
                 draw = draw,
                 recordsTotal = db.Suppliers.Count(),

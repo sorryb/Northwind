@@ -9,7 +9,7 @@ namespace NorthwindWeb.Models.ServerClientCommunication
     /// <summary>
     /// Contain data that datatable need to draw corect table from server
     /// </summary>
-    public class JsonDataTableObject
+    public class JsonDataTable
     {
         /// <summary>
         /// The draw counter that this object is a response to - from the draw parameter 
