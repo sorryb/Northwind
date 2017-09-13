@@ -27,7 +27,11 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
 
-        // GET: Product
+        /// <summary>
+        /// Displays a page containing a datatable with all the products in the database.
+        /// </summary>
+        /// <param name="category">Filters the products and only shows the ones containing this category.</param>
+        /// <returns>Product index view</returns>
         public ActionResult Index(string category = "")
         {
             //category from browser adress is used also in JsonTableFill action
@@ -35,7 +39,11 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
-        // GET: Product/Details/5
+        /// <summary>
+        /// Displays a page containing all the information about one product
+        /// </summary>
+        /// <param name="id">The id of the product that is going to be created.</param>
+        /// <returns>Product details view</returns>
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,7 +58,10 @@ namespace NorthwindWeb.Controllers
             return View(products);
         }
 
-        // GET: Product/Create
+        /// <summary>
+        /// Displays a page containing a form required to add a new product in the database.
+        /// </summary>
+        /// <returns>Product create view</returns>
         public ActionResult Create()
         {
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName");
@@ -58,7 +69,11 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
-        // POST: Product/Create
+        /// <summary>
+        /// Creates a new product and adds it to the database.
+        /// </summary>
+        /// <param name="products">The products entity that will be added.</param>
+        /// <returns>Product index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -78,7 +93,11 @@ namespace NorthwindWeb.Controllers
             return View(products);
         }
 
-        // GET: Product/Edit/5
+        /// <summary>
+        /// Displays a page containing a form required to edit a product.
+        /// </summary>
+        /// <param name="id">The id of the product that is going to be edited.</param>
+        /// <returns>Product edit view</returns>
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
@@ -96,7 +115,11 @@ namespace NorthwindWeb.Controllers
             return View(products);
         }
 
-        // POST: Product/Edit/5
+        /// <summary>
+        /// Updates the information of a product in the database.
+        /// </summary>
+        /// <param name="products">The product entity with the updated information.</param>
+        /// <returns>Product index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -115,7 +138,11 @@ namespace NorthwindWeb.Controllers
             return View(products);
         }
 
-        // GET: Product/Delete/5
+        /// <summary>
+        /// Displays a confirmation page for the following delete operation.
+        /// </summary>
+        /// <param name="id">The id of the product that is going to be deleted.</param>
+        /// <returns>Product delete view</returns>
         //TODO Delete from related tables
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
@@ -134,7 +161,11 @@ namespace NorthwindWeb.Controllers
 
         }
 
-        // POST: Product/Delete/5
+        /// <summary>
+        /// Deletes a product from the database.
+        /// </summary>
+        /// <param name="id">The id of the product that is going to be deleted.</param>
+        /// <returns>Product index view.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
@@ -161,7 +192,7 @@ namespace NorthwindWeb.Controllers
 
 
         /// <summary>
-        /// send back a JsonDataTableObject as json with all the information that wee need to populate datatable
+        /// Send back a JsonDataTableObject as json with all the information that we need to populate datatable
         /// </summary>
         /// <param name="draw">Draw order. Client send a draw id in request to keep track of asincron response</param>
         /// <param name="start">Start from this item</param>

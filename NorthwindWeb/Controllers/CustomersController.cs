@@ -165,7 +165,7 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch (Exception e)
+            catch
             {
                 string listOfOrders = "";
                 var orderId = db.Orders.Include(x=>x.Customer).Where(x=>x.CustomerID == id).Select(x=>new { x.OrderID });
@@ -195,7 +195,10 @@ namespace NorthwindWeb.Controllers
             {
                 search = Request.QueryString["search[value]"] ?? "";
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
 
             int sortColumn = -1;
@@ -215,7 +218,10 @@ namespace NorthwindWeb.Controllers
 
                 }
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
             try
             {
@@ -225,7 +231,10 @@ namespace NorthwindWeb.Controllers
 
                 }
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
             //list of customers that contain "search"
             var list = db.Customers.Where(x => x.CompanyName.Contains(search)||

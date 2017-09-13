@@ -3,9 +3,18 @@ using System.Web.Optimization;
 
 namespace NorthwindWeb
 {
+    /// <summary>
+    /// Bundles.
+    /// </summary>
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+        /// <summary>
+        /// Register bundles.
+        /// </summary>
+        /// <param name="bundles"></param>
+        /// <remarks>
+        /// For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+        ///</remarks>
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
