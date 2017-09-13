@@ -18,7 +18,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Customers Controller. For table Customers
     /// </summary>
-    [Authorize]    
+    [Authorize]
     public class CustomersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
@@ -168,8 +168,8 @@ namespace NorthwindWeb.Controllers
             catch
             {
                 string listOfOrders = "";
-                var orderId = db.Orders.Include(x=>x.Customer).Where(x=>x.CustomerID == id).Select(x=>new { x.OrderID });
-                foreach(var itemInOrders in orderId)
+                var orderId = db.Orders.Include(x => x.Customer).Where(x => x.CustomerID == id).Select(x => new { x.OrderID });
+                foreach (var itemInOrders in orderId)
                 {
                     listOfOrders = listOfOrders + itemInOrders.OrderID.ToString() + "\n ";
                 }
@@ -177,7 +177,7 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        
+
 
         /// <summary>
         /// Function used to control the dashboard datatables from the server
@@ -191,14 +191,8 @@ namespace NorthwindWeb.Controllers
             const int totalRows = 999;
 
             string search = "";
-            try
-            {
-                search = Request.QueryString["search[value]"] ?? "";
-            }
-            catch
-            {
 
-            }
+            search = Request.QueryString["search[value]"] ?? "";
 
 
             int sortColumn = -1;
@@ -209,39 +203,25 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            try
+            if (Request.QueryString["order[0][column]"] != null)
             {
-                if (Request.QueryString["order[0][column]"] != null)
-                {
 
-                        sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-
-                }
-            }
-            catch
-            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
 
             }
 
-            try
+            if (Request.QueryString["order[0][dir]"] != null)
             {
-                if (Request.QueryString["order[0][dir]"] != null)
-                {
-                        sortDirection = Request.QueryString["order[0][dir]"];
-
-                }
-            }
-            catch
-            {
+                sortDirection = Request.QueryString["order[0][dir]"];
 
             }
 
             //list of customers that contain "search"
-            var list = db.Customers.Where(x => x.CompanyName.Contains(search)||
-                                          x.ContactName.Contains(search)||
-                                          x.ContactTitle.Contains(search)||
-                                          x.City.Contains(search)||
-                                          x.Country.Contains(search)||
+            var list = db.Customers.Where(x => x.CompanyName.Contains(search) ||
+                                          x.ContactName.Contains(search) ||
+                                          x.ContactTitle.Contains(search) ||
+                                          x.City.Contains(search) ||
+                                          x.Country.Contains(search) ||
                                           x.Phone.Contains(search));
 
             //order list
@@ -311,8 +291,8 @@ namespace NorthwindWeb.Controllers
                         list = list.OrderByDescending(x => x.Phone);
                     }
                     break;
-               
-                    
+
+
             }
 
             //objet that whill be sent to client

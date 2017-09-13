@@ -199,23 +199,15 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            try
-            {
                 if (Request.QueryString["order[0][column]"] != null)
                 {
                     sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
                 }
-            }
-            catch (NullReferenceException) { }
 
-            try
-            {
                 if (Request.QueryString["order[0][dir]"] != null)
                 {
                     sortDirection = Request.QueryString["order[0][dir]"];
                 }
-            }
-            catch (NullReferenceException) { }
 
             //list of product that contain "search"
 
