@@ -129,7 +129,7 @@ namespace NorthwindWeb.Models
         public virtual ICollection<Employees> Employees1 { get; set; }
 
         /// <summary>
-        ///  The employees that this employee is responsible for.
+        /// The employee that is responsible for this employee.
         /// </summary>
         public virtual Employees Employee1 { get; set; }
 
