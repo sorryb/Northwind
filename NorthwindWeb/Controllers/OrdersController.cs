@@ -33,9 +33,9 @@ namespace NorthwindWeb.Controllers
         /// <returns>Orders index view</returns>
         public ActionResult Index(string search = "")
         {
-            return View(db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o=>o.OrderID.ToString().Contains(search)).OrderBy(o=>o.OrderID));
-            
-          
+            return View(db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)).OrderBy(o => o.OrderID));
+
+
         }
 
         /// <summary>
@@ -52,12 +52,12 @@ namespace NorthwindWeb.Controllers
             {
                 return HttpNotFound();
             }
-            viewModel.order = orders;
+            viewModel.Order = orders;
 
             //take order-details of orders
             var orderDetail = from od in db.Order_Details
-                        where (od.OrderID == id)
-                        select new { od.OrderID,od.ProductID,od.Quantity,od.UnitPrice, od.Discount };
+                              where (od.OrderID == id)
+                              select new { od.OrderID, od.ProductID, od.Quantity, od.UnitPrice, od.Discount };
 
 
             List<DetailsOfOrder> listOfDetails = new List<DetailsOfOrder>();
@@ -77,7 +77,7 @@ namespace NorthwindWeb.Controllers
                 listOfDetails.Add(order);
 
             }
-            viewModel.details = listOfDetails;
+            viewModel.Details = listOfDetails;
             ViewBag.orderid = id;
             return View(viewModel);
         }
@@ -176,7 +176,7 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> Delete(int? id)
         {
 
-            if(id==null)
+            if (id == null)
             {
                 return HttpNotFound();
             }
@@ -187,12 +187,12 @@ namespace NorthwindWeb.Controllers
             {
                 return HttpNotFound();
             }
-            viewModel.order = orders;
+            viewModel.Order = orders;
 
             //take order-details of orders
             var orderDetail = from od in db.Order_Details
-                        where (od.OrderID == id)
-                        select new { od.OrderID, od.ProductID, od.Quantity, od.UnitPrice, od.Discount };
+                              where (od.OrderID == id)
+                              select new { od.OrderID, od.ProductID, od.Quantity, od.UnitPrice, od.Discount };
 
 
             List<DetailsOfOrder> listOfDetails = new List<DetailsOfOrder>();
@@ -212,7 +212,7 @@ namespace NorthwindWeb.Controllers
                 listOfDetails.Add(order);
 
             }
-            viewModel.details = listOfDetails;
+            viewModel.Details = listOfDetails;
             ViewBag.orderid = id;
 
             return View(viewModel);
@@ -230,8 +230,8 @@ namespace NorthwindWeb.Controllers
         {
 
 
-            var details = db.Order_Details.Where(x=>x.OrderID==id);
-            foreach(var orderDet in details)
+            var details = db.Order_Details.Where(x => x.OrderID == id);
+            foreach (var orderDet in details)
                 db.Order_Details.Remove(orderDet);
 
             Orders orders = await db.Orders.FindAsync(id);
@@ -252,17 +252,10 @@ namespace NorthwindWeb.Controllers
         /// <returns>A JSON filtered orders list.</returns>
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
-            const int totalRows = 999;          
+            const int totalRows = 999;
 
             string search = "";
-            try
-            {
-                search = Request.QueryString["search[value]"] ?? "";
-            }
-            catch
-            {
-
-            }
+            search = Request.QueryString["search[value]"] ?? "";
 
 
             int sortColumn = -1;
@@ -273,37 +266,23 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            try
+            if (Request.QueryString["order[0][column]"] != null)
             {
-                if (Request.QueryString["order[0][column]"] != null)
-                {
-                        sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-                }
-            }
-            catch
-            {
-
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
             }
 
-            try
-            {
-                if (Request.QueryString["order[0][dir]"] != null)
-                {
-
-                    sortDirection = Request.QueryString["order[0][dir]"];
-                }
-            }
-            catch
+            if (Request.QueryString["order[0][dir]"] != null)
             {
 
+                sortDirection = Request.QueryString["order[0][dir]"];
             }
 
             //list of orders that contain "search"
-            var list = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)||
-                                        o.Employee.LastName.Contains(search)||
-                                        o.Shipper.CompanyName.Contains(search)||
-                                        o.ShippedDate.ToString().Contains(search)||
-                                        o.ShipName.Contains(search)||
+            var list = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search) ||
+                                        o.Employee.LastName.Contains(search) ||
+                                        o.Shipper.CompanyName.Contains(search) ||
+                                        o.ShippedDate.ToString().Contains(search) ||
+                                        o.ShipName.Contains(search) ||
                                         o.ShipAddress.Contains(search));
 
             //order list

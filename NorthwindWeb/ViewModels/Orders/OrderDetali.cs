@@ -11,7 +11,14 @@ namespace NorthwindWeb.ViewModels.Orders
     /// </summary>
     public class OrderDetali
     {
-        public Models.Orders order { get; set; }
-        public IEnumerable<DetailsOfOrder> details { get; set; }
+        /// <summary>
+        /// Display the order. 
+        /// </summary>
+        public Models.Orders Order { get; set; }
+
+        /// <summary>
+        /// Dispay the details of the order.
+        /// </summary>
+        public IEnumerable<DetailsOfOrder> Details { get; set; }
     }
 }

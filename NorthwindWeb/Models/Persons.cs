@@ -26,6 +26,7 @@ namespace NorthwindWeb.Models
         /// The LastName through which we find the person.
         /// </summary>
         [Key]
+        [Required]
         [Column(Order = 1)]
         [StringLength(255)]
         public string LastName { get; set; }
@@ -39,12 +40,15 @@ namespace NorthwindWeb.Models
         /// <summary>
         /// The Email through which we find the person.
         /// </summary>
+        [Required]
+        [EmailAddress]
         [StringLength(255)]
         public string Email { get; set; }
 
         /// <summary>
         /// The Comment what belongs to the person.
         /// </summary>
+        [Required]
         [StringLength(255)]
         public string Comment { get; set; }
 

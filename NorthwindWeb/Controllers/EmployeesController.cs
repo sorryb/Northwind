@@ -173,7 +173,7 @@ namespace NorthwindWeb.Controllers
                 if (employees.Orders.Any())
                     throw new DeleteException("Angajatul nu poate fi sters pentru ca detine comenzi");
                 if (employees.Employees1.Any())
-                    throw new DeleteException("Angajatul nu poate fi sters pentru ca angajati in subordine");
+                    throw new DeleteException("Angajatul nu poate fi sters pentru ca are angajati in subordine");
                 employees.Territories.Clear();
                 db.Employees.Remove(employees);
                 await db.SaveChangesAsync();

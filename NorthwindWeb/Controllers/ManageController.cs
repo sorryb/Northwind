@@ -11,6 +11,9 @@ using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// Contains all the methods used to change the user's information.
+    /// </summary>
     [Authorize]
     public class ManageController : Controller
     {
@@ -25,12 +28,20 @@ namespace NorthwindWeb.Controllers
 
         }
 
+        /// <summary>
+        /// Initialises userManager and signInManager.
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
-
+        
+        /// <summary>
+        /// Getter/Setter
+        /// </summary>
         public ApplicationSignInManager SignInManager
         {
             get
@@ -43,6 +54,9 @@ namespace NorthwindWeb.Controllers
             }
         }
 
+        /// <summary>
+        /// Getter/Setter
+        /// </summary>
         public ApplicationUserManager UserManager
         {
             get
@@ -83,8 +97,12 @@ namespace NorthwindWeb.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Manage/RemoveLogin
+        /// <summary>
+        /// Removes an external login from this user.
+        /// </summary>
+        /// <param name="loginProvider">The provider that sent the external login link.</param>
+        /// <param name="providerKey"></param>
+        /// <returns>Manage ManageLogins view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
@@ -107,15 +125,21 @@ namespace NorthwindWeb.Controllers
             return RedirectToAction("ManageLogins", new { Message = message });
         }
 
-        //
-        // GET: /Manage/AddPhoneNumber
+        /// <summary>
+        /// Displays a page containing a form neccessary to add a phone number to an existing user.
+        /// </summary>
+        /// <returns>Manage AddPhoneNumber view</returns>
         public ActionResult AddPhoneNumber()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/AddPhoneNumber
+        
+        /// <summary>
+        /// Displays a page containing a form neccessary to add a phone number to an existing user.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
@@ -138,8 +162,10 @@ namespace NorthwindWeb.Controllers
             return RedirectToAction("VerifyPhoneNumber", new { PhoneNumber = model.Number });
         }
 
-        //
-        // POST: /Manage/EnableTwoFactorAuthentication
+        /// <summary>
+        /// Enables two factor authentication
+        /// </summary>
+        /// <returns>Manage index view.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
@@ -153,8 +179,10 @@ namespace NorthwindWeb.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
-        // POST: /Manage/DisableTwoFactorAuthentication
+        /// <summary>
+        /// Disables two factor authentication
+        /// </summary>
+        /// <returns>Manage index view.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
@@ -168,8 +196,11 @@ namespace NorthwindWeb.Controllers
             return RedirectToAction("Index", "Manage");
         }
 
-        //
-        // GET: /Manage/VerifyPhoneNumber
+        /// <summary>
+        /// Sends an sms containing a security code to the phonenumber
+        /// </summary>
+        /// <param name="phoneNumber">The number that will receive the sms.</param>
+        /// <returns>Manage VerifyPhoneNumber view.</returns>
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
@@ -177,8 +208,11 @@ namespace NorthwindWeb.Controllers
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel { PhoneNumber = phoneNumber });
         }
 
-        //
-        // POST: /Manage/VerifyPhoneNumber
+        /// <summary>
+        /// Verifies if the security code matches the number it was sent to.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Manage index view.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
@@ -202,8 +236,10 @@ namespace NorthwindWeb.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Manage/RemovePhoneNumber
+        /// <summary>
+        /// Removes the current user's phone number.
+        /// </summary>
+        /// <returns>Manage index view.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RemovePhoneNumber()
@@ -221,15 +257,20 @@ namespace NorthwindWeb.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
-        //
-        // GET: /Manage/ChangePassword
+        /// <summary>
+        /// Displays a page containing a form neccessary to change the password for the curent user.
+        /// </summary>
+        /// <returns>Manage ChangePassword view</returns>
         public ActionResult ChangePassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/ChangePassword
+        /// <summary>
+        /// Changes the password of the current user if the old password was entered correctly.
+        /// </summary>
+        /// <param name="model">The class containing the neccessary information.</param>
+        /// <returns>Manage index view.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
@@ -252,15 +293,20 @@ namespace NorthwindWeb.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Manage/SetPassword
+        /// <summary>
+        /// Displays a page containing a form neccessary to set a new password.
+        /// </summary>
+        /// <returns>Manage setPassword view.</returns>
         public ActionResult SetPassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/SetPassword
+        /// <summary>
+        /// Sets the password for the current user.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Manage index view.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
@@ -284,8 +330,11 @@ namespace NorthwindWeb.Controllers
             return View(model);
         }
 
-        //
-        // GET: /Manage/ManageLogins
+        /// <summary>
+        /// Manages local and external logins.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns>Manage ManageLogins view</returns>
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -307,8 +356,11 @@ namespace NorthwindWeb.Controllers
             });
         }
 
-        //
-        // POST: /Manage/LinkLogin
+        /// <summary>
+        /// Requests an external login link from a provider.
+        /// </summary>
+        /// <param name="provider">The provider that will receive the request.</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
@@ -317,8 +369,10 @@ namespace NorthwindWeb.Controllers
             return new AccountController.ChallengeResult(provider, Url.Action("LinkLoginCallback", "Manage"), User.Identity.GetUserId());
         }
 
-        //
-        // GET: /Manage/LinkLoginCallback
+        /// <summary>
+        /// Logs in the user using the external login link.
+        /// </summary>
+        /// <returns>Manage ManageLogins view.</returns>
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
@@ -329,7 +383,10 @@ namespace NorthwindWeb.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && _userManager != null)
@@ -386,14 +443,38 @@ namespace NorthwindWeb.Controllers
         //    throw new NotImplementedException();
         //}
 
+        /// <summary>
+        /// Contains the possible messages that a Manage page can display.
+        /// </summary>
         public enum ManageMessageId
         {
+            /// <summary>
+            /// 
+            /// </summary>
             AddPhoneSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
             ChangePasswordSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
             SetTwoFactorSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
             SetPasswordSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
             RemoveLoginSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
             RemovePhoneSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
             Error
         }
 

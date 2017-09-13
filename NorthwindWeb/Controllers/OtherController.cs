@@ -4,7 +4,9 @@
 namespace NorthwindWeb.Controllers
 {
     
-    
+    /// <summary>
+    /// 
+    /// </summary>
     public class OtherController : Controller
     {
         /// <summary>

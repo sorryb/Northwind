@@ -202,18 +202,10 @@ namespace NorthwindWeb.Controllers
         {
             const int TOTAL_ROWS = 999;
             string category = "";
-            try
-            {
-                category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
-            }
-            catch (NullReferenceException) { }
+            category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
 
             string search = "";
-            try
-            {
-                search = Request.QueryString["search[value]"] ?? "";
-            }
-            catch (NullReferenceException) { }
+            search = Request.QueryString["search[value]"] ?? "";
 
 
             int sortColumn = -1;
@@ -224,31 +216,15 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            try
+            if (Request.QueryString["order[0][column]"] != null)
             {
-                if (Request.QueryString["order[0][column]"] != null)
-                {
-                    try
-                    {
-                        sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-                    }
-                    catch (NullReferenceException) { }
-                }
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
             }
-            catch (NullReferenceException) { }
 
-            try
+            if (Request.QueryString["order[0][dir]"] != null)
             {
-                if (Request.QueryString["order[0][dir]"] != null)
-                {
-                    try
-                    {
-                        sortDirection = Request.QueryString["order[0][dir]"];
-                    }
-                    catch (NullReferenceException) { }
-                }
+                sortDirection = Request.QueryString["order[0][dir]"];
             }
-            catch (NullReferenceException) { }
 
             //list of product that contain "search"
             var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)

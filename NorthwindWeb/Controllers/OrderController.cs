@@ -285,7 +285,7 @@ namespace NorthwindWeb.Controllers
             foreach (var itemOrder in order)
             {
                 bigOrder.OrderID = itemOrder.OrderID;
-                bigOrder.Produse = itemOrder.max;
+                bigOrder.NumberOfProduct = itemOrder.max;
             }
             return bigOrder;
         }
@@ -305,7 +305,7 @@ namespace NorthwindWeb.Controllers
             foreach (var itemOrder in order)
             {
                 bigOrder.OrderID = itemOrder.OrderID;
-                bigOrder.Produse = itemOrder.max;
+                bigOrder.NumberOfProduct = itemOrder.max;
             }
             return bigOrder;
         }
