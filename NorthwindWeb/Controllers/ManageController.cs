@@ -17,8 +17,12 @@ namespace NorthwindWeb.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public ManageController()
         {
+
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -51,8 +55,11 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        //
-        // GET: /Manage/Index
+        /// <summary>
+        /// Displays a page with links to change various account information. (password, phone number)
+        /// </summary>
+        /// <param name="message">A message to show.</param>
+        /// <returns>Manage index view</returns>
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
