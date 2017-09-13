@@ -6,14 +6,22 @@ namespace NorthwindWeb.Models
     using System.Linq;
     using NorthwindWeb.Context;
 
+    /// <summary>
+    /// Context for northwind database.
+    /// </summary>
     public partial class NorthwindModel : DbContext
     {
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public NorthwindModel()
             : base("name=NwModel")
         {
             Database.SetInitializer(new NorthwindDatabaseInitializer());
         }
 
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
@@ -27,7 +35,11 @@ namespace NorthwindWeb.Models
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
         public virtual DbSet<ShopCarts> ShopCart { get; set; }
-
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
 
