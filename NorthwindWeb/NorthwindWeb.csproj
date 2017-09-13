@@ -499,6 +499,7 @@
     <Content Include="Views\ShopCart\Index.cshtml" />
     <Content Include="Views\ShopCart\ConfirmOrder.cshtml" />
     <Content Include="Views\ShopCart\CreateCustomers.cshtml" />
+    <Content Include="Views\Account\RegisterAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />

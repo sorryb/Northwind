@@ -45,15 +45,14 @@
                     </div>
                     <div class="form-group col-lg-4">
                         <label style="color:white;">Email </label><br />
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.TextBoxFor(model => model.Email, new { htmlAttributes = new { type = "email", @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                     </div>
                     <div class="clearfix"></div>
                     <div class="form-group col-lg-12">
                             <label style="color:white;">Comentariu</label><br />
-                        @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @id = "input4", @rows = "6",  @class = "form-control" } })
+                        @Html.TextAreaFor(model => model.Comment,new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
-                           @*<textarea id="input4" rows="6" class="form-control" name="contact_message"></textarea>*@ 
                             
                     </div>
                         <div class="form-group col-lg-12">

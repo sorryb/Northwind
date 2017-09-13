@@ -186,7 +186,10 @@ namespace NorthwindWeb.Controllers
             {
                 search = Request.QueryString["search[value]"] ?? "";
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
             int sortColumn = -1;
             string sortDirection = "asc";
@@ -203,7 +206,10 @@ namespace NorthwindWeb.Controllers
                     sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
                 }
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
             try
             {
@@ -212,7 +218,10 @@ namespace NorthwindWeb.Controllers
                     sortDirection = Request.QueryString["order[0][dir]"];
                 }
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
             //list of product that contain "search"
             var suppliersInfo = db.Suppliers.OrderBy(x => x.SupplierID).Where(s => s.CompanyName.Contains(search) || s.ContactName.Contains(search)
