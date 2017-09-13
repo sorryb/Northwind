@@ -15,6 +15,10 @@ using System.Data;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// Contains all the methods neccessary for interacting with the shopcart.
+    /// For example adding/removing products from the shopcart, or creating an order with those products.
+    /// </summary>
     public class ShopCartController : Controller, NorthwindWeb.Models.Interfaces.IJsonTableFillServerSide
     {
         NorthwindModel db = new NorthwindModel();
@@ -65,48 +69,40 @@ namespace NorthwindWeb.Controllers
 
 
 
-
+        /// <summary>
+        /// Updates the quantity of a product in the database. The product must exist.
+        /// </summary>
+        /// <param name="id">The id of the product.</param>
+        /// <param name="quantity">The new quantity value.</param>
+        /// <returns>"{}" on success, "Error" on failure.</returns>
         public string UpdateQuantity(int id, int quantity)
         {
-            try
-            {
-                if (quantity <= 0 || quantity >= 255)
-                {
-                    return "Error";
-                }
-                if (db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name))
-                {
-                    db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).First().Quantity = quantity;
-                    db.SaveChanges();
-                }
-                else
-                {
-                    return "Error";
-                }
-                return "{}";
-            }
-            catch
+            if (quantity <= 0 || quantity >= 255 || !(db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name)))
             {
                 return "Error";
             }
+
+            db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).First().Quantity = quantity;
+            db.SaveChanges();
+            return "{}";//for ajax this means success
         }
 
 
 
 
 
+
         /// <summary>
-        /// Import data from local storage when the user will log on
+        /// Import data from local storage when the user will log in.
         /// </summary>
         /// <param name="json">data will be parsed as a json string</param>
         /// <returns>"{}" on success, "Error" on fail</returns>
         public string ImportFromLocal(string json = "")
         {
             var shopCartProducts = JsonConvert.DeserializeObject<List<ProductShopCart>>(json).AsQueryable();
-
-            if (User.Identity.IsAuthenticated && shopCartProducts.Count() != 0)
+            try
             {
-                try
+                if (User.Identity.IsAuthenticated && shopCartProducts.Count() != 0)
                 {
                     foreach (var shopCartProduct in shopCartProducts)
                     {
@@ -120,19 +116,23 @@ namespace NorthwindWeb.Controllers
                         }
                     }
                     db.SaveChanges();
+                    return "{}"; //for ajax this means success
                 }
-                catch
-                {
-                    return "Error";
-                }
-                return "{}"; //for ajax this mean success
+                else throw(new Exception());
             }
-            return "Error";
+            catch
+            {
+                return "Error";
+            }
         }
 
 
 
-
+        /// <summary>
+        /// Deletes a product from the shopcart table in the database.
+        /// </summary>
+        /// <param name="id">The id of the product that is going to be deleted.</param>
+        /// <returns>"{}" on success, "Error" on failure.</returns>
         public string Delete(int? id)
         {
             if (id != null && User.Identity.IsAuthenticated)
@@ -148,7 +148,13 @@ namespace NorthwindWeb.Controllers
         }
 
 
-
+        /// <summary>
+        /// Send back a JsonDataTableObject as json with all the information that we need to populate datatable
+        /// </summary>
+        /// <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+        /// <param name="start">Start from this item</param>
+        /// <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+        /// <returns>JsonDataTableObject</returns>
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             string json = Request.QueryString["json"] ?? "";
@@ -281,26 +287,35 @@ namespace NorthwindWeb.Controllers
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
 
+        //todo GetCartCount() pe server ajax...
+        /// <summary>
+        /// Returns how many products a user has in hit shopcart.
+        /// </summary>
+        /// <returns>Number of products on success, "Error" on failure.</returns>
         public string GetCartCount()
         {
             if (User.Identity.IsAuthenticated)
                 return db.ShopCart.Where(x => x.UserName == User.Identity.Name).Count().ToString();
-            return "{}";
+            return "Error";
         }
 
-
+        /// <summary>
+        /// Creates an order with the products in the logged user's shopcart.
+        /// </summary>
+        /// <returns>Home index view</returns>
         [Authorize]
-        public ActionResult ConfirmCommand()
+        public ActionResult ConfirmOrder()
         {
             var shopCart = db.ShopCart;
             string userName = User.Identity.GetUserName();
             string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
-            if (String.IsNullOrEmpty(customerId)) { db.Dispose(); return RedirectToAction("CreateCustomers", "ShopCart"); }            
-            Orders order = new Orders();
-            order.OrderID = db.Orders.Count() + 1;
-          
-            order.CustomerID = customerId;
-            order.OrderDate = DateTime.Now;
+            if (String.IsNullOrEmpty(customerId)) { db.Dispose(); return RedirectToAction("CreateCustomers", "ShopCart"); }
+            Orders order = new Orders()
+            {
+                OrderID = db.Orders.Count() + 1,
+                CustomerID = customerId,
+                OrderDate = DateTime.Now
+            };
             foreach (var product in shopCart)
             {
                 short quantity = 255;
@@ -312,17 +327,18 @@ namespace NorthwindWeb.Controllers
                     }
                     var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
 
-                    Order_Details orderDetail = new Order_Details {
+                    Order_Details orderDetail = new Order_Details
+                    {
                         ProductID = product.ProductID,
                         Quantity = quantity,
                         UnitPrice = productdetails.UnitPrice,
                         Discount = productdetails.Discount,
-                        OrderID =order.OrderID
+                        OrderID = order.OrderID
                     };
                     order.Order_Details.Add(orderDetail);
                     db.Order_Details.Add(orderDetail);
 
-                   
+
 
                     db.ShopCart.Remove(product);
                 }
@@ -336,9 +352,7 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Returns the view containing the form neccesary for creating a new customer.
         /// </summary>
-        /// <returns>Create view.</returns>
-        // GET: Customers/Create
-
+        /// <returns>Shopart createCustomer view.</returns>
         public ActionResult CreateCustomers()
         {
             return View();
@@ -349,7 +363,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="customers">The customer entity to be inserted</param>
         /// <returns>If successful returns customers index view, else goes back to form.</returns>
-        // POST: Customers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -364,18 +377,20 @@ namespace NorthwindWeb.Controllers
                 {
                     if (!String.IsNullOrEmpty(customers.Phone))
                     {
-                        Customers custom = new Customers();
-                        custom.CustomerID = User.Identity.GetUserName().Substring(0, 4);
-                        custom.CompanyName = String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName;
-                        custom.ContactName = User.Identity.GetUserName();
-                        custom.ContactTitle = customers.ContactTitle;
-                        custom.Address = customers.Address;
-                        custom.City = customers.City;
-                        custom.Region = customers.Region;
-                        custom.PostalCode = customers.PostalCode;
-                        custom.Country = customers.Country;
-                        custom.Phone = customers.Phone;
-                        custom.Fax = customers.Fax;
+                        Customers custom = new Customers()
+                        {
+                            CustomerID = User.Identity.GetUserName().Substring(0, 4),
+                            CompanyName = String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName,
+                            ContactName = User.Identity.GetUserName(),
+                            ContactTitle = customers.ContactTitle,
+                            Address = customers.Address,
+                            City = customers.City,
+                            Region = customers.Region,
+                            PostalCode = customers.PostalCode,
+                            Country = customers.Country,
+                            Phone = customers.Phone,
+                            Fax = customers.Fax
+                        };
                         db.Customers.Add(custom);
                         await db.SaveChangesAsync();
                         return RedirectToAction("ConfirmCommand");
@@ -389,7 +404,7 @@ namespace NorthwindWeb.Controllers
                 {
                     ModelState.AddModelError("Address", "Introduceti adresa");
                 }
-                
+
             }
             catch (DataException /* dex */)
             {
