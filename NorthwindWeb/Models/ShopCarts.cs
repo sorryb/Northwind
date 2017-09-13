@@ -4,7 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("Shop Carts")]
+    [Table("ShopCarts")]
     public partial class ShopCarts
     {
         [Key]
