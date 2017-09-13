@@ -301,7 +301,7 @@ namespace NorthwindWeb.Controllers
             var shopCart = db.ShopCart;
             string userName = User.Identity.GetUserName();
             string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
-            if (String.IsNullOrEmpty(customerId)) { db.Dispose(); return RedirectToAction("CreateCustomers", "ShopCart"); }
+            if (String.IsNullOrEmpty(customerId)) {return RedirectToAction("CreateCustomers", "ShopCart"); }
             Orders order = new Orders()
             {
                 OrderID = db.Orders.Count() + 1,
@@ -371,7 +371,7 @@ namespace NorthwindWeb.Controllers
                     {
                         Customers custom = new Customers()
                         {
-                            CustomerID = User.Identity.GetUserName().Substring(0, 4),
+                            CustomerID = User.Identity.GetUserName().Substring(0, 5),
                             CompanyName = String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName,
                             ContactName = User.Identity.GetUserName(),
                             ContactTitle = customers.ContactTitle,
@@ -385,7 +385,7 @@ namespace NorthwindWeb.Controllers
                         };
                         db.Customers.Add(custom);
                         await db.SaveChangesAsync();
-                        return RedirectToAction("ConfirmCommand");
+                        return RedirectToAction("ConfirmOrder");
                     }
                     else
                     {

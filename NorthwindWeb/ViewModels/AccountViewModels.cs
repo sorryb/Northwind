@@ -162,6 +162,9 @@ namespace NorthwindWeb.ViewModels
         /// </summary>
         [Display(Name = "Last Active Date/Time")]
         public DateTime LastActiveDateTime { get; set; }
+        /// <summary>
+        /// Last time when was activated as string.
+        /// </summary>
         public string LastActiveString { get; set; }
 
         /// <summary>
@@ -178,7 +181,9 @@ namespace NorthwindWeb.ViewModels
 
         
     }
-
+    /// <summary>
+    /// This Model class is used to retrieve a new user information and create a new user.
+    /// </summary>
     public class RegisterViewModel
     {
         //[Required]
@@ -201,6 +206,7 @@ namespace NorthwindWeb.ViewModels
         /// User name.
         /// </summary>
         [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
+        [StringLength(100, ErrorMessage = "{0} trebuie sa aiba minim {2} caractere.", MinimumLength = 5)]
         [Display(Name = "Nume utilizator")]
         public string UserName { get; set; }
 
