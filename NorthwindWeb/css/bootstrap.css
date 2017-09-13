@@ -1729,8 +1729,31 @@ fieldset[disabled] .form-control {
   opacity: 1;
 }
 textarea.form-control {
-  height: auto;
+    height: auto;
+   
 }
+#LastName {
+    resize: none;
+    width: 100%;
+}
+
+#FirstName {
+    resize: none;
+    width: 100%;
+}
+
+#Email {
+    resize: none;
+    width: 100%;
+}
+
+#Comment {
+    resize: none;
+    height: 200px;
+    width: 100%;
+}
+
+
 input[type="search"] {
   -webkit-appearance: none;
 }
