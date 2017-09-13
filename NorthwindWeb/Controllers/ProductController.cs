@@ -94,7 +94,7 @@ namespace NorthwindWeb.Controllers
         }
 
         /// <summary>
-        /// Displays a page containing a form required to edit a product.
+        /// Displays a page containing a form neccessary to edit an existing product.
         /// </summary>
         /// <param name="id">The id of the product that is going to be edited.</param>
         /// <returns>Product edit view</returns>
@@ -342,7 +342,10 @@ namespace NorthwindWeb.Controllers
             };
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
