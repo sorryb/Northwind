@@ -36,8 +36,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons person)
-        {
-            //create person from Form
+        {//create person from Form
             if (ModelState.IsValid)
             {
                 person.ID = db.Persons.Count() + 1;
