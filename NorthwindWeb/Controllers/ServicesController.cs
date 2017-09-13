@@ -28,7 +28,7 @@ namespace NorthwindWeb.Controllers
             var viewModel = new ServicesIndex();
 
             //take the names of first 4 products
-            viewModel.top4name = (from p in db.Products
+            viewModel.TopFourName = (from p in db.Products
                                   where (p.CategoryID==6)
                                   orderby p.ProductID
                                   select p.ProductName).Take(4);
@@ -67,7 +67,7 @@ namespace NorthwindWeb.Controllers
                 listOfProducts.Add(product);
 
             }
-            viewModel.top4products = listOfProducts;
+            viewModel.TopFourProducts = listOfProducts;
 
 
             //take last 3 products
@@ -107,7 +107,7 @@ namespace NorthwindWeb.Controllers
                 listOfProductsOrderByDesc.Add(product);
 
             }
-            viewModel.last3 = listOfProductsOrderByDesc;
+            viewModel.LastThreeProducts = listOfProductsOrderByDesc;
 
 
             return View(viewModel);
