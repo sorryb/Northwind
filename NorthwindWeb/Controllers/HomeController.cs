@@ -32,21 +32,19 @@ namespace NorthwindWeb.Controllers
         [ChildActionOnly]
         public ActionResult Menu()
         {
+            var productsCategories = _northwindDatabase.Categories;
+            List<string> listOfCategories = new List<string>();
+
             try
             {
-                var productsCategories = _northwindDatabase.Categories;
-                List<string> listOfCategories = new List<string>();
                 foreach (var item in productsCategories)
                 {
                     string categoryName = item.CategoryName;
                     listOfCategories.Add(categoryName);
                 }
 
-                int x, y, z;
-                x = 5; y = 0;
-                z = x / y;
-
                 return View(listOfCategories);
+
             }
             catch (Exception exception)
             {

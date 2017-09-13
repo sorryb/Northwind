@@ -43,8 +43,7 @@ namespace UnitTestNorthwindWeb
             {
             ID = db.Persons.Count() + 1,
             FirstName = "test1223",
-                LastName = "123331111",
-                Age = 19
+                LastName = "123331111"
             };
 
             //Act
