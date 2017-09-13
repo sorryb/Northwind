@@ -34,7 +34,6 @@ namespace NorthwindWeb.Controllers
         {
             try
             {
-
                 var productsCategories = _northwindDatabase.Categories;
                 List<string> listOfCategories = new List<string>();
                 foreach (var item in productsCategories)

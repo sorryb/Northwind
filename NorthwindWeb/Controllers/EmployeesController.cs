@@ -14,6 +14,9 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// Class that contains all the neccessary functions to perform CRUD operations on the database employees table.
+    /// </summary>
     [Authorize]
     public class EmployeesController : Controller
     {
