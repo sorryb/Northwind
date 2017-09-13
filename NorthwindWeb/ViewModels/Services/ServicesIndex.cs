@@ -12,9 +12,20 @@ namespace NorthwindWeb.ViewModels
     public class ServicesIndex
     {
 
-        public IQueryable<string> top4name {get; set;}
-        public IEnumerable<ProductServices> top4products { get; set; }
-        public IEnumerable<ProductServices> last3 { get; set; }
+        /// <summary>
+        /// The names of the four first products. 
+        /// </summary>
+        public IQueryable<string> TopFourName {get; set;}
+
+        /// <summary>
+        /// Display the first four products with their details.
+        /// </summary>
+        public IEnumerable<ProductServices> TopFourProducts { get; set; }
+
+        /// <summary>
+        /// Display the last three products with their details.
+        /// </summary>
+        public IEnumerable<ProductServices> LastThreeProducts { get; set; }
 
     }
 }
