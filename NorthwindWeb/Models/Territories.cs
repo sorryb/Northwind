@@ -43,7 +43,6 @@ namespace NorthwindWeb.Models
         /// </summary>
         public virtual Region Region { get; set; }
 
-
         /// <summary>
         /// The employees where work in a territory.
         /// </summary>
