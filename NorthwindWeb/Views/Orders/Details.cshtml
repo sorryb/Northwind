@@ -27,14 +27,14 @@
                     Id comanda
                 </dt>
                 <dd>
-                    @Html.DisplayFor(model=>model.order.OrderID)<br />
+                    @Html.DisplayFor(model=>model.Order.OrderID)<br />
                 </dd>
                 <dt>
                    Companie
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Customer.CompanyName)<br />
+                    @Html.DisplayFor(model => model.Order.Customer.CompanyName)<br />
                 </dd>
 
                 <dt>
@@ -42,7 +42,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Employee.LastName)<br />
+                    @Html.DisplayFor(model => model.Order.Employee.LastName)<br />
                 </dd>
 
                 <dt>
@@ -50,7 +50,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.Shipper.CompanyName)<br />
+                    @Html.DisplayFor(model => model.Order.Shipper.CompanyName)<br />
                 </dd>
 
                 <dt>
@@ -58,7 +58,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShippedDate)<br />
+                    @Html.DisplayFor(model => model.Order.ShippedDate)<br />
                 </dd>
 
                 <dt>
@@ -66,7 +66,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipName)<br />
+                    @Html.DisplayFor(model => model.Order.ShipName)<br />
                 </dd>
 
                 <dt>
@@ -74,7 +74,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipAddress)<br />
+                    @Html.DisplayFor(model => model.Order.ShipAddress)<br />
                 </dd>
 
                 <dt>
@@ -82,7 +82,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipCity)<br />
+                    @Html.DisplayFor(model => model.Order.ShipCity)<br />
                 </dd>
 
                 <dt>
@@ -90,13 +90,13 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.order.ShipCountry)<br />
+                    @Html.DisplayFor(model => model.Order.ShipCountry)<br />
                 </dd>
 
             </dl>
 
             <p>
-               @Html.ActionLink("Modifica", "Edit", "Orders", new { id = Model.order.OrderID }, new { @class = "btn btn-default" }) |   
+               @Html.ActionLink("Modifica", "Edit", "Orders", new { id = Model.Order.OrderID }, new { @class = "btn btn-default" }) |   
                @Html.ActionLink("Inapoi la lista", "Index", "Orders", new { @class = "btn btn-default" })  
               
             </p>
@@ -106,7 +106,7 @@
             <hr />
             @Html.ActionLink("Adauga", "Create", "OrderDetail", new { id = ViewBag.orderid }, new { @class = "btn btn-default" }) 
             <br /><br /><br />
-           @foreach (var y in Model.details)
+           @foreach (var y in Model.Details)
            {
               <dl class="dl-horizontal">
 

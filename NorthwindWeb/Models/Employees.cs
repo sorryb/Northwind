@@ -8,7 +8,7 @@ namespace NorthwindWeb.Models
 
 
     /// <summary>
-    /// The entity that holds all the information from the employees table in the database.
+    /// The entity that holds all the information from the Employees table in the database.
     /// </summary>
     public partial class Employees
     {

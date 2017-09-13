@@ -40,6 +40,7 @@ namespace NorthwindWeb.Models
         /// The Email through which we find the person.
         /// </summary>
         [StringLength(255)]
+        [EmailAddress]
         public string Email { get; set; }
 
         /// <summary>

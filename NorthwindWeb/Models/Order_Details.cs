@@ -7,7 +7,7 @@ namespace NorthwindWeb.Models
     using System.Data.Entity.Spatial;
 
     /// <summary>
-    /// The entity that holds all the information from the order-details table in the database.
+    /// The entity that holds all the information from the Order_Details table in the database.
     /// </summary>
     [Table("Order Details")]
     public partial class Order_Details

@@ -34,6 +34,10 @@ namespace NorthwindWeb.ViewModels.Orders
         /// The discount of the product.
         /// </summary>
         public float Discount { get; set; }
+
+        /// <summary>
+        /// Default constructor. Initialises new empty instance.
+        /// </summary>
         public DetailsOfOrder() { }
     }
 }

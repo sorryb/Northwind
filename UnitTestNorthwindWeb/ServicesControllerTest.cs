@@ -78,9 +78,9 @@ namespace UnitTestNorthwindWeb
             //Act
             var result = _servicesControllerUnderTest.Index() as ViewResult;
             var result1 = result.Model as ServicesIndex;
-            var countTop4Name = result1.top4name.Count();
-            var countTop4Products = result1.top4products.Count();
-            var countLast3 = result1.last3.Count();
+            var countTop4Name = result1.TopFourName.Count();
+            var countTop4Products = result1.TopFourProducts.Count();
+            var countLast3 = result1.LastThreeProducts.Count();
 
             //Assert
             Assert.AreEqual(4,countTop4Name);
