@@ -238,7 +238,7 @@ namespace UnitTestNorthwindWeb
             int row = 20;
 
             //Act
-            var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTableObject;
+            var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTable;
 
             //Assert
             Assert.AreEqual(jsonData.draw, draw);

@@ -296,7 +296,7 @@ namespace NorthwindWeb.Controllers
             }
 
             //objet that whill be sent to client
-            JsonDataTableObject dataTableData = new JsonDataTableObject()
+            JsonDataTable dataTableData = new JsonDataTable()
             {
                 draw = draw,
                 recordsTotal = db.Customers.Count(),
