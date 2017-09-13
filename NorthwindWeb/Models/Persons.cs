@@ -43,7 +43,6 @@ namespace NorthwindWeb.Models
         [Required]
         [EmailAddress]
         [StringLength(255)]
-        [EmailAddress]
         public string Email { get; set; }
 
         /// <summary>
