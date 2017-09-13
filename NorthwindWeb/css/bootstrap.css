@@ -1732,6 +1732,8 @@ textarea.form-control {
     height: auto;
    
 }
+
+/*Style form texbox and textarea from Contact*/
 #LastName {
     resize: none;
     width: 100%;
@@ -1752,6 +1754,7 @@ textarea.form-control {
     height: 200px;
     width: 100%;
 }
+/*End style form texbox and textarea from Contact*/
 
 
 input[type="search"] {

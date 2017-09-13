@@ -10,13 +10,40 @@ namespace NorthwindWeb.ViewModels
     /// </summary>
     public class ViewProductCategoryS
     {
-        //take ProductID, ProductNmae and CategoryName  all as string
+        //take ProductID, ProductName and CategoryName  all as string
+        /// <summary>
+        /// The ID of product
+        /// </summary>
         public string ProductID { get; set; }   
+
+        /// <summary>
+        /// The name of product.
+        /// </summary>
         public string ProductName { get; set; }
+
+        /// <summary>
+        /// The name of category.
+        /// </summary>
         public string CategoryName { get; set; }
+
+        /// <summary>
+        /// Product price
+        /// </summary>
         public decimal ProductPrice { get; set; }
+
+        /// <summary>
+        /// Suppliers name
+        /// </summary>
         public string SuppliersName { get; set; }
+
+        /// <summary>
+        /// Stock
+        /// </summary>
         public string Stock { get; set; }
+
+        /// <summary>
+        /// On order
+        /// </summary>
         public string OnOrder { get; set; }
     }
 }
