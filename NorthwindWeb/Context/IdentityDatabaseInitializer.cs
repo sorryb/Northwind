@@ -57,10 +57,10 @@ namespace NorthwindWeb.Context
 
             }
             // creating Creating Manager role    
-            if (!roleManager.RoleExists("Users"))
+            if (!roleManager.RoleExists("Guest"))
             {
                 var role = new IdentityRole();
-                role.Name = "Users";
+                role.Name = "Guest";
                 roleManager.Create(role);
 
             }
