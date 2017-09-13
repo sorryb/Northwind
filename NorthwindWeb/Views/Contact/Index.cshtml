@@ -29,8 +29,6 @@
        @using (Html.BeginForm("Create", "Contact", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
        {
              @Html.AntiForgeryToken()
-           
-
                 <div class="row">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group col-lg-4">

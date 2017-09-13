@@ -19,6 +19,7 @@ namespace NorthwindWeb.Controllers
     [Authorize]
     public class CategoriesController : Controller
     {
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         private NorthwindModel db = new NorthwindModel();
 
         /// <summary>
@@ -161,8 +162,9 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception exception)
             {
+                logger.Error(exception.ToString());
                 string list = "";
                 var productId = db.Products.Include(x => x.Category).Where(x => x.CategoryID == id).Select(x => new { x.ProductName });
                 foreach (var i in productId)
