@@ -68,7 +68,7 @@
                 <h2 class="page-header">Produse</h2>
                 <ul class="nav nav-tabs" id="myTab">
                     @{int i = 1;}
-                    @foreach (var itemInTop4 in Model.top4name)
+                    @foreach (var itemInTop4 in Model.TopFourName)
                     {
                         if (i == 1)
                         {
@@ -90,7 +90,7 @@
                 <div class="tab-content" id="myTabContent">
 
                     @{int j = 1;}
-                    @foreach (var itemInProducts in Model.top4products)
+                    @foreach (var itemInProducts in Model.TopFourProducts)
                     {
                         if (j == 1)
                         {
@@ -138,7 +138,7 @@
                 <h2 class="page-header">Imagini produse</h2>
             </div>
 
-            @foreach (var itemInLast3 in Model.last3)
+            @foreach (var itemInLast3 in Model.LastThreeProducts)
             {
                 <div class="col-sm-4">                                      
                     <img src="~/Images/Servicii/@(itemInLast3.ProductID).jpg" class="img-services img-responsive">
