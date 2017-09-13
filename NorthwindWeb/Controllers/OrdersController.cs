@@ -25,6 +25,7 @@ namespace NorthwindWeb.Controllers
     public class OrdersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
         /// <summary>
         /// Displays a page with all the orders existing in the database.
@@ -259,9 +260,9 @@ namespace NorthwindWeb.Controllers
             {
                 search = Request.QueryString["search[value]"] ?? "";
             }
-            catch
+            catch(Exception exception)
             {
-
+                logger.Error(exception.ToString());
             }
 
 
@@ -280,9 +281,9 @@ namespace NorthwindWeb.Controllers
                         sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
                 }
             }
-            catch
+            catch(Exception exception)
             {
-
+                logger.Error(exception.ToString());
             }
 
             try
@@ -293,9 +294,9 @@ namespace NorthwindWeb.Controllers
                     sortDirection = Request.QueryString["order[0][dir]"];
                 }
             }
-            catch
+            catch(Exception exception)
             {
-
+                logger.Error(exception.ToString());
             }
 
             //list of orders that contain "search"

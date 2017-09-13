@@ -22,6 +22,7 @@ namespace NorthwindWeb.Controllers
     public class CustomersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
         /// <summary>
         /// Displays a page with all the customers in the database.
@@ -165,8 +166,9 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception exception)
             {
+                logger.Error(exception.ToString());
                 string listOfOrders = "";
                 var orderId = db.Orders.Include(x=>x.Customer).Where(x=>x.CustomerID == id).Select(x=>new { x.OrderID });
                 foreach(var itemInOrders in orderId)
@@ -195,9 +197,9 @@ namespace NorthwindWeb.Controllers
             {
                 search = Request.QueryString["search[value]"] ?? "";
             }
-            catch
+            catch(Exception exception)
             {
-
+                logger.Error(exception.ToString());
             }
 
 
@@ -218,9 +220,9 @@ namespace NorthwindWeb.Controllers
 
                 }
             }
-            catch
+            catch(Exception exception)
             {
-
+                logger.Error(exception.ToString());
             }
 
             try
@@ -231,9 +233,9 @@ namespace NorthwindWeb.Controllers
 
                 }
             }
-            catch
+            catch(Exception exception)
             {
-
+                logger.Error(exception.ToString());
             }
 
             //list of customers that contain "search"
