@@ -87,7 +87,6 @@ namespace NorthwindWeb.Controllers
         /// <param name="currentFilter">Curent search</param>
         /// <returns></returns>
         [Authorize(Roles="Managers, Admins")]
-        
         public ActionResult HomeAdmin(int? orderID, int? productID, int? page, string search, string currentFilter)
         {
             var viewModel = new OrderIndexData();

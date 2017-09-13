@@ -56,6 +56,14 @@ namespace NorthwindWeb.Context
 
 
             }
+            // creating Creating Manager role    
+            if (!roleManager.RoleExists("Users"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Users";
+                roleManager.Create(role);
+
+            }
 
             // creating Creating Manager role    
             if (!roleManager.RoleExists("Managers"))
@@ -77,7 +85,7 @@ namespace NorthwindWeb.Context
 
                 foreach(var itemEmployee in employees)
                 {
-                    var employee = new ApplicationUser();
+                    ApplicationUser employee = new ApplicationUser();
                     employee.UserName = itemEmployee.FirstName+itemEmployee.LastName;
                     employee.Email = itemEmployee.FirstName+"@gmail.com";
                     userManager.Create(employee, itemEmployee.FirstName + itemEmployee.LastName);
