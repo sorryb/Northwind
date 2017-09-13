@@ -14,10 +14,11 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins")]
+
     /// <summary>
     /// Regions Controller. For table Region
     /// </summary>
+    [Authorize(Roles = "Admins")]
     public class RegionsController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -45,7 +46,7 @@ namespace NorthwindWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             RegionIndex viewModel = new RegionIndex();
-            ///take details of Region
+            //take details of Region
             Region region = await db.Regions.FindAsync(id);
             if (region == null)
             {
@@ -59,7 +60,7 @@ namespace NorthwindWeb.Controllers
 
             List<RegionDetails> list = new List<RegionDetails>();
 
-            ///lopp in all territories
+            //lopp in all territories
             foreach (var item in teritory)
             {
                 RegionDetails regionDetail = new RegionDetails();
@@ -80,7 +81,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <returns>Create view.</returns>
         [Authorize(Roles = "Employees, Admins")]
-        ///Enter in the page Create
         public ActionResult Create()
         {
             return View();
@@ -219,7 +219,11 @@ namespace NorthwindWeb.Controllers
                 })
                 , JsonRequestBehavior.AllowGet);
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

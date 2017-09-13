@@ -13,10 +13,11 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize]
+
     /// <summary>
     /// Shippers Controller. For table Shippers
     /// </summary>
+    [Authorize]
     public class ShippersController : Controller, IJsonTableFill
     {
         private NorthwindModel db = new NorthwindModel();
@@ -93,7 +94,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ///take details of Shipper
+            //take details of Shipper
             Shippers shippers = await db.Shippers.FindAsync(id);
             if (shippers == null)
             {
@@ -176,7 +177,6 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Function used to control the dashboard datatables local
         /// </summary>
-        /// <param name="search"></param>
         /// <returns>A JSON filtered shipper list.</returns>
         public JsonResult JsonTableFill()
         {
@@ -193,6 +193,10 @@ namespace NorthwindWeb.Controllers
                 , JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
