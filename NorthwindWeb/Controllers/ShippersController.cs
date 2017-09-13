@@ -13,6 +13,7 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
+
     /// <summary>
     /// Shippers Controller. For table Shippers
     /// </summary>
@@ -192,6 +193,10 @@ namespace NorthwindWeb.Controllers
                 , JsonRequestBehavior.AllowGet);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -12,10 +12,11 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins")]
+
     /// <summary>
     /// Territories Controller. For table Territories
     /// </summary>
+    [Authorize(Roles = "Admins")]
     public class TerritoriesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -23,7 +24,6 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Displays a page with all the territories existing in the database.
         /// </summary>
-        /// <param name="search">The search look to find something asked</param>
         /// <returns>Territories index view</returns>
         public async Task<ActionResult> Index()
         {
@@ -42,7 +42,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ///take details of Territory
+            //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -56,7 +56,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <returns>Create view.</returns>
         [Authorize(Roles = "Employees, Admins")]
-        ///Enter in the page Create via RegionID
         public ActionResult Create(int? id)
         {
             ViewBag.regionid = id;
@@ -67,6 +66,7 @@ namespace NorthwindWeb.Controllers
         /// Inserts a territory into the database table. If it fails, goes back to the form.
         /// </summary>
         /// <param name="territories">The territory entity to be inserted</param>
+        /// <param name="id">The territory find by region's id</param>
         /// <returns>If successful returns territories index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -157,7 +157,7 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            ///take details of Territory
+            //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             int idRegion=territories.RegionID;
             try
@@ -175,6 +175,10 @@ namespace NorthwindWeb.Controllers
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
