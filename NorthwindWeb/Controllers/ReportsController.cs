@@ -9,17 +9,18 @@ using System.Net;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// Contains the methods neccessary to deal with reports.
+    /// </summary>
     public class ReportsController : Controller
     {
         /// <summary>
-        /// Displays a page containing a navbar with a list of reports from a remote report server provided in web.config
+        /// Displays a page containing a navbar with a list of reports from a report server provided in web.config
         /// </summary>
         /// <returns>Reports index view</returns>
-        // GET: Reports
         [Authorize]
         public ActionResult Index()
         {
-            
             string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
             string reportServerDir = ConfigurationManager.AppSettings.Get("ReportServerDirectory");
 

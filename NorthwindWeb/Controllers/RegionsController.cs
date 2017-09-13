@@ -14,10 +14,10 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize(Roles = "Admins")]
     /// <summary>
     /// Regions Controller. For table Region
     /// </summary>
+    [Authorize(Roles = "Admins")]
     public class RegionsController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
