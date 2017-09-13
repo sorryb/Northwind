@@ -270,6 +270,7 @@
     <Content Include="Content\DataTables\images\details_close.png" />
     <Content Include="Content\DataTables\images\details_open.png" />
     <Content Include="css\CustomerStyle.css" />
+    <Content Include="images\Home\k.png" />
     <Content Include="images\northwind-sign.jpg" />
     <Content Include="images\default.png" />
     <Content Include="images\sort_asc.png" />
@@ -351,7 +352,6 @@
     <Content Include="images\hi-fun.png" />
     <Content Include="images\Home\ebooks.jpg" />
     <Content Include="images\Home\imgad.png" />
-    <Content Include="images\Home\k.jpg" />
     <Content Include="images\images.jpg" />
     <Content Include="images\Home\AppleLogo.png" />
     <Content Include="images\Home\asus.png" />
@@ -364,7 +364,6 @@
     <Content Include="images\StefanBucurescu.jpg" />
     <Content Include="images\Home\footer_logo.png" />
     <Content Include="images\Home\reduceri-telefoane-emag-it-mobile-days.jpg" />
-    <Content Include="images\Home\smartwatch.jpg" />
     <Content Include="images\logo-white.png" />
     <Content Include="images\accesorii.png" />
     <Content Include="images\eBookreader.jpg" />
