@@ -259,7 +259,10 @@ namespace NorthwindWeb.Controllers
             {
                 search = Request.QueryString["search[value]"] ?? "";
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
 
             int sortColumn = -1;
@@ -277,17 +280,23 @@ namespace NorthwindWeb.Controllers
                         sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
                 }
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
             try
             {
                 if (Request.QueryString["order[0][dir]"] != null)
                 {
-                    
-                        sortDirection = Request.QueryString["order[0][dir]"];
+
+                    sortDirection = Request.QueryString["order[0][dir]"];
                 }
             }
-            catch (NullReferenceException e) { }
+            catch
+            {
+
+            }
 
             //list of orders that contain "search"
             var list = db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)||

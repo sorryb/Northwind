@@ -12,10 +12,10 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize]
     /// <summary>
     /// Categories Controller. For table Categories
     /// </summary>
+    [Authorize]
     public class CategoriesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -41,7 +41,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ///take details of Categories
+            //take details of Categories
             Categories categories = await db.Categories.FindAsync(id);
             if (categories == null)
             {
@@ -166,7 +166,7 @@ namespace NorthwindWeb.Controllers
                 var productId = db.Products.Include(x => x.Category).Where(x => x.CategoryID == id).Select(x => new { x.ProductName });
                 foreach (var i in productId)
                 {
-                    ///lopp in ProductName
+                    //lopp in ProductName
                     list = list + i.ProductName.ToString() + ",\n ";
                 }
                 throw new DeleteException("Nu poti sterge categoria deoarece are produse cu numele:\n" + list+ "\nPentru a putea sterge aceasta categorie trebuie sterse produsele.");

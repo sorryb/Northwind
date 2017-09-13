@@ -10,10 +10,10 @@ using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Controllers
 {
-    [Authorize]
     /// <summary>
     /// Persons Controller. For table Persons
     /// </summary>
+    [Authorize]
     public class PersonsController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
@@ -100,7 +100,7 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Updates the database changing the fields of the personr whose id is equal to the id of the provided persons parameter to those of the parameter.
         /// </summary>
-        /// <param name="shippers">The changed personr.</param>
+        /// <param name="persons">The changed person.</param>
         /// <returns>Persons index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
