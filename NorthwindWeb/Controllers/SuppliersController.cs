@@ -14,20 +14,31 @@ using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
+    /// <summary>
+    /// Contains all the methods neccessary for CRUD on the suppliers table in the database.
+    /// </summary>
     [Authorize(Roles = "Admins, Employees")]
     public class SuppliersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
 
-        // GET: Suppliers
+        /// <summary>
+        /// Displays a page containing a datatable with all the suppliers in the database.
+        /// </summary>
+        /// <returns>Suppliers index view.</returns>
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Suppliers/Details/5
+        /// <summary>
+        /// Displays a page containing all the information about one supplier.
+        /// </summary>
+        /// <param name="id">The id of the supplier whose information will be shown.</param>
+        /// <returns>Suppliers details view.</returns>
         public async Task<ActionResult> Details(int? id)
-        {//if a vendor has been selected
+        {
+            //if a vendor has been selected
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -41,14 +52,21 @@ namespace NorthwindWeb.Controllers
             return View(suppliers);
         }
 
-        // GET: Suppliers/Create
+        /// <summary>
+        /// Displays a page containing a form neccessary to create a new supplier.
+        /// </summary>
+        /// <returns>Suppliers create view.</returns>
         [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Suppliers/Create
+        /// <summary>
+        /// Adds a new supplier in the database.
+        /// </summary>
+        /// <param name="suppliers">The supplier entity to be added.</param>
+        /// <returns>Suppliers index view.</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -66,7 +84,11 @@ namespace NorthwindWeb.Controllers
             return View(suppliers);
         }
 
-        // GET: Suppliers/Edit/5
+        /// <summary>
+        /// Displays a page containing a form neccessary to edit an existing supplier.
+        /// </summary>
+        /// <param name="id">The id of the supplier that is going to be edited.</param>
+        /// <returns>Suppliers edit view.</returns>
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {//if a vendor has been selected
@@ -83,7 +105,11 @@ namespace NorthwindWeb.Controllers
             return View(suppliers);
         }
 
-        // POST: Suppliers/Edit/5
+        /// <summary>
+        /// Updates the information of a supplier in the database.
+        /// </summary>
+        /// <param name="suppliers">The supplier entity with the updated information.</param>
+        /// <returns>Suppliers index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -100,7 +126,11 @@ namespace NorthwindWeb.Controllers
             return View(suppliers);
         }
 
-        // GET: Suppliers/Delete/5
+        /// <summary>
+        /// Displays a confirmation page for the following delete operation.
+        /// </summary>
+        /// <param name="id">The id of the supplier that is going to be deleted.</param>
+        /// <returns>Suppliers delete view.</returns>
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {//if a vendor has been selected
@@ -117,7 +147,11 @@ namespace NorthwindWeb.Controllers
             return View(suppliers);
         }
 
-        // POST: Suppliers/Delete/5
+        /// <summary>
+        /// Deletes a supplier from the database.
+        /// </summary>
+        /// <param name="id">The id of the supplier that is going to be deleted.</param>
+        /// <returns>Suppliers index view.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admins")]
@@ -136,7 +170,13 @@ namespace NorthwindWeb.Controllers
             }
         }
 
-        //return a list a suppliers to complete table
+        /// <summary>
+        /// Send back a JsonDataTableObject as json with all the information that we need to populate datatable
+        /// </summary>
+        /// <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+        /// <param name="start">Start from this item</param>
+        /// <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+        /// <returns>JsonDataTableObject</returns>
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
             const int TOTAL_ROWS = 999;
@@ -277,6 +317,11 @@ namespace NorthwindWeb.Controllers
             };
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
