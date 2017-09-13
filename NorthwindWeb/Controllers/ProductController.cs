@@ -13,7 +13,7 @@ using PagedList;
 using System.Web.Helpers;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.ExceptionHandler;
-
+using log4net.Repository.Hierarchy;
 
 namespace NorthwindWeb.Controllers
 {
@@ -25,6 +25,7 @@ namespace NorthwindWeb.Controllers
     public class ProductController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ProductController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
 
         /// <summary>
@@ -178,8 +179,9 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
+                logger.Error(e.ToString());
                 string listOrders = "";
                 var ordersWhitProductID = db.Order_Details.Include(s => s.Order).Include(s => s.Product).Where(s => s.ProductID == id).Select(s => new { s.OrderID });
                 foreach (var i in ordersWhitProductID)
@@ -200,123 +202,131 @@ namespace NorthwindWeb.Controllers
         /// <returns>JsonDataTableObject</returns>
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
-            const int TOTAL_ROWS = 999;
-            string category = "";
-            category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
-
-            string search = "";
-            search = Request.QueryString["search[value]"] ?? "";
-
-
-            int sortColumn = -1;
-            string sortDirection = "asc";
-            if (length == -1)
+            try
             {
-                length = TOTAL_ROWS;
-            }
+                const int TOTAL_ROWS = 999;
+                string category = "";
+                category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
 
-            // note: we only sort one column at a time
-            if (Request.QueryString["order[0][column]"] != null)
-            {
-                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-            }
+                string search = "";
+                search = Request.QueryString["search[value]"] ?? "";
 
-            if (Request.QueryString["order[0][dir]"] != null)
-            {
-                sortDirection = Request.QueryString["order[0][dir]"];
-            }
 
-            //list of product that contain "search"
-            var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)
-                .Where(p => (p.ProductName.Contains(search) || p.ProductID.ToString().Contains(search)
-                || p.Discontinued.ToString().Contains(search) || p.Supplier.CompanyName.Contains(search)) && p.Category.CategoryName.Contains(category));
-
-            //order list
-            switch (sortColumn)
-            {
-                case -1: //sort by first column
-                    goto FirstColumn;
-                case 0: //first column
-                    FirstColumn:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.ProductName);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.ProductName);
-                    }
-                    break;
-                case 1: //second column
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.UnitPrice);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.UnitPrice);
-                    }
-                    break;
-                case 2: // and so on
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.UnitsInStock);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.UnitsInStock);
-                    }
-                    break;
-                case 3:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.UnitsOnOrder);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.UnitsOnOrder);
-                    }
-                    break;
-                case 4:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.ReorderLevel);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.ReorderLevel);
-                    }
-                    break;
-                case 5:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.Discontinued);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.Discontinued);
-                    }
-                    break;
-            }
-
-            //objet that whill be sent to client
-            JsonDataTable dataTableData = new JsonDataTable()
-            {
-                draw = draw,
-                recordsTotal = db.Products.Count(),
-                data = list.Skip(start).Take(length).Select(x => new
+                int sortColumn = -1;
+                string sortDirection = "asc";
+                if (length == -1)
                 {
-                    ID = x.ProductID,
-                    ProductName = x.ProductName,
-                    Price = x.UnitPrice,
-                    InStock = x.UnitsInStock,
-                    OnOrders = x.UnitsOnOrder,
-                    ReorderLevel = x.ReorderLevel,
-                    Discontinued = x.Discontinued
-                }),
-                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
-            };
-            return Json(dataTableData, JsonRequestBehavior.AllowGet);
+                    length = TOTAL_ROWS;
+                }
+
+                // note: we only sort one column at a time
+                if (Request.QueryString["order[0][column]"] != null)
+                {
+                    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                }
+
+                if (Request.QueryString["order[0][dir]"] != null)
+                {
+                    sortDirection = Request.QueryString["order[0][dir]"];
+                }
+
+                //list of product that contain "search"
+                var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)
+                    .Where(p => (p.ProductName.Contains(search) || p.ProductID.ToString().Contains(search)
+                    || p.Discontinued.ToString().Contains(search) || p.Supplier.CompanyName.Contains(search)) && p.Category.CategoryName.Contains(category));
+
+                //order list
+                switch (sortColumn)
+                {
+                    case -1: //sort by first column
+                        goto FirstColumn;
+                    case 0: //first column
+                        FirstColumn:
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.ProductName);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.ProductName);
+                        }
+                        break;
+                    case 1: //second column
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.UnitPrice);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.UnitPrice);
+                        }
+                        break;
+                    case 2: // and so on
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.UnitsInStock);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.UnitsInStock);
+                        }
+                        break;
+                    case 3:
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.UnitsOnOrder);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.UnitsOnOrder);
+                        }
+                        break;
+                    case 4:
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.ReorderLevel);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.ReorderLevel);
+                        }
+                        break;
+                    case 5:
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.Discontinued);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.Discontinued);
+                        }
+                        break;
+                }
+
+                //objet that whill be sent to client
+                JsonDataTable dataTableData = new JsonDataTable()
+                {
+                    draw = draw,
+                    recordsTotal = db.Products.Count(),
+                    data = list.Skip(start).Take(length).Select(x => new
+                    {
+                        ID = x.ProductID,
+                        ProductName = x.ProductName,
+                        Price = x.UnitPrice,
+                        InStock = x.UnitsInStock,
+                        OnOrders = x.UnitsOnOrder,
+                        ReorderLevel = x.ReorderLevel,
+                        Discontinued = x.Discontinued
+                    }),
+                    recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                };
+                return Json(dataTableData, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.ToString());
+                return Json(new JsonDataTable() { error = "Ceva nu a mers bine" }, JsonRequestBehavior.AllowGet);
+            }
         }
         /// <summary>
         /// 
