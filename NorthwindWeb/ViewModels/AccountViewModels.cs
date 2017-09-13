@@ -230,6 +230,7 @@ namespace NorthwindWeb.ViewModels
         /// <summary>
         /// Seccond password.
         /// </summary>
+        [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirmare parola")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Cele doua parole introduse nu se potrivesc !")]
@@ -253,7 +254,7 @@ namespace NorthwindWeb.ViewModels
         /// Password.
         /// </summary>
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "{0} trebuie să contină cel putin {2} caractere.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Parola")]
         public string Password { get; set; }
