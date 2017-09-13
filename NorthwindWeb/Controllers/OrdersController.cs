@@ -52,7 +52,7 @@ namespace NorthwindWeb.Controllers
             {
                 return HttpNotFound();
             }
-            viewModel.order = orders;
+            viewModel.Order = orders;
 
             //take order-details of orders
             var orderDetail = from od in db.Order_Details
@@ -77,7 +77,7 @@ namespace NorthwindWeb.Controllers
                 listOfDetails.Add(order);
 
             }
-            viewModel.details = listOfDetails;
+            viewModel.Details = listOfDetails;
             ViewBag.orderid = id;
             return View(viewModel);
         }
@@ -187,7 +187,7 @@ namespace NorthwindWeb.Controllers
             {
                 return HttpNotFound();
             }
-            viewModel.order = orders;
+            viewModel.Order = orders;
 
             //take order-details of orders
             var orderDetail = from od in db.Order_Details
@@ -212,7 +212,7 @@ namespace NorthwindWeb.Controllers
                 listOfDetails.Add(order);
 
             }
-            viewModel.details = listOfDetails;
+            viewModel.Details = listOfDetails;
             ViewBag.orderid = id;
 
             return View(viewModel);

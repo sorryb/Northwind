@@ -25,7 +25,7 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// The action that creates the data for the dashboard page
         /// </summary>
-        /// <returns></returns>
+        /// <returns>returns a view with a DashboardIndexData model</returns>
         public ActionResult Home()
         {
             DashboardIndexData viewModel = new DashboardIndexData();
@@ -45,8 +45,7 @@ namespace NorthwindWeb.Controllers
         /// <param name="search">The parameter to be searched for</param>
         /// <param name="page"></param>
         /// <param name="currentFilter"></param>
-        /// <returns></returns>
-        
+        /// <returns>Returns a view vith a list of match</returns>
         public ActionResult Search(string search,int? page, string currentFilter)
         {
             var viewModel = new DashboardSearchData();
@@ -370,7 +369,7 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Returns a json with the data required for the MorrisArea table on the dashboard page
         /// </summary>
-        /// <returns></returns>
+        /// <returns>returns a json with the data for the MorrisArea table</returns>
         public JsonResult MorrisArea()
         {
             List<DashboardMorrisArea> dashboardMorrisAreaData = new List<DashboardMorrisArea>();
@@ -410,7 +409,7 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Returns a json with the data required for the MorrisBar table on the dashboard page
         /// </summary>
-        /// <returns></returns>
+        /// <returns>returns a json with the data for the MorrisBar table</returns>
         public JsonResult MorrisBar()
         {
 
@@ -420,7 +419,7 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Returns a json with the data required for the MorrisDonut table on the dashboard page
         /// </summary>
-        /// <returns></returns>
+        /// <returns>returns a json with the data for the MorrisDonut table</returns>
         public JsonResult MorrisDonut()
         {
             List<DashboardMorrisDonut> dashboardMorrisDonutData = new List<DashboardMorrisDonut>();
