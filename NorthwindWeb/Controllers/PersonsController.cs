@@ -66,7 +66,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Age")] Persons persons)
+        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Email,Comment")] Persons persons)
         {
             if (ModelState.IsValid)
             {
@@ -106,7 +106,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,Age")] Persons persons)
+        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,Email,Comment")] Persons persons)
         {
             if (ModelState.IsValid)
             {
