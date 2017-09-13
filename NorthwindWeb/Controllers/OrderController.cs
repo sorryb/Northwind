@@ -24,7 +24,7 @@ namespace NorthwindWeb.Controllers
         private NorthwindModel db = new NorthwindModel();
 
         /// <summary>
-        /// the list of current user orders
+        /// the list of current Employees orders
         /// </summary>
         /// <param name="orderID">Returns selected Order</param>
         /// <param name="productID">Returns selected Product</param>
@@ -32,11 +32,13 @@ namespace NorthwindWeb.Controllers
         /// <param name="search">The search string</param>
         /// <param name="currentFilter">Curent search</param>
         /// <returns></returns>
-        [Authorize]
+        [Authorize(Roles = "Employees, Managers, Admins")]
         public ActionResult Home(int? orderID, int? productID, int? page, string search, string currentFilter)
         {
             var viewModel = new OrderIndexData();
             string curentUser = User.Identity.GetUserName();
+            int employeerId = db.Employees.Where(e => e.FirstName + e.LastName == curentUser).Select(e => e.EmployeeID).FirstOrDefault();
+
             // test null if in search control
             if (search != null)
             {
@@ -47,7 +49,64 @@ namespace NorthwindWeb.Controllers
                 search = currentFilter;
             }
             ViewBag.CurrentFilter = search;
-            viewModel.Order = Orders(search, curentUser);
+            viewModel.Order = Orders(search, employeerId);
+            viewModel.Command = BigComand(employeerId);
+
+            viewModel.OrderTen = LastTenOrder(employeerId);
+            // test null if orders not selected in page
+            if (orderID == 0) { orderID = null; }
+            if (orderID != null)
+            {
+                ViewBag.OrderID = orderID.Value;
+                viewModel.Order_Detail = Details(ViewBag.OrderID);
+
+
+            }
+            //test null if OrdersDetails not selected in page
+            if (productID == 0) { productID = null; }
+            if (productID != null)
+            {
+                ViewBag.ProductID = productID.Value;
+
+                viewModel.Product = ProductCategory(ViewBag.ProductID);
+            }
+            //pagination
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
+            viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
+
+
+            return View(viewModel);
+
+        }
+
+        /// <summary>
+        /// the list of current Employees orders
+        /// </summary>
+        /// <param name="orderID">Returns selected Order</param>
+        /// <param name="productID">Returns selected Product</param>
+        /// <param name="page">Returns the current page</param>
+        /// <param name="search">The search string</param>
+        /// <param name="currentFilter">Curent search</param>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult HomeCustomers(int? orderID, int? productID, int? page, string search, string currentFilter)
+        {
+            var viewModel = new OrderIndexData();
+            string curentUser = User.Identity.GetUserName();
+            
+            // test null if in search control
+            if (search != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                search = currentFilter;
+            }
+            ViewBag.CurrentFilter = search;
+            viewModel.Order = Orders(search,curentUser);
             viewModel.Command = BigComand(curentUser);
 
             viewModel.OrderTen = LastTenOrder(curentUser);
@@ -73,6 +132,8 @@ namespace NorthwindWeb.Controllers
             int pageNumber = (page ?? 1);
             viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
+
+
             return View(viewModel);
 
         }
@@ -86,7 +147,7 @@ namespace NorthwindWeb.Controllers
         /// <param name="search">The search string</param>
         /// <param name="currentFilter">Curent search</param>
         /// <returns></returns>
-        [Authorize(Roles="Managers, Admins")]
+        [Authorize(Roles = "Managers, Admins")]
         public ActionResult HomeAdmin(int? orderID, int? productID, int? page, string search, string currentFilter)
         {
             var viewModel = new OrderIndexData();
@@ -159,8 +220,34 @@ namespace NorthwindWeb.Controllers
         {
             var orderTen = (from o in db.Orders
                             join od in db.Order_Details on o.OrderID equals od.OrderID
+                            join c in db.Customers on o.CustomerID equals c.CustomerID
+                            where (c.ContactName == user)
+                            group od by o.OrderID into x
+                            select new { OrderID = x.Key, Cost = x.Sum(o => o.UnitPrice * o.Quantity) })
+                              .OrderByDescending(x => x.Cost)
+                              .Take(10);
+            ;
+            List<OrderTen> lastTenOrderData = new List<OrderTen>();
+            //IQueryable->list
+            foreach (var itemOrderTen in orderTen)
+            {
+                OrderTen lastTenOrdeElementr = new OrderTen();
+
+                lastTenOrdeElementr.OrderID = itemOrderTen.OrderID;
+                lastTenOrdeElementr.Cost = decimal.Round(itemOrderTen.Cost, 2);
+                lastTenOrderData.Add(lastTenOrdeElementr);
+
+            }
+            return lastTenOrderData;
+        }
+
+        //last ten of current Employeers orders  
+        private List<OrderTen> LastTenOrder(int userId)
+        {
+            var orderTen = (from o in db.Orders
+                            join od in db.Order_Details on o.OrderID equals od.OrderID
                             join e in db.Employees on o.EmployeeID equals e.EmployeeID
-                            where (e.FirstName + e.LastName == user)
+                            where (e.EmployeeID == userId)
                             group od by o.OrderID into x
                             select new { OrderID = x.Key, Cost = x.Sum(o => o.UnitPrice * o.Quantity) })
                               .OrderByDescending(x => x.Cost)
@@ -229,10 +316,56 @@ namespace NorthwindWeb.Controllers
         {
             List<OrderInfo> orders = new List<OrderInfo>();
             var order = (from o in db.Orders
+                         join s in db.Shippers on o.ShipVia equals s.ShipperID
+                         join c in db.Customers on o.CustomerID equals c.CustomerID
+                         where (c.ContactName == user)
+                         select new { o.OrderID, o.OrderDate, c.CompanyName, ShipperName = s.CompanyName })
+                       .OrderBy(i => i.OrderID);
+            //Filter orders if a text has been entered
+            if (!String.IsNullOrEmpty(search))
+            {//IQueryable->list
+                foreach (var item in order)
+                {//filter the results
+                    if ((Convert.ToString(item.OrderID).Contains(search)) || (item.ShipperName.ToLower().Contains(search.ToLower())))
+                    {
+                        OrderInfo x = new OrderInfo();
+
+                        x.OrderID = item.OrderID;
+                        DateTime t = Convert.ToDateTime(item.OrderDate);
+                        x.OrderDate = t.Day.ToString() + "." + t.Month + "." + t.Year;
+                        x.CompanyName = item.CompanyName;
+                        x.ShipperName = item.ShipperName;
+                        orders.Add(x);
+                    }
+                }
+            }
+            else
+            {
+                //IQueryable->list
+                foreach (var item in order)
+                {
+                    OrderInfo x = new OrderInfo();
+
+                    x.OrderID = item.OrderID;
+                    DateTime t = Convert.ToDateTime(item.OrderDate);
+                    x.OrderDate = t.Day.ToString() + "." + t.Month + "." + t.Year;
+                    x.CompanyName = item.CompanyName;
+                    x.ShipperName = item.ShipperName;
+                    orders.Add(x);
+
+                }
+            }
+            return orders;
+        }
+        //current Employeers orders 
+        private List<OrderInfo> Orders(string search,int userId)
+        {
+            List<OrderInfo> orders = new List<OrderInfo>();
+            var order = (from o in db.Orders
                          join c in db.Customers on o.CustomerID equals c.CustomerID
                          join s in db.Shippers on o.ShipVia equals s.ShipperID
                          join e in db.Employees on o.EmployeeID equals e.EmployeeID
-                         where (e.FirstName + e.LastName == user)
+                         where (e.EmployeeID == userId)
                          select new { o.OrderID, o.OrderDate, c.CompanyName, ShipperName = s.CompanyName })
                        .OrderBy(i => i.OrderID);
             //Filter orders if a text has been entered
@@ -294,8 +427,28 @@ namespace NorthwindWeb.Controllers
         {
             var order = (from o in db.Orders
                          join od in db.Order_Details on o.OrderID equals od.OrderID
+                         join c in db.Customers on o.CustomerID equals c.CustomerID
+                         where (c.ContactName == user)
+                         group od by o.OrderID into x
+                         select new { OrderID = x.Key, max = x.Sum(o => o.Quantity) })
+                                  .OrderByDescending(x => x.max)
+                                  .Take(1);
+            BigOrder bigOrder = new BigOrder();
+            //IQueryable->BigOrder
+            foreach (var itemOrder in order)
+            {
+                bigOrder.OrderID = itemOrder.OrderID;
+                bigOrder.NumberOfProduct = itemOrder.max;
+            }
+            return bigOrder;
+        }
+        //big order of current Employeers orders  
+        private BigOrder BigComand(int userId)
+        {
+            var order = (from o in db.Orders
+                         join od in db.Order_Details on o.OrderID equals od.OrderID
                          join e in db.Employees on o.EmployeeID equals e.EmployeeID
-                         where (e.FirstName + e.LastName == user)
+                         where (e.EmployeeID == userId)
                          group od by o.OrderID into x
                          select new { OrderID = x.Key, max = x.Sum(o => o.Quantity) })
                                   .OrderByDescending(x => x.max)

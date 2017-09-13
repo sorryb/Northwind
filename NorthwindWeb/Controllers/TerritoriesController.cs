@@ -19,6 +19,7 @@ namespace NorthwindWeb.Controllers
     [Authorize(Roles = "Admins")]
     public class TerritoriesController : Controller
     {
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         private NorthwindModel db = new NorthwindModel();
 
         /// <summary>
@@ -167,8 +168,9 @@ namespace NorthwindWeb.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Details","Regions",new { id=idRegion });
             }
-            catch
+            catch(Exception exception)
             {
+                logger.Error(exception.ToString());
                 throw new DeleteException("Nu poti sterge teritoriul deoarece contine angajati. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii.");
             }
 

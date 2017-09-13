@@ -1,7 +1,7 @@
 #Database Initialization
-First time, before starting the web server, we need to chose wath DataBase we want to use.
+First time, before starting the web server, we need to chose what DataBase we want to use.
 We have three options:
-	A. Full initialization. This type of DataBase Initializtion allow us to start the site with a lot's of Orders, Customers, Territories and more
+	A. Full initialization. This type of DataBase Initializtion allow us to start the site with a lot of Orders, Customers, Territories and more
 		Implementation:
 		1.Go in NorthwindDB project -> dbo -> Scripts
 		2.Run Northwind.sql to make Northwind DataBase on your SQL Server
@@ -9,12 +9,12 @@ We have three options:
 		4.Make sure that in WebConfig -> connectionStrings -> NwModel connection string match the Northwind DataBase connection string from your SQL Server
 	B. Small initialization. This will fill the database with Territories and Products, and with some portions of the Customers, Orders, (and others) from data that point A would add in DataBase
 		Implementation:
-		1.Change the connectionString in WebConfig -> connectionStrings -> NwModel to what you want (this is where the database will be maked)
-		2.Start the application. Now first time when the site will need something from Northwind DataBase the DataBase will be make
+		1.Change the connectionString in WebConfig -> connectionStrings -> NwModel to what you want (this is where the database will be made)
+		2.Start the application. Now first time when the site will need something from Northwind DataBase the DataBase will be made
 	C. Without initialization
 		Implementation:
 		1.Go in Models -> NorthwindModel.cs and in constructor comment this line: Database.SetInitializer(new NorthwindDatabaseInitializer());
-		2.Start the application. Now first time when the site will need something from Northwind DataBase the empty DataBase will be maked
+		2.Start the application. Now first time when the site will need something from Northwind DataBase the empty DataBase will be made
 
 
 #DataTable

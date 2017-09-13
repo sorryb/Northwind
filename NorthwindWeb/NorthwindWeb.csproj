@@ -500,6 +500,7 @@
     <Content Include="Views\ShopCart\ConfirmOrder.cshtml" />
     <Content Include="Views\ShopCart\CreateCustomers.cshtml" />
     <Content Include="Views\Account\RegisterAdmin.cshtml" />
+    <Content Include="Views\Order\HomeCustomers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
