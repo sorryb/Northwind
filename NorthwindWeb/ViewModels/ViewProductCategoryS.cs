@@ -45,5 +45,10 @@ namespace NorthwindWeb.ViewModels
         /// On order
         /// </summary>
         public string OnOrder { get; set; }
+        
+        /// <summary>
+        /// If this product is disponible this will be false
+        /// </summary>
+        public bool Discontinued { get; set; }
     }
 }

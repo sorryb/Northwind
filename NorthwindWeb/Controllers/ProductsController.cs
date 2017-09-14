@@ -55,7 +55,8 @@ namespace NorthwindWeb.Controllers
                            ProductPrice = prod.UnitPrice ?? 0,
                            OnOrder = prod.UnitsOnOrder.ToString(),
                            Stock = prod.UnitsInStock.ToString(),
-                           SuppliersName = supp.CompanyName
+                           SuppliersName = supp.CompanyName,
+                           Discontinued = prod.Discontinued
                        };
 
             int pageSize = 10;

@@ -43,7 +43,7 @@
         for (int i = 0; i < itemCount; i += 2)
         {
             <div class="row productdiv">
-                <div class="col-md-6 portfolio-item container" style="display:block">
+                <div class="col-md-6 portfolio-item container @(Model[i].Discontinued ? "discontinued" : "")" style="display:block">
                     <div class="col-xs-6">
                         <img src="/Images/@Model.ElementAt(i).CategoryName/@(Model.ElementAt(i).ProductID).jpg" class="img-responsive products">
                     </div>

@@ -24,17 +24,26 @@ function exportLocalShopCartToServer() {
     }
 }
 
-
+//when page was loaded
 $("document").ready(function () {
-    if (isLogedIn == 1)
+
+    //shopcart count item
+    if (isLogedIn == 1) {
         if (getLocalCartCount()) {
             var sendToServer = confirm("Aveti produse in shopcart, doriti sa le adaugam la cele din baza de date?");
             if (sendToServer) {
                 exportLocalShopCartToServer();
             }
-            else
+            else {
                 localStorage.setItem("cart", "");
+            }
         }
+
+        //discontinued product make it unavailable
+        $(".discontinued").css("color", "black").prop("title", "Produs Indisponibil");
+        $(".discontinued .shopcartcontainer-products").detach();
+        $(".discontinued img").css("filter", "grayscale(90%)").addClass("grayscale90");
+    }
     UpdateShop();
 })
 
