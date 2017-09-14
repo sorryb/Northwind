@@ -5,6 +5,7 @@ using System.Linq;
 using NorthwindWeb.Models;
 using System.Web.Helpers;
 using NorthwindWeb.Models.ServerClientCommunication;
+using NorthwindWeb.ViewModels;
 
 namespace UnitTestNorthwindWeb
 {
@@ -84,7 +85,7 @@ namespace UnitTestNorthwindWeb
             var controller = new ProductController();
             var db = new NorthwindWeb.Models.NorthwindModel();
             int productCountBefore = db.Products.Count();
-            var product = new Products()
+            var product = new ProductViewModel()
             {
                 CategoryID = 4,
                 ProductName = "TestProductCreate",
