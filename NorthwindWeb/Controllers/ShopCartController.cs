@@ -107,8 +107,6 @@ namespace NorthwindWeb.Controllers
             db.SaveChanges();
         }
 
-
-
         /// <summary>
         /// Updates the quantity of a product in the database. The product must exist.
         /// </summary>
@@ -126,11 +124,6 @@ namespace NorthwindWeb.Controllers
             db.SaveChanges();
             return "{}";//for ajax this means success
         }
-
-
-
-
-
 
         /// <summary>
         /// Import data from local storage when the user will log in.
