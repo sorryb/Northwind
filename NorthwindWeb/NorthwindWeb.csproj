@@ -193,6 +193,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -501,6 +502,7 @@
     <Content Include="Views\ShopCart\CreateCustomers.cshtml" />
     <Content Include="Views\Account\RegisterAdmin.cshtml" />
     <Content Include="Views\Order\HomeCustomers.cshtml" />
+    <Content Include="Views\Shared\_LoginPartialDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
@@ -534,6 +536,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
