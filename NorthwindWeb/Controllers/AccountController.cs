@@ -394,7 +394,7 @@ namespace NorthwindWeb.Controllers
         //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         //}
 
-       
+
         /// <summary>
         /// get sendcode
         /// </summary>
@@ -517,8 +517,8 @@ namespace NorthwindWeb.Controllers
         [Authorize]
         public ActionResult LogOff()
         {
-           if(System.Web.HttpContext.Current!=null)
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            if (System.Web.HttpContext.Current != null)
+                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
 
@@ -540,7 +540,7 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public ActionResult Index()
         {
-            
+
             return View();
         }
 
@@ -574,15 +574,15 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> ChangeUser(RegisterViewModel model)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-            string userName=Request["UserName"];
+            string userName = Request["UserName"];
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindByNameAsync(userName);
                 user.UserName = model.UserName;
                 user.Email = model.Email;
-                
-               var result=await UserManager.RemovePasswordAsync(user.Id);
-                if(result.Succeeded)
+
+                var result = await UserManager.RemovePasswordAsync(user.Id);
+                if (result.Succeeded)
                 { result = await UserManager.AddPasswordAsync(user.Id, model.Password); }
                 isChanged = UserManager.Update(user);
 
@@ -608,7 +608,7 @@ namespace NorthwindWeb.Controllers
         {
             IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
 
-            string curentUser=User.Identity.GetUserName();
+            string curentUser = User.Identity.GetUserName();
             ApplicationUser user = await UserManager.FindByNameAsync(userName);
 
             if (!String.IsNullOrEmpty(userName))
@@ -620,7 +620,7 @@ namespace NorthwindWeb.Controllers
             //if (isDeleted.Succeeded)
             //    return RedirectToAction("Index", "Home");
             //else
-                return RedirectToAction("Index");
+            return RedirectToAction("Index");
 
         }
         /// <summary>
@@ -635,12 +635,12 @@ namespace NorthwindWeb.Controllers
             ////var userStore = new UserStore<ApplicationUser>(context);
             //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             UserInfoViewModel userDelete = new UserInfoViewModel();
-          
-            if (!String.IsNullOrEmpty(userName)&& UserManager.FindByName(userName)!= null)
+
+            if (!String.IsNullOrEmpty(userName) && UserManager.FindByName(userName) != null)
             {
-                userDelete.UserName=UserManager.FindByName(userName).UserName;
-                userDelete.Email =UserManager.FindByName(userName).Email; 
-               
+                userDelete.UserName = UserManager.FindByName(userName).UserName;
+                userDelete.Email = UserManager.FindByName(userName).Email;
+
             }
             return View(userDelete);
         }
@@ -736,11 +736,11 @@ namespace NorthwindWeb.Controllers
                 if (userManager.IsInRole(user.Id, roleName))
                     selectItemsUserInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
 
-               
+
 
                 //userManager.Dispose();
             }
-            if (selectItemsUserInRole.Count()==0)
+            if (selectItemsUserInRole.Count() == 0)
             {
                 IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
 
@@ -808,16 +808,16 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="roleInfo">Role name</param>
         /// <returns>Returns RoleMembership view after the selected user has been assigned the role</returns>
-        [HttpPost] 
+        [HttpPost]
         public ActionResult RoleMembership(RoleInfoViewModel roleInfo)
         {
             var roleName = Request["name"];
             var userName = Request.Form["UserList"];
             var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var currentUser = userManager.FindByName(userName);
-            if (!string.IsNullOrEmpty(userName)&& !userManager.IsInRole(currentUser.Id, roleName))
+            if (!string.IsNullOrEmpty(userName) && !userManager.IsInRole(currentUser.Id, roleName))
                 return AddUsersToRole();
-           
+
             //Roles.IsUserInRole(userName, roleName)
             //return View(roleInfo);
             //return View(new RoleInfoModel() { Name = roleName });
@@ -1071,7 +1071,10 @@ namespace NorthwindWeb.Controllers
         {
             ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
             UserManager.AddToRole(user.Id, "Customers");
-
+            if (UserManager.IsInRole(user.Id, "Guest"))
+            {
+                UserManager.RemoveFromRole(user.Id, "Guest");
+            }
             return RedirectToAction("ConfirmOrder", "ShopCart");
         }
 
@@ -1087,7 +1090,7 @@ namespace NorthwindWeb.Controllers
         {
             const int TOTAL_ROWS = 999;
 
-            
+
             string search = Request.QueryString["search[value]"] ?? "";
             int sortColumn = -1;
             string sortDirection = "asc";
@@ -1106,9 +1109,9 @@ namespace NorthwindWeb.Controllers
                 sortDirection = Request.QueryString["order[0][dir]"];
             }
 
-            
+
             var context = new ApplicationDbContext();
-           
+
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 
@@ -1130,7 +1133,7 @@ namespace NorthwindWeb.Controllers
                 //user.IsLockedOut = user.IsLockedOut ? true : false;
                 user.IsOnline = user.IsOnline ? true : false;
             }
-            
+
             string searchBool = "bool";
             if ("no".Contains(search)) { searchBool = "false"; }
             else if ("yes".Contains(search)) { searchBool = "true"; }
@@ -1147,7 +1150,7 @@ namespace NorthwindWeb.Controllers
                     Username:
                     if (sortDirection == "asc")
                     {
-                      userInfoViewModel = userInfoViewModel.OrderBy(x => x.UserName).ToList();
+                        userInfoViewModel = userInfoViewModel.OrderBy(x => x.UserName).ToList();
                     }
                     else
                     {
@@ -1194,17 +1197,17 @@ namespace NorthwindWeb.Controllers
                         userInfoViewModel = userInfoViewModel.OrderByDescending(x => x.IsOnline).ToList();
                     }
                     break;
-                
+
             }
             //objet that whill be sent to client
             JsonDataTableUserList dataTableData = new JsonDataTableUserList()
             {
                 draw = draw,
                 recordsTotal = userManager.Users.Count(),
-                data= new List<UserInfoViewModel>(),
+                data = new List<UserInfoViewModel>(),
                 recordsFiltered = userInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
             };
-            foreach(var itemUserInfoViewModel in userInfoViewModel.Skip(start).Take(length))
+            foreach (var itemUserInfoViewModel in userInfoViewModel.Skip(start).Take(length))
             {
                 UserInfoViewModel userInfo = new UserInfoViewModel();
                 userInfo.UserName = itemUserInfoViewModel.UserName;
@@ -1264,8 +1267,8 @@ namespace NorthwindWeb.Controllers
                 {
                     Name = role.Name
                 });
-            
-            roleInfoViewModel = roleInfoViewModel.Where(r=>r.Name.ToLower().Contains(search.ToLower())).ToList();
+
+            roleInfoViewModel = roleInfoViewModel.Where(r => r.Name.ToLower().Contains(search.ToLower())).ToList();
 
 
             //order list
@@ -1274,7 +1277,7 @@ namespace NorthwindWeb.Controllers
                 case -1: //sort by first column
                     goto FirstColumn;
                 case 1: //first column
-                FirstColumn:
+                    FirstColumn:
                     if (sortDirection == "asc")
                     {
                         roleInfoViewModel = roleInfoViewModel.OrderBy(x => x.Name).ToList();
@@ -1284,7 +1287,7 @@ namespace NorthwindWeb.Controllers
                         roleInfoViewModel = roleInfoViewModel.OrderByDescending(x => x.Name).ToList();
                     }
                     break;
-                
+
 
             }
             //objet that whill be sent to client
@@ -1293,7 +1296,7 @@ namespace NorthwindWeb.Controllers
                 draw = draw,
                 recordsTotal = roleManager.Roles.Count(),
                 data = new List<RoleInfoViewModel>(),
-                
+
                 recordsFiltered = roleInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
             };
             foreach (var role in roleInfoViewModel.Skip(start).Take(length))
@@ -1314,10 +1317,10 @@ namespace NorthwindWeb.Controllers
         /// <returns>Returns json for datatable with users assigned to role</returns>
         public JsonResult JsonTableMembershipFill(int draw, int start, int length)
         {
-           
+
             const int TOTAL_ROWS = 999;
 
-            
+
             string search = Request.QueryString["search[value]"] ?? "";
             int sortColumn = -1;
             string sortDirection = "asc";
@@ -1336,9 +1339,9 @@ namespace NorthwindWeb.Controllers
                 sortDirection = Request.QueryString["order[0][dir]"];
             }
 
-            
+
             string roleName = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["roleName"] != null ? HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["roleName"].ToString() : "Admins";
-           
+
 
 
             List<UserInfoViewModel> selectItemsUserInRole = new List<UserInfoViewModel>();
@@ -1359,7 +1362,7 @@ namespace NorthwindWeb.Controllers
 
             }
 
-            
+
             var numberUsersInRole = selectItemsUserInRole.Count();
             selectItemsUserInRole = selectItemsUserInRole.Where(r => r.UserName.ToLower().Contains(search.ToLower())).ToList();
 
@@ -1488,12 +1491,12 @@ namespace NorthwindWeb.Controllers
     /// Return a list of roles.
     /// </summary>
     public static class Extentions
-    { 
-      /// <summary>
-      /// List of roles.
-      /// </summary>
-      /// <param name="identity">User identity</param>
-      /// <returns>Returns roles</returns>
+    {
+        /// <summary>
+        /// List of roles.
+        /// </summary>
+        /// <param name="identity">User identity</param>
+        /// <returns>Returns roles</returns>
         public static List<string> Roles(this ClaimsIdentity identity)
         {
             return identity.Claims
