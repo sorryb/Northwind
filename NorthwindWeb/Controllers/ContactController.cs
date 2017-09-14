@@ -20,17 +20,7 @@ namespace NorthwindWeb.Controllers
         {
             return View();
         }
-
-        /// <summary>
-        /// Returns the view containing the form neccesary for creating a new person.
-        /// </summary>
-        /// <returns>Contact index view.</returns>
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
+        
         /// <summary>
         /// Inserts a person into the database table. If it fails, goes back to the form.
         /// </summary>
@@ -38,17 +28,8 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns contact index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Email,Comment")] Persons person)
+        public ActionResult Index([Bind(Include = "ID,LastName,FirstName,Email,Comment")] Persons person)
         {//create person from Form
-
-            if (String.IsNullOrEmpty(person.FirstName))
-                ModelState.AddModelError("FirstName", "Introduceti-va numele");
-
-            if (String.IsNullOrEmpty(person.Email))
-                ModelState.AddModelError("Email", "Email-ul nu a fost introdus corect");
-
-            if (String.IsNullOrEmpty(person.Comment))
-                ModelState.AddModelError("Comment", "Va rugam sa va spuneti parerea");
 
             if (ModelState.IsValid)
             {
@@ -56,8 +37,17 @@ namespace NorthwindWeb.Controllers
                 db.Persons.Add(person);
                 db.SaveChanges();
             }
+
+            if (String.IsNullOrEmpty(person.FirstName))
+                ModelState.AddModelError("","Introduceti-va numele");
+
+            if (String.IsNullOrEmpty(person.Email))
+                ModelState.AddModelError("","Email-ul nu a fost introdus corect");
+
+            if (String.IsNullOrEmpty(person.Comment))
+                ModelState.AddModelError("","Va rugam sa va spuneti parerea");
             
-            return RedirectToAction("Index");
+            return View();
 
         }
     }
