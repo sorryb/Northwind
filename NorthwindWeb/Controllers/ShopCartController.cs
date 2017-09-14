@@ -42,14 +42,14 @@ namespace NorthwindWeb.Controllers
         [Authorize]
         public string Create(int id, int quantity)
         {
-            if(!(db.Products.Any(x => x.ProductID == id)) || db.Products.Where(x => x.ProductID == id).First().Discontinued){
+            if(!(db.Products.Where(x => x.ProductID == id).Any()) || db.Products.Where(x => x.ProductID == id).First().Discontinued){
                 return "Error";
             }
             try
             {
                 if (!(db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name)))
                 {
-                    ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductID = id, Quantity = quantity };
+                    ShopCarts cart = new ShopCarts() { UserName = User.Identity.Name, ProductID = id, Quantity = quantity, Products = db.Products.Find(id) };
                     db.ShopCart.Add(cart);
                     db.SaveChanges();
                 }
