@@ -267,9 +267,9 @@ namespace NorthwindWeb.Controllers
             //object that whill be sent to client
             JsonDataTable dataTableData = new JsonDataTable()
             {
-                Draw = draw,
-                RecordsTotal = db.Products.Count(),
-                Data = list.Skip(start).Take(length).Select(p => new
+                draw = draw,
+                recordsTotal = db.Products.Count(),
+                data = list.Skip(start).Take(length).Select(p => new
                 {
                     Category = p.Category,
                     ID = p.ID,
@@ -277,7 +277,7 @@ namespace NorthwindWeb.Controllers
                     Quantity = p.Quantity,
                     UnitPrice = (int)p.UnitPrice,
                 }).AsQueryable(),
-                RecordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
             };
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }

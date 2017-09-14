@@ -1193,10 +1193,10 @@ namespace NorthwindWeb.Controllers
             //objet that whill be sent to client
             JsonDataTableUserList dataTableData = new JsonDataTableUserList()
             {
-                Draw = draw,
-                RecordsTotal = userManager.Users.Count(),
-                Data= new List<UserInfoViewModel>(),
-                RecordsFiltered = userInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
+                draw = draw,
+                recordsTotal = userManager.Users.Count(),
+                data= new List<UserInfoViewModel>(),
+                recordsFiltered = userInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
             };
             foreach(var itemUserInfoViewModel in userInfoViewModel.Skip(start).Take(length))
             {
@@ -1207,7 +1207,7 @@ namespace NorthwindWeb.Controllers
                 userInfo.LastActiveString = itemUserInfoViewModel.LastActiveString;
                 //userInfo.IsLockedOut = itemUserInfoViewModel.IsLockedOut;
                 userInfo.IsOnline = itemUserInfoViewModel.IsOnline;
-                dataTableData.Data.Add(userInfo);
+                dataTableData.data.Add(userInfo);
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
@@ -1284,17 +1284,17 @@ namespace NorthwindWeb.Controllers
             //objet that whill be sent to client
             JsonDataTableRoleList dataTableData = new JsonDataTableRoleList()
             {
-                Draw = draw,
-                RecordsTotal = roleManager.Roles.Count(),
-                Data = new List<RoleInfoViewModel>(),
+                draw = draw,
+                recordsTotal = roleManager.Roles.Count(),
+                data = new List<RoleInfoViewModel>(),
                 
-                RecordsFiltered = roleInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
+                recordsFiltered = roleInfoViewModel.Count(), //need to be below data(ref recordsFiltered)
             };
             foreach (var role in roleInfoViewModel.Skip(start).Take(length))
             {
                 RoleInfoViewModel roleInfo = new RoleInfoViewModel();
                 roleInfo.Name = role.Name;
-                dataTableData.Data.Add(roleInfo);
+                dataTableData.data.Add(roleInfo);
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
@@ -1380,18 +1380,18 @@ namespace NorthwindWeb.Controllers
             //objet that whill be sent to client
             JsonDataTableUserList dataTableData = new JsonDataTableUserList()
             {
-                Draw = draw,
-                RecordsTotal = numberUsersInRole,
-                Data = new List<UserInfoViewModel>(),
+                draw = draw,
+                recordsTotal = numberUsersInRole,
+                data = new List<UserInfoViewModel>(),
 
-                RecordsFiltered = selectItemsUserInRole.Count(), //need to be below data(ref recordsFiltered)
-                RoleName = roleName,
+                recordsFiltered = selectItemsUserInRole.Count(), //need to be below data(ref recordsFiltered)
+                roleName = roleName,
             };
             foreach (var userInRole in selectItemsUserInRole.Skip(start).Take(length))
             {
                 UserInfoViewModel user = new UserInfoViewModel();
                 user.UserName = userInRole.UserName;
-                dataTableData.Data.Add(user);
+                dataTableData.data.Add(user);
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }

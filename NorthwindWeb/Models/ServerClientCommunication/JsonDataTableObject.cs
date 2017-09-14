@@ -15,25 +15,25 @@ namespace NorthwindWeb.Models.ServerClientCommunication
         /// The draw counter that this object is a response to - from the draw parameter 
         /// sent as part of the data request.
         /// </summary>
-        public int Draw { get; set; }
+        public int draw { get; set; }
         /// <summary>
         /// Total records, before filtering (i.e. the total number of records in the database)
         /// </summary>
-        public int RecordsTotal { get; set; }
+        public int recordsTotal { get; set; }
         /// <summary>
         /// Total records, after filtering
         /// </summary>
-        public int RecordsFiltered { get; set; }
+        public int recordsFiltered { get; set; }
         /// <summary>
         /// The data to be displayed in the table. 
         /// This is an array of data source objects, one for each row, which will be used by DataTables.
         /// </summary>
-        public IQueryable Data { get; set; }
+        public IQueryable data { get; set; }
         /// <summary>
         /// Optional: If an error occurs during the running of the server-side processing script, 
         /// you can inform the user of this error by passing back the error message to be displayed using this parameter.
         /// </summary>
-        public string Error { get; set; }
+        public string error { get; set; }
 
     }
 
@@ -44,29 +44,29 @@ namespace NorthwindWeb.Models.ServerClientCommunication
         /// The draw counter that this object is a response to - from the draw parameter 
         /// sent as part of the data request.
         /// </summary>
-        public int Draw { get; set; }
+        public int draw { get; set; }
         /// <summary>
         /// Total records, before filtering (i.e. the total number of records in the database)
         /// </summary>
-        public int RecordsTotal { get; set; }
+        public int recordsTotal { get; set; }
         /// <summary>
         /// Total records, after filtering
         /// </summary>
-        public int RecordsFiltered { get; set; }
+        public int recordsFiltered { get; set; }
         /// <summary>
         /// The data to be displayed in the table. 
         /// This is an array of data source objects, one for each row, which will be used by DataTables.
         /// </summary>
-        public List<UserInfoViewModel> Data { get; set; }
+        public List<UserInfoViewModel> data { get; set; }
         /// <summary>
         /// Optional: If an error occurs during the running of the server-side processing script, 
         /// you can inform the user of this error by passing back the error message to be displayed using this parameter.
         /// </summary>
-        public string Error { get; set; }
+        public string error { get; set; }
         /// <summary>
         /// Optional:Only used if want users assigned to a role
         /// </summary>
-        public string RoleName { get; set; }
+        public string roleName { get; set; }
     }
 
     public class JsonDataTableRoleList
@@ -75,25 +75,25 @@ namespace NorthwindWeb.Models.ServerClientCommunication
         /// The draw counter that this object is a response to - from the draw parameter 
         /// sent as part of the data request.
         /// </summary>
-        public int Draw { get; set; }
+        public int draw { get; set; }
         /// <summary>
         /// Total records, before filtering (i.e. the total number of records in the database)
         /// </summary>
-        public int RecordsTotal { get; set; }
+        public int recordsTotal { get; set; }
         /// <summary>
         /// Total records, after filtering
         /// </summary>
-        public int RecordsFiltered { get; set; }
+        public int recordsFiltered { get; set; }
         /// <summary>
         /// The data to be displayed in the table. 
         /// This is an array of data source objects, one for each row, which will be used by DataTables.
         /// </summary>
-        public List<RoleInfoViewModel> Data { get; set; }
+        public List<RoleInfoViewModel> data { get; set; }
         /// <summary>
         /// Optional: If an error occurs during the running of the server-side processing script, 
         /// you can inform the user of this error by passing back the error message to be displayed using this parameter.
         /// </summary>
-        public string Error { get; set; }
+        public string error { get; set; }
 
     }
 

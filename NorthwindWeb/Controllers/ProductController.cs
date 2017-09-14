@@ -305,9 +305,9 @@ namespace NorthwindWeb.Controllers
                 //objet that whill be sent to client
                 JsonDataTable dataTableData = new JsonDataTable()
                 {
-                    Draw = draw,
-                    RecordsTotal = db.Products.Count(),
-                    Data = list.Skip(start).Take(length).Select(x => new
+                    draw = draw,
+                    recordsTotal = db.Products.Count(),
+                    data = list.Skip(start).Take(length).Select(x => new
                     {
                         ID = x.ProductID,
                         ProductName = x.ProductName,
@@ -317,14 +317,14 @@ namespace NorthwindWeb.Controllers
                         ReorderLevel = x.ReorderLevel,
                         Discontinued = x.Discontinued
                     }),
-                    RecordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                    recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
                 };
                 return Json(dataTableData, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
                 logger.Error(e.ToString());
-                return Json(new JsonDataTable() { Error = "Ceva nu a mers bine" }, JsonRequestBehavior.AllowGet);
+                return Json(new JsonDataTable() { error = "Ceva nu a mers bine" }, JsonRequestBehavior.AllowGet);
             }
         }
         /// <summary>

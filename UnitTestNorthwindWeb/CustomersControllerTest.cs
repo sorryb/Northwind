@@ -241,9 +241,9 @@ namespace UnitTestNorthwindWeb
             var jsonData = controller.JsonTableFill(draw, 0, row).Data as JsonDataTable;
 
             //Assert
-            Assert.AreEqual(jsonData.Draw, draw);
-            Assert.AreEqual(jsonData.RecordsTotal, customersCount);
-            Assert.IsTrue(jsonData.RecordsFiltered <= customersCount);
+            Assert.AreEqual(jsonData.draw, draw);
+            Assert.AreEqual(jsonData.recordsTotal, customersCount);
+            Assert.IsTrue(jsonData.recordsFiltered <= customersCount);
             db.Dispose();
         }
     }

@@ -302,9 +302,9 @@ namespace NorthwindWeb.Controllers
             //objet that whill be sent to client
             JsonDataTable dataTableData = new JsonDataTable()
             {
-                Draw = draw,
-                RecordsTotal = db.Customers.Count(),
-                Data = list.Skip(start).Take(length).Select(x => new
+                draw = draw,
+                recordsTotal = db.Customers.Count(),
+                data = list.Skip(start).Take(length).Select(x => new
                 {
                     ID = x.CustomerID,
                     CompanyName = x.CompanyName,
@@ -315,7 +315,7 @@ namespace NorthwindWeb.Controllers
                     Phone = x.Phone
 
                 }),
-                RecordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
 
             };
 

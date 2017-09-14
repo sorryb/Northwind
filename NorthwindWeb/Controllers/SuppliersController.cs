@@ -288,9 +288,9 @@ namespace NorthwindWeb.Controllers
             //objet that whill be sent to client
             JsonDataTable dataTableData = new JsonDataTable()
             {
-                Draw = draw,
-                RecordsTotal = db.Suppliers.Count(),
-                Data = suppliersInfo.Skip(start).Take(length).Select(x => new
+                draw = draw,
+                recordsTotal = db.Suppliers.Count(),
+                data = suppliersInfo.Skip(start).Take(length).Select(x => new
                 {
                     SupplierID = x.SupplierID,
                     CompanyName = x.CompanyName,
@@ -301,7 +301,7 @@ namespace NorthwindWeb.Controllers
                     Country = x.Country,
                     Phone = x.Phone
                 }),
-                RecordsFiltered = suppliersInfo.Count(), //need to be below data(ref recordsFiltered)
+                recordsFiltered = suppliersInfo.Count(), //need to be below data(ref recordsFiltered)
             };
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
