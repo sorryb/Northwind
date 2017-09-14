@@ -13,6 +13,7 @@
         {
             @Html.AntiForgeryToken()
         }
+       
         <a href=# class="dropdown-toggle" data-toggle="dropdown">User: @User.Identity.GetUserName()<b class="caret"></b></a>
         <ul class="dropdown-menu">
             @if (userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
