@@ -335,20 +335,20 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <returns>Home index view</returns>
         [Authorize]
-        public ActionResult ConfirmOrder(int ShipVia)
+        public ActionResult ConfirmOrder(int shipVia)
         {
             string userName = User.Identity.GetUserName();
             var shopCart = db.ShopCart.Where(n=>n.UserName==userName);
             if (shopCart.Any())
             {
                 string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
-                if (String.IsNullOrEmpty(customerId)) { return RedirectToAction("CreateCustomers", "ShopCart", new { ShipVia = ShipVia }); }
+                if (String.IsNullOrEmpty(customerId)) { return RedirectToAction("CreateCustomers", "ShopCart", new { ShipVia = shipVia }); }
                 Orders order = new Orders()
                 {
                     OrderID = db.Orders.Count() + 1,
                     CustomerID = customerId,
                     OrderDate = DateTime.Now,
-                    ShipVia = ShipVia
+                    ShipVia = shipVia
                 };
 
                 foreach (var product in shopCart)
@@ -390,7 +390,7 @@ namespace NorthwindWeb.Controllers
         /// Returns the view containing the form neccesary for creating a new customer.
         /// </summary>
         /// <returns>Shopart createCustomer view.</returns>
-        public ActionResult CreateCustomers(int ShipVia)
+        public ActionResult CreateCustomers(int shipVia)
         {
             return View();
         }
@@ -405,7 +405,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers, int ShipVia)
+        public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers, int shipVia)
         {
             try
             {
@@ -430,7 +430,7 @@ namespace NorthwindWeb.Controllers
                         };
                         db.Customers.Add(custom);
                         await db.SaveChangesAsync();
-                        return RedirectToAction("AssignCustomers","Account", new { ShipVia = ShipVia });
+                        return RedirectToAction("AssignCustomers","Account", new { ShipVia = shipVia });
                     }
                     else
                     {
@@ -449,7 +449,7 @@ namespace NorthwindWeb.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
 
             }
-            return View( new { customers, ShipVia = ShipVia } );
+            return View( new { customers, ShipVia = shipVia } );
         }
 
         /// <summary>

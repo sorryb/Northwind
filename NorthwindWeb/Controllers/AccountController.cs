@@ -1084,7 +1084,7 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize]
-        public ActionResult AssignCustomers(int ShipVia)
+        public ActionResult AssignCustomers(int shipVia)
         {
             ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
             UserManager.AddToRole(user.Id, "Customers");
@@ -1092,7 +1092,7 @@ namespace NorthwindWeb.Controllers
             {
                 UserManager.RemoveFromRole(user.Id, "Guest");
             }
-            return RedirectToAction("ConfirmOrder", "ShopCart", new { ShipVia = ShipVia });
+            return RedirectToAction("ConfirmOrder", "ShopCart", new { shipVia = shipVia });
         }
 
 
