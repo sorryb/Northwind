@@ -33,6 +33,7 @@ $("document").ready(function () {
             var sendToServer = confirm("Aveti produse in shopcart, doriti sa le adaugam la cele din baza de date?");
             if (sendToServer) {
                 exportLocalShopCartToServer();
+                UpdateShop();
             }
             else {
                 localStorage.setItem("cart", "");
