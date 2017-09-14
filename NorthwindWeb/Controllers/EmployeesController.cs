@@ -21,6 +21,7 @@ namespace NorthwindWeb.Controllers
     public class EmployeesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(EmployeesController));
 
         /// <summary>
         /// Displays a page with all the employees in the database.
@@ -171,9 +172,9 @@ namespace NorthwindWeb.Controllers
             try
             {
                 if (employees.Orders.Any())
-                    throw new DeleteException("Angajatul nu poate fi sters pentru ca detine comenzi");
+                    throw new DeleteException("The employee cannot be deleted because he has orders in the database.");
                 if (employees.Employees1.Any())
-                    throw new DeleteException("Angajatul nu poate fi sters pentru ca are angajati in subordine");
+                    throw new DeleteException("The employee cannot be deleted because he has subordinates.");
                 employees.Territories.Clear();
                 db.Employees.Remove(employees);
                 await db.SaveChangesAsync();
@@ -181,7 +182,13 @@ namespace NorthwindWeb.Controllers
             }
             catch (DeleteException e)
             {
-                throw e;
+                logger.Error(e.ToString());
+                if (e.Message.Contains("orders"))
+                    throw new DeleteException("Angajatul nu poate fi sters pentru ca detine comenzi");
+                if (e.Message.Contains("subordinates"))
+                    throw new DeleteException("Angajatul nu poate fi sters pentru ca are angajati in subordine");
+
+                throw;
             }
         }
         /// <summary>

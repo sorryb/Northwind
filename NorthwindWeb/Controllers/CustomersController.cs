@@ -22,7 +22,7 @@ namespace NorthwindWeb.Controllers
     public class CustomersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
-        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(CustomersController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
         /// <summary>
         /// Displays a page with all the customers in the database.
@@ -162,11 +162,13 @@ namespace NorthwindWeb.Controllers
             try
             {
                 Customers customers = await db.Customers.FindAsync(id);
+                if (customers.Orders.Any())
+                    throw new DeleteException("The customer cannot be deleted because he has orders in the database.");
                 db.Customers.Remove(customers);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch(Exception exception)
+            catch(DeleteException exception)
             {
                 logger.Error(exception.ToString());
                 string listOfOrders = "";

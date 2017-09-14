@@ -144,7 +144,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the product that is going to be deleted.</param>
         /// <returns>Product delete view</returns>
-        //TODO Delete from related tables
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
