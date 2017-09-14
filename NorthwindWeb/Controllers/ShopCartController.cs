@@ -104,7 +104,7 @@ namespace NorthwindWeb.Controllers
         private void Update(int id, int quantity)
         {
             var cart = db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).FirstOrDefault();
-            cart.Quantity = cart.Quantity >= 255 ? 255 : cart.Quantity + quantity;
+            cart.Quantity = cart.Quantity >= short.MaxValue ? short.MaxValue : cart.Quantity + quantity;
             db.SaveChanges();
         }
 
@@ -116,7 +116,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>"{}" on success, "Error" on failure.</returns>
         public string UpdateQuantity(int id, int quantity)
         {
-            if (quantity <= 0 || quantity >= 255 || !(db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name)))
+            if (quantity <= 0 || quantity >= short.MaxValue || !(db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name)))
             {
                 return "Error";
             }
@@ -356,7 +356,7 @@ namespace NorthwindWeb.Controllers
                     short quantity = 1;
                     if (product.UserName == userName)
                     {
-                        if ((product.Quantity >= 1) && (product.Quantity <= 255))
+                        if ((product.Quantity >= 1) && (product.Quantity <= short.MaxValue))
                         {
                             quantity = (short)product.Quantity;
                         }
@@ -376,6 +376,7 @@ namespace NorthwindWeb.Controllers
 
 
                         db.ShopCart.Remove(product);
+                        db.Products.Find(product.ProductID).UnitsOnOrder += (short)product.Quantity;
                     }
                 }
 
