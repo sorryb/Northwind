@@ -33,6 +33,6 @@
         /// <summary>
         /// The products contained by the shopcart
         /// </summary>
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual Products Products { get; set; }
     }
 }
