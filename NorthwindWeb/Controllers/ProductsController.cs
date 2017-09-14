@@ -58,7 +58,7 @@ namespace NorthwindWeb.Controllers
                            SuppliersName = supp.CompanyName,
                            Discontinued = prod.Discontinued
                        };
-
+            products = products.OrderBy(x => x.Discontinued).ThenBy(y => y.ProductName);
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));

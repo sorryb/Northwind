@@ -42,7 +42,7 @@ $("document").ready(function () {
         //discontinued product make it unavailable
         $(".discontinued").css("color", "black").prop("title", "Produs Indisponibil");
         $(".discontinued .shopcartcontainer-products").detach();
-        $(".discontinued img").css("filter", "grayscale(90%)").addClass("grayscale90");
+        $(".discontinued img").addClass("grayscale90");
     }
     UpdateShop();
 })
