@@ -27,7 +27,7 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindModel db = new NorthwindModel();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ProductController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
-
+        
 
         /// <summary>
         /// Displays a page containing a datatable with all the products in the database.

@@ -24,7 +24,41 @@ namespace NorthwindWeb.Controllers
         NorthwindModel db = new NorthwindModel();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ShopCartController));
 
+        private static Random random = new Random();
+        private string CustomerId()
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string result=new string(Enumerable.Repeat(chars, 5)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+            if (db.Customers.Find(result) != null)
+                result = CustomerId();
+            return result;
+        }
 
+        //private string CustomerId(string id, int indexId)
+        //{
+        //    string dictionary = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKAMNOPQRSTUVWXYZ";
+        //    int pozition = dictionary.IndexOf(id.Substring(indexId, 1));
+        //    if (db.Customers.Find(id)!=null)
+        //    {
+        //        if(pozition< dictionary.Length)
+        //        {
+        //            id = CustomerId(id, indexId);
+        //        }
+        //        else if(indexId>1)
+        //        {
+        //            for(int i= indexId; i<=5; i++)
+        //            {
+        //                id=id.Substring(0,i-1)+ "0"+id.Substring
+        //                id[i] = "0";
+        //            }
+        //            id = CustomerId(id, indexId-1);
+        //        }
+                
+                
+        //    }
+        //        return id;
+        //}
         /// <summary>
         /// See the curent shop list
         /// </summary>
@@ -73,8 +107,6 @@ namespace NorthwindWeb.Controllers
             db.SaveChanges();
         }
 
-
-
         /// <summary>
         /// Updates the quantity of a product in the database. The product must exist.
         /// </summary>
@@ -92,11 +124,6 @@ namespace NorthwindWeb.Controllers
             db.SaveChanges();
             return "{}";//for ajax this means success
         }
-
-
-
-
-
 
         /// <summary>
         /// Import data from local storage when the user will log in.
@@ -387,7 +414,7 @@ namespace NorthwindWeb.Controllers
                     {
                         Customers custom = new Customers()
                         {
-                            CustomerID = User.Identity.GetUserName().Substring(0, 5),
+                            CustomerID = CustomerId(),
                             CompanyName = String.IsNullOrEmpty(customers.CompanyName) ? "Persoana fizica" : customers.CompanyName,
                             ContactName = User.Identity.GetUserName(),
                             ContactTitle = customers.ContactTitle,
