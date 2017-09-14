@@ -1,6 +1,8 @@
 ﻿using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Linq;
+using System;
+
 namespace NorthwindWeb.Controllers
 {
     /// <summary>
@@ -23,6 +25,7 @@ namespace NorthwindWeb.Controllers
         /// Returns the view containing the form neccesary for creating a new person.
         /// </summary>
         /// <returns>Contact index view.</returns>
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -37,12 +40,23 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,LastName,FirstName,Email,Comment")] Persons person)
         {//create person from Form
+
+            if (String.IsNullOrEmpty(person.FirstName))
+                ModelState.AddModelError("FirstName", "Introduceti-va numele");
+
+            if (String.IsNullOrEmpty(person.Email))
+                ModelState.AddModelError("Email", "Email-ul nu a fost introdus corect");
+
+            if (String.IsNullOrEmpty(person.Comment))
+                ModelState.AddModelError("Comment", "Va rugam sa va spuneti parerea");
+
             if (ModelState.IsValid)
             {
                 person.ID = db.Persons.Count() + 1;
                 db.Persons.Add(person);
                 db.SaveChanges();
             }
+            
             return RedirectToAction("Index");
 
         }
