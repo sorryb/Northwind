@@ -73,6 +73,6 @@ namespace NorthwindWeb.ViewModels
         /// <summary>
         /// The image of this product.
         /// </summary>
-        public HttpPostedFileBase productImage { get; set; }
+        public HttpPostedFileBase ProductImage { get; set; }
     }
 }

@@ -1754,6 +1754,13 @@ textarea.form-control {
     height: 200px;
     width: 100%;
 }
+/*.field-validation-valid {
+    display: none;
+}
+
+.validation-summary-valid {
+    display: none;*/
+}
 /*End style form texbox and textarea from Contact*/
 
 

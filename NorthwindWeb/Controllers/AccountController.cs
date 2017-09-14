@@ -191,7 +191,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -208,7 +208,11 @@ namespace NorthwindWeb.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    if (model.UserImage != null)
+                    {
+                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                        model.UserImage.SaveAs(path);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -236,7 +240,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [Authorize(Roles = "Admins")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterAdmin(RegisterViewModel model)
+        public async Task<ActionResult> RegisterAdmin([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -253,7 +257,11 @@ namespace NorthwindWeb.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    if(model.UserImage != null)
+                    {
+                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                        model.UserImage.SaveAs(path);
+                    }
                     return RedirectToAction("Index");
                 }
                 AddErrors(result);
@@ -571,7 +579,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>Returns to index if succes else returns to this page</returns>
         [HttpPost]
         [Authorize(Roles = "Admins")]
-        public async Task<ActionResult> ChangeUser(RegisterViewModel model)
+        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
             string userName = Request["UserName"];
@@ -585,7 +593,13 @@ namespace NorthwindWeb.Controllers
                 if (result.Succeeded)
                 { result = await UserManager.AddPasswordAsync(user.Id, model.Password); }
                 isChanged = UserManager.Update(user);
-
+                if (model.UserImage != null)
+                {
+                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                    model.UserImage.SaveAs(path);
+                }
+                
                 if (isChanged.Succeeded)
                     return RedirectToAction("Index", "Home");
                 else
@@ -617,7 +631,10 @@ namespace NorthwindWeb.Controllers
                 isDeleted = UserManager.Delete(user);
             }
 
-            //if (isDeleted.Succeeded)
+            if (isDeleted.Succeeded)
+               
+                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                
             //    return RedirectToAction("Index", "Home");
             //else
             return RedirectToAction("Index");
