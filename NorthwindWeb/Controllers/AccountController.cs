@@ -625,7 +625,8 @@ namespace NorthwindWeb.Controllers
                 isDeleted = UserManager.Delete(user);
             }
 
-            //if (isDeleted.Succeeded)
+            if (isDeleted.Succeeded)
+                System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
             //    return RedirectToAction("Index", "Home");
             //else
             return RedirectToAction("Index");
