@@ -5,37 +5,8 @@
 @{
     var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 }
-@if (Request.IsAuthenticated)
+@if (Request.IsAuthenticated && userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
 {
-    <li id="blog" class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comenzi<b class="caret"></b></a>
-        <ul class="dropdown-menu">
-            @if (userManager.IsInRole(User.Identity.GetUserId(), "Admins") || userManager.IsInRole(User.Identity.GetUserId(), "Managers"))
-            {
-                <li id="orders">
-                    @Html.ActionLink("Lista Comenzi", "HomeAdmin", "Order")
-                </li>
-            }
-            @if (userManager.IsInRole(User.Identity.GetUserId(), "Employees")|| userManager.IsInRole(User.Identity.GetUserId(), "Admins") || userManager.IsInRole(User.Identity.GetUserId(), "Managers"))
-            {
-                <li id="userOrders">
-                    @Html.ActionLink("Comenzi atribuite", "Home", "Order")
-                </li>
-            }
-            @if (userManager.IsInRole(User.Identity.GetUserId(), "Guest"))
-            {
-                <li id="userOrders">
-                    @Html.ActionLink("Comenzi '" + User.Identity.GetUserName() + "'", "HomeCustomers", "Order")
-                </li>
-            }
-        </ul>
-    </li>
-    if (userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
-    {
-        <li id="dashboard">
-
-            @Html.ActionLink("Dashboard", "Home", "Dashboard")
-        </li>
-    }
+    
 }
 

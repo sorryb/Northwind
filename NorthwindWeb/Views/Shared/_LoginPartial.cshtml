@@ -1,4 +1,11 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using NorthwindWeb.Models
+@using NorthwindWeb.Context
+
+@{
+    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+}
 @if (Request.IsAuthenticated)
 {
     <li>
@@ -6,7 +13,36 @@
         {
             @Html.AntiForgeryToken()
         }
-        @Html.ActionLink("User: " + User.Identity.GetUserName(), "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        <a href=# class="dropdown-toggle" data-toggle="dropdown">User: @User.Identity.GetUserName()<b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            @if (userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
+            {
+                <li id="dashboard">
+                    @Html.ActionLink("Dashboard", "Home", "Dashboard")
+                </li>
+            }
+            <li>
+                @Html.ActionLink("Manage", "Index", "Manage")
+            </li>
+            @if (userManager.IsInRole(User.Identity.GetUserId(), "Managers")|| userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
+            {
+                <li id="orders">
+                    @Html.ActionLink("Lista Comenzi", "HomeAdmin", "Order")
+                </li>
+            }
+            @if (userManager.IsInRole(User.Identity.GetUserId(), "Employees") || userManager.IsInRole(User.Identity.GetUserId(), "Admins") || userManager.IsInRole(User.Identity.GetUserId(), "Managers"))
+            {
+                <li id="userOrders">
+                    @Html.ActionLink("Comenzi atribuite", "Home", "Order")
+                </li>
+            }
+            @if (userManager.IsInRole(User.Identity.GetUserId(), "Guest"))
+            {
+                <li id="userOrders">
+                    @Html.ActionLink("Comenzi '" + User.Identity.GetUserName() + "'", "HomeCustomers", "Order")
+                </li>
+            }
+        </ul>
     </li>
     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
 }

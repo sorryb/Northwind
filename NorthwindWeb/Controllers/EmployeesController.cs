@@ -21,7 +21,8 @@ namespace NorthwindWeb.Controllers
     public class EmployeesController : Controller
     {
         private NorthwindModel db = new NorthwindModel();
-
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(EmployeesController));
+        
         /// <summary>
         /// Displays a page with all the employees in the database.
         /// </summary>
@@ -181,6 +182,7 @@ namespace NorthwindWeb.Controllers
             }
             catch (DeleteException e)
             {
+                logger.Error(e.ToString());
                 throw e;
             }
         }
