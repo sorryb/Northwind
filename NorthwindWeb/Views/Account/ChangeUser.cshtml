@@ -16,7 +16,7 @@
     <section id="ChangeForm">
 
 
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("ChangeUser", "Account", FormMethod.Post, new {enctype = "multipart/form-data" }))
         { <div class="row">
                 @Html.AntiForgeryToken()
                 <h4>&nbsp;&nbsp;&nbsp;&nbsp;Modificare utilizator @ViewBag.UserName</h4>
@@ -58,6 +58,13 @@
                         </div>
                     </div>
                     <br>
+                    <div class="from-group">
+                        <span class="control-label col-md-2 bold"><strong>Schimba imaginea</strong></span>
+                        <div class="col-md-10">
+                            <input type="file" id="filechooser" name="UserImage">
+                        </div>
+                    </div>
+                    <br /><br />
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-7">
                             <input type="submit" value="Modificare" class="btn btn-default" />

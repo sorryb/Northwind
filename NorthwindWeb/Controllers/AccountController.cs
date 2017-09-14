@@ -579,7 +579,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>Returns to index if succes else returns to this page</returns>
         [HttpPost]
         [Authorize(Roles = "Admins")]
-        public async Task<ActionResult> ChangeUser(RegisterViewModel model)
+        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
             string userName = Request["UserName"];
@@ -593,7 +593,13 @@ namespace NorthwindWeb.Controllers
                 if (result.Succeeded)
                 { result = await UserManager.AddPasswordAsync(user.Id, model.Password); }
                 isChanged = UserManager.Update(user);
-
+                if (model.UserImage != null)
+                {
+                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                    model.UserImage.SaveAs(path);
+                }
+                
                 if (isChanged.Succeeded)
                     return RedirectToAction("Index", "Home");
                 else
@@ -626,7 +632,9 @@ namespace NorthwindWeb.Controllers
             }
 
             if (isDeleted.Succeeded)
-                System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+               
+                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                
             //    return RedirectToAction("Index", "Home");
             //else
             return RedirectToAction("Index");
