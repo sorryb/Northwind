@@ -1056,7 +1056,18 @@ namespace NorthwindWeb.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Assigns user to role Customers
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult AssignCustomers()
+        {
+            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+            UserManager.AddToRole(user.Id, "Customers");
 
+            return RedirectToAction("ConfirmOrder", "ShopCart");
+        }
 
 
         /// <summary>

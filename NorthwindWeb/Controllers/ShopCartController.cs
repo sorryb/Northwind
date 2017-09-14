@@ -309,8 +309,10 @@ namespace NorthwindWeb.Controllers
             {
                 OrderID = db.Orders.Count() + 1,
                 CustomerID = customerId,
-                OrderDate = DateTime.Now
+                OrderDate = DateTime.Now,
+                ShipVia =1
             };
+           
             foreach (var product in shopCart)
             {
                 short quantity = 255;
@@ -367,7 +369,7 @@ namespace NorthwindWeb.Controllers
         {
             try
             {
-
+                
                 if (!String.IsNullOrEmpty(customers.Address))
                 {
                     if (!String.IsNullOrEmpty(customers.Phone))
@@ -388,7 +390,7 @@ namespace NorthwindWeb.Controllers
                         };
                         db.Customers.Add(custom);
                         await db.SaveChangesAsync();
-                        return RedirectToAction("ConfirmOrder");
+                        return RedirectToAction("AssignCustomers","Account");
                     }
                     else
                     {
