@@ -33,6 +33,7 @@ $("document").ready(function () {
             var sendToServer = confirm("Aveti produse in shopcart, doriti sa le adaugam la cele din baza de date?");
             if (sendToServer) {
                 exportLocalShopCartToServer();
+                UpdateShop();
             }
             else {
                 localStorage.setItem("cart", "");
@@ -42,7 +43,7 @@ $("document").ready(function () {
         //discontinued product make it unavailable
         $(".discontinued").css("color", "black").prop("title", "Produs Indisponibil");
         $(".discontinued .shopcartcontainer-products").detach();
-        $(".discontinued img").css("filter", "grayscale(90%)").addClass("grayscale90");
+        $(".discontinued img").addClass("grayscale90");
     }
     UpdateShop();
 })

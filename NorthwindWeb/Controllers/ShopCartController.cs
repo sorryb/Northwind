@@ -352,20 +352,20 @@ namespace NorthwindWeb.Controllers
 
                 foreach (var product in shopCart)
                 {
-                    short quantity = 255;
+                    short quantity = 1;
                     if (product.UserName == userName)
                     {
                         if ((product.Quantity >= 1) && (product.Quantity <= 255))
                         {
                             quantity = (short)product.Quantity;
                         }
-                        var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
+                        var productdetails = db.Products.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount =0 }).FirstOrDefault();
 
                         Order_Details orderDetail = new Order_Details
                         {
                             ProductID = product.ProductID,
                             Quantity = quantity,
-                            UnitPrice = productdetails.UnitPrice,
+                            UnitPrice = (int)(productdetails.UnitPrice ?? 999999),
                             Discount = productdetails.Discount,
                             OrderID = order.OrderID
                         };
