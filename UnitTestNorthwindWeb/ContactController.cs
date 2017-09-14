@@ -41,8 +41,8 @@ namespace UnitTestNorthwindWeb
             var db = new NorthwindWeb.Models.NorthwindModel();
             NorthwindWeb.Models.Persons person = new NorthwindWeb.Models.Persons()
             {
-            ID = db.Persons.Count() + 1,
-            FirstName = "test1223",
+                ID = db.Persons.Count() + 1,
+                FirstName = "test1223",
                 LastName = "123331111"
             };
 

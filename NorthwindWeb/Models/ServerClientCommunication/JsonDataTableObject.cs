@@ -37,7 +37,9 @@ namespace NorthwindWeb.Models.ServerClientCommunication
 
     }
 
-
+    /// <summary>
+    /// Contain data that datatable need to draw corect table from server
+    /// </summary>
     public class JsonDataTableUserList
     {
         /// <summary>
@@ -69,6 +71,9 @@ namespace NorthwindWeb.Models.ServerClientCommunication
         public string roleName { get; set; }
     }
 
+    /// <summary>
+    /// Contain data that datatable need to draw corect table from server
+    /// </summary>
     public class JsonDataTableRoleList
     {
         /// <summary>

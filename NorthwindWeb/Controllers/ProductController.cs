@@ -14,6 +14,7 @@ using System.Web.Helpers;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.ExceptionHandler;
 using log4net.Repository.Hierarchy;
+using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
@@ -73,20 +74,44 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Creates a new product and adds it to the database.
         /// </summary>
-        /// <param name="products">The products entity that will be added.</param>
+        /// <param name="productviewmodel">The products entity that will be added.</param>
         /// <returns>Product index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,productImage")] ProductViewModel productviewmodel)
         {
+            Products products = new Products()
+            {
+                ProductID = productviewmodel.ProductID,
+                ProductName = productviewmodel.ProductName,
+                SupplierID = productviewmodel.SupplierID,
+                CategoryID = productviewmodel.CategoryID,
+                QuantityPerUnit = productviewmodel.QuantityPerUnit,
+                UnitPrice = productviewmodel.UnitPrice,
+                UnitsInStock = productviewmodel.UnitsInStock,
+                UnitsOnOrder = productviewmodel.UnitsOnOrder,
+                ReorderLevel = productviewmodel.ReorderLevel,
+                Discontinued = productviewmodel.Discontinued
+            };
+
             if (ModelState.IsValid)
             {
                 db.Products.Add(products);
                 await db.SaveChangesAsync();
+
+                if (productviewmodel.productImage != null)
+                {
+                    string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
+                    productviewmodel.productImage.SaveAs(path);
+                }
+
+
                 return RedirectToAction("Index");
+
+
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);

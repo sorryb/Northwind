@@ -6,8 +6,16 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NorthwindWeb.Models
 {
+    /// <summary>
+    /// User's account information.
+    /// </summary>
     public class ApplicationUser : IdentityUser
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <returns></returns>
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

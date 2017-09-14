@@ -16,7 +16,7 @@
     <li class="active">Adauga</li>
 </ol>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","Product",FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -98,10 +98,10 @@
         <div class="from-group">
             <span class="control-label col-md-2 bold"><strong>Imagine</strong></span>
             <div class="col-md-10">
-                <input type="file" id="filechooser">
+                <input type="file" id="filechooser" name="productImage">
             </div>
         </div>
-
+        <br /><br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Creaza" class="btn btn-default" />
