@@ -359,7 +359,7 @@ namespace NorthwindWeb.Controllers
             {
                 Draw = draw,
                 RecordsTotal = db.Orders.Count(),
-                data = list.Skip(start).Take(length).Select(x => new
+                Data = list.Skip(start).Take(length).Select(x => new
                 {
                     ID = x.OrderID,
                     LastName = x.Employee.LastName,
@@ -369,7 +369,7 @@ namespace NorthwindWeb.Controllers
                     ShipAddress = x.ShipAddress,
 
                 }),
-                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                RecordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
 
             };
 

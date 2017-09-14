@@ -242,7 +242,7 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.AreEqual(jsonData.Draw, draw);
             Assert.AreEqual(jsonData.RecordsTotal, productCount);
-            Assert.IsTrue(jsonData.recordsFiltered <= productCount);
+            Assert.IsTrue(jsonData.RecordsFiltered <= productCount);
             db.Dispose();
         }
 

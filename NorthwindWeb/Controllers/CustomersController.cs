@@ -302,7 +302,7 @@ namespace NorthwindWeb.Controllers
             {
                 Draw = draw,
                 RecordsTotal = db.Customers.Count(),
-                data = list.Skip(start).Take(length).Select(x => new
+                Data = list.Skip(start).Take(length).Select(x => new
                 {
                     ID = x.CustomerID,
                     CompanyName = x.CompanyName,
@@ -313,7 +313,7 @@ namespace NorthwindWeb.Controllers
                     Phone = x.Phone
 
                 }),
-                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                RecordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
 
             };
 

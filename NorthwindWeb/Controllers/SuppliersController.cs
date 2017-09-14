@@ -290,7 +290,7 @@ namespace NorthwindWeb.Controllers
             {
                 Draw = draw,
                 RecordsTotal = db.Suppliers.Count(),
-                data = suppliersInfo.Skip(start).Take(length).Select(x => new
+                Data = suppliersInfo.Skip(start).Take(length).Select(x => new
                 {
                     SupplierID = x.SupplierID,
                     CompanyName = x.CompanyName,
@@ -301,7 +301,7 @@ namespace NorthwindWeb.Controllers
                     Country = x.Country,
                     Phone = x.Phone
                 }),
-                recordsFiltered = suppliersInfo.Count(), //need to be below data(ref recordsFiltered)
+                RecordsFiltered = suppliersInfo.Count(), //need to be below data(ref recordsFiltered)
             };
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }

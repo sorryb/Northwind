@@ -307,7 +307,7 @@ namespace NorthwindWeb.Controllers
                 {
                     Draw = draw,
                     RecordsTotal = db.Products.Count(),
-                    data = list.Skip(start).Take(length).Select(x => new
+                    Data = list.Skip(start).Take(length).Select(x => new
                     {
                         ID = x.ProductID,
                         ProductName = x.ProductName,
@@ -317,14 +317,14 @@ namespace NorthwindWeb.Controllers
                         ReorderLevel = x.ReorderLevel,
                         Discontinued = x.Discontinued
                     }),
-                    recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                    RecordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
                 };
                 return Json(dataTableData, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
                 logger.Error(e.ToString());
-                return Json(new JsonDataTable() { error = "Ceva nu a mers bine" }, JsonRequestBehavior.AllowGet);
+                return Json(new JsonDataTable() { Error = "Ceva nu a mers bine" }, JsonRequestBehavior.AllowGet);
             }
         }
         /// <summary>
