@@ -16,6 +16,10 @@ namespace NorthwindWeb
     public partial class Startup
     {
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
+        /// <summary>
+        /// configuration of the application
+        /// </summary>
+        /// <param name="app">application data</param>
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request

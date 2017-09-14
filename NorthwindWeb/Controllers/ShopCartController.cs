@@ -395,13 +395,15 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         /// <summary>
         /// Inserts an customer into the database table. If it fails, goes back to the form.
         /// </summary>
         /// <param name="customers">The customer entity to be inserted</param>
+        /// <param name="ShipVia">id selected provider</param>
         /// <returns>If successful returns customers index view, else goes back to form.</returns>
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]

@@ -6,8 +6,13 @@ using System.Web.Mvc;
    
 namespace NorthwindWeb.ViewModels
 {
+    /// <summary>
+    /// Navigation link format
+    /// </summary>
     public class CustomizeViewEngine : RazorViewEngine
-    {
+    {   /// <summary>
+        ///  identifies the location of the pages in the project
+        /// </summary>
         public CustomizeViewEngine()
         {
             //here we are resetting the ViewLocationFormats  
