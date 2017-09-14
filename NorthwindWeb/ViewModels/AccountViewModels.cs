@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Security;
 using System.Globalization;
 using System.Web.Mvc;
+using System.Web;
 
 namespace NorthwindWeb.ViewModels
 {
@@ -235,6 +236,10 @@ namespace NorthwindWeb.ViewModels
         [Display(Name = "Confirmare parola")]
         [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Cele doua parole introduse nu se potrivesc !")]
         public string ConfirmPassword { get; set; }
+        /// <summary>
+        /// The image user.
+        /// </summary>
+        public HttpPostedFileBase UserImage { get; set; }
     }
 
     /// <summary>
