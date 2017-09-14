@@ -37,6 +37,7 @@ namespace NorthwindWeb.Models.ServerClientCommunication
 
     }
 
+
     public class JsonDataTableUserList
     {
         /// <summary>
