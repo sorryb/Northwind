@@ -17,6 +17,18 @@
 			2.Start the application. Now first time when the site will need something from Northwind DataBase the empty DataBase will be made
 
 
+#Users
+	The main users are: username: admin, password: 123456;
+						username: tester, password: Tester_1;
+
+	Users are stored in the aspnet-Northwind-20170823114137.mdf database
+	User information is created, encrypted and saved with aspnet.Identity
+	The first use of any operation involving the user, the aspnet-Northwind-20170823114137.mdf database is initialized (ex: Login)
+	There are two static users: admin, tester; rest being done for employees from the northwind database
+	The default roles created at initialization are:Admins, Employees, Managers, Guest they offer different degrees of access
+	admin, tester and users for employees are set in IdentityDatabaseInitializer called from ApplicationDataContext if it does not exist aspnet-Northwind-20170823114137.mdf database
+	They are set with username, password and email, and are assigned to the Admins role
+
 #DataTable
 	All you need to do to enable datatables is to create a table with the following structure:
 	<table id="example" class="">
@@ -81,16 +93,3 @@
 		password: ...the password
 		If it doesn't work and you don't remember setting up a username and a password try the ones you use to log
 		in to windows.
-
-
-#Users
-	The main users are: username: admin, password: 123456;
-						username: tester, password: Tester_1;
-
-	Users are stored in the aspnet-Northwind-20170823114137.mdf database
-	User information is encoded with aspnet.Identity
-	First use of any user aspnet-Northwind-20170823114137.mdf database is initialized(ex:Login)
-	There are two static users: admin, tester; rest being done for employees from the northwind database
-	the default roles created at initialization are:Admins, Employees, Managers they offer different degrees of access
-	admin, tester are set in IdentityDatabaseInitializer appealed from ApplicationDataContext
-	they are set with username, password and email, and are assigned to the Admins role
