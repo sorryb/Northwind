@@ -22,7 +22,8 @@ namespace NorthwindWeb.Controllers
     public class ShopCartController : Controller, NorthwindWeb.Models.Interfaces.IJsonTableFillServerSide
     {
         NorthwindModel db = new NorthwindModel();
-        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ShopCartController));
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ShopCartController));
+
 
         /// <summary>
         /// See the curent shop list
@@ -41,6 +42,9 @@ namespace NorthwindWeb.Controllers
         [Authorize]
         public string Create(int id, int quantity)
         {
+            if(!(db.Products.Any(x => x.ProductID == id)) || db.Products.Where(x => x.ProductID == id).First().Discontinued){
+                return "Error";
+            }
             try
             {
                 if (!(db.ShopCart.Any(x => x.ProductID == id && x.UserName == User.Identity.Name)))
@@ -108,6 +112,10 @@ namespace NorthwindWeb.Controllers
                 {
                     foreach (var shopCartProduct in shopCartProducts)
                     {
+                        if (!(db.Products.Any(x => x.ProductID == shopCartProduct.ID)) || db.Products.Where(x => x.ProductID == shopCartProduct.ID).First().Discontinued)
+                        {
+                            continue;
+                        }
                         if (db.ShopCart.Any(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID))
                         {
                             db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity = db.ShopCart.Where(x => x.UserName == User.Identity.Name && x.ProductID == shopCartProduct.ID).First().Quantity + shopCartProduct.Quantity;
