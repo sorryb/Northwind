@@ -25,7 +25,7 @@ namespace NorthwindWeb.Controllers
     public class OrdersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindModel db = new NorthwindModel();
-        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
+        
 
         /// <summary>
         /// Displays a page with all the orders existing in the database.
@@ -357,8 +357,8 @@ namespace NorthwindWeb.Controllers
             //objet that whill be sent to client
             JsonDataTable dataTableData = new JsonDataTable()
             {
-                Draw = draw,
-                RecordsTotal = db.Orders.Count(),
+                draw = draw,
+                recordsTotal = db.Orders.Count(),
                 data = list.Skip(start).Take(length).Select(x => new
                 {
                     ID = x.OrderID,

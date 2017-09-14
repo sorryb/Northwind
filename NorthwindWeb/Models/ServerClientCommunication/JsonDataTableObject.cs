@@ -15,11 +15,11 @@ namespace NorthwindWeb.Models.ServerClientCommunication
         /// The draw counter that this object is a response to - from the draw parameter 
         /// sent as part of the data request.
         /// </summary>
-        public int Draw { get; set; }
+        public int draw { get; set; }
         /// <summary>
         /// Total records, before filtering (i.e. the total number of records in the database)
         /// </summary>
-        public int RecordsTotal { get; set; }
+        public int recordsTotal { get; set; }
         /// <summary>
         /// Total records, after filtering
         /// </summary>
