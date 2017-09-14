@@ -357,8 +357,8 @@ namespace NorthwindWeb.Controllers
             //objet that whill be sent to client
             JsonDataTable dataTableData = new JsonDataTable()
             {
-                draw = draw,
-                recordsTotal = db.Orders.Count(),
+                Draw = draw,
+                RecordsTotal = db.Orders.Count(),
                 data = list.Skip(start).Take(length).Select(x => new
                 {
                     ID = x.OrderID,

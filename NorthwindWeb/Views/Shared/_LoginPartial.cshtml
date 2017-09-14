@@ -30,13 +30,13 @@
                     @Html.ActionLink("Lista Comenzi", "HomeAdmin", "Order")
                 </li>
             }
-            @if (userManager.IsInRole(User.Identity.GetUserId(), "Employees") || userManager.IsInRole(User.Identity.GetUserId(), "Admins") || userManager.IsInRole(User.Identity.GetUserId(), "Managers"))
+            @if (userManager.IsInRole(User.Identity.GetUserId(), "Employees"))
             {
                 <li id="userOrders">
                     @Html.ActionLink("Comenzi atribuite", "Home", "Order")
                 </li>
             }
-            @if (userManager.IsInRole(User.Identity.GetUserId(), "Guest"))
+            @if (userManager.IsInRole(User.Identity.GetUserId(), "Customers"))
             {
                 <li id="userOrders">
                     @Html.ActionLink("Comenzi '" + User.Identity.GetUserName() + "'", "HomeCustomers", "Order")

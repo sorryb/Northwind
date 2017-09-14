@@ -4,14 +4,23 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace NorthwindWeb.Context
 {
+    /// <summary>
+    /// Context class used for Microsoft identity users database.
+    /// </summary>
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        /// <summary>
+        /// Default constructor. Initialises the datababase based on the IdentityDatabaseInitializer class.
+        /// </summary>
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer(new IdentityDatabaseInitializer());
         }
-
+        /// <summary>
+        /// Returns a new instance of this class.
+        /// </summary>
+        /// <returns>new ApplicationDbContext</returns>
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
