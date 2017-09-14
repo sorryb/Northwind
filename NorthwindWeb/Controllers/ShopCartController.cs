@@ -301,48 +301,51 @@ namespace NorthwindWeb.Controllers
         [Authorize]
         public ActionResult ConfirmOrder()
         {
-            var shopCart = db.ShopCart;
             string userName = User.Identity.GetUserName();
-            string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
-            if (String.IsNullOrEmpty(customerId)) {return RedirectToAction("CreateCustomers", "ShopCart"); }
-            Orders order = new Orders()
+            var shopCart = db.ShopCart.Where(n=>n.UserName==userName);
+            if (shopCart.Any())
             {
-                OrderID = db.Orders.Count() + 1,
-                CustomerID = customerId,
-                OrderDate = DateTime.Now,
-                ShipVia =1
-            };
-           
-            foreach (var product in shopCart)
-            {
-                short quantity = 255;
-                if (product.UserName == userName)
+                string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
+                if (String.IsNullOrEmpty(customerId)) { return RedirectToAction("CreateCustomers", "ShopCart"); }
+                Orders order = new Orders()
                 {
-                    if ((product.Quantity >= 1) && (product.Quantity <= 255))
+                    OrderID = db.Orders.Count() + 1,
+                    CustomerID = customerId,
+                    OrderDate = DateTime.Now,
+                    ShipVia = 1
+                };
+
+                foreach (var product in shopCart)
+                {
+                    short quantity = 255;
+                    if (product.UserName == userName)
                     {
-                        quantity = (short)product.Quantity;
+                        if ((product.Quantity >= 1) && (product.Quantity <= 255))
+                        {
+                            quantity = (short)product.Quantity;
+                        }
+                        var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
+
+                        Order_Details orderDetail = new Order_Details
+                        {
+                            ProductID = product.ProductID,
+                            Quantity = quantity,
+                            UnitPrice = productdetails.UnitPrice,
+                            Discount = productdetails.Discount,
+                            OrderID = order.OrderID
+                        };
+                        order.Order_Details.Add(orderDetail);
+                        db.Order_Details.Add(orderDetail);
+
+
+
+                        db.ShopCart.Remove(product);
                     }
-                    var productdetails = db.Order_Details.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = x.Discount }).FirstOrDefault();
-
-                    Order_Details orderDetail = new Order_Details
-                    {
-                        ProductID = product.ProductID,
-                        Quantity = quantity,
-                        UnitPrice = productdetails.UnitPrice,
-                        Discount = productdetails.Discount,
-                        OrderID = order.OrderID
-                    };
-                    order.Order_Details.Add(orderDetail);
-                    db.Order_Details.Add(orderDetail);
-
-
-
-                    db.ShopCart.Remove(product);
                 }
-            }
 
-            db.Orders.Add(order);
-            db.SaveChanges();
+                db.Orders.Add(order);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index", "Home");
         }
 
