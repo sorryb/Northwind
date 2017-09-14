@@ -16,8 +16,7 @@ using System.Web;
 using NorthwindWeb.Context;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
-
-
+using NorthwindWeb.Models.ExceptionHandler;
 
 namespace NorthwindWeb.Controllers
 {
@@ -27,6 +26,7 @@ namespace NorthwindWeb.Controllers
     [Authorize]
     public class AccountController : Controller, IJsonTableFillServerSide
     {
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AccountController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         /// <summary>
@@ -763,7 +763,13 @@ namespace NorthwindWeb.Controllers
             }
             else
             {
-                throw new Exception("Nu puteti sterge roluri cu utilizatori alocati");
+                string error = "Nu puteti sterge roluri cat timp au utilizatori alocati: ";
+                foreach (SelectListItem user in selectItemsUserInRole)
+                {
+                    error += user.Text + " ";
+                }
+                logger.Error(error.ToString());
+                throw new DeleteException(error);
             }
         }
         /// <summary>

@@ -20,6 +20,7 @@ namespace NorthwindWeb.Controllers
     [Authorize(Roles = "Admins, Employees")]
     public class SuppliersController : Controller, IJsonTableFillServerSide
     {
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(SuppliersController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         private NorthwindModel db = new NorthwindModel();
 
         /// <summary>
@@ -166,7 +167,14 @@ namespace NorthwindWeb.Controllers
             }
             catch
             {
-                throw new DeleteException("Nu puteti sterge un furnizor cu comenzi alocate");
+                string error = "Nu puteti sterge un furnizor cu comenzi alocate: ";
+                var orders = db.Orders.Where(o => o.ShipVia == id).Select(o=> new {o.OrderID });
+                foreach (var order in orders)
+                {
+                    error += order.OrderID.ToString() + " ";
+                }
+                logger.Error(error.ToString());
+                throw new DeleteException(error);
             }
         }
 
