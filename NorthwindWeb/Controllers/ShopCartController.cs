@@ -22,6 +22,7 @@ namespace NorthwindWeb.Controllers
     public class ShopCartController : Controller, NorthwindWeb.Models.Interfaces.IJsonTableFillServerSide
     {
         NorthwindModel db = new NorthwindModel();
+        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ShopCartController));
 
         /// <summary>
         /// See the curent shop list
@@ -54,8 +55,9 @@ namespace NorthwindWeb.Controllers
                 }
                 return "{}";
             }
-            catch
+            catch (Exception e)
             {
+                logger.Error(e.ToString());
                 return "Error";
             }
         }
@@ -120,8 +122,9 @@ namespace NorthwindWeb.Controllers
                 }
                 else throw(new Exception());
             }
-            catch
+            catch (Exception e)
             {
+                logger.Error(e.ToString());
                 return "Error";
             }
         }
