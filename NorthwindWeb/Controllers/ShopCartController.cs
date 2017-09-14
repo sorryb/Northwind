@@ -22,11 +22,8 @@ namespace NorthwindWeb.Controllers
     public class ShopCartController : Controller, NorthwindWeb.Models.Interfaces.IJsonTableFillServerSide
     {
         NorthwindModel db = new NorthwindModel();
-<<<<<<< HEAD
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ShopCartController));
-=======
-        log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ShopCartController));
->>>>>>> 2f9169017120538dd2d9db51f96a123c89f6a988
+
 
         /// <summary>
         /// See the curent shop list
