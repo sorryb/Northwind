@@ -81,7 +81,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,productImage")] ProductViewModel productviewmodel)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,ProductImage")] ProductViewModel productviewmodel)
         {
             Products products = new Products()
             {
@@ -102,16 +102,12 @@ namespace NorthwindWeb.Controllers
                 db.Products.Add(products);
                 await db.SaveChangesAsync();
 
-                if (productviewmodel.productImage != null)
+                if (productviewmodel.ProductImage != null)
                 {
                     string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
-                    productviewmodel.productImage.SaveAs(path);
+                    productviewmodel.ProductImage.SaveAs(path);
                 }
-
-
                 return RedirectToAction("Index");
-
-
             }
 
             ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
