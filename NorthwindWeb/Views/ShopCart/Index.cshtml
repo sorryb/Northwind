@@ -1,9 +1,10 @@
+@model List<NorthwindWeb.Models.Shippers>
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
-<link href="~/css/cartTable.css" rel="stylesheet" />
+    <link href="~/css/cartTable.css" rel="stylesheet" />
     <h2>Cos de Cumparaturi</h2><hr />
 
     <table id="ShopCartTable" class="cell-border hover order-column coloronwhite">
@@ -26,12 +27,24 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
-
-        </tbody>
+        <tbody></tbody>
 
     </table>
     <br />
-    @Html.ActionLink("Trimite Comanda", "ConfirmOrder", "ShopCart", null, new { @class = "btn btn-default" })
 
+    @using (Html.BeginForm("ConfirmOrder", "ShopCart", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form">
+            <strong>Selecteaza Curierul</strong><br />
+            @Html.DropDownList("ShipVia", (IEnumerable<SelectListItem>)ViewBag.ShipVia, htmlAttributes: new { @class = "form" })
+
+            <br />
+            <br />
+            <input type="submit" value="Trimite Comanda" class="btn btn-default" />
+
+        </div>
+        <br />
+    }
 </div>
