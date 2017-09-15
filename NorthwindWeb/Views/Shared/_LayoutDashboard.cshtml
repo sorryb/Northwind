@@ -49,9 +49,9 @@
                 </button>
                 @Html.ActionLink(" Northwind Phone", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
             </div>
-          
-           
-           
+
+
+
             <!-- /.navbar-left-links -->
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav collapse navbar-collapse">
@@ -78,27 +78,27 @@
 
 
 
-                                    <!--@Html.ActionLink("Dashboard", "Home", "Dashboard")-->
+                            <!--@Html.ActionLink("Dashboard", "Home", "Dashboard")-->
                         </li>
 
-                        <li id="category" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produse<b class="caret"></b></a>
-                            <ul class="nav nav-second-level">
-                                <li id="product">
-                                    @Html.ActionLink("Toate", "Index", "Product")
-                                </li>
-                                @{Html.RenderAction("Menu", "Home");}
-
-                            </ul>
+                        <li id="reports">
+                            @Html.ActionLink("Rapoarte", "Index", "Reports")
                         </li>
                         <li id="entity" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Entitati<b class="caret"></b></a>
                             <ul class="nav nav-second-level">
+                                <li id="category" class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produse<b class="caret"></b></a>
+                                    <ul class="nav nav-second-level">
+                                        <li id="product">
+                                            @Html.ActionLink("Toate", "Index", "Product")
+                                        </li>
+                                        @{Html.RenderAction("Menu", "Home");}
+
+                                    </ul>
+                                </li>
                                 <li id="orders">
                                     @Html.ActionLink("Comenzi", "Index", "Orders")
-                                </li>
-                                <li id="reports">
-                                    @Html.ActionLink("Rapoarte", "Index", "Reports")
                                 </li>
                                 <li id="customers">
                                     @Html.ActionLink("Clienti", "Index", "Customers")
@@ -126,13 +126,13 @@
                                 <li id="users">
                                     <a href='@Url.Action("Index", "Account")'><i class="fa fa-user fa-fw"></i> Utilizatori</a>
 
-                                            <!--@Html.ActionLink("Utilizatori", "Index", "Account")-->
+                                    <!--@Html.ActionLink("Utilizatori", "Index", "Account")-->
                                 </li>
 
                                 <li id="roles">
                                     <a href='@Url.Action("RolesIndex", "Account")'><i class="fa fa-gift fa-fw"></i> Roluri</a>
 
-                                            <!--@Html.ActionLink("Roluri", "RolesIndex", "Account")-->
+                                    <!--@Html.ActionLink("Roluri", "RolesIndex", "Account")-->
                                 </li>
                             </ul>
                         </li>
