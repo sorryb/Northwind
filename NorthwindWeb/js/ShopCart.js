@@ -142,6 +142,8 @@ function RemoveFromCart(id) {
         }
         productsInStorage.splice(i, 1);
         localStorage.setItem("cart", JSON.stringify(productsInStorage));
+        UpdateShop();
+        animateShopCart();
         $("#ShopCartTable").DataTable().destroy();
         CreateShopCartDataTable("ShopCartTable");
     }
@@ -150,7 +152,8 @@ function RemoveFromCart(id) {
             url: searchControllerPath() + "/Delete?id=" + id,
         })
             .done(function () {
-                //ar trebui modificat
+                UpdateShop();
+                animateShopCart();
                 $("#ShopCartTable").DataTable().destroy();
                 CreateShopCartDataTable("ShopCartTable");
             })
@@ -158,8 +161,6 @@ function RemoveFromCart(id) {
                 alert("Ceva nu a mers bine");
             });
     }
-    UpdateShop();
-    animateShopCart();
 }
 
 //get array of products
