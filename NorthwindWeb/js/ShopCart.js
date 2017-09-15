@@ -4,7 +4,7 @@ function CartProducts(productId, quantity) {
     this.Quantity = quantity;
 }
 
-//work
+//export local storage to server (when user is loged in)
 function exportLocalShopCartToServer() {
     if (isLogedIn == 1 && localStorage.getItem("cart") != null && localStorage.getItem("cart") != "") {
         $.ajax({
@@ -23,31 +23,6 @@ function exportLocalShopCartToServer() {
             })
     }
 }
-
-//when page was loaded
-$("document").ready(function () {
-
-    //shopcart count item
-    if (isLogedIn == 1) {
-        if (getLocalCartCount()) {
-            var sendToServer = confirm("Aveti produse in shopcart, doriti sa le adaugam la cele din baza de date?");
-            if (sendToServer) {
-                exportLocalShopCartToServer();
-                UpdateShop();
-            }
-            else {
-                localStorage.setItem("cart", "");
-            }
-        }
-
-        //discontinued product make it unavailable
-        $(".discontinued").css("color", "black").prop("title", "Produs Indisponibil");
-        $(".discontinued .shopcartcontainer-products").detach();
-        $(".discontinued img").addClass("grayscale90");
-    }
-    UpdateShop();
-})
-
 
 //add product in cart
 function AddToCart(productToAdd) {
@@ -91,6 +66,7 @@ function AddToCart(productToAdd) {
     }
 }
 
+//change product quantity for product with "id"
 function ChangeQuantity(id, quantity) {
     if (quantity < 1 || quantity > 32767) {
         $("#ShopCartTable").DataTable().destroy();
@@ -130,6 +106,7 @@ function ChangeQuantity(id, quantity) {
     }
 }
 
+//delete a product from shopcart (local/server)
 function RemoveFromCart(id) {
 
     if (isLogedIn == 0) {
@@ -162,13 +139,19 @@ function RemoveFromCart(id) {
     UpdateShop();
 }
 
-//count number of product in shopcart
+//get array of products
+function getLocalCartProducts() {
+    //also we need to see how we manage this
+    return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
+}
+
+//count number of product in shopcart (local)
 function getLocalCartCount() {
 
     return (localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : new Array().length);
 }
 
-//todo this
+//count number of product in shopcart (server)
 function getServerCartCount() {
     if (isLogedIn == 1) {
         $.ajax({
@@ -181,50 +164,7 @@ function getServerCartCount() {
     }
 }
 
-//get array of products
-function getLocalCartProducts() {
-    //also we need to see how we manage this
-    return localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : new Array();
-}
-
-/*
-* numerele nu reprezinta pasii cronologici ce trebuie facuti
-1. salvam product list intr-un array json
-    -daca este logat il luam din database
-    -daca nu este logat il luam din local
-2. la fiecare incarcare de pagina trebuie sa verificam daca userul este logat si daca local sunt produse
-    -daca local sunt produse atunci va trebui sa adaugam produsele pe server
-    -produsele locale vor fi sterse
-3. la plasarea comenzii:
-    -verificam daca este logat
-        -daca este atunci trimitem apelam o actiune ce ia json-ul din server
-        -daca nu este conectat atunci il trimitem la pagina de autentificate (si ar trebui sa facem a.i. de aici sa il redirectioneze inapoi spre a trimite comanda)
-            jsonul datorita pct 2 va fi luat tot de pe server
-4. trebuie sa avem un controller shop
-    -Index: va afisa intreg cos
-    -JsonShopCart: va trimite catre client un json cu obiectele din shop (vezi 5.)
-    -AddOrder: va adauga order folosind json-ul din baza de date
-    -AddProduct(productID, Quantity): va adauga/modifica(daca exista) un produs
-    -AddListProduct: dupa ce se logheaza ia json, trece prin fiecare produs, vede ca e disponibil si ca exista si il baga pe server.
-        daca da return ProductShopResponse.error=0
-        daca nu return ProductShopResponse.error=1 si detaliile necesare
-    -DeleteProduct(productID): sterge un produs din baza de date (din json)
-5. Ne vor trebui urmatoarele obiecte:
-    -ProductShopCart={
-        ID --Pentru cautare in baza de date
-        Category --Pentru gasirea imaginii
-        Quantity  --cantitatea ce o comanda
-        UnitPrice
-        TotalPrice
-    }
-    -ProductShopResponse{
-        bool Error --in caz ca a fost vreo eroare
-        MessageTitle messageTitle
-        MessageText messageText
-        data --neadaugate pe server
-}
-*/
-
+//update products count
 function UpdateShop() {
     if (isLogedIn == 1)
         getServerCartCount();
@@ -232,3 +172,27 @@ function UpdateShop() {
         $("#shopcart-productcount").text(getLocalCartCount());
 
 }
+
+//when page was loaded
+$("document").ready(function () {
+
+    //shopcart count item
+    if (isLogedIn == 1) {
+        if (getLocalCartCount()) {
+            var sendToServer = confirm("Aveti produse in shopcart, doriti sa le adaugam la cele din baza de date?");
+            if (sendToServer) {
+                exportLocalShopCartToServer();
+                UpdateShop();
+            }
+            else {
+                localStorage.setItem("cart", "");
+            }
+        }
+
+        //discontinued product make it unavailable
+        $(".discontinued").css("color", "black").prop("title", "Produs Indisponibil");
+        $(".discontinued .shopcartcontainer-products").detach();
+        $(".discontinued img").addClass("grayscale90");
+    }
+    UpdateShop();
+})
