@@ -1,4 +1,4 @@
-﻿@model NorthwindWeb.Models.Customers
+﻿@model NorthwindWeb.ViewModels.Customer
 
 @{
     ViewBag.Title = "Adauga";
@@ -37,7 +37,7 @@
         </div>
         
         <div class="form-group">
-            <span class="control-label col-md-2 bold"><strong>Adresa*</strong></span>
+            <span class="control-label col-md-2 bold"><strong>Adresa</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address)
                 @Html.ValidationMessageFor(model => model.Address)
@@ -77,7 +77,7 @@
         </div>
 
         <div class="form-group">
-            <span class="control-label col-md-2 bold"><strong>Telefon*</strong></span>
+            <span class="control-label col-md-2 bold"><strong>Telefon</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Phone)
                 @Html.ValidationMessageFor(model => model.Phone)
@@ -101,10 +101,7 @@
     </div>
 }
 
-<br />
-<div class="container">
-    Campurile marcate cu * sunt obligatorii
-</div>
+
 
 
 

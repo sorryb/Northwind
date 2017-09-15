@@ -257,7 +257,7 @@ namespace NorthwindWeb.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    if(model.UserImage != null)
+                    if (model.UserImage != null)
                     {
                         string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
                         model.UserImage.SaveAs(path);
@@ -541,17 +541,31 @@ namespace NorthwindWeb.Controllers
             return View();
         }
         //-------------------------------------------------------------------------manage users account and roles-----------------------------------------
+        ///// <summary>
+        ///// Index of account
+        ///// </summary>
+        ///// <returns>Returns Index view</returns>
+        //[Authorize(Roles = "Admins")]
+        //public ActionResult Index()
+        //{
+
+        //    return View();
+        //}
         /// <summary>
         /// Index of account
         /// </summary>
+        /// <param name="status">Change user status</param>
         /// <returns>Returns Index view</returns>
         [Authorize(Roles = "Admins")]
-        public ActionResult Index()
+        public ActionResult Index(string status)
         {
+            if (!String.IsNullOrEmpty(status))
+            {
+                ViewBag.Status = status;
 
+            }
             return View();
         }
-
 
         /// <summary>
         /// data to change user
@@ -562,48 +576,68 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> ChangeUser(string userName)
         {
             RegisterViewModel model = new RegisterViewModel();
+            try
+            {
+                var user = await UserManager.FindByNameAsync(userName);
 
-            var user = await UserManager.FindByNameAsync(userName);
+                model.Email = user.Email;
+                model.UserName = user.UserName;
 
-            model.Email = user.Email;
-            model.UserName = user.UserName;
-
-            ViewBag.UserName = user.UserName;
-
+                ViewData["curentUserName"] = user.UserName;
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception.ToString());
+                
+            }
             return View(model);
         }
         /// <summary>
         /// Change User
         /// </summary>
         /// <param name="model">User for change</param>
+        /// <param name="name">Old user name</param>
         /// <returns>Returns to index if succes else returns to this page</returns>
         [HttpPost]
         [Authorize(Roles = "Admins")]
-        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
+        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model, string name)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-            string userName = Request["UserName"];
+            //string userName = Request["curentUserName"];
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(userName);
-                user.UserName = model.UserName;
-                user.Email = model.Email;
-
-                var result = await UserManager.RemovePasswordAsync(user.Id);
-                if (result.Succeeded)
-                { result = await UserManager.AddPasswordAsync(user.Id, model.Password); }
-                isChanged = UserManager.Update(user);
-                if (model.UserImage != null)
+                try
                 {
-                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
-                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
-                    model.UserImage.SaveAs(path);
+                    var user = await UserManager.FindByNameAsync(model.UserName);
+                    user.UserName = model.UserName;
+                    user.Email = model.Email;
+
+                    var result = await UserManager.RemovePasswordAsync(user.Id);
+                    if (result.Succeeded)
+                    {
+                        result = await UserManager.AddPasswordAsync(user.Id, model.Password);
+                        isChanged = UserManager.Update(user);
+                    }
+                    if (model.UserImage != null)
+                    {
+                        System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{name}.jpg"));
+                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                        model.UserImage.SaveAs(path);
+                    }
+
+                    if (isChanged.Succeeded)
+                        return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
+                    else
+                        return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
                 }
-                
-                //if (isChanged.Succeeded)
-                //    return RedirectToAction("Index", "Home");
-                //else
-                    return RedirectToAction("Index");
+                catch (Exception exception)
+                {
+                    logger.Error(exception.ToString());
+                    return View();
+
+                }
+
+
 
             }
 
@@ -632,9 +666,9 @@ namespace NorthwindWeb.Controllers
             }
 
             if (isDeleted.Succeeded)
-               
-                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
-                
+
+                System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+
             //    return RedirectToAction("Index", "Home");
             //else
             return RedirectToAction("Index");
@@ -908,9 +942,11 @@ namespace NorthwindWeb.Controllers
 
                 context.SaveChanges();
             }
-            catch
+            catch (Exception exception)
             {
-                throw;
+                logger.Error(exception.ToString());
+                return View();
+
             }
 
             return RedirectToAction("RoleMembership", new { name = roleName, roleName = roleName });
@@ -1082,12 +1118,13 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Assigns user to role Customers
         /// </summary>
+        /// <param name="shipVia">id selected provider</param>
         /// <returns></returns>
         [Authorize]
         public ActionResult AssignCustomers(int shipVia)
         {
             ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
-            UserManager.AddToRole(user.Id, "Customers");
+            if (user != null) UserManager.AddToRole(user.Id, "Customers");
             if (UserManager.IsInRole(user.Id, "Guest"))
             {
                 UserManager.RemoveFromRole(user.Id, "Guest");

@@ -3,8 +3,7 @@
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
-    <link href="~/css/cartTable.css" rel="stylesheet" />
+<div class="container whiterounded coloronwhite">
     <h2>Cos de Cumparaturi</h2><hr />
 
     <table id="ShopCartTable" class="cell-border hover order-column coloronwhite">
@@ -37,7 +36,7 @@
         @Html.AntiForgeryToken()
 
         <div class="form">
-            <strong>Selecteaza Curierul</strong><br />
+            <strong class="coloronwhite">Selecteaza Curierul</strong><br />
             @Html.DropDownList("ShipVia", (IEnumerable<SelectListItem>)ViewBag.ShipVia, htmlAttributes: new { @class = "form" })
 
             <br />

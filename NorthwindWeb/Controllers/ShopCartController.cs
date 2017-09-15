@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using System.Data;
+using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
@@ -28,7 +29,7 @@ namespace NorthwindWeb.Controllers
         private string CustomerId()
         {
             const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            string result=new string(Enumerable.Repeat(chars, 5)
+            string result = new string(Enumerable.Repeat(chars, 5)
               .Select(s => s[random.Next(s.Length)]).ToArray());
             if (db.Customers.Find(result) != null)
                 result = CustomerId();
@@ -54,8 +55,8 @@ namespace NorthwindWeb.Controllers
         //            }
         //            id = CustomerId(id, indexId-1);
         //        }
-                
-                
+
+
         //    }
         //        return id;
         //}
@@ -77,7 +78,8 @@ namespace NorthwindWeb.Controllers
         [Authorize]
         public string Create(int id, int quantity)
         {
-            if(!(db.Products.Where(x => x.ProductID == id).Any()) || db.Products.Where(x => x.ProductID == id).First().Discontinued){
+            if (!(db.Products.Where(x => x.ProductID == id).Any()) || db.Products.Where(x => x.ProductID == id).First().Discontinued)
+            {
                 return "Error";
             }
             try
@@ -156,7 +158,7 @@ namespace NorthwindWeb.Controllers
                     db.SaveChanges();
                     return "{}"; //for ajax this means success
                 }
-                else throw(new Exception());
+                else throw (new Exception());
             }
             catch (Exception e)
             {
@@ -238,15 +240,15 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-                if (Request.QueryString["order[0][column]"] != null)
-                {
-                    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-                }
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
 
-                if (Request.QueryString["order[0][dir]"] != null)
-                {
-                    sortDirection = Request.QueryString["order[0][dir]"];
-                }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
 
             //list of product that contain "search"
 
@@ -326,7 +328,9 @@ namespace NorthwindWeb.Controllers
         public string GetCartCount()
         {
             if (User.Identity.IsAuthenticated)
+            {
                 return db.ShopCart.Where(x => x.UserName == User.Identity.Name).Count().ToString();
+            }
             return "Error";
         }
 
@@ -339,7 +343,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult ConfirmOrder(int shipVia)
         {
             string userName = User.Identity.GetUserName();
-            var shopCart = db.ShopCart.Where(n=>n.UserName==userName);
+            var shopCart = db.ShopCart.Where(n => n.UserName == userName);
             if (shopCart.Any())
             {
                 string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
@@ -361,7 +365,7 @@ namespace NorthwindWeb.Controllers
                         {
                             quantity = (short)product.Quantity;
                         }
-                        var productdetails = db.Products.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount =0 }).FirstOrDefault();
+                        var productdetails = db.Products.Where(x => x.ProductID == product.ProductID).Select(x => new { UnitPrice = x.UnitPrice, Discount = 0 }).FirstOrDefault();
 
                         Order_Details orderDetail = new Order_Details
                         {
@@ -406,13 +410,16 @@ namespace NorthwindWeb.Controllers
         /// <param name="shipVia">id selected provider</param>
         /// <returns>If successful returns customers index view, else goes back to form.</returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize]
-        public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers, int shipVia)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customer customers, int shipVia)
         {
             try
             {
-                
+                if (!ModelState.IsValid)
+                {
+                    return View(customers);
+                }
                 if (!String.IsNullOrEmpty(customers.Address))
                 {
                     if (!String.IsNullOrEmpty(customers.Phone))
@@ -433,7 +440,7 @@ namespace NorthwindWeb.Controllers
                         };
                         db.Customers.Add(custom);
                         await db.SaveChangesAsync();
-                        return RedirectToAction("AssignCustomers","Account", new { shipVia = shipVia });
+                        return RedirectToAction("AssignCustomers", "Account", new { shipVia = shipVia });
                     }
                     else
                     {
@@ -452,7 +459,7 @@ namespace NorthwindWeb.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
 
             }
-            return View( new { customers, shipVia = shipVia } );
+            return View(new { customers, shipVia = shipVia });
         }
 
         /// <summary>

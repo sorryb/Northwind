@@ -188,9 +188,8 @@ iframe.fill {
 .grayscale90 {
     filter: grayscale(90%);
 }
-.nav li a {
-    color:#777;
-}
+
+
 
 /*style for the dashboard errors page*/
 .error-navbar{
