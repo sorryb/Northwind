@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -11,7 +12,7 @@ namespace NorthwindWeb.Controllers
     public class HomeController : Controller
     {
 
-        private NorthwindModel _northwindDatabase = new NorthwindModel();
+        private NorthwindDatabase _northwindDatabase = new NorthwindDatabase();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
         /// <summary>

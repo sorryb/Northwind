@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using PagedList;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -18,7 +19,7 @@ namespace NorthwindWeb.Controllers
     [Authorize(Roles = "Admins")]
     public class OrderDetailController : Controller
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
 
         /// <summary>

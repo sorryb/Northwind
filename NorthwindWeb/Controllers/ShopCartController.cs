@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity;
 using System.Threading.Tasks;
 using System.Data;
 using NorthwindWeb.ViewModels;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -22,7 +23,7 @@ namespace NorthwindWeb.Controllers
     /// </summary>
     public class ShopCartController : Controller, NorthwindWeb.Models.Interfaces.IJsonTableFillServerSide
     {
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ShopCartController));
 
         private static Random random = new Random();

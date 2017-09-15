@@ -1,10 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using PagedList;
-using NorthwindWeb.Models.ExceptionHandler;
-
-using System.Web.Script.Serialization;
-using System.Collections.Generic;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -13,7 +10,7 @@ namespace NorthwindWeb.Controllers
     /// </summary>
     public class ProductsController : Controller
     {
-        private Models.NorthwindModel db = new Models.NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Returns a paged list filtered by category and by name

@@ -6,7 +6,7 @@ using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Linq;
 using System;
-
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -15,7 +15,7 @@ namespace UnitTestNorthwindWeb
     {
         //Arrange
         TerritoriesController _territoriesControllerTest = new TerritoriesController();
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Sample test method.
@@ -200,7 +200,7 @@ namespace UnitTestNorthwindWeb
 
             db.Dispose();
             territoryTest.TerritoryDescription = "Acolo";
-            db = new NorthwindModel();
+            db = new NorthwindDatabase();
             //Act
             await _territoriesControllerTest.Edit(territoryTest);
             db.Entry(territoryTest).State = System.Data.Entity.EntityState.Modified;

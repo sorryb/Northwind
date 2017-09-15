@@ -4,6 +4,7 @@ using NorthwindWeb.Controllers;
 using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Linq;
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -12,7 +13,7 @@ namespace UnitTestNorthwindWeb
     {
         //Arrange
         EmployeesController _EmployeesControllerUnderTest = new EmployeesController();
-        NorthwindModel _db = new NorthwindModel();
+        NorthwindDatabase _db = new NorthwindDatabase();
 
 
         /// <summary>
@@ -151,7 +152,7 @@ namespace UnitTestNorthwindWeb
             _db.Dispose();
             employeeTest.LastName = "test2";
             employeeTest.FirstName = "test2";
-            _db = new NorthwindModel();
+            _db = new NorthwindDatabase();
 
             //Act
             await _EmployeesControllerUnderTest.Edit(employeeTest);

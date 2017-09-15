@@ -6,8 +6,7 @@ using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Linq;
 using System;
-
-
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -16,7 +15,7 @@ namespace UnitTestNorthwindWeb
     {
         //Arrange
         CategoriesController _categoriesControllerTest = new CategoriesController();
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Sample test method.
@@ -180,7 +179,7 @@ namespace UnitTestNorthwindWeb
 
             db.Dispose();
             categoriesTest.CategoryName = "video";
-            db = new NorthwindModel();
+            db = new NorthwindDatabase();
 
             //Act
             await _categoriesControllerTest.Edit(categoriesTest);
@@ -205,7 +204,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new CategoriesController();
-            var db = new NorthwindModel();
+            var db = new NorthwindDatabase();
             var categoryCount = db.Categories.Count();
 
 

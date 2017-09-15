@@ -11,6 +11,7 @@ using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.ExceptionHandler;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -21,7 +22,7 @@ namespace NorthwindWeb.Controllers
     public class SuppliersController : Controller, IJsonTableFillServerSide
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(SuppliersController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Displays a page containing a datatable with all the suppliers in the database.

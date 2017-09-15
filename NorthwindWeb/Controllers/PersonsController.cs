@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -17,7 +18,7 @@ namespace NorthwindWeb.Controllers
     [Authorize]
     public class PersonsController : Controller
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Displays a page with all the persons in the database.

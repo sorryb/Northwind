@@ -1,28 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.ViewModels.Dashboard;
-using System.IO;
-using System.Runtime.Serialization.Json;
-using System.Web.Script.Serialization;
-using Newtonsoft.Json;
 using PagedList;
+using NorthwindWeb.Context;
 
 
 namespace NorthwindWeb.Controllers
-{   
-    
-    
+{
+
+
     /// <summary>
     /// DashBoard Controller. Charts with actual state of the site
     /// </summary>
     [Authorize(Roles = "Admins")]
     public class DashboardController : Controller
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
 
         /// <summary>

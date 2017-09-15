@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.ViewModels;
 using PagedList;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -17,7 +18,7 @@ namespace NorthwindWeb.Controllers
     /// </summary>
     public class ServicesController : Controller
     {
-        private Models.NorthwindModel db = new Models.NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// take first 4 products and last 3 products with their details

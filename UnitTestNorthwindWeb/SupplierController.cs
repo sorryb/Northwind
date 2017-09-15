@@ -5,6 +5,7 @@ using NorthwindWeb.Models;
 using System.Threading.Tasks;
 using System.Linq;
 using NorthwindWeb.Models.ServerClientCommunication;
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -37,7 +38,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new NorthwindWeb.Controllers.SuppliersController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             int SuppliersCountBefore = db.Suppliers.Count();
             var Suppliers = new Suppliers()
             {
@@ -88,7 +89,7 @@ namespace UnitTestNorthwindWeb
             //Arrange
             //init
             var controller = new NorthwindWeb.Controllers.SuppliersController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             //create Suppliers
             var Suppliers = new Suppliers()
             {
@@ -155,7 +156,7 @@ namespace UnitTestNorthwindWeb
             //Arrange
             //init
             var controller = new NorthwindWeb.Controllers.SuppliersController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             //create Suppliers
             var Suppliers = new Suppliers()
             {
@@ -187,7 +188,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new NorthwindWeb.Controllers.SuppliersController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             var SuppliersCount = db.Suppliers.Count();
             int draw = 1;
             int row = 20;

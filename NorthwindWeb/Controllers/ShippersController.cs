@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ExceptionHandler;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -21,7 +22,7 @@ namespace NorthwindWeb.Controllers
     public class ShippersController : Controller, IJsonTableFill
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Displays a page with all the shippers existing in the database.

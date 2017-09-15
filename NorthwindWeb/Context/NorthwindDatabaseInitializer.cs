@@ -1,33 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using NorthwindWeb.Models;
-using Newtonsoft.Json;
-using System.IO;
 using System.Linq;
 using System;
+using NorthwindWeb.Models;
 
 namespace NorthwindWeb.Context
 {
 
     /// <summary>
-    /// Initializa with Users and Roles.
+    /// Northwind Database Tables  Initializer.
     /// </summary>
-    public class NorthwindDatabaseInitializer : CreateDatabaseIfNotExists<NorthwindModel>
+    public class NorthwindDatabaseInitializer : CreateDatabaseIfNotExists<NorthwindDatabase>
     {
         /// <summary>
         /// Seed database ; fill tables.
         /// </summary>
         /// <param name="context"></param>
-        protected override void Seed(NorthwindModel context)
+        protected override void Seed(NorthwindDatabase context)
         {
             InsertInDatabase(context);
 
             base.Seed(context);
         }
 
-        private void InsertInDatabase(NorthwindModel context)
+        private void InsertInDatabase(NorthwindDatabase context)
         {
 
             //list of region

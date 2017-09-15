@@ -11,6 +11,7 @@ using NorthwindWeb.Models;
 using PagedList;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.ExceptionHandler;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -20,7 +21,7 @@ namespace NorthwindWeb.Controllers
     [Authorize]
     public class EmployeesController : Controller
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(EmployeesController));
 
         /// <summary>
