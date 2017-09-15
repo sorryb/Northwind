@@ -26,7 +26,7 @@ function exportLocalShopCartToServer() {
 
 //animate shopcart when a product is added
 function animateShopCart() {
-    $(".shopcartcontainer .shopcart-container-text, .shopcartcontainer #shopcart-productcount").animate(
+    $(".shopcartcontainer #shopcart-productcount").finish().animate(
         {
             "font-size": "+=12px",
         },
