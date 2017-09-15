@@ -288,7 +288,6 @@
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\cartTable.css" />
     <Content Include="css\dist\sb-admin-2.css" />
     <Content Include="css\dist\sb-admin-2.min.css" />
     <Content Include="css\font-awesome\css\font-awesome.css" />
