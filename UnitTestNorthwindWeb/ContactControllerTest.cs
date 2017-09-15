@@ -27,7 +27,7 @@ namespace UnitTestNorthwindWeb
             var controller = new NorthwindWeb.Controllers.ContactController();
 
             //Act
-            var result = controller.Create();
+            var result = controller.Index();
 
             //Assert
             Assert.IsNotNull(result);
@@ -49,7 +49,7 @@ namespace UnitTestNorthwindWeb
             };
 
             //Act
-            var result = controller.Create(person);
+            var result = controller.Index(person);
 
             //Assert
             Assert.IsNotNull(result);
