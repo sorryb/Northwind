@@ -4,7 +4,7 @@
 }
 @{
     ViewBag.Title = "Modificare";
-    //ViewData["curentUserName"] = ViewBag.UserName;
+   
 }
 
 <hgroup class="title">
@@ -16,17 +16,22 @@
     <section id="ChangeForm">
 
 
-        @using (Html.BeginForm("ChangeUser", "Account", FormMethod.Post, new {name = "curentUserName", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("ChangeUser", "Account", FormMethod.Post, new {enctype = "multipart/form-data" }))
         { <div class="row">
+              @*@Html.DropDownList("name", ViewData["name"] as System.String, "Alege un user", new { @style = "font-size:150%" })*@
+              
+            
                 @Html.AntiForgeryToken()
                 <h4>&nbsp;&nbsp;&nbsp;&nbsp;Modificare utilizator @ViewBag.UserName</h4>
                 <hr />
-                <div class="col-md-4 embed-responsive-4by3">
+                <div class="form-group col-md-4 embed-responsive-4by3">
                     <img src="/images/@(ViewBag.UserName).jpg" onerror="this.src='/images/default.png'" style="max-width:100%;max-height:100%;">
+                    <input type="hidden" value="@(ViewBag.UserName)" name="Name" />
                 </div>
                 <div class="col-md-8">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group row">
+                       
                         @Html.LabelFor(m => m.UserName, new { @class = "col-md-2  control-label" })
                         <div class="col-md-10">
                             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", autofocus = "true" })
@@ -59,7 +64,9 @@
                     </div>
                     <br>
                     <div class="from-group">
+                      
                         <span class="control-label col-md-2 bold"><strong>Schimba imaginea</strong></span>
+                      
                         <div class="col-md-10">
                             <input type="file" id="filechooser" name="UserImage">
                         </div>
