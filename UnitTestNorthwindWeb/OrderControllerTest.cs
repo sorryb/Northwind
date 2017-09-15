@@ -59,9 +59,9 @@ namespace UnitTestNorthwindWeb
             user.UserName = "admin";
             user.Password = "123456";
             AccountController login = new AccountController();
-            var c = login.Login(user,"/Order/Home");
+            var c = login.Login(user, "/Order/Home");
             //Act
-            var result = _orderControllerUnderTest.Home(null, null, null, "102", "102");
+            var result = _orderControllerUnderTest.HomeAdmin(null, null, null, "102", "102");
 
             //Assert
             Assert.IsInstanceOfType(result, typeof(ActionResult));
@@ -81,7 +81,7 @@ namespace UnitTestNorthwindWeb
             AccountController login = new AccountController();
             var c = login.Login(user, "url");
             //Act
-            var result = _orderControllerUnderTest.Home(null, null, null, "102", "102") as ViewResult;
+            var result = _orderControllerUnderTest.HomeAdmin(null, null, null, "102", "102") as ViewResult;
             var model = result.Model;
 
             //Assert
