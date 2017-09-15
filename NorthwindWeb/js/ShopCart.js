@@ -24,6 +24,26 @@ function exportLocalShopCartToServer() {
     }
 }
 
+//animate shopcart when a product is added
+function animateShopCart() {
+    $(".shopcartcontainer .shopcart-container-text, .shopcartcontainer #shopcart-productcount").animate(
+        {
+            "font-size": "+=12px",
+        },
+        200,
+        function () {
+            //complete
+            $(this).animate(
+                {
+                    "font-size": "-=12px",
+                },
+                200
+            )
+        }
+
+    );
+}
+
 //add product in cart
 function AddToCart(productToAdd) {
     if (isLogedIn == 0) {
@@ -45,6 +65,7 @@ function AddToCart(productToAdd) {
         }
         localStorage.setItem("cart", JSON.stringify(productsInStorage));
         UpdateShop();
+        animateShopCart();
     }
     else {
         $.ajax({
@@ -57,6 +78,7 @@ function AddToCart(productToAdd) {
             .done(function () {
                 //ar trebui modificat
                 UpdateShop();
+                animateShopCart();
                 $("#ShopCartTable").DataTable().destroy();
                 CreateShopCartDataTable("ShopCartTable");
             })
@@ -137,6 +159,7 @@ function RemoveFromCart(id) {
             });
     }
     UpdateShop();
+    animateShopCart();
 }
 
 //get array of products
@@ -166,10 +189,12 @@ function getServerCartCount() {
 
 //update products count
 function UpdateShop() {
-    if (isLogedIn == 1)
+    if (isLogedIn == 1) {
         getServerCartCount();
-    else
+    }
+    else {
         $("#shopcart-productcount").text(getLocalCartCount());
+    }
 
 }
 
