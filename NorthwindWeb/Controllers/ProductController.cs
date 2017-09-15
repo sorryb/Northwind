@@ -197,9 +197,9 @@ namespace NorthwindWeb.Controllers
                 Products products = await db.Products.FindAsync(id);
                 db.Products.Remove(products);
                 
-                System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{id}.jpg"));
 
                 await db.SaveChangesAsync();
+                System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{id}.jpg"));
             }
             catch (NullReferenceException e)
             {

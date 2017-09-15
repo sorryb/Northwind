@@ -17,84 +17,88 @@
 </ol>
 
 <h3>Esti sigur ca vrei sa-l stergi?</h3>
-<div>
-    <h4>Produs</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            Nume Categorie
-        </dt>
+<div class="row">
+    <div class="col-lg-4">
+        <h4>Produs</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Nume Categorie
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.CategoryName)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Category.CategoryName)<br />
+            </dd>
 
-        <dt>
-            Nume Furnizor
-        </dt>
+            <dt>
+                Nume Furnizor
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Supplier.CompanyName)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Supplier.CompanyName)<br />
+            </dd>
 
-        <dt>
-            Nume Produs
-        </dt>
+            <dt>
+                Nume Produs
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProductName)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ProductName)<br />
+            </dd>
 
-        <dt>
-            Cantitate
-        </dt>
+            <dt>
+                Cantitate
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.QuantityPerUnit)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.QuantityPerUnit)<br />
+            </dd>
 
-        <dt>
-            Pret
-        </dt>
+            <dt>
+                Pret
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitPrice)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UnitPrice)<br />
+            </dd>
 
-        <dt>
-            In Stoc
-        </dt>
+            <dt>
+                In Stoc
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitsInStock)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UnitsInStock)<br />
+            </dd>
 
-        <dt>
-            Pe Comnezi
-        </dt>
+            <dt>
+                Pe Comnezi
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UnitsOnOrder)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.UnitsOnOrder)<br />
+            </dd>
 
-        <dt>
-            Stoc limita
-        </dt>
+            <dt>
+                Stoc limita
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ReorderLevel)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ReorderLevel)<br />
+            </dd>
 
-        <dt>
-            Indisponibil
-        </dt>
+            <dt>
+                Indisponibil
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Discontinued)<br />
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Discontinued)<br />
+            </dd>
 
-    </dl>
-
+        </dl>
+    </div>
+    <div class="col-lg-8">
+        <img src="~/Images/@Model.Category.CategoryName/@(Model.ProductID).jpg" />
+    </div>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
