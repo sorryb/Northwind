@@ -578,17 +578,25 @@ namespace NorthwindWeb.Controllers
             RegisterViewModel model = new RegisterViewModel();
             try
             {
-                var user = await UserManager.FindByNameAsync(userName);
-
+                ApplicationUser user = null;
+                if (!String.IsNullOrEmpty(userName))
+                {
+                    user = await UserManager.FindByNameAsync(userName);
+                }
+                else
+                {
+                    user = await UserManager.FindByNameAsync(ViewBag.UserName);
+                }
                 model.Email = user.Email;
                 model.UserName = user.UserName;
+                //model.OldUserName = user.UserName;
+                ViewBag.UserName = user.UserName;
 
-                ViewData["curentUserName"] = user.UserName;
             }
             catch (Exception exception)
             {
                 logger.Error(exception.ToString());
-                
+
             }
             return View(model);
         }
@@ -596,55 +604,57 @@ namespace NorthwindWeb.Controllers
         /// Change User
         /// </summary>
         /// <param name="model">User for change</param>
-        /// <param name="name">Old user name</param>
         /// <returns>Returns to index if succes else returns to this page</returns>
         [HttpPost]
         [Authorize(Roles = "Admins")]
-        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model, string name)
+        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-            //string userName = Request["curentUserName"];
-            if (ModelState.IsValid)
+            string userName = Request["Name"];
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    var user = await UserManager.FindByNameAsync(model.UserName);
-                    user.UserName = model.UserName;
-                    user.Email = model.Email;
-
-                    var result = await UserManager.RemovePasswordAsync(user.Id);
-                    if (result.Succeeded)
-                    {
-                        result = await UserManager.AddPasswordAsync(user.Id, model.Password);
-                        isChanged = UserManager.Update(user);
-                    }
-                    if (model.UserImage != null)
-                    {
-                        System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{name}.jpg"));
-                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
-                        model.UserImage.SaveAs(path);
-                    }
-
-                    if (isChanged.Succeeded)
-                        return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
-                    else
-                        return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
-                }
-                catch (Exception exception)
-                {
-                    logger.Error(exception.ToString());
-                    return View();
-
-                }
-
-
-
+                ViewBag.UserName = userName;
+                return View(model);
             }
+            try
+            {
+                var user = await UserManager.FindByNameAsync(userName);
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+
+                var result = await UserManager.RemovePasswordAsync(user.Id);
+                if (result.Succeeded)
+                {
+                    System.IO.File.Move(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"), System.IO.Path.Combine(Server.MapPath($"~/images"), $"{user.UserName}.jpg"));
+                    //System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                    result = await UserManager.AddPasswordAsync(user.Id, model.Password);
+                    isChanged = UserManager.Update(user);
+                }
+                if (model.UserImage != null)
+                {
+                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                    model.UserImage.SaveAs(path);
+                }
+
+
+                return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
+
+                //return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception.ToString());
+
+                return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
+            }
+
+
 
             // If we got this far, something failed, redisplay form
             //ViewBag.PasswordLength = UserManager.PasswordValidator.
 
-            return View(model);
+
         }
         /// <summary>
         /// delete user

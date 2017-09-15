@@ -443,7 +443,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
             RegisterViewModel model = new RegisterViewModel();
             //Act
-            var result = _accountController.ChangeUser(model,"succes");
+            var result = _accountController.ChangeUser(model);
 
             //Assert
 
