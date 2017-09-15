@@ -40,7 +40,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _accountController.Index();
+            var result = _accountController.Index("succes");
 
             //Assert
 
@@ -409,7 +409,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _accountController.Index();
+            var result = _accountController.Index("succes");
 
             //Assert
 
@@ -443,7 +443,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
             RegisterViewModel model = new RegisterViewModel();
             //Act
-            var result = _accountController.ChangeUser(model);
+            var result = _accountController.ChangeUser(model,"succes");
 
             //Assert
 

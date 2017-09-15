@@ -168,7 +168,7 @@ namespace NorthwindWeb.Controllers
             catch
             {
                 string error = "Nu puteti sterge un furnizor cu comenzi alocate: ";
-                var orders = db.Orders.Where(o => o.ShipVia == id).Select(o=> new {o.OrderID });
+                var orders = db.Orders.Where(o => o.ShipVia == id).Select(o => new { o.OrderID });
                 foreach (var order in orders)
                 {
                     error += order.OrderID.ToString() + " ";
@@ -190,8 +190,15 @@ namespace NorthwindWeb.Controllers
             const int TOTAL_ROWS = 999;
 
             string search = "";
-            search = Request.QueryString["search[value]"] ?? "";
+            try
+            {
+                search = Request.QueryString["search[value]"] ?? "";
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception.ToString());
 
+            }
             int sortColumn = -1;
             string sortDirection = "asc";
             if (length == -1)
@@ -200,15 +207,30 @@ namespace NorthwindWeb.Controllers
             }
 
             // note: we only sort one column at a time
-            if (Request.QueryString["order[0][column]"] != null)
+            try
             {
-                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                if (Request.QueryString["order[0][column]"] != null)
+                {
+                    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+                }
             }
+            catch (Exception exception)
+            {
+                logger.Error(exception.ToString());
 
+            }
+            try
+            {
                 if (Request.QueryString["order[0][dir]"] != null)
                 {
                     sortDirection = Request.QueryString["order[0][dir]"];
                 }
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception.ToString());
+
+            }
 
             //list of product that contain "search"
             var suppliersInfo = db.Suppliers.OrderBy(x => x.SupplierID).Where(s => s.CompanyName.Contains(search) || s.ContactName.Contains(search)

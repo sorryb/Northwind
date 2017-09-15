@@ -4,7 +4,7 @@
 }
 @{
     ViewBag.Title = "Modificare";
-  
+    //ViewData["curentUserName"] = ViewBag.UserName;
 }
 
 <hgroup class="title">
@@ -16,7 +16,7 @@
     <section id="ChangeForm">
 
 
-        @using (Html.BeginForm("ChangeUser", "Account", FormMethod.Post, new { userName= ViewBag.UserName, enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("ChangeUser", "Account", FormMethod.Post, new {name = "curentUserName", enctype = "multipart/form-data" }))
         { <div class="row">
                 @Html.AntiForgeryToken()
                 <h4>&nbsp;&nbsp;&nbsp;&nbsp;Modificare utilizator @ViewBag.UserName</h4>

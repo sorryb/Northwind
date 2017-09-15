@@ -576,53 +576,59 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> ChangeUser(string userName)
         {
             RegisterViewModel model = new RegisterViewModel();
+            try
+            {
+                var user = await UserManager.FindByNameAsync(userName);
 
-            var user = await UserManager.FindByNameAsync(userName);
+                model.Email = user.Email;
+                model.UserName = user.UserName;
 
-            model.Email = user.Email;
-            model.UserName = user.UserName;
-
-            ViewBag.UserName = user.UserName;
-
+                ViewData["curentUserName"] = user.UserName;
+            }
+            catch (Exception exception)
+            {
+                logger.Error(exception.ToString());
+                
+            }
             return View(model);
         }
         /// <summary>
         /// Change User
         /// </summary>
         /// <param name="model">User for change</param>
-        /// <param name="userName">Old user name</param>
+        /// <param name="name">Old user name</param>
         /// <returns>Returns to index if succes else returns to this page</returns>
         [HttpPost]
         [Authorize(Roles = "Admins")]
-        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model, string userName)
+        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model, string name)
         {
             IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-            
+            //string userName = Request["curentUserName"];
             if (ModelState.IsValid)
             {
                 try
                 {
                     var user = await UserManager.FindByNameAsync(model.UserName);
-                user.UserName = model.UserName;
-                user.Email = model.Email;
+                    user.UserName = model.UserName;
+                    user.Email = model.Email;
 
-                var result = await UserManager.RemovePasswordAsync(user.Id);
-                if (result.Succeeded)
-                {
-                    result = await UserManager.AddPasswordAsync(user.Id, model.Password);
-                    isChanged = UserManager.Update(user);
-                }
-                if (model.UserImage != null)
-                {
-                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
-                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
-                    model.UserImage.SaveAs(path);
-                }
+                    var result = await UserManager.RemovePasswordAsync(user.Id);
+                    if (result.Succeeded)
+                    {
+                        result = await UserManager.AddPasswordAsync(user.Id, model.Password);
+                        isChanged = UserManager.Update(user);
+                    }
+                    if (model.UserImage != null)
+                    {
+                        System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                        model.UserImage.SaveAs(path);
+                    }
 
-                if (isChanged.Succeeded)
-                    return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
-                else
-                    return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
+                    if (isChanged.Succeeded)
+                        return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
+                    else
+                        return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
                 }
                 catch (Exception exception)
                 {
@@ -1118,7 +1124,7 @@ namespace NorthwindWeb.Controllers
         public ActionResult AssignCustomers(int shipVia)
         {
             ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
-            if(user!=null) UserManager.AddToRole(user.Id, "Customers");
+            if (user != null) UserManager.AddToRole(user.Id, "Customers");
             if (UserManager.IsInRole(user.Id, "Guest"))
             {
                 UserManager.RemoveFromRole(user.Id, "Guest");
