@@ -196,13 +196,17 @@ namespace NorthwindWeb.Controllers
             {
                 Products products = await db.Products.FindAsync(id);
                 db.Products.Remove(products);
-
+                
                 System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{id}.jpg"));
 
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
             }
-            catch (Exception e)
+            catch (NullReferenceException e)
+            {
+                //missing file or direectory
+                logger.Error(e.ToString());
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
                 logger.Error(e.ToString());
                 string listOrders = "";
@@ -213,6 +217,12 @@ namespace NorthwindWeb.Controllers
                 }
                 throw new DeleteException("Acest produs nu a putut fi sters deoarece se afla pe urmatoarele comenzi: " + listOrders + " .Ia in considerare si varianta de a-l face indisponibil");
             }
+            catch(Exception e)
+            {
+                //if someone else go wrong
+                logger.Error(e.ToString());
+            }
+            return RedirectToAction("Index");
         }
 
 
@@ -348,7 +358,13 @@ namespace NorthwindWeb.Controllers
             catch (Exception e)
             {
                 logger.Error(e.ToString());
-                return Json(new JsonDataTable() { error = "Ceva nu a mers bine" }, JsonRequestBehavior.AllowGet);
+                return Json(new JsonDataTable()
+                {
+                    draw = draw,
+                    recordsTotal = db.Products.Count(),
+                    error = "Ceva nu a mers bine",
+                    recordsFiltered = 0
+                }, JsonRequestBehavior.AllowGet);
             }
         }
         /// <summary>

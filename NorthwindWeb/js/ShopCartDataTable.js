@@ -31,7 +31,7 @@ function CreateShopCartDataTable(tableId) {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
                     item.ProductName = '<img src="/images/' + item.Category + '/' + item.ID + '.jpg" class="shopCartImage"/> <span>' + item.ProductName + '</span>';
-                    item.Remove = '<a href="javascript:" onclick="RemoveFromCart(' + item.ID + ')" /> <i class="fa fa-remove"></i></a >';
+                    item.Remove = '<a href="javascript:" onclick="RemoveFromCart(' + item.ID + ')" /> <i class="fa fa-remove coloronwhite"></i></a >';
                     item.TotalPrice = item.UnitPrice * item.Quantity;
                     item.Quantity = '<input type="number" min="1" max="255" value=' + item.Quantity + ' onblur="ChangeQuantity(' + item.ID + ',value)"/> ';
                 })

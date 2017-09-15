@@ -103,7 +103,7 @@ namespace UnitTestNorthwindWeb
 
             //Assert
             Assert.AreEqual(productCountBefore + 1, db.Products.Count());
-            db.Entry(product).State = System.Data.Entity.EntityState.Deleted;
+            db.Entry(db.Products.Where(x => x.ProductName == product.ProductName).First()).State = System.Data.Entity.EntityState.Deleted;
             db.SaveChanges();
             controller.Dispose();
             db.Dispose();
@@ -209,9 +209,7 @@ namespace UnitTestNorthwindWeb
             var product = new Products() { ProductName = "test", CategoryID = 1, SupplierID = 1 };
             db.Entry(product).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();
-            //detach product from db
-            db.Entry(product).State = System.Data.Entity.EntityState.Detached;
-            db.SaveChanges();
+            db.Dispose();
 
             //Act
             //run controller action
