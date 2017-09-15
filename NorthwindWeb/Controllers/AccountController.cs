@@ -620,7 +620,7 @@ namespace NorthwindWeb.Controllers
                     }
                     if (model.UserImage != null)
                     {
-                        System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                        System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{name}.jpg"));
                         string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
                         model.UserImage.SaveAs(path);
                     }
