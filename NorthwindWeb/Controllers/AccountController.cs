@@ -600,9 +600,9 @@ namespace NorthwindWeb.Controllers
                     model.UserImage.SaveAs(path);
                 }
                 
-                if (isChanged.Succeeded)
-                    return RedirectToAction("Index", "Home");
-                else
+                //if (isChanged.Succeeded)
+                //    return RedirectToAction("Index", "Home");
+                //else
                     return RedirectToAction("Index");
 
             }

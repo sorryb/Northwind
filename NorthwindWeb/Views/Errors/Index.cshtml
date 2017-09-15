@@ -1,0 +1,35 @@
+﻿@model IOrderedEnumerable<System.Diagnostics.EventLogEntry>
+@{
+    ViewBag.Title = "Errors";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 text-center error-navbar">
+        <ul class="nav">
+            @if (Model.Any())
+            {
+                foreach (System.Diagnostics.EventLogEntry entry in Model)
+                {
+                    <li>
+                        <a href='javascript:$("#message").text("@entry.Message")'>@entry.TimeGenerated</a>
+                    </li>
+                }
+            }
+            else
+            {
+                <li>
+                    There are no errors logged.
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<hr style="border-color: black;" />
+<div class="row error-message">
+    <div class="col-lg-12" max-height="50%">
+        <p id="message">
+
+        </p>
+    </div>
+</div>

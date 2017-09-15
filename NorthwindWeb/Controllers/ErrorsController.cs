@@ -16,13 +16,26 @@ namespace NorthwindWeb.Controllers
         /// Displays a page with a table containing all the errors from the NorthwindLog
         /// </summary>
         /// <returns>Errors index view</returns>
+        [Authorize(Roles = "Admins")]
         public ActionResult Index()
         {
-            var test = EventLog.GetEventLogs();
-            
+
+            EventLog log = new EventLog()
+            {
+                Log = "NorthwindLog"
+            };
+
+            var entries = from EventLogEntry entry in log.Entries
+                          orderby entry.TimeGenerated descending
+                          select entry;
 
 
-            return View();
+
+
+
+
+
+            return View(entries);
         }
     }
 }
