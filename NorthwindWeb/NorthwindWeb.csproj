@@ -502,6 +502,7 @@
     <Content Include="Views\Account\RegisterAdmin.cshtml" />
     <Content Include="Views\Order\HomeCustomers.cshtml" />
     <Content Include="Views\Shared\_LoginPartialDashboard.cshtml" />
+    <Content Include="Views\Errors\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
@@ -535,7 +536,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Errors\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

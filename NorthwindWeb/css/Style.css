@@ -191,3 +191,12 @@ iframe.fill {
 .nav li a {
     color:#777;
 }
+
+/*style for the dashboard errors page*/
+.error-navbar{
+    max-height:20vh;
+    overflow-y:auto;
+}
+.error-message{
+    padding-top:10px;
+}

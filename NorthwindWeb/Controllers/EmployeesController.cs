@@ -172,9 +172,9 @@ namespace NorthwindWeb.Controllers
             try
             {
                 if (employees.Orders.Any())
-                    throw new DeleteException("The employee cannot be deleted because he has orders in the database.");
+                    throw new DeleteException("Angajatul nu poate fi sters pentru ca detine comenzi");
                 if (employees.Employees1.Any())
-                    throw new DeleteException("The employee cannot be deleted because he has subordinates.");
+                    throw new DeleteException("Angajatul nu poate fi sters pentru ca are angajati in subordine");
                 employees.Territories.Clear();
                 db.Employees.Remove(employees);
                 await db.SaveChangesAsync();
@@ -183,12 +183,7 @@ namespace NorthwindWeb.Controllers
             catch (DeleteException e)
             {
                 logger.Error(e.ToString());
-                if (e.Message.Contains("orders"))
-                    throw new DeleteException("Angajatul nu poate fi sters pentru ca detine comenzi");
-                if (e.Message.Contains("subordinates"))
-                    throw new DeleteException("Angajatul nu poate fi sters pentru ca are angajati in subordine");
-
-                throw;
+                throw e;
             }
         }
         /// <summary>
