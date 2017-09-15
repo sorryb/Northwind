@@ -625,8 +625,8 @@ namespace NorthwindWeb.Controllers
                 var result = await UserManager.RemovePasswordAsync(user.Id);
                 if (result.Succeeded)
                 {
-                    System.IO.File.Copy(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"), System.IO.Path.Combine(Server.MapPath($"~/images"), $"{user.UserName}.jpg"));
-                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                    System.IO.File.Move(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"), System.IO.Path.Combine(Server.MapPath($"~/images"), $"{user.UserName}.jpg"));
+                    //System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
                     result = await UserManager.AddPasswordAsync(user.Id, model.Password);
                     isChanged = UserManager.Update(user);
                 }
