@@ -384,26 +384,44 @@ namespace NorthwindWeb.Controllers
             {
                 int ok = 0;
                 foreach (var i in dashboardMorrisAreaData)
-                {
-                    if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
+                { if (Convert.ToDateTime(itemSalesByYear.OrderDate).Year <= 1998)
                     {
-                        i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
-                        ok = 1;
-                        break;
+                        if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year + 19)
+                        {
+                            i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
+                            ok = 1;
+                            break;
+                        }
+                    }
+                else
+                    {
+                        if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
+                        {
+                            i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
+                            ok = 1;
+                            break;
+                        }
                     }
                 }
                 //test return true if item->year is not in list
                 if (ok == 0)
                 {
                     DashboardMorrisArea dashboardMorrisAreaElement = new DashboardMorrisArea();
-                    dashboardMorrisAreaElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
+                    if (Convert.ToDateTime(itemSalesByYear.OrderDate).Year <= 1998)
+                    {
+                        dashboardMorrisAreaElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year + 19);
+                    }
+                    else
+                    {
+                        dashboardMorrisAreaElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
+                    }
                     dashboardMorrisAreaElement.Sales = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
                     dashboardMorrisAreaData.Add(dashboardMorrisAreaElement);
                 }
             }
             //Rounds the value to two decimal places
             foreach (var itemDashboardMorrisAreaData in dashboardMorrisAreaData)
-            {
+            {  
                 itemDashboardMorrisAreaData.Sales = decimal.Round(itemDashboardMorrisAreaData.Sales, 2);
             }
 
@@ -481,7 +499,9 @@ namespace NorthwindWeb.Controllers
                 int alreadyExistQuarter = 0;
                 foreach (var itemDashboardMorrisBarData in dashboardMorrisBarData)
                 {
-                    if (int.Parse(itemDashboardMorrisBarData.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
+                    if(Convert.ToDateTime(itemSalesByYear.OrderDate).Year<=1998)
+                    { 
+                    if (int.Parse(itemDashboardMorrisBarData.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year+19)
                     {
                         if (quarter == 1) { itemDashboardMorrisBarData.dashboardMorrisBarColumA += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
                         else if (quarter == 2) { itemDashboardMorrisBarData.dashboardMorrisBarColumB += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
@@ -490,12 +510,32 @@ namespace NorthwindWeb.Controllers
                         alreadyExistQuarter = 1;
                         break;
                     }
+                    }
+                    else
+                    {
+                        if (int.Parse(itemDashboardMorrisBarData.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
+                        {
+                            if (quarter == 1) { itemDashboardMorrisBarData.dashboardMorrisBarColumA += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                            else if (quarter == 2) { itemDashboardMorrisBarData.dashboardMorrisBarColumB += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+                            else { itemDashboardMorrisBarData.dashboardMorrisBarColumC += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
+
+                            alreadyExistQuarter = 1;
+                            break;
+                        }
+                    }
                 }
                 //test return true if itemSalesByYear->quarter not exist yet in itemDashboardMorrisBarData->year 
                 if (alreadyExistQuarter == 0)
                 {
                     DashboardMorrisBar dashboardMorrisBarElement = new DashboardMorrisBar();
-                    dashboardMorrisBarElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
+                    if (Convert.ToDateTime(itemSalesByYear.OrderDate).Year <= 1998)
+                    {
+                        dashboardMorrisBarElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year+19);
+                    }
+                    else
+                    {
+                        dashboardMorrisBarElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
+                    }
                     if (quarter == 1) { dashboardMorrisBarElement.dashboardMorrisBarColumA = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
                     else if (quarter == 2) { dashboardMorrisBarElement.dashboardMorrisBarColumB = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
                     else { dashboardMorrisBarElement.dashboardMorrisBarColumC = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }

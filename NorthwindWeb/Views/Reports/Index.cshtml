@@ -4,8 +4,8 @@
 }
 @model List<NorthwindWeb.ViewModels.ReportViewModel>
 
-<div>
-    <div class="navbar-default col-xs-3" role="navigation">
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav collapse navbar-collapse">
         <ul class="nav">
             @foreach (var report in Model)
             {
@@ -15,8 +15,19 @@
             }
         </ul>
     </div>
-    <div class="col-xs-9">
-        <iframe name="reps" class="fill"></iframe>
-    </div>
 </div>
+<div class="collapse navbar-collapse navbar-ex1-collapse  navbar-right" role="navigation">
+
+    <ul class="nav navbar-nav">
+
+        @Html.Partial("_LoginPartialDashBoard")
+
+    </ul>
+
+</div>
+
+
+
+
+
 

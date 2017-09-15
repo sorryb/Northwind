@@ -188,3 +188,14 @@ iframe.fill {
 .grayscale90 {
     filter: grayscale(90%);
 }
+
+
+
+/*style for the dashboard errors page*/
+.error-navbar{
+    max-height:20vh;
+    overflow-y:auto;
+}
+.error-message{
+    padding-top:10px;
+}
