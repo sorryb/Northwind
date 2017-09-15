@@ -188,3 +188,6 @@ iframe.fill {
 .grayscale90 {
     filter: grayscale(90%);
 }
+.nav li a {
+    color:#777;
+}
