@@ -10,7 +10,7 @@ using NorthwindWeb.Context;
 namespace UnitTestNorthwindWeb
 {
     [TestClass]
-    public class SupplierController
+    public class SupplierControllerTests
     {
         /// <summary>
         /// create Suppliers unit test

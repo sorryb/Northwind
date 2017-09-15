@@ -144,11 +144,11 @@
     <Compile Include="RegionsControllerTest.cs" />
     <Compile Include="CustomersControllerTest.cs" />
     <Compile Include="OrderDetailControllerTest.cs" />
-    <Compile Include="ProductsController.cs" />
-    <Compile Include="ManageController.cs" />
+    <Compile Include="ProductsControllerTests.cs" />
+    <Compile Include="ManageControllerTests.cs" />
     <Compile Include="ContactControllerTest.cs" />
     <Compile Include="TerritoriesControllerTest.cs" />
-    <Compile Include="SupplierController.cs" />
+    <Compile Include="SupplierControllerTests.cs" />
     <Compile Include="ServicesControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>

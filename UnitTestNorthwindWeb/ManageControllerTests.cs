@@ -5,7 +5,7 @@ using System.Web.Mvc;
 namespace UnitTestNorthwindWeb
 {
     [TestClass]
-    public class ManageController
+    public class ManageControllerTests
     {
         //[TestMethod]
         //[ExpectedException(typeof(NotImplementedException))]

@@ -7,7 +7,7 @@ using NorthwindWeb.Context;
 namespace UnitTestNorthwindWeb
 {
     [TestClass]
-    public class ProductsController
+    public class ProductsControllerTests
     {
         [TestMethod]
         public void ProductsProducts()
