@@ -328,7 +328,9 @@ namespace NorthwindWeb.Controllers
         public string GetCartCount()
         {
             if (User.Identity.IsAuthenticated)
+            {
                 return db.ShopCart.Where(x => x.UserName == User.Identity.Name).Count().ToString();
+            }
             return "Error";
         }
 
