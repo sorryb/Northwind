@@ -600,7 +600,9 @@ namespace NorthwindWeb.Controllers
             
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(userName);
+                try
+                {
+                    var user = await UserManager.FindByNameAsync(model.UserName);
                 user.UserName = model.UserName;
                 user.Email = model.Email;
 
@@ -621,6 +623,13 @@ namespace NorthwindWeb.Controllers
                     return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
                 else
                     return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
+                }
+                catch (Exception exception)
+                {
+                    logger.Error(exception.ToString());
+                    return View();
+
+                }
 
 
 
@@ -927,9 +936,11 @@ namespace NorthwindWeb.Controllers
 
                 context.SaveChanges();
             }
-            catch
+            catch (Exception exception)
             {
-                throw;
+                logger.Error(exception.ToString());
+                return View();
+
             }
 
             return RedirectToAction("RoleMembership", new { name = roleName, roleName = roleName });
