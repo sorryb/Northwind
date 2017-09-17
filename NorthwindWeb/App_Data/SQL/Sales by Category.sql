@@ -17,5 +17,3 @@ WHERE
 GROUP BY 
 	Categories.CategoryID, Categories.CategoryName, Products.ProductName
 --ORDER BY Products.ProductName
-
-GO

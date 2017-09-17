@@ -8,6 +8,3 @@ FROM
 	 "Order Details"
 GROUP BY 
 	"Order Details".OrderID
-
-
-GO
