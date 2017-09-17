@@ -3,6 +3,8 @@ using System.Data.Entity;
 using System.Linq;
 using System;
 using NorthwindWeb.Models;
+using System.Text;
+using System.IO;
 
 namespace NorthwindWeb.Context
 {
@@ -20,8 +22,21 @@ namespace NorthwindWeb.Context
         {
             InsertInDatabase(context);
 
+            // add indexes
             context.Database.ExecuteSqlCommand("CREATE INDEX IX_Person_Name ON Persons (FirstName)");
 
+            //add views
+            var sqlCommands = Directory
+                                    .EnumerateFiles(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), "*.sql")
+                                    .OrderBy(x => x)
+                                    .SelectMany(ReadAllCommands);
+
+            foreach (string command in sqlCommands)
+            {
+                context.Database.ExecuteSqlCommand(command);
+            }
+
+            //seed
             base.Seed(context);
         }
 
@@ -112,7 +127,7 @@ namespace NorthwindWeb.Context
             employees[1].Territories = context.Territories.Where(x => x.TerritoryID == "10" || x.TerritoryID == "34" || x.TerritoryID == "35" || x.TerritoryID == "36" || x.TerritoryID == "5" || x.TerritoryID == "9").ToList();
             employees[2].Territories = context.Territories.Where(x => x.TerritoryID == "11" || x.TerritoryID == "12" || x.TerritoryID == "3" || x.TerritoryID == "35" || x.TerritoryID == "37" || x.TerritoryID == "38" || x.TerritoryID == "4").ToList();
             employees[3].Territories = context.Territories.Where(x => x.TerritoryID == "11" || x.TerritoryID == "12" || x.TerritoryID == "13" || x.TerritoryID == "14" || x.TerritoryID == "16").ToList();
-            employees[4].Territories = context.Territories.Where(x => x.TerritoryID == "1" || x.TerritoryID == "2" || x.TerritoryID == "29" || x.TerritoryID == "33" || x.TerritoryID == "42" || x.TerritoryID == "43" || x.TerritoryID == "6").ToList();
+            employees[4].Territories = context.Territories.Where(x => x.TerritoryID == "1"  || x.TerritoryID == "2" || x.TerritoryID == "29" || x.TerritoryID == "33" || x.TerritoryID == "42" || x.TerritoryID == "43" || x.TerritoryID == "6").ToList();
             employees[5].Territories = context.Territories.Where(x => x.TerritoryID == "22" || x.TerritoryID == "28" || x.TerritoryID == "29" || x.TerritoryID == "30" || x.TerritoryID == "31" || x.TerritoryID == "32" || x.TerritoryID == "33").ToList();
             employees[6].Territories = context.Territories.Where(x => x.TerritoryID == "36" || x.TerritoryID == "37" || x.TerritoryID == "38" || x.TerritoryID == "39" || x.TerritoryID == "40" || x.TerritoryID == "41" || x.TerritoryID == "42").ToList();
             employees[7].Territories = context.Territories.Where(x => x.TerritoryID == "15" || x.TerritoryID == "16" || x.TerritoryID == "17" || x.TerritoryID == "18" || x.TerritoryID == "20" || x.TerritoryID == "21" || x.TerritoryID == "25" || x.TerritoryID == "26" || x.TerritoryID == "39" || x.TerritoryID == "40" || x.TerritoryID == "7").ToList();
@@ -506,6 +521,33 @@ namespace NorthwindWeb.Context
             }
             context.SaveChanges();
 
+        }
+
+        static IEnumerable<string> ReadAllCommands(string path)
+        {
+            StringBuilder sb = null;
+            foreach (string line in File.ReadLines(path))
+            {
+                if (string.Equals(line, "GO", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (null != sb && 0 != sb.Length)
+                    {
+                        string item = sb.ToString();
+                        if (!string.IsNullOrWhiteSpace(item)) yield return item;
+                        sb = null;
+                    }
+                }
+                else
+                {
+                    if (null == sb) sb = new StringBuilder();
+                    sb.AppendLine(line);
+                }
+            }
+            if (null != sb && 0 != sb.Length)
+            {
+                string item = sb.ToString();
+                if (!string.IsNullOrWhiteSpace(item)) yield return item;
+            }
         }
     }
 }
