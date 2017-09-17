@@ -45,7 +45,7 @@ namespace NorthwindWeb.Controllers
         /// <param name="page"></param>
         /// <param name="currentFilter"></param>
         /// <returns>Returns a view vith a list of match</returns>
-        public ActionResult Search(string search,int? page, string currentFilter)
+        public ActionResult Search(string search, int? page, string currentFilter)
         {
             var viewModel = new DashboardSearchData();
             // test null if in search control
@@ -97,7 +97,7 @@ namespace NorthwindWeb.Controllers
                         }
                     }
 
-                    }
+                }
                 var suppliers = db.Suppliers;
                 foreach (var itemSuppliers in suppliers)
                 {
@@ -133,7 +133,7 @@ namespace NorthwindWeb.Controllers
                         }
                     }
 
-                    }
+                }
                 var product = db.Products;
                 foreach (var itemProduct in product)
                 {
@@ -157,7 +157,7 @@ namespace NorthwindWeb.Controllers
                             machesFount.Add(locationSearch);
                         }
                     }
-                 
+
 
                 }
                 var order = db.Orders;
@@ -254,7 +254,7 @@ namespace NorthwindWeb.Controllers
                             machesFount.Add(locationSearch);
                         }
                     }
-                    
+
 
                 }
                 var employees = db.Employees;
@@ -358,12 +358,12 @@ namespace NorthwindWeb.Controllers
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             viewModel.MatchesCount = machesFount.Count();
-            viewModel.MatchesFound=machesFount.ToPagedList(pageNumber, pageSize);
-            viewModel.MatchesFoundPaged= machesFount.ToPagedList(pageNumber, pageSize);
+            viewModel.MatchesFound = machesFount.ToPagedList(pageNumber, pageSize);
+            viewModel.MatchesFoundPaged = machesFount.ToPagedList(pageNumber, pageSize);
             return View(viewModel);
 
 
-           
+
         }
         /// <summary>
         /// Returns a json with the data required for the MorrisArea table on the dashboard page
@@ -380,44 +380,27 @@ namespace NorthwindWeb.Controllers
             {
                 int ok = 0;
                 foreach (var i in dashboardMorrisAreaData)
-                { if (Convert.ToDateTime(itemSalesByYear.OrderDate).Year <= 1998)
+                {
+                    if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
                     {
-                        if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year + 19)
-                        {
-                            i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
-                            ok = 1;
-                            break;
-                        }
+                        i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
+                        ok = 1;
+                        break;
                     }
-                else
-                    {
-                        if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
-                        {
-                            i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
-                            ok = 1;
-                            break;
-                        }
-                    }
+
                 }
                 //test return true if item->year is not in list
                 if (ok == 0)
                 {
                     DashboardMorrisArea dashboardMorrisAreaElement = new DashboardMorrisArea();
-                    if (Convert.ToDateTime(itemSalesByYear.OrderDate).Year <= 1998)
-                    {
-                        dashboardMorrisAreaElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year + 19);
-                    }
-                    else
-                    {
-                        dashboardMorrisAreaElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
-                    }
+                    dashboardMorrisAreaElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
                     dashboardMorrisAreaElement.Sales = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
                     dashboardMorrisAreaData.Add(dashboardMorrisAreaElement);
                 }
             }
             //Rounds the value to two decimal places
             foreach (var itemDashboardMorrisAreaData in dashboardMorrisAreaData)
-            {  
+            {
                 itemDashboardMorrisAreaData.Sales = decimal.Round(itemDashboardMorrisAreaData.Sales, 2);
             }
 
@@ -495,9 +478,8 @@ namespace NorthwindWeb.Controllers
                 int alreadyExistQuarter = 0;
                 foreach (var itemDashboardMorrisBarData in dashboardMorrisBarData)
                 {
-                    if(Convert.ToDateTime(itemSalesByYear.OrderDate).Year<=1998)
-                    { 
-                    if (int.Parse(itemDashboardMorrisBarData.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year+19)
+
+                    if (int.Parse(itemDashboardMorrisBarData.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
                     {
                         if (quarter == 1) { itemDashboardMorrisBarData.dashboardMorrisBarColumA += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
                         else if (quarter == 2) { itemDashboardMorrisBarData.dashboardMorrisBarColumB += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
@@ -506,32 +488,13 @@ namespace NorthwindWeb.Controllers
                         alreadyExistQuarter = 1;
                         break;
                     }
-                    }
-                    else
-                    {
-                        if (int.Parse(itemDashboardMorrisBarData.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
-                        {
-                            if (quarter == 1) { itemDashboardMorrisBarData.dashboardMorrisBarColumA += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
-                            else if (quarter == 2) { itemDashboardMorrisBarData.dashboardMorrisBarColumB += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
-                            else { itemDashboardMorrisBarData.dashboardMorrisBarColumC += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
 
-                            alreadyExistQuarter = 1;
-                            break;
-                        }
-                    }
                 }
                 //test return true if itemSalesByYear->quarter not exist yet in itemDashboardMorrisBarData->year 
                 if (alreadyExistQuarter == 0)
                 {
                     DashboardMorrisBar dashboardMorrisBarElement = new DashboardMorrisBar();
-                    if (Convert.ToDateTime(itemSalesByYear.OrderDate).Year <= 1998)
-                    {
-                        dashboardMorrisBarElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year+19);
-                    }
-                    else
-                    {
-                        dashboardMorrisBarElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
-                    }
+                    dashboardMorrisBarElement.Year = Convert.ToString(Convert.ToDateTime(itemSalesByYear.OrderDate).Year);
                     if (quarter == 1) { dashboardMorrisBarElement.dashboardMorrisBarColumA = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
                     else if (quarter == 2) { dashboardMorrisBarElement.dashboardMorrisBarColumB = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
                     else { dashboardMorrisBarElement.dashboardMorrisBarColumC = itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount)); }
@@ -582,7 +545,7 @@ namespace NorthwindWeb.Controllers
 
         private int NumberCustomers()
         {
-           return db.Customers.Count();
+            return db.Customers.Count();
         }
 
         private List<LastTenOrders> LastTenOrder()
@@ -596,9 +559,9 @@ namespace NorthwindWeb.Controllers
                 LastTenOrders lastTenOrdersElement = new LastTenOrders();
                 lastTenOrdersElement.OrderID = itemOrder.OrderID;
                 var pastTime = DateTime.Now - Convert.ToDateTime(itemOrder.OrderDate);
-                if (pastTime.TotalMinutes <= 60) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(decimal.Round(Convert.ToDecimal(pastTime.TotalMinutes),0)) + " de Minute"; }
+                if (pastTime.TotalMinutes <= 60) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(decimal.Round(Convert.ToDecimal(pastTime.TotalMinutes), 0)) + " de Minute"; }
                 else if (pastTime.TotalHours <= 24) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(decimal.Round(Convert.ToDecimal(pastTime.TotalHours), 0)) + " Ore"; }
-                else if (pastTime.TotalDays <= 30) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(decimal.Round(Convert.ToDecimal(pastTime.TotalDays),0)) + " Zile"; }
+                else if (pastTime.TotalDays <= 30) { lastTenOrdersElement.Ago = "Acum " + Convert.ToString(decimal.Round(Convert.ToDecimal(pastTime.TotalDays), 0)) + " Zile"; }
                 else { lastTenOrdersElement.Ago = "Cu mai mult de o luna in urma"; }
                 lastTenOrdersData.Add(lastTenOrdersElement);
             }
