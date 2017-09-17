@@ -536,7 +536,7 @@
     <Content Include="Views\Account\UsersInRole.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\SQL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
