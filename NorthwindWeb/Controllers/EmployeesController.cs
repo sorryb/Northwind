@@ -28,7 +28,6 @@ namespace NorthwindWeb.Controllers
         /// Displays a page with all the employees in the database.
         /// </summary>
         /// <returns>Employees index view</returns>
-        // GET: Employees
         public ActionResult Index()
         {
             return View();
@@ -54,7 +53,7 @@ namespace NorthwindWeb.Controllers
             return View(employees);
         }
 
-        // GET: Employees/Create
+       
         /// <summary>
         /// Returns the view containing the form neccesary for creating a new employee.
         /// </summary>
@@ -94,7 +93,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the employee that is going to be edited</param>
         /// <returns>Employees edit view</returns>
-        // GET: Employees/Edit/5
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
@@ -137,7 +135,7 @@ namespace NorthwindWeb.Controllers
             return View(employees);
         }
 
-        // GET: Employees/Delete/5
+        
         /// <summary>
         /// Displays a confirmation page for the following delete.
         /// </summary>
@@ -150,14 +148,17 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Employees employees = await db.Employees.FindAsync(id);
+
             if (employees == null)
             {
                 return HttpNotFound();
             }
             return View(employees);
         }
-        // POST: Employees/Delete/5
+      
+
         /// <summary>
         /// Deletes an employee from the database. The employee must not have orders or subordinates
         /// </summary>
@@ -178,7 +179,9 @@ namespace NorthwindWeb.Controllers
                     throw new DeleteException("Angajatul nu poate fi sters pentru ca are angajati in subordine");
                 employees.Territories.Clear();
                 db.Employees.Remove(employees);
+
                 await db.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
             catch (DeleteException e)

@@ -324,7 +324,7 @@ namespace NorthwindWeb.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Dispoze db context object.
         /// </summary>
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)
