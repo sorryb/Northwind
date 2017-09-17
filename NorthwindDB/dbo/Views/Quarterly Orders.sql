@@ -11,6 +11,4 @@ FROM
 	Orders 
 		ON Customers.CustomerID = Orders.CustomerID
 WHERE 
-	Orders.OrderDate BETWEEN '19970101' And getdate()
-
-
+	Orders.OrderDate BETWEEN '19970101' And '20181231'
