@@ -13,10 +13,11 @@ namespace NorthwindWeb.Context
         /// Default constructor. Initialises the datababase based on the IdentityDatabaseInitializer class.
         /// </summary>
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("NorthwindDatabaseConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer(new IdentityDatabaseInitializer());
         }
+
         /// <summary>
         /// Returns a new instance of this class.
         /// </summary>
@@ -26,17 +27,21 @@ namespace NorthwindWeb.Context
             return new ApplicationDbContext();
         }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
+        /// <summary>
+        /// When model start to be build.
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
-        //    modelBuilder.Entity<User>().ToTable("Users").Property(p => p.Id).HasColumnName("UserId");
-        //    modelBuilder.Entity<IdentityRole>().ToTable("Roles");
-        //    modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
-        //    modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
-        //    modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+            modelBuilder.Entity<ApplicationUser>().ToTable("Users").Property(p => p.Id).HasColumnName("UserId");
+            modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
+            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
 
 
-        //}
+        }
     }
 }
