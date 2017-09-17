@@ -11,4 +11,3 @@ WHERE
 --ORDER BY Product_List.ProductName
 
 
-GO

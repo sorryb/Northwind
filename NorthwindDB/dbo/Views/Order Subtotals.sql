@@ -10,4 +10,4 @@ GROUP BY
 	"Order Details".OrderID
 
 
-GO
+

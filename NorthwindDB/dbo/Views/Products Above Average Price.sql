@@ -10,4 +10,4 @@ WHERE
 	Products.UnitPrice>(SELECT AVG(UnitPrice) From Products)
 --ORDER BY Products.UnitPrice DESC
 
-GO
+

@@ -28,4 +28,3 @@ FROM
 		ON Customers.CustomerID = Orders.CustomerID
 
 
-GO

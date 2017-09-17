@@ -14,4 +14,4 @@ WHERE
 	-- Orders.ShippedDate
 	
 	
-GO
+

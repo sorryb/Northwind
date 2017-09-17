@@ -12,3 +12,6 @@ FROM
 	Products INNER JOIN 
 	"Order Details" ON Products.ProductID = "Order Details".ProductID
 --ORDER BY "Order Details".OrderID
+
+
+

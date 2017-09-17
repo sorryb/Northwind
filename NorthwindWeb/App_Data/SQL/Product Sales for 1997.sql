@@ -15,3 +15,6 @@ WHERE
 GROUP BY 
 	Categories.CategoryName, 
 	Products.ProductName
+
+
+

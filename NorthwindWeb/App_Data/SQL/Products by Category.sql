@@ -14,3 +14,6 @@ FROM
 WHERE 
 	Products.Discontinued <> 1
 --ORDER BY Categories.CategoryName, Products.ProductName
+
+
+

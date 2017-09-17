@@ -13,4 +13,4 @@ FROM
 WHERE 
 	("Order Subtotals".Subtotal >2500) AND (Orders.ShippedDate BETWEEN '19900101' And getdate())
 
-GO
+

@@ -38,4 +38,3 @@ FROM 	Shippers INNER JOIN
 	ON Shippers.ShipperID = Orders.ShipVia
 
 
-GO

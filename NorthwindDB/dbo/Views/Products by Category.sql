@@ -16,4 +16,4 @@ WHERE
 --ORDER BY Categories.CategoryName, Products.ProductName
 
 
-GO
+

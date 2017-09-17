@@ -12,4 +12,4 @@ WHERE
 	 (((Products.Discontinued)=0))
 
 
-	 GO
+	 

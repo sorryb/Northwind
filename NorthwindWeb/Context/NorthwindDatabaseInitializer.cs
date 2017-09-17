@@ -26,14 +26,11 @@ namespace NorthwindWeb.Context
             context.Database.ExecuteSqlCommand("CREATE INDEX IX_Person_Name ON Persons (FirstName)");
 
             //add views
-            var sqlCommands = Directory
-                                    .EnumerateFiles(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), "*.sql")
-                                    .OrderBy(x => x)
-                                    .SelectMany(ReadAllCommands);
+            var sqlFiles = Directory.GetFiles(AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "\\SQL", "*.sql").OrderBy(x => x);
 
-            foreach (string command in sqlCommands)
+            foreach (string file in sqlFiles)
             {
-                context.Database.ExecuteSqlCommand(command);
+                context.Database.ExecuteSqlCommand(File.ReadAllText(file));
             }
 
             //seed
@@ -359,13 +356,13 @@ namespace NorthwindWeb.Context
             //customers and orders
             List<Customers> customers = new List<Customers>
             {
-                new Customers(){ CustomerID = "ALFKI", CompanyName = "Vinyl Fever",               ContactName = "Danut Gogean"        , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 10 MAI nr. 15, DaMBOVITA"           , City = "Targoviste", Region = "Muntenia"    , PostalCode = "130062", Country = "Romania", Phone = "0245-216 446" },
-                new Customers(){ CustomerID = "ANATR", CompanyName = "Kash n",                    ContactName = "Gabriella Anghelescu", ContactTitle = "Patron"               , Address = "Strada Caraiman 3, Constanta"            , City = "Constanta" , Region = "Dobrogea"    , PostalCode = "907021", Country = "Romania", Phone = "0723-564 218"  , Fax = "0251.411688" },
-                new Customers(){ CustomerID = "ANTON", CompanyName = "Tech Hifi",                 ContactName = "Dorin Butacu"        , ContactTitle = "Patron"               , Address = "Piata Revolutiei 3/26, Maramures"        , City = "Maramures" , Region = "Maramures"   , PostalCode = "873309", Country = "Romania", Phone = "+40(262)260999", Fax = "+40(262)271338" },
-                new Customers(){ CustomerID = "AROUT", CompanyName = "Beatties",                  ContactName = "Ioana Draghici"      , ContactTitle = "Reprezentant Vanzari" , Address = "STR. VULCAN SAMUIL nr. 16, BEIUS"        , City = "BIHOR"     , Region = "Crisana"     , PostalCode = "653271", Country = "Romania", Phone = "0259-320 222"  , Fax = "0251.418803" },
-                new Customers(){ CustomerID = "BERGS", CompanyName = "Cut Above",                 ContactName = "Varujan Puscas"      , ContactTitle = "Administrator Comenzi", Address = "Bulevardul Ion Mihalache 148B, Bucuresti", City = "Bucuresti" , Region = "Muntenia"    , PostalCode = "666708", Country = "Romania", Phone = "+40(21)2246714", Fax = "0251.413102" },
-                new Customers(){ CustomerID = "BLAUS", CompanyName = "Sears Homelife",            ContactName = "Stefan Manole"       , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 9 MAI, BACAU"                       , City = "Bacau"     , Region = "Moldova"     , PostalCode = "546708", Country = "Romania", Phone = "0740-082 824"  , Fax = "0251.413102" },
-                new Customers(){ CustomerID = "BLONP", CompanyName = "Century House",             ContactName = "Varujan Teodorescu"  , ContactTitle = "Director Marketing"   , Address = "STR. BARNUTIU SIMION nr. 67, SALAJ"      , City = "SALAJ"     , Region = "Transilvania", PostalCode = "437945", Country = "Romania", Phone = "0260-616 920"  , Fax = "0251.418803" },
+                new Customers(){ CustomerID = "ALFKI", CompanyName = "RadioCom S.A.",               ContactName = "Danut Gogean"        , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 10 MAI nr. 15, DaMBOVITA"           , City = "Targoviste", Region = "Muntenia"    , PostalCode = "130062", Country = "Romania", Phone = "0245-216 446" },
+                new Customers(){ CustomerID = "ANATR", CompanyName = "OTE S.A.",                    ContactName = "Gabriella Anghelescu", ContactTitle = "Patron"               , Address = "Strada Caraiman 3, Constanta"            , City = "Constanta" , Region = "Dobrogea"    , PostalCode = "907021", Country = "Romania", Phone = "0723-564 218"  , Fax = "0251.411688" },
+                new Customers(){ CustomerID = "ANTON", CompanyName = "Digi Telecom S.A.",                 ContactName = "Dorin Butacu"        , ContactTitle = "Patron"               , Address = "Piata Revolutiei 3/26, Maramures"        , City = "Maramures" , Region = "Maramures"   , PostalCode = "873309", Country = "Romania", Phone = "+40(262)260999", Fax = "+40(262)271338" },
+                new Customers(){ CustomerID = "AROUT", CompanyName = "Cosmote S.A.",                  ContactName = "Ioana Draghici"      , ContactTitle = "Reprezentant Vanzari" , Address = "STR. VULCAN SAMUIL nr. 16, BEIUS"        , City = "BIHOR"     , Region = "Crisana"     , PostalCode = "653271", Country = "Romania", Phone = "0259-320 222"  , Fax = "0251.418803" },
+                new Customers(){ CustomerID = "BERGS", CompanyName = "Telecom S.R.L.",                 ContactName = "Varujan Puscas"      , ContactTitle = "Administrator Comenzi", Address = "Bulevardul Ion Mihalache 148B, Bucuresti", City = "Bucuresti" , Region = "Muntenia"    , PostalCode = "666708", Country = "Romania", Phone = "+40(21)2246714", Fax = "0251.413102" },
+                new Customers(){ CustomerID = "BLAUS", CompanyName = "Vodafone S.A.",            ContactName = "Stefan Manole"       , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 9 MAI, BACAU"                       , City = "Bacau"     , Region = "Moldova"     , PostalCode = "546708", Country = "Romania", Phone = "0740-082 824"  , Fax = "0251.413102" },
+                new Customers(){ CustomerID = "BLONP", CompanyName = "Orange S.A.",             ContactName = "Varujan Teodorescu"  , ContactTitle = "Director Marketing"   , Address = "STR. BARNUTIU SIMION nr. 67, SALAJ"      , City = "SALAJ"     , Region = "Transilvania", PostalCode = "437945", Country = "Romania", Phone = "0260-616 920"  , Fax = "0251.418803" },
              };
 
             foreach(var customer in customers)
@@ -523,7 +520,24 @@ namespace NorthwindWeb.Context
 
         }
 
-        static IEnumerable<string> ReadAllCommands(string path)
+
+        /// <summary>
+        /// In case there are all Views in one sql file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        /// <remarks>
+            ///var sqlCommands = Directory
+            ///                    .EnumerateFiles(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), "*.sql")
+            ///                    .OrderBy(x => x)
+            ///                    .SelectMany(ReadAllCommands);
+            ///
+            ///foreach (string command in sqlCommands)
+            ///{
+            ///    context.Database.ExecuteSqlCommand(command);
+            ///}
+    /// </remarks>
+    static IEnumerable<string> ReadAllCommands(string path)
         {
             StringBuilder sb = null;
             foreach (string line in File.ReadLines(path))

@@ -13,4 +13,4 @@ FROM
 WHERE 
 	Orders.OrderDate BETWEEN '19970101' And getdate()
 
-GO
+

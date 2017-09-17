@@ -12,3 +12,6 @@ WHERE
 	 Orders.ShippedDate IS NOT NULL
 --ORDER BY
 	-- Orders.ShippedDate
+	
+	
+

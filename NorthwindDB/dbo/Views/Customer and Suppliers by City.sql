@@ -16,4 +16,4 @@ FROM
 --ORDER BY City, CompanyName
 
 
-GO
+
