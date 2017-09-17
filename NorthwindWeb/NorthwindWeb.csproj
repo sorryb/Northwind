@@ -268,22 +268,6 @@
     <Compile Include="ViewModels\ViewProductCategoryS.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SQL\Alphabetical list of products.sql" />
-    <Content Include="App_Data\SQL\Category Sales for 1997.sql" />
-    <Content Include="App_Data\SQL\Current Product List.sql" />
-    <Content Include="App_Data\SQL\Customer and Suppliers by City.sql" />
-    <Content Include="App_Data\SQL\Invoices.sql" />
-    <Content Include="App_Data\SQL\Order Details Extended.sql" />
-    <Content Include="App_Data\SQL\Order Subtotals.sql" />
-    <Content Include="App_Data\SQL\Orders Qry.sql" />
-    <Content Include="App_Data\SQL\Product Sales for 1997.sql" />
-    <Content Include="App_Data\SQL\Products Above Average Price.sql" />
-    <Content Include="App_Data\SQL\Products by Category.sql" />
-    <Content Include="App_Data\SQL\Quarterly Orders.sql" />
-    <Content Include="App_Data\SQL\Sales by Category.sql" />
-    <Content Include="App_Data\SQL\Sales Totals by Amount.sql" />
-    <Content Include="App_Data\SQL\Summary of Sales by Quarter.sql" />
-    <Content Include="App_Data\SQL\Summary of Sales by Year.sql" />
     <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
     <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
     <Content Include="Content\DataTables\images\details_close.png" />
@@ -551,7 +535,9 @@
     <Content Include="Views\Account\RolesIndex.cshtml" />
     <Content Include="Views\Account\UsersInRole.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\SQL\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
