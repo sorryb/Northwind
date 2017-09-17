@@ -20,6 +20,8 @@ namespace NorthwindWeb.Context
         {
             InsertInDatabase(context);
 
+            context.Database.ExecuteSqlCommand("CREATE INDEX IX_Person_Name ON Persons (FirstName)");
+
             base.Seed(context);
         }
 
