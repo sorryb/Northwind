@@ -15,7 +15,7 @@ namespace UnitTestNorthwindWeb
             var controller = new NorthwindWeb.Controllers.ContactController();
 
             //Act
-            var result = controller.Index();
+            var result = controller.Index("status");
 
             //Assert
             Assert.IsNotNull(result);
@@ -28,7 +28,7 @@ namespace UnitTestNorthwindWeb
             var controller = new NorthwindWeb.Controllers.ContactController();
 
             //Act
-            var result = controller.Index();
+            var result = controller.Index("status");
 
             //Assert
             Assert.IsNotNull(result);
