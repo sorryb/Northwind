@@ -24,7 +24,7 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindDatabase db = new NorthwindDatabase();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ProductController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
-        
+
 
         /// <summary>
         /// Displays a page containing a datatable with all the products in the database.
@@ -71,27 +71,27 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Creates a new product and adds it to the database.
         /// </summary>
-        /// <param name="productviewmodel">The products entity that will be added.</param>
+        /// <param name="productViewModel">The products entity that will be added.</param>
         /// <returns>Product index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,ProductImage")] ProductViewModel productviewmodel)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,ProductImage")] ProductViewModel productViewModel)
         {
             Products products = new Products()
             {
-                ProductID = productviewmodel.ProductID,
-                ProductName = productviewmodel.ProductName,
-                SupplierID = productviewmodel.SupplierID,
-                CategoryID = productviewmodel.CategoryID,
-                QuantityPerUnit = productviewmodel.QuantityPerUnit,
-                UnitPrice = productviewmodel.UnitPrice,
-                UnitsInStock = productviewmodel.UnitsInStock,
-                UnitsOnOrder = productviewmodel.UnitsOnOrder,
-                ReorderLevel = productviewmodel.ReorderLevel,
-                Discontinued = productviewmodel.Discontinued
+                ProductID = productViewModel.ProductID,
+                ProductName = productViewModel.ProductName,
+                SupplierID = productViewModel.SupplierID,
+                CategoryID = productViewModel.CategoryID,
+                QuantityPerUnit = productViewModel.QuantityPerUnit,
+                UnitPrice = productViewModel.UnitPrice,
+                UnitsInStock = productViewModel.UnitsInStock,
+                UnitsOnOrder = productViewModel.UnitsOnOrder,
+                ReorderLevel = productViewModel.ReorderLevel,
+                Discontinued = productViewModel.Discontinued
             };
 
             if (ModelState.IsValid)
@@ -99,10 +99,10 @@ namespace NorthwindWeb.Controllers
                 db.Products.Add(products);
                 await db.SaveChangesAsync();
 
-                if (productviewmodel.ProductImage != null)
+                if (productViewModel.ProductImage != null)
                 {
                     string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
-                    productviewmodel.ProductImage.SaveAs(path);
+                    productViewModel.ProductImage.SaveAs(path);
                 }
                 return RedirectToAction("Index");
             }
@@ -137,24 +137,64 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Updates the information of a product in the database.
         /// </summary>
-        /// <param name="products">The product entity with the updated information.</param>
+        /// <param name="productViewModel">The product entity with the updated information.</param>
         /// <returns>Product index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products)
+        public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,ProductImage")] ProductViewModel productViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(products).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                var products = db.Products.Find(productViewModel.ProductID);
+
+                products.ProductName = productViewModel.ProductName;
+                products.SupplierID = productViewModel.SupplierID;
+                products.CategoryID = productViewModel.CategoryID;
+                products.QuantityPerUnit = productViewModel.QuantityPerUnit;
+                products.UnitPrice = productViewModel.UnitPrice;
+                products.UnitsInStock = productViewModel.UnitsInStock;
+                products.UnitsOnOrder = productViewModel.UnitsOnOrder;
+                products.ReorderLevel = productViewModel.ReorderLevel;
+                products.Discontinued = productViewModel.Discontinued;
+
+
+
+                if(TryValidateModel(products))
+                {
+                    db.Entry(products).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+
+                    if (productViewModel.ProductImage != null)
+                    {
+                        string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
+                        System.IO.File.Delete(path);
+                        productViewModel.ProductImage.SaveAs(path);
+                    }
+
+                }
+                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", productViewModel.CategoryID);
+                ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", productViewModel.SupplierID);
+                return View(productViewModel);
             }
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
-            return View(products);
+            catch (NullReferenceException e)
+            {
+                logger.Error(e.ToString());
+                throw new NullReferenceException("Imaginea nu a putut fi gasita");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                logger.Error(e.ToString());
+                throw new System.Data.Entity.Infrastructure.DbUpdateException("Nu s-au putut efectua modificatile");
+            }
+            catch (Exception e)
+            {
+                //if something else goes wrong
+                logger.Error(e.ToString());
+                throw new Exception("Ceva nu a mers bine, va rugam reincercati. Daca problema persista contactati un administrator.");
+            }
         }
 
         /// <summary>
@@ -193,15 +233,15 @@ namespace NorthwindWeb.Controllers
             {
                 Products products = await db.Products.FindAsync(id);
                 db.Products.Remove(products);
-                
-
                 await db.SaveChangesAsync();
+
                 System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{id}.jpg"));
             }
             catch (NullReferenceException e)
             {
-                //missing file or direectory
+                //missing file or directory
                 logger.Error(e.ToString());
+                throw new NullReferenceException("Imaginea nu a putut fi gasita.");
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException e)
             {
@@ -214,10 +254,11 @@ namespace NorthwindWeb.Controllers
                 }
                 throw new DeleteException("Acest produs nu a putut fi sters deoarece se afla pe urmatoarele comenzi: " + listOrders + " .Ia in considerare si varianta de a-l face indisponibil");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                //if someone else go wrong
+                //if something else goes wrong
                 logger.Error(e.ToString());
+                throw new Exception("Ceva nu a mers bine, va rugam reincercati. Daca problema persista contactati un administrator.");
             }
             return RedirectToAction("Index");
         }
