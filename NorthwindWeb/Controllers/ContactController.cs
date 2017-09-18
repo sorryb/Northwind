@@ -16,12 +16,18 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Displays a Contact index page.
         /// </summary>
+        /// <param name="status"></param>
         /// <returns>Contact index view</returns>
-        public ActionResult Index()
+        public ActionResult Index(string status)
         {
+            if (!String.IsNullOrEmpty(status))
+            {
+                ViewBag.Status = status;
+
+            }
             return View();
         }
-        
+
         /// <summary>
         /// Inserts a person into the database table. If it fails, goes back to the form.
         /// </summary>
@@ -32,24 +38,30 @@ namespace NorthwindWeb.Controllers
         public ActionResult Index([Bind(Include = "ID,LastName,FirstName,Email,Comment")] Persons person)
         {//create person from Form
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                person.ID = db.Persons.Count() + 1;
-                db.Persons.Add(person);
-                db.SaveChanges();
+                if (String.IsNullOrEmpty(person.FirstName))
+                    ModelState.AddModelError("", "Introduceti-va numele");
+
+                if (String.IsNullOrEmpty(person.Email))
+                    ModelState.AddModelError("", "Email-ul nu a fost introdus corect");
+
+                if (String.IsNullOrEmpty(person.Comment))
+                    ModelState.AddModelError("", "Va rugam sa va spuneti parerea");
+
+                return View(person);
             }
-
-            if (String.IsNullOrEmpty(person.FirstName))
-                ModelState.AddModelError("","Introduceti-va numele");
-
-            if (String.IsNullOrEmpty(person.Email))
-                ModelState.AddModelError("","Email-ul nu a fost introdus corect");
-
-            if (String.IsNullOrEmpty(person.Comment))
-                ModelState.AddModelError("","Va rugam sa va spuneti parerea");
-            
-            return View();
-
+            person.ID = db.Persons.Count() + 1;
+            db.Persons.Add(person);
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index", new { status = "Mesajul dumneavoastra a fost trimis cu succes. Va multumim!" });
+            }
+            catch
+            {
+                return RedirectToAction("Index", new { status = "Mesajul dumneavoastra nu a putut fi trimis momentan. Va rugam incercati mai tarziu!" });
+            }
         }
     }
 }
