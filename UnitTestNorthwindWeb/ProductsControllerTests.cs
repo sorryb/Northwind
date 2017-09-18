@@ -2,18 +2,19 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Mvc;
 using System.Linq;
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
     [TestClass]
-    public class ProductsController
+    public class ProductsControllerTests
     {
         [TestMethod]
         public void ProductsProducts()
         {
             //Arrange
             var controller = new NorthwindWeb.Controllers.ProductsController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             int productCount = db.Products.Count();
             int noProductOnPage = 10;
 

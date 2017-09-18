@@ -1,21 +1,20 @@
-namespace NorthwindWeb.Models
+using System.Data.Entity;
+using NorthwindWeb.Models;
+
+namespace NorthwindWeb.Context
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
-    using NorthwindWeb.Context;
+
 
     /// <summary>
     /// Context for northwind database.
     /// </summary>
-    public partial class NorthwindModel : DbContext
+    public partial class NorthwindDatabase : DbContext
     {
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public NorthwindModel()
-            : base("name=NwModel")
+        public NorthwindDatabase()
+            : base("name=NorthwindDatabaseConnection") // name in web.config of Connection string.
         {
             Database.SetInitializer(new NorthwindDatabaseInitializer());
         }

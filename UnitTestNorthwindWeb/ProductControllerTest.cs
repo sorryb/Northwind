@@ -6,6 +6,7 @@ using NorthwindWeb.Models;
 using System.Web.Helpers;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.ViewModels;
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -83,7 +84,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new ProductController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             int productCountBefore = db.Products.Count();
             var product = new ProductViewModel()
             {
@@ -141,7 +142,7 @@ namespace UnitTestNorthwindWeb
             //Arrange
             //init
             var controller = new ProductController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             //create product
             var product = new Products() { ProductName = "test", CategoryID = 1, SupplierID = 1};
             db.Entry(product).State = System.Data.Entity.EntityState.Added;
@@ -204,7 +205,7 @@ namespace UnitTestNorthwindWeb
             //Arrange
             //init
             var controller = new ProductController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             //create product
             var product = new Products() { ProductName = "test", CategoryID = 1, SupplierID = 1 };
             db.Entry(product).State = System.Data.Entity.EntityState.Added;
@@ -230,7 +231,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new ProductController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             var productCount = db.Products.Count();
             int draw = 1;
             int row = 20;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Models.ShopCart
 {
@@ -34,7 +35,7 @@ namespace NorthwindWeb.Models.ShopCart
         {
             get
             {
-                return (new NorthwindModel()).Products.Find(ID).ProductName;
+                return (new NorthwindDatabase()).Products.Find(ID).ProductName;
             }
             set
             {
@@ -49,7 +50,7 @@ namespace NorthwindWeb.Models.ShopCart
         {
             get
             {
-                return (new NorthwindModel()).Products.Find(ID).UnitPrice ?? 99999999;
+                return (new NorthwindDatabase()).Products.Find(ID).UnitPrice ?? 99999999;
             }
             set
             {
@@ -64,7 +65,7 @@ namespace NorthwindWeb.Models.ShopCart
         {
             get
             {
-                return (new NorthwindModel()).Products.Find(ID).Category.CategoryName;
+                return (new NorthwindDatabase()).Products.Find(ID).Category.CategoryName;
             }
             set
             {

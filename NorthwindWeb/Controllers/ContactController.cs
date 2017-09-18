@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using System.Linq;
 using System;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -10,7 +11,7 @@ namespace NorthwindWeb.Controllers
     /// </summary>
     public class ContactController : Controller
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Displays a Contact index page.

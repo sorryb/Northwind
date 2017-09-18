@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
 using NorthwindWeb.ViewModels;
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -17,7 +18,7 @@ namespace UnitTestNorthwindWeb
     {
         //Arrange
         ServicesController _servicesControllerUnderTest = new ServicesController();
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Check what Index action returns.

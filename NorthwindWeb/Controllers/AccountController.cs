@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using System.Threading.Tasks;
@@ -30,12 +29,14 @@ namespace NorthwindWeb.Controllers
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AccountController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
         /// <summary>
         ///  constructor with managed empty
         /// </summary>
         public AccountController()
         {
         }
+
         /// <summary>
         /// constructor with managed set
         /// </summary>
@@ -46,6 +47,7 @@ namespace NorthwindWeb.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
+
         /// <summary>
         ///  sign in manager
         /// </summary>
@@ -60,6 +62,7 @@ namespace NorthwindWeb.Controllers
                 _signInManager = value;
             }
         }
+
         /// <summary>
         /// User manager
         /// </summary>
@@ -382,6 +385,7 @@ namespace NorthwindWeb.Controllers
             AddErrors(result);
             return View();
         }
+
         /// <summary>
         /// confirm password reset
         /// </summary>
@@ -422,6 +426,7 @@ namespace NorthwindWeb.Controllers
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
+
         /// <summary>
         /// code with the data of a new user
         /// </summary>

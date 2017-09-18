@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
-using PagedList;
 using NorthwindWeb.ViewModels.Orders;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
-
+using NorthwindWeb.Context;
 
 
 
@@ -24,7 +21,7 @@ namespace NorthwindWeb.Controllers
     [Authorize]
     public class OrdersController : Controller, IJsonTableFillServerSide
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
         
 
         /// <summary>

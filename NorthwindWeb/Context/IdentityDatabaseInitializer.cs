@@ -12,7 +12,7 @@ namespace NorthwindWeb.Context
     /// </summary>
     public class IdentityDatabaseInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
     {
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
         /// <summary>
         /// Seed database ; fill tables.
         /// </summary>

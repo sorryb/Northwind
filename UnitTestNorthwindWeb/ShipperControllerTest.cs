@@ -6,8 +6,7 @@ using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Linq;
 using System;
-
-
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -16,7 +15,7 @@ namespace UnitTestNorthwindWeb
     {
         //Arrange
         ShippersController _shippersControllerTest = new ShippersController();
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Sample test method.
@@ -187,7 +186,7 @@ namespace UnitTestNorthwindWeb
             db.Dispose();
             shipperTest.CompanyName = "Nero Express";
             shipperTest.Phone = "0240-222-222";
-            db = new NorthwindModel();
+            db = new NorthwindDatabase();
 
             //Act
             await _shippersControllerTest.Edit(shipperTest);
@@ -211,7 +210,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new ShippersController();
-            var db = new NorthwindModel();
+            var db = new NorthwindDatabase();
             var shipperCount = db.Shippers.Count();
 
 

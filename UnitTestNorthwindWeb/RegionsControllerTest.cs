@@ -6,8 +6,7 @@ using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Linq;
 using System;
-
-
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -16,7 +15,7 @@ namespace UnitTestNorthwindWeb
     {
         //Arrange
         RegionsController _regionsControllerTest = new RegionsController();
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Sample test method.
@@ -189,7 +188,7 @@ namespace UnitTestNorthwindWeb
 
             db.Dispose();
             regionTest.RegionDescription = "Acolo";
-            db = new NorthwindModel();
+            db = new NorthwindDatabase();
 
             //Act
             await _regionsControllerTest.Edit(regionTest);
@@ -214,7 +213,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new RegionsController();
-            var db = new NorthwindModel();
+            var db = new NorthwindDatabase();
             var regionCount = db.Regions.Count();
             
 

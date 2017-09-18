@@ -11,7 +11,7 @@ using NorthwindWeb.ViewModels.Order;
 using PagedList;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -21,7 +21,7 @@ namespace NorthwindWeb.Controllers
     /// </summary>
     public class OrderController : Controller
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// the list of current Employees orders

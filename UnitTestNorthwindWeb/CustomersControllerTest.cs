@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
 using NorthwindWeb.Models.ServerClientCommunication;
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -18,7 +19,7 @@ namespace UnitTestNorthwindWeb
        
             //Arrange
             CustomersController _customersControllerUnderTest = new CustomersController();
-            NorthwindModel db = new NorthwindModel();
+            NorthwindDatabase db = new NorthwindDatabase();
 
             /// <summary>
             /// Check what Index action returns.
@@ -165,7 +166,7 @@ namespace UnitTestNorthwindWeb
 
             db.Dispose();
             customerTest.CompanyName="test2";
-            db = new NorthwindModel();
+            db = new NorthwindDatabase();
 
             //Act
             await _customersControllerUnderTest.Edit(customerTest);
@@ -232,7 +233,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new CustomersController();
-            var db = new NorthwindModel();
+            var db = new NorthwindDatabase();
             var customersCount = db.Customers.Count();
             int draw = 1;
             int row = 20;

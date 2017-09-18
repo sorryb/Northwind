@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -9,12 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
 using NorthwindWeb.Models.Interfaces;
-using PagedList;
-using System.Web.Helpers;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.ExceptionHandler;
-using log4net.Repository.Hierarchy;
 using NorthwindWeb.ViewModels;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -25,7 +22,7 @@ namespace NorthwindWeb.Controllers
     [Authorize(Roles = "Admins, Manager, Employees")]
     public class ProductController : Controller, IJsonTableFillServerSide
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ProductController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         
 

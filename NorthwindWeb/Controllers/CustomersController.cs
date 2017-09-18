@@ -12,6 +12,7 @@ using PagedList;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ExceptionHandler;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -21,7 +22,7 @@ namespace NorthwindWeb.Controllers
     [Authorize]
     public class CustomersController : Controller, IJsonTableFillServerSide
     {
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(CustomersController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
         /// <summary>
@@ -323,7 +324,7 @@ namespace NorthwindWeb.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Dispoze db context object.
         /// </summary>
         /// <param name="disposing"></param>
         protected override void Dispose(bool disposing)

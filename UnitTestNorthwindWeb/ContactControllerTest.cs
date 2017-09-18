@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -38,7 +39,7 @@ namespace UnitTestNorthwindWeb
         {
             //Arrange
             var controller = new NorthwindWeb.Controllers.ContactController();
-            var db = new NorthwindWeb.Models.NorthwindModel();
+            var db = new NorthwindDatabase();
             NorthwindWeb.Models.Persons person = new NorthwindWeb.Models.Persons()
             {
             ID = db.Persons.Count() + 1,

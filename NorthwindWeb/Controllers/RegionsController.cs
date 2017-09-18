@@ -11,6 +11,7 @@ using NorthwindWeb.Models;
 using PagedList;
 using NorthwindWeb.ViewModels;
 using NorthwindWeb.Models.ExceptionHandler;
+using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Controllers
 {
@@ -22,7 +23,7 @@ namespace NorthwindWeb.Controllers
     public class RegionsController : Controller
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
-        private NorthwindModel db = new NorthwindModel();
+        private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Displays a page with all the regions existing in the database.

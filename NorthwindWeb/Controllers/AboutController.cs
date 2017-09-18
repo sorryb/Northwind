@@ -1,6 +1,8 @@
 ﻿using System.Web.Mvc;
 using NorthwindWeb.Models;
 using System.Linq;
+using NorthwindWeb.Context;
+
 namespace NorthwindWeb.Controllers
 {
     /// <summary>
@@ -8,7 +10,7 @@ namespace NorthwindWeb.Controllers
     /// </summary>
     public class AboutController : Controller
     {
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
        
         /// <summary>
         /// Select the first 6 employees

@@ -5,6 +5,7 @@ using NorthwindWeb.Models;
 using System.Web.Mvc;
 using System.Threading.Tasks;
 using System.Linq;
+using NorthwindWeb.Context;
 
 namespace UnitTestNorthwindWeb
 {
@@ -16,7 +17,7 @@ namespace UnitTestNorthwindWeb
     {
         //Arrange
         OrderDetailController _detailsControllerUnderTest = new OrderDetailController();
-        NorthwindModel db = new NorthwindModel();
+        NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
         /// Check what Index action returns.
@@ -180,7 +181,7 @@ namespace UnitTestNorthwindWeb
             db.Dispose();
             detailsTest.UnitPrice = 43;
             detailsTest.Quantity = 22;
-            db = new NorthwindModel();
+            db = new NorthwindDatabase();
 
             //Act
             await _detailsControllerUnderTest.Edit(detailsTest);
