@@ -504,6 +504,7 @@
     <Content Include="Views\Order\HomeCustomers.cshtml" />
     <Content Include="Views\Shared\_LoginPartialDashboard.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
+    <Content Include="Views\Reports\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />

@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NorthwindWeb.Controllers;
-using System.Web.Mvc;
+using NorthwindWeb.ViewModels;
 
 namespace UnitTestNorthwindWeb
 {
@@ -15,9 +14,13 @@ namespace UnitTestNorthwindWeb
         public void ReportsIndexReturnsView()
         {
             //Arrange
-
+            var login = new ReportLoginViewModel()
+            {
+                Username = "",
+                Password = ""
+            };
             //Act
-            var result = _ReportsControllerUnderTest.Index();
+            var result = _ReportsControllerUnderTest.Index(login);
 
             //Assert
             Assert.IsNotNull(result);
