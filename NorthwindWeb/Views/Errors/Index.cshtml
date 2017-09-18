@@ -12,7 +12,7 @@
                 foreach (System.Diagnostics.EventLogEntry entry in Model)
                 {
                     <li>
-                        <a href='javascript:$("#message").text("@entry.Message")'>@entry.TimeGenerated</a>
+                        <a href='javascript:$("#message").text("@entry.Message")'>#@entry.Index:       @entry.Message.Substring(0,100)...</a>
                     </li>
                 }
             }

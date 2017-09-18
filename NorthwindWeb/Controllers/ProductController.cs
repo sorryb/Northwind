@@ -71,40 +71,28 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Creates a new product and adds it to the database.
         /// </summary>
-        /// <param name="productViewModel">The products entity that will be added.</param>
+        /// <param name="products">The products entity that will be added.</param>
+         /// <param name="ProductImage">The image of the products</param>
         /// <returns>Product index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,ProductImage")] ProductViewModel productViewModel)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products,HttpPostedFileBase ProductImage)
         {
             try
             {
-                Products products = new Products()
-                {
-                    ProductID = productViewModel.ProductID,
-                    ProductName = productViewModel.ProductName,
-                    SupplierID = productViewModel.SupplierID,
-                    CategoryID = productViewModel.CategoryID,
-                    QuantityPerUnit = productViewModel.QuantityPerUnit,
-                    UnitPrice = productViewModel.UnitPrice,
-                    UnitsInStock = productViewModel.UnitsInStock,
-                    UnitsOnOrder = productViewModel.UnitsOnOrder,
-                    ReorderLevel = productViewModel.ReorderLevel,
-                    Discontinued = productViewModel.Discontinued
-                };
 
                 if (ModelState.IsValid)
                 {
                     db.Products.Add(products);
                     await db.SaveChangesAsync();
 
-                    if (productViewModel.ProductImage != null)
+                    if (ProductImage != null)
                     {
                         string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
-                        productViewModel.ProductImage.SaveAs(path);
+                        ProductImage.SaveAs(path);
                     }
                     return RedirectToAction("Index");
                 }
@@ -113,6 +101,7 @@ namespace NorthwindWeb.Controllers
                 ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
                 return View(products);
             }
+            //todo exception
             catch
             {
                 throw;
@@ -144,44 +133,33 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Updates the information of a product in the database.
         /// </summary>
-        /// <param name="productViewModel">The product entity with the updated information.</param>
+        /// <param name="products">The product entity with the updated information.</param>
+        /// <param name="ProductImage">The updated image</param>
         /// <returns>Product index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employees, Admins")]
-        public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,ProductImage")] ProductViewModel productViewModel)
+        public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products, HttpPostedFileBase ProductImage)
         {
             try
             {
-                Products products = db.Products.Find(productViewModel.ProductID);
-
-                products.ProductName = productViewModel.ProductName;
-                products.SupplierID = productViewModel.SupplierID;
-                products.CategoryID = productViewModel.CategoryID;
-                products.QuantityPerUnit = productViewModel.QuantityPerUnit;
-                products.UnitPrice = productViewModel.UnitPrice;
-                products.UnitsInStock = productViewModel.UnitsInStock;
-                products.UnitsOnOrder = productViewModel.UnitsOnOrder;
-                products.ReorderLevel = productViewModel.ReorderLevel;
-                products.Discontinued = productViewModel.Discontinued;
-
                 if(ModelState.IsValid)
                 {
                     db.Entry(products).State = EntityState.Modified;
                     await db.SaveChangesAsync();
 
-                    if (productViewModel.ProductImage != null)
+                    if (ProductImage != null)
                     {
                         string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
                         System.IO.File.Delete(path);
-                        productViewModel.ProductImage.SaveAs(path);
+                        ProductImage.SaveAs(path);
                     }
 
                 }
-                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", productViewModel.CategoryID);
-                ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", productViewModel.SupplierID);
+                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
+                ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
                 return View(products);
             }
             catch (NullReferenceException e)
