@@ -29,6 +29,16 @@
 	admin, tester and users for employees are set in IdentityDatabaseInitializer called from ApplicationDataContext if it does not exist aspnet-Northwind-20170823114137.mdf database
 	They are set with username, password and email, and are assigned to the Admins role
 
+#Roles
+    There are five roles, they offer different degrees of access for two categories of Customers and Employees
+	Anyone logged in or out has access to the presentation interface
+
+	  Customers: Guest: They have the lowest degree of access, they only have access to change the password
+	             Customers: When a user places his first order, he becomes Customers and can see their orders
+
+      Employees: Employeers: They have access to the list of orders they handle
+	             Managers: They have access to the list of all commands
+
 #DataTable
 	All you need to do to enable datatables is to create a table with the following structure:
 	<table id="example" class="">
