@@ -154,6 +154,12 @@ h3.prodpad {
 [class~=crudstyle] input, [class~=crudstyle] select {
     color: black;
 }
+
+/*report iframe*/
+iframe {
+    height: 400px;
+    width: 100%;
+}
 /*report iframe*/
 iframe.fill {
     height: 90vh;
