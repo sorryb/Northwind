@@ -20,21 +20,59 @@ namespace NorthwindWeb.Context
         }
 
 
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+        /// <summary>
+        /// Context for Categories table in northwind database
+        /// </summary>
         public virtual DbSet<Categories> Categories { get; set; }
+        /// <summary>
+        /// Context for CustomerDemographics table in northwind database
+        /// </summary>
         public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
+        /// <summary>
+        /// Context for Customers table in northwind database
+        /// </summary>
         public virtual DbSet<Customers> Customers { get; set; }
+        /// <summary>
+        /// Context for Employees table in northwind database
+        /// </summary>
         public virtual DbSet<Employees> Employees { get; set; }
+        /// <summary>
+        /// Context for Order_Details table in northwind database
+        /// </summary>
         public virtual DbSet<Order_Details> Order_Details { get; set; }
+        /// <summary>
+        /// Context for Orders table in northwind database
+        /// </summary>
         public virtual DbSet<Orders> Orders { get; set; }
+        /// <summary>
+        /// Context for Persons table in northwind database
+        /// </summary>
         public virtual DbSet<Persons> Persons { get; set; }
+        /// <summary>
+        /// Context for Products table in northwind database
+        /// </summary>
         public virtual DbSet<Products> Products { get; set; }
+        /// <summary>
+        /// Context for Regions table in northwind database
+        /// </summary>
         public virtual DbSet<Region> Regions { get; set; }
+        /// <summary>
+        /// Context for Shippers table in northwind database
+        /// </summary>
         public virtual DbSet<Shippers> Shippers { get; set; }
+        /// <summary>
+        /// Context for Suppliers table in northwind database
+        /// </summary>
         public virtual DbSet<Suppliers> Suppliers { get; set; }
+        /// <summary>
+        /// Context for Territories table in northwind database
+        /// </summary>
         public virtual DbSet<Territories> Territories { get; set; }
+        /// <summary>
+        /// Context for ShopCart table in northwind database
+        /// </summary>
         public virtual DbSet<ShopCarts> ShopCart { get; set; }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
 
         /// <summary>
         /// Build Information of Northwind DataBase
