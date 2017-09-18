@@ -31,7 +31,7 @@
 
 #Roles
     There are five roles, they offer different degrees of access for two categories of Customers and Employees
-	Anyone logged in or out has access to the presentation interface
+	Anyone logged in or out has access to the eCommerce interface
 
 	  Customers: Guest: They have the lowest degree of access, they only have access to change the password
 	             Customers: When a user places his first order, he becomes Customers and can see their orders
