@@ -187,6 +187,8 @@
     <Compile Include="Context\ApplicationDataContext.cs" />
     <Compile Include="Context\NorthwindDatabaseInitializer.cs" />
     <Compile Include="Context\IdentityDatabaseInitializer.cs" />
+    <Compile Include="Context\NorthwindReferenceTableInitializer.cs" />
+    <Compile Include="Context\NorthwindTestDatabaseInitializer.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />

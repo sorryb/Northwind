@@ -27,7 +27,8 @@
                     <tr role="row">
                         <th>Numar Comanda</th>
                         <th>Data plasare</th>
-                        <th>Nume Client</th>
+                        <th>Companie</th>
+                        <th>Furnizor</th>
                     </tr>
                 </thead>
                 <tbody class="tbody">
@@ -48,7 +49,9 @@
                             <td>
                                 @itemOrder.CompanyName
                             </td>
-
+                            <td>
+                                @itemOrder.ShipperName
+                            </td>
                         </tr>
                     }
                 </tbody>
