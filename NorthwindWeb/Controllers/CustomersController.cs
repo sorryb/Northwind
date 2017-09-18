@@ -193,134 +193,147 @@ namespace NorthwindWeb.Controllers
         /// <returns>A JSON filtered customer list.</returns>
         public JsonResult JsonTableFill(int draw, int start, int length)
         {
-            const int totalRows = 999;
-
-            string search = "";
-
-            search = Request.QueryString["search[value]"] ?? "";
-
-
-            int sortColumn = -1;
-            string sortDirection = "asc";
-            if (length == -1)
+            try
             {
-                length = totalRows;
-            }
+                const int totalRows = 999;
 
-            // note: we only sort one column at a time
-            if (Request.QueryString["order[0][column]"] != null)
-            {
+                string search = "";
 
-                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
-
-            }
-
-            if (Request.QueryString["order[0][dir]"] != null)
-            {
-                sortDirection = Request.QueryString["order[0][dir]"];
-
-            }
-
-            //list of customers that contain "search"
-            var list = db.Customers.Where(x => x.CompanyName.Contains(search) ||
-                                          x.ContactName.Contains(search) ||
-                                          x.ContactTitle.Contains(search) ||
-                                          x.City.Contains(search) ||
-                                          x.Country.Contains(search) ||
-                                          x.Phone.Contains(search));
-
-            //order list
-            switch (sortColumn)
-            {
-                case -1: //sort by first column
-                    goto FirstColumn;
-                case 0: //first column
-                    FirstColumn:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.CompanyName);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.CompanyName);
-                    }
-                    break;
-
-                case 1: //second column
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.ContactName);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.ContactName);
-                    }
-                    break;
-                case 2: // and so on
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.ContactTitle);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.ContactTitle);
-                    }
-                    break;
-                case 3:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.City);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.City);
-                    }
-                    break;
-                case 4:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.Country);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.Country);
-                    }
-                    break;
-                case 5:
-                    if (sortDirection == "asc")
-                    {
-                        list = list.OrderBy(x => x.Phone);
-                    }
-                    else
-                    {
-                        list = list.OrderByDescending(x => x.Phone);
-                    }
-                    break;
+                search = Request.QueryString["search[value]"] ?? "";
 
 
-            }
-
-            //objet that whill be sent to client
-            JsonDataTable dataTableData = new JsonDataTable()
-            {
-                draw = draw,
-                recordsTotal = db.Customers.Count(),
-                data = list.Skip(start).Take(length).Select(x => new
+                int sortColumn = -1;
+                string sortDirection = "asc";
+                if (length == -1)
                 {
-                    ID = x.CustomerID,
-                    CompanyName = x.CompanyName,
-                    ContactName = x.ContactName,
-                    ContactTitle = x.ContactTitle,
-                    City = x.City,
-                    Country = x.Country,
-                    Phone = x.Phone
+                    length = totalRows;
+                }
 
-                }),
-                recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                // note: we only sort one column at a time
+                if (Request.QueryString["order[0][column]"] != null)
+                {
 
-            };
+                    sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
 
-            return Json(dataTableData, JsonRequestBehavior.AllowGet);
+                }
+
+                if (Request.QueryString["order[0][dir]"] != null)
+                {
+                    sortDirection = Request.QueryString["order[0][dir]"];
+
+                }
+
+                //list of customers that contain "search"
+                var list = db.Customers.Where(x => x.CompanyName.Contains(search) ||
+                                              x.ContactName.Contains(search) ||
+                                              x.ContactTitle.Contains(search) ||
+                                              x.City.Contains(search) ||
+                                              x.Country.Contains(search) ||
+                                              x.Phone.Contains(search));
+
+                //order list
+                switch (sortColumn)
+                {
+                    case -1: //sort by first column
+                        goto FirstColumn;
+                    case 0: //first column
+                        FirstColumn:
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.CompanyName);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.CompanyName);
+                        }
+                        break;
+
+                    case 1: //second column
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.ContactName);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.ContactName);
+                        }
+                        break;
+                    case 2: // and so on
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.ContactTitle);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.ContactTitle);
+                        }
+                        break;
+                    case 3:
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.City);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.City);
+                        }
+                        break;
+                    case 4:
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.Country);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.Country);
+                        }
+                        break;
+                    case 5:
+                        if (sortDirection == "asc")
+                        {
+                            list = list.OrderBy(x => x.Phone);
+                        }
+                        else
+                        {
+                            list = list.OrderByDescending(x => x.Phone);
+                        }
+                        break;
+
+
+                }
+
+                //objet that whill be sent to client
+                JsonDataTable dataTableData = new JsonDataTable()
+                {
+                    draw = draw,
+                    recordsTotal = db.Customers.Count(),
+                    data = list.Skip(start).Take(length).Select(x => new
+                    {
+                        ID = x.CustomerID,
+                        CompanyName = x.CompanyName,
+                        ContactName = x.ContactName,
+                        ContactTitle = x.ContactTitle,
+                        City = x.City,
+                        Country = x.Country,
+                        Phone = x.Phone
+
+                    }),
+                    recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                };
+
+                return Json(dataTableData, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.ToString());
+                return Json(new JsonDataTable()
+                {
+                    draw = draw,
+                    recordsTotal = db.Customers.Count(),
+                    error = "Ceva nu a mers bine",
+                    recordsFiltered = 0
+                }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         /// <summary>
