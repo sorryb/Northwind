@@ -46,7 +46,7 @@ namespace NorthwindWeb.Controllers
 
                 doc = web.Load($"{reportServer}?%2f{reportServerDir}", "GET", new WebProxy() { UseDefaultCredentials = true }, new NetworkCredential(login.Username, login.Password));
 
-                if(doc==null)
+                if (doc == null)
                 {
                     throw new ArgumentException("The username or password were not entered correctly. If not the problem might be with the report server.");
                 }
@@ -56,23 +56,28 @@ namespace NorthwindWeb.Controllers
 
 
 
-                List<ViewModels.ReportViewModel> reports = new List<ViewModels.ReportViewModel>();
-                ViewModels.ReportViewModel temp;
+                List<ReportViewModel> reports = new List<ReportViewModel>();
+                ReportViewModel temp;
 
                 //loops through each <a> in links2 and records the reports' href and filename
                 foreach (var linkloop in links2)
                 {
                     string filename = linkloop.InnerHtml;
                     string link = $"{reportServer}/Pages/ReportViewer.aspx{linkloop.Attributes.FirstOrDefault().DeEntitizeValue}&rc:zoom=Page%20Width";
-                    temp = new ViewModels.ReportViewModel(link, filename);
+                    temp = new ReportViewModel(link, filename);
                     reports.Add(temp);
                 }
                 return View(reports);
             }
+            catch (WebException e)
+            {
+                logger.Error(e.ToString());
+                throw new WebException("Nu am primit nici un raspuns de la server. Verificati ca adresa serverului este scrisa corect sau ca acesta este pornit.");
+            }
             catch (ArgumentException e)
             {
                 logger.Error(e.ToString());
-                throw new ArgumentException("Numele sau parola nu au fost introduse corect. Daca nu problema poate fi de la report server.");
+                throw new ArgumentException("Numele sau parola nu au fost introduse corect.");
             }
             catch (Exception e)
             {
