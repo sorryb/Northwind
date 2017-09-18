@@ -5,6 +5,7 @@ using HtmlAgilityPack;
 using System.Linq;
 using System.Net;
 using System;
+using NorthwindWeb.ViewModels;
 
 
 
@@ -17,11 +18,23 @@ namespace NorthwindWeb.Controllers
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ReportsController));
         /// <summary>
-        /// Displays a page containing a navbar with a list of reports from a report server provided in web.config
+        /// Displays a page containing a form to login on the report server.
         /// </summary>
-        /// <returns>Reports index view</returns>
+        /// <returns></returns>
+        [Authorize(Roles = "Admins")]
+        public ActionResult LogIn()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Shows the reports on the report server.
+        /// </summary>
+        /// <param name="login">Holds the username and password for the report server</param>
+        /// <returns></returns>
+        [HttpPost]
         [Authorize]
-        public ActionResult Index()
+        public ActionResult Index([Bind(Include = "Username,Password")] ReportLoginViewModel login)
         {
             try
             {
@@ -31,10 +44,12 @@ namespace NorthwindWeb.Controllers
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument doc = new HtmlDocument();
 
-                string userId = ConfigurationManager.AppSettings.Get("userId");
-                string password = ConfigurationManager.AppSettings.Get("password");
+                doc = web.Load($"{reportServer}?%2f{reportServerDir}", "GET", new WebProxy() { UseDefaultCredentials = true }, new NetworkCredential(login.Username, login.Password));
 
-                doc = web.Load($"{reportServer}?%2f{reportServerDir}", "GET", new WebProxy() { UseDefaultCredentials = true }, new NetworkCredential(userId, password));
+                if(doc==null)
+                {
+                    throw new ArgumentException("The username or password were not entered correctly. If not the problem might be with the report server.");
+                }
 
                 var links = doc.DocumentNode.SelectNodes("//a");
                 var links2 = links.Skip(1);
@@ -53,6 +68,11 @@ namespace NorthwindWeb.Controllers
                     reports.Add(temp);
                 }
                 return View(reports);
+            }
+            catch (ArgumentException e)
+            {
+                logger.Error(e.ToString());
+                throw new ArgumentException("Numele sau parola nu au fost introduse corect. Daca nu problema poate fi de la report server.");
             }
             catch (Exception e)
             {
