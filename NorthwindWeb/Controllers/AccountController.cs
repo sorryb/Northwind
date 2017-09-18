@@ -627,39 +627,38 @@ namespace NorthwindWeb.Controllers
                 var user = await UserManager.FindByNameAsync(userName);
                 user.UserName = model.UserName;
                 user.Email = model.Email;
+                user.PasswordHash = UserManager.PasswordHasher.HashPassword(model.Password);
 
-                var result = await UserManager.RemovePasswordAsync(user.Id);
-                result = await UserManager.AddPasswordAsync(user.Id, model.Password);
-                if (result.Succeeded)
+                if (UserManager.IsInRole(user.Id, "Customers"))
                 {
-                    NorthwindModel db = new NorthwindModel();
-                    var customers = db.Customers.Where(c => c.ContactName == userName);
-                    if (customers.Count() >= 1)
+                    NorthwindDatabase db = new NorthwindDatabase();
+                    var customers = db.Customers.Where(c => c.ContactName == userName).FirstOrDefault();
+                    if (customers!=null)
                     {
-                        foreach (var customer in customers)
-                        {
-                            customer.ContactName = user.UserName;
-                            db.Entry(customer).State = EntityState.Modified;
+                         customers.ContactName = user.UserName;
+                            db.Entry(customers).State = EntityState.Modified;
                             db.SaveChanges();
-                        }
+                       
+                    }
                         db.Dispose();
-                    }
-                    System.IO.File.Move(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"), System.IO.Path.Combine(Server.MapPath($"~/images"), $"{user.UserName}.jpg"));
-                    //System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
-                    isChanged = UserManager.Update(user);
-                    if (model.UserImage != null)
-                    {
-                        System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
-                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
-                        model.UserImage.SaveAs(path);
-                    }
-
-
-                    return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
                 }
-                AddErrors(result);
-                ViewBag.UserName = userName;
-                return View(model);
+                //System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                isChanged = UserManager.Update(user);
+                if (model.UserImage != null)
+                {
+                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                    model.UserImage.SaveAs(path);
+                }
+                else
+                {
+                    System.IO.File.Move(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"), System.IO.Path.Combine(Server.MapPath($"~/images"), $"{user.UserName}.jpg"));
+                }
+
+                return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
+
+                //ViewBag.UserName = userName;
+                //return View(model);
                 //return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
             }
             catch (Exception exception)
