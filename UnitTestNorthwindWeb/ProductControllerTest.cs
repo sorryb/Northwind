@@ -157,7 +157,7 @@ namespace UnitTestNorthwindWeb
 
             //Act
             //run controller action
-            await controller.Edit(product);
+            await controller.Edit(product.ProductID);
             controller.Dispose();
             string actual = db.Products.Where(x => x.ProductID == product.ProductID).First().ProductName;
 
