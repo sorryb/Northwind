@@ -80,36 +80,43 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued,ProductImage")] ProductViewModel productViewModel)
         {
-            Products products = new Products()
+            try
             {
-                ProductID = productViewModel.ProductID,
-                ProductName = productViewModel.ProductName,
-                SupplierID = productViewModel.SupplierID,
-                CategoryID = productViewModel.CategoryID,
-                QuantityPerUnit = productViewModel.QuantityPerUnit,
-                UnitPrice = productViewModel.UnitPrice,
-                UnitsInStock = productViewModel.UnitsInStock,
-                UnitsOnOrder = productViewModel.UnitsOnOrder,
-                ReorderLevel = productViewModel.ReorderLevel,
-                Discontinued = productViewModel.Discontinued
-            };
-
-            if (ModelState.IsValid)
-            {
-                db.Products.Add(products);
-                await db.SaveChangesAsync();
-
-                if (productViewModel.ProductImage != null)
+                Products products = new Products()
                 {
-                    string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
-                    productViewModel.ProductImage.SaveAs(path);
-                }
-                return RedirectToAction("Index");
-            }
+                    ProductID = productViewModel.ProductID,
+                    ProductName = productViewModel.ProductName,
+                    SupplierID = productViewModel.SupplierID,
+                    CategoryID = productViewModel.CategoryID,
+                    QuantityPerUnit = productViewModel.QuantityPerUnit,
+                    UnitPrice = productViewModel.UnitPrice,
+                    UnitsInStock = productViewModel.UnitsInStock,
+                    UnitsOnOrder = productViewModel.UnitsOnOrder,
+                    ReorderLevel = productViewModel.ReorderLevel,
+                    Discontinued = productViewModel.Discontinued
+                };
 
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
-            ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
-            return View(products);
+                if (ModelState.IsValid)
+                {
+                    db.Products.Add(products);
+                    await db.SaveChangesAsync();
+
+                    if (productViewModel.ProductImage != null)
+                    {
+                        string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
+                        productViewModel.ProductImage.SaveAs(path);
+                    }
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
+                ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
+                return View(products);
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -148,7 +155,7 @@ namespace NorthwindWeb.Controllers
         {
             try
             {
-                var products = db.Products.Find(productViewModel.ProductID);
+                Products products = db.Products.Find(productViewModel.ProductID);
 
                 products.ProductName = productViewModel.ProductName;
                 products.SupplierID = productViewModel.SupplierID;
@@ -160,9 +167,7 @@ namespace NorthwindWeb.Controllers
                 products.ReorderLevel = productViewModel.ReorderLevel;
                 products.Discontinued = productViewModel.Discontinued;
 
-
-
-                if(TryValidateModel(products))
+                if(ModelState.IsValid)
                 {
                     db.Entry(products).State = EntityState.Modified;
                     await db.SaveChangesAsync();
@@ -177,7 +182,7 @@ namespace NorthwindWeb.Controllers
                 }
                 ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", productViewModel.CategoryID);
                 ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", productViewModel.SupplierID);
-                return View(productViewModel);
+                return View(products);
             }
             catch (NullReferenceException e)
             {
