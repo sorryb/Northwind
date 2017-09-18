@@ -9,7 +9,7 @@
 			4.Make sure that in WebConfig -> connectionStrings -> NwModel connection string match the Northwind DataBase connection string from your SQL Server
 		B. Small initialization. This will fill the database with Territories and Products, and with some portions of the Customers, Orders, (and others) from data that point A would add in DataBase
 			Implementation:
-			1.Change the connectionString in WebConfig -> connectionStrings -> NwModel to what you want (this is where the database will be made)
+			1.Change the connectionString in WebConfig -> connectionStrings -> NorthwindDatabaseConnection to what you want (this is where the database will be made)
 			2.Start the application. Now first time when the site will need something from Northwind DataBase the DataBase will be made
 		C. Without initialization
 			Implementation:
@@ -21,9 +21,9 @@
 	The main users are: username: admin, password: 123456;
 						username: tester, password: Tester_1;
 
-	Users are stored in the aspnet-Northwind-20170823114137.mdf database
+	Users are stored in the Northwind database
 	User information is created, encrypted and saved with aspnet.Identity
-	The first use of any operation involving the user, the aspnet-Northwind-20170823114137.mdf database is initialized (ex: Login)
+	The first use of any operation involving the user, the Northwind database is initialized with user tables(ex: Login)
 	There are two static users: admin, tester; rest being done for employees from the northwind database
 	The default roles created at initialization are:Admins, Employees, Managers, Guest, Customers they offer different degrees of access
 	admin, tester and users for employees are set in IdentityDatabaseInitializer called from ApplicationDataContext if it does not exist aspnet-Northwind-20170823114137.mdf database
@@ -31,7 +31,7 @@
 
 #Roles
     There are five roles, they offer different degrees of access for two categories of Customers and Employees
-	Anyone logged in or out has access to the presentation interface
+	Anyone logged in or out has access to the eCommerce interface
 
 	  Customers: Guest: They have the lowest degree of access, they only have access to change the password
 	             Customers: When a user places his first order, he becomes Customers and can see their orders
