@@ -15,7 +15,7 @@ namespace NorthwindWeb.ViewModels
         /// </summary>
         /// <param name="link">set link</param>
         /// <param name="filename">set filename</param>
-        public ReportViewModel(string link,string filename)
+        public ReportViewModel(string link, string filename)
         {
             this.Link = link;
             this.Filename = filename;
@@ -29,7 +29,22 @@ namespace NorthwindWeb.ViewModels
         /// <summary>
         /// File name of RaportView
         /// </summary>
-        public string Filename { get; set; } 
+        public string Filename { get; set; }
 
+    }
+
+    /// <summary>
+    /// Holds username and password for the report server.
+    /// </summary>
+    public class ReportLoginViewModel
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Username { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Password { get; set; }
     }
 }

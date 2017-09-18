@@ -187,6 +187,8 @@
     <Compile Include="Context\ApplicationDataContext.cs" />
     <Compile Include="Context\NorthwindDatabaseInitializer.cs" />
     <Compile Include="Context\IdentityDatabaseInitializer.cs" />
+    <Compile Include="Context\NorthwindReferenceTableInitializer.cs" />
+    <Compile Include="Context\NorthwindTestDatabaseInitializer.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -504,6 +506,7 @@
     <Content Include="Views\Order\HomeCustomers.cshtml" />
     <Content Include="Views\Shared\_LoginPartialDashboard.cshtml" />
     <Content Include="Views\Errors\Index.cshtml" />
+    <Content Include="Views\Reports\LogIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Categories\Create.cshtml" />
