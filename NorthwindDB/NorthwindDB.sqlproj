@@ -169,11 +169,11 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </None>
-    <None Include="dbo\Views\Current Product List.sql">
+    <None Include="dbo\Views\2.Current Product List.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </None>
-    <None Include="dbo\Views\Orders Qry.sql">
+    <None Include="dbo\Views\1.Orders Qry.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </None>
@@ -193,15 +193,15 @@
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </None>
-    <None Include="dbo\Views\Order Details Extended.sql">
+    <None Include="dbo\Views\4.Order Details Extended.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </None>
-    <None Include="dbo\Views\Order Subtotals.sql">
+    <None Include="dbo\Views\3.Order Subtotals.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </None>
-    <None Include="dbo\Views\Product Sales for 1997.sql">
+    <None Include="dbo\Views\5.Product Sales for 1997.sql">
       <AnsiNulls>On</AnsiNulls>
       <QuotedIdentifier>On</QuotedIdentifier>
     </None>

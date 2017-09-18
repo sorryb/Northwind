@@ -3,6 +3,8 @@ using System.Data.Entity;
 using System.Linq;
 using System;
 using NorthwindWeb.Models;
+using System.Text;
+using System.IO;
 
 namespace NorthwindWeb.Context
 {
@@ -20,8 +22,18 @@ namespace NorthwindWeb.Context
         {
             InsertInDatabase(context);
 
+            // add indexes
             context.Database.ExecuteSqlCommand("CREATE INDEX IX_Person_Name ON Persons (FirstName)");
 
+            //add views
+            var sqlFiles = Directory.GetFiles(AppDomain.CurrentDomain.GetData("DataDirectory").ToString() + "\\SQL", "*.sql").OrderBy(x => x);
+
+            foreach (string file in sqlFiles)
+            {
+                context.Database.ExecuteSqlCommand(File.ReadAllText(file));
+            }
+
+            //seed
             base.Seed(context);
         }
 
@@ -112,7 +124,7 @@ namespace NorthwindWeb.Context
             employees[1].Territories = context.Territories.Where(x => x.TerritoryID == "10" || x.TerritoryID == "34" || x.TerritoryID == "35" || x.TerritoryID == "36" || x.TerritoryID == "5" || x.TerritoryID == "9").ToList();
             employees[2].Territories = context.Territories.Where(x => x.TerritoryID == "11" || x.TerritoryID == "12" || x.TerritoryID == "3" || x.TerritoryID == "35" || x.TerritoryID == "37" || x.TerritoryID == "38" || x.TerritoryID == "4").ToList();
             employees[3].Territories = context.Territories.Where(x => x.TerritoryID == "11" || x.TerritoryID == "12" || x.TerritoryID == "13" || x.TerritoryID == "14" || x.TerritoryID == "16").ToList();
-            employees[4].Territories = context.Territories.Where(x => x.TerritoryID == "1" || x.TerritoryID == "2" || x.TerritoryID == "29" || x.TerritoryID == "33" || x.TerritoryID == "42" || x.TerritoryID == "43" || x.TerritoryID == "6").ToList();
+            employees[4].Territories = context.Territories.Where(x => x.TerritoryID == "1"  || x.TerritoryID == "2" || x.TerritoryID == "29" || x.TerritoryID == "33" || x.TerritoryID == "42" || x.TerritoryID == "43" || x.TerritoryID == "6").ToList();
             employees[5].Territories = context.Territories.Where(x => x.TerritoryID == "22" || x.TerritoryID == "28" || x.TerritoryID == "29" || x.TerritoryID == "30" || x.TerritoryID == "31" || x.TerritoryID == "32" || x.TerritoryID == "33").ToList();
             employees[6].Territories = context.Territories.Where(x => x.TerritoryID == "36" || x.TerritoryID == "37" || x.TerritoryID == "38" || x.TerritoryID == "39" || x.TerritoryID == "40" || x.TerritoryID == "41" || x.TerritoryID == "42").ToList();
             employees[7].Territories = context.Territories.Where(x => x.TerritoryID == "15" || x.TerritoryID == "16" || x.TerritoryID == "17" || x.TerritoryID == "18" || x.TerritoryID == "20" || x.TerritoryID == "21" || x.TerritoryID == "25" || x.TerritoryID == "26" || x.TerritoryID == "39" || x.TerritoryID == "40" || x.TerritoryID == "7").ToList();
@@ -344,13 +356,13 @@ namespace NorthwindWeb.Context
             //customers and orders
             List<Customers> customers = new List<Customers>
             {
-                new Customers(){ CustomerID = "ALFKI", CompanyName = "Vinyl Fever",               ContactName = "Danut Gogean"        , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 10 MAI nr. 15, DaMBOVITA"           , City = "Targoviste", Region = "Muntenia"    , PostalCode = "130062", Country = "Romania", Phone = "0245-216 446" },
-                new Customers(){ CustomerID = "ANATR", CompanyName = "Kash n",                    ContactName = "Gabriella Anghelescu", ContactTitle = "Patron"               , Address = "Strada Caraiman 3, Constanta"            , City = "Constanta" , Region = "Dobrogea"    , PostalCode = "907021", Country = "Romania", Phone = "0723-564 218"  , Fax = "0251.411688" },
-                new Customers(){ CustomerID = "ANTON", CompanyName = "Tech Hifi",                 ContactName = "Dorin Butacu"        , ContactTitle = "Patron"               , Address = "Piata Revolutiei 3/26, Maramures"        , City = "Maramures" , Region = "Maramures"   , PostalCode = "873309", Country = "Romania", Phone = "+40(262)260999", Fax = "+40(262)271338" },
-                new Customers(){ CustomerID = "AROUT", CompanyName = "Beatties",                  ContactName = "Ioana Draghici"      , ContactTitle = "Reprezentant Vanzari" , Address = "STR. VULCAN SAMUIL nr. 16, BEIUS"        , City = "BIHOR"     , Region = "Crisana"     , PostalCode = "653271", Country = "Romania", Phone = "0259-320 222"  , Fax = "0251.418803" },
-                new Customers(){ CustomerID = "BERGS", CompanyName = "Cut Above",                 ContactName = "Varujan Puscas"      , ContactTitle = "Administrator Comenzi", Address = "Bulevardul Ion Mihalache 148B, Bucuresti", City = "Bucuresti" , Region = "Muntenia"    , PostalCode = "666708", Country = "Romania", Phone = "+40(21)2246714", Fax = "0251.413102" },
-                new Customers(){ CustomerID = "BLAUS", CompanyName = "Sears Homelife",            ContactName = "Stefan Manole"       , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 9 MAI, BACAU"                       , City = "Bacau"     , Region = "Moldova"     , PostalCode = "546708", Country = "Romania", Phone = "0740-082 824"  , Fax = "0251.413102" },
-                new Customers(){ CustomerID = "BLONP", CompanyName = "Century House",             ContactName = "Varujan Teodorescu"  , ContactTitle = "Director Marketing"   , Address = "STR. BARNUTIU SIMION nr. 67, SALAJ"      , City = "SALAJ"     , Region = "Transilvania", PostalCode = "437945", Country = "Romania", Phone = "0260-616 920"  , Fax = "0251.418803" },
+                new Customers(){ CustomerID = "ALFKI", CompanyName = "RadioCom S.A.",               ContactName = "Danut Gogean"        , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 10 MAI nr. 15, DaMBOVITA"           , City = "Targoviste", Region = "Muntenia"    , PostalCode = "130062", Country = "Romania", Phone = "0245-216 446" },
+                new Customers(){ CustomerID = "ANATR", CompanyName = "OTE S.A.",                    ContactName = "Gabriella Anghelescu", ContactTitle = "Patron"               , Address = "Strada Caraiman 3, Constanta"            , City = "Constanta" , Region = "Dobrogea"    , PostalCode = "907021", Country = "Romania", Phone = "0723-564 218"  , Fax = "0251.411688" },
+                new Customers(){ CustomerID = "ANTON", CompanyName = "Digi Telecom S.A.",                 ContactName = "Dorin Butacu"        , ContactTitle = "Patron"               , Address = "Piata Revolutiei 3/26, Maramures"        , City = "Maramures" , Region = "Maramures"   , PostalCode = "873309", Country = "Romania", Phone = "+40(262)260999", Fax = "+40(262)271338" },
+                new Customers(){ CustomerID = "AROUT", CompanyName = "Cosmote S.A.",                  ContactName = "Ioana Draghici"      , ContactTitle = "Reprezentant Vanzari" , Address = "STR. VULCAN SAMUIL nr. 16, BEIUS"        , City = "BIHOR"     , Region = "Crisana"     , PostalCode = "653271", Country = "Romania", Phone = "0259-320 222"  , Fax = "0251.418803" },
+                new Customers(){ CustomerID = "BERGS", CompanyName = "Telecom S.R.L.",                 ContactName = "Varujan Puscas"      , ContactTitle = "Administrator Comenzi", Address = "Bulevardul Ion Mihalache 148B, Bucuresti", City = "Bucuresti" , Region = "Muntenia"    , PostalCode = "666708", Country = "Romania", Phone = "+40(21)2246714", Fax = "0251.413102" },
+                new Customers(){ CustomerID = "BLAUS", CompanyName = "Vodafone S.A.",            ContactName = "Stefan Manole"       , ContactTitle = "Reprezentant Vanzari" , Address = "STR. 9 MAI, BACAU"                       , City = "Bacau"     , Region = "Moldova"     , PostalCode = "546708", Country = "Romania", Phone = "0740-082 824"  , Fax = "0251.413102" },
+                new Customers(){ CustomerID = "BLONP", CompanyName = "Orange S.A.",             ContactName = "Varujan Teodorescu"  , ContactTitle = "Director Marketing"   , Address = "STR. BARNUTIU SIMION nr. 67, SALAJ"      , City = "SALAJ"     , Region = "Transilvania", PostalCode = "437945", Country = "Romania", Phone = "0260-616 920"  , Fax = "0251.418803" },
              };
 
             foreach(var customer in customers)
@@ -506,6 +518,50 @@ namespace NorthwindWeb.Context
             }
             context.SaveChanges();
 
+        }
+
+
+        /// <summary>
+        /// In case there are all Views in one sql file.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        /// <remarks>
+            ///var sqlCommands = Directory
+            ///                    .EnumerateFiles(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), "*.sql")
+            ///                    .OrderBy(x => x)
+            ///                    .SelectMany(ReadAllCommands);
+            ///
+            ///foreach (string command in sqlCommands)
+            ///{
+            ///    context.Database.ExecuteSqlCommand(command);
+            ///}
+    /// </remarks>
+    static IEnumerable<string> ReadAllCommands(string path)
+        {
+            StringBuilder sb = null;
+            foreach (string line in File.ReadLines(path))
+            {
+                if (string.Equals(line, "GO", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (null != sb && 0 != sb.Length)
+                    {
+                        string item = sb.ToString();
+                        if (!string.IsNullOrWhiteSpace(item)) yield return item;
+                        sb = null;
+                    }
+                }
+                else
+                {
+                    if (null == sb) sb = new StringBuilder();
+                    sb.AppendLine(line);
+                }
+            }
+            if (null != sb && 0 != sb.Length)
+            {
+                string item = sb.ToString();
+                if (!string.IsNullOrWhiteSpace(item)) yield return item;
+            }
         }
     }
 }
