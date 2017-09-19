@@ -82,7 +82,7 @@ namespace NorthwindWeb.Controllers
             {
                 db.Order_Details.Add(order_Details);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Orders", new { id = id });
             }
 
             //ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID", order_Details.OrderID);
@@ -124,7 +124,7 @@ namespace NorthwindWeb.Controllers
             {
                 db.Entry(order_Details).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Orders", new { id = order_Details.OrderID });
             }
             ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID", order_Details.OrderID);
             ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName", order_Details.ProductID);
@@ -164,7 +164,7 @@ namespace NorthwindWeb.Controllers
                 db.Order_Details.Remove(orderdet);
 
             await db.SaveChangesAsync();
-            return RedirectToAction("Index","Orders");
+            return RedirectToAction("Details","Orders",new {id=orderID });
 
         }
 
