@@ -286,6 +286,7 @@
     <Content Include="App_Data\SQL\Sales Totals by Amount.sql" />
     <Content Include="App_Data\SQL\Summary of Sales by Quarter.sql" />
     <Content Include="App_Data\SQL\Summary of Sales by Year.sql" />
+    <Content Include="App_Data\SQL\_ReadMe.txt" />
     <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
     <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
     <Content Include="Content\DataTables\images\details_close.png" />
@@ -498,7 +499,6 @@
     <Content Include="Views\OrderDetail\Delete.cshtml" />
     <Content Include="Views\OrderDetail\Details.cshtml" />
     <Content Include="Views\OrderDetail\Edit.cshtml" />
-    <Content Include="Views\OrderDetail\Index.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Shared\_OrdersMenuPartial.cshtml" />
     <Content Include="Views\Persons\Create.cshtml" />
@@ -510,7 +510,6 @@
     <Content Include="Views\Territories\Delete.cshtml" />
     <Content Include="Views\Territories\Details.cshtml" />
     <Content Include="Views\Territories\Edit.cshtml" />
-    <Content Include="Views\Territories\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutReports.cshtml" />
     <Content Include="Views\Dashboard\Search.cshtml" />
     <Content Include="Views\Account\DeleteUser.cshtml" />
