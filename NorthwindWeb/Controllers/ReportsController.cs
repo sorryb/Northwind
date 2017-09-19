@@ -14,7 +14,6 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Contains the methods neccessary to deal with reports.
     /// </summary>
-    [Authorize(Roles = "Admins, Managers")]
     public class ReportsController : Controller
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ReportsController));
@@ -22,6 +21,7 @@ namespace NorthwindWeb.Controllers
         /// Displays a page containing a form to login on the report server.
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "Admins")]
         public ActionResult LogIn()
         {
             return View();

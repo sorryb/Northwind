@@ -18,7 +18,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Orders Controller. For table Orders
     /// </summary>
-    [Authorize(Roles = "Admins, Managers")]
+    [Authorize]
     public class OrdersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindDatabase db = new NorthwindDatabase();
@@ -85,6 +85,7 @@ namespace NorthwindWeb.Controllers
         /// Returns the view containing the form neccesary for creating a new order.
         /// </summary>
         /// <returns>Create view.</returns>
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "CompanyName");
@@ -100,6 +101,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns orders index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "OrderID,CustomerID,EmployeeID,OrderDate,RequiredDate,ShippedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry")] Orders orders)
         {
             if (ModelState.IsValid)
@@ -122,6 +124,7 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the order that is going to be edited</param>
         /// <returns>Orders edit view</returns>
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -148,6 +151,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>Orders index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "OrderID,CustomerID,EmployeeID,OrderDate,RequiredDate,ShippedDate,ShipVia,Freight,ShipName,ShipAddress,ShipCity,ShipRegion,ShipPostalCode,ShipCountry")] Orders orders)
         {
             if (ModelState.IsValid)
@@ -167,6 +171,7 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The order that is going to be deleted.</param>
         /// <returns>Delete view</returns>
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
 
@@ -219,6 +224,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>Orders index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
 
