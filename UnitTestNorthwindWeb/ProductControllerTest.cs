@@ -152,12 +152,12 @@ namespace UnitTestNorthwindWeb
             db.SaveChanges();
             //edit name of product
             string name = product.ProductName;
-            string nameExpected = "test1223";
+            string nameExpected = "test12232";
             product.ProductName = nameExpected;
 
             //Act
             //run controller action
-            await controller.Edit(product.ProductID);
+            await controller.Edit(product, null);
             controller.Dispose();
             string actual = db.Products.Where(x => x.ProductID == product.ProductID).First().ProductName;
 
