@@ -18,7 +18,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Customers Controller. For table Customers
     /// </summary>
-    [Authorize]
+    [Authorize(Roles = "Admins, Managers")]
     public class CustomersController : Controller, IJsonTableFillServerSide
     {
         private NorthwindDatabase db = new NorthwindDatabase();
@@ -56,7 +56,6 @@ namespace NorthwindWeb.Controllers
         /// Returns the view containing the form neccesary for creating a new customer.
         /// </summary>
         /// <returns>Create view.</returns>
-        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
@@ -69,7 +68,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns customers index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "CustomerID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers)
         {
             if (ModelState.IsValid)
@@ -87,7 +85,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the customer that is going to be edited</param>
         /// <returns>Customers edit view</returns>
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
@@ -111,7 +108,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>Customers index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "CustomerID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers)
         {
             if (ModelState.IsValid)
@@ -128,7 +124,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The customer that is going to be deleted.</param>
         /// <returns>Delete view</returns>
-        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -150,7 +145,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>Customers index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
 

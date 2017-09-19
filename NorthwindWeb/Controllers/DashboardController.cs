@@ -15,7 +15,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// DashBoard Controller. Charts with actual state of the site
     /// </summary>
-    [Authorize(Roles = "Admins")]
+    [Authorize(Roles = "Admins, Managers")]
     public class DashboardController : Controller
     {
         private NorthwindDatabase db = new NorthwindDatabase();
