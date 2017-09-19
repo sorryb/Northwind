@@ -43,7 +43,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _detailsControllerUnderTest.Index(1) as ViewResult;
+            var result = _detailsControllerUnderTest.Index();
 
             //Assert
 
