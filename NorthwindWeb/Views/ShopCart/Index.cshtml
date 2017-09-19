@@ -30,6 +30,9 @@
 
     </table>
     <br />
+    <div class="container col-xs-9">
+        <strong><span class="coloronwhite pull-right">Total comanda = <span id="totalComanda" class="coloronwhite"></span></span></strong>
+    </div>
 
     @using (Html.BeginForm("ConfirmOrder", "ShopCart", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
     {
