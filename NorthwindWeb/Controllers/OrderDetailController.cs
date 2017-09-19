@@ -21,22 +21,6 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindDatabase db = new NorthwindDatabase();
 
-
-        /// <summary>
-        /// Returns a paged list with all order-details
-        /// </summary>
-        /// <param name="page">Required for paged list to work</param>
-        /// 
-        /// <returns>PagedList</returns>
-        public ActionResult Index(int page = 1)
-        {
-            var order_Details = db.Order_Details.Include(o => o.Order).Include(o => o.Product).OrderBy(o=>o.OrderID);
-          
-            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
-            int pageNumber = page;
-            return View(order_Details.ToPagedList(pageNumber, pageSize));
-        }
-
         /// <summary>
         /// Displays a page showing all the information about one order-detail.
         /// </summary>
