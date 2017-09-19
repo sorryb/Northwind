@@ -18,7 +18,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Class that contains all the neccessary functions to perform CRUD operations on the database employees table.
     /// </summary>
-    [Authorize]
+    [Authorize(Roles = "Admins, Managers")]
     public class EmployeesController : Controller
     {
         private NorthwindDatabase db = new NorthwindDatabase();
@@ -58,7 +58,6 @@ namespace NorthwindWeb.Controllers
         /// Returns the view containing the form neccesary for creating a new employee.
         /// </summary>
         /// <returns>Create view.</returns>
-        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             ViewBag.ReportsTo = new SelectList(db.Employees, "EmployeeID", "LastName");
@@ -75,7 +74,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns employees index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "EmployeeID,LastName,FirstName,Title,TitleOfCourtesy,BirthDate,HireDate,Address,City,Region,PostalCode,Country,HomePhone,Extension,Notes,ReportsTo")] Employees employees)
         {
             if (ModelState.IsValid)
@@ -93,7 +91,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the employee that is going to be edited</param>
         /// <returns>Employees edit view</returns>
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -122,7 +119,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>Employees index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "EmployeeID,LastName,FirstName,Title,TitleOfCourtesy,BirthDate,HireDate,Address,City,Region,PostalCode,Country,HomePhone,Extension,Notes,ReportsTo")] Employees employees)
         {
             if (ModelState.IsValid)
@@ -141,7 +137,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The employee that is going to be deleted.</param>
         /// <returns>Delete view</returns>
-        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -166,7 +161,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>Employees index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
 
