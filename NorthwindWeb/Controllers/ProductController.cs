@@ -284,10 +284,24 @@ namespace NorthwindWeb.Controllers
                     sortDirection = Request.QueryString["order[0][dir]"];
                 }
 
-                //list of product that contain "search"
-                var list = db.Products.Include(p => p.Category).Include(p => p.Supplier)
-                    .Where(p => (p.ProductName.Contains(search) || p.ProductID.ToString().Contains(search)
-                    || p.Discontinued.ToString().Contains(search) || p.Supplier.CompanyName.Contains(search)) && p.Category.CategoryName.Contains(category));
+                IQueryable<Products> products;
+                //try to parse search to int
+                try
+                {
+                    //int parse
+                    int searchInteger = int.Parse(search);
+                    //list of product that contain "search"
+                    products = db.Products.Include(p => p.Category).Include(p => p.Supplier)
+                        .Where(p => (p.ProductName.Contains(search) || p.UnitPrice == searchInteger
+                        || p.UnitsInStock == searchInteger || p.UnitsOnOrder == searchInteger
+                        || p.ReorderLevel == searchInteger || p.Discontinued.ToString().Contains(search)));
+                }
+                catch (FormatException e)
+                {
+                    //if int cannot be taken
+                    products = db.Products.Include(p => p.Category).Include(p => p.Supplier)
+                        .Where(p => (p.ProductName.Contains(search) || p.Discontinued.ToString().Contains(search)));
+                }
 
                 //order list
                 switch (sortColumn)
@@ -298,61 +312,61 @@ namespace NorthwindWeb.Controllers
                         FirstColumn:
                         if (sortDirection == "asc")
                         {
-                            list = list.OrderBy(x => x.ProductName);
+                            products = products.OrderBy(x => x.ProductName);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.ProductName);
+                            products = products.OrderByDescending(x => x.ProductName);
                         }
                         break;
                     case 1: //second column
                         if (sortDirection == "asc")
                         {
-                            list = list.OrderBy(x => x.UnitPrice);
+                            products = products.OrderBy(x => x.UnitPrice);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.UnitPrice);
+                            products = products.OrderByDescending(x => x.UnitPrice);
                         }
                         break;
                     case 2: // and so on
                         if (sortDirection == "asc")
                         {
-                            list = list.OrderBy(x => x.UnitsInStock);
+                            products = products.OrderBy(x => x.UnitsInStock);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.UnitsInStock);
+                            products = products.OrderByDescending(x => x.UnitsInStock);
                         }
                         break;
                     case 3:
                         if (sortDirection == "asc")
                         {
-                            list = list.OrderBy(x => x.UnitsOnOrder);
+                            products = products.OrderBy(x => x.UnitsOnOrder);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.UnitsOnOrder);
+                            products = products.OrderByDescending(x => x.UnitsOnOrder);
                         }
                         break;
                     case 4:
                         if (sortDirection == "asc")
                         {
-                            list = list.OrderBy(x => x.ReorderLevel);
+                            products = products.OrderBy(x => x.ReorderLevel);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.ReorderLevel);
+                            products = products.OrderByDescending(x => x.ReorderLevel);
                         }
                         break;
                     case 5:
                         if (sortDirection == "asc")
                         {
-                            list = list.OrderBy(x => x.Discontinued);
+                            products = products.OrderBy(x => x.Discontinued);
                         }
                         else
                         {
-                            list = list.OrderByDescending(x => x.Discontinued);
+                            products = products.OrderByDescending(x => x.Discontinued);
                         }
                         break;
                 }
@@ -362,7 +376,7 @@ namespace NorthwindWeb.Controllers
                 {
                     draw = draw,
                     recordsTotal = db.Products.Count(),
-                    data = list.Skip(start).Take(length).Select(x => new
+                    data = products.Skip(start).Take(length).Select(x => new
                     {
                         ID = x.ProductID,
                         ProductName = x.ProductName,
@@ -372,7 +386,7 @@ namespace NorthwindWeb.Controllers
                         ReorderLevel = x.ReorderLevel,
                         Discontinued = x.Discontinued
                     }),
-                    recordsFiltered = list.Count(), //need to be below data(ref recordsFiltered)
+                    recordsFiltered = products.Count(), //need to be below data(ref recordsFiltered)
                 };
                 return Json(dataTableData, JsonRequestBehavior.AllowGet);
             }
