@@ -40,6 +40,11 @@ namespace NorthwindWeb.Controllers
             {
                 string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
                 string reportServerDir = ConfigurationManager.AppSettings.Get("ReportServerDirectory");
+                if(string.IsNullOrEmpty(reportServer))
+                {
+                    
+                }
+
 
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument doc = new HtmlDocument();
@@ -79,10 +84,10 @@ namespace NorthwindWeb.Controllers
                 logger.Error(e.ToString());
                 throw new ArgumentException("Numele sau parola nu au fost introduse corect.");
             }
-            catch (Exception e)
+            catch (UriFormatException e)
             {
                 logger.Error(e.ToString());
-                throw new Exception("A aparut o eroare in timpul afisarii rapoartelor, va rugam incercati din nou. Verificati ca setarile pentru report server sunt corecte.");
+                throw new Exception("Adresa serverului nu este intr-un format valid");
             }
 
         }
