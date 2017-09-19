@@ -42,8 +42,22 @@ function CreateShopCartDataTable(tableId) {
         "columns": [
             { 'data': 'ProductName' },
             { 'data': 'Quantity' },
-            { 'data': 'UnitPrice' },
-            { 'data': 'TotalPrice' },
+            {
+                'data': 'UnitPrice',
+                'render': function (data, type, row) {
+                    if (data == 1)
+                        return data + " leu";
+                    return data + " lei";
+                }
+            },
+            {
+                'data': 'TotalPrice',
+                'render': function (data, type, row) {
+                    if (data == 1)
+                        return data + " leu";
+                    return data + " lei";
+                }
+            },
             {
                 'data': 'Remove',
                 'orderable': false,
