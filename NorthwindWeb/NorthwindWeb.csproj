@@ -286,6 +286,7 @@
     <Content Include="App_Data\SQL\Sales Totals by Amount.sql" />
     <Content Include="App_Data\SQL\Summary of Sales by Quarter.sql" />
     <Content Include="App_Data\SQL\Summary of Sales by Year.sql" />
+    <Content Include="App_Data\SQL\_ReadMe.txt" />
     <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
     <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
     <Content Include="Content\DataTables\images\details_close.png" />

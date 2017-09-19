@@ -36,7 +36,7 @@ namespace NorthwindWeb.ViewModels
     /// <summary>
     /// Holds username and password for the report server.
     /// </summary>
-    public class ReportServerViewModel
+    public class ReportLoginViewModel
     {
         /// <summary>
         /// 
@@ -46,15 +46,5 @@ namespace NorthwindWeb.ViewModels
         /// 
         /// </summary>
         public string Password { get; set; }
-        /// <summary>
-        /// The address of the report server.
-        /// </summary>
-        public string ServerAddress { get; set; }
-        /// <summary>
-        /// The directory that holds the reports.
-        /// </summary>
-        public string ReportsDirectory { get; set; }
-
-
     }
 }
