@@ -86,7 +86,7 @@ $(document).ready(function () {
     });
 
 
-   /*datatable handler with server side implementation for customer*/
+    /*datatable handler with server side implementation for customer*/
     $('#CustomersTable').DataTable({
         "processing": true,
         "serverSide": true,
@@ -190,195 +190,202 @@ $(document).ready(function () {
     });
 
     /*add from json in table Shippers*/
-    
-        $('#ShippersTable').DataTable({
-            "responsive": true,
-            "autoWidth": false,
-            "columnDefs": [
-                { responsivePriority: 1, targets: 0 },
-                { responsivePriority: 2, targets: -1 }
-            ],
-            "ajax": {
-                "type": "GET",
-                "url": searchControllerPath() + "/JsonTableFill",
-                "dataSrc": function (json) {
-                    //Make your callback here.
-                    $.each(json, function (index, item) {
-                        item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                        item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
-                    });
-                    return json;
-                }
-            },
-            "columns": [
-                { 'data': 'CompanyName' },
-                { 'data': 'Phone' },
-                { 'data': 'DeleteLink' }
-            ]
 
-        });
-    
+    $('#ShippersTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.CompanyName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CompanyName + '</a >';
+                });
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'CompanyName' },
+            { 'data': 'Phone' },
+            { 'data': 'DeleteLink' }
+        ]
+
+    });
+
 
     /*add from json in table Categories*/
-    
-        $('#CategoriesTable').DataTable({
-            "responsive": true,
-            "autoWidth": false,
-            "columnDefs": [
-                { responsivePriority: 1, targets: 0 },
-                { responsivePriority: 2, targets: -1 }
-            ],
-            "ajax": {
-                "type": "GET",
-                "url": searchControllerPath() + "/JsonTableFill",
-                "dataSrc": function (json) {
-                    //Make your callback here.
-                    $.each(json, function (index, item) {
-                        item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                        item.CategoryName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CategoryName + '</a >';
-                    });
-                    return json;
-                }
-            },
-            "columns": [
-                { 'data': 'CategoryName' },
-                { 'data': 'Description' },
-                { 'data': 'DeleteLink' }
-            ]
 
-        });
-        /*add from json in table User*/
-        $('#UsersTable').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "responsive": true,
-            "autoWidth": false,
-            "columnDefs": [
-                { responsivePriority: 1, targets: 0 },
-                { responsivePriority: 2, targets: -1 }
-            ],
-            "ajax": {
-                "type": "GET",
-                "url": searchControllerPath() + "/JsonTableFill",
-                "dataSrc": function (json) {
-                    //Make your callback here.
-                    $.each(json.data, function (index, item) {
-                        if (item.IsLockedOut) { item.IsLockedOut = "Yes"; }
-                        else { item.IsLockedOut = "No"; }
-                        if (item.IsOnline) { item.IsOnline = "Yes"; }
-                        else { item.IsOnline = "No"; }
-                        var date = Date.parse(item.LastActiveString);
+    $('#CategoriesTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.CategoryName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.CategoryName + '</a >';
+                });
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'CategoryName' },
+            { 'data': 'Description' },
+            { 'data': 'DeleteLink' }
+        ]
 
-                        item.LastActiveDate = new Date(date);
-                        item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
-                        item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/><i>Manage</i></a >';
-                        item.Image = '<img src="/images/' + item.UserName + '.jpg" onerror="this.src=' + "'/images/default.png'" + '"  style= "width:60px;height:45px;" >';
-                    })
+    });
+    /*add from json in table User*/
+    $('#UsersTable').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json.data, function (index, item) {
+                    if (item.IsLockedOut) { item.IsLockedOut = "Yes"; }
+                    else { item.IsLockedOut = "No"; }
+                    if (item.IsOnline) { item.IsOnline = "Yes"; }
+                    else { item.IsOnline = "No"; }
+                    var date = Date.parse(item.LastActiveString);
 
-                    return json.data;
-                }
-            },
-            "columns": [
-                { 'data': 'Manage' },
-                { 'data': 'Image' },
-                { 'data': 'UserName' },
-                { 'data': 'Email' },
-                { 'data': 'LastActiveDate' },
-                { 'data': 'IsOnline' },
-                { 'data': 'DeleteLink' }
-            ]
+                    item.LastActiveDate = new Date(date);
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
+                    item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/><i>Manage</i></a >';
+                    item.Image = '<img src="/images/' + item.UserName + '.jpg" onerror="this.src=' + "'/images/default.png'" + '"  style= "width:60px;height:45px;" >';
+                })
 
-        });
+                return json.data;
+            }
+        },
+        "columns": [
+            { 'data': 'Manage' },
+            { 'data': 'Image' },
+            { 'data': 'UserName' },
+            { 'data': 'Email' },
+            { 'data': 'LastActiveDate' },
+            { 'data': 'IsOnline' },
+            { 'data': 'DeleteLink' }
+        ]
 
-   
+    });
+
+
 
     /*add from json in table Regions*/
 
-        $('#RegionsTable').DataTable({
-            "responsive": true,
-            "autoWidth": false,
-            "columnDefs": [
-                { responsivePriority: 1, targets: 0 },
-                { responsivePriority: 2, targets: -1 }
-            ],
-            "ajax": {
-                "type": "GET",
-                "url": searchControllerPath() + "/JsonTableFill",
-                "dataSrc": function (json) {
-                    //Make your callback here.
-                    $.each(json, function (index, item) {
-                        item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                        item.RegionDescription = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.RegionDescription + '</a >';
-                    });
-                    return json;
-                }
-            },
-            "columns": [
-                { 'data': 'RegionDescription' },
-                { 'data': 'DeleteLink' }
-            ]
+    $('#RegionsTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json, function (index, item) {
+                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                    item.RegionDescription = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.RegionDescription + '</a >';
+                });
+                return json;
+            }
+        },
+        "columns": [
+            { 'data': 'RegionDescription' },
+            { 'data': 'DeleteLink' }
+        ]
 
-        });
-     /*add from json in table Role*/
-        $('#RolesTable').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "responsive": true,
-            "autoWidth": false,
-            "columnDefs": [
-                { responsivePriority: 1, targets: 0 },
-                { responsivePriority: 2, targets: -1 }
-            ],
-            "ajax": {
-                "type": "GET",
-                "url": searchControllerPath() + "/JsonTableRolesFill",
-                "dataSrc": function (json) {
-                    //Make your callback here.
-                    $.each(json.data, function (index, item) {
-                        item.Delete = '<a href= "' + searchControllerPath() + '/RoleDelete?roleName=' + item.Name + '" onclick="if (!confirm('+"'Doriti sa stergeti ?'"+')) return false;"/> <i class="fa fa-remove"></i></a >';
-                        item.Membership = '<a href= "' + searchControllerPath() + '/RoleMembership?roleName='+ item.Name+'&name='+item.Name+'"/>Membrii</a >';
-                    })
-                   
-                    return json.data;
-                }
-            },
-            "columns": [
-                { 'data': 'Delete' },
-                { 'data': 'Name' },
-                { 'data': 'Membership' }
-            ]
+    });
+    /*add from json in table Role*/
+    $('#RolesTable').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableRolesFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json.data, function (index, item) {
+                    item.Delete = '<a href= "' + searchControllerPath() + '/RoleDelete?roleName=' + item.Name + '" onclick="if (!confirm(' + "'Doriti sa stergeti ?'" + ')) return false;"/> <i class="fa fa-remove"></i></a >';
+                    item.Membership = '<a href= "' + searchControllerPath() + '/RoleMembership?roleName=' + item.Name + '&name=' + item.Name + '"/>Membrii</a >';
+                })
 
-        });
+                return json.data;
+            }
+        },
+        "columns": [
+            { 'data': 'Delete' },
+            { 'data': 'Name' },
+            { 'data': 'Membership' }
+        ]
 
-        /*add from json in table Role*/
-        $('#UsersInRole').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "responsive": true,
-            "autoWidth": false,
-            "columnDefs": [
-                { responsivePriority: 1, targets: 0 },
-                { responsivePriority: 2, targets: -1 }
-            ],
-            "ajax": {
-                "type": "GET",
-                "url": searchControllerPath() + "/JsonTableMembershipFill",
-                "dataSrc": function (json) {
-                    //Make your callback here.
-                    $.each(json.data, function (index, item) {
-                        item.Delete = '<a href= "' + searchControllerPath() + '/DeleteFromRole?userName=' + item.UserName + '&roleName='+json.roleName+'" onclick="if (!confirm(' + "'Doriti sa stergeti ?'" + ')) return false;"/> <i class="fa fa-remove"></i></a >';
-                       
-                    })
+    });
 
-                    return json.data;
-                }
-            },
-            "columns": [
-                { 'data': 'Delete' },
-                { 'data': 'UserName' }
-                
-            ]
+    /*add from json in table Role*/
+    $('#UsersInRole').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableMembershipFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json.data, function (index, item) {
+                    item.Delete = '<a href= "' + searchControllerPath() + '/DeleteFromRole?userName=' + item.UserName + '&roleName=' + json.roleName + '" onclick="if (!confirm(' + "'Doriti sa stergeti ?'" + ')) return false;"/> <i class="fa fa-remove"></i></a >';
 
-        });
-    
+                })
+
+                return json.data;
+            }
+        },
+        "columns": [
+            { 'data': 'Delete' },
+            { 'data': 'UserName' }
+
+        ]
+
+    });
+    $('#ErrorsTable').DataTable({
+        "responsive": true,
+        "autoWidth": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ]
+    })
 });

@@ -5,31 +5,97 @@
 }
 
 <div class="row">
-    <div class="col-lg-12 text-center error-navbar">
-        <ul class="nav">
-            @if (Model.Any())
-            {
-                foreach (System.Diagnostics.EventLogEntry entry in Model)
-                {
-                    <li>
-                        <a href='javascript:$("#message").text("@entry.Message")'>#@entry.Index:       @entry.Message.Substring(0,100)...</a>
-                    </li>
-                }
-            }
-            else
-            {
-                <li>
-                    There are no errors logged.
-                </li>
-            }
-        </ul>
+    <div class="col-lg-12">
+        <h2>
+            Erori
+        </h2>
+        <hr />
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Dashboard", "Home", "Dashboard")
+            </li>
+            <li class="active">
+                Erori
+            </li>
+        </ol>
+        <hr />
     </div>
 </div>
-<hr style="border-color: black;" />
-<div class="row error-message">
-    <div class="col-lg-12" max-height="50%">
-        <p id="message">
 
-        </p>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    Lista erori
+                </h4>
+
+            </div>
+            <div class="panel-body">
+                <table id="ErrorsTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Index
+                            </th>
+                            <th>
+                                Data
+                            </th>
+                            <th>
+                                Mesaj
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Any())
+                        {
+                            foreach (System.Diagnostics.EventLogEntry entry in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @entry.Index
+                                    </td>
+                                    <td>
+                                        @entry.TimeGenerated
+                                    </td>
+                                    <td>
+                                        <a href='javascript:$("#message").text("@entry.Message")'>
+                                            @entry.Message.Substring(20, 120)...
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>
+                                    0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    0
+                                </td>
+                            </tr>
+                            <tr>
+                                There are no errors logged.
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+                <hr style="border-color: black;" />
+                <div class="row error-message">
+                    <div class="col-lg-12" max-height="50%">
+                        <p id="message">
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
