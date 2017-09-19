@@ -32,7 +32,6 @@
             @using (Html.BeginForm("Index", "Contact", FormMethod.Post, htmlAttributes: new { @class = "ord-form" }))
             {
                 @Html.AntiForgeryToken()
-                @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
                 <div class="row">
                     <div class="form-group col-lg-4">
                         <label style="color:white;">Nume </label><br />
