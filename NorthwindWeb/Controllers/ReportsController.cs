@@ -39,9 +39,9 @@ namespace NorthwindWeb.Controllers
             {
                 string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
                 string reportServerDir = ConfigurationManager.AppSettings.Get("ReportServerDirectory");
-                if(string.IsNullOrEmpty(reportServer))
+                if(string.IsNullOrEmpty(reportServerDir))
                 {
-                    
+                    throw new ArgumentNullException("The report directory is null or empty");
                 }
 
 
@@ -52,7 +52,7 @@ namespace NorthwindWeb.Controllers
 
                 if (doc == null)
                 {
-                    throw new ArgumentException("The username or password were not entered correctly. If not the problem might be with the report server.");
+                    throw new ArgumentNullException("The username or password were not entered correctly. If not the problem might be with the report server.");
                 }
 
                 var links = doc.DocumentNode.SelectNodes("//a");
@@ -78,6 +78,11 @@ namespace NorthwindWeb.Controllers
                 logger.Error(e.ToString());
                 throw new WebException("Nu am primit nici un raspuns de la server. Verificati ca adresa serverului este scrisa corect sau ca acesta este pornit.");
             }
+            catch(ArgumentNullException e)
+            {
+                logger.Error(e.ToString());
+                throw new ArgumentNullException("Directorul de rapoarte este null sau gol");
+            }
             catch (ArgumentException e)
             {
                 logger.Error(e.ToString());
@@ -88,6 +93,7 @@ namespace NorthwindWeb.Controllers
                 logger.Error(e.ToString());
                 throw new Exception("Adresa serverului nu este intr-un format valid");
             }
+
 
         }
     }
