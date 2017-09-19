@@ -218,6 +218,7 @@ namespace UnitTestNorthwindWeb
             }
             catch (Exception ex)
             {
+                //image not found
                 if (!(ex is NullReferenceException))
                 {
                     throw;

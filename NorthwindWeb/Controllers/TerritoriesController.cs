@@ -44,6 +44,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
@@ -76,6 +77,7 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
+
             if (ModelState.IsValid)
             {
                 db.Territories.Add(territories);
@@ -122,8 +124,10 @@ namespace NorthwindWeb.Controllers
             {
                 db.Entry(territories).State = EntityState.Modified;
                 await db.SaveChangesAsync();
+
                 return RedirectToAction("Index");
             }
+
             ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
             return View(territories);
         }
