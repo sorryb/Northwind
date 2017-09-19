@@ -31,38 +31,7 @@ namespace UnitTestNorthwindWeb
             Assert.AreEqual("TerritoriesController", "TerritoriesController");
         }
 
-        /// <summary>
-        /// Check what Index action returns.
-        /// </summary>
-        [TestMethod]
-        public void TerritoryReturnsIndexView()
-        {
-            //Arrage
-
-            //Act
-            var result = _territoriesControllerTest.Index();
-
-
-            //Assert
-            Assert.IsNotNull(result);
-        }
-
-        /// <summary>
-        /// Check what Index action returns.
-        /// </summary>
-        [TestMethod]
-        public void TerritoryReturnsIndexViewResult()
-        {
-            //Arrage
-
-            //Act
-            var result = _territoriesControllerTest.Index();
-
-            //Assert
-            Assert.IsNotNull(result);
-
-
-        }
+       
 
 
         /// <summary>

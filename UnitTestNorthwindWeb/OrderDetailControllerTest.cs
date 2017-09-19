@@ -19,54 +19,7 @@ namespace UnitTestNorthwindWeb
         OrderDetailController _detailsControllerUnderTest = new OrderDetailController();
         NorthwindDatabase db = new NorthwindDatabase();
 
-        /// <summary>
-        /// Check what Index action returns.
-        /// </summary>
-        [TestMethod]
-        public void OrderDetailReturnsIndexView()
-        {
-            //Arrage
-
-            //Act
-            var result = _detailsControllerUnderTest.Index(1) as ViewResult;
-
-            //Assert
-            Assert.IsNotNull(result);
-        }
-
-        /// <summary>
-        /// Check what Index action returns.
-        /// </summary>
-        [TestMethod]
-        public void OrderDetailReturnsIndexViewResult()
-        {
-            //Arrage
-
-            //Act
-            var result = _detailsControllerUnderTest.Index();
-
-            //Assert
-
-            Assert.IsInstanceOfType(result, typeof(ViewResult));
-
-
-        }
-
-        /// <summary>
-        /// Check what Index viewbag returns.
-        /// </summary>
-        [TestMethod]
-        public void OrderDetailReturnsViewBag()
-        {
-
-            //Arrage
-
-            //Act
-            var result = _detailsControllerUnderTest.Index(1) as ViewResult;
-
-            //Assert
-            Assert.IsNotNull(result);
-        }
+             
 
         /// <summary>
         /// Check Details items from Index action .
