@@ -15,15 +15,17 @@ namespace UnitTestNorthwindWeb
         public void ReportsIndexReturnsView()
         {
             //Arrange
-            var login = new ReportLoginViewModel()
+            var server = new ReportServerViewModel()
             {
+                ServerAddress = "http://localhost",
+                ReportsDirectory="",
                 Username = "",
                 Password = ""
             };
             //Act
             try
             {
-                var result = _ReportsControllerUnderTest.Index(login);
+                var result = _ReportsControllerUnderTest.Index(server);
 
                 //Assert
                 Assert.IsNotNull(result);

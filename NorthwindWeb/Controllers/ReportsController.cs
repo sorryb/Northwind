@@ -14,7 +14,6 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Contains the methods neccessary to deal with reports.
     /// </summary>
-    [Authorize(Roles = "Admins, Managers")]
     public class ReportsController : Controller
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ReportsController));
@@ -22,6 +21,7 @@ namespace NorthwindWeb.Controllers
         /// Displays a page containing a form to login on the report server.
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "Admins")]
         public ActionResult LogIn()
         {
             return View();
@@ -30,21 +30,18 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Shows the reports on the report server.
         /// </summary>
-        /// <param name="login">Holds the username and password for the report server</param>
+        /// <param name="server">Holds the username, password, address and directory for the report server.</param>
         /// <returns></returns>
         [HttpPost]
         [Authorize]
-        public ActionResult Index([Bind(Include = "Username,Password")] ReportLoginViewModel login)
+        public ActionResult Index([Bind(Include = "ServerAddress,ReportsDirectory,Username,Password")] ReportServerViewModel server)
         {
             try
             {
-                string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
-                string reportServerDir = ConfigurationManager.AppSettings.Get("ReportServerDirectory");
-
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument doc = new HtmlDocument();
 
-                doc = web.Load($"{reportServer}?%2f{reportServerDir}", "GET", new WebProxy() { UseDefaultCredentials = true }, new NetworkCredential(login.Username, login.Password));
+                doc = web.Load($"{server.ServerAddress}?%2f{server.ReportsDirectory}", "GET", new WebProxy() { UseDefaultCredentials = true }, new NetworkCredential(server.Username, server.Password));
 
                 if (doc == null)
                 {
@@ -63,7 +60,7 @@ namespace NorthwindWeb.Controllers
                 foreach (var linkloop in links2)
                 {
                     string filename = linkloop.InnerHtml;
-                    string link = $"{reportServer}/Pages/ReportViewer.aspx{linkloop.Attributes.FirstOrDefault().DeEntitizeValue}&rc:zoom=Page%20Width";
+                    string link = $"{server.ServerAddress}/Pages/ReportViewer.aspx{linkloop.Attributes.FirstOrDefault().DeEntitizeValue}&rc:zoom=Page%20Width";
                     temp = new ReportViewModel(link, filename);
                     reports.Add(temp);
                 }

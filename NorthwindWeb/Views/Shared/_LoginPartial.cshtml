@@ -16,7 +16,7 @@
        
         <a href=# class="dropdown-toggle" data-toggle="dropdown">User: @User.Identity.GetUserName()<b class="caret"></b></a>
         <ul class="dropdown-menu">
-            @if (userManager.IsInRole(User.Identity.GetUserId(), "Admins")|| userManager.IsInRole(User.Identity.GetUserId(), "Managers"))
+            @if (userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
             {
                 <li id="dashboard">
                     @Html.ActionLink("Dashboard", "Home", "Dashboard")

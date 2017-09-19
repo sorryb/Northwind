@@ -18,7 +18,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Contains all the methods neccessary for CRUD on the suppliers table in the database.
     /// </summary>
-    [Authorize(Roles = "Admins, Managers")]
+    [Authorize(Roles = "Admins, Employees")]
     public class SuppliersController : Controller, IJsonTableFillServerSide
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(SuppliersController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
@@ -58,6 +58,7 @@ namespace NorthwindWeb.Controllers
         /// Displays a page containing a form neccessary to create a new supplier.
         /// </summary>
         /// <returns>Suppliers create view.</returns>
+        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create()
         {
             return View();
@@ -72,6 +73,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "SupplierID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax,HomePage")] Suppliers suppliers)
         {//if inputs data correspond to the model
             if (ModelState.IsValid)
@@ -89,6 +91,7 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the supplier that is going to be edited.</param>
         /// <returns>Suppliers edit view.</returns>
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {//if a vendor has been selected
             if (id == null)
@@ -113,6 +116,7 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "SupplierID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax,HomePage")] Suppliers suppliers)
         {//if inputs data correspond to the model
             if (ModelState.IsValid)
@@ -129,6 +133,7 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the supplier that is going to be deleted.</param>
         /// <returns>Suppliers delete view.</returns>
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {//if a vendor has been selected
             if (id == null)
@@ -151,6 +156,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>Suppliers index view.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {//if the supplier exists and can be deleted
             try
