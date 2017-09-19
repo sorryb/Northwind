@@ -296,7 +296,7 @@ namespace NorthwindWeb.Controllers
                         || p.UnitsInStock == searchInteger || p.UnitsOnOrder == searchInteger
                         || p.ReorderLevel == searchInteger || p.Discontinued.ToString().Contains(search)));
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     //if int cannot be taken
                     products = db.Products.Include(p => p.Category).Include(p => p.Supplier)
