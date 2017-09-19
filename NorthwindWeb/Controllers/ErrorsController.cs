@@ -16,7 +16,7 @@ namespace NorthwindWeb.Controllers
         /// Displays a page with a table containing all the errors from the NorthwindLog
         /// </summary>
         /// <returns>Errors index view</returns>
-        [Authorize(Roles = "Admins")]
+        [Authorize(Roles = "Admins, Managers")]
         public ActionResult Index()
         {
 

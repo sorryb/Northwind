@@ -120,22 +120,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li id="entity" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Securitate<b class="caret"></b></a>
-                            <ul class="nav nav-second-level">
-                                <li id="users">
-                                    <a href='@Url.Action("Index", "Account")'><i class="fa fa-user fa-fw"></i> Utilizatori</a>
-
-                                    <!--@Html.ActionLink("Utilizatori", "Index", "Account")-->
-                                </li>
-
-                                <li id="roles">
-                                    <a href='@Url.Action("RolesIndex", "Account")'><i class="fa fa-gift fa-fw"></i> Roluri</a>
-
-                                    <!--@Html.ActionLink("Roluri", "RolesIndex", "Account")-->
-                                </li>
-                            </ul>
-                        </li>
+                        @Html.Partial("_SecurityPartial")
                         <li id="error">
                             <a href='@Url.Action("Index", "Errors")'><i class="fa  fa-exclamation-circle fa-fw"></i>Erori</a>
                         </li>

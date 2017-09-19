@@ -15,7 +15,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// DashBoard Controller. Charts with actual state of the site
     /// </summary>
-    [Authorize(Roles = "Admins")]
+    [Authorize(Roles = "Admins, Managers")]
     public class DashboardController : Controller
     {
         private NorthwindDatabase db = new NorthwindDatabase();
@@ -381,14 +381,14 @@ namespace NorthwindWeb.Controllers
                 int ok = 0;
                 foreach (var i in dashboardMorrisAreaData)
                 {
-                   
-                        if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
-                        {
-                            i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
-                            ok = 1;
-                            break;
-                        }
-                    
+
+                    if (int.Parse(i.Year) == Convert.ToDateTime(itemSalesByYear.OrderDate).Year)
+                    {
+                        i.Sales += itemSalesByYear.Quantity * itemSalesByYear.UnitPrice * (1 - Convert.ToDecimal(itemSalesByYear.Discount));
+                        ok = 1;
+                        break;
+                    }
+
                 }
                 //test return true if item->year is not in list
                 if (ok == 0)

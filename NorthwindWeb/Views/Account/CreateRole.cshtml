@@ -1,6 +1,7 @@
 ﻿@model NorthwindWeb.ViewModels.RoleInfoViewModel 
 
 @{
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
     ViewBag.Title = "Creaza Rol";
 }
 
@@ -23,9 +24,10 @@
             @Html.TextBoxFor(model => model.Name, htmlAttributes: new { style = "text-decoration:none; color:#333" }) 
             @Html.ValidationMessageFor(model => model.Name) 
         </div>
-
+        <br />
         <p>
             <input class="btn btn-default" type="submit" value="Creare" />
+            @Html.ActionLink("Inapoi", "RolesIndex", "Account", new { @class = "btn btn-default" })
         </p>
     </fieldset>
 }

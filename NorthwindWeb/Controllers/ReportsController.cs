@@ -14,6 +14,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Contains the methods neccessary to deal with reports.
     /// </summary>
+    [Authorize(Roles = "Admins, Managers")]
     public class ReportsController : Controller
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ReportsController));
@@ -21,7 +22,6 @@ namespace NorthwindWeb.Controllers
         /// Displays a page containing a form to login on the report server.
         /// </summary>
         /// <returns></returns>
-        [Authorize(Roles = "Admins")]
         public ActionResult LogIn()
         {
             return View();
@@ -33,13 +33,17 @@ namespace NorthwindWeb.Controllers
         /// <param name="login">Holds the username and password for the report server</param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
         public ActionResult Index([Bind(Include = "Username,Password")] ReportLoginViewModel login)
         {
             try
             {
                 string reportServer = ConfigurationManager.AppSettings.Get("ReportServer");
                 string reportServerDir = ConfigurationManager.AppSettings.Get("ReportServerDirectory");
+                if(string.IsNullOrEmpty(reportServer))
+                {
+                    
+                }
+
 
                 HtmlWeb web = new HtmlWeb();
                 HtmlDocument doc = new HtmlDocument();
@@ -79,10 +83,10 @@ namespace NorthwindWeb.Controllers
                 logger.Error(e.ToString());
                 throw new ArgumentException("Numele sau parola nu au fost introduse corect.");
             }
-            catch (Exception e)
+            catch (UriFormatException e)
             {
                 logger.Error(e.ToString());
-                throw new Exception("A aparut o eroare in timpul afisarii rapoartelor, va rugam incercati din nou. Verificati ca setarile pentru report server sunt corecte.");
+                throw new Exception("Adresa serverului nu este intr-un format valid");
             }
 
         }

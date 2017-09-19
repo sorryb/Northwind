@@ -16,7 +16,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// OrderDetail Controller. For table Order_Details
     /// </summary>
-    [Authorize(Roles = "Admins")]
+    [Authorize(Roles = "Admins, Managers")]
     public class OrderDetailController : Controller
     {
         private NorthwindDatabase db = new NorthwindDatabase();

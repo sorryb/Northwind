@@ -19,7 +19,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// ProductController is controller that we use to show all product for Admins, Manager, Employees
     /// </summary>
-    [Authorize(Roles = "Admins, Manager, Employees")]
+    [Authorize(Roles = "Admins, Managers")]
     public class ProductController : Controller, IJsonTableFillServerSide
     {
         private NorthwindDatabase db = new NorthwindDatabase();
@@ -78,7 +78,6 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products,HttpPostedFileBase ProductImage)
         {
             try
@@ -113,7 +112,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the product that is going to be edited.</param>
         /// <returns>Product edit view</returns>
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -140,7 +138,6 @@ namespace NorthwindWeb.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products, HttpPostedFileBase ProductImage)
         {
             try
@@ -185,7 +182,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the product that is going to be deleted.</param>
         /// <returns>Product delete view</returns>
-        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(int? id)
         {
 
@@ -209,7 +205,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>Product index view.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             try
