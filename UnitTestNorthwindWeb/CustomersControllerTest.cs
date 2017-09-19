@@ -30,7 +30,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _customersControllerUnderTest.Index("",1) as ViewResult;
+            var result = _customersControllerUnderTest.Index() as ViewResult;
 
             //Assert
             Assert.IsNotNull(result);
@@ -45,7 +45,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _customersControllerUnderTest.Index("",1) as ViewResult;
+            var result = _customersControllerUnderTest.Index() as ViewResult;
 
             //Assert
 
@@ -64,7 +64,7 @@ namespace UnitTestNorthwindWeb
             //Arrage
 
             //Act
-            var result = _customersControllerUnderTest.Index("",1) as ViewResult;
+            var result = _customersControllerUnderTest.Index() as ViewResult;
 
             //Assert
             Assert.IsNotNull(result);
