@@ -166,7 +166,7 @@ namespace NorthwindWeb.Controllers
             catch(Exception exception)
             {
                 logger.Error(exception.ToString());
-                throw new DeleteException("Nu poti sterge teritoriul deoarece contine angajati. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii.");
+                throw new DeleteException("Nu puteti sterge teritoriul deoarece are angajati asignati la el. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii asignati mai intai!.");
             }
 
 
