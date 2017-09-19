@@ -56,7 +56,7 @@ namespace NorthwindWeb.Controllers
                            Discontinued = prod.Discontinued
                        };
             products = products.OrderBy(x => x.Discontinued).ThenBy(y => y.ProductName);
-            int pageSize = 10;
+            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }

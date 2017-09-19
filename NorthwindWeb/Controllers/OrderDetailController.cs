@@ -32,7 +32,7 @@ namespace NorthwindWeb.Controllers
         {
             var order_Details = db.Order_Details.Include(o => o.Order).Include(o => o.Product).OrderBy(o=>o.OrderID);
           
-            int pageSize = 15;
+            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
             int pageNumber = page;
             return View(order_Details.ToPagedList(pageNumber, pageSize));
         }

@@ -106,7 +106,7 @@ namespace NorthwindWeb.Controllers
                     {
                         locationSearch.Position = machesFount.Count() + 1;
                         locationSearch.ID = Convert.ToString(itemSuppliers.SupplierID);
-                        locationSearch.WhereFound = "CategoryID: " + Convert.ToString(itemSuppliers.SupplierID);
+                        locationSearch.WhereFound = "SupplierID: " + Convert.ToString(itemSuppliers.SupplierID);
                         locationSearch.Controller = "Suppliers";
                         machesFount.Add(locationSearch);
                     }
@@ -355,7 +355,7 @@ namespace NorthwindWeb.Controllers
                 notMachesFount.Controller = "Dashboard";
                 machesFount.Add(notMachesFount);
             }
-            int pageSize = 20;
+            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
             int pageNumber = (page ?? 1);
             viewModel.MatchesCount = machesFount.Count();
             viewModel.MatchesFound = machesFount.ToPagedList(pageNumber, pageSize);
