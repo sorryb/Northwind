@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.EntityFramework
+@using NorthwindWeb.Models
+@using NorthwindWeb.Context
+
+@{
+    var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+}
+
+@if (userManager.IsInRole(User.Identity.GetUserId(), "Admins"))
+{
+<li id="security" class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Securitate<b class="caret"></b></a>
+    <ul class="nav nav-second-level">
+        <li id="users">
+            <a href='@Url.Action("Index", "Account")'><i class="fa fa-user fa-fw"></i> Utilizatori</a>
+
+           
+        </li>
+
+        <li id="roles">
+            <a href='@Url.Action("RolesIndex", "Account")'><i class="fa fa-gift fa-fw"></i> Roluri</a>
+
+           
+        </li>
+    </ul>
+</li>
+}

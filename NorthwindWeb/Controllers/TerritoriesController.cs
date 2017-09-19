@@ -17,7 +17,7 @@ namespace NorthwindWeb.Controllers
     /// <summary>
     /// Territories Controller. For table Territories
     /// </summary>
-    [Authorize(Roles = "Admins")]
+    [Authorize(Roles = "Admins, Managers")]
     public class TerritoriesController : Controller
     {
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
@@ -48,7 +48,6 @@ namespace NorthwindWeb.Controllers
         /// Returns the view containing the form neccesary for creating a new territory.
         /// </summary>
         /// <returns>Create view.</returns>
-        [Authorize(Roles = "Employees, Admins")]
         public ActionResult Create(int? id)
         {
             ViewBag.regionid = id;
@@ -63,7 +62,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns territories index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
@@ -83,7 +81,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The id of the territory that is going to be edited</param>
         /// <returns>Territories edit view</returns>
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
@@ -107,7 +104,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>Territories index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Employees, Admins")]
         public async Task<ActionResult> Edit([Bind(Include = "TerritoryID,TerritoryDescription,RegionID")] Territories territories)
         {
             if (ModelState.IsValid)
@@ -127,7 +123,6 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="id">The territory that is going to be deleted.</param>
         /// <returns>Delete view</returns>
-        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
@@ -150,7 +145,6 @@ namespace NorthwindWeb.Controllers
         /// <returns>Territories index view</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admins")]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
             //take details of Territory
