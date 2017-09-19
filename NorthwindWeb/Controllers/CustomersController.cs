@@ -8,7 +8,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NorthwindWeb.Models;
-using PagedList;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ExceptionHandler;
@@ -28,15 +27,10 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Displays a page with all the customers in the database.
         /// </summary>
-        /// <param name="search">The search look to find something asked</param>
-        /// <param name="page">Required for paged list to work</param>
         /// <returns>Customers index view</returns>
-        public ActionResult Index(string search = "", int page = 1)
+        public ActionResult Index()
         {
-            int pageSize = 15;
-            int pageNumber = page;
-            ViewBag.search = search;
-            return View(db.Customers.OrderBy(x => x.CustomerID).Where(x => x.CompanyName.Contains(search)).ToPagedList(pageNumber, pageSize));
+            return View();
         }
 
         /// <summary>
