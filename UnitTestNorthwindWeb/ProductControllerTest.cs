@@ -86,7 +86,7 @@ namespace UnitTestNorthwindWeb
             var controller = new ProductController();
             var db = new NorthwindDatabase();
             int productCountBefore = db.Products.Count();
-            var product = new ProductViewModel()
+            var product = new Products()
             {
                 CategoryID = 4,
                 ProductName = "TestProductCreate",
@@ -100,7 +100,7 @@ namespace UnitTestNorthwindWeb
             };
 
             //Act
-            await controller.Create(product);
+            await controller.Create(product, null);
 
             //Assert
             Assert.AreEqual(productCountBefore + 1, db.Products.Count());
