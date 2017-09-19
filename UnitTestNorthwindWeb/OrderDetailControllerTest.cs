@@ -19,7 +19,7 @@ namespace UnitTestNorthwindWeb
         OrderDetailController _detailsControllerUnderTest = new OrderDetailController();
         NorthwindDatabase db = new NorthwindDatabase();
 
-             
+       
 
         /// <summary>
         /// Check Details items from Index action .

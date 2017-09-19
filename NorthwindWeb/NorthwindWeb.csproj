@@ -499,7 +499,6 @@
     <Content Include="Views\OrderDetail\Delete.cshtml" />
     <Content Include="Views\OrderDetail\Details.cshtml" />
     <Content Include="Views\OrderDetail\Edit.cshtml" />
-    <Content Include="Views\OrderDetail\Index.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Shared\_OrdersMenuPartial.cshtml" />
     <Content Include="Views\Persons\Create.cshtml" />
@@ -511,7 +510,6 @@
     <Content Include="Views\Territories\Delete.cshtml" />
     <Content Include="Views\Territories\Details.cshtml" />
     <Content Include="Views\Territories\Edit.cshtml" />
-    <Content Include="Views\Territories\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutReports.cshtml" />
     <Content Include="Views\Dashboard\Search.cshtml" />
     <Content Include="Views\Account\DeleteUser.cshtml" />

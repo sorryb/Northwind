@@ -30,10 +30,7 @@ namespace UnitTestNorthwindWeb
             //Assert
             Assert.AreEqual("TerritoriesController", "TerritoriesController");
         }
-
-       
-
-
+              
         /// <summary>
         /// Check Details items from Index action .
         /// </summary>
