@@ -24,16 +24,6 @@ namespace NorthwindWeb.Controllers
         private NorthwindDatabase db = new NorthwindDatabase();
 
         /// <summary>
-        /// Displays a page with all the territories existing in the database.
-        /// </summary>
-        /// <returns>Territories index view</returns>
-        public async Task<ActionResult> Index()
-        {
-            var territories = db.Territories.Include(t => t.Region);
-            return View(await territories.ToListAsync());
-        }
-
-        /// <summary>
         /// Displays a page showing all the information about one territory.
         /// </summary>
         /// <param name="id">The id of the territory whose information to show</param>
@@ -176,7 +166,7 @@ namespace NorthwindWeb.Controllers
             catch(Exception exception)
             {
                 logger.Error(exception.ToString());
-                throw new DeleteException("Nu poti sterge teritoriul deoarece contine angajati. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii.");
+                throw new DeleteException("Nu puteti sterge teritoriul deoarece are angajati asignati la el. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii asignati mai intai!.");
             }
 
 
