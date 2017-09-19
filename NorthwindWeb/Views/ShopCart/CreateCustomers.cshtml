@@ -22,7 +22,7 @@
             <span class="control-label col-md-2 bold"><strong>Nume Companie</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CompanyName)
-               
+                @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -32,15 +32,15 @@
             <span class="control-label col-md-2 bold"><strong>Pozitie</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ContactTitle)
-                @Html.ValidationMessageFor(model => model.ContactTitle)
+                @Html.ValidationMessageFor(model => model.ContactTitle, "", new { @class = "text-danger" })
             </div>
         </div>
         
         <div class="form-group">
-            <span class="control-label col-md-2 bold"><strong>Adresa</strong></span>
+            <span class="control-label col-md-2 bold"><strong>Adresa<span class = "text-danger">*</span></strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address)
-                @Html.ValidationMessageFor(model => model.Address)
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -48,7 +48,7 @@
             <span class="control-label col-md-2 bold"><strong>Oras</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.City)
-                @Html.ValidationMessageFor(model => model.City)
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -56,7 +56,7 @@
             <span class="control-label col-md-2 bold"><strong>Regiune</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Region)
-                @Html.ValidationMessageFor(model => model.Region)
+                @Html.ValidationMessageFor(model => model.Region, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -64,7 +64,7 @@
             <span class="control-label col-md-2 bold"><strong>Cod Postal</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PostalCode)
-                @Html.ValidationMessageFor(model => model.PostalCode)
+                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -72,15 +72,15 @@
             <span class="control-label col-md-2 bold"><strong>Tara</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Country)
-                @Html.ValidationMessageFor(model => model.Country)
+                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <span class="control-label col-md-2 bold"><strong>Telefon</strong></span>
+            <span class="control-label col-md-2 bold"><strong>Telefon<span class="text-danger">*</span></strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Phone)
-                @Html.ValidationMessageFor(model => model.Phone)
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -88,7 +88,7 @@
             <span class="control-label col-md-2 bold"><strong>Fax</strong></span>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Fax)
-                @Html.ValidationMessageFor(model => model.Fax)
+                @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
             </div>
         </div>
 
