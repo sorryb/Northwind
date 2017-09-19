@@ -104,3 +104,5 @@
 		password: ...the password
 		If it doesn't work and you don't remember setting up a username and a password try the ones you use to log
 		in to windows.
+
+	Key pageSize represents the number of items in the paging list returned by the ToPagedList function

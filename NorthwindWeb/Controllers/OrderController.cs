@@ -71,7 +71,7 @@ namespace NorthwindWeb.Controllers
                 viewModel.Product = ProductCategory(ViewBag.ProductID);
             }
             //pagination
-            int pageSize = 10;
+            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
             int pageNumber = (page ?? 1);
             viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
@@ -128,7 +128,7 @@ namespace NorthwindWeb.Controllers
                 viewModel.Product = ProductCategory(ViewBag.ProductID);
             }
             //pagination
-            int pageSize = 10;
+            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
             int pageNumber = (page ?? 1);
             viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
@@ -184,7 +184,7 @@ namespace NorthwindWeb.Controllers
                 viewModel.Product = ProductCategory(ViewBag.ProductID);
             }
             //pagination
-            int pageSize = 10;
+            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
             int pageNumber = (page ?? 1);
             viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);

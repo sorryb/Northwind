@@ -15,7 +15,7 @@
             @Html.ActionLink("Comenzi", "Index", "Orders")
         </li>
         <li>
-            @Html.ActionLink("Detalii", "Details", "Orders", new { id = ViewBag.orderid }, null)
+            @Html.ActionLink("Detalii", "Details", "Orders", new { id = ViewBag.OrderID }, null)
         
         </li>
         <li class="active">Adauga</li>
@@ -71,7 +71,7 @@
         }
 
         <div>
-            @Html.ActionLink("Inapoi", "Details", "Orders",new { id = ViewBag.orderid }, new { @class = "btn btn-default" })   
+            @Html.ActionLink("Inapoi", "Details", "Orders",new { id = ViewBag.OrderID }, new { @class = "btn btn-default" })   
            
         </div>
 

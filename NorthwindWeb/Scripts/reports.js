@@ -14,7 +14,7 @@ var translate = {
     "ProductsByCategory": "Produse ordonate dupa categorie",
     "QuarterlyOrders": "Comenzi trimestriale",
     "SalesByAmount": "Vanzari ordonate dupa total",
-    "SalesByCategory": "Vanzari ordonate dupa cateforie",
+    "SalesByCategory": "Vanzari ordonate dupa categorie",
     "SuMmaryOfSalesByQuarter": "Rezumatul vanzarilor pe trimestru",
     "SummaryOfSalesByYear": "Rezumatul vanzarilor pe an",
 };
