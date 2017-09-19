@@ -199,27 +199,35 @@ namespace UnitTestNorthwindWeb
         /// </summary>
         /// <returns></returns>
         [TestMethod]
-        [ExpectedException(typeof(System.InvalidOperationException))]
         public async System.Threading.Tasks.Task ProductDeleteItemAsync()
         {
             //Arrange
-            //init
             var controller = new ProductController();
             var db = new NorthwindDatabase();
             //create product
             var product = new Products() { ProductName = "test", CategoryID = 1, SupplierID = 1 };
             db.Entry(product).State = System.Data.Entity.EntityState.Added;
             db.SaveChanges();
-            db.Dispose();
 
             //Act
-            //run controller action
-            await controller.DeleteConfirmed(product.ProductID);
-            controller.Dispose();
-
+            try
+            {
+                //run controller action
+                await controller.DeleteConfirmed(product.ProductID);
+                controller.Dispose();
+            }
+            catch (Exception ex)
+            {
+                if (!(ex is NullReferenceException))
+                {
+                    throw;
+                }
+            }
             //Assert
             //this will throw a InvalidOperationException
-            var actualProduct = db.Products.Where(x => x.ProductID == product.ProductID).First();
+            if (db.Products.Any(x => x.ProductID == product.ProductID)) {
+                Assert.Fail();
+            }
             
         }
 
