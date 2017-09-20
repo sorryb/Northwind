@@ -21,11 +21,11 @@
 </ol>
 <hr />
 <div>
-    <button class="btn btn-default crudFormButtonLeftOfSearch">@Html.ActionLink("Utilizator nou", "RegisterAdmin", null, htmlAttributes: new { style = "text-decoration: none;color:black;" })</button>
+   @Html.ActionLink("Utilizator nou", "RegisterAdmin", null, htmlAttributes: new { @class="btn btn-default" })
 
 </div>
-<br />
-<br />
+
+
 <br />
 @if (!String.IsNullOrEmpty(ViewBag.Status))
 {

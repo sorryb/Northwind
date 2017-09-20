@@ -7,8 +7,19 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Creaza un rol nou.</h2>
+
 </hgroup>
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Roluri", "RolesIndex", "Account")
+    </li>
+    <li class="active">Membrii</li>
+</ol>
+<hr />
+    <h2>Creaza un rol nou.</h2>
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()

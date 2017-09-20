@@ -12,7 +12,15 @@
     <h1>@ViewBag.Title <font color=red>@Model.Name </font>  .</h1>
     <h2> </h2>
 </hgroup>
-
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Roluri", "RolesIndex", "Account")
+    </li>
+    <li class="active">Membrii</li>
+</ol>
 
 @using (Html.BeginForm())
 {
