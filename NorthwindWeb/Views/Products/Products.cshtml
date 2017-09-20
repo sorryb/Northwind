@@ -49,7 +49,7 @@
                     </div>
                     <ul class="col-xs-6">
                         <li class="textlarge"><strong>@Model.ElementAt(i).ProductName</strong></li>
-                        <li class="textlarge"><strong>Pret: @Decimal.Round(Model.ElementAt(i).ProductPrice, 2)</strong></li>
+                        <li class="textlarge"><strong>Pret: @Decimal.Round(Model.ElementAt(i).ProductPrice, 2) @(Model[i].ProductPrice == 1 ? " leu": " lei")</strong></li>
                         <li><strong>Categorie: @Model.ElementAt(i).CategoryName</strong></li>
                         <li><strong>Furnizor: @Model.ElementAt(i).SuppliersName</strong></li>
                         <li><strong>In Stoc: @Model.ElementAt(i).Stock</strong></li>
@@ -71,13 +71,13 @@
                 <br />
                 @if (i + 1 < itemCount)
                 {
-                    <div class="col-md-6 portfolio-item container @(Model[i +  1].Discontinued ? "discontinued" : "")" style="display:block">
+                    <div class="col-md-6 portfolio-item container @(Model[i + 1].Discontinued ? "discontinued" : "")" style="display:block">
                         <div class="col-xs-6">
                             <img src="/Images/@Model.ElementAt(i + 1).CategoryName/@(Model.ElementAt(i + 1).ProductID).jpg" class="img-responsive products">
                         </div>
                         <ul class="col-xs-6">
                             <li class="textlarge"><strong>@Model.ElementAt(i + 1).ProductName</strong></li>
-                            <li class="textlarge"><strong>Pret: @Decimal.Round(Model.ElementAt(i + 1).ProductPrice, 2)</strong></li>
+                            <li class="textlarge"><strong>Pret: @Decimal.Round(Model.ElementAt(i + 1).ProductPrice, 2) @(Model[i + 1].ProductPrice == 1 ? "leu": "lei")</strong></li>
                             <li><strong>Categorie: @Model.ElementAt(i + 1).CategoryName</strong></li>
                             <li><strong>Furnizor: @Model.ElementAt(i + 1).SuppliersName</strong></li>
                             <li><strong>In Stoc: @Model.ElementAt(i + 1).Stock</strong></li>
