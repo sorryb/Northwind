@@ -17,7 +17,27 @@ function deleteIcon(id) {
 
 }
 
+//get parameter value from http query
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+//select category for dropdown
+function selectDropdownCategory() {
+    
+    $('#dropdownCategory option[value=' + $('#dropdownCategory option:contains("' + getParameterByName("category") +'")').val() + ']').attr("selected", "selected");
+}
+
 $(document).ready(function () {
+
+    /*autoselect category*/
+    selectDropdownCategory();
 
     /*datatable handler with server side implementation for product*/
     $('#Product').DataTable({
@@ -35,8 +55,17 @@ $(document).ready(function () {
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
-                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                    item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
+                    var category = getParameterByName("category");
+                    if (category == null || category == "" || category == undefined) {
+                        item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
+                        item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+
+                    }
+                    else {
+                        item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '&category=' + category + '"/>' + item.ProductName + '</a >';
+                        item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '&category=' + getParameterByName("category") + '"/> <i class="fa fa-remove"></i></a >';
+
+                    }
                 })
                 return json.data;
             }

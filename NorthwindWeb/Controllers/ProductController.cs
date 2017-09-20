@@ -96,7 +96,7 @@ namespace NorthwindWeb.Controllers
                         string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
                         ProductImage.SaveAs(path);
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "Product", new { category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "" });
                 }
 
                 ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
@@ -255,7 +255,7 @@ namespace NorthwindWeb.Controllers
                 logger.Error(e.ToString());
                 throw new Exception("Ceva nu a mers bine, va rugam reincercati. Daca problema persista contactati un administrator.");
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Product", new { category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "" });
         }
 
 
