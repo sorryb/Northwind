@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System.Web;
 
 namespace NorthwindWeb.ViewModels
 {
@@ -115,6 +116,46 @@ namespace NorthwindWeb.ViewModels
         [Display(Name = "Confirma noua parola")]
         [Compare("NewPassword", ErrorMessage = "Parola si parola de confirmare nu se potrivesc.")]
         public string ConfirmPassword { get; set; }
+    }
+    /// <summary>
+    /// Change Email view.
+    /// </summary>
+    public class ChangeEmailViewModel
+    {
+        /// <summary>
+        /// Password
+        /// </summary>
+        [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Parola")]
+        public string Password { get; set; }
+
+        /// <summary>
+        /// Email.
+        /// </summary>
+        [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Adresa de Email")]
+        public string Email { get; set; }
+    }
+    /// <summary>
+    /// Change Email view.
+    /// </summary>
+    public class ChangeProfileViewModel
+    {
+        /// <summary>
+        /// Password
+        /// </summary>
+        [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Parola")]
+        public string Password { get; set; }
+
+        /// <summary>
+        /// The image user.
+        /// </summary>
+        [Display(Name = "Poza de profil")]
+        public HttpPostedFileBase UserImage { get; set; }
     }
 
     /// <summary>
