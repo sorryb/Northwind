@@ -38,7 +38,7 @@
 
       Employees: Employeers: They have access to the list of orders they handle
 	             Managers: They have access to the list of all orders and dashboard
-				 Admins: They are alone who have access to security administration
+				 Admins: They are the only ones who have access to security administration
 
 #DataTable
 	All you need to do to enable datatables is to create a table with the following structure:
