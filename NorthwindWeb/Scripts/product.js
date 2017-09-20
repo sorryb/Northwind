@@ -412,6 +412,7 @@ $(document).ready(function () {
     $('#ErrorsTable').DataTable({
         "responsive": true,
         "autoWidth": false,
+        "order":[["0","desc"]],
         "columnDefs": [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: -1 }
