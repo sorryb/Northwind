@@ -83,7 +83,7 @@ namespace NorthwindWeb.Controllers
             try
             {
 
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && !(String.IsNullOrEmpty(products.ProductName)))
                 {
                     db.Products.Add(products);
                     await db.SaveChangesAsync();
