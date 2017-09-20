@@ -17,10 +17,68 @@ function deleteIcon(id) {
 
 }
 
+//get parameter value from http query
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+//select category for dropdown
+function selectDropdownCategory() {
+
+    $('#dropdownCategory option[value=' + $('#dropdownCategory option:contains("' + getParameterByName("category") + '")').val() + ']').attr("selected", "selected");
+}
+
+//get initial search value
+function getInitialSearchValue() {
+    var searchValue = getParameterByName("search");
+    if (searchValue == null || searchValue == "" || searchValue == undefined) {
+        return "";
+    }
+    return searchValue;
+}
+
+//change query link
+function updateQueryStringParameter(uri, key, value) {
+    var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+    var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+    if (uri.match(re)) {
+        if (value == null || value == "" || value == undefined) {
+            return uri.replace(re, "");
+        }
+        else {
+            return uri.replace(re, '$1' + key + "=" + value + '$2');
+        }
+    }
+    else {
+        if (value == null || value == "" || value == undefined) {
+            return uri;
+        }
+        else {
+            return uri + separator + key + "=" + value;
+        }
+    }
+}
+
+//change product create link
+function changeProductCreateLink(search) {
+    if (document.getElementById('createProductButton') != null) {
+        $("#createProductButton").attr("href", updateQueryStringParameter($("#createProductButton").attr("href"), "search", search));
+    }
+}
+
 $(document).ready(function () {
 
+    /*autoselect category*/
+    selectDropdownCategory();
+
     /*datatable handler with server side implementation for product*/
-    $('#Product').DataTable({
+    var productTable = $('#Product').DataTable({
         "processing": true,
         "serverSide": true,
         "responsive": true,
@@ -35,9 +93,30 @@ $(document).ready(function () {
             "dataSrc": function (json) {
                 //Make your callback here.
                 $.each(json.data, function (index, item) {
-                    item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
-                    item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
-                })
+                    var category = getParameterByName("category");
+                    var search = productTable.search();
+                    if (category == null || category == "" || category == undefined) {
+                        if (search == null || search == "" || search == undefined) {
+                            item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '"/>' + item.ProductName + '</a >';
+                            item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '"/> <i class="fa fa-remove"></i></a >';
+                        }
+                        else {
+                            item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '&search=' + search + '"/>' + item.ProductName + '</a >';
+                            item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '&search=' + search + '"/> <i class="fa fa-remove"></i></a >';
+                        }
+
+                    }
+                    else {
+                        if (search == null || search == "" || search == undefined) {
+                            item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '&category=' + category + '"/>' + item.ProductName + '</a >';
+                            item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '&category=' + getParameterByName("category") + '"/> <i class="fa fa-remove"></i></a >';
+                        }
+                        else {
+                            item.ProductName = '<a href= "' + searchControllerPath() + '/Details?id=' + item.ID + '&category=' + category + '&search=' + search + '"/>' + item.ProductName + '</a >';
+                            item.DeleteLink = '<a href= "' + searchControllerPath() + '/Delete?id=' + item.ID + '&category=' + getParameterByName("category") + '&search=' + search + '"/> <i class="fa fa-remove"></i></a >';
+                        }
+                    }
+                });
                 return json.data;
             }
         },
@@ -51,6 +130,16 @@ $(document).ready(function () {
             { 'data': 'DeleteLink' }
         ]
     });
+    //begin with search...
+    productTable.search(getInitialSearchValue()).ajax.reload();
+    //on search change link of create button
+    productTable.on("search.dt", function () {
+        changeProductCreateLink(productTable.search());
+    });
+    //set search on page load
+    changeProductCreateLink(productTable.search());
+
+
 
     $('#EmployeesTable').DataTable({
         "processing": true,
@@ -273,7 +362,7 @@ $(document).ready(function () {
                     item.DeleteLink = '<a href= "' + searchControllerPath() + '/DeleteUser?userName=' + item.UserName + '"/> <i class="fa fa-remove"></i></a >';
                     item.Manage = '<a href= "' + searchControllerPath() + '/ChangeUser?userName=' + item.UserName + '"/><i>Manage</i></a >';
                     item.Image = '<img src="/images/' + item.UserName + '.jpg" onerror="this.src=' + "'/images/default.png'" + '"  style= "width:60px;height:45px;" >';
-                })
+                });
 
                 return json.data;
             }
@@ -337,7 +426,7 @@ $(document).ready(function () {
                 $.each(json.data, function (index, item) {
                     item.Delete = '<a href= "' + searchControllerPath() + '/RoleDelete?roleName=' + item.Name + '" onclick="if (!confirm(' + "'Doriti sa stergeti ?'" + ')) return false;"/> <i class="fa fa-remove"></i></a >';
                     item.Membership = '<a href= "' + searchControllerPath() + '/RoleMembership?roleName=' + item.Name + '&name=' + item.Name + '"/>Membrii</a >';
-                })
+                });
 
                 return json.data;
             }
@@ -368,7 +457,7 @@ $(document).ready(function () {
                 $.each(json.data, function (index, item) {
                     item.Delete = '<a href= "' + searchControllerPath() + '/DeleteFromRole?userName=' + item.UserName + '&roleName=' + json.roleName + '" onclick="if (!confirm(' + "'Doriti sa stergeti ?'" + ')) return false;"/> <i class="fa fa-remove"></i></a >';
 
-                })
+                });
 
                 return json.data;
             }
@@ -383,10 +472,10 @@ $(document).ready(function () {
     $('#ErrorsTable').DataTable({
         "responsive": true,
         "autoWidth": false,
-        "order":[["0","desc"]],
+        "order": [["0", "desc"]],
         "columnDefs": [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: -1 }
         ]
-    })
+    });
 });

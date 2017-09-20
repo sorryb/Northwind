@@ -13,6 +13,15 @@
     <li>
         @Html.ActionLink("Produse", "Index", "Product")
     </li>
+    @{
+        string category = Request.QueryString["category"] ?? "";
+        if (!String.IsNullOrEmpty(category))
+        {
+            <li>
+                @Html.ActionLink(category, "Index", "Product", new { category = category }, null)
+            </li>
+        }
+    }
     <li class="active">Detalii</li>
 </ol>
 
@@ -100,6 +109,6 @@
     </div>
 </div>
 <p>
-    @Html.ActionLink("Modifica", "Edit", new { id=Model.ProductID }, new { @class = "btn btn-default" }) |
-    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Modifica", "Edit", new { id=Model.ProductID, category = category, search = Request.QueryString["search"] ?? ""}, new { @class = "btn btn-default" }) |
+    @Html.ActionLink("Inapoi", "Index", new { category = category, search = Request.QueryString["search"] ?? ""}, new { @class = "btn btn-default" })
 </p>
