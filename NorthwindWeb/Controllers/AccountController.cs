@@ -195,7 +195,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
+        public async Task<ActionResult> Register([Bind(Include = "UserName,Email,Password,ConfirmPassword")]RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -212,11 +212,7 @@ namespace NorthwindWeb.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    if (model.UserImage != null)
-                    {
-                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
-                        model.UserImage.SaveAs(path);
-                    }
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
