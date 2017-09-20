@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using PagedList;
 using NorthwindWeb.Context;
+using System;
 
 namespace NorthwindWeb.Controllers
 {
@@ -11,7 +12,7 @@ namespace NorthwindWeb.Controllers
     public class ProductsController : Controller
     {
         private NorthwindDatabase db = new NorthwindDatabase();
-
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ProductsController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         /// <summary>
         /// Returns a paged list filtered by category and by name
         /// </summary>
@@ -56,7 +57,16 @@ namespace NorthwindWeb.Controllers
                            Discontinued = prod.Discontinued
                        };
             products = products.OrderBy(x => x.Discontinued).ThenBy(y => y.ProductName);
-            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
+            int pageSize;
+            try
+            {
+               pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
+            }
+            catch
+            {
+                logger.Error("Exista o eroare in configurare, key pageSize trebuie sa fie un numar");
+                pageSize = 10;
+            }
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
