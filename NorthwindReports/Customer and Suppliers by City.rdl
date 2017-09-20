@@ -137,7 +137,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Contact Name</Value>
+                                  <Value>Company Name</Value>
                                   <Style>
                                     <FontFamily />
                                     <FontSize>11pt</FontSize>
@@ -174,7 +174,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Company Name</Value>
+                                  <Value>Contact Name</Value>
                                   <Style>
                                     <FontFamily />
                                     <FontSize>11pt</FontSize>
