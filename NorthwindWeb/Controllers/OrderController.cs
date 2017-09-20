@@ -22,7 +22,7 @@ namespace NorthwindWeb.Controllers
     public class OrderController : Controller
     {
         private NorthwindDatabase db = new NorthwindDatabase();
-
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(OrderController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         /// <summary>
         /// the list of current Employees orders
         /// </summary>
@@ -71,7 +71,16 @@ namespace NorthwindWeb.Controllers
                 viewModel.Product = ProductCategory(ViewBag.ProductID);
             }
             //pagination
-            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
+            int pageSize;
+            try
+            {
+                pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
+            }
+            catch
+            {
+                logger.Error("Exista o eroare in configurare, key pageSize trebuie sa fie un numar");
+                pageSize = 10;
+            }
             int pageNumber = (page ?? 1);
             viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
@@ -128,7 +137,16 @@ namespace NorthwindWeb.Controllers
                 viewModel.Product = ProductCategory(ViewBag.ProductID);
             }
             //pagination
-            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
+            int pageSize;
+            try
+            {
+                pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
+            }
+            catch
+            {
+                logger.Error("Exista o eroare in configurare, key pageSize trebuie sa fie un numar");
+                pageSize = 10;
+            }
             int pageNumber = (page ?? 1);
             viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);
@@ -184,7 +202,16 @@ namespace NorthwindWeb.Controllers
                 viewModel.Product = ProductCategory(ViewBag.ProductID);
             }
             //pagination
-            int pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
+            int pageSize;
+            try
+            {
+                pageSize = int.Parse(System.Configuration.ConfigurationManager.AppSettings["pageSize"]);
+            }
+            catch
+            {
+                logger.Error("Exista o eroare in configurare, key pageSize trebuie sa fie un numar");
+                pageSize = 10;
+            }
             int pageNumber = (page ?? 1);
             viewModel.Page = viewModel.Order.ToPagedList(pageNumber, pageSize);
             viewModel.Order = viewModel.Order.ToPagedList(pageNumber, pageSize);

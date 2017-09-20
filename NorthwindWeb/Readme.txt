@@ -37,8 +37,8 @@
 	             Customers: When a user places his first order, he becomes Customers and can see their orders
 
       Employees: Employeers: They have access to the list of orders they handle
-	             Managers: They have access to the list of all orders
-				 Admins: They have access to the dashboard where they can manage the database and see company statistics
+	             Managers: They have access to the list of all orders and dashboard
+				 Admins: They are the only ones who have access to security administration
 
 #DataTable
 	All you need to do to enable datatables is to create a table with the following structure:
@@ -100,5 +100,4 @@
 	Reports configuration
 		ReportServer: the link to your report server
 		ReportServerDirectory: the folder in which your reports are stored on your report server
-
 	Key pageSize represents the number of items in the paging list returned by the ToPagedList function

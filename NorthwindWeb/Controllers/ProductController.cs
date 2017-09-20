@@ -83,7 +83,7 @@ namespace NorthwindWeb.Controllers
             try
             {
 
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && !(String.IsNullOrEmpty(products.ProductName)))
                 {
                     db.Products.Add(products);
                     await db.SaveChangesAsync();
@@ -289,13 +289,14 @@ namespace NorthwindWeb.Controllers
                     products = db.Products.Include(p => p.Category).Include(p => p.Supplier)
                         .Where(p => (p.ProductName.Contains(search) || p.UnitPrice == searchInteger
                         || p.UnitsInStock == searchInteger || p.UnitsOnOrder == searchInteger
-                        || p.ReorderLevel == searchInteger || p.Discontinued.ToString().Contains(search)));
+                        || p.ReorderLevel == searchInteger || p.Discontinued.ToString().Contains(search))
+                        && p.Category.CategoryName.Contains(category));
                 }
                 catch (FormatException)
                 {
                     //if int cannot be taken
                     products = db.Products.Include(p => p.Category).Include(p => p.Supplier)
-                        .Where(p => (p.ProductName.Contains(search) || p.Discontinued.ToString().Contains(search)));
+                        .Where(p => (p.ProductName.Contains(search) || p.Discontinued.ToString().Contains(search)) && p.Category.CategoryName.Contains(category));
                 }
 
                 //order list
