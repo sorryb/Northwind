@@ -96,7 +96,15 @@ namespace NorthwindWeb.Controllers
                         string path = System.IO.Path.Combine(Server.MapPath($"~/images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
                         ProductImage.SaveAs(path);
                     }
-                    return RedirectToAction("Index", "Product", new { category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "", search = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["search"] ?? "" });
+                    string category = "";
+                    string search = "";
+                    try
+                    {
+                        category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"];
+                        search = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["search"];
+                    }
+                    catch { }
+                    return RedirectToAction("Index", "Product", new { category = category, search = search});
                 }
 
                 ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "CategoryName", products.CategoryID);
