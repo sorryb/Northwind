@@ -13,6 +13,15 @@
     <li>
         @Html.ActionLink("Produse", "Index", "Product")
     </li>
+    @{ 
+        string category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
+        if (!String.IsNullOrEmpty(category))
+        {
+            <li>
+                @Html.ActionLink(category, "Index", "Product", new { category = category } ,null)
+            </li>
+        }
+    }
     <li class="active">Adauga</li>
 </ol>
 
@@ -43,7 +52,7 @@
         <div class="form-group">
             <span class="control-label col-md-2 bold"><strong>Categorie</strong></span>
             <div class="col-md-10">
-                @Html.DropDownList("CategoryID")
+                @Html.DropDownList("CategoryID", null, htmlAttributes: new { id = "dropdownCategory" })
                 @Html.ValidationMessageFor(model => model.CategoryID)
             </div>
         </div>
@@ -111,7 +120,7 @@
 }
 
 <div>
-    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" }) 
+    @Html.ActionLink("Inapoi", "Index", new { category = category }, new { @class = "btn btn-default" }) 
 </div>
 
 @section Scripts {
