@@ -3,19 +3,27 @@
     ViewBag.Title = "Creaza utilizator nou";
     Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
 }
+<h2>@ViewBag.Title.</h2>
 
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Utilizatorii", "Index", "Account")
+    </li>
+    <li class="active">Utilizator nou</li>
+</ol>
+<hr />
 <div class="row">
-    <div class="col-md-2">
 
-    </div>
-    <div class="col-md-8">
-        <h2>@ViewBag.Title.</h2>
+    <div class="col-md-offset-2 col-md-8">
         @using (Html.BeginForm("RegisterAdmin", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
             <h4>Crează un nou cont.</h4>
-            <hr />
-           @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 control-label" })
                 <div class="col-md-5">
