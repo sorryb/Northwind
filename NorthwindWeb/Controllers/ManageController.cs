@@ -76,16 +76,22 @@ namespace NorthwindWeb.Controllers
         /// <returns>Manage index view</returns>
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                message == ManageMessageId.ChangePasswordSuccess ? "Parola va fost schimbata"
+                : message == ManageMessageId.SetPasswordSuccess ? "Parola va fost setata"
+                : message == ManageMessageId.ChangeEmailSuccess ? "Adresa de email va fost schimbata"
+                : message == ManageMessageId.SetEmailSuccess ? "Adresa de email va fost setata"
+                : message == ManageMessageId.ChangeProfilePhotoSuccess ? "Poza de profil va fost schimbata"
+                : message == ManageMessageId.SetProfilePhotoSuccess ? "Poza de profil va fost setata"
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.Error ? "A aparut o eroare"
+                : message == ManageMessageId.AddPhoneSuccess ? "Numarul dumneavoastra de telefon a fost schimbat"
+                : message == ManageMessageId.RemovePhoneSuccess ? "Numarul dumneavoastra de telefon a fost setat"
                 : "";
 
             var userId = User.Identity.GetUserId();
+            ViewBag.Username = User.Identity.GetUserName();
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
@@ -292,6 +298,85 @@ namespace NorthwindWeb.Controllers
             AddErrors(result);
             return View(model);
         }
+        /// <summary>
+        /// Displays a page containing a form neccessary to change the email for the curent user.
+        /// </summary>
+        /// <returns>Manage ChangeEmail view</returns>
+        public ActionResult ChangeEmail()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Changes the email of the current user if the password was entered correctly.
+        /// </summary>
+        /// <param name="model">The class containing the neccessary information.</param>
+        /// <returns>Manage index view.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeEmail(ChangeEmailViewModel model)
+        {
+            IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var verifyUser = await UserManager.FindAsync(User.Identity.Name, model.Password);
+            
+            if (verifyUser!=null)
+            {
+                verifyUser.Email = model.Email;
+                isChanged = UserManager.Update(verifyUser);
+                if (isChanged.Succeeded)
+                {
+                    return RedirectToAction("Index", new { Message = ManageMessageId.ChangeEmailSuccess });
+                }
+                AddErrors(isChanged);
+            }
+            ModelState.AddModelError("Parola actuala", "Parola nu este corecta");
+           
+            return View(model);
+        }
+        /// <summary>
+        /// Displays a page containing a form neccessary to change the profile photo for the curent user.
+        /// </summary>
+        /// <returns>Manage ChangeEmail view</returns>
+        public ActionResult ChangeImage()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Changes the profile photo of the current user if the password was entered correctly.
+        /// </summary>
+        /// <param name="model">The class containing the neccessary information.</param>
+        /// <returns>Manage index view.</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeImage(ChangeProfileViewModel model)
+        {
+            IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var verifyUser = await UserManager.FindAsync(User.Identity.Name, model.Password);
+
+            if (verifyUser != null)
+            {
+                System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{verifyUser.UserName}.jpg"));
+                if (model.UserImage != null)
+                {
+                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{verifyUser.UserName}.jpg");
+                    model.UserImage.SaveAs(path);
+                }
+                    return RedirectToAction("Index", new { Message = ManageMessageId.ChangeProfilePhotoSuccess });
+               
+            }
+            ModelState.AddModelError("Parola actuala", "Parola nu este corecta");
+
+            return View(model);
+        }
 
         /// <summary>
         /// Displays a page containing a form neccessary to set a new password.
@@ -459,11 +544,27 @@ namespace NorthwindWeb.Controllers
             /// <summary>
             /// 
             /// </summary>
+            ChangeEmailSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
+            ChangeProfilePhotoSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
             SetTwoFactorSuccess,
             /// <summary>
             /// 
             /// </summary>
             SetPasswordSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
+            SetEmailSuccess,
+            /// <summary>
+            /// 
+            /// </summary>
+            SetProfilePhotoSuccess,
             /// <summary>
             /// 
             /// </summary>
