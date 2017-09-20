@@ -72,17 +72,20 @@ namespace NorthwindWeb.Controllers
         /// Creates a new product and adds it to the database.
         /// </summary>
         /// <param name="products">The products entity that will be added.</param>
-         /// <param name="ProductImage">The image of the products</param>
+        /// <param name="ProductImage">The image of the products</param>
         /// <returns>Product index view</returns>
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products,HttpPostedFileBase ProductImage)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,ProductName,SupplierID,CategoryID,QuantityPerUnit,UnitPrice,UnitsInStock,UnitsOnOrder,ReorderLevel,Discontinued")] Products products, HttpPostedFileBase ProductImage)
         {
             try
             {
-
+                if (!((ProductImage == null) || ProductImage.ContentType.Contains("image")))
+                {
+                    throw new ArgumentException("The provided file is not an image");
+                }
                 if (ModelState.IsValid && !(String.IsNullOrEmpty(products.ProductName)))
                 {
                     db.Products.Add(products);
@@ -100,10 +103,15 @@ namespace NorthwindWeb.Controllers
                 ViewBag.SupplierID = new SelectList(db.Suppliers, "SupplierID", "CompanyName", products.SupplierID);
                 return View(products);
             }
-            //todo exception
-            catch
+            catch (ArgumentException e)
             {
-                throw;
+                logger.Error(e.ToString());
+                throw new ArgumentException("Fisierul ales nu este o imagine");
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.ToString());
+                throw new Exception("Ceva nu a mers bine, va rugam reincercati. Daca problema persista contactati un administrator.");
             }
         }
 
@@ -142,7 +150,11 @@ namespace NorthwindWeb.Controllers
         {
             try
             {
-                if(ModelState.IsValid)
+                if (!((ProductImage == null) || ProductImage.ContentType.Contains("image")))
+                {
+                    throw new ArgumentException("The provided file is not an image");
+                }
+                if (ModelState.IsValid)
                 {
                     db.Entry(products).State = EntityState.Modified;
                     await db.SaveChangesAsync();
@@ -168,6 +180,11 @@ namespace NorthwindWeb.Controllers
             {
                 logger.Error(e.ToString());
                 throw new System.Data.Entity.Infrastructure.DbUpdateException("Nu s-au putut efectua modificatile");
+            }
+            catch (ArgumentException e)
+            {
+                logger.Error(e.ToString());
+                throw new ArgumentException("Fisierul ales nu este o imagine");
             }
             catch (Exception e)
             {
