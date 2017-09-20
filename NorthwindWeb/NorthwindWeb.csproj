@@ -203,7 +203,6 @@
     <Compile Include="Controllers\OrderDetailController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OtherController.cs" />
-    <Compile Include="Controllers\PersonsController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\RegionsController.cs" />
