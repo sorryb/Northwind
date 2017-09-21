@@ -73,7 +73,7 @@
             </div>
 
             <div class="form-group">
-                <span class="control-label col-md-2 bold"><strong>Expeditor</strong></span>
+                <span class="control-label col-md-2 bold"><strong>Nume Expeditor</strong></span>
                 <div class="col-md-10">
                     @Html.DropDownList("ShipVia", (IEnumerable<SelectListItem>)ViewBag.ShipVia, htmlAttributes: new { @class = "form" })
                     @Html.ValidationMessageFor(model => model.ShipVia)
