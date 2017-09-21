@@ -71,14 +71,19 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "CategoryID,CategoryName,Description")] Categories categories)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Categories.Add(categories);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return View(categories);
             }
 
-            return View(categories);
+            if (db.Categories.Where(c => c.CategoryName == categories.CategoryName) != null)
+            {
+                ModelState.AddModelError("CategoryName", "Numele de categorie este deja folosit");
+                return View(categories);
+            }
+            db.Categories.Add(categories);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         /// <summary>
@@ -110,13 +115,19 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit([Bind(Include = "CategoryID,CategoryName,Description")] Categories categories)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                db.Entry(categories).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return View(categories);
+
             }
-            return View(categories);
+            if (db.Categories.Where(c => c.CategoryName == categories.CategoryName) != null)
+            {
+                ModelState.AddModelError("CategoryName", "Numele de categorie este deja folosit");
+                return View(categories);
+            }
+            db.Entry(categories).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         /// <summary>
