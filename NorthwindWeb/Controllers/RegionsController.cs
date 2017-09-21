@@ -47,6 +47,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            TempData["RegionID"] = id;
             RegionIndex viewModel = new RegionIndex();
             //take details of Region
             Region region = await db.Regions.FindAsync(id);

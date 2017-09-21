@@ -88,7 +88,7 @@ namespace NorthwindWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //take details of Territory
-            TempData["RegionID"] = id;
+            ViewBag.RegionsID = Convert.ToInt32(TempData["RegionID"]);
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -109,11 +109,12 @@ namespace NorthwindWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                territories.RegionID =Convert.ToInt16(TempData["RegionID"]);
+                ViewBag.RegionsID = Convert.ToInt32(TempData["RegionID"]);
+                territories.RegionID =Convert.ToInt32(TempData["RegionID"]);
                 db.Entry(territories).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
-                return RedirectToAction("Details","Regions",new {id= Convert.ToInt16(TempData["RegionID"])});
+                return RedirectToAction("Details","Regions",new {id= Convert.ToInt32(TempData["RegionID"])});
             }
 
             ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);

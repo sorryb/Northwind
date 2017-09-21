@@ -55,7 +55,7 @@
     }
 
     <div>
-        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = @ViewBag.RegionsID}, new { @class = "btn btn-default" })
     </div>
 
 
