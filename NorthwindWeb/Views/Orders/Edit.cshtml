@@ -33,7 +33,7 @@
             @Html.HiddenFor(model => model.OrderID)
 
             <div class="form-group">
-                <span class="control-label col-md-2 bold"><strong>Nume Client</strong></span>
+                <span class="control-label col-md-2 bold"><strong>Nume Companie</strong></span>
                 <div class="col-md-10">
                     @Html.DropDownList("CustomerID", (IEnumerable<SelectListItem>)ViewBag.CustomerID, htmlAttributes: new { @class = "form" })
                     @Html.ValidationMessageFor(model => model.CustomerID)
@@ -89,7 +89,7 @@
             </div>
 
             <div class="form-group">
-                <span class="control-label col-md-2 bold"><strong>Nume Expeditor</strong></span>
+                <span class="control-label col-md-2 bold"><strong>Expeditor</strong></span>
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.ShipName)
                     @Html.ValidationMessageFor(model => model.ShipName)
