@@ -19,7 +19,7 @@ namespace NorthwindWeb.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ManageController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -355,27 +355,50 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangeImage(ChangeProfileViewModel model)
         {
-            IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-            if (!ModelState.IsValid)
+            try
             {
+                if (!((model.UserImage == null) || model.UserImage.ContentType.Contains("image")))
+                {
+                    throw new ArgumentException("Fisierul selectat nu este o imagine");
+                }
+                IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var verifyUser = await UserManager.FindAsync(User.Identity.Name, model.Password);
+
+                if (verifyUser != null)
+                {
+                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{verifyUser.UserName}.jpg"));
+                    if (model.UserImage != null)
+                    {
+                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{verifyUser.UserName}.jpg");
+                        model.UserImage.SaveAs(path);
+                    }
+                    return RedirectToAction("Index", new { Message = ManageMessageId.ChangeProfilePhotoSuccess });
+
+                }
+                ModelState.AddModelError("Parola actuala", "Parola nu este corecta");
+
                 return View(model);
             }
-            var verifyUser = await UserManager.FindAsync(User.Identity.Name, model.Password);
-
-            if (verifyUser != null)
+            catch (NullReferenceException e)
             {
-                System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{verifyUser.UserName}.jpg"));
-                if (model.UserImage != null)
-                {
-                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{verifyUser.UserName}.jpg");
-                    model.UserImage.SaveAs(path);
-                }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.ChangeProfilePhotoSuccess });
-               
+                logger.Error(e.ToString());
+                throw new NullReferenceException("Imaginea nu a putut fi gasita");
             }
-            ModelState.AddModelError("Parola actuala", "Parola nu este corecta");
-
-            return View(model);
+            catch (ArgumentException e)
+            {
+                logger.Error(e.ToString());
+                throw new ArgumentException("Fisierul ales nu este o imagine");
+            }
+            catch (Exception e)
+            {
+                //if something else goes wrong
+                logger.Error(e.ToString());
+                throw new Exception("Ceva nu a mers bine, va rugam reincercati. Daca problema persista contactati un administrator.");
+            }
         }
 
         /// <summary>

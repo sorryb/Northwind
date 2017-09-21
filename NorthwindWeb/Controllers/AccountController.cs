@@ -212,7 +212,7 @@ namespace NorthwindWeb.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -242,33 +242,56 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterAdmin([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (!((model.UserImage == null) || model.UserImage.ContentType.Contains("image")))
                 {
-                    var currentUser = UserManager.FindByName(user.UserName);
-                    UserManager.AddToRole(currentUser.Id, "Guest");
-                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    if (model.UserImage != null)
-                    {
-                        string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
-                        model.UserImage.SaveAs(path);
-                    }
-                    return RedirectToAction("Index");
+                    throw new ArgumentException("Fisierul selectat nu este o imagine");
                 }
-                AddErrors(result);
-            }
+                if (ModelState.IsValid)
+                {
+                    ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                    var result = await UserManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var currentUser = UserManager.FindByName(user.UserName);
+                        UserManager.AddToRole(currentUser.Id, "Guest");
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        if (model.UserImage != null)
+                        {
+                            string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+                            model.UserImage.SaveAs(path);
+                        }
+                        return RedirectToAction("Index");
+                    }
+                    AddErrors(result);
+                }
+
+                // If we got this far, something failed, redisplay form
+                return View(model);
+            }
+            catch (NullReferenceException e)
+            {
+                logger.Error(e.ToString());
+                throw new NullReferenceException("Imaginea nu a putut fi gasita");
+            }
+            catch (ArgumentException e)
+            {
+                logger.Error(e.ToString());
+                throw new ArgumentException("Fisierul ales nu este o imagine");
+            }
+            catch (Exception e)
+            {
+                //if something else goes wrong
+                logger.Error(e.ToString());
+                throw new Exception("Ceva nu a mers bine, va rugam reincercati. Daca problema persista contactati un administrator.");
+            }
         }
 
         /// <summary>
@@ -611,15 +634,19 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
-            IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-            string userName = Request["Name"];
-            if (!ModelState.IsValid)
-            {
-                ViewBag.UserName = userName;
-                return View(model);
-            }
             try
             {
+                if (!((model.UserImage == null) || model.UserImage.ContentType.Contains("image")))
+                {
+                    throw new ArgumentException("Fisierul selectat nu este o imagine");
+                }
+                IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
+                string userName = Request["Name"];
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.UserName = userName;
+                    return View(model);
+                }
                 var user = await UserManager.FindByNameAsync(userName);
                 user.UserName = model.UserName;
                 user.Email = model.Email;
@@ -648,7 +675,22 @@ namespace NorthwindWeb.Controllers
                 }
                 return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
 
-              
+
+            }
+            catch (NullReferenceException e)
+            {
+                logger.Error(e.ToString());
+                throw new NullReferenceException("Imaginea nu a putut fi gasita");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            {
+                logger.Error(e.ToString());
+                throw new System.Data.Entity.Infrastructure.DbUpdateException("Nu s-au putut efectua modificatile");
+            }
+            catch (ArgumentException e)
+            {
+                logger.Error(e.ToString());
+                throw new ArgumentException("Fisierul ales nu este o imagine");
             }
             catch (Exception exception)
             {
