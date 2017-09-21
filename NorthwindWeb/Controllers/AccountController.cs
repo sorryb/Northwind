@@ -244,6 +244,7 @@ namespace NorthwindWeb.Controllers
         {
             try
             {
+                model.UserName = HttpUtility.HtmlEncode(model.UserName);
                 if (!((model.UserImage == null) || model.UserImage.ContentType.Contains("image")))
                 {
                     throw new ArgumentException("Fisierul selectat nu este o imagine");
