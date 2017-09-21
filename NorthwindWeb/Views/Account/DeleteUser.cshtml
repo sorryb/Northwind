@@ -44,7 +44,7 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
+        <div class="form-actions no-color col-md-offset-1">
             @Html.ActionLink("Sterge", "Delete", new { userName = Model.UserName },new { @class= "btn btn-default" })  
             @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
         </div>
