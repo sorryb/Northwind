@@ -25,13 +25,14 @@ namespace NorthwindWeb.Models
         /// The id of the customer.
         /// </summary>
         [Key]
+        [Required(ErrorMessage = "ID Client este obligatoriu.")]
         [StringLength(5)]
         public string CustomerID { get; set; }
 
         /// <summary>
         /// The name of the company which is the customer.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage ="Nume Companie este obligatoriu.")]
         [StringLength(40)]
         public string CompanyName { get; set; }
 

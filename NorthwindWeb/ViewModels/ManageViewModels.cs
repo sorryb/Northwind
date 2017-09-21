@@ -95,7 +95,7 @@ namespace NorthwindWeb.ViewModels
         /// <summary>
         /// Old.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Parola actuala este obligatorie")]
         [DataType(DataType.Password)]
         [Display(Name = "Parola actuala")]
         public string OldPassword { get; set; }
@@ -103,7 +103,7 @@ namespace NorthwindWeb.ViewModels
         /// <summary>
         /// New.
         /// </summary>
-        [Required]
+        [Required(ErrorMessage = "Noua parola este obligatorie")]
         [StringLength(100, ErrorMessage = "{0} trebuie să contină cel putin {2} caractere.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Parola noua")]

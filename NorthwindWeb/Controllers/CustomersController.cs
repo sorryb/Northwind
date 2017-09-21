@@ -12,6 +12,7 @@ using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.Interfaces;
 using NorthwindWeb.Models.ExceptionHandler;
 using NorthwindWeb.Context;
+using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Controllers
 {
@@ -52,6 +53,18 @@ namespace NorthwindWeb.Controllers
             return View(customers);
         }
 
+
+        private static Random random = new Random();
+        private string CustomerId()
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string result = new string(Enumerable.Repeat(chars, 5)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+            if (db.Customers.Find(result) != null)
+                result = CustomerId();
+            return result;
+        }
+
         /// <summary>
         /// Returns the view containing the form neccesary for creating a new customer.
         /// </summary>
@@ -68,17 +81,35 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns customers index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CustomerID,CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customers customers)
+        public async Task<ActionResult> Create([Bind(Include = "CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Custom customers)
         {
+            
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customers);
+                Customers customer = new Customers()
+                {
+                    CustomerID = CustomerId(),
+                    CompanyName =customers.CompanyName,
+                    ContactName = customers.ContactName,
+                    ContactTitle = customers.ContactTitle,
+                    Address = customers.Address,
+                    City = customers.City,
+                    Region = customers.Region,
+                    PostalCode = customers.PostalCode,
+                    Country = customers.Country,
+                    Phone = customers.Phone,
+                    Fax = customers.Fax
+                };
+                db.Customers.Add(customer);
+
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
             return View(customers);
         }
+
+       
 
         /// <summary>
         /// Returns the view containing the form necessary for editing an existing customer.
