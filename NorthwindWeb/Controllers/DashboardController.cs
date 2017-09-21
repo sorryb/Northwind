@@ -511,6 +511,7 @@ namespace NorthwindWeb.Controllers
                     dashboardMorrisBarData.Add(dashboardMorrisBarElement);
                 }
             }
+            dashboardMorrisBarData = dashboardMorrisBarData.OrderBy(bar => bar.Year).ToList();
             //Rounds the value to two decimal places
             foreach (var itemDashboardMorrisBarData in dashboardMorrisBarData)
             {
