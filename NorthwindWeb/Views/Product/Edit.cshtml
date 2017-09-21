@@ -14,7 +14,7 @@
         @Html.ActionLink("Produse", "Index", "Product")
     </li>
     @{
-        string category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
+        string category = Request.QueryString["category"] ?? "";
         if (!String.IsNullOrEmpty(category))
         {
             <li>
@@ -27,7 +27,7 @@
 
 <div class="row">
     <div class="col-lg-7">
-        @using (Html.BeginForm("Edit", "Product", new { category = category },  FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Edit", "Product", new { category = category, search = Request.QueryString["search"] ?? "" },  FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
 
@@ -129,7 +129,7 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Inapoi", "Index", new { category = category }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Inapoi", "Index", new { category = category, search = Request.QueryString["search"] ?? ""}, new { @class = "btn btn-default" })
 </div>
 
 @section Scripts {

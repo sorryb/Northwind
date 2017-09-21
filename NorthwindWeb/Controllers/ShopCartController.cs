@@ -67,6 +67,7 @@ namespace NorthwindWeb.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+           
             ViewBag.ShipVia = new SelectList(db.Shippers, "ShipperID", "CompanyName");
             return View();
         }
@@ -334,27 +335,36 @@ namespace NorthwindWeb.Controllers
             }
             return "Error";
         }
-
+        /// <summary>
+        /// Save selected Shippers
+        /// </summary>
+        /// <param name="shipVia">Shippers Id</param>
+        /// <returns></returns>
+        public ActionResult GetShipVia(int shipVia)
+        {
+            TempData["ShipVia"] = shipVia;
+            return RedirectToAction("ConfirmOrder");
+        }
         /// <summary>
         /// Creates an order with the products in the logged user's shopcart.
         /// </summary>
-        /// <param name="shipVia">id selected provider</param>
-        /// <returns>Home index view</returns>
+        /// <returns>Redirect to Home index view</returns>
         [Authorize]
-        public ActionResult ConfirmOrder(int shipVia)
+        public ActionResult ConfirmOrder()
         {
+           
             string userName = User.Identity.GetUserName();
             var shopCart = db.ShopCart.Where(n => n.UserName == userName);
             if (shopCart.Any())
             {
                 string customerId = db.Customers.Where(c => c.ContactName == userName).Select(c => c.CustomerID).FirstOrDefault();
-                if (String.IsNullOrEmpty(customerId)) { return RedirectToAction("CreateCustomers", "ShopCart", new { shipVia = shipVia }); }
+                if (String.IsNullOrEmpty(customerId)) { return RedirectToAction("CreateCustomers", "ShopCart"); }
                 Orders order = new Orders()
                 {
                     OrderID = db.Orders.Count() + 1,
                     CustomerID = customerId,
                     OrderDate = DateTime.Now,
-                    ShipVia = shipVia
+                    ShipVia = Convert.ToInt32(TempData["ShipVia"])
                 };
 
                 foreach (var product in shopCart)
@@ -395,9 +405,8 @@ namespace NorthwindWeb.Controllers
         /// <summary>
         /// Returns the view containing the form neccesary for creating a new customer.
         /// </summary>
-        /// <param name="shipVia">id selected provider</param>
         /// <returns>Shopart createCustomer view.</returns>
-        public ActionResult CreateCustomers(int shipVia)
+        public ActionResult CreateCustomers()
         {
             return View();
         }
@@ -408,12 +417,11 @@ namespace NorthwindWeb.Controllers
         /// Inserts an customer into the database table. If it fails, goes back to the form.
         /// </summary>
         /// <param name="customers">The customer entity to be inserted</param>
-        /// <param name="shipVia">id selected provider</param>
         /// <returns>If successful returns customers index view, else goes back to form.</returns>
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customer customers, int shipVia)
+        public async Task<ActionResult> CreateCustomers([Bind(Include = "CompanyName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Customer customers)
         {
             try
             {
@@ -441,7 +449,8 @@ namespace NorthwindWeb.Controllers
                         };
                         db.Customers.Add(custom);
                         await db.SaveChangesAsync();
-                        return RedirectToAction("AssignCustomers", "Account", new { shipVia = shipVia });
+                        
+                        return RedirectToAction("AssignCustomers", "Account");
                     }
                     else
                     {
@@ -460,7 +469,7 @@ namespace NorthwindWeb.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
 
             }
-            return View(new { customers, shipVia = shipVia });
+            return View(customers);
         }
 
         /// <summary>

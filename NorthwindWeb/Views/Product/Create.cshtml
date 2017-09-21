@@ -14,7 +14,7 @@
         @Html.ActionLink("Produse", "Index", "Product")
     </li>
     @{ 
-        string category = HttpUtility.ParseQueryString(Request.UrlReferrer.Query)["category"] ?? "";
+        string category = Request.QueryString["category"] ?? "";
         if (!String.IsNullOrEmpty(category))
         {
             <li>
@@ -120,7 +120,7 @@
 }
 
 <div>
-    @Html.ActionLink("Inapoi", "Index", new { category = category }, new { @class = "btn btn-default" }) 
+    @Html.ActionLink("Inapoi", "Index", new { category = category, search = Request.QueryString["search"] ?? "" }, new { @class = "btn btn-default" }) 
 </div>
 
 @section Scripts {
