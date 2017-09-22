@@ -177,28 +177,25 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsEditEdits()
         {
             //Arrange
-            DashbordCustomer customers = new DashbordCustomer() { CompanyName = "test" };
-            await _customersControllerUnderTest.Create(customers);
-            var customer = db.Customers.Where(c => c.CompanyName == customers.CompanyName).FirstOrDefault();
-            db.Entry(customer).State = System.Data.Entity.EntityState.Added;
-
-            var expectedCustomer = db.Customers.Find(customer.CustomerID);
-            db.Entry(expectedCustomer).State = System.Data.Entity.EntityState.Detached;
+            var expectedCustomer = new Customers() {CustomerID="ZZZZZ", CompanyName = "test" };
+            db.Customers.Add(expectedCustomer);
             db.SaveChanges();
+            db.Entry(expectedCustomer).State = System.Data.Entity.EntityState.Added;
 
-            customer.CompanyName = "test2";
-            db.SaveChanges();
-
+            db.Dispose();
+            expectedCustomer.CompanyName = "test2";
+            db = new NorthwindDatabase();
 
             //Act
-            await _customersControllerUnderTest.Edit(customer);
-            var actualCustomer = db.Customers.Find(customer.CustomerID);
+            await _customersControllerUnderTest.Edit(expectedCustomer);
+            db.Entry(expectedCustomer).State = System.Data.Entity.EntityState.Modified;
+            var actualCustomer = db.Customers.Find(expectedCustomer.CustomerID);
 
             //Assert
             Assert.AreEqual(expectedCustomer.CustomerID, actualCustomer.CustomerID);
 
 
-            var customerss = db.Customers.Where(c => c.CustomerID == customer.CustomerID && c.CompanyName == customer.CompanyName);
+            var customerss = db.Customers.Where(c => c.CompanyName == expectedCustomer.CompanyName||c.CompanyName==actualCustomer.CompanyName);
             db.Customers.RemoveRange(customerss);
             db.SaveChanges();
 
