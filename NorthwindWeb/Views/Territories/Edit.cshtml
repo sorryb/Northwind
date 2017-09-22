@@ -21,7 +21,7 @@
     </ol>
 
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(new { TerritoryID = Model.TerritoryID }))
     {
         @Html.AntiForgeryToken()
 
@@ -31,10 +31,10 @@
             @Html.ValidationSummary(true)
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TerritoryID,"ID Teritoriu", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.RegionID,"ID Regiune", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.TerritoryID)
-                    @Html.ValidationMessageFor(model => model.TerritoryID)
+                    @Html.EditorFor(model => model.RegionID)
+                    @Html.ValidationMessageFor(model => model.RegionID)
                 </div>
             </div>
 
@@ -55,7 +55,7 @@
     }
 
     <div>
-        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = @ViewBag.RegionsID}, new { @class = "btn btn-default" })
+        @Html.ActionLink("Inapoi", "Details", "Regions", new { id = Model.RegionID}, new { @class = "btn btn-default" })
     </div>
 
 
