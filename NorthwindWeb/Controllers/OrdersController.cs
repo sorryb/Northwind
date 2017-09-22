@@ -33,8 +33,6 @@ namespace NorthwindWeb.Controllers
         public ActionResult Index(string search = "")
         {
             return View(db.Orders.Include(o => o.Customer).Include(o => o.Employee).Include(o => o.Shipper).Where(o => o.OrderID.ToString().Contains(search)).OrderBy(o => o.OrderID));
-
-
         }
 
         /// <summary>
