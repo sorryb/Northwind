@@ -59,9 +59,10 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns orders-details index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,UnitPrice,Quantity,Discount")] Order_Details order_Details,int id)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,Quantity,Discount")] Order_Details order_Details,int id)
         {
             order_Details.OrderID = id;
+            order_Details.UnitPrice = db.Products.Find(order_Details.ProductID).UnitPrice ?? 0;
             if (ModelState.IsValid)
             {
                 db.Order_Details.Add(order_Details);
@@ -102,8 +103,9 @@ namespace NorthwindWeb.Controllers
         /// <returns>Orders-details index view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "OrderID,ProductID,UnitPrice,Quantity,Discount")] Order_Details order_Details)
+        public async Task<ActionResult> Edit([Bind(Include = "OrderID,ProductID,Quantity,Discount")] Order_Details order_Details)
         {
+            order_Details.UnitPrice = db.Products.Find(order_Details.ProductID).UnitPrice ?? 0;
             if (ModelState.IsValid)
             {
                 db.Entry(order_Details).State = EntityState.Modified;
