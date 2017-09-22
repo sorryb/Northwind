@@ -91,10 +91,6 @@ namespace NorthwindWeb.Models.ServerClientCommunication
         /// </summary>
         public int recordsFiltered { get; set; }
         /// <summary>
-        /// Number of element in page
-        /// </summary>
-        public int pageLength { get; set; }
-        /// <summary>
         /// The data to be displayed in the table. 
         /// This is an array of data source objects, one for each row, which will be used by DataTables.
         /// </summary>

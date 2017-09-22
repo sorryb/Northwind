@@ -18,8 +18,6 @@ $(document).ready(function () {
         "autoWidth": false,
         "bFilter": false,
         "bLengthChange": false,
-        "aLengthMenu": false,
-        "paging": true,
         "columnDefs": [
             { responsivePriority: 1, targets: 0 },
             { responsivePriority: 2, targets: -1 }
@@ -29,22 +27,84 @@ $(document).ready(function () {
             "url": searchControllerPath() + "/JsonTableFill",
             "dataSrc": function (json) {
                 //Make your callback here.
-                //$.each(json.data, function (index, item) {
-                //    item.Delete = '<a href= "' + searchControllerPath() + '/DeleteFromRole?userName=' + item.UserName + '&roleName=' + json.roleName + '" onclick="if (!confirm(' + "'Doriti sa stergeti ?'" + ')) return false;"/> <i class="fa fa-remove"></i></a >';
+                $.each(json.data, function (index, item) {
+                    item.OrderID = '<a href= "' + searchControllerPath() + '/Home?orderID=' + item.OrderID + '" class="coloronwhite"/>'+item.OrderID+'</a >';
 
-                //});
+                });
 
                 return json.data;
             },
-            "pageLength": function (json) {
-                return json.pageLength;
+
+
+        },
+        "columns": [
+            { 'data': 'OrderID' },
+            { 'data': 'OrderDate' },
+            { 'data': 'CompanyName' },
+            { 'data': 'ShipperName' }
+
+        ]
+
+    });
+    $('#HomeAdmin').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "responsive": true,
+        "autoWidth": false,
+        "bFilter": false,
+        "bLengthChange": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableAdminFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json.data, function (index, item) {
+                    item.OrderID = '<a href= "' + searchControllerPath() + '/HomeAdmin?orderID=' + item.OrderID + '" class="coloronwhite"/>' + item.OrderID + '</a >';
+
+                });
+
+                return json.data;
             },
-            "recordsFiltered": function (json) {
-                return json.recordsFiltered;
+
+
+        },
+        "columns": [
+            { 'data': 'OrderID' },
+            { 'data': 'OrderDate' },
+            { 'data': 'CompanyName' },
+            { 'data': 'ShipperName' }
+
+        ]
+
+    });
+    $('#HomeCustomer').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "responsive": true,
+        "autoWidth": false,
+        "bFilter": false,
+        "bLengthChange": false,
+        "columnDefs": [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "ajax": {
+            "type": "GET",
+            "url": searchControllerPath() + "/JsonTableCustomerFill",
+            "dataSrc": function (json) {
+                //Make your callback here.
+                $.each(json.data, function (index, item) {
+                    item.OrderID = '<a href= "' + searchControllerPath() + '/HomeCustomer?orderID=' + item.OrderID + '" class="coloronwhite"/>' + item.OrderID + '</a >';
+
+                });
+
+                return json.data;
             },
-            "recordsTotal": function (json) {
-                return json.recordsTotal;
-            }
+
 
         },
         "columns": [
