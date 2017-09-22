@@ -41,7 +41,7 @@ namespace NorthwindWeb.Controllers
                 string reportServerDir = ConfigurationManager.AppSettings.Get("ReportServerDirectory");
                 if(string.IsNullOrEmpty(reportServerDir))
                 {
-                    throw new ArgumentNullException("The report directory is null or empty");
+                    throw new ArgumentNullException("The report directory name is null or empty");
                 }
 
 
@@ -50,12 +50,11 @@ namespace NorthwindWeb.Controllers
 
                 doc = web.Load($"{reportServer}?%2f{reportServerDir}", "GET", new WebProxy() { UseDefaultCredentials = true }, new NetworkCredential(login.Username, login.Password));
 
-                if (doc == null)
-                {
-                    throw new ArgumentNullException("The username or password were not entered correctly. If not the problem might be with the report server.");
-                }
-
                 var links = doc.DocumentNode.SelectNodes("//a");
+                if (links == null)
+                {
+                    throw new ArgumentException("The username or password were not entered correctly.");
+                }
                 var links2 = links.Skip(1);
 
 
@@ -78,10 +77,10 @@ namespace NorthwindWeb.Controllers
                 logger.Error(e.ToString());
                 throw new WebException("Nu am primit nici un raspuns de la server. Verificati ca adresa serverului este scrisa corect sau ca acesta este pornit.");
             }
-            catch(ArgumentNullException e)
+            catch (ArgumentNullException e)
             {
                 logger.Error(e.ToString());
-                throw new ArgumentNullException("Directorul de rapoarte este null sau gol");
+                throw new ArgumentNullException("Numele directorului de rapoarte este null sau gol");
             }
             catch (ArgumentException e)
             {
