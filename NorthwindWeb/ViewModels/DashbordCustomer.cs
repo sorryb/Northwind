@@ -9,7 +9,7 @@ namespace NorthwindWeb.ViewModels
     /// <summary>
     /// New customer from ShopCart
     /// </summary>
-    public class Custom
+    public class DashbordCustomer
     {
         /// <summary>
         /// The name of the company which is the customer.

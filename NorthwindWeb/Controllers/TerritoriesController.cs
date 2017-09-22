@@ -67,7 +67,8 @@ namespace NorthwindWeb.Controllers
             territories.RegionID = id;
             if (db.Territories.Any())
             {
-                territories.TerritoryID = (int.Parse(db.Territories.Last().TerritoryID) + 1).ToString();
+                var lastItem = db.Territories.Select(x => new { nr = x.TerritoryID }).ToList().OrderByDescending(x => int.Parse(x.nr)).First();
+                territories.TerritoryID = (int.Parse(lastItem.nr) + 1).ToString();
             }
             else
             {
@@ -103,6 +104,7 @@ namespace NorthwindWeb.Controllers
                 return HttpNotFound();
             }
             ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
+            territories.TerritoryDescription = territories.TerritoryDescription.Trim();
             return View(territories);
         }
 
@@ -117,15 +119,12 @@ namespace NorthwindWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                territories.RegionID = Convert.ToInt32(TempData["RegionID"]);
                 db.Entry(territories).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
                 return RedirectToAction("Details", "Regions", new { id = Convert.ToInt32(TempData["RegionID"]) });
             }
-
-            ViewBag.RegionsID = Convert.ToInt32(TempData["RegionID"]);
-            TempData["RegionID"] = ViewBag.RegionsID;
+            
             ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
             return View(territories);
         }
