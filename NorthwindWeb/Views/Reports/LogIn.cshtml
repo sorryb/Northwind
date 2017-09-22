@@ -12,14 +12,14 @@
     <div class="form-group">
         @Html.LabelFor(m=>m.Username,"Nume utilizator", new { @class = "col-md-2 control-label" })
         <div class="col-md-5">
-            @Html.TextBoxFor(m=>m.Username, new { @class = "form-control", autofocus = "true" })
+            @Html.TextBoxFor(m=>m.Username, new { @class = "form-control", autofocus = "true", required = "required" })
             @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m=>m.Password, "Parola", new { @class = "col-md-2 control-label" })
         <div class="col-md-5">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" ,required="required"})
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>
     </div>

@@ -460,6 +460,7 @@
     <Content Include="js\morrisjs\morris-data.js" />
     <Content Include="js\morrisjs\morris.js" />
     <Content Include="js\morrisjs\morris.min.js" />
+    <Content Include="js\OrderDatatable.js" />
     <Content Include="js\raphael\raphael.js" />
     <Content Include="js\raphael\raphael.min.js" />
     <Content Include="js\script.js" />

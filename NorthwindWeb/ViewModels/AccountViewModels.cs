@@ -314,7 +314,7 @@ namespace NorthwindWeb.ViewModels
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public sealed class ValidatePasswordLengthAttribute : ValidationAttribute, IClientValidatable
     {
-        private const string _defaultErrorMessage = "'{0}' must be at least {1} characters long.";
+        private const string _defaultErrorMessage = "'{0}' trebuie sa aiba cel putin {1} caractere.";
         private readonly int _minCharacters = Membership.Provider.MinRequiredPasswordLength;
 
         /// <summary>
