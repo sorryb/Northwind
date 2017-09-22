@@ -124,6 +124,7 @@ namespace NorthwindWeb.Controllers
             {
                 return HttpNotFound();
             }
+            region.RegionDescription = region.RegionDescription.Trim();
             return View(region);
         }
 

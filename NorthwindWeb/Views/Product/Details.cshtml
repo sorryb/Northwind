@@ -26,8 +26,8 @@
 </ol>
 
 <div class="row">
-    <div class="col-lg-6">
-        <h4 class="col-lg-4">Produs</h4>
+    <div class="col-lg-3">
+        <h4>Produs</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -108,7 +108,7 @@
             @Html.ActionLink("Inapoi", "Index", new { category = category, search = Request.QueryString["search"] ?? "" }, new { @class = "btn btn-default" })
         </p>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-9">
         <img src="~/Images/@Model.Category.CategoryName/@(Model.ProductID).jpg" class="img-responsive"/>
     </div>
 </div>

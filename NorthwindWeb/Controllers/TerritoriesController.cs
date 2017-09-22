@@ -62,10 +62,10 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns territories index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories, int id)
+        public async Task<ActionResult> Create([Bind(Include = "TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
-
+            territories.TerritoryID = (int.Parse(db.Territories.Last().TerritoryID) + 1).ToString();
             if (ModelState.IsValid)
             {
                 db.Territories.Add(territories);
