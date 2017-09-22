@@ -76,7 +76,7 @@ namespace NorthwindWeb.Controllers
                 return View(categories);
             }
 
-            if (db.Categories.Where(c => c.CategoryName == categories.CategoryName) != null)
+            if (db.Categories.Where(c => c.CategoryName == categories.CategoryName).Count()!=0)
             {
                 ModelState.AddModelError("CategoryName", "Numele de categorie este deja folosit");
                 return View(categories);
@@ -120,7 +120,7 @@ namespace NorthwindWeb.Controllers
                 return View(categories);
 
             }
-            if (db.Categories.Where(c => c.CategoryName == categories.CategoryName) != null)
+            if (db.Categories.Where(c => (c.CategoryName == categories.CategoryName)&&(c.CategoryID!= categories.CategoryID)).Count()!=0)
             {
                 ModelState.AddModelError("CategoryName", "Numele de categorie este deja folosit");
                 return View(categories);
