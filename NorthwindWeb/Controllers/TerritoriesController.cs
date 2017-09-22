@@ -67,7 +67,8 @@ namespace NorthwindWeb.Controllers
             territories.RegionID = id;
             if (db.Territories.Any())
             {
-                territories.TerritoryID = (int.Parse(db.Territories.Last().TerritoryID) + 1).ToString();
+                var lastItem = db.Territories.Select(x => new { nr = x.TerritoryID }).ToList().OrderByDescending(x => int.Parse(x.nr)).First();
+                territories.TerritoryID = (int.Parse(lastItem.nr) + 1).ToString();
             }
             else
             {
