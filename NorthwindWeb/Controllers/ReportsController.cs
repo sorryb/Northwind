@@ -53,7 +53,8 @@ namespace NorthwindWeb.Controllers
                 var links = doc.DocumentNode.SelectNodes("//a");
                 if (links == null)
                 {
-                    throw new ArgumentException("The username or password were not entered correctly.");
+                    ViewBag.ErrorMessage = "Numele sau parola nu au fost introduse corect.";
+                    return View("LogIn");
                 }
                 var links2 = links.Skip(1);
 
@@ -81,11 +82,6 @@ namespace NorthwindWeb.Controllers
             {
                 logger.Error(e.ToString());
                 throw new ArgumentNullException("Numele directorului de rapoarte este null sau gol");
-            }
-            catch (ArgumentException e)
-            {
-                logger.Error(e.ToString());
-                throw new ArgumentException("Numele sau parola nu au fost introduse corect.");
             }
             catch (UriFormatException e)
             {
