@@ -95,8 +95,16 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns regions index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "RegionID,RegionDescription")] Region region)
+        public async Task<ActionResult> Create([Bind(Include = "RegionDescription")] Region region)
         {
+            if (db.Territories.Any())
+            {
+                region.RegionID = db.Regions.OrderByDescending(x=>x.RegionID).First().RegionID + 1;
+            }
+            else
+            {
+                region.RegionID = 1;
+            }
             if (ModelState.IsValid)
             {
                 db.Regions.Add(region);

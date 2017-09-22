@@ -46,8 +46,12 @@ namespace NorthwindWeb.Controllers
         public ActionResult Create(int? id)
         {
             ViewBag.orderid = id;
-            //ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID");
-            ViewBag.ProductID = new SelectList(db.Products, "ProductID", "ProductName");
+            ////ViewBag.OrderID = new SelectList(db.Orders, "OrderID", "CustomerID");
+            var productsOnOrder = db.Orders.Find(id).Order_Details.Select(od => od.Product).AsEnumerable();
+            var productsNotOnOrder = db.Products.ToList();
+            foreach (Products product in productsOnOrder)
+                productsNotOnOrder.Remove(product);
+            ViewBag.ProductID = new SelectList(productsNotOnOrder, "ProductID", "ProductName");
             return View();
         }
 
@@ -59,7 +63,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns orders-details index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ProductID,Quantity,Discount")] Order_Details order_Details,int id)
+        public async Task<ActionResult> Create([Bind(Include = "ProductID,Quantity,Discount")] Order_Details order_Details, int id)
         {
             order_Details.OrderID = id;
             order_Details.UnitPrice = db.Products.Find(order_Details.ProductID).UnitPrice ?? 0;
@@ -81,9 +85,9 @@ namespace NorthwindWeb.Controllers
         /// <param name="orderID">The orderID of the order-detail that is going to be edited</param>
         /// <param name="productID">The productID of the order-detail that is going to be edited</param>
         /// <returns>Orders-details edit view</returns>
-        public async Task<ActionResult> Edit(int? orderID,int? productID)
+        public async Task<ActionResult> Edit(int? orderID, int? productID)
         {
-            Order_Details orderdetail = await db.Order_Details.FindAsync(orderID,productID);
+            Order_Details orderdetail = await db.Order_Details.FindAsync(orderID, productID);
             if (orderdetail == null)
             {
                 return HttpNotFound();
@@ -145,12 +149,12 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int? orderID, int? productID)
         {
-            var details = db.Order_Details.Where(x => x.OrderID == orderID && x.ProductID==productID);
+            var details = db.Order_Details.Where(x => x.OrderID == orderID && x.ProductID == productID);
             foreach (var orderdet in details)
                 db.Order_Details.Remove(orderdet);
 
             await db.SaveChangesAsync();
-            return RedirectToAction("Details","Orders",new {id=orderID });
+            return RedirectToAction("Details", "Orders", new { id = orderID });
 
         }
 

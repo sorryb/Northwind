@@ -81,7 +81,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns customers index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] Custom customers)
+        public async Task<ActionResult> Create([Bind(Include = "CompanyName,ContactName,ContactTitle,Address,City,Region,PostalCode,Country,Phone,Fax")] DashbordCustomer customers)
         {
             
             if (ModelState.IsValid)
