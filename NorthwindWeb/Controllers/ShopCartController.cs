@@ -37,30 +37,8 @@ namespace NorthwindWeb.Controllers
             return result;
         }
 
-        //private string CustomerId(string id, int indexId)
-        //{
-        //    string dictionary = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKAMNOPQRSTUVWXYZ";
-        //    int pozition = dictionary.IndexOf(id.Substring(indexId, 1));
-        //    if (db.Customers.Find(id)!=null)
-        //    {
-        //        if(pozition< dictionary.Length)
-        //        {
-        //            id = CustomerId(id, indexId);
-        //        }
-        //        else if(indexId>1)
-        //        {
-        //            for(int i= indexId; i<=5; i++)
-        //            {
-        //                id=id.Substring(0,i-1)+ "0"+id.Substring
-        //                id[i] = "0";
-        //            }
-        //            id = CustomerId(id, indexId-1);
-        //        }
+        
 
-
-        //    }
-        //        return id;
-        //}
         /// <summary>
         /// See the curent shop list
         /// </summary>
@@ -108,6 +86,8 @@ namespace NorthwindWeb.Controllers
         private void Update(int id, int quantity)
         {
             var cart = db.ShopCart.Where(x => x.ProductID == id && x.UserName == User.Identity.Name).FirstOrDefault();
+            //todo anunta clientul ca nu sunt suficiente unitati in stock
+            //short? unitsInStock = db.Products.Find(cart.ProductID).UnitsInStock ?? 0;
             cart.Quantity = cart.Quantity >= short.MaxValue ? short.MaxValue : cart.Quantity + quantity;
             db.SaveChanges();
         }
@@ -392,7 +372,13 @@ namespace NorthwindWeb.Controllers
 
 
                         db.ShopCart.Remove(product);
-                        db.Products.Find(product.ProductID).UnitsOnOrder += (short)product.Quantity;
+                        var dbProduct = db.Products.Find(product.ProductID);
+                        dbProduct.UnitsOnOrder += (short)product.Quantity;
+                        dbProduct.UnitsInStock -= (short)product.Quantity;
+                        if(dbProduct.UnitsInStock <= 0)
+                        {
+                            dbProduct.Discontinued = true;
+                        }
                     }
                 }
 

@@ -70,9 +70,9 @@ namespace NorthwindWeb.Controllers
             {
                 db.Territories.Add(territories);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Details","Regions",new { id=id });
+                return RedirectToAction("Details", "Regions", new { id = id });
             }
-            
+            ViewBag.regionid = id;
             return View(territories);
         }
 
@@ -89,6 +89,7 @@ namespace NorthwindWeb.Controllers
             }
             //take details of Territory
             ViewBag.RegionsID = Convert.ToInt32(TempData["RegionID"]);
+            TempData["RegionID"] = ViewBag.RegionsID;
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
@@ -109,14 +110,15 @@ namespace NorthwindWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.RegionsID = Convert.ToInt32(TempData["RegionID"]);
-                territories.RegionID =Convert.ToInt32(TempData["RegionID"]);
+                territories.RegionID = Convert.ToInt32(TempData["RegionID"]);
                 db.Entry(territories).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
-                return RedirectToAction("Details","Regions",new {id= Convert.ToInt32(TempData["RegionID"])});
+                return RedirectToAction("Details", "Regions", new { id = Convert.ToInt32(TempData["RegionID"]) });
             }
 
+            ViewBag.RegionsID = Convert.ToInt32(TempData["RegionID"]);
+            TempData["RegionID"] = ViewBag.RegionsID;
             ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
             return View(territories);
         }
@@ -152,15 +154,15 @@ namespace NorthwindWeb.Controllers
         {
             //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
-            int idRegion=territories.RegionID;
+            int idRegion = territories.RegionID;
             try
             {
                 territories.Employees.Clear();
                 db.Territories.Remove(territories);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Details","Regions",new { id=idRegion });
+                return RedirectToAction("Details", "Regions", new { id = idRegion });
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 logger.Error(exception.ToString());
                 throw new DeleteException("Nu puteti sterge teritoriul deoarece are angajati asignati la el. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii asignati mai intai!.");
