@@ -65,7 +65,14 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> Create([Bind(Include = "TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
-            territories.TerritoryID = (int.Parse(db.Territories.Last().TerritoryID) + 1).ToString();
+            if (db.Territories.Any())
+            {
+                territories.TerritoryID = (int.Parse(db.Territories.Last().TerritoryID) + 1).ToString();
+            }
+            else
+            {
+                territories.TerritoryID = "1";
+            }
             if (ModelState.IsValid)
             {
                 db.Territories.Add(territories);
