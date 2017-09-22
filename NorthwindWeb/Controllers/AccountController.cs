@@ -101,8 +101,10 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            model.UserName = HttpUtility.HtmlEncode(model.UserName);
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -241,6 +243,7 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [Authorize(Roles = "Admins")]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> RegisterAdmin([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
             try
@@ -287,6 +290,11 @@ namespace NorthwindWeb.Controllers
             {
                 logger.Error(e.ToString());
                 throw new ArgumentException("Fisierul ales nu este o imagine");
+            }
+            catch (HttpRequestValidationException e)
+            {
+                logger.Error(e.ToString());
+                throw new HttpRequestValidationException("Nu aveti voie sa introduceti html sau script in acest camp.");
             }
             catch (Exception e)
             {
