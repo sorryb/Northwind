@@ -197,6 +197,7 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register([Bind(Include = "UserName,Email,Password,ConfirmPassword")]RegisterViewModel model)
         {
+            model.UserName = HttpUtility.HtmlEncode(model.UserName);
             if (ModelState.IsValid)
             {
                 ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
