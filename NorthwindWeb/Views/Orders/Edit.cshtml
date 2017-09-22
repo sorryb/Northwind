@@ -51,7 +51,7 @@
             <div class="form-group">
                 <span class="control-label col-md-2 bold"><strong>Data comanda</strong></span>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.OrderDate)
+                    @Html.TextBoxFor(model => model.OrderDate,new { required="required" })
                     @Html.ValidationMessageFor(model => model.OrderDate)
                 </div>
             </div>
