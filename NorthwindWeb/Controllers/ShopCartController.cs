@@ -374,10 +374,14 @@ namespace NorthwindWeb.Controllers
                         db.ShopCart.Remove(product);
                         var dbProduct = db.Products.Find(product.ProductID);
                         dbProduct.UnitsOnOrder += (short)product.Quantity;
-                        dbProduct.UnitsInStock -= (short)product.Quantity;
-                        if(dbProduct.UnitsInStock <= 0)
+                        //daca produsul nu este un serviciu
+                        if (dbProduct.Category.CategoryID != 6)
                         {
-                            dbProduct.Discontinued = true;
+                            dbProduct.UnitsInStock -= (short)product.Quantity;
+                            if (dbProduct.UnitsInStock <= 0)
+                            {
+                                dbProduct.Discontinued = true;
+                            }
                         }
                     }
                 }
