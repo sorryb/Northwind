@@ -47,6 +47,7 @@ namespace NorthwindWeb.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            TempData["RegionID"] = id;
             RegionIndex viewModel = new RegionIndex();
             //take details of Region
             Region region = await db.Regions.FindAsync(id);
@@ -94,8 +95,16 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns regions index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "RegionID,RegionDescription")] Region region)
+        public async Task<ActionResult> Create([Bind(Include = "RegionDescription")] Region region)
         {
+            if (db.Territories.Any())
+            {
+                region.RegionID = db.Regions.OrderByDescending(x=>x.RegionID).First().RegionID + 1;
+            }
+            else
+            {
+                region.RegionID = 1;
+            }
             if (ModelState.IsValid)
             {
                 db.Regions.Add(region);
@@ -123,6 +132,7 @@ namespace NorthwindWeb.Controllers
             {
                 return HttpNotFound();
             }
+            region.RegionDescription = region.RegionDescription.Trim();
             return View(region);
         }
 

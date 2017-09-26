@@ -62,17 +62,25 @@ namespace NorthwindWeb.Controllers
         /// <returns>If successful returns territories index view, else goes back to form.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TerritoryID,TerritoryDescription")] Territories territories, int id)
+        public async Task<ActionResult> Create([Bind(Include = "TerritoryDescription")] Territories territories, int id)
         {
             territories.RegionID = id;
-
+            if (db.Territories.Any())
+            {
+                var lastItem = db.Territories.Select(x => new { nr = x.TerritoryID }).ToList().OrderByDescending(x => int.Parse(x.nr)).First();
+                territories.TerritoryID = (int.Parse(lastItem.nr) + 1).ToString();
+            }
+            else
+            {
+                territories.TerritoryID = "1";
+            }
             if (ModelState.IsValid)
             {
                 db.Territories.Add(territories);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Details","Regions",new { id=id });
+                return RedirectToAction("Details", "Regions", new { id = id });
             }
-            
+            ViewBag.regionid = id;
             return View(territories);
         }
 
@@ -88,12 +96,15 @@ namespace NorthwindWeb.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //take details of Territory
+            ViewBag.RegionsID = Convert.ToInt32(TempData["RegionID"]);
+            TempData["RegionID"] = ViewBag.RegionsID;
             Territories territories = await db.Territories.FindAsync(id);
             if (territories == null)
             {
                 return HttpNotFound();
             }
             ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
+            territories.TerritoryDescription = territories.TerritoryDescription.Trim();
             return View(territories);
         }
 
@@ -111,9 +122,9 @@ namespace NorthwindWeb.Controllers
                 db.Entry(territories).State = EntityState.Modified;
                 await db.SaveChangesAsync();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Regions", new { id = Convert.ToInt32(TempData["RegionID"]) });
             }
-
+            
             ViewBag.RegionID = new SelectList(db.Regions, "RegionID", "RegionDescription", territories.RegionID);
             return View(territories);
         }
@@ -149,15 +160,15 @@ namespace NorthwindWeb.Controllers
         {
             //take details of Territory
             Territories territories = await db.Territories.FindAsync(id);
-            int idRegion=territories.RegionID;
+            int idRegion = territories.RegionID;
             try
             {
                 territories.Employees.Clear();
                 db.Territories.Remove(territories);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Details","Regions",new { id=idRegion });
+                return RedirectToAction("Details", "Regions", new { id = idRegion });
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 logger.Error(exception.ToString());
                 throw new DeleteException("Nu puteti sterge teritoriul deoarece are angajati asignati la el. \nPentru a putea sterge acest teritoriu trebuie sa stergi angajatii asignati mai intai!.");

@@ -21,18 +21,19 @@
     </div>
     <div class="row">
         <div class="col-lg-8">
-            <table class="table">
-                <!--Table with Orders-->
-                <thead class="thead">
-                    <tr role="row">
-                        <th>Numar Comanda</th>
-                        <th>Data plasare</th>
-                        <th>Companie</th>
-                        <th>Furnizor</th>
-                    </tr>
-                </thead>
-                <tbody class="tbody">
-                    @foreach (var itemOrder in Model.Order)
+            <div class="whiterounded coloronwhite">
+                <table class="cell-border hover order-column" id="HomeAdmin">
+                    <!--Table with Orders-->
+                    <thead>
+                        <tr role="row">
+                            <th>Numar Comanda</th>
+                            <th>Data plasare</th>
+                            <th>Companie</th>
+                            <th>Furnizor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@foreach (var itemOrder in Model.Order)
                     {
                         string selectedRow = "";
                         if (itemOrder.OrderID == ViewBag.OrderID)
@@ -53,12 +54,12 @@
                                 @itemOrder.ShipperName
                             </td>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    }*@
+                    </tbody>
+                </table>
+            </div>
             <!--Pagination Orders-->
-            Pagina @(Model.Page.PageCount < Model.Page.PageNumber ? 0 : Model.Page.PageNumber) din @Model.Page.PageCount
-            @Html.PagedListPager(Model.Page, page => Url.Action("HomeAdmin", new { page, orderID = 0, productID = 0, currentFilter = ViewBag.CurrentFilter }))
+           
             <!--Table with OrdersDetails for selected Order-->
             @if (Model.Order_Detail != null)
             {<hr>

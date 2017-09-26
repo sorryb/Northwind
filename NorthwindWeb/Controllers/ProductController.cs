@@ -162,7 +162,7 @@ namespace NorthwindWeb.Controllers
                 {
                     throw new ArgumentException("The provided file is not an image");
                 }
-                if (ModelState.IsValid)
+                if (ModelState.IsValid && !(String.IsNullOrEmpty(products.ProductName)))
                 {
                     db.Entry(products).State = EntityState.Modified;
                     await db.SaveChangesAsync();

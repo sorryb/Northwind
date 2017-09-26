@@ -1,20 +1,27 @@
 #Database Initialization
 	First time, before starting the web server, we need to chose what DataBase we want to use.
 	We have three options:
-		A. Full initialization. This type of DataBase Initializtion allow us to start the site with a lot of Orders, Customers, Territories and more
+		A. Test Initialisation. This will fill the database with test data
+			Implementation:
+			1.Change the connectionString in WebConfig -> connectionStrings -> NorthwindDatabaseConnection to what you want (this is where the database will be created)
+			2.Go in Context -> NorthwindDatabaseInitializer.cs and make sure that the following functions are not commented: NorthwindReferencedTableInitializer.InsertNorthwindReferencedData(context);
+																															 NorthwindTestDatabaseInitializer.InsertNorthwindTestData(context);
+			3.Start the application. Now first time when the site will need something from Northwind DataBase the DataBase will be created
+		B. Empty Initialisation:
+			1.Change the connectionString in WebConfig -> connectionStrings -> NorthwindDatabaseConnection to what you want (this is where the database will be created)
+			2.Go in Context -> NorthwindDatabaseInitializer.cs and comment: 
+				-b if you want to keep the referenced database data
+				-b and a if you want an empty database
+					a) NorthwindReferencedTableInitializer.InsertNorthwindReferencedData(context);
+					b) NorthwindTestDatabaseInitializer.InsertNorthwindTestData(context);
+			3.Start the application. Now first time when the site will need something from Northwind DataBase the DataBase will be created
+		Note:
+		You can also create a test database by using the following two scripts.
 			Implementation:
 			1.Go in NorthwindDB project -> dbo -> Scripts
 			2.Run Northwind.sql to make Northwind DataBase on your SQL Server
 			3.Run Translate.sql to translate in Romanian the above data
 			4.Make sure that in WebConfig -> connectionStrings -> NwModel connection string match the Northwind DataBase connection string from your SQL Server
-		B. Small initialization. This will fill the database with Territories and Products, and with some portions of the Customers, Orders, (and others) from data that point A would add in DataBase
-			Implementation:
-			1.Change the connectionString in WebConfig -> connectionStrings -> NorthwindDatabaseConnection to what you want (this is where the database will be made)
-			2.Start the application. Now first time when the site will need something from Northwind DataBase the DataBase will be made
-		C. Without initialization
-			Implementation:
-			1.Go in Models -> NorthwindModel.cs and in constructor comment this line: Database.SetInitializer(new NorthwindDatabaseInitializer());
-			2.Start the application. Now first time when the site will need something from Northwind DataBase the empty DataBase will be made
 
 
 #Users

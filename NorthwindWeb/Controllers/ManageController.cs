@@ -333,7 +333,10 @@ namespace NorthwindWeb.Controllers
                 }
                 AddErrors(isChanged);
             }
+            else
+            {
             ModelState.AddModelError("Parola actuala", "Parola nu este corecta");
+            }
            
             return View(model);
         }

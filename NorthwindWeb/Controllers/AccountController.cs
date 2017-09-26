@@ -101,8 +101,10 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            model.UserName = HttpUtility.HtmlEncode(model.UserName);
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -197,6 +199,7 @@ namespace NorthwindWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register([Bind(Include = "UserName,Email,Password,ConfirmPassword")]RegisterViewModel model)
         {
+            model.UserName = HttpUtility.HtmlEncode(model.UserName);
             if (ModelState.IsValid)
             {
                 ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
@@ -240,10 +243,12 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [Authorize(Roles = "Admins")]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> RegisterAdmin([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
             try
             {
+                model.UserName = HttpUtility.HtmlEncode(model.UserName);
                 if (!((model.UserImage == null) || model.UserImage.ContentType.Contains("image")))
                 {
                     throw new ArgumentException("Fisierul selectat nu este o imagine");
@@ -285,6 +290,11 @@ namespace NorthwindWeb.Controllers
             {
                 logger.Error(e.ToString());
                 throw new ArgumentException("Fisierul ales nu este o imagine");
+            }
+            catch (HttpRequestValidationException e)
+            {
+                logger.Error(e.ToString());
+                throw new HttpRequestValidationException("Nu aveti voie sa introduceti html sau script in acest camp.");
             }
             catch (Exception e)
             {

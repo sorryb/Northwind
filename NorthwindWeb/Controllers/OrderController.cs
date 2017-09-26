@@ -12,6 +12,8 @@ using PagedList;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using NorthwindWeb.Context;
+using NorthwindWeb.Models.Interfaces;
+using NorthwindWeb.Models.ServerClientCommunication;
 
 namespace NorthwindWeb.Controllers
 {
@@ -23,6 +25,7 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindDatabase db = new NorthwindDatabase();
         private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(OrderController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
+        private static string Search;
         /// <summary>
         /// the list of current Employees orders
         /// </summary>
@@ -48,7 +51,7 @@ namespace NorthwindWeb.Controllers
             {
                 search = currentFilter;
             }
-            ViewBag.CurrentFilter = search;
+            Search = search;
             viewModel.Order = Orders(search, employeerId);
             viewModel.Command = BigComand(employeerId);
 
@@ -98,13 +101,13 @@ namespace NorthwindWeb.Controllers
         /// <param name="page">Returns the current page</param>
         /// <param name="search">The search string</param>
         /// <param name="currentFilter">Curent search</param>
-        /// <returns></returns>
+        /// <returns>Return Orders for curent customers</returns>
         [Authorize]
         public ActionResult HomeCustomers(int? orderID, int? productID, int? page, string search, string currentFilter)
         {
             var viewModel = new OrderIndexData();
             string curentUser = User.Identity.GetUserName();
-            
+
             // test null if in search control
             if (search != null)
             {
@@ -114,8 +117,9 @@ namespace NorthwindWeb.Controllers
             {
                 search = currentFilter;
             }
+            Search = search;
             ViewBag.CurrentFilter = search;
-            viewModel.Order = Orders(search,curentUser);
+            viewModel.Order = Orders(search, curentUser);
             viewModel.Command = BigComand(curentUser);
 
             viewModel.OrderTen = LastTenOrder(curentUser);
@@ -179,6 +183,7 @@ namespace NorthwindWeb.Controllers
             {
                 search = currentFilter;
             }
+            Search = search;
             ViewBag.CurrentFilter = search;
             viewModel.Order = Orders(search);
             viewModel.Command = BigComand();
@@ -218,6 +223,322 @@ namespace NorthwindWeb.Controllers
             return View(viewModel);
 
         }
+
+        /// <summary>
+        /// Return a list of users to complete table
+        /// </summary>
+        /// <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+        /// <param name="start">Start from this item</param>
+        /// <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+        /// <returns>Returns json for datatable with users</returns>        
+        public JsonResult JsonTableFill(int draw, int start, int length)
+        {
+            const int TOTAL_ROWS = 999;
+
+            int sortColumn = -1;
+            string sortDirection = "asc";
+
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+
+
+            string curentUser = User.Identity.GetUserName();
+            int employeerId = db.Employees.Where(e => e.FirstName + e.LastName == curentUser).Select(e => e.EmployeeID).FirstOrDefault();
+
+            List<OrderInfo> orders = Orders(Search, employeerId);
+
+
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto OrderID;
+                case 0: //OrderID column
+                    OrderID:
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.OrderID).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.OrderID).ToList();
+                    }
+                    break;
+                case 1: //OrderDate column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.OrderDate).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.OrderDate).ToList();
+                    }
+                    break;
+                case 2: // CompanyName column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.CompanyName).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.CompanyName).ToList();
+                    }
+                    break;
+                case 3:// ShipperName column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.ShipperName).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.ShipperName).ToList();
+                    }
+                    break;
+
+            }
+            //objet that whill be sent to client
+            JsonDataTableOrderList dataTableData = new JsonDataTableOrderList()
+            {
+                draw = draw,
+                recordsTotal = db.Orders.Where(o => o.EmployeeID == employeerId).Count(),
+                data = new List<OrderInfo>(),
+                recordsFiltered = orders.Count(), //need to be below data(ref recordsFiltered)
+                //aLengthMenu = length,
+            };
+            foreach (var itemOderInfo in orders.Skip(start).Take(length))
+            {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.OrderID = itemOderInfo.OrderID;
+                orderInfo.OrderDate = itemOderInfo.OrderDate;
+                orderInfo.CompanyName = itemOderInfo.CompanyName;
+                orderInfo.ShipperName = itemOderInfo.ShipperName;
+                dataTableData.data.Add(orderInfo);
+            }
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Return a list of users to complete table
+        /// </summary>
+        /// <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+        /// <param name="start">Start from this item</param>
+        /// <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+        /// <returns>Returns json for datatable with users</returns>        
+        public JsonResult JsonTableAdminFill(int draw, int start, int length)
+        {
+            const int TOTAL_ROWS = 999;
+
+            int sortColumn = -1;
+            string sortDirection = "asc";
+
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+            string search = Request.QueryString["search[value]"] ?? "";
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+
+
+
+
+            List<OrderInfo> orders = Orders(Search);
+
+
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto OrderID;
+                case 0: //OrderID column
+                    OrderID:
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.OrderID).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.OrderID).ToList();
+                    }
+                    break;
+                case 1: //OrderDate column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.OrderDate).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.OrderDate).ToList();
+                    }
+                    break;
+                case 2: // CompanyName column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.CompanyName).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.CompanyName).ToList();
+                    }
+                    break;
+                case 3:// ShipperName column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.ShipperName).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.ShipperName).ToList();
+                    }
+                    break;
+
+            }
+            //objet that whill be sent to client
+            JsonDataTableOrderList dataTableData = new JsonDataTableOrderList()
+            {
+                draw = draw,
+                recordsTotal = db.Orders.Count(),
+                data = new List<OrderInfo>(),
+                recordsFiltered = orders.Count(), //need to be below data(ref recordsFiltered)
+                //aLengthMenu = length,
+            };
+            foreach (var itemOderInfo in orders.Skip(start).Take(length))
+            {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.OrderID = itemOderInfo.OrderID;
+                orderInfo.OrderDate = itemOderInfo.OrderDate;
+                orderInfo.CompanyName = itemOderInfo.CompanyName;
+                orderInfo.ShipperName = itemOderInfo.ShipperName;
+                dataTableData.data.Add(orderInfo);
+            }
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// Return a list of users to complete table
+        /// </summary>
+        /// <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+        /// <param name="start">Start from this item</param>
+        /// <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+        /// <returns>Returns json for datatable with users</returns>        
+        public JsonResult JsonTableCustomerFill(int draw, int start, int length)
+        {
+            const int TOTAL_ROWS = 999;
+
+            int sortColumn = -1;
+            string sortDirection = "asc";
+
+            if (length == -1)
+            {
+                length = TOTAL_ROWS;
+            }
+
+
+            // note: we only sort one column at a time
+            if (Request.QueryString["order[0][column]"] != null)
+            {
+                sortColumn = int.Parse(Request.QueryString["order[0][column]"]);
+            }
+            if (Request.QueryString["order[0][dir]"] != null)
+            {
+                sortDirection = Request.QueryString["order[0][dir]"];
+            }
+
+            string curentUser = User.Identity.GetUserName();
+            List<OrderInfo> orders = Orders(Search, curentUser);
+
+            //order list
+            switch (sortColumn)
+            {
+                case -1: //sort by first column
+                    goto OrderID;
+                case 0: //OrderID column
+                    OrderID:
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.OrderID).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.OrderID).ToList();
+                    }
+                    break;
+                case 1: //OrderDate column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.OrderDate).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.OrderDate).ToList();
+                    }
+                    break;
+                case 2: // CompanyName column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.CompanyName).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.CompanyName).ToList();
+                    }
+                    break;
+                case 3:// ShipperName column
+                    if (sortDirection == "asc")
+                    {
+                        orders = orders.OrderBy(x => x.ShipperName).ToList();
+                    }
+                    else
+                    {
+                        orders = orders.OrderByDescending(x => x.ShipperName).ToList();
+                    }
+                    break;
+
+            }
+            //objet that whill be sent to client
+            JsonDataTableOrderList dataTableData = new JsonDataTableOrderList()
+            {
+                draw = draw,
+                recordsTotal = db.Customers.Where(c => c.ContactName == curentUser).Count(),
+                data = new List<OrderInfo>(),
+                recordsFiltered = orders.Count(), //need to be below data(ref recordsFiltered)
+                //aLengthMenu = length,
+            };
+            foreach (var itemOderInfo in orders.Skip(start).Take(length))
+            {
+                OrderInfo orderInfo = new OrderInfo();
+                orderInfo.OrderID = itemOderInfo.OrderID;
+                orderInfo.OrderDate = itemOderInfo.OrderDate;
+                orderInfo.CompanyName = itemOderInfo.CompanyName;
+                orderInfo.ShipperName = itemOderInfo.ShipperName;
+                dataTableData.data.Add(orderInfo);
+            }
+            return Json(dataTableData, JsonRequestBehavior.AllowGet);
+        }
+
         //last ten of all orders 
         private List<OrderTen> LastTenOrder()
         {
@@ -385,7 +706,7 @@ namespace NorthwindWeb.Controllers
             return orders;
         }
         //current Employeers orders 
-        private List<OrderInfo> Orders(string search,int userId)
+        private List<OrderInfo> Orders(string search, int userId)
         {
             List<OrderInfo> orders = new List<OrderInfo>();
             var order = (from o in db.Orders
@@ -536,6 +857,7 @@ namespace NorthwindWeb.Controllers
             }
             return productCategoryData;
         }
+
 
     }
 }
