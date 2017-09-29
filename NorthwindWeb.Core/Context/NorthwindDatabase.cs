@@ -81,7 +81,7 @@ namespace NorthwindWeb.Core.Context
 
             modelBuilder.Entity<CustomerDemographics>()
                 .Property(e => e.CustomerTypeID)
-                .IsFixedLength();
+                .
 
             modelBuilder.Entity<CustomerDemographics>()
                 .HasMany(e => e.Customers)
