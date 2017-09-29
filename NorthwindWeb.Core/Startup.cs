@@ -17,8 +17,15 @@ namespace NorthwindWeb.Core
 {
     public class Startup
     {
+        /// <summary>
+        /// path to site
+        /// </summary>
+        internal static IHostingEnvironment _hostingEnvironment;
+
         public Startup(IHostingEnvironment env)
         {
+            _hostingEnvironment = env;
+
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -41,6 +48,9 @@ namespace NorthwindWeb.Core
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<Context.NorthwindDatabase>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
