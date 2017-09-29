@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NorthwindWeb.Core.Models;
 
+
 namespace NorthwindWeb.Core.Context
 {
 
@@ -81,70 +82,56 @@ namespace NorthwindWeb.Core.Context
 
             modelBuilder.Entity<CustomerDemographics>()
                 .Property(e => e.CustomerTypeID)
-                .
+                .HasColumnType("NCHAR(10)");
 
             modelBuilder.Entity<CustomerDemographics>()
-                .HasMany(e => e.Customers)
-                .WithMany(e => e.CustomerDemographics)
-                .Map(m => m.ToTable("CustomerCustomerDemo").MapLeftKey("CustomerTypeID").MapRightKey("CustomerID"));
+                .HasMany(e => e.Customers);
 
             modelBuilder.Entity<Customers>()
                 .Property(e => e.CustomerID)
-                .IsFixedLength();
+                .HasColumnType("NCHAR(5)");
 
             modelBuilder.Entity<Employees>()
-                .HasMany(e => e.Employees1)
-                .WithOptional(e => e.Employee1)
-                .HasForeignKey(e => e.ReportsTo);
+                .HasMany(e => e.Employees1);
 
             modelBuilder.Entity<Employees>()
-                .HasMany(e => e.Territories)
-                .WithMany(e => e.Employees)
-                .Map(m => m.ToTable("EmployeeTerritories").MapLeftKey("EmployeeID").MapRightKey("TerritoryID"));
+                .HasMany(e => e.Territories);
 
             modelBuilder.Entity<Order_Details>()
                 .Property(e => e.UnitPrice)
-                .HasPrecision(19, 4);
+                .HasColumnType("decimal(19, 4)");
 
             modelBuilder.Entity<Orders>()
                 .Property(e => e.CustomerID)
-                .IsFixedLength();
+                .HasColumnType("NCHAR(5)");
 
             modelBuilder.Entity<Orders>()
                 .Property(e => e.Freight)
-                .HasPrecision(19, 4);
+                .HasColumnType("decimal(19, 4)");
 
             modelBuilder.Entity<Orders>()
-                .HasMany(e => e.Order_Details)
-                .WithRequired(e => e.Order)
-                .WillCascadeOnDelete(false);
+                .HasMany(e => e.Order_Details);
 
             modelBuilder.Entity<Products>()
                 .Property(e => e.UnitPrice)
-                .HasPrecision(19, 4);
+                .HasColumnType("decimal(19, 4)");
 
             modelBuilder.Entity<Products>()
-                .HasMany(e => e.Order_Details)
-                .WithRequired(e => e.Product)
-                .WillCascadeOnDelete(false);
+                .HasMany(e => e.Order_Details);
 
             modelBuilder.Entity<Region>()
                 .Property(e => e.RegionDescription)
-                .IsFixedLength();
+                .HasColumnType("NCHAR(50)");
 
             modelBuilder.Entity<Region>()
-                .HasMany(e => e.Territories)
-                .WithRequired(e => e.Region)
-                .WillCascadeOnDelete(false);
+                .HasMany(e => e.Territories);
 
             modelBuilder.Entity<Shippers>()
-                .HasMany(e => e.Orders)
-                .WithOptional(e => e.Shipper)
-                .HasForeignKey(e => e.ShipVia);
+                .HasMany(e => e.Orders);
 
             modelBuilder.Entity<Territories>()
                 .Property(e => e.TerritoryDescription)
-                .IsFixedLength();
+                .HasColumnType("NCHAR(50)");
 
             modelBuilder.Entity<Persons>()
                 .Property(e => e.LastName)
@@ -153,11 +140,6 @@ namespace NorthwindWeb.Core.Context
             modelBuilder.Entity<Persons>()
                 .Property(e => e.FirstName)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<ShopCarts>()
-                .HasRequired(a => a.Products)
-                .WithMany()
-                .HasForeignKey(a => a.ProductID);
 
             modelBuilder.Entity<ShopCarts>()
                 .Property(e => e.UserName)
@@ -169,3 +151,9 @@ namespace NorthwindWeb.Core.Context
         }
     }
 }
+
+//todo uita-te in istoric si unde vezi ca sunt proprietati in proprietati scoate-le, ca de exemplu mai jos territories necesita Region
+//modelBuilder.Entity<Region>()
+//                .HasMany(e => e.Territories)
+//                .WithRequired(e => e.Region)
+//                .WillCascadeOnDelete(false);
