@@ -127,7 +127,10 @@ $(document).ready(function () {
             { 'data': 'OnOrders' },
             { 'data': 'ReorderLevel' },
             { 'data': 'Discontinued' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
     });
     //begin with search...
@@ -169,7 +172,10 @@ $(document).ready(function () {
             { 'data': 'City' },
             { 'data': 'Country' },
             { 'data': 'HomePhone' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
 
     });
@@ -204,7 +210,10 @@ $(document).ready(function () {
             { 'data': 'City' },
             { 'data': 'Country' },
             { 'data': 'Phone' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
 
     });
@@ -239,7 +248,10 @@ $(document).ready(function () {
             { 'data': 'ShippedDate' },
             { 'data': 'ShipName' },
             { 'data': 'ShipAddress' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
 
     });
@@ -273,7 +285,10 @@ $(document).ready(function () {
             { 'data': 'City' },
             { 'data': 'Country' },
             { 'data': 'Phone' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
 
     });
@@ -302,7 +317,10 @@ $(document).ready(function () {
         "columns": [
             { 'data': 'CompanyName' },
             { 'data': 'Phone' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
 
     });
@@ -332,7 +350,10 @@ $(document).ready(function () {
         "columns": [
             { 'data': 'CategoryName' },
             { 'data': 'Description' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
 
     });
@@ -374,7 +395,10 @@ $(document).ready(function () {
             { 'data': 'Email' },
             { 'data': 'LastActiveDate' },
             { 'data': 'IsOnline' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
 
     });
@@ -404,7 +428,10 @@ $(document).ready(function () {
         },
         "columns": [
             { 'data': 'RegionDescription' },
-            { 'data': 'DeleteLink' }
+            {
+                'data': 'DeleteLink',
+                "orderable": false,
+            }
         ]
 
     });
@@ -432,7 +459,10 @@ $(document).ready(function () {
             }
         },
         "columns": [
-            { 'data': 'Delete' },
+            {
+                'data': 'Delete',
+                "orderable": false,
+            },
             { 'data': 'Name' },
             { 'data': 'Membership' }
         ]

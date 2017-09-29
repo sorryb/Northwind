@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Context;
+using NorthwindWeb.ViewModels;
 
 namespace UnitTestNorthwindWeb
 {
@@ -70,6 +71,17 @@ namespace UnitTestNorthwindWeb
             Assert.IsNotNull(result);
         }
 
+        private static Random random = new Random();
+        private string CustomerId()
+        {
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string result = new string(Enumerable.Repeat(chars, 5)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+            if (db.Customers.Find(result) != null)
+                result = CustomerId();
+            return result;
+        }
+
         /// <summary>
         /// Check Details items from Index action .
         /// </summary>
@@ -77,17 +89,19 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsDetails()
         {
             //Arrage
-            Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
-            await _customersControllerUnderTest.Create(customerTest);
+            DashbordCustomer customers = new DashbordCustomer() { CompanyName = "test" };           
+            
+            await _customersControllerUnderTest.Create(customers);
+            var customer = db.Customers.Where(c => c.CompanyName == customers.CompanyName).FirstOrDefault();
 
             //Act
-            var result = await _customersControllerUnderTest.Details(customerTest.CustomerID) as ViewResult;
+            var result = await _customersControllerUnderTest.Details(customer.CustomerID) as ViewResult;
 
             //Assert
             Assert.IsNotNull(result);
 
-            var customers = db.Customers.Where(c => c.CustomerID == customerTest.CustomerID && c.CompanyName == customerTest.CompanyName);
-            db.Customers.RemoveRange(customers);
+            var customerss = db.Customers.Where(c => c.CustomerID == customer.CustomerID && c.CompanyName == customers.CompanyName);
+            db.Customers.RemoveRange(customerss);
             db.SaveChanges();
         }
 
@@ -114,18 +128,21 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsCreateCreates()
         {
             //Arrange
-            Customers customerTest = new Customers() { CustomerID="AABBC",CompanyName="test" };
+            DashbordCustomer customers = new DashbordCustomer() { CompanyName = "test" };
+            await _customersControllerUnderTest.Create(customers);
+            var customer = db.Customers.Where(c => c.CompanyName == customers.CompanyName).FirstOrDefault();
+           
             //Act
             var expected = db.Customers.Count() + 1;
-            await _customersControllerUnderTest.Create(customerTest);
+            await _customersControllerUnderTest.Create(customers);
             var actual = db.Customers.Count();
-            var customers = db.Customers.Where(c => c.CustomerID == customerTest.CustomerID && c.CompanyName == customerTest.CompanyName);
+            var customerss = db.Customers.Where(c => c.CustomerID == customer.CustomerID && c.CompanyName == customer.CompanyName);
             //Assert
             Assert.AreEqual(expected, actual);
 
 
 
-            db.Customers.RemoveRange(customers);
+            db.Customers.RemoveRange(customerss);
             db.SaveChanges();
         }
 
@@ -136,17 +153,19 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsEdit()
         {
             //Arrage
-            Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
-            await _customersControllerUnderTest.Create(customerTest);
+            DashbordCustomer customers = new DashbordCustomer() { CompanyName = "test" };
+            await _customersControllerUnderTest.Create(customers);
+            var customer = db.Customers.Where(c => c.CompanyName == customers.CompanyName).FirstOrDefault();           
+
 
             //Act
-            var result = await _customersControllerUnderTest.Edit(customerTest.CustomerID) as ViewResult;
+            var result = await _customersControllerUnderTest.Edit(customer.CustomerID) as ViewResult;
 
             //Assert
             Assert.IsNotNull(result);
 
-            var customers = db.Customers.Where(c => c.CustomerID == customerTest.CustomerID && c.CompanyName == customerTest.CompanyName);
-            db.Customers.RemoveRange(customers);
+            var customerss = db.Customers.Where(c => c.CustomerID == customer.CustomerID && c.CompanyName == customer.CompanyName);
+            db.Customers.RemoveRange(customerss);
             db.SaveChanges();
 
         }
@@ -158,27 +177,26 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsEditEdits()
         {
             //Arrange
-            Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
-            await _customersControllerUnderTest.Create(customerTest);
-            db.Entry(customerTest).State = System.Data.Entity.EntityState.Added;
-
-            var expectedCustomer = db.Customers.Find(customerTest.CustomerID);
+            var expectedCustomer = new Customers() {CustomerID="ZZZZZ", CompanyName = "test" };
+            db.Customers.Add(expectedCustomer);
+            db.SaveChanges();
+            db.Entry(expectedCustomer).State = System.Data.Entity.EntityState.Added;
 
             db.Dispose();
-            customerTest.CompanyName="test2";
+            expectedCustomer.CompanyName = "test2";
             db = new NorthwindDatabase();
 
             //Act
-            await _customersControllerUnderTest.Edit(customerTest);
-            db.Entry(customerTest).State = System.Data.Entity.EntityState.Modified;
-            var actualCustomer = db.Customers.Find(customerTest.CustomerID);
+            await _customersControllerUnderTest.Edit(expectedCustomer);
+            db.Entry(expectedCustomer).State = System.Data.Entity.EntityState.Modified;
+            var actualCustomer = db.Customers.Find(expectedCustomer.CustomerID);
 
             //Assert
-            Assert.AreEqual(expectedCustomer, actualCustomer);
+            Assert.AreEqual(expectedCustomer.CustomerID, actualCustomer.CustomerID);
 
 
-            var customers = db.Customers.Where(c => c.CustomerID == customerTest.CustomerID && c.CompanyName == customerTest.CompanyName);
-            db.Customers.RemoveRange(customers);
+            var customerss = db.Customers.Where(c => c.CompanyName == expectedCustomer.CompanyName||c.CompanyName==actualCustomer.CompanyName);
+            db.Customers.RemoveRange(customerss);
             db.SaveChanges();
 
         }
@@ -191,18 +209,19 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsDelete()
         {
             //Arrange
-            Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
-            await _customersControllerUnderTest.Create(customerTest);
+            DashbordCustomer customers = new DashbordCustomer() { CompanyName = "test" };
+            await _customersControllerUnderTest.Create(customers);
+            var customer = db.Customers.Where(c => c.CompanyName == customers.CompanyName).FirstOrDefault();          
 
             //Act
-            var result = _customersControllerUnderTest.Delete(customerTest.CustomerID);
+            var result = _customersControllerUnderTest.Delete(customer.CustomerID);
 
             //Assert
             Assert.IsNotNull(result);
 
 
-            var customers = db.Customers.Where(c => c.CustomerID == customerTest.CustomerID && c.CompanyName == customerTest.CompanyName);
-            db.Customers.RemoveRange(customers);
+            var customerss = db.Customers.Where(c => c.CustomerID == customer.CustomerID && c.CompanyName == customer.CompanyName);
+            db.Customers.RemoveRange(customerss);
             db.SaveChanges();
         }
 
@@ -213,12 +232,13 @@ namespace UnitTestNorthwindWeb
         public async Task CustomersReturnsDeleteDeletes()
         {
             //Arrange
-            Customers customerTest = new Customers() { CustomerID = "BBBBB", CompanyName = "test" };
-            await _customersControllerUnderTest.Create(customerTest);
+            DashbordCustomer customers = new DashbordCustomer() { CompanyName = "test" };
+            await _customersControllerUnderTest.Create(customers);
+            var customer = db.Customers.Where(c => c.CompanyName == customers.CompanyName).FirstOrDefault();
             int expected = db.Customers.Count() - 1;
 
             //Act
-            await _customersControllerUnderTest.DeleteConfirmed(customerTest.CustomerID);
+            await _customersControllerUnderTest.DeleteConfirmed(customer.CustomerID);
             int actual = db.Customers.Count();
 
             //Assert

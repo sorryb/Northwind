@@ -408,12 +408,12 @@ namespace NorthwindWeb.Controllers
                     dashboardMorrisAreaData.Add(dashboardMorrisAreaElement);
                 }
             }
+            dashboardMorrisAreaData = dashboardMorrisAreaData.OrderBy(area => Convert.ToInt32(area.Year)).ToList();
             //Rounds the value to two decimal places
             foreach (var itemDashboardMorrisAreaData in dashboardMorrisAreaData)
             {
                 itemDashboardMorrisAreaData.Sales = decimal.Round(itemDashboardMorrisAreaData.Sales, 2);
             }
-
             return Json(dashboardMorrisAreaData, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
@@ -511,6 +511,7 @@ namespace NorthwindWeb.Controllers
                     dashboardMorrisBarData.Add(dashboardMorrisBarElement);
                 }
             }
+            dashboardMorrisBarData = dashboardMorrisBarData.OrderBy(bar => Convert.ToInt32(bar.Year)).ToList();
             //Rounds the value to two decimal places
             foreach (var itemDashboardMorrisBarData in dashboardMorrisBarData)
             {
