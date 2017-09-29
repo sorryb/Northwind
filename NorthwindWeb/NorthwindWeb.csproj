@@ -294,6 +294,7 @@
     <Content Include="css\CustomerStyle.css" />
     <Content Include="css\DashboardMenu.css" />
     <Content Include="images\Home\k.png" />
+    <Content Include="images\Home\phones.png" />
     <Content Include="images\northwind-sign.jpg" />
     <Content Include="images\default.png" />
     <Content Include="images\sort_asc.png" />
