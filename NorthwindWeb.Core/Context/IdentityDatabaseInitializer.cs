@@ -3,114 +3,97 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using NorthwindWeb.Core.Models;
 using NorthwindWeb.Core.Context;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Threading.Tasks;
+using System;
 
 namespace NorthwindWeb.Context
 {
 
-    /// <summary>
-    /// Initializa with Users and Roles.
-    /// </summary>
-    public class IdentityDatabaseInitializer
+    public static class RolesData
+    {
 
-    { 
-        private static void CreateRolesandUsers(ApplicationDbContext context, NorthwindDatabase northwindContext)
+        private static readonly string[] roles = new[] {
+        "Admins",
+        "Guest",
+        "Customers",
+        "Managers",
+        "Employees"
+        };
+
+        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager, ApplicationDbContext context, NorthwindDatabase northwindContext)
         {
-            var roleManager = new RoleManager<ApplicationUser>(new RoleStore<IdentityRole>(context));
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-
-            // In Startup iam creating first Admin Role and creating a default Admin User    
-            if (!roleManager.RoleExists("Admins"))
+            foreach (var role in roles)
             {
 
-                // first we create Admin rool   
-                var role = new IdentityRole();
-                role.Name = "Admins";
-                roleManager.Create(role);
-
-                //Here we create a Admin super user who will maintain the website                  
-
-                var user = new ApplicationUser();
-                user.UserName = "admin";
-                user.Email = "admin@gmail.com";
-                AddUser(userManager, user, "123456");
-
-                //-create a user for tests
-                var testUser = new ApplicationUser();
-                testUser.UserName = "tester";
-                testUser.Email = "Tester_1@gmail.com";
-                AddUser(userManager, testUser, "Tester_1");
-
-
-            }
-
-            // creating Creating Guest role    
-            if (!roleManager.RoleExists("Guest"))
-            {
-                var role = new IdentityRole();
-                role.Name = "Guest";
-                roleManager.Create(role);
-
-            }
-
-            // creating Creating Guest role    
-            if (!roleManager.RoleExists("Customers"))
-            {
-                var role = new IdentityRole();
-                role.Name = "Customers";
-                roleManager.Create(role);
-
-            }
-
-            // creating Creating Manager role    
-            if (!roleManager.RoleExists("Managers"))
-            {
-                var role = new IdentityRole();
-                role.Name = "Managers";
-                roleManager.Create(role);
-
-            }
-
-            // creating Creating Employee role    
-            if (!roleManager.RoleExists("Employees"))
-            {
-                var role = new IdentityRole();
-                role.Name = "Employees";
-                roleManager.Create(role);
-
-                var employees = this.northwindContext.Employees;
-
-                foreach(var itemEmployee in employees)
+                if (!await roleManager.RoleExistsAsync(role))
                 {
-                    ApplicationUser employee = new ApplicationUser();
-                    employee.UserName = itemEmployee.FirstName+itemEmployee.LastName;
-                    employee.Email = itemEmployee.FirstName+"@gmail.com";
-                    userManager.Create(employee, itemEmployee.FirstName + itemEmployee.LastName);
-                    
-                    var currentUser = userManager.FindByName(itemEmployee.FirstName+itemEmployee.LastName);
-                    if (itemEmployee.ReportsTo == null)
+                    var create = await roleManager.CreateAsync(new IdentityRole(role));
+
+                    if (!create.Succeeded)
                     {
-                        var rolManagers = userManager.AddToRole(currentUser.Id, "Managers");
+
+                        throw new Exception("Failed to create role");
+
                     }
-                    
-                        var rol = userManager.AddToRole(currentUser.Id, "Employees");
-                    
                 }
 
             }
 
+            await AddUsersInRole(context,  northwindContext);
+
         }
+        //todo adauga useri in baza de date. sa speram ca merge :)
+        //din cate am vazut trebuie sa fac o clasa mostenita din "alta" in care voi crea un createAsinc, delete, ... ajutat de un membru privat din clasa de baza
+        //daca am vazut bine :)
 
-        private static void AddUser(UserManager<ApplicationUser> userManager, ApplicationUser user, string userPWD)
+        public static async Task AddUsersInRole(ApplicationDbContext context, NorthwindDatabase northwindContext)
         {
-            var chkUser = userManager.Create(user, userPWD);
+            var userManager = new UserManager<ApplicationUser>(new UserStore(context));
+            //add admins
+            var user = new ApplicationUser();
+            user.UserName = "admin";
+            user.Email = "admin@gmail.com";
+            AddUser(userManager, user, "123456");
 
-            //Add default User to Role Admin   
-            if (chkUser.Succeeded)
+            //create user for tests
+            var testUser = new ApplicationUser();
+            testUser.UserName = "tester";
+            testUser.Email = "Tester_1@gmail.com";
+            AddUser(userManager, testUser, "Tester_1");
+
+
+            var employees = northwindContext.Employees;
+
+            foreach (var itemEmployee in employees)
             {
-                var resultForAdd = userManager.AddToRole(user.Id, "Admins");
+                ApplicationUser employee = new ApplicationUser();
+                employee.UserName = itemEmployee.FirstName + itemEmployee.LastName;
+                employee.Email = itemEmployee.FirstName + "@gmail.com";
+                await userManager.CreateAsync(employee, itemEmployee.FirstName + itemEmployee.LastName);
+
+                var currentUser = await userManager.FindByNameAsync(itemEmployee.FirstName + itemEmployee.LastName);
+                if (itemEmployee.ReportsTo == null)
+                {
+                    var rolManagers = await userManager.AddToRoleAsync(currentUser, "Managers");
+                }
+
+                var rol = await userManager.AddToRoleAsync(currentUser, "Employees");
 
             }
         }
+
+        private static async Task AddUserAsync(UserManager<ApplicationUser> userManager, ApplicationUser user, string userPWD)
+        {
+            var chkUser = await userManager.CreateAsync(user, userPWD);
+
+            //Add default User to Role Admin   
+            if (chkUser.Result == IdentityResult.Success)
+            {
+                var resultForAdd = userManager.AddToRoleAsync(user, "Admins");
+
+            }
+        }
+
     }
 }

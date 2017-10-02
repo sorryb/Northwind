@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.Security;
+//using Microsoft.Security;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -234,12 +234,14 @@ namespace NorthwindWeb.Core.ViewModels
         [Required(ErrorMessage = "Acest camp '{0}' este obligatoriu!")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirmare parola")]
-        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Cele doua parole introduse nu se potrivesc !")]
+        [Compare("Password", ErrorMessage = "Cele doua parole introduse nu se potrivesc !")]
         public string ConfirmPassword { get; set; }
+
         /// <summary>
         /// The image user.
         /// </summary>
-        public HttpPostedFileBase UserImage { get; set; }
+        /// see https://stackoverflow.com/questions/29836342/mvc-6-httppostedfilebase and delete this
+        public  HttpPostedFileBase UserImage { get; set; }
     }
 
     /// <summary>

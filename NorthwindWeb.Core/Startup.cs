@@ -13,6 +13,7 @@ using NorthwindWeb.Core.Data;
 using NorthwindWeb.Core.Models;
 using NorthwindWeb.Core.Services;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Identity;
 
 namespace NorthwindWeb.Core
 {
@@ -58,6 +59,8 @@ namespace NorthwindWeb.Core
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddScoped<RoleManager<IdentityRole>>();
+
             services.AddMvc();
 
             //added instead of CustomizeViewEngine from mvc 5
@@ -74,7 +77,7 @@ namespace NorthwindWeb.Core
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, RoleManager<IdentityRole> roleManager)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -93,6 +96,7 @@ namespace NorthwindWeb.Core
             app.UseStaticFiles();
 
             app.UseIdentity();
+            RolesData.SeedRoles(roleManager).Wait();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
