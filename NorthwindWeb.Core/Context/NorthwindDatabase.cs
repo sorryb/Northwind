@@ -91,6 +91,9 @@ namespace NorthwindWeb.Core.Context
                 .Property(e => e.CustomerID)
                 .HasColumnType("NCHAR(5)");
 
+            modelBuilder.Entity<Customers>()
+                .HasMany(e => e.CustomerDemographics);
+
             modelBuilder.Entity<Employees>()
                 .HasMany(e => e.Employees1);
 
@@ -100,6 +103,14 @@ namespace NorthwindWeb.Core.Context
             modelBuilder.Entity<Order_Details>()
                 .Property(e => e.UnitPrice)
                 .HasColumnType("decimal(19, 4)");
+
+            modelBuilder.Entity<Order_Details>()
+                .Property(e => e.Order)
+                .IsRequired();
+
+            modelBuilder.Entity<Order_Details>()
+                .Property(e => e.Product)
+                .IsRequired();
 
             modelBuilder.Entity<Orders>()
                 .Property(e => e.CustomerID)
@@ -133,6 +144,9 @@ namespace NorthwindWeb.Core.Context
                 .Property(e => e.TerritoryDescription)
                 .HasColumnType("NCHAR(50)");
 
+            modelBuilder.Entity<Territories>()
+                .HasMany(e => e.Employees);
+
             modelBuilder.Entity<Persons>()
                 .Property(e => e.LastName)
                 .IsUnicode(false);
@@ -151,9 +165,3 @@ namespace NorthwindWeb.Core.Context
         }
     }
 }
-
-//todo uita-te in istoric si unde vezi ca sunt proprietati in proprietati scoate-le, ca de exemplu mai jos territories necesita Region
-//modelBuilder.Entity<Region>()
-//                .HasMany(e => e.Territories)
-//                .WithRequired(e => e.Region)
-//                .WillCascadeOnDelete(false);

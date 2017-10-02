@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace NorthwindWeb.ViewModels
+﻿namespace NorthwindWeb.ViewModels
 {
     /// <summary>
     ///  Keeps all territories from regions.

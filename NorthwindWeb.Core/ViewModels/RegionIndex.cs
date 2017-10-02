@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using NorthwindWeb.Models;
+﻿using System.Collections.Generic;
+using NorthwindWeb.Core.Models;
 
 namespace NorthwindWeb.ViewModels
 {

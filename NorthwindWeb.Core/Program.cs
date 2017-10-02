@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using System.Text;
 
 namespace NorthwindWeb.Core
 {
@@ -98,7 +99,5 @@ namespace NorthwindWeb.Core
                 if (!string.IsNullOrWhiteSpace(item)) yield return item;
             }
         }
-    }
-}
     }
 }

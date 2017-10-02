@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NorthwindWeb.Core.Models;
-using NorthwindWeb.Core.Models.ManageViewModels;
 using NorthwindWeb.Core.Services;
+using NorthwindWeb.ViewModels;
 
 namespace NorthwindWeb.Core.Controllers
 {
@@ -44,13 +44,13 @@ namespace NorthwindWeb.Core.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(ManageMessageId? message = null)
         {
-            ViewData["StatusMessage"] =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess ? "Parola va fost schimbata"
+                : message == ManageMessageId.SetPasswordSuccess ? "Parola va fost setata"
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.Error ? "A aparut o eroare"
+                : message == ManageMessageId.AddPhoneSuccess ? "Numarul dumneavoastra de telefon a fost schimbat"
+                : message == ManageMessageId.RemovePhoneSuccess ? "Numarul dumneavoastra de telefon a fost setat"
                 : "";
 
             var user = await GetCurrentUserAsync();
@@ -69,24 +69,32 @@ namespace NorthwindWeb.Core.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Manage/RemoveLogin
+        /// <summary>
+        /// Removes an external login from this user.
+        /// </summary>
+        /// <param name="loginProvider">The provider that sent the external login link.</param>
+        /// <param name="providerKey"></param>
+        /// <returns>Manage ManageLogins view</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel account)
+        public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
-            ManageMessageId? message = ManageMessageId.Error;
-            var user = await GetCurrentUserAsync();
-            if (user != null)
+            ManageMessageId? message;
+            var result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            if (result.Succeeded)
             {
-                var result = await _userManager.RemoveLoginAsync(user, account.LoginProvider, account.ProviderKey);
-                if (result.Succeeded)
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    message = ManageMessageId.RemoveLoginSuccess;
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
+                message = ManageMessageId.RemoveLoginSuccess;
             }
-            return RedirectToAction(nameof(ManageLogins), new { Message = message });
+            else
+            {
+                message = ManageMessageId.Error;
+            }
+            return RedirectToAction("ManageLogins", new { Message = message });
         }
 
         //

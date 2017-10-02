@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using NorthwindWeb.Core.Models;
 
 namespace NorthwindWeb.Core.Context
@@ -16,7 +15,7 @@ namespace NorthwindWeb.Core.Context
         /// </summary>
         public static void InsertNorthwindReferencedData()
         {
-            var db = new NorthwindDatabase();
+            var db = new NorthwindDatabase(null);
             InsertNorthwindReferencedData(db);
             db.Dispose();
         }

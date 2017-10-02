@@ -15,8 +15,7 @@ namespace NorthwindWeb.Context
     { 
         private static void CreateRolesandUsers(ApplicationDbContext context, NorthwindDatabase northwindContext)
         {
-
-            var roleManager = new RoleManager<ApplicationUser>((new RoleStore<IdentityRole>(context));
+            var roleManager = new RoleManager<ApplicationUser>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
 

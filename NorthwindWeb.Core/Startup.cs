@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using NorthwindWeb.Core.Data;
 using NorthwindWeb.Core.Models;
 using NorthwindWeb.Core.Services;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace NorthwindWeb.Core
 {
@@ -58,6 +59,14 @@ namespace NorthwindWeb.Core
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            //added instead of CustomizeViewEngine from mvc 5
+            //this will set the folder tree for view 1 == controller, 0 == action, (2 == area)
+            services.Configure<RazorViewEngineOptions>(
+                options => {
+                    options.AreaViewLocationFormats.Clear();
+                    options.AreaViewLocationFormats.Add("~/Views/{1}/{0}.cshtml");
+                });
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
