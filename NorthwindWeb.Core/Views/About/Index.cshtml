@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+@model IQueryable<Employees>
+<div class="container" style="font-family:Tahoma">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Despre noi
+                <small>Ne bucuram ca esti alaturi de noi !</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-action="Home" asp-controller="Index">Home</a>
+                    @*@Html.ActionLink("Home", "Index", "Home")*@
+                </li>
+                <li class="active">Despre noi</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+
+            <img src="~/images/northwind-sign.jpg" height="800" width="500" class="img-responsive" />
+        </div>
+        <div class="col-md-6">
+            <h2>Bine ati venit la Northwind Phone !</h2>
+            <p>
+                Northwind Phone este unul dintre cele mai mari magazine online cu capital integral romanesc care activeaza pe piata IT din Romania.
+                Inca de la inceput, din anul 2017, am avut parte de o crestere dinamica si am contribuit la consolidarea comertului online printr-o gama variata de produse la cel mai bun pret si o experienta de cumparare simpla, rapida si placuta.
+            </p>
+            <p>
+                Avem peste 70 de produse si permanent negociem cu producatorii cele mai bune preturi, obtinem promotii si reduceri substantiale care ne ajuta sa satisfacem preferintele celor care apeleaza la noi.
+                Cautam sa atingem excelenta printr-o atitudine deschisa, responsabila, adaptata nevoilor clientilor nostri.
+            </p>
+        </div>
+    </div>
+    <!-- Team Member Profiles -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Afla cine suntem!</h2>
+        </div>
+
+
+        @foreach (var y in Model)
+        {
+            <div class="col-sm-4">
+                <img src="~/images/@(y.FirstName+y.LastName).jpg" height="250" width="270" />
+                <ul>
+                    <li>
+                     @y.TitleOfCourtesy   @y.LastName @y.FirstName-@y.Title
+                    </li>
+                  
+                    <li>
+                        @y.Country - @y.City - @y.Region 
+                    </li>
+                  
+                    
+                    <li>
+                      Contact:  @y.HomePhone
+                    </li>
+
+                </ul>
+
+
+
+            </div>
+
+        }
+
+    </div>
+    <!-- Parteneri -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Parteneri</h2>
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="/images/sony3.jpg" height="500" width="210" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="~/images/hi-fun.png" height="500" width="300" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="~/images/samsung.png" height="500" width="300" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="/images/aple.png" height="500" width="300" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="~/images/images.jpg" height="500" width="300" class="img-responsive img-customer">
+        </div>
+        <div class="col-md-2 col-sm-4 col-xs-6">
+            <img src="~/images/wpid-nokia-logo.jpg" height="500" width="310" class="img-responsive img-customer">
+        </div>
+    </div>
+</div>
