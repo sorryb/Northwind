@@ -1,0 +1,54 @@
+﻿@model IEnumerable<NorthwindWeb.Models.Categories>
+
+@{
+    ViewBag.Title = "Categorii";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Categorii</h2>
+<hr />
+<ol class="breadcrumb">
+
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+
+    <li class="active">Categorii</li>
+</ol>
+<hr />
+<div>
+    @Html.ActionLink("Adauga Categorii", "Create", null, new { @class = "btn btn-default" })
+    <br /><br />
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    Categorii
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table id="CategoriesTable" class="cell-border hover order-column">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nume Categorie
+                            </th>
+                            <th>
+                                Descriere
+                            </th>
+
+                            <th>
+                                Sterge
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

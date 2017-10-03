@@ -1,0 +1,48 @@
+﻿@model NorthwindWeb.Models.Categories
+
+@{
+    ViewBag.Title = "Detalii";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<h2>Detalii</h2>
+<hr />
+<div>
+    <ol class="breadcrumb">
+        <li>
+            @Html.ActionLink("Dashboard", "Home", "Dashboard")
+        </li>
+        <li>
+            @Html.ActionLink("Categorii", "Index", "Orders")
+        </li>
+        <li class="active">Detalii</li>
+    </ol>
+    <h4>Categorie</h4>
+    <hr />
+   
+    
+
+        <dl class="dl-horizontal">
+            <dt>
+                Nume Categorie
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CategoryName)<br />
+            </dd>
+
+            <dt>
+                Descriere
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Description)<br />
+            </dd>
+
+        </dl>
+</div>
+<p>
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.CategoryID }, new { @class = "btn btn-default" })
+   
+</p>
