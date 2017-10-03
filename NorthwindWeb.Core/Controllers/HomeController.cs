@@ -3,33 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NorthwindWeb.Core.Context;
 
 namespace NorthwindWeb.Core.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private NorthwindDatabase _northwindDatabase = new NorthwindDatabase(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindDatabase>());
+        //private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
+
+        /// <summary>
+        /// First page in the site.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Index()
         {
-            return View();
+            ViewBag.SiteName = "Northwind Phone Shop";
+
+            return View("Index");
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
+        //Menu() was here
+        //Moved to ViewComponents
+        //Used in _LayoutDashboard
+        //https://davepaquette.com/archive/2016/01/02/goodbye-child-actions-hello-view-components.aspx
 
-            return View();
-        }
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
 
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
     }
 }

@@ -30,7 +30,7 @@ namespace NorthwindWeb.Controllers
         /// Used to construct the menu.
         /// </summary>
         /// <returns></returns>
-        [ChildActionOnly]
+        //[ChildActionOnly]
         public ActionResult Menu()
         {
             var productsCategories = _northwindDatabase.Categories;

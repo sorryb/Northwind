@@ -18,4 +18,9 @@ namespace NorthwindWeb.Core.ViewModels.Dashboard
         /// </summary>
         public IPagedList MatchesFoundPaged { get; set; }
     }
+    //todo delete this
+    public interface IPagedList
+    {
+    }
+    //end delete
 }

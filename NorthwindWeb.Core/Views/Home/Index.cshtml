@@ -1,108 +1,202 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewBag.Title = "Home";
 }
-
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+<div id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
         <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
     </ol>
-    <div class="carousel-inner" role="listbox">
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
         <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+            <div class="fill" style=" background-image: url('../../images/Home/imgad.png'); "></div>
+            <div class="carousel-caption">
+                <h1></h1>
             </div>
         </div>
         <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+            <div class="fill" style="background-image: url('../../images/Home/k.png');"></div>
+            <div class="carousel-caption">
+                <h1></h1>
             </div>
         </div>
         <div class="item">
-            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
+            <div class="fill" style="background-image: url('../../images/Home/phones.png'); "></div>
+            <div class="carousel-caption">
+                <h1></h1>
             </div>
         </div>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
     </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
     </a>
 </div>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518004">Bower</a> for managing client-side libraries</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
+<div class="section">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-check-circle"></i> Telefoane mobile</h3>
+                <p>Acest site se adresează celor care doresc să-şi schimbe telefonul şi sunt nehotărâţi în privinţa alegerii acestuia. Piaţa telefoanelor mobile este într-o continuă schimbare, de aceea noi va oferim cele mai noi produse apărute, atât smartphone-uri cât şi telefoane clasice. </p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-pencil"></i> SmartWatch si Gadgeturi</h3>
+                <p>Gadgeturi sunt întotdeauna concepute mai neobișnuit sau mai ingenios decât alte obiecte tehnologice la momentul invenției lor, de aceea venim în întâmpinarea dumneavoastră cu cele mai căutate şi folosite gadgeturi de pe piaţă.</p>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3><i class="fa fa-folder-open"></i> Accesorii</h3>
+                <p>
+                    Cea mai variată gama de accesorii şi componente pentru telefoane mobile le găsiţi la noi. Aruncaţi doar o privire pe site-ul nostru şi veţi găsi ceea ce căutaţi fără a depune nici un pic de efort.
+                </p>
+            </div>
+        </div>
+        <!-- /.row -->
+
     </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699318">Add client packages using Bower.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run & Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
+    <!-- /.container -->
+
 </div>
+<!-- /.section -->
+
+<div class="section-colored text-center">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="home col-lg-12">
+                <h2>NORTHWIND PHONE </h2>
+                <p>Northwind Phone - unul dintre cele mai mari magazine online cu capital integral românesc care activează pe piaţa IT din România</p>
+                <hr>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.section-colored -->
+
+<div class="section">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Branduri de top</h2>
+                <hr>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <img class="img-responsive img-home-portfolio" src="~/images/Home/AppleLogo.png" />
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <img class="img-responsive img-home-portfolio" src="~/images/Home/Nokia.gif" />
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <img class="img-responsive img-home-portfolio" src="~/images/Home/logo-sony.jpg" />
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <img class="img-responsive img-home-portfolio" src="~/images/Home/samsung.jpg" />
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <img class="img-responsive img-home-portfolio" src="~/images/Home/huawei.jpg" />
+
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <img class="img-responsive img-home-portfolio" src="~/images/Home/asus.png" />
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.section -->
+
+<div class="section-colored">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="home col-lg-6 col-md-6 col-sm-6">
+                <h2>NORTHWIND PHONE vă oferă:</h2>
+                <ul>
+                    <li>Telefoane clasice</li>
+                    <li>Smartphone-uri</li>
+                    <li>Accesorii pentru telefoane</li>
+                    <li>Gadgeturi</li>
+                    <li>eBook Readers</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <img class="img-responsive" src="~/Images/Home/ebooks.jpg">
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.section-colored -->
+
+<div class="section">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <img class="img-responsive" src="~/images/Home/footer_logo.png" />
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <h2>Condiţii de livrare:</h2>
+                <ul>
+                    <li>Livrare în 24 de ore în Bucureşti.</li>
+                    <li>Livrare în 3 zile în ţară.</li>
+                    <li>Taxa de transport este de 20 lei. </li>
+                    <li>Pentru comenzi mai mari de 200 lei transportul este gratuit.</li>
+                    <li>Se va livra în zilele lucratore între orele 8:00 şi 18:00. </li>
+                    <li>Livrarea în timpul week-end-ului se realizează contra unei taxe de 20 lei.</li>
+                    <li>În cazul returului, clientul va plăti taxa de transport.</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+</div>
+<!-- /.section -->
+
+<div class="container">
+
+    <div class="row well">
+        <div class="col-lg-8 col-md-8">
+            <h4>FAN COURIER:Firma cu care am ales sa colaboram!</h4>
+            <p>Toată lumea doreşte că produsele comandate să ajungă în siguranţă şi la timp, de aceea compania noastră a decis să colaboreze cu cei buni din domeniu:FAN Courier care este lider pe piaţă din 2006.</p>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <a class="btn btn-lg btn-primary pull-right" href="https://www.fancourier.ro/">Fan Courier</a>
+        </div>
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->

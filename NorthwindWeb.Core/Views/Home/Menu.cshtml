@@ -1,0 +1,14 @@
+﻿@{
+    Layout =null;
+}
+@model System.Collections.Generic.List<System.String>
+
+<ul class="nav nav-second-level">
+    @foreach (var item in Model)
+    {
+        <li>
+            @Html.ActionLink(item, "Index", "Product", new { category = item }, null)
+        </li>
+    }
+
+</ul>

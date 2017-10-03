@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Web;
 
 namespace NorthwindWeb.Core.ViewModels
 {
@@ -355,14 +356,28 @@ namespace NorthwindWeb.Core.ViewModels
         /// <param name="metadata"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
-        {
-            return new[]{
-                new ModelClientValidationStringLengthRule(FormatErrorMessage(metadata.GetDisplayName()), _minCharacters, int.MaxValue)
-            };
-        }
+        //public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        //{
+        //    return new[]{
+        //        new ModelClientValidationStringLengthRule(FormatErrorMessage(metadata.GetDisplayName()), _minCharacters, int.MaxValue)
+        //    };
+        //}
     }
 
+    //todo delete this
+    internal class Membership
+    {
+        public static Provider Provider { get; internal set; }
+    }
+    internal class Provider
+    {
+        public int MinRequiredPasswordLength;
+    }
+
+    internal interface IClientValidatable
+    {
+    }
+    //end delete
     #endregion
 
 }

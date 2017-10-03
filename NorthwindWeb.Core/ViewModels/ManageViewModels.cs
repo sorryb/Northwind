@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Owin.Security;
 using System.Web;
+using Microsoft.AspNetCore.Http.Authentication;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace NorthwindWeb.ViewModels
 {
@@ -206,6 +207,6 @@ namespace NorthwindWeb.ViewModels
         /// <summary>
         /// Providers collection.
         /// </summary>
-        public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
+        public ICollection<SelectListItem> Providers { get; set; }
     }
 }
