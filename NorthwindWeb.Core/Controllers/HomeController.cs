@@ -9,8 +9,14 @@ namespace NorthwindWeb.Core.Controllers
 {
     public class HomeController : Controller
     {
-        private NorthwindDatabase _northwindDatabase = new NorthwindDatabase(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindDatabase>());
+        private NorthwindDatabase _northwindDatabase;
         //private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
+
+
+        public HomeController(NorthwindDatabase context)
+        {
+            _northwindDatabase = context;
+        }
 
         /// <summary>
         /// First page in the site.
@@ -18,6 +24,7 @@ namespace NorthwindWeb.Core.Controllers
         /// <returns></returns>
         public ActionResult Index()
         {
+
             ViewBag.SiteName = "Northwind Phone Shop";
 
             return View("Index");
