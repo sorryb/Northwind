@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
 using System;
 
-namespace NorthwindWeb.Context
+namespace NorthwindWeb.Context.IdentityDatabaseInitializer
 {
 
     public static class RolesData
@@ -20,9 +20,9 @@ namespace NorthwindWeb.Context
         "Employees"
         };
 
-        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager, ApplicationDbContext context, NorthwindDatabase northwindContext)
+        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager)
         {
-
+            ApplicationDbContext context = new ApplicationDbContext();
             foreach (var role in roles)
             {
 
@@ -41,7 +41,7 @@ namespace NorthwindWeb.Context
             }
 
             //await AddUsersInRole(context,  northwindContext);
-
+            context.Dispose();
         }
         //todo adauga useri in baza de date. sa speram ca merge :)
         //din cate am vazut trebuie sa fac o clasa mostenita din "alta" in care voi crea un createAsinc, delete, ... ajutat de un membru privat din clasa de baza
