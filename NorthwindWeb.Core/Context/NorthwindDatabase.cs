@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using NorthwindWeb.Core.Models;
-
+using System;
 
 namespace NorthwindWeb.Core.Context
 {
@@ -22,7 +22,7 @@ namespace NorthwindWeb.Core.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data source=.\\SQLExpress;initial catalog=Northwind;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework");
+            optionsBuilder.UseSqlServer("Data source=.\\SQLExpress;initial catalog=Northwindp;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework");
         }
         /// <summary>
         /// Context for Categories table in northwind database

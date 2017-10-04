@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
 using System;
 
-namespace NorthwindWeb.Context
+namespace NorthwindWeb.Context.IdentityDatabaseInitializer
 {
 
     public static class RolesData
@@ -20,7 +20,7 @@ namespace NorthwindWeb.Context
         "Employees"
         };
 
-        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager, ApplicationDbContext context, NorthwindDatabase northwindContext)
+        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager, ApplicationDbContext context)
         {
 
             foreach (var role in roles)

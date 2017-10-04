@@ -14,6 +14,8 @@ using NorthwindWeb.Core.Models;
 using NorthwindWeb.Core.Services;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Identity;
+using NorthwindWeb.Context;
+using NorthwindWeb.Context.IdentityDatabaseInitializer;
 
 namespace NorthwindWeb.Core
 {
@@ -95,7 +97,7 @@ namespace NorthwindWeb.Core
 
             app.UseStaticFiles();
 
-            //RolesData.SeedRoles(roleManager).Wait();
+            RolesData.SeedRoles(roleManager, new Context.ApplicationDbContext()).Wait();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
             app.UseMvc(routes =>
