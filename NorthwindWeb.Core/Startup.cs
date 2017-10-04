@@ -14,7 +14,6 @@ using NorthwindWeb.Core.Models;
 using NorthwindWeb.Core.Services;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Identity;
-using NorthwindWeb.Context;
 
 namespace NorthwindWeb.Core
 {

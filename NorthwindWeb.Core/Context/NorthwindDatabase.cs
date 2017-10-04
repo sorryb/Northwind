@@ -17,6 +17,7 @@ namespace NorthwindWeb.Core.Context
         public NorthwindDatabase(DbContextOptions<NorthwindDatabase> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
 
 
@@ -105,12 +106,15 @@ namespace NorthwindWeb.Core.Context
                 .HasColumnType("decimal(19, 4)");
 
             modelBuilder.Entity<Order_Details>()
-                .Property(e => e.Order)
+                .Property(o => o.OrderID)
                 .IsRequired();
 
             modelBuilder.Entity<Order_Details>()
-                .Property(e => e.Product)
+                .Property(e => e.ProductID)
                 .IsRequired();
+
+            modelBuilder.Entity<Order_Details>()
+                .HasKey(o => new { o.OrderID, o.ProductID });
 
             modelBuilder.Entity<Orders>()
                 .Property(e => e.CustomerID)
@@ -155,13 +159,15 @@ namespace NorthwindWeb.Core.Context
                 .Property(e => e.FirstName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ShopCarts>()
-                .Property(e => e.UserName)
-                .IsRequired();
+            modelBuilder.Entity<Persons>()
+                .HasKey(p => new { p.ID, p.LastName });
 
             modelBuilder.Entity<ShopCarts>()
                 .Property(e => e.Quantity)
                 .IsRequired();
+
+            modelBuilder.Entity<ShopCarts>()
+                .HasKey(s => new { s.UserName, s.ProductID });
         }
     }
 }
