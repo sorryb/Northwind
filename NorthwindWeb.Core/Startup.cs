@@ -97,7 +97,7 @@ namespace NorthwindWeb.Core
 
             app.UseStaticFiles();
 
-            RolesData.SeedRoles(roleManager, new Context.ApplicationDbContext()).Wait();
+            RolesData.SeedRoles(roleManager).Wait();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
             app.UseMvc(routes =>
