@@ -20,7 +20,10 @@ namespace NorthwindWeb.Core.Context
             Database.EnsureCreated();
         }
 
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer("Data source=.\\SQLExpress;initial catalog=Northwind;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework");
+        }
         /// <summary>
         /// Context for Categories table in northwind database
         /// </summary>
