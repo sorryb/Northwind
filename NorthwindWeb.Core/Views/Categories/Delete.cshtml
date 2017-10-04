@@ -1,4 +1,4 @@
-﻿@model NorthwindWeb.Models.Categories
+﻿@model Categories
 
 @{
     ViewBag.Title = "Sterge";
@@ -9,10 +9,10 @@
 <hr />
 <ol class="breadcrumb">
     <li>
-        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+        <a asp-action="home" asp-controller="Dashboard">Dashboard</a>
     </li>
     <li>
-        @Html.ActionLink("Categorii", "Index", "Orders")
+        <a asp-controller="Categories" asp-action="Index">Categorii</a>
     </li>
     <li class="active">Sterge</li>
 </ol>
@@ -40,14 +40,13 @@
         </dd>
 
     </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
+    <form asp-controller="Categories" asp-action="Delete" asp-antiforgery="true">
         <div class="form-actions no-color">
+            <a asp-controller="Categories" asp-action="Index" class="btn btn-default">Inapoi</a>
             @Html.ActionLink("Inapoi", "Index", "Categories", new { @class = "btn btn-default" })
             <input type="submit" value="Sterge" class="btn btn-default" /> 
             
         </div>
     }
+    </form>
 </div>

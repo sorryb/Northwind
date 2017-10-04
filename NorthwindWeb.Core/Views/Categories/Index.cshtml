@@ -1,4 +1,4 @@
-﻿@model IEnumerable<NorthwindWeb.Models.Categories>
+﻿@model IEnumerable<Categories>
 
 @{
     ViewBag.Title = "Categorii";
@@ -10,14 +10,14 @@
 <ol class="breadcrumb">
 
     <li>
-        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+        <a asp-controller="Dashboard" asp-action="Home">Dashboard</a>
     </li>
 
     <li class="active">Categorii</li>
 </ol>
 <hr />
 <div>
-    @Html.ActionLink("Adauga Categorii", "Create", null, new { @class = "btn btn-default" })
+    <a asp-controller="Categories" asp-action="Create" class="btn btn-default">Adauga Categorii</a>
     <br /><br />
 </div>
 <br />

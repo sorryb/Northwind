@@ -1,0 +1,80 @@
+﻿@model ViewProductCategoryS
+@{
+    ViewBag.Title = "Sidebar Page";
+}
+<div class="container">
+    <div class="row">
+        <h1 class="page-header">
+            Asigurare back-up
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="active">Asigurare back-up</li>
+        </ol>
+        <div class="col-md-3 col-sm-4 sidebar">
+            <ul class="nav nav-stacked nav-pills">
+                <li>
+                    <a asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li>
+                    <a asp-controller="About" asp-action="Index">Despre noi</a>
+                </li>
+                <li>
+                    <a asp-controller="Services" asp-action="Index">Servicii</a>
+                </li>
+                <li>
+                    <a asp-controller="Contact" asp-action="Index">Contact</a>
+                </li>
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Magazin online
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a asp-controller="Products" asp-action="Products">Promotii</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Products" asp-action="Products" asp-route-category="Smartphone">Telefoane</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        Asistenta
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a asp-controller="Other" asp-action="Faq">Intrebari despre servicii</a>
+                        </li>
+                        <li>
+                            <a asp-controller="Account" asp-action="Register">Sunt client nou</a>
+                        </li>
+                        <li>
+                            <a href="mailto:cineva@exemplu.com?subject=Nelamuriri">Contacteaza-ne</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 col-sm-8 imagine">
+            <img src="~/images/alt2.png" class="right" />
+            <p>
+                Te asteptam in magazinul Northwind Phone cu o solutie complexa de transfer de date si
+                identificare a problemelor, creata pentru a te ajuta sa te bucuri 100% de telefonul tau.
+            </p>
+            <p>   Hai sa-ti povestim ce stie sa faca!</p>
+            <p>Transfer de continut rapid si sigur</p>
+            <p>
+                Ti-ai luat un telefon nou si vrei sa ai la îndemâna toate pozele, videourile,
+                contactele si alte date de pe telefonul vechi?
+                Te poti baza pe Transfer de Continut!
+            </p>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<span class="arrow-down"></span>

@@ -1,0 +1,79 @@
+﻿@model Persons
+
+@{
+    ViewBag.Title = "Contact";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Contact </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="active">Contact</li>
+            </ol>
+        </div>
+        <div class="col-lg-12">
+            <!-- Embedded Google Map using an iframe - to select your location find it on Google maps and paste the link as the iframe src. If you want to use the Google Maps API instead then have at it! -->
+            <iframe scrolling="no" frameborder="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2846.710625275883!2d26.1061385158562!3d44.48010397910156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b202797a54bac1%3A0x365f39e7d7ef7166!2sKepler-Rominfo!5e0!3m2!1sro!2sro!4v1503048554459" marginwidth="0" marginheight="0"></iframe>
+
+
+
+        </div>
+    </div><!-- /.row -->
+    <div class="row">
+        <div class="col-sm-8">
+            <h3>Ia legătura cu noi</h3>
+            <p>Pentru a evita filtrele de junk mail, în cazul în care ne contactați prima dată, vă rugăm să folosiți formularul de mai jos. În acest fel vă asigurați că mesajul dumnevoastră va ajunge la noi. Vă mulțumim.</p>
+
+            @if (!String.IsNullOrEmpty(ViewBag.Status))
+            {
+                <h1>@ViewBag.Status</h1>
+            }
+            <form asp-controller="Contact" asp-action="Index" asp-antiforgery="true" method="post" class="ord-form">
+                <div class="row">
+                    <div class="form-group col-lg-4">
+                        <label asp-for="LastName" style="color:white;">Nume </label><br />
+                        <input type="text" asp-for="LastName" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label asp-for="FirstName" style="color:white;">Prenume </label><br />
+                        <input type="text" asp-for="FirstName" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group col-lg-4">
+                        <label asp-for="Email" style="color:white;">Email </label><br />
+                        <input type="text" asp-for="Email" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group col-lg-12">
+                        <label asp-for="Comment" style="color:white;">Comentariu</label><br />
+                        <input type="text" asp-for="Comment" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group col-lg-12">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-4">
+            <h3>Northwind Phone</h3>
+            <h4></h4><br />
+            <span>
+                <i class="glyphicon glyphicon-map-marker"></i>
+                Bulevardul Dimitrie Pompeiu 5, <br />
+                Sector 2, București 077190.<br />
+
+            </span>
+            <span><i class="glyphicon glyphicon-earphone"></i> : 021 233 1080 </span><br />
+            <span><i class="glyphicon glyphicon-envelope"></i> : <a href="https://www.kepler-rominfo.com/pages/home">northwind-phone.com </a></span><br />
+            <span><i class="glyphicon glyphicon-calendar"></i>  : Luni - Vineri: 9:00 AM - 6:00 PM</span><br />
+        </div>
+    </div><!-- /.row -->
+</div> 

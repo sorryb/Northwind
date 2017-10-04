@@ -1,4 +1,4 @@
-﻿@model NorthwindWeb.Models.Categories
+﻿@model Categories
 
 @{
     ViewBag.Title = "Adauga";
@@ -8,17 +8,14 @@
 <h2>Adauga</h2>
 
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
+<form asp-antiforgery="true" asp-controller="Categories" asp-action="Create">
     <div class="form-horizontal">
         <ol class="breadcrumb">
             <li>
-                @Html.ActionLink("Dashboard", "Home", "Dashboard")
+                <a asp-action="Home" asp-controller="Dashboard">Dashboard</a>
             </li>
             <li>
-                @Html.ActionLink("Categorii", "Index", "Categories")
+                <a asp-controller="Categories" asp-action="Index">Categorii</a>
             </li>
             <li class="active">Adauga</li>
             
@@ -32,7 +29,8 @@
         <div class="form-group">
             <span class="control-label col-md-2 bold"><strong>Nume Categorie</strong></span>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CategoryName)
+                <input type="text" asp-for="CategoryName" />
+                @*@Html.EditorFor(model => model.CategoryName)*@
                 @Html.ValidationMessageFor(model => model.CategoryName)
             </div>
         </div>
@@ -40,7 +38,8 @@
         <div class="form-group">
             <span class="control-label col-md-2 bold"><strong>Descriere</strong></span>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description)
+                <input type="text" asp-for="Description" />
+                @*@Html.EditorFor(model => model.Description)*@
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
         </div>
@@ -51,12 +50,8 @@
             </div>
         </div>
     </div>
-}
+</form>
 
 <div>
-    @Html.ActionLink("Inapoi", "Index",null , new { @class = "btn btn-default" })
+    <a asp-action="Index" class="btn btn-default">Inapoi</a>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

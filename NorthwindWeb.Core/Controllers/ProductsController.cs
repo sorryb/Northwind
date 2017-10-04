@@ -3,6 +3,8 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using NorthwindWeb.Core.Context;
 using NorthwindWeb.Core.ViewModels;
+using NorthwindWeb.Core.Models;
+using System.Collections.Generic;
 
 namespace NorthwindWeb.Controllers
 {
@@ -23,7 +25,14 @@ namespace NorthwindWeb.Controllers
         /// <returns>PagedList</returns>
         public ActionResult Products(string category, string search = "", int? page = 1)
         {
-            var products = db.Products as IQueryable<ViewProductCategoryS>;
+            var product1 = new ViewProductCategoryS() { ProductID = "1000", ProductName = "alabala" };
+            var product2 = new ViewProductCategoryS() { ProductID = "1001", ProductName = "portocala" };
+            var products = new List<ViewProductCategoryS>();
+            products.Add(product1);
+            products.Add(product2);
+            return View(products.ToList());
+
+            //products = db.Products as IQueryable<ViewProductCategoryS>;
             ViewBag.title = ViewBag.category= "Produse";
             ViewBag.search = search;
             int categID = 0;
@@ -40,23 +49,23 @@ namespace NorthwindWeb.Controllers
             }
 
             //Gets all products filtered by category and by name from the database.
-            products = from prod in db.Products
-                       join cat in db.Categories on prod.CategoryID equals cat.CategoryID
-                       join supp in db.Suppliers on prod.SupplierID equals supp.SupplierID
-                       where (categID>0 ? prod.CategoryID == categID : true) && prod.ProductName.Contains(search)
-                       orderby prod.ProductName ascending
-                       select new ViewProductCategoryS
-                       {
-                           CategoryName = cat.CategoryName,
-                           ProductName = prod.ProductName,
-                           ProductID = prod.ProductID.ToString(),
-                           ProductPrice = prod.UnitPrice ?? 0,
-                           OnOrder = prod.UnitsOnOrder.ToString(),
-                           Stock = prod.UnitsInStock.ToString(),
-                           SuppliersName = supp.CompanyName,
-                           Discontinued = prod.Discontinued
-                       };
-            products = products.OrderBy(x => x.Discontinued).ThenBy(y => y.ProductName);
+            //products = from prod in db.Products
+            //           join cat in db.Categories on prod.CategoryID equals cat.CategoryID
+            //           join supp in db.Suppliers on prod.SupplierID equals supp.SupplierID
+            //           where (categID>0 ? prod.CategoryID == categID : true) && prod.ProductName.Contains(search)
+            //           orderby prod.ProductName ascending
+            //           select new ViewProductCategoryS
+            //           {
+            //               CategoryName = cat.CategoryName,
+            //               ProductName = prod.ProductName,
+            //               ProductID = prod.ProductID.ToString(),
+            //               ProductPrice = prod.UnitPrice ?? 0,
+            //               OnOrder = prod.UnitsOnOrder.ToString(),
+            //               Stock = prod.UnitsInStock.ToString(),
+            //               SuppliersName = supp.CompanyName,
+            //               Discontinued = prod.Discontinued
+            //           };
+            //products = products.OrderBy(x => x.Discontinued).ThenBy(y => y.ProductName);
             int pageSize;
             try
             {

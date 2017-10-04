@@ -1,4 +1,4 @@
-﻿@model NorthwindWeb.Models.Categories
+﻿@model Categories
 
 @{
     ViewBag.Title = "Detalii";
@@ -10,10 +10,10 @@
 <div>
     <ol class="breadcrumb">
         <li>
-            @Html.ActionLink("Dashboard", "Home", "Dashboard")
+            <a asp-action="home" asp-controller="Dashboard">Dashboard</a>
         </li>
         <li>
-            @Html.ActionLink("Categorii", "Index", "Orders")
+            <a asp-controller="Categories" asp-action="Index">Categorii</a>
         </li>
         <li class="active">Detalii</li>
     </ol>
@@ -42,7 +42,6 @@
         </dl>
 </div>
 <p>
-    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Modifica", "Edit", new { id = Model.CategoryID }, new { @class = "btn btn-default" })
-   
+    <a asp-action="Index" class="btn btn-default">Inapoi</a>
+    <a asp-action="Edit" asp-route-id="@Model.CategoryID" class="btn btn-default">Modifica</a>
 </p>

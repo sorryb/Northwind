@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "FAQ";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Intrebari frecvente
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <a asp-controller="Home" asp-action="Index">Home</a>
+
+                </li>
+                <li class="active">FAQ</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="accordion" class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseOne" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                Am gresit datele de facturare. Se poate refactura comanda?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseOne" style="height: 0px;">
+                        <div class="panel-body">
+                            In cazul in care comanda este finalizata, modificarea datelor de facturare presupune stornarea facturii initiale si emiterea unei noi facturi. Refacturarea se poate face doar in cadrul aceleiasi luni contabile si doar pentru facturile ce depasesc valoarea de 500 RON. Pentru a solicita o refacturare, completeaza formularul disponibil, aici, atat cu datele comenzii ce trebuie refacute, cat si cu noile date de facturare.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseTwo" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                Care este avantajul unei comenzi online?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseTwo" style="height: 0px;">
+                        <div class="panel-body">
+                            Plasarea comenzii online prezinta o serie de avantaje: a) Comenzile pot fi inregistrate la orice ora, fiind preluate in ordinea inregistrarii lor; b) Rezervarea produselor se face automat la inregistrarea comenzii, daca acestea au statusul "In stoc''; c) Poti verifica direct din contul tau Northwind Phone traseul comenzii de la inregistrarea ei pana la livrare.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseThree" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                Cand se livreaza comanda mea?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseThree">
+                        <div class="panel-body">
+                            Pentru produsele vandute de Northwind Phone, imediat ce predam curierului comanda ta vei primi un email care va contine data estimativa de livrare.   Poti urmari in orice clipa statusul comenzii tale intrand in contul de client, sectiunea Istoric comenzi. Daca ai comandat un produs vandut de catre un partener Northwind Phone, comanda ta va fi livrata prin curier in aproximativ 24-48 de ore. Termenul concret de livrare iti va fi comunicat de catre partenerul Northwind Phone.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseFour" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                Cum verific daca produsul este eligibil pentru retur?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseFour">
+                        <div class="panel-body">
+                            Un produs este eligibil pentru retur daca este in aceeasi stare in care a fost livrat (nu prezinta: zgarieturi, deteriorari, accesorii lipsa, ambalaj incomplet, socuri electrice) si nu face parte din exceptiile mentionate aici.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseFive" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                In cat timp primesc banii inapoi in urma returului efectuat?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseFive">
+                        <div class="panel-body">
+                            Banii se pot returna in termen de maxim 14 zile de la primirea produsului de catre Northwind Phone, in contul indicat la completarea formularului 30 de zile drept de retur. Daca plata a fost efectuata cu card bancar online, restituirea se va efectua in contul respectiv.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseSix" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                Nu sunt multumit de produs. Cum procedez pentru retur?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseSix">
+                        <div class="panel-body">
+                            Verifica daca produsul este eligibil pentru retur si apoi completeaza formularul de returnare produs de pe site cel tarziu in a 30-a zi calendaristica de la data ridicarii/primirii produsului. Produsul trebuie returnat in aceeasi stare in care a fost livrat, in ambalajul original.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseSeven" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                Pot folosi banii proveniti in urma unui retur pentru o comanda noua?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseSeven">
+                        <div class="panel-body">
+                            Da, banii proveniti in urma unui retur pot fi folositi pentru achitarea altui produs, conditia este ca tu sa inregistrezi comanda telefonic. In cazul in care comanda se inregistreaza online soldul nu se aplica automat, de aceea te rugam sa ne contactezi la numarele de telefon expuse in sectiunea  Contact pentru modificarea rambursului.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseEight" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                Cum pot anula sau modifica o comanda activa?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseEight">
+                        <div class="panel-body">
+                            O comanda activa poate fi anulata sau modificata telefonic la numerele expuse in sectiunea Contact.
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a href="#collapseNine" data-parent="#accordion" data-toggle="collapse" class="accordion-toggle collapsed">
+                                Produsul primit prezinta un defect fizic. Cum procedez?
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse" id="collapseNine">
+                        <div class="panel-body">
+                            Daca produsul primit are un defect fizic (este lovit, zgariat, fisurat, ciobit, spart) iti recomandam sa refuzi livrarea. Daca totusi ai acceptat coletul, iti recomandam sa nu folosesti produsul si sa ne aduci situatia la cunostinta in maxim 48 de ore de la livrare, prin completarea formularului de Reclamatii & Sesizari .Orice sesizare ulterioara nu va putea fi solutionata pozitiv.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

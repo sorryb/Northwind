@@ -25,13 +25,15 @@ namespace NorthwindWeb.Controllers
         /// <returns>Products index view</returns>
         public ActionResult Index()
         {
-            var viewModel = new ServicesIndex();
+            var viewModel = new ServicesIndex
+            {
 
-            //take the names of first 4 products
-            viewModel.TopFourName = (from p in db.Products
-                                  where (p.CategoryID==6)
-                                  orderby p.ProductID
-                                  select p.ProductName).Take(4);
+                //take the names of first 4 products
+                TopFourName = (from p in db.Products
+                               where (p.CategoryID == 6)
+                               orderby p.ProductID
+                               select p.ProductName).Take(4)
+            };
 
             //take first 4 products
             var products = (from p in db.Products
@@ -54,15 +56,16 @@ namespace NorthwindWeb.Controllers
             //lopp in first 4 products 
             foreach (var itemInProducts in products)
             {
-                ProductServices product = new ProductServices();
-
-                product.ProductName = itemInProducts.ProductName;
-                product.CategoryName = itemInProducts.CategoryName;
-                product.CompanyName = itemInProducts.CompanyName;
-                product.QuantityPerUnit = itemInProducts.QuantityPerUnit;
-                product.UnitPrice = itemInProducts.UnitPrice;
-                product.UnitsInStock = itemInProducts.UnitsInStock;
-                product.UnitsOnOrder = itemInProducts.UnitsOnOrder;
+                ProductServices product = new ProductServices
+                {
+                    ProductName = itemInProducts.ProductName,
+                    CategoryName = itemInProducts.CategoryName,
+                    CompanyName = itemInProducts.CompanyName,
+                    QuantityPerUnit = itemInProducts.QuantityPerUnit,
+                    UnitPrice = itemInProducts.UnitPrice,
+                    UnitsInStock = itemInProducts.UnitsInStock,
+                    UnitsOnOrder = itemInProducts.UnitsOnOrder
+                };
 
                 listOfProducts.Add(product);
 
@@ -93,16 +96,17 @@ namespace NorthwindWeb.Controllers
             //loop in last 3 products
             foreach (var itemInProductsDesc in productsOrderByDesc)
             {
-                ProductServices product = new ProductServices();
-
-                product.ProductName = itemInProductsDesc.ProductName;
-                product.ProductID = itemInProductsDesc.ProductID;
-                product.CategoryName = itemInProductsDesc.CategoryName;
-                product.CompanyName = itemInProductsDesc.CompanyName;
-                product.QuantityPerUnit = itemInProductsDesc.QuantityPerUnit;
-                product.UnitPrice = itemInProductsDesc.UnitPrice;
-                product.UnitsInStock = itemInProductsDesc.UnitsInStock;
-                product.UnitsOnOrder = itemInProductsDesc.UnitsOnOrder;
+                ProductServices product = new ProductServices
+                {
+                    ProductName = itemInProductsDesc.ProductName,
+                    ProductID = itemInProductsDesc.ProductID,
+                    CategoryName = itemInProductsDesc.CategoryName,
+                    CompanyName = itemInProductsDesc.CompanyName,
+                    QuantityPerUnit = itemInProductsDesc.QuantityPerUnit,
+                    UnitPrice = itemInProductsDesc.UnitPrice,
+                    UnitsInStock = itemInProductsDesc.UnitsInStock,
+                    UnitsOnOrder = itemInProductsDesc.UnitsOnOrder
+                };
 
                 listOfProductsOrderByDesc.Add(product);
 

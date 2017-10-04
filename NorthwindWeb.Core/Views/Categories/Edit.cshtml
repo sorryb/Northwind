@@ -1,4 +1,4 @@
-﻿@model NorthwindWeb.Models.Categories
+﻿@model Categories
 
 @{
     ViewBag.Title = "Modifica";
@@ -9,29 +9,26 @@
 <hr />
 <ol class="breadcrumb">
     <li>
-        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+        <a asp-action="home" asp-controller="Dashboard">Dashboard</a>
     </li>
     <li>
-        @Html.ActionLink("Categorii", "Index", "Orders")
+        <a asp-controller="Categories" asp-action="Index">Categorii</a>
     </li>
     <li class="active">Modifica</li>
 </ol>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Categorie</h4>
-        <hr />
-       
+<form asp-controller="Categories" asp-action="Edit" asp-antiforgery="true">
+        <div class="form-horizontal">
+            <h4>Categorie</h4>
+            <hr />
+
             @Html.ValidationSummary(true)
-            @Html.HiddenFor(model => model.CategoryID)
+            <input type="hidden" asp-for="CategoryID"/>
 
             <div class="form-group">
                 <span class="control-label col-md-2 bold"><strong>Nume Categorie</strong></span>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CategoryName)
+                    <input type="text" asp-for="CategoryName" />
                     @Html.ValidationMessageFor(model => model.CategoryName)
                 </div>
             </div>
@@ -39,7 +36,7 @@
             <div class="form-group">
                 <span class="control-label col-md-2 bold"><strong>Descriere</strong></span>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description)
+                    <input type="text" asp-for="Description" />
                     @Html.ValidationMessageFor(model => model.Description)
                 </div>
             </div>
@@ -49,13 +46,10 @@
                     <input type="submit" value="Salveaza" class="btn btn-default" />
                 </div>
             </div>
-</div>
-}
+        </div>
+    }
 
+</form>
 <div>
-    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
+    <a asp-action="Index" class="btn btn-default">Inapoi</a>
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
