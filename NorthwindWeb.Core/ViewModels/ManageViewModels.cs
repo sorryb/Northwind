@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using System.Web;
+//using System.Web;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace NorthwindWeb.ViewModels
+namespace NorthwindWeb.Core.ViewModels
 {
     /// <summary>
     /// Index view.
@@ -155,8 +155,8 @@ namespace NorthwindWeb.ViewModels
         /// <summary>
         /// The image user.
         /// </summary>
-        [Display(Name = "Poza de profil")]
-        public HttpPostedFileBase UserImage { get; set; }
+        //[Display(Name = "Poza de profil")]
+        //public HttpPostedFileBase UserImage { get; set; }
     }
 
     /// <summary>

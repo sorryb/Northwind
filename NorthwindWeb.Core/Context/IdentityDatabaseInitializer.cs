@@ -40,55 +40,55 @@ namespace NorthwindWeb.Context
 
             }
 
-            await AddUsersInRole(context,  northwindContext);
+            //await AddUsersInRole(context,  northwindContext);
 
         }
         //todo adauga useri in baza de date. sa speram ca merge :)
         //din cate am vazut trebuie sa fac o clasa mostenita din "alta" in care voi crea un createAsinc, delete, ... ajutat de un membru privat din clasa de baza
         //daca am vazut bine :)
 
-        public static async Task AddUsersInRole(ApplicationDbContext context, NorthwindDatabase northwindContext)
-        {
-            var userManager = new UserManager<ApplicationUser>(new UserStore(context));
-            //add admins
-            var user = new ApplicationUser();
-            user.UserName = "admin";
-            user.Email = "admin@gmail.com";
-            AddUser(userManager, user, "123456");
+        //public static async Task AddUsersInRole(ApplicationDbContext context, NorthwindDatabase northwindContext)
+        //{
+        //    var userManager = new UserManager<ApplicationUser>(new UserStore(context));
+        //    //add admins
+        //    var user = new ApplicationUser();
+        //    user.UserName = "admin";
+        //    user.Email = "admin@gmail.com";
+        //    AddUser(userManager, user, "123456");
 
-            //create user for tests
-            var testUser = new ApplicationUser();
-            testUser.UserName = "tester";
-            testUser.Email = "Tester_1@gmail.com";
-            AddUser(userManager, testUser, "Tester_1");
+        //    //create user for tests
+        //    var testUser = new ApplicationUser();
+        //    testUser.UserName = "tester";
+        //    testUser.Email = "Tester_1@gmail.com";
+        //    AddUser(userManager, testUser, "Tester_1");
 
 
-            var employees = northwindContext.Employees;
+        //    var employees = northwindContext.Employees;
 
-            foreach (var itemEmployee in employees)
-            {
-                ApplicationUser employee = new ApplicationUser();
-                employee.UserName = itemEmployee.FirstName + itemEmployee.LastName;
-                employee.Email = itemEmployee.FirstName + "@gmail.com";
-                await userManager.CreateAsync(employee, itemEmployee.FirstName + itemEmployee.LastName);
+        //    foreach (var itemEmployee in employees)
+        //    {
+        //        ApplicationUser employee = new ApplicationUser();
+        //        employee.UserName = itemEmployee.FirstName + itemEmployee.LastName;
+        //        employee.Email = itemEmployee.FirstName + "@gmail.com";
+        //        await userManager.CreateAsync(employee, itemEmployee.FirstName + itemEmployee.LastName);
 
-                var currentUser = await userManager.FindByNameAsync(itemEmployee.FirstName + itemEmployee.LastName);
-                if (itemEmployee.ReportsTo == null)
-                {
-                    var rolManagers = await userManager.AddToRoleAsync(currentUser, "Managers");
-                }
+        //        var currentUser = await userManager.FindByNameAsync(itemEmployee.FirstName + itemEmployee.LastName);
+        //        if (itemEmployee.ReportsTo == null)
+        //        {
+        //            var rolManagers = await userManager.AddToRoleAsync(currentUser, "Managers");
+        //        }
 
-                var rol = await userManager.AddToRoleAsync(currentUser, "Employees");
+        //        var rol = await userManager.AddToRoleAsync(currentUser, "Employees");
 
-            }
-        }
+        //    }
+        //}
 
         private static async Task AddUserAsync(UserManager<ApplicationUser> userManager, ApplicationUser user, string userPWD)
         {
             var chkUser = await userManager.CreateAsync(user, userPWD);
 
             //Add default User to Role Admin   
-            if (chkUser.Result == IdentityResult.Success)
+            if (chkUser.Succeeded)
             {
                 var resultForAdd = userManager.AddToRoleAsync(user, "Admins");
 

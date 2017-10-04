@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using NorthwindWeb.Core.Models;
-using System.Web;
+//using System.Web;
 
 namespace NorthwindWeb.ViewModels
 {
@@ -71,6 +71,6 @@ namespace NorthwindWeb.ViewModels
         /// <summary>
         /// The image of this product.
         /// </summary>
-        public HttpPostedFileBase ProductImage { get; set; }
+        //public HttpPostedFileBase ProductImage { get; set; }
     }
 }

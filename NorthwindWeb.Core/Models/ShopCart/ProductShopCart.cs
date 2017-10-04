@@ -30,7 +30,7 @@ namespace NorthwindWeb.Core.Models.ShopCart
         {
             get
             {
-                return (new NorthwindDatabase()).Products.Find(ID).ProductName;
+                return (new NorthwindDatabase(null)).Products.Find(ID).ProductName;
             }
             set
             {
@@ -45,7 +45,7 @@ namespace NorthwindWeb.Core.Models.ShopCart
         {
             get
             {
-                return (new NorthwindDatabase()).Products.Find(ID).UnitPrice ?? 99999999;
+                return (new NorthwindDatabase(null)).Products.Find(ID).UnitPrice ?? 99999999;
             }
             set
             {
@@ -60,7 +60,7 @@ namespace NorthwindWeb.Core.Models.ShopCart
         {
             get
             {
-                return (new NorthwindDatabase()).Products.Find(ID).Category.CategoryName;
+                return (new NorthwindDatabase(null)).Products.Find(ID).Category.CategoryName;
             }
             set
             {

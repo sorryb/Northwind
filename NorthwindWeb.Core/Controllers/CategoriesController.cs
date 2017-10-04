@@ -194,7 +194,6 @@ namespace NorthwindWeb.Controllers
         public JsonResult JsonTableFill(string search = "")
         {
             var categories = db.Categories.Include(p => p.Description).Where(x => x.CategoryName.Contains(search)).OrderBy(x => x.CategoryID);
-
             //Select what wee need in table
             return Json(
                categories.Select(x => new NorthwindWeb.Models.ServerClientCommunication.CategoriesData
@@ -203,8 +202,7 @@ namespace NorthwindWeb.Controllers
                    CategoryName = x.CategoryName,
                    Description = x.Description
 
-               })
-                , JsonRequestBehavior.AllowGet);
+               }));
         }
 
         /// <summary>

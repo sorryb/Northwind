@@ -50,10 +50,10 @@ namespace NorthwindWeb.Core
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<Context.NorthwindDatabase>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<Context.NorthwindDatabase>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -96,17 +96,17 @@ namespace NorthwindWeb.Core
 
             app.UseStaticFiles();
 
-            app.UseIdentity();
-            RolesData.SeedRoles(roleManager).Wait();
+            //RolesData.SeedRoles(roleManager).Wait();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseIdentity();
         }
     }
 }

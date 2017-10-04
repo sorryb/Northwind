@@ -36,9 +36,9 @@ namespace NorthwindWeb.Core.Context
 
             modelBuilder.Entity<ApplicationUser>().ToTable("Users").Property(p => p.Id).HasColumnName("UserId");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
-            modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
-            modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
-            modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
+            //modelBuilder.Entity<IdentityUserRole>().ToTable("UserRoles");
+            //modelBuilder.Entity<IdentityUserLogin>().ToTable("UserLogins");
+            //modelBuilder.Entity<IdentityUserClaim>().ToTable("UserClaims");
 
 
         }
