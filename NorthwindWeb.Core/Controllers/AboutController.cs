@@ -12,7 +12,12 @@ namespace NorthwindWeb.Controllers
     public class AboutController : Controller
     {
         NorthwindDatabase db = new NorthwindDatabase(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindDatabase>());
-       
+
+        public AboutController(NorthwindDatabase context)
+        {
+            db = context;
+        }
+
         /// <summary>
         /// Select the first 6 employees
         /// </summary>

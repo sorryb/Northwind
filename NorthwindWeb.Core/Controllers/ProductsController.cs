@@ -14,6 +14,11 @@ namespace NorthwindWeb.Controllers
     public class ProductsController : Controller
     {
         private NorthwindDatabase db = new NorthwindDatabase(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindDatabase>());
+
+        public ProductsController(NorthwindDatabase context)
+        {
+            db = context;
+        }
         //private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(ProductsController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         /// <summary>
         /// Returns a paged list filtered by category and by name
@@ -25,14 +30,7 @@ namespace NorthwindWeb.Controllers
         /// <returns>PagedList</returns>
         public ActionResult Products(string category, string search = "", int? page = 1)
         {
-            var product1 = new ViewProductCategoryS() { ProductID = "1000", ProductName = "alabala" };
-            var product2 = new ViewProductCategoryS() { ProductID = "1001", ProductName = "portocala" };
-            var products = new List<ViewProductCategoryS>();
-            products.Add(product1);
-            products.Add(product2);
-            return View(products.ToList());
-
-            //products = db.Products as IQueryable<ViewProductCategoryS>;
+            var products = db.Products as IQueryable<ViewProductCategoryS>;
             ViewBag.title = ViewBag.category= "Produse";
             ViewBag.search = search;
             int categID = 0;
@@ -49,23 +47,23 @@ namespace NorthwindWeb.Controllers
             }
 
             //Gets all products filtered by category and by name from the database.
-            //products = from prod in db.Products
-            //           join cat in db.Categories on prod.CategoryID equals cat.CategoryID
-            //           join supp in db.Suppliers on prod.SupplierID equals supp.SupplierID
-            //           where (categID>0 ? prod.CategoryID == categID : true) && prod.ProductName.Contains(search)
-            //           orderby prod.ProductName ascending
-            //           select new ViewProductCategoryS
-            //           {
-            //               CategoryName = cat.CategoryName,
-            //               ProductName = prod.ProductName,
-            //               ProductID = prod.ProductID.ToString(),
-            //               ProductPrice = prod.UnitPrice ?? 0,
-            //               OnOrder = prod.UnitsOnOrder.ToString(),
-            //               Stock = prod.UnitsInStock.ToString(),
-            //               SuppliersName = supp.CompanyName,
-            //               Discontinued = prod.Discontinued
-            //           };
-            //products = products.OrderBy(x => x.Discontinued).ThenBy(y => y.ProductName);
+            products = from prod in db.Products
+                       join cat in db.Categories on prod.CategoryID equals cat.CategoryID
+                       join supp in db.Suppliers on prod.SupplierID equals supp.SupplierID
+                       where (categID > 0 ? prod.CategoryID == categID : true) && prod.ProductName.Contains(search)
+                       orderby prod.ProductName ascending
+                       select new ViewProductCategoryS
+                       {
+                           CategoryName = cat.CategoryName,
+                           ProductName = prod.ProductName,
+                           ProductID = prod.ProductID.ToString(),
+                           ProductPrice = prod.UnitPrice ?? 0,
+                           OnOrder = prod.UnitsOnOrder.ToString(),
+                           Stock = prod.UnitsInStock.ToString(),
+                           SuppliersName = supp.CompanyName,
+                           Discontinued = prod.Discontinued
+                       };
+            products = products.OrderBy(x => x.Discontinued).ThenBy(y => y.ProductName);
             int pageSize;
             try
             {
@@ -77,6 +75,7 @@ namespace NorthwindWeb.Controllers
                 pageSize = 10;
             }
             int pageNumber = (page ?? 1);
+#warning "Need to rewrite paged list";
             return View(products.ToList());
         }
     }

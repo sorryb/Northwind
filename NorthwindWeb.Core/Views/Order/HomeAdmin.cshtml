@@ -1,0 +1,198 @@
+﻿@model NorthwindWeb.ViewModels.Order.OrderIndexData
+
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Orders";
+}
+<link href="~/css/Order.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Comenzi
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home")
+                </li>
+                <li class="active">Comenzi</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="whiterounded coloronwhite">
+                <table class="cell-border hover order-column" id="HomeAdmin">
+                    <!--Table with Orders-->
+                    <thead>
+                        <tr role="row">
+                            <th>Numar Comanda</th>
+                            <th>Data plasare</th>
+                            <th>Companie</th>
+                            <th>Furnizor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@foreach (var itemOrder in Model.Order)
+                    {
+                        string selectedRow = "";
+                        if (itemOrder.OrderID == ViewBag.OrderID)
+                        {
+                            selectedRow = "selectat";
+                        }
+                        <tr class="@selectedRow" role="row">
+                            <td>
+                                @Html.ActionLink(Convert.ToString(itemOrder.OrderID), "HomeAdmin", new { orderID = itemOrder.OrderID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                            </td>
+                            <td>
+                                @itemOrder.OrderDate
+                            </td>
+                            <td>
+                                @itemOrder.CompanyName
+                            </td>
+                            <td>
+                                @itemOrder.ShipperName
+                            </td>
+                        </tr>
+                    }*@
+                    </tbody>
+                </table>
+            </div>
+            <!--Pagination Orders-->
+           
+            <!--Table with OrdersDetails for selected Order-->
+            @if (Model.Order_Detail != null)
+            {<hr>
+                <h3>Detalii Comanda</h3>
+                <table class="table">
+                    <thead class="thead">
+
+                    <tr role="row">
+
+                        <th>Nume Produs</th>
+                        <th>Pret</th>
+                        <th>Cantitate</th>
+                        <th>Reducere</th>
+                    </tr>
+                    </thead>
+                    <tbody  class="tbody">
+                        @foreach (var itemOrderDetail in Model.Order_Detail)
+                        {
+                            string selectedRow = "";
+                            if (itemOrderDetail.ProductID == ViewBag.ProductID)
+                            {
+                                selectedRow = "selectat";
+                            }
+                            <tr class="@selectedRow">
+                                <td>
+                                    @Html.ActionLink(itemOrderDetail.ProductName, "HomeAdmin", new { orderID = ViewBag.OrderID, productID = itemOrderDetail.ProductID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => itemOrderDetail.UnitPrice) lei
+                                </td>
+                                <td>
+                                    @itemOrderDetail.Quantity
+                                </td>
+                                <td>
+                                    @(itemOrderDetail.Discount * 100)%
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            <!--Table with Product for selected OrdersDetail-->
+            @if (Model.Product != null)
+            {<hr>
+                <h3>
+                    Caracteristici Produs
+                </h3>
+                <table class="table">
+                    <thead class="thead">
+                        <tr role="row">
+                            <th>Denumire Produs</th>
+                            <th>Categorie</th>
+                            <th>Buc</th>
+                        </tr>
+                    </thead>
+                    <tbody  class="tbody">
+                        @foreach (var itemProduct in Model.Product)
+                        {
+                            <tr>
+                                <td>
+                                    @itemProduct.ProductName
+                                </td>
+                                <td>
+                                    @itemProduct.CategoryName
+                                </td>
+                                <td>
+                                    @itemProduct.UnitsInStock
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            
+           
+        </div>
+        <div class="col-lg-4">
+            <div class="well">
+                <!--Search in Orders-->
+                <h4>Cautare in comenzi</h4>
+                <div class="input-group">
+                    @using (Html.BeginForm("HomeAdmin", "Order", FormMethod.Get))
+                    {                  @Html.TextBox("search", ViewBag.CurrentFilter as string)
+
+                        <button type="submit" class="btn btn-default">
+                            <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    }
+                </div>
+                <!-- /input-group -->
+            </div>
+            <!-- The most expensive ten orders-->
+            <div class="well">
+                <h4>Cele mai scumpe comenzi</h4>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <table class="table">
+                            <tr>
+                                <th>Numar Comanda</th>
+                                <th>Cost</th>
+
+                            </tr>
+
+                            @foreach (var itemOrderTen in Model.OrderTen)
+                            {
+                                <tr>
+                                    <td>@Html.ActionLink(Convert.ToString(itemOrderTen.OrderID), "HomeAdmin", new { orderID = itemOrderTen.OrderID, search = itemOrderTen.OrderID })</td>
+                                    <td>@itemOrderTen.Cost lei</td>
+
+                                </tr>
+                            }
+                        </table>
+
+                    </div>
+                   
+                </div>
+            </div>
+            <!-- Order with the highest number of products -->
+            <div class="well">
+                <h4>Cea mai mare comanda</h4>
+                <table class="table">
+                    <tr>
+                        <th>@Html.ActionLink(Convert.ToString(Model.Command.OrderID), "HomeAdmin", new { orderID = Model.Command.OrderID, search = Model.Command.OrderID })</th>
+                        <th>@Model.Command.NumberOfProduct Produse</th>
+
+                    </tr>
+                </table>
+            </div>
+           
+        </div>
+
+    </div>
+
+</div>

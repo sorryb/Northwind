@@ -25,6 +25,11 @@ namespace NorthwindWeb.Controllers
         //private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
         private NorthwindDatabase db = new NorthwindDatabase(new DbContextOptions<NorthwindDatabase>());
 
+        public CategoriesController(NorthwindDatabase context)
+        {
+            db = context;
+        }
+
         /// <summary>
         /// Displays a page with all the categories existing in the database.
         /// </summary>

@@ -13,6 +13,10 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindDatabase db = new NorthwindDatabase(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindDatabase>());
 
+        public ContactController(NorthwindDatabase context)
+        {
+            db = context;
+        }
         /// <summary>
         /// Displays a Contact index page.
         /// </summary>

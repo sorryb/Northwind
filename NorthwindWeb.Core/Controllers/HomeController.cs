@@ -9,13 +9,13 @@ namespace NorthwindWeb.Core.Controllers
 {
     public class HomeController : Controller
     {
-        private NorthwindDatabase _northwindDatabase;
+        private NorthwindDatabase db;
         //private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(HomeController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
 
         public HomeController(NorthwindDatabase context)
         {
-            _northwindDatabase = context;
+            db = context;
         }
 
         /// <summary>

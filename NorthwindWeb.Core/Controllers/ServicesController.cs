@@ -19,6 +19,10 @@ namespace NorthwindWeb.Controllers
     {
         private NorthwindDatabase db = new NorthwindDatabase(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindDatabase>());
 
+        public ServicesController(NorthwindDatabase context)
+        {
+            db = context;
+        }
         /// <summary>
         /// take first 4 products and last 3 products with their details
         /// </summary>

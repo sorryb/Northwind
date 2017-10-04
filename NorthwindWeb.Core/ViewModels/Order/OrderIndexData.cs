@@ -1,11 +1,36 @@
 ﻿using System.Collections.Generic;
+using NorthwindWeb.Models;
+using NorthwindWeb.Core.ViewModels.Order;
 
-namespace NorthwindWeb.Core.ViewModels.Order
+namespace NorthwindWeb.ViewModels.Order
 {   /// <summary>
-    /// DONT USE IT. THIS WHILL BE DELETED
+    /// The data model sent by the OrderController to Home
     /// </summary>
     public class OrderIndexData
     {
-        //todo delete this class. This class was makedin mvc 6 to take data from model and send to view in paged list, but now in mvc core pagedlist not longeer exist
+        /// <summary>
+        /// Paging the list of OrderInfo
+        /// </summary>
+        public int Page { get; set; }
+        /// <summary>
+        /// List of OrderInfo
+        /// </summary>
+        public IEnumerable<OrderInfo> Order { get; set; }
+        /// <summary>
+        /// List of OrderProduct
+        /// </summary>
+        public IEnumerable<OrderProduct> Order_Detail { get; set; }
+        /// <summary>
+        /// List of ProductCategory
+        /// </summary>
+        public IEnumerable<ProductCategory> Product { get; set; }
+        /// <summary>
+        /// List of OrderTen
+        /// </summary>
+        public IEnumerable<OrderTen> OrderTen { get; set; }
+        /// <summary>
+        /// order with the highest number of products
+        /// </summary>
+        public BigOrder Command { get; set; }
     }
 }
