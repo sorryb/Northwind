@@ -18,7 +18,7 @@ namespace NorthwindWeb.Core.Models
         {
             Employees1 = new HashSet<Employees>();
             Orders = new HashSet<Orders>();
-            Territories = new HashSet<Territories>();
+            EmployeeTerritories = new HashSet<EmployeeTerritories>();
         }
 
         /// <summary>
@@ -140,6 +140,6 @@ namespace NorthwindWeb.Core.Models
         /// <summary>
         /// The territories where the employee works.
         /// </summary>
-        public virtual ICollection<Territories> Territories { get; set; }
+        public virtual ICollection<EmployeeTerritories> EmployeeTerritories { get; set; }
     }
 }

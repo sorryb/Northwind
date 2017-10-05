@@ -15,7 +15,7 @@ namespace NorthwindWeb.Core.Models
         public Customers()
         {
             Orders = new HashSet<Orders>();
-            CustomerDemographics = new HashSet<CustomerDemographics>();
+            CustomerCustomerDemo = new HashSet<CustomerCustomerDemo>();
         }
 
         /// <summary>
@@ -95,6 +95,6 @@ namespace NorthwindWeb.Core.Models
         /// <summary>
         /// The demography of the customer.
         /// </summary>
-        public virtual ICollection<CustomerDemographics> CustomerDemographics { get; set; }
+        public virtual ICollection<CustomerCustomerDemo> CustomerCustomerDemo { get; set; }
     }
 }

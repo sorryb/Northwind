@@ -22,7 +22,7 @@ namespace NorthwindWeb.Core.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data source=.\\SQLExpress;initial catalog=NorthwindP;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework");
+            optionsBuilder.UseSqlServer("Data source=.\\SQLExpress;initial catalog=NorthwindEF;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework");
         }
         /// <summary>
         /// Context for Categories table in northwind database
@@ -76,6 +76,14 @@ namespace NorthwindWeb.Core.Context
         /// Context for ShopCart table in northwind database
         /// </summary>
         public virtual DbSet<ShopCarts> ShopCart { get; set; }
+        /// <summary>
+        /// Context for CustomerCustomerDemo table in northwind database
+        /// </summary>
+        public virtual DbSet<CustomerCustomerDemo> CustomerCustomerDemo { get; set; }
+        /// <summary>
+        /// Context for EmployeeTerritories table in northwind database
+        /// </summary>
+        public virtual DbSet<EmployeeTerritories> EmployeeTerritories { get; set; }
 
         /// <summary>
         /// Build Information of Northwind DataBase
@@ -88,21 +96,48 @@ namespace NorthwindWeb.Core.Context
                 .Property(e => e.CustomerTypeID)
                 .HasColumnType("NCHAR(10)");
 
-            modelBuilder.Entity<CustomerDemographics>()
-                .HasMany(e => e.Customers);
+            modelBuilder.Entity<CustomerCustomerDemo>()
+                .Property(e => e.CustomerTypeID)
+                .HasColumnType("NCHAR(10)");
 
             modelBuilder.Entity<Customers>()
                 .Property(e => e.CustomerID)
                 .HasColumnType("NCHAR(5)");
 
-            modelBuilder.Entity<Customers>()
-                .HasMany(e => e.CustomerDemographics);
+            modelBuilder.Entity<CustomerCustomerDemo>()
+                .Property(e => e.CustomerID)
+                .HasColumnType("NCHAR(5)");
+
+            modelBuilder.Entity<CustomerCustomerDemo>()
+                .HasKey(e => new { e.CustomerTypeID, e.CustomerID });
+
+            modelBuilder.Entity<CustomerCustomerDemo>()
+                .HasOne(e => e.Customers)
+                .WithMany(c => c.CustomerCustomerDemo)
+                .HasForeignKey(d => d.CustomerID);
+
+            modelBuilder.Entity<CustomerCustomerDemo>()
+                .HasOne(bc => bc.CustomerDemographics)
+                .WithMany(b => b.CustomerCustomerDemo)
+                .HasForeignKey(bc => bc.CustomerTypeID);
+
+            modelBuilder.Entity<EmployeeTerritories>()
+                .HasKey(e => new { e.TerritoryID, e.EmployeeID });
 
             modelBuilder.Entity<Employees>()
-                .HasMany(e => e.Employees1);
+                .HasMany(e => e.Employees1)
+                .WithOne(e => e.Employee1)
+                .HasForeignKey(e => e.ReportsTo);
 
-            modelBuilder.Entity<Employees>()
-                .HasMany(e => e.Territories);
+            modelBuilder.Entity<EmployeeTerritories>()
+                .HasOne(e => e.Employees)
+                .WithMany(c => c.EmployeeTerritories)
+                .HasForeignKey(d => d.EmployeeID);
+
+            modelBuilder.Entity<EmployeeTerritories>()
+                .HasOne(bc => bc.Territories)
+                .WithMany(b => b.EmployeeTerritories)
+                .HasForeignKey(bc => bc.TerritoryID);
 
             modelBuilder.Entity<Order_Details>()
                 .Property(e => e.UnitPrice)
@@ -150,9 +185,7 @@ namespace NorthwindWeb.Core.Context
             modelBuilder.Entity<Territories>()
                 .Property(e => e.TerritoryDescription)
                 .HasColumnType("NCHAR(50)");
-
-            modelBuilder.Entity<Territories>()
-                .HasMany(e => e.Employees);
+            
 
             modelBuilder.Entity<Persons>()
                 .Property(e => e.LastName)

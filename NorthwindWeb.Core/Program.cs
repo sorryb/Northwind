@@ -34,9 +34,6 @@ namespace NorthwindWeb.Core
                     //test data
                     Context.NorthwindTestDatabaseInitializer.InsertNorthwindTestData(context);
 
-                    // add indexes
-                    context.Database.ExecuteSqlCommand("CREATE INDEX IX_Person_Name ON Persons (FirstName)");
-
                     //add views
                     //todo ensure that this is a thing
                     var sqlFiles = Directory.GetFiles(Startup._hostingEnvironment.ContentRootPath.ToString() + "\\App_Data\\SQL", "*.sql").OrderBy(x => x);
