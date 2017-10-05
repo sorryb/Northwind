@@ -20,32 +20,26 @@ namespace NorthwindWeb.Context.IdentityDatabaseInitializer
         "Employees"
         };
 
-        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager)
+        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             ApplicationDbContext context = new ApplicationDbContext();
             foreach (var role in roles)
             {
-
                 if (!await roleManager.RoleExistsAsync(role))
                 {
                     var create = await roleManager.CreateAsync(new IdentityRole(role));
 
                     if (!create.Succeeded)
                     {
-
                         throw new Exception("Failed to create role");
-
                     }
                 }
-
             }
-
+            var result = await userManager.CreateAsync(new ApplicationUser { UserName = "admin"}, "123+Asd");
             //await AddUsersInRole(context,  northwindContext);
             context.Dispose();
         }
-        //todo adauga useri in baza de date. sa speram ca merge :)
-        //din cate am vazut trebuie sa fac o clasa mostenita din "alta" in care voi crea un createAsinc, delete, ... ajutat de un membru privat din clasa de baza
-        //daca am vazut bine :)
+        //todo adauga useri in baza de date.
 
         //public static async Task AddUsersInRole(ApplicationDbContext context, NorthwindDatabase northwindContext)
         //{
