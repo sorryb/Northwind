@@ -131,9 +131,6 @@ namespace NorthwindWeb.Core.Controllers
             return View(model);
         }
 
-        //todo aici am ajuns cu modificatul in primul controller
-        //continua de aici
-
         //
         // POST: /Account/Logout
         [HttpPost]

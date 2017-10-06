@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Http;
 //using System.Web;
 
 namespace NorthwindWeb.Core.ViewModels
@@ -241,8 +242,7 @@ namespace NorthwindWeb.Core.ViewModels
         /// <summary>
         /// The image user.
         /// </summary>
-        /// see https://stackoverflow.com/questions/29836342/mvc-6-httppostedfilebase and delete this
-        //public  HttpPostedFileBase UserImage { get; set; }
+        public List<IFormFile> UserImage { get; set; }
     }
 
     /// <summary>

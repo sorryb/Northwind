@@ -18,6 +18,11 @@ using Microsoft.AspNetCore.Identity;
 using NorthwindWeb.Core.Services;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NorthwindWeb.Core.Controllers;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.IO;
+using NorthwindWeb.Core;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace NorthwindWeb.Controllers
 {
@@ -36,6 +41,8 @@ namespace NorthwindWeb.Controllers
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         private readonly string _externalCookieScheme;
+        private readonly NorthwindDatabase db;
+        private readonly ApplicationDbContext identityContext;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -43,7 +50,9 @@ namespace NorthwindWeb.Controllers
             IOptions<IdentityCookieOptions> identityCookieOptions,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            NorthwindDatabase northwindContext,
+            ApplicationDbContext applicationDbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -51,6 +60,8 @@ namespace NorthwindWeb.Controllers
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            db = northwindContext;
+            identityContext = applicationDbContext;
         }
 
 
@@ -123,11 +134,52 @@ namespace NorthwindWeb.Controllers
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
-            if (!await _signInManager.HasBeenVerifiedAsync())
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            if (user == null)
             {
                 return View("Error");
             }
             return View(new VerifyCodeViewModel { Provider = provider, ReturnUrl = returnUrl, RememberMe = rememberMe });
+        }
+
+        //
+        // POST: /Account/VerifyCode
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> VerifyCode(VerifyCodeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // The following code protects for brute force attacks against the two factor codes.
+            // If a user enters incorrect codes for a specified amount of time then the user account
+            // will be locked out for a specified amount of time.
+            var result = await _signInManager.TwoFactorSignInAsync(model.Provider, model.Code, model.RememberMe, model.RememberBrowser);
+            if (result.Succeeded)
+            {
+                return RedirectToLocal(model.ReturnUrl);
+            }
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning(7, "User account locked out.");
+                return View("Lockout");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid code.");
+                return View(model);
+            }
+        }
+
+        //
+        // GET: /Account/AccessDenied
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
         /// <summary>
@@ -229,74 +281,72 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
-        /// <summary>
-        /// create a new user
-        /// </summary>
-        /// <param name="model">data for new user</param>
-        /// <returns>Returns a redirect to the index page if the model is valid, otherwise it displays the errors</returns>
-        [HttpPost]
-        [Authorize(Roles = "Admins")]
-        [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public async Task<ActionResult> RegisterAdmin([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
-        {
-            try
-            {
-                model.UserName = HttpUtility.HtmlEncode(model.UserName);
-                if (!((model.UserImage == null) || model.UserImage.ContentType.Contains("image")))
-                {
-                    throw new ArgumentException("Fisierul selectat nu este o imagine");
-                }
-                if (ModelState.IsValid)
-                {
-                    ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
-                    var result = await UserManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
-                    {
-                        var currentUser = UserManager.FindByName(user.UserName);
-                        UserManager.AddToRole(currentUser.Id, "Guest");
-                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+        ///// <summary>
+        ///// create a new user
+        ///// </summary>
+        ///// <param name="model">data for new user</param>
+        ///// <returns>Returns a redirect to the index page if the model is valid, otherwise it displays the errors</returns>
+        //[HttpPost]
+        //[Authorize(Roles = "Admins")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> RegisterAdmin([Bind("UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
+        //{
+        //    try
+        //    {
+        //        if (!((model.UserImage == null) || model.UserImage.ContentType.Contains("image")))
+        //        {
+        //            throw new ArgumentException("Fisierul selectat nu este o imagine");
+        //        }
+        //        if (ModelState.IsValid)
+        //        {
+        //            ApplicationUser user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+        //            var result = await UserManager.CreateAsync(user, model.Password);
+        //            if (result.Succeeded)
+        //            {
+        //                var currentUser = UserManager.FindByName(user.UserName);
+        //                UserManager.AddToRole(currentUser.Id, "Guest");
+        //                //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                        if (model.UserImage != null)
-                        {
-                            string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
-                            model.UserImage.SaveAs(path);
-                        }
-                        return RedirectToAction("Index");
-                    }
-                    AddErrors(result);
-                }
+        //                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+        //                // Send an email with this link
+        //                // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+        //                // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+        //                // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+        //                if (model.UserImage != null)
+        //                {
+        //                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
+        //                    model.UserImage.SaveAs(path);
+        //                }
+        //                return RedirectToAction("Index");
+        //            }
+        //            AddErrors(result);
+        //        }
 
-                // If we got this far, something failed, redisplay form
-                return View(model);
-            }
-            catch (NullReferenceException e)
-            {
-                logger.Error(e.ToString());
-                throw new NullReferenceException("Imaginea nu a putut fi gasita");
-            }
-            catch (ArgumentException e)
-            {
-                logger.Error(e.ToString());
-                throw new ArgumentException("Fisierul ales nu este o imagine");
-            }
-            catch (HttpRequestValidationException e)
-            {
-                logger.Error(e.ToString());
-                throw new HttpRequestValidationException("Nu aveti voie sa introduceti html sau script in acest camp.");
-            }
-            catch (Exception e)
-            {
-                //if something else goes wrong
-                logger.Error(e.ToString());
-                throw new Exception("Ceva nu a mers bine, va rugam reincercati. Daca problema persista contactati un administrator.");
-            }
-        }
+        //        // If we got this far, something failed, redisplay form
+        //        return View(model);
+        //    }
+        //    catch (NullReferenceException e)
+        //    {
+        //        logger.Error(e.ToString());
+        //        throw new NullReferenceException("Imaginea nu a putut fi gasita");
+        //    }
+        //    catch (ArgumentException e)
+        //    {
+        //        logger.Error(e.ToString());
+        //        throw new ArgumentException("Fisierul ales nu este o imagine");
+        //    }
+        //    catch (HttpRequestValidationException e)
+        //    {
+        //        logger.Error(e.ToString());
+        //        throw new HttpRequestValidationException("Nu aveti voie sa introduceti html sau script in acest camp.");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        //if something else goes wrong
+        //        logger.Error(e.ToString());
+        //        throw new Exception("Ceva nu a mers bine, va rugam reincercati. Daca problema persista contactati un administrator.");
+        //    }
+        //}
 
         /// <summary>
         /// Confirm email
@@ -311,7 +361,12 @@ namespace NorthwindWeb.Controllers
             {
                 return View("Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View("Error");
+            }
+            var result = await _userManager.ConfirmEmailAsync(user, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -337,8 +392,8 @@ namespace NorthwindWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -394,16 +449,16 @@ namespace NorthwindWeb.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetPasswordConfirmation", "Account");
+                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
             }
             AddErrors(result);
             return View();
@@ -419,15 +474,17 @@ namespace NorthwindWeb.Controllers
             return View();
         }
 
-        ////
-        //// POST: /Account/ExternalLogin
+        //
+        // POST: /Account/ExternalLogin
         //[HttpPost]
         //[AllowAnonymous]
         //[ValidateAntiForgeryToken]
         //public ActionResult ExternalLogin(string provider, string returnUrl)
         //{
-        //    // Request a redirect to the external login provider
-        //    return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+        //    // Request a redirect to the external login provider.
+        //    var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { ReturnUrl = returnUrl });
+        //    var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+        //    return Challenge(properties, provider);
         //}
 
 
@@ -438,72 +495,64 @@ namespace NorthwindWeb.Controllers
         /// <param name="rememberMe">if you want to save your password</param>
         /// <returns>Returns send code view</returns>
         [AllowAnonymous]
-        public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
+        public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe = false)
         {
-            var userId = await SignInManager.GetVerifiedUserIdAsync();
+            var userId = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (userId == null)
             {
                 return View("Error");
             }
-            var userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
+            var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(userId);
             var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
         }
 
-        /// <summary>
-        /// code with the data of a new user
-        /// </summary>
-        /// <param name="model">data of a new user</param>
-        /// <returns>returns an error or Verify code</returns>
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SendCode(SendCodeViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
 
-            // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
-            {
-                return View("Error");
-            }
-            return RedirectToAction("VerifyCode", new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
-        }
         /// <summary>
         /// result for external logging
         /// </summary>
         /// <param name="returnUrl">redirect to this action</param>
         /// <returns>Return external login result</returns>
-        [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
-        {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            if (loginInfo == null)
-            {
-                return RedirectToAction("Login");
-            }
+        //[AllowAnonymous]
+        //public async Task<ActionResult> ExternalLoginCallback(string returnUrl, string remoteError = null)
+        //{
+        //    if (remoteError != null)
+        //    {
+        //        ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
+        //        return View(nameof(Login));
+        //    }
+        //    var info = await _signInManager.GetExternalLoginInfoAsync();
+        //    if (info == null)
+        //    {
+        //        return RedirectToAction(nameof(Login));
+        //    }
 
-            // Sign in the user with this external login provider if the user already has a login
-            var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
-            switch (result)
-            {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
-                case SignInStatus.Failure:
-                default:
-                    // If the user does not have an account, then prompt the user to create an account
-                    ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
-            }
-        }
+        //    // Sign in the user with this external login provider if the user already has a login.
+        //    var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+        //    if (result.Succeeded)
+        //    {
+        //        _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
+        //        return RedirectToLocal(returnUrl);
+        //    }
+        //    if (result.RequiresTwoFactor)
+        //    {
+        //        return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl });
+        //    }
+        //    if (result.IsLockedOut)
+        //    {
+        //        return View("Lockout");
+        //    }
+        //    else
+        //    {
+        //        // If the user does not have an account, then ask the user to create an account.
+        //        ViewData["ReturnUrl"] = returnUrl;
+        //        ViewData["LoginProvider"] = info.LoginProvider;
+        //        var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+        //        return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
+        //    }
+        //}
+
+
         /// <summary>
         /// ExternalLoginConfirmation
         /// </summary>
@@ -513,38 +562,36 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl = null)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Manage");
-            }
-
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                var info = await _signInManager.GetExternalLoginInfoAsync();
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user);
+                var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
                         return RedirectToLocal(returnUrl);
                     }
                 }
                 AddErrors(result);
             }
 
-            ViewBag.ReturnUrl = returnUrl;
+            ViewData["ReturnUrl"] = returnUrl;
             return View(model);
         }
+
+
         /// <summary>
         /// LogOff
         /// </summary>
@@ -552,11 +599,12 @@ namespace NorthwindWeb.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult LogOff()
+        public async Task<IActionResult> LogOffAsync()
         {
-            if (System.Web.HttpContext.Current != null)
-                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            // check if this is log off sau log out(probabil este asa)
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation(4, "User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
 
@@ -610,11 +658,11 @@ namespace NorthwindWeb.Controllers
                 ApplicationUser user = null;
                 if (!String.IsNullOrEmpty(userName))
                 {
-                    user = await UserManager.FindByNameAsync(userName);
+                    user = await _userManager.FindByNameAsync(userName);
                 }
                 else
                 {
-                    user = await UserManager.FindByNameAsync(ViewBag.UserName);
+                    user = await _userManager.FindByNameAsync(ViewBag.UserName);
                 }
                 model.Email = user.Email;
                 model.UserName = user.UserName;
@@ -624,8 +672,9 @@ namespace NorthwindWeb.Controllers
             }
             catch (Exception exception)
             {
-                logger.Error(exception.ToString());
-
+                //todo add logger
+                //logger.Error(exception.ToString());
+                throw exception;
             }
             return View(model);
         }
@@ -636,70 +685,86 @@ namespace NorthwindWeb.Controllers
         /// <returns>Returns to index if succes else returns to this page</returns>
         [HttpPost]
         [Authorize(Roles = "Admins")]
-        public async Task<ActionResult> ChangeUser([Bind(Include = "UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
+        public async Task<ActionResult> ChangeUser([Bind("UserName,Email,Password,ConfirmPassword,UserImage")]RegisterViewModel model)
         {
             try
             {
-                if (!((model.UserImage == null) || model.UserImage.ContentType.Contains("image")))
+                //todo check if this is good (contains(image))
+                if (!(model.UserName == null))
                 {
                     throw new ArgumentException("Fisierul selectat nu este o imagine");
                 }
-                IdentityResult isChanged = new IdentityResult("Nu s-a putut modifica!");
-                string userName = Request["Name"];
+
                 if (!ModelState.IsValid)
                 {
-                    ViewBag.UserName = userName;
+                    ViewBag.UserName = model.UserName;
                     return View(model);
                 }
-                var user = await UserManager.FindByNameAsync(userName);
+
+                var user = await _userManager.FindByNameAsync(model.UserName);
+                await _userManager.ChangePasswordAsync(user, model.ConfirmPassword, model.Password);
                 user.UserName = model.UserName;
                 user.Email = model.Email;
-                user.PasswordHash = UserManager.PasswordHasher.HashPassword(model.Password);
-                if (UserManager.IsInRole(user.Id, "Customers"))
+
+
+                if (await _userManager.IsInRoleAsync(user, "Customers"))
                 {
-                    NorthwindDatabase db = new NorthwindDatabase();
-                    var customers = db.Customers.Where(c => c.ContactName == userName).FirstOrDefault();
+                    var customers = db.Customers.Where(c => c.ContactName == model.UserName).FirstOrDefault();
                     if (customers != null)
                         customers.ContactName = user.UserName;
                     db.Entry(customers).State = EntityState.Modified;
-                    db.Dispose();
+                    db.SaveChanges();
 
                 }
 
-                isChanged = UserManager.Update(user);
+                await _userManager.UpdateAsync(user);
+                
+
                 if (model.UserImage != null)
                 {
-                    System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
-                    string path = System.IO.Path.Combine(Server.MapPath($"~/images"), $"{model.UserName}.jpg");
-                    model.UserImage.SaveAs(path);
+                    string path = System.IO.Path.Combine(Startup._hostingEnvironment + "\\images\\", $"{model.UserName}.jpg");
+                    //todo verifica daca sunt necesate \\ de la images\\
+                    System.IO.File.Delete(path);
+
+                    foreach (var formFile in model.UserImage)
+                    {
+                        if (formFile.Length > 0)
+                        {
+                            using (var stream = new FileStream(path, FileMode.Create))
+                            {
+                                await formFile.CopyToAsync(stream);
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    System.IO.File.Move(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"), System.IO.Path.Combine(Server.MapPath($"~/images"), $"{user.UserName}.jpg"));
+                    string path = System.IO.Path.Combine(Startup._hostingEnvironment + "\\images\\", $"{model.UserName}.jpg");
+                    System.IO.File.Move(System.IO.Path.Combine(path, $"{model.UserName}.jpg"), System.IO.Path.Combine(path, $"{user.UserName}.jpg"));
                 }
                 return RedirectToAction("Index", new { status = "Schimbarile sau efectuat" });
 
 
             }
-            catch (NullReferenceException e)
+            //todo in bellow catch log the error
+            catch (NullReferenceException)
             {
-                logger.Error(e.ToString());
+                //logger.Error(e.ToString());
                 throw new NullReferenceException("Imaginea nu a putut fi gasita");
             }
-            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            catch (DbUpdateException e)
             {
-                logger.Error(e.ToString());
-                throw new System.Data.Entity.Infrastructure.DbUpdateException("Nu s-au putut efectua modificatile");
+                //logger.Error(e.ToString());
+                throw new DbUpdateException("Nu s-au putut efectua modificatile", e.InnerException);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
-                logger.Error(e.ToString());
+                //logger.Error(e.ToString());
                 throw new ArgumentException("Fisierul ales nu este o imagine");
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                logger.Error(exception.ToString());
-
+                //logger.Error(exception.ToString());
                 return RedirectToAction("Index", new { status = "Schimbarile nu sau putut efectua" });
             }
 
@@ -718,20 +783,21 @@ namespace NorthwindWeb.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<ActionResult> Delete(string userName)
         {
-            IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
+            IdentityResult isDeleted = IdentityResult.Failed() ;
 
-            string curentUser = User.Identity.GetUserName();
-            ApplicationUser user = await UserManager.FindByNameAsync(userName);
+            string curentUser = User.Identity.Name;
+            ApplicationUser user = await _userManager.FindByNameAsync(userName);
 
             if (!String.IsNullOrEmpty(userName))
             {
-                if (user.UserName == curentUser) { LogOff(); }
-                isDeleted = UserManager.Delete(user);
+                if (user.UserName == curentUser) { await LogOffAsync(); }
+                isDeleted = await _userManager.DeleteAsync(user);
             }
 
             if (isDeleted.Succeeded)
-
-                System.IO.File.Delete(System.IO.Path.Combine(Server.MapPath($"~/images"), $"{userName}.jpg"));
+            {
+                System.IO.File.Delete(System.IO.Path.Combine(Startup._hostingEnvironment + "\\images\\", $"{userName}.jpg"));
+            }
 
             //    return RedirectToAction("Index", "Home");
             //else
@@ -744,17 +810,17 @@ namespace NorthwindWeb.Controllers
         /// <param name="userName">Curent username</param>
         /// <returns>Returns details for user delete</returns>
         [Authorize(Roles = "Admins")]
-        public ActionResult DeleteUser(string userName)
+        public async Task<IActionResult> DeleteUser(string userName)
         {
             //ApplicationDbContext context = new ApplicationDbContext();
             ////var userStore = new UserStore<ApplicationUser>(context);
             //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             UserInfoViewModel userDelete = new UserInfoViewModel();
-
-            if (!String.IsNullOrEmpty(userName) && UserManager.FindByName(userName) != null)
+            var result = await _userManager.FindByNameAsync(userName);
+            if (!String.IsNullOrEmpty(userName) && result != null)
             {
-                userDelete.UserName = UserManager.FindByName(userName).UserName;
-                userDelete.Email = UserManager.FindByName(userName).Email;
+                userDelete.UserName = result.UserName;
+                userDelete.Email = result.Email;
 
             }
             return View(userDelete);
@@ -764,13 +830,8 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <returns>Returns to RoleIndex view</returns>        
         [Authorize(Roles = "Admins")]
-        public ActionResult RolesIndex()
+        public ActionResult RolesIndex(RoleManager<IdentityRole> roleManager)
         {
-
-            //var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());
-            var roleStore = new RoleStore<IdentityRole>(System.Web.HttpContext.Current.GetOwinContext().Get<ApplicationDbContext>());
-            var roleManager = new RoleManager<IdentityRole>(roleStore);
-
             List<RoleInfoViewModel> roleInfoViewModel = new List<RoleInfoViewModel>();
 
             foreach (var role in roleManager.Roles)
@@ -800,23 +861,21 @@ namespace NorthwindWeb.Controllers
         /// <returns>Returns create role error if status is not succes, if status is succes Redirect to the RoleIndex page</returns>
         [Authorize]
         [HttpPost]
-        public ActionResult CreateRole(RoleInfoViewModel roleInfo)
+        public async Task<ActionResult> CreateRole(RoleInfoViewModel roleInfo, RoleManager<IdentityRole> roleManager)
         {
             IdentityResult isCreated = null;
             ApplicationDbContext context = new ApplicationDbContext();
 
             using (context)
             {
-                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-
-                if (!roleManager.RoleExists(roleInfo.Name))
+                if (! await roleManager.RoleExistsAsync(roleInfo.Name))
                 {
 
                     // first we create Admin rool   
                     var role = new IdentityRole();
                     role.Name = roleInfo.Name;
 
-                    isCreated = roleManager.Create(role);
+                    isCreated = await roleManager.CreateAsync(role);
 
                     if (ViewData.Keys.Contains("RoleExists")) ViewData.Remove("RoleExists");
 
@@ -838,17 +897,16 @@ namespace NorthwindWeb.Controllers
         /// <param name="roleName"></param>
         /// <returns>Redirect to RoleIndex if succes, else display error message</returns>
         [Authorize]
-        public ActionResult RoleDelete(string roleName)
+        public async Task<IActionResult> RoleDelete(string roleName, RoleManager<IdentityRole> roleManager)
         {
             List<SelectListItem> selectItemsUserInRole = new List<SelectListItem>();
             ApplicationDbContext context = new ApplicationDbContext();
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            List<ApplicationUser> users = userManager.Users.ToList();
+            List<ApplicationUser> users = _userManager.Users.ToList();
 
             foreach (ApplicationUser user in users)
             {
 
-                if (userManager.IsInRole(user.Id, roleName))
+                if (await _userManager.IsInRoleAsync(user, roleName))
                     selectItemsUserInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
 
 
@@ -857,17 +915,15 @@ namespace NorthwindWeb.Controllers
             }
             if (selectItemsUserInRole.Count() == 0)
             {
-                IdentityResult isDeleted = new IdentityResult("Nu s-a putut sterge!");
-
+                IdentityResult isDeleted = IdentityResult.Failed();
 
                 using (context)
                 {
-                    var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-                    if (roleManager.RoleExists(roleName))
+                    if (await roleManager.RoleExistsAsync(roleName))
                     {
-                        IdentityRole role = roleManager.FindByName(roleName);
-                        isDeleted = roleManager.Delete(role);
+                        IdentityRole role = await roleManager.FindByNameAsync(roleName);
+                        isDeleted = await roleManager.DeleteAsync(role);
                     }
                 }
 
@@ -883,7 +939,8 @@ namespace NorthwindWeb.Controllers
                 {
                     error += user.Text + " ";
                 }
-                logger.Error(error.ToString());
+                //todo add logger
+                //logger.Error(error.ToString());
                 throw new DeleteException(error);
             }
         }
@@ -892,19 +949,14 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <param name="roleName"></param>
         /// <returns>Return UserInRole view</returns>
-        public ActionResult UsersInRole(string roleName)
+        public async Task<IActionResult> UsersInRole(string roleName)
         {
-            var context = new ApplicationDbContext();
-            //var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-
-
             List<UserInfoViewModel> userInfoViewModel = new List<UserInfoViewModel>();
 
-            foreach (var user in userManager.Users)
+            foreach (var user in _userManager.Users)
             {
 
-                if (userManager.IsInRole(user.Id, roleName))
+                if (await _userManager.IsInRoleAsync(user, roleName))
                     userInfoViewModel.Add(new UserInfoViewModel()
                     {
                         UserName = user.UserName,
@@ -924,30 +976,29 @@ namespace NorthwindWeb.Controllers
         /// <param name="roleInfo">Role name</param>
         /// <returns>Returns RoleMembership view after the selected user has been assigned the role</returns>
         [HttpPost]
-        public ActionResult RoleMembership(RoleInfoViewModel roleInfo)
+        public async Task<IActionResult> RoleMembership(RoleInfoViewModel roleInfo)
         {
-            var roleName = Request["name"];
+            var roleName = Request.Query["name"];
             var userName = Request.Form["UserList"];
-            var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var currentUser = userManager.FindByName(userName);
-            if (!string.IsNullOrEmpty(userName) && !userManager.IsInRole(currentUser.Id, roleName))
-                return AddUsersToRole();
+            var currentUser = await _userManager.FindByNameAsync(userName);
+            if (!string.IsNullOrEmpty(userName) && ! await _userManager.IsInRoleAsync(currentUser, roleName))
+                return await AddUsersToRole();
 
             //Roles.IsUserInRole(userName, roleName)
             //return View(roleInfo);
             //return View(new RoleInfoModel() { Name = roleName });
 
-            return RoleMembership();
+            return await RoleMembership();
         }
         /// <summary>
         /// user in role
         /// </summary>
         /// <returns>Returns RoleMembership view </returns>
         [HttpGet]
-        public ActionResult RoleMembership()
+        public async Task<IActionResult> RoleMembership()
         {
             //string roleName = Request["roleName"] != null ? Request["roleName"].ToString() : Roles.GetRolesForUser(User.Identity.Name)[0];
-            string roleName = Request["roleName"] != null ? Request["roleName"].ToString() : "Admins";
+            string roleName = String.IsNullOrEmpty(HttpContext.Request.Query["roleName"]) ? HttpContext.Request.Query["roleName"].ToString() : "Admins";
             //var usersInRole = from C in Roles.GetUsersInRole(roleName).AsQueryable() select C.ToLower();
 
             //var allUsers = Membership.GetAllUsers();
@@ -957,13 +1008,12 @@ namespace NorthwindWeb.Controllers
 
             var context = new ApplicationDbContext();
 
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            List<ApplicationUser> users = userManager.Users.ToList();
+            List<ApplicationUser> users = _userManager.Users.ToList();
 
             foreach (ApplicationUser user in users)
             {
 
-                if (!userManager.IsInRole(user.Id, roleName))
+                if (! await  _userManager.IsInRoleAsync(user, roleName))
                     selectItemsUserNotInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
                 //else
                 //    selectItemsUserInRole.Add(new SelectListItem() { Text = user.UserName, Value = user.UserName, Selected = false });
@@ -985,30 +1035,30 @@ namespace NorthwindWeb.Controllers
         /// </summary>
         /// <returns>Redirect to RoleMembership page</returns>        
         [Authorize(Roles = "Admins")]
-        public ActionResult AddUsersToRole()
+        public async Task<ActionResult> AddUsersToRole()
         {
-            string roleName = (string)Request["roleName"];
-            string userNameList = (string)Request["UserList"];
+            string roleName = (string)Request.Query["roleName"];
+            string userNameList = (string)Request.Query["UserList"];
 
 
             //Roles.AddUserToRole(userName, roleName);
 
             var context = new ApplicationDbContext();
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             try
             {
                 foreach (string userName in new string[] { userNameList })
                 {
-                    var user = userManager.FindByName(userName);
-                    userManager.AddToRole(user.Id, roleName);
+                    var user = await _userManager.FindByNameAsync(userName);
+                    await _userManager.AddToRoleAsync(user, roleName);
                 }
 
                 context.SaveChanges();
             }
             catch (Exception exception)
             {
-                logger.Error(exception.ToString());
+                //todo logger
+                //logger.Error(exception.ToString());
                 return View();
 
             }
@@ -1034,19 +1084,18 @@ namespace NorthwindWeb.Controllers
         /// <returns>Debunk user selected from role and redirect to RoleMembership page</returns>
         [HttpGet]
         [Authorize(Roles = "Admins")]
-        public ActionResult DeleteFromRole()
+        public async Task<IActionResult> DeleteFromRole()
         {
-            var roleName = Request["roleName"];
-            var userName = Request["userName"];
+            var roleName = Request.Query["roleName"];
+            var userName = Request.Query["userName"];
 
             //var account = new AccountController();
             var context = new ApplicationDbContext();
-            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser user = context.Users.Where(u => u.UserName.Equals(userName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
 
-            if (userManager.IsInRole(user.Id, roleName))
+            if (await _userManager.IsInRoleAsync(user, roleName))
             {
-                userManager.RemoveFromRole(user.Id, roleName);
+                await _userManager.RemoveFromRoleAsync(user, roleName);
                 ViewBag.ResultMessage = "Role removed from this user successfully !";
             }
             else
@@ -1109,7 +1158,7 @@ namespace NorthwindWeb.Controllers
                 : "";
             ViewBag.HasLocalPassword = User.Identity.IsAuthenticated;
 
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (user == null)
             {
                 return View("Error");
@@ -1523,85 +1572,27 @@ namespace NorthwindWeb.Controllers
         }
 
         #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
-        private IAuthenticationManager AuthenticationManager
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
-        }
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError(string.Empty, error.Description);
             }
         }
 
-        private ActionResult RedirectToLocal(string returnUrl)
+        private IActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
-        }
-
-        internal class ChallengeResult : HttpUnauthorizedResult
-        {
-            public ChallengeResult(string provider, string redirectUri)
-                : this(provider, redirectUri, null)
+            else
             {
-            }
-
-            public ChallengeResult(string provider, string redirectUri, string userId)
-            {
-                LoginProvider = provider;
-                RedirectUri = redirectUri;
-                UserId = userId;
-            }
-
-            public string LoginProvider { get; set; }
-            public string RedirectUri { get; set; }
-            public string UserId { get; set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-                if (UserId != null)
-                {
-                    properties.Dictionary[XsrfKey] = UserId;
-                }
-                context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
+                return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
-        /// <summary>
-        ///Dispose connection
-        /// </summary>
         #endregion
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_userManager != null)
-                {
-                    _userManager.Dispose();
-                    _userManager = null;
-                }
 
-                if (_signInManager != null)
-                {
-                    _signInManager.Dispose();
-                    _signInManager = null;
-                }
-            }
-
-            base.Dispose(disposing);
-        }
     }
 
     /// <summary>
