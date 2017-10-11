@@ -1,0 +1,114 @@
+﻿@model NorthwindWeb.Core.Models.Products
+
+@{
+    ViewBag.Title = "Detalii";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<h2>Detalii</h2>
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Produse", "Index", "Product")
+    </li>
+    @{
+        if (!String.IsNullOrEmpty(ViewBag.category))
+        {
+            <li>
+                <a asp-controller="Product" asp-action="Index" asp-route={ category=ViewBag.category}>ViewBag.category</a>
+            </li>
+        }
+    }
+    <li class="active">Detalii</li>
+</ol>
+
+<div class="row">
+    <div class="col-lg-3">
+        <h4>Produs</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Nume Categorie
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.CategoryName)<br />
+            </dd>
+
+            <dt>
+                Nume Furnizor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Supplier.CompanyName)<br />
+            </dd>
+
+            <dt>
+                Nume Produs
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductName)<br />
+            </dd>
+
+            <dt>
+                Cantitate
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.QuantityPerUnit)<br />
+            </dd>
+
+            <dt>
+                Pret
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitPrice)<br />
+            </dd>
+
+            <dt>
+                In Stoc
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitsInStock)<br />
+            </dd>
+
+            <dt>
+                Pe Comenzi
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitsOnOrder)<br />
+            </dd>
+
+            <dt>
+                Stoc limita
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ReorderLevel)<br />
+            </dd>
+
+            <dt>
+                Indisponibil
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Discontinued)<br />
+            </dd>
+
+        </dl>
+        <p class="col-lg-12">
+            <a asp-action="Edit" asp-route={ id = Model.ProductID, category = ViewBag.category, search = ViewBag.search} class="btn btn-default">Edit</a>
+            <a asp-action="Index" asp-route={ category=ViewBag.category, search=ViewBag.search} class="btn btn-default">Index</a>
+        </p>
+    </div>
+    <div class="col-lg-9">
+        <img src="~/Images/@Model.Category.CategoryName/@(Model.ProductID).jpg" class="img-responsive"/>
+    </div>
+</div>
+

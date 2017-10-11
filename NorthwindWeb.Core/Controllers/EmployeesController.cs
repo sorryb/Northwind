@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using NorthwindWeb.Core.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace NorthwindWeb.Controllers
 {

@@ -11,6 +11,7 @@ using NorthwindWeb.Core.Models.Interfaces;
 using NorthwindWeb.Core.Context;
 using NorthwindWeb.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Serialization;
 
 namespace NorthwindWeb.Controllers
 {

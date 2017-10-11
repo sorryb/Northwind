@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Produse";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+
+        <h2>Produse</h2>
+        <hr />
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Dashboard", "Home", "Dashboard")
+            </li>
+            @if (!string.IsNullOrEmpty(ViewBag.category))
+            {
+                <li class="active"><a href=@Url.Action("Index", "Product")>Produse</a></li>
+                <li>@ViewBag.category</li>
+            }
+            else
+            {
+                <li class="active">Produse</li>
+            }
+        </ol>
+        <hr />
+        <br />
+
+        <div>
+           @Html.ActionLink("Adauga Produs", "Create", new { category = ViewBag.category }, new { @class = "btn btn-default", id = "createProductButton"})
+        </div>
+
+    </div>
+
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    Lista produse
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table id="Product" class="cell-border hover order-column">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nume Produs
+                            </th>
+                            <th>
+                                Pret
+                            </th>
+                            <th>
+                                In Stoc
+                            </th>
+                            <th>
+                                Pe Comezi
+                            </th>
+                            <th>
+                                Stoc limita
+                            </th>
+                            <th>
+                                Indisponibil
+                            </th>
+                            <th>
+                                Sterge
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div id="dialog" title="Delete">
+            </div>
+        </div>
+    </div>
+</div>
