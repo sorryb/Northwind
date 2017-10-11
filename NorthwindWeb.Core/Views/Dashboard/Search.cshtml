@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+@model NorthwindWeb.Core.ViewModels.Dashboard.DashboardSearchData
+@{
+    ViewBag.Title = "Search";
+}
+<!--Test checks if there are no matches for the search-->
+@if ((Model.MatchesFound.Count() == 1) && (Model.MatchesFound.First().Controller == "Dashboard"))
+{
+    <a href="@Url.Action("Home", Model.MatchesFound.First().Controller, null)" class="list-group-item">
+        @Html.DisplayFor(modelItem => Model.MatchesFound.First().WhereFound)
+        
+    </a>
+}
+//if exist marches
+else
+{<h1>@Model.MatchesCount Rezultate pentru "@ViewBag.CurrentFilter"</h1>
+    foreach (var itemMatchesFound in Model.MatchesFound)
+    {
+        <a href="@Url.Action("Details", itemMatchesFound.Controller, new { id = itemMatchesFound.ID }, null)" class="list-group-item">
+            @Html.DisplayFor(modelItem => itemMatchesFound.Position) @Html.DisplayFor(modelItem => itemMatchesFound.WhereFound)
+            <span class="pull-right text-muted small">
+                <em>@itemMatchesFound.Controller</em>
+            </span>
+        </a>
+}
+}

@@ -1,0 +1,116 @@
+﻿@model NorthwindWeb.Core.Models.Customers
+
+@{
+    ViewBag.Title = "Sterge";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<h2>Sterge</h2>
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Clienti", "Index", "Customers")
+    </li>
+    <li class="active">Sterge</li>
+</ol>
+
+<h3>Esti sigur ca vrei sa-l stergi?</h3>
+<hr />
+<div>
+    <h4>Client</h4>
+   
+    <dl class="dl-horizontal">
+        <dt>
+            Nume Companiue
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)<br />
+        </dd>
+
+        <dt>
+            Nume Contact
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactName)<br />
+        </dd>
+
+        <dt>
+            Pozitie
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactTitle)<br />
+        </dd>
+
+        <dt>
+            Adresa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)<br />
+        </dd>
+
+        <dt>
+            Oras
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)<br />
+        </dd>
+
+        <dt>
+            Regiune
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Region)<br />
+        </dd>
+
+        <dt>
+            Cod Postal
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)<br />
+        </dd>
+
+        <dt>
+            Tara
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)<br />
+        </dd>
+
+        <dt>
+            Telefon
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)<br />
+        </dd>
+
+        <dt>
+            Fax
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fax)<br />
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sterge" class="btn btn-default" /> |
+           @Html.ActionLink("Inapoi la lista", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

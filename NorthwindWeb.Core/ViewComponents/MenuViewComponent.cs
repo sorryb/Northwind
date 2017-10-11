@@ -9,7 +9,12 @@ namespace NorthwindWeb.Core.ViewComponents
 {
     public class MenuViewComponent : ViewComponent
     {
-        private NorthwindDatabase _northwindDatabase = new NorthwindDatabase(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindDatabase>());
+        private readonly NorthwindDatabase _northwindDatabase;
+
+        public MenuViewComponent(NorthwindDatabase context)
+        {
+            _northwindDatabase = context;
+        }
 
         /// <summary>
         /// Used to construct the menu.

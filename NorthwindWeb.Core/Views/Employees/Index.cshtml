@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Angajati";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2>Angajati</h2>
+        <hr />
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Dashboard", "Home", "Dashboard")
+            </li>
+
+            <li class="active">Angajati</li>
+        </ol>
+        <hr />
+        <br />
+        <div>
+            @Html.ActionLink("Adauga Angajat", "Create", null, new { @class = "btn btn-default" })
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4>
+                    Lista Angajati
+                </h4>
+            </div>
+            <div class="panel-body">
+                <table id="EmployeesTable" class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nume
+                            </th>
+                            <th>
+                                Prenume
+                            </th>
+                            <th>
+                                Pozitie
+                            </th>
+                            <th>
+                                Oras
+                            </th>
+                            <th>
+                                Tara
+                            </th>
+                            <th>
+                                Telefon
+                            </th>
+                            <th>
+                                Sterge
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

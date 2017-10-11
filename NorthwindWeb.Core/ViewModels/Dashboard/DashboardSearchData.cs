@@ -16,11 +16,6 @@ namespace NorthwindWeb.Core.ViewModels.Dashboard
         /// <summary>
         /// page locations of matches
         /// </summary>
-        public IPagedList MatchesFoundPaged { get; set; }
+        public List<LocateSearch> MatchesFoundPaged { get; set; }
     }
-    //todo delete this
-    public interface IPagedList
-    {
-    }
-    //end delete
 }

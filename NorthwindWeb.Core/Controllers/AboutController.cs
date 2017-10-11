@@ -11,11 +11,12 @@ namespace NorthwindWeb.Controllers
     /// </summary>
     public class AboutController : Controller
     {
-        NorthwindDatabase db = new NorthwindDatabase(new Microsoft.EntityFrameworkCore.DbContextOptions<NorthwindDatabase>());
+        private readonly NorthwindDatabase db;
 
-        public AboutController(NorthwindDatabase context)
+        public AboutController(
+            NorthwindDatabase northwindContext)
         {
-            db = context;
+            db = northwindContext;
         }
 
         /// <summary>

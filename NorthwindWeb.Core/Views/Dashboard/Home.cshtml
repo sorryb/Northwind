@@ -1,0 +1,219 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+
+@model NorthwindWeb.Core.ViewModels.Dashboard.DashboardIndexData
+@using NorthwindWeb.Core.ViewModels.Dashboard;
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+<h1>Dashboard</h1>
+<div class="row">
+    <!--Number Total Sales-->
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-usd fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.TotalSalesValue</div>
+                        <div>Valoare totala vanzari</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("Index", "Orders",null)">
+                <div class="panel-footer">
+                    <span class="pull-left">Detalii</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!--Number Total Products Sold-->
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-android fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.NumberProductsSold</div>
+                        <div>Numar total produse vandute</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("Index", "Product",null)">
+                <div class="panel-footer">
+                    <span class="pull-left">Detalii</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!--Number Total Employees-->
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-user fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.NumberEmployees</div>
+                        <div>Numar total angajati</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("Index", "Employees",null)">
+                <div class="panel-footer">
+                    <span class="pull-left">Detalii</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!--Number Total Customers-->
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">@Model.NumberCustomers</div>
+                        <div>Numar total clienti</div>
+                    </div>
+                </div>
+            </div>
+            <a href="@Url.Action("Index", "Customers",null)">
+                <div class="panel-footer">
+                    <span class="pull-left">Detalii</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <!--Sales by Year-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe ani ($)
+            </div>
+            <!--Morris Area panel/ sales by year-->
+            <div class="panel-body">
+                <div id="morris-area-chart"></div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!--Sales by Quarter-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe trimestru ($)
+
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="row">
+                    <!--Sales by Quarter table-->
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>An</th>
+                                        <th>Trimestrul 1</th>
+                                        <th>Trimestrul 2</th>
+                                        <th>Trimestrul 3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var itemSalesPerQuarter in Model.SalesPerQuarter)
+                                    {
+                                        <tr>
+                                            <td>@itemSalesPerQuarter.Year</td>
+                                            <td>@itemSalesPerQuarter.dashboardMorrisBarColumA</td>
+                                            <td>@itemSalesPerQuarter.dashboardMorrisBarColumB</td>
+                                            <td>@itemSalesPerQuarter.dashboardMorrisBarColumC</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                   <!--Morris bar panel/ sales by quarter-->
+                    <div class="col-lg-12">
+                        <div id="morris-bar-chart"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+   
+    <div class="col-lg-4">
+        <!--Sales by Category-->
+        <div class="panel panel-default">
+            <!--Sales by Category panel -->
+            <div class="panel-heading">
+                <i class="fa fa-bar-chart-o fa-fw"></i>Vanzarile pe categorii de produse($)
+            </div>
+            <!--Morris Donut panel/ sales by category-->
+            <div class="panel-body">
+                <div id="morris-donut-chart"></div>
+
+                @Html.ActionLink("Vizualizati Produsele", "Index", "Product", null, new { @class = "btn btn-default btn-block" })
+
+            </div>
+
+            
+        </div>
+        <!--Last Ten Orders panel-->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-briefcase fa-fw"></i> Ultimele 10 Comenzi
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="list-group">
+
+                    @foreach (var itemLastTenOrders in Model.LastTenOrders)
+                    {
+
+
+                        <a href="@Url.Action("Details","Orders",new { id = itemLastTenOrders.OrderID},null)" class="list-group-item">
+                            @itemLastTenOrders.OrderID
+                            <span class="pull-right text-muted small">
+                                <em>@itemLastTenOrders.Ago</em>
+                            </span>
+                        </a>
+
+
+                    }
+
+
+                </div>
+                <!--view all Orders-->
+                @Html.ActionLink("Vizualizati toate comenzile", "Index", "Orders", null, new { @class = "btn btn-default btn-block" })
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+

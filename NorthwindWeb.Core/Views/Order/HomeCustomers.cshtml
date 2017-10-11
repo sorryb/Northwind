@@ -1,6 +1,5 @@
 ﻿@model NorthwindWeb.ViewModels.Order.OrderIndexData
 
-@using PagedList.Mvc;
 @{
     ViewBag.Title = "Orders";
 }
@@ -85,7 +84,8 @@
                                 }
                                 <tr class="@selectedRow">
                                     <td>
-                                        @Html.ActionLink(itemOrderDetail.ProductName, "HomeCustomers", new { orderID = ViewBag.OrderID, productID = itemOrderDetail.ProductID, page = Model.Page.PageNumber, currentFilter = ViewBag.CurrentFilter })
+                                        @*todo fa action link in functie de noul page list folosit*@
+                                        @Html.ActionLink(itemOrderDetail.ProductName, "HomeCustomers", new { orderID = ViewBag.OrderID, productID = itemOrderDetail.ProductID, page = 10, currentFilter = ViewBag.CurrentFilter })
                                     </td>
 
                                     <td>

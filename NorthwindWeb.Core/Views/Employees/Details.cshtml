@@ -1,0 +1,136 @@
+﻿@model NorthwindWeb.Core.Models.Employees
+
+@{
+    ViewBag.Title = "Detalii";
+    Layout = "~/Views/Shared/_LayoutDashboard.cshtml";
+}
+<h2>Detalii</h2>
+<hr />
+<ol class="breadcrumb">
+    <li>
+        @Html.ActionLink("Dashboard", "Home", "Dashboard")
+    </li>
+    <li>
+        @Html.ActionLink("Angajati", "Index", "Employees")
+    </li>
+    <li class="active">Detalii</li>
+</ol>
+
+<div>
+    <h4>Angajat</h4>
+    <hr />
+   
+    <dl class="dl-horizontal">
+
+        <dt>
+            Nume
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)<br />
+        </dd>
+
+        <dt>
+            Prenume
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)<br />
+        </dd>
+
+        <dt>
+            Pozitie
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)<br />
+        </dd>
+
+        <dt>
+            Metoda de adresare
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TitleOfCourtesy)<br />
+        </dd>
+
+        <dt>
+            Data nasterii
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)<br />
+        </dd>
+
+        <dt>
+            Data angajarii
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HireDate)<br />
+        </dd>
+
+        <dt>
+            Adresa
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)<br />
+        </dd>
+
+        <dt>
+            Oras
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)<br />
+        </dd>
+
+        <dt>
+            Cod Postal
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)<br />
+        </dd>
+
+        <dt>
+            Oras
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)<br />
+        </dd>
+
+        <dt>
+            Telefon
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomePhone)<br />
+        </dd>
+
+        <dt>
+            Interior
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Extension)<br />
+        </dd>
+
+        <dt>
+            Note
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)<br />
+        </dd>
+
+        <dt>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Modifica", "Edit", new { id = Model.EmployeeID }, new { @class = "btn btn-default" }) 
+    @Html.ActionLink("Inapoi", "Index", null, new { @class = "btn btn-default" })
+</p>

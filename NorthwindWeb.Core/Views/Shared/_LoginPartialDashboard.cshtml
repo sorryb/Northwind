@@ -1,0 +1,21 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using NorthwindWeb.Core.Models
+@using NorthwindWeb.Core.Context
+
+
+<li>
+    @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-inline navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+
+
+
+    @Html.ActionLink("User: " + @User.Identity.Name, "Index", "Manage")
+</li>
+
+
+<li><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a></li>
+
+
