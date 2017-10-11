@@ -111,7 +111,7 @@ namespace NorthwindWeb.Controllers
 
                     if (ProductImage != null)
                     {
-                        string path = System.IO.Path.Combine(Startup._hostingEnvironment.WebRootPath + ($"Images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
+                        string path = System.IO.Path.Combine(Startup._hostingEnvironment.WebRootPath.Replace("\\", "/") + ($"Images/{db.Categories.Where(x => x.CategoryID == products.CategoryID).FirstOrDefault().CategoryName}/"), $"{products.ProductID}.jpg");
                         using (var fileStream = new FileStream(path, FileMode.Create))
                         {
                             await ProductImage.CopyToAsync(fileStream);
