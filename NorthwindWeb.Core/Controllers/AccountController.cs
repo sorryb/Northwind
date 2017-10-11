@@ -9,7 +9,7 @@ using NorthwindWeb.Core.ViewModels;
 using System.Security.Claims;
 using System.Web;
 using NorthwindWeb.Core.Context;
-using NorthwindWeb.Models.Interfaces;
+using NorthwindWeb.Core.Models.Interfaces;
 using NorthwindWeb.Models.ServerClientCommunication;
 using NorthwindWeb.Models.ExceptionHandler;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +30,7 @@ namespace NorthwindWeb.Controllers
     /// controller for users and roles
     /// </summary>
     [Authorize]
-    public class AccountController : Controller, IJsonTableFillServerSide
+    public class AccountController : Controller /*, IJsonTableFillServerSide */
     {
         //private log4net.ILog logger = log4net.LogManager.GetLogger(typeof(AccountController));  //Declaring Log4Net to log errors in Event View-er in NorthwindLog Application log.
 
@@ -1142,6 +1142,9 @@ namespace NorthwindWeb.Controllers
             /// </summary>
             Error
         }
+
+        //todo decomenteaza tot ce este mai jos intre /**/ si interfata clasei
+        /*
         /// <summary>
         /// Change users password
         /// </summary>
@@ -1570,6 +1573,7 @@ namespace NorthwindWeb.Controllers
             }
             return Json(dataTableData, JsonRequestBehavior.AllowGet);
         }
+        */
 
         #region Helpers
         private void AddErrors(IdentityResult result)

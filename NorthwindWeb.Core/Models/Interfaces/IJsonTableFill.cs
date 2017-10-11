@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace NorthwindWeb.Models.Interfaces
+namespace NorthwindWeb.Core.Models.Interfaces
 {
     /// <summary>
     /// Basic interface of datatable comunication (server side)
