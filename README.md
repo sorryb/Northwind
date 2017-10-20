@@ -6,11 +6,11 @@ Northwind sample Web Shop Application used to master MVC 5 and EF 6.
 
 -Entity Framework 6.0 Code First and Migrations
 
--ASP.NET Identity Authentication - Roles and Users managemet
+-ASP.NET Identity Authentication - Roles and Users management
 
--SQL Server 2016 Database & SSRS Reporst
+-SQL Server 2016 Database & SSRS Reports
 
--The Apache Log4Net logger for Erorrs Management.
+-The Apache Log4Net logger for Errors Management.
 
 -Bootstrap 3.0, HTML 5 & CSS3, AJAX, JavaScript and JQuery 
 
