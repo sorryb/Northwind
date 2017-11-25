@@ -6,6 +6,7 @@ namespace NorthwindWeb
 {
     /// <summary>
     /// Start the application.
+    /// Some more comments here.
     /// </summary>
     public partial class Startup
     {

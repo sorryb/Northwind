@@ -9,6 +9,7 @@
   display: inline;
 }
 
+/*this is a comment*/
 .pagination > li > a,
 .pagination > li > span {
   position: relative;
