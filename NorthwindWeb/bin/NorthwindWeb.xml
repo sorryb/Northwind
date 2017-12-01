@@ -1,0 +1,4124 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NorthwindWeb</name>
+    </assembly>
+    <members>
+        <member name="T:NorthwindWeb.BundleConfig">
+            <summary>
+            Bundles.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.BundleConfig.RegisterBundles(System.Web.Optimization.BundleCollection)">
+             <summary>
+             Register bundles.
+             </summary>
+             <param name="bundles"></param>
+             <remarks>
+             For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
+            </remarks>
+        </member>
+        <member name="T:NorthwindWeb.FilterConfig">
+            <summary>
+            Filters.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.FilterConfig.RegisterGlobalFilters(System.Web.Mvc.GlobalFilterCollection)">
+            <summary>
+            Register filters.
+            </summary>
+            <param name="filters"></param>
+        </member>
+        <member name="T:NorthwindWeb.ApplicationUserManager">
+            <summary>
+            Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application. 
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ApplicationUserManager.#ctor(Microsoft.AspNet.Identity.IUserStore{NorthwindWeb.Models.ApplicationUser})">
+            <summary>
+            Cstr.
+            </summary>
+            <param name="store"></param>
+        </member>
+        <member name="M:NorthwindWeb.ApplicationUserManager.Create(Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{NorthwindWeb.ApplicationUserManager},Microsoft.Owin.IOwinContext)">
+            <summary>
+            Create a manager of users.
+            </summary>
+            <param name="options"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NorthwindWeb.ApplicationSignInManager">
+            <summary>
+            Configure the application sign-in manager which is used in this application. 
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ApplicationSignInManager.#ctor(NorthwindWeb.ApplicationUserManager,Microsoft.Owin.Security.IAuthenticationManager)">
+            <summary>
+            cstr.
+            </summary>
+            <param name="userManager"></param>
+            <param name="authenticationManager"></param>
+        </member>
+        <member name="M:NorthwindWeb.ApplicationSignInManager.CreateUserIdentityAsync(NorthwindWeb.Models.ApplicationUser)">
+            <summary>
+            Generate an identity.
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.ApplicationSignInManager.Create(Microsoft.AspNet.Identity.Owin.IdentityFactoryOptions{NorthwindWeb.ApplicationSignInManager},Microsoft.Owin.IOwinContext)">
+            <summary>
+            Create manager for sign in.
+            </summary>
+            <param name="options"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NorthwindWeb.RouteConfig">
+            <summary>
+            Configure route.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.RouteConfig.RegisterRoutes(System.Web.Routing.RouteCollection)">
+            <summary>
+            Regiter in route table.
+            </summary>
+            <param name="routes"></param>
+        </member>
+        <member name="T:NorthwindWeb.Startup">
+            <summary>
+            Start the application.
+            </summary>
+            <summary>
+            Start the application.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Startup.ConfigureAuth(Owin.IAppBuilder)">
+            <summary>
+            configuration of the application
+            </summary>
+            <param name="app">application data</param>
+        </member>
+        <member name="M:NorthwindWeb.Startup.Configuration(Owin.IAppBuilder)">
+            <summary>
+            generates application configuration
+            </summary>
+            <param name="app">application data</param>
+        </member>
+        <member name="T:NorthwindWeb.Context.ApplicationDbContext">
+            <summary>
+            Context class used for Microsoft identity users database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.ApplicationDbContext.#ctor">
+            <summary>
+            Default constructor. Initialises the datababase based on the IdentityDatabaseInitializer class.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.ApplicationDbContext.Create">
+            <summary>
+            Returns a new instance of this class.
+            </summary>
+            <returns>new ApplicationDbContext</returns>
+        </member>
+        <member name="M:NorthwindWeb.Context.ApplicationDbContext.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            When model start to be build.
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:NorthwindWeb.Context.NorthwindDatabaseInitializer">
+            <summary>
+            Northwind Database Tables  Initializer.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.NorthwindDatabaseInitializer.Seed(NorthwindWeb.Context.NorthwindDatabase)">
+            <summary>
+            Seed database ; fill tables.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:NorthwindWeb.Context.NorthwindDatabaseInitializer.ReadAllCommands(System.String)">
+             <summary>
+             In case there are all Views in one sql file.
+             </summary>
+             <param name="path"></param>
+             <returns></returns>
+             <remarks>
+            var sqlCommands = Directory
+                                .EnumerateFiles(AppDomain.CurrentDomain.GetData("DataDirectory").ToString(), "*.sql")
+                                .OrderBy(x => x)
+                                .SelectMany(ReadAllCommands);
+            
+            foreach (string command in sqlCommands)
+            {
+                context.Database.ExecuteSqlCommand(command);
+            }
+             </remarks>
+        </member>
+        <member name="T:NorthwindWeb.Context.IdentityDatabaseInitializer">
+            <summary>
+            Initializa with Users and Roles.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.IdentityDatabaseInitializer.Seed(NorthwindWeb.Context.ApplicationDbContext)">
+            <summary>
+            Seed database ; fill tables.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="T:NorthwindWeb.Context.NorthwindReferencedTableInitializer">
+            <summary>
+            This class contains functions that fill Region and Territories with Romanian data
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.NorthwindReferencedTableInitializer.InsertNorthwindReferencedData">
+            <summary>
+            Insert referenced data with new NorthwindDatabase() context
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.NorthwindReferencedTableInitializer.InsertNorthwindReferencedData(NorthwindWeb.Context.NorthwindDatabase)">
+            <summary>
+            Insert referenced data with given context
+            </summary>
+            <param name="context">Local Northwind Context</param>
+        </member>
+        <member name="T:NorthwindWeb.Context.NorthwindTestDatabaseInitializer">
+            <summary>
+            This class contains functions that fill Northwind Database with Test data
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.NorthwindTestDatabaseInitializer.InsertNorthwindTestData">
+            <summary>
+            Insert test data with new NorthwindDatabase() context
+            </summary>
+            <remarks>You need to insert the referencied data with InsertNorthwindReferencedData.InsertNorthwindReferencedData(...)</remarks>
+        </member>
+        <member name="M:NorthwindWeb.Context.NorthwindTestDatabaseInitializer.InsertNorthwindTestData(NorthwindWeb.Context.NorthwindDatabase)">
+            <summary>
+            Insert test data with given context
+            </summary>
+            <remarks></remarks>
+            <param name="context">Local Northwind Context</param>
+        </member>
+        <member name="T:NorthwindWeb.Context.NorthwindDatabase">
+            <summary>
+            Context for northwind database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.NorthwindDatabase.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Categories">
+            <summary>
+            Context for Categories table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.CustomerDemographics">
+            <summary>
+            Context for CustomerDemographics table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Customers">
+            <summary>
+            Context for Customers table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Employees">
+            <summary>
+            Context for Employees table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Order_Details">
+            <summary>
+            Context for Order_Details table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Orders">
+            <summary>
+            Context for Orders table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Persons">
+            <summary>
+            Context for Persons table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Products">
+            <summary>
+            Context for Products table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Regions">
+            <summary>
+            Context for Regions table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Shippers">
+            <summary>
+            Context for Shippers table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Suppliers">
+            <summary>
+            Context for Suppliers table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.Territories">
+            <summary>
+            Context for Territories table in northwind database
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Context.NorthwindDatabase.ShopCart">
+            <summary>
+            Context for ShopCart table in northwind database
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Context.NorthwindDatabase.OnModelCreating(System.Data.Entity.DbModelBuilder)">
+            <summary>
+            Build Information of Northwind DataBase
+            </summary>
+            <param name="modelBuilder"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.AboutController">
+            <summary>
+            AboutController. For the page Index from AboutUs 
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AboutController.Index">
+            <summary>
+            Select the first 6 employees
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.AccountController">
+            <summary>
+            controller for users and roles
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.#ctor">
+            <summary>
+             constructor with managed empty
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.#ctor(NorthwindWeb.ApplicationUserManager,NorthwindWeb.ApplicationSignInManager)">
+            <summary>
+            constructor with managed set
+            </summary>
+            <param name="userManager">User manager</param>
+            <param name="signInManager">sign in manager</param>
+        </member>
+        <member name="P:NorthwindWeb.Controllers.AccountController.SignInManager">
+            <summary>
+             sign in manager
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Controllers.AccountController.UserManager">
+            <summary>
+            User manager
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Login(System.String)">
+            <summary>
+            Login result
+            </summary>
+            <param name="returnUrl">redirect to this action</param>
+            <returns>Return view login</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Login(NorthwindWeb.ViewModels.LoginViewModel,System.String)">
+            <summary>
+            Login user
+            </summary>
+            <param name="model">username, passwoard</param>
+            <param name="returnUrl"> redirect to this action</param>
+            <returns>Return view for status login</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.VerifyCode(System.String,System.String,System.Boolean)">
+            <summary>
+            send data to verify
+            </summary>
+            <param name="provider">Provider</param>
+            <param name="returnUrl">redirect to this action</param>
+            <param name="rememberMe"> save passwoard or not</param>
+            <returns>Return validation code result</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.VerifyCode(NorthwindWeb.ViewModels.VerifyCodeViewModel)">
+            <summary>
+            Verify if date is corect
+            </summary>
+            <param name="model">provider, code result, email, return url, save passwoard</param>
+            <returns>Returns the view according to the validity of the code </returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Register">
+            <summary>
+            send data to create new user
+            </summary>
+            <returns>Return register view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Register(NorthwindWeb.ViewModels.RegisterViewModel)">
+            <summary>
+            create a new user
+            </summary>
+            <param name="model">data for new user</param>
+            <returns>Returns a redirect to the start page if the model is valid, otherwise it displays the errors</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.RegisterAdmin">
+            <summary>
+            send data to create new user
+            </summary>
+            <returns>Return Register Admin view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.RegisterAdmin(NorthwindWeb.ViewModels.RegisterViewModel)">
+            <summary>
+            create a new user
+            </summary>
+            <param name="model">data for new user</param>
+            <returns>Returns a redirect to the index page if the model is valid, otherwise it displays the errors</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ConfirmEmail(System.String,System.String)">
+            <summary>
+            Confirm email
+            </summary>
+            <param name="userId">Curent user id</param>
+            <param name="code">validation email code</param>
+            <returns>returns validation of the email address</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ForgotPassword">
+            <summary>
+            announce that you forgot your password
+            </summary>
+            <returns>Return Forgot Password view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ForgotPassword(NorthwindWeb.ViewModels.ForgotPasswordViewModel)">
+            <summary>
+            Forgot Password
+            </summary>
+            <param name="model">Email to send code to reset</param>
+            <returns>Return validation status for reguest of Forgot Password</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ForgotPasswordConfirmation">
+            <summary>
+            confirm password Forgot
+            </summary>
+            <returns>Return Forgot Password Confirmation view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ResetPassword(System.String)">
+            <summary>
+            result reset password
+            </summary>
+            <param name="code">code you received for reset</param>
+            <returns>Return if the code is correct or not</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ResetPassword(NorthwindWeb.ViewModels.ResetPasswordViewModel)">
+            <summary>
+            reset password
+            </summary>
+            <param name="model">Email, password, confirm password, result</param>
+            <returns>if there is an error or a mismatch in the model to return to this page, otherwise it redirects you to the confirmation page</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ResetPasswordConfirmation">
+            <summary>
+            confirm password reset
+            </summary>
+            <returns>Return Reset Password Confirmation view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.SendCode(System.String,System.Boolean)">
+            <summary>
+            get sendcode
+            </summary>
+            <param name="returnUrl">redirect to this action</param>
+            <param name="rememberMe">if you want to save your password</param>
+            <returns>Returns send code view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.SendCode(NorthwindWeb.ViewModels.SendCodeViewModel)">
+            <summary>
+            code with the data of a new user
+            </summary>
+            <param name="model">data of a new user</param>
+            <returns>returns an error or Verify code</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ExternalLoginCallback(System.String)">
+            <summary>
+            result for external logging
+            </summary>
+            <param name="returnUrl">redirect to this action</param>
+            <returns>Return external login result</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ExternalLoginConfirmation(NorthwindWeb.ViewModels.ExternalLoginConfirmationViewModel,System.String)">
+            <summary>
+            ExternalLoginConfirmation
+            </summary>
+            <param name="model">data for external logging</param>
+            <param name="returnUrl">redirect to this action</param>
+            <returns>redirects you to the start page if your login was successful otherwise it displays the errors</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.LogOff">
+            <summary>
+            LogOff
+            </summary>
+            <returns>Redirect to the start page</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ExternalLoginFailure">
+            <summary>
+            ExternalLoginFailure
+            </summary>
+            <returns>Return External Login Failure view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Index(System.String)">
+            <summary>
+            Index of account
+            </summary>
+            <param name="status">Change user status</param>
+            <returns>Returns Index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ChangeUser(System.String)">
+            <summary>
+            data to change user
+            </summary>
+            <param name="userName">identify the user with this username</param>
+            <returns>Returns Change User view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.ChangeUser(NorthwindWeb.ViewModels.RegisterViewModel)">
+            <summary>
+            Change User
+            </summary>
+            <param name="model">User for change</param>
+            <returns>Returns to index if succes else returns to this page</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Delete(System.String)">
+            <summary>
+            delete user
+            </summary>
+            <param name="userName">deletes the user with this username</param>
+            <returns>Redirect to index page</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.DeleteUser(System.String)">
+            <summary>
+            view user to delete
+            </summary>
+            <param name="userName">Curent username</param>
+            <returns>Returns details for user delete</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.RolesIndex">
+            <summary>
+            View list of role
+            </summary>
+            <returns>Returns to RoleIndex view</returns>        
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.CreateRole">
+            <summary>
+            name a new role
+            </summary>
+            <returns>Returns create role view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.CreateRole(NorthwindWeb.ViewModels.RoleInfoViewModel)">
+            <summary>
+            create a new role
+            </summary>
+            <param name="roleInfo"></param>
+            <returns>Returns create role error if status is not succes, if status is succes Redirect to the RoleIndex page</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.RoleDelete(System.String)">
+            <summary>
+            delete role
+            </summary>
+            <param name="roleName"></param>
+            <returns>Redirect to RoleIndex if succes, else display error message</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.UsersInRole(System.String)">
+            <summary>
+            user assingned to role
+            </summary>
+            <param name="roleName"></param>
+            <returns>Return UserInRole view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.RoleMembership(NorthwindWeb.ViewModels.RoleInfoViewModel)">
+            <summary>
+            select and additing user to role
+            </summary>
+            <param name="roleInfo">Role name</param>
+            <returns>Returns RoleMembership view after the selected user has been assigned the role</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.RoleMembership">
+            <summary>
+            user in role
+            </summary>
+            <returns>Returns RoleMembership view </returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.AddUsersToRole">
+            <summary>
+            add user to role
+            </summary>
+            <returns>Redirect to RoleMembership page</returns>        
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.DeleteFromRole">
+            <summary>
+            debunk the user from the role
+            </summary>
+            <returns>Debunk user selected from role and redirect to RoleMembership page</returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.AccountController.ManageMessageId">
+            <summary>
+            Message status
+            </summary> 
+        </member>
+        <member name="F:NorthwindWeb.Controllers.AccountController.ManageMessageId.AddPhoneSuccess">
+            <summary>
+            Add Phone Success
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.AccountController.ManageMessageId.ChangePasswordSuccess">
+            <summary>
+            Change Password Success
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.AccountController.ManageMessageId.SetTwoFactorSuccess">
+            <summary>
+            Set Two Factor Success
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.AccountController.ManageMessageId.SetPasswordSuccess">
+            <summary>
+            Set Password Success
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.AccountController.ManageMessageId.RemoveLoginSuccess">
+            <summary>
+            Remove Login Success
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.AccountController.ManageMessageId.RemovePhoneSuccess">
+            <summary>
+            Remove Phone Success
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.AccountController.ManageMessageId.Error">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Manage(System.Nullable{NorthwindWeb.Controllers.AccountController.ManageMessageId})">
+            <summary>
+            Change users password
+            </summary>
+            <param name="message">Status</param>
+            <returns>Return view manage</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Manage(NorthwindWeb.ViewModels.ChangePasswordViewModel)">
+            <summary>
+             Manage users password
+            </summary>
+            <param name="model">old and new password</param>
+            <returns>return status of manage</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.AssignCustomers">
+            <summary>
+            Assigns user to role Customers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Return a list of users to complete table
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>Returns json for datatable with users</returns>        
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.JsonTableRolesFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Return a list a roles to complete table
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>Returns json for datatable with role</returns>        
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.JsonTableMembershipFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns a list of users assigned to role
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>Returns json for datatable with users assigned to role</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.AccountController.Dispose(System.Boolean)">
+             <summary>
+            Dispose connection
+             </summary>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.Extentions">
+            <summary>
+            Return a list of roles.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.Extentions.Roles(System.Security.Claims.ClaimsIdentity)">
+            <summary>
+            List of roles.
+            </summary>
+            <param name="identity">User identity</param>
+            <returns>Returns roles</returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.CategoriesController">
+            <summary>
+            Categories Controller. For table Categories
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.Index(System.String)">
+            <summary>
+            Displays a page with all the categories existing in the database.
+            </summary>
+            <param name="search">The search look to find something asked</param>
+            <returns>Categories index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Displays a page showing all the information about one category.
+            </summary>
+            <param name="id">The id of the category whose information to show</param>
+            <returns>Categories details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.Create">
+            <summary>
+            Returns the view containing the form neccesary for creating a new category.
+            </summary>
+            <returns>Create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.Create(NorthwindWeb.Models.Categories)">
+            <summary>
+            Inserts a category into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="categories">The category entity to be inserted</param>
+            <returns>If successful returns categories index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Returns the view containing the form necessary for editing an existing category.
+            </summary>
+            <param name="id">The id of the category that is going to be edited</param>
+            <returns>Categories edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.Edit(NorthwindWeb.Models.Categories)">
+            <summary>
+            Updates the database changing the fields of the category whose id is equal to the id of the provided category parameter to those of the parameter.
+            </summary>
+            <param name="categories">The changed category.</param>
+            <returns>Categories index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Displays a confirmation page for the following delete.
+            </summary>
+            <param name="id">The category that is going to be deleted.</param>
+            <returns>Delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Deletes a category from the database. The category must not have products.
+            </summary>
+            <param name="id">The id of the category that is going to be deleted</param>
+            <returns>Categories index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.JsonTableFill(System.String)">
+            <summary>
+            Function used to control the dashboard datatables local
+            </summary>
+            <param name="search"></param>
+            <returns>A JSON filtered categories list.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CategoriesController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.CustomersController">
+            <summary>
+            Customers Controller. For table Customers
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.Index">
+            <summary>
+            Displays a page with all the customers in the database.
+            </summary>
+            <returns>Customers index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.Details(System.String)">
+            <summary>
+            Displays a page showing all the information about one customer.
+            </summary>
+            <param name="id">The id of the customer whose information to show</param>
+            <returns>Customers details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.Create">
+            <summary>
+            Returns the view containing the form neccesary for creating a new customer.
+            </summary>
+            <returns>Create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.Create(NorthwindWeb.ViewModels.DashbordCustomer)">
+            <summary>
+            Inserts an customer into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="customers">The customer entity to be inserted</param>
+            <returns>If successful returns customers index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.Edit(System.String)">
+            <summary>
+            Returns the view containing the form necessary for editing an existing customer.
+            </summary>
+            <param name="id">The id of the customer that is going to be edited</param>
+            <returns>Customers edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.Edit(NorthwindWeb.Models.Customers)">
+            <summary>
+            Updates the database 
+            changing the fields of the customer whose id is equal to the id of the provided customers parameter
+            to those of the parameter.
+            </summary>
+            <param name="customers">The changed customer.</param>
+            <returns>Customers index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.Delete(System.String)">
+            <summary>
+            Displays a confirmation page for the following delete.
+            </summary>
+            <param name="id">The customer that is going to be deleted.</param>
+            <returns>Delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.DeleteConfirmed(System.String)">
+            <summary>
+            Deletes an customer from the database. The customer will be deleted only if he does not have orders.
+            </summary>
+            <param name="id">The id of the customer that is going to be deleted</param>
+            <returns>Customers index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Function used to control the dashboard datatables from the server
+            </summary>
+            <param name="draw"></param>
+            <param name="start"></param>
+            <param name="length"></param>
+            <returns>A JSON filtered customer list.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.CustomersController.Dispose(System.Boolean)">
+            <summary>
+            Dispoze db context object.
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.DashboardController">
+            <summary>
+            DashBoard Controller. Charts with actual state of the site
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.DashboardController.Home">
+            <summary>
+            The action that creates the data for the dashboard page
+            </summary>
+            <returns>returns a view with a DashboardIndexData model</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.DashboardController.Search(System.String,System.Nullable{System.Int32},System.String)">
+            <summary>
+            Creates a list of data from the database containing the search parameter
+            </summary>
+            <param name="search">The parameter to be searched for</param>
+            <param name="page"></param>
+            <param name="currentFilter"></param>
+            <returns>Returns a view vith a list of match</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.DashboardController.MorrisArea">
+            <summary>
+            Returns a json with the data required for the MorrisArea table on the dashboard page
+            </summary>
+            <returns>returns a json with the data for the MorrisArea table</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.DashboardController.MorrisBar">
+            <summary>
+            Returns a json with the data required for the MorrisBar table on the dashboard page
+            </summary>
+            <returns>returns a json with the data for the MorrisBar table</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.DashboardController.MorrisDonut">
+            <summary>
+            Returns a json with the data required for the MorrisDonut table on the dashboard page
+            </summary>
+            <returns>returns a json with the data for the MorrisDonut table</returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.EmployeesController">
+            <summary>
+            Class that contains all the neccessary functions to perform CRUD operations on the database employees table.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.Index">
+            <summary>
+            Displays a page with all the employees in the database.
+            </summary>
+            <returns>Employees index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Displays a page showing all the information about one employee.
+            </summary>
+            <param name="id">The id of the employee whose information to show</param>
+            <returns>Employees details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.Create">
+            <summary>
+            Returns the view containing the form neccesary for creating a new employee.
+            </summary>
+            <returns>Create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.Create(NorthwindWeb.Models.Employees)">
+            <summary>
+            Inserts an employee into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="employees">The employee entity to be inserted</param>
+            <returns>If successful returns employees index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Returns the view containing the form necessary for editing an existing employee.
+            </summary>
+            <param name="id">The id of the employee that is going to be edited</param>
+            <returns>Employees edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.Edit(NorthwindWeb.Models.Employees)">
+            <summary>
+            Updates the database 
+            changing the fields of
+            the employee whose id is equal to the id of the provided employees parameter
+            to those of the parameter.
+            </summary>
+            <param name="employees">The changed employee.</param>
+            <returns>Employees index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Displays a confirmation page for the following delete.
+            </summary>
+            <param name="id">The employee that is going to be deleted.</param>
+            <returns>Delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Deletes an employee from the database. The employee must not have orders or subordinates
+            </summary>
+            <param name="id">The id of the employee that is going to be deleted</param>
+            <returns>Employees index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.EmployeesController.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Function used to control the dashboard datatables from the server
+            </summary>
+            <param name="draw"></param>
+            <param name="start"></param>
+            <param name="length"></param>
+            <returns>A JSON filtered employees list.</returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ErrorsController">
+            <summary>
+            Contains methods that read and show error logs.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ErrorsController.Index">
+            <summary>
+            Displays a page with a table containing all the errors from the NorthwindLog
+            </summary>
+            <returns>Errors index view</returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ManageController">
+            <summary>
+            Contains all the methods used to change the user's information.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.#ctor(NorthwindWeb.ApplicationUserManager,NorthwindWeb.ApplicationSignInManager)">
+            <summary>
+            Initialises userManager and signInManager.
+            </summary>
+            <param name="userManager"></param>
+            <param name="signInManager"></param>
+        </member>
+        <member name="P:NorthwindWeb.Controllers.ManageController.SignInManager">
+            <summary>
+            Getter/Setter
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Controllers.ManageController.UserManager">
+            <summary>
+            Getter/Setter
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.Index(System.Nullable{NorthwindWeb.Controllers.ManageController.ManageMessageId})">
+            <summary>
+            Displays a page with links to change various account information. (password, phone number)
+            </summary>
+            <param name="message">A message to show.</param>
+            <returns>Manage index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.RemoveLogin(System.String,System.String)">
+            <summary>
+            Removes an external login from this user.
+            </summary>
+            <param name="loginProvider">The provider that sent the external login link.</param>
+            <param name="providerKey"></param>
+            <returns>Manage ManageLogins view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.AddPhoneNumber">
+            <summary>
+            Displays a page containing a form neccessary to add a phone number to an existing user.
+            </summary>
+            <returns>Manage AddPhoneNumber view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.AddPhoneNumber(NorthwindWeb.ViewModels.AddPhoneNumberViewModel)">
+            <summary>
+            Displays a page containing a form neccessary to add a phone number to an existing user.
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.EnableTwoFactorAuthentication">
+            <summary>
+            Enables two factor authentication
+            </summary>
+            <returns>Manage index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.DisableTwoFactorAuthentication">
+            <summary>
+            Disables two factor authentication
+            </summary>
+            <returns>Manage index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.VerifyPhoneNumber(System.String)">
+            <summary>
+            Sends an sms containing a security code to the phonenumber
+            </summary>
+            <param name="phoneNumber">The number that will receive the sms.</param>
+            <returns>Manage VerifyPhoneNumber view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.VerifyPhoneNumber(NorthwindWeb.ViewModels.VerifyPhoneNumberViewModel)">
+            <summary>
+            Verifies if the security code matches the number it was sent to.
+            </summary>
+            <param name="model"></param>
+            <returns>Manage index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.RemovePhoneNumber">
+            <summary>
+            Removes the current user's phone number.
+            </summary>
+            <returns>Manage index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.ChangePassword">
+            <summary>
+            Displays a page containing a form neccessary to change the password for the curent user.
+            </summary>
+            <returns>Manage ChangePassword view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.ChangePassword(NorthwindWeb.ViewModels.ChangePasswordViewModel)">
+            <summary>
+            Changes the password of the current user if the old password was entered correctly.
+            </summary>
+            <param name="model">The class containing the neccessary information.</param>
+            <returns>Manage index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.ChangeEmail">
+            <summary>
+            Displays a page containing a form neccessary to change the email for the curent user.
+            </summary>
+            <returns>Manage ChangeEmail view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.ChangeEmail(NorthwindWeb.ViewModels.ChangeEmailViewModel)">
+            <summary>
+            Changes the email of the current user if the password was entered correctly.
+            </summary>
+            <param name="model">The class containing the neccessary information.</param>
+            <returns>Manage index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.ChangeImage">
+            <summary>
+            Displays a page containing a form neccessary to change the profile photo for the curent user.
+            </summary>
+            <returns>Manage ChangeEmail view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.ChangeImage(NorthwindWeb.ViewModels.ChangeProfileViewModel)">
+            <summary>
+            Changes the profile photo of the current user if the password was entered correctly.
+            </summary>
+            <param name="model">The class containing the neccessary information.</param>
+            <returns>Manage index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.SetPassword">
+            <summary>
+            Displays a page containing a form neccessary to set a new password.
+            </summary>
+            <returns>Manage setPassword view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.SetPassword(NorthwindWeb.ViewModels.SetPasswordViewModel)">
+            <summary>
+            Sets the password for the current user.
+            </summary>
+            <param name="model"></param>
+            <returns>Manage index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.ManageLogins(System.Nullable{NorthwindWeb.Controllers.ManageController.ManageMessageId})">
+            <summary>
+            Manages local and external logins.
+            </summary>
+            <param name="message"></param>
+            <returns>Manage ManageLogins view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.LinkLogin(System.String)">
+            <summary>
+            Requests an external login link from a provider.
+            </summary>
+            <param name="provider">The provider that will receive the request.</param>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.LinkLoginCallback">
+            <summary>
+            Logs in the user using the external login link.
+            </summary>
+            <returns>Manage ManageLogins view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ManageController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ManageController.ManageMessageId">
+            <summary>
+            Contains the possible messages that a Manage page can display.
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.AddPhoneSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.ChangePasswordSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.ChangeEmailSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.ChangeProfilePhotoSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.SetTwoFactorSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.SetPasswordSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.SetEmailSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.SetProfilePhotoSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.RemoveLoginSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.RemovePhoneSuccess">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Controllers.ManageController.ManageMessageId.Error">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.OrderController">
+            <summary>
+            Orders controller. For table Orders.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderController.Home(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String)">
+            <summary>
+            the list of current Employees orders
+            </summary>
+            <param name="orderID">Returns selected Order</param>
+            <param name="productID">Returns selected Product</param>
+            <param name="page">Returns the current page</param>
+            <param name="search">The search string</param>
+            <param name="currentFilter">Curent search</param>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderController.HomeCustomers(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String)">
+            <summary>
+            the list of current Employees orders
+            </summary>
+            <param name="orderID">Returns selected Order</param>
+            <param name="productID">Returns selected Product</param>
+            <param name="page">Returns the current page</param>
+            <param name="search">The search string</param>
+            <param name="currentFilter">Curent search</param>
+            <returns>Return Orders for curent customers</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderController.HomeAdmin(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String,System.String)">
+            <summary>
+            list of all orders viewable only by admin
+            </summary>
+            <param name="orderID">Returns selected Order</param>
+            <param name="productID">Returns selected Product</param>
+            <param name="page">Returns the current page</param>
+            <param name="search">The search string</param>
+            <param name="currentFilter">Curent search</param>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderController.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Return a list of users to complete table
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>Returns json for datatable with users</returns>        
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderController.JsonTableAdminFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Return a list of users to complete table
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>Returns json for datatable with users</returns>        
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderController.JsonTableCustomerFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Return a list of users to complete table
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>Returns json for datatable with users</returns>        
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ContactController">
+            <summary>
+            Contact Controller. For table Persons which is used in Contact index view
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ContactController.Index(System.String)">
+            <summary>
+            Displays a Contact index page.
+            </summary>
+            <param name="status"></param>
+            <returns>Contact index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ContactController.Index(NorthwindWeb.Models.Persons)">
+            <summary>
+            Inserts a person into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="person">The person entity to be inserted</param>
+            <returns>If successful returns contact index view, else goes back to form.</returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.HomeController">
+            <summary>
+            Used from enter page from the site (public site not admin site).
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.HomeController.Index">
+            <summary>
+            First page in the site.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.HomeController.Menu">
+            <summary>
+            Used to construct the menu.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.OrderDetailController">
+            <summary>
+            OrderDetail Controller. For table Order_Details
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderDetailController.Details(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Displays a page showing all the information about one order-detail.
+            </summary>
+            <param name="orderID">The orderID of the order-detail that is going to be showed</param>
+            <param name="productID">The productID of the order-detail that is going to be showed</param>
+            <returns>Orders-details details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderDetailController.Create(System.Nullable{System.Int32})">
+            <summary>
+            Returns the view containing the form neccesary for creating a new order-detail.
+            </summary>
+            <returns>Create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderDetailController.Create(NorthwindWeb.Models.Order_Details,System.Int32)">
+            <summary>
+            Inserts an order-detail into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="order_Details">The order-detail entity to be inserted</param>
+            <param name="id">The order id for which order-details are made</param>
+            <returns>If successful returns orders-details index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderDetailController.Edit(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Returns the view containing the form necessary for editing an existing order-detail.
+            </summary>
+            <param name="orderID">The orderID of the order-detail that is going to be edited</param>
+            <param name="productID">The productID of the order-detail that is going to be edited</param>
+            <returns>Orders-details edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderDetailController.Edit(NorthwindWeb.Models.Order_Details)">
+            <summary>
+            Updates the database 
+            changing the fields of the order-detail whose id is equal to the id of the provided orders-details parameter
+            to those of the parameter.
+            </summary>
+            <param name="order_Details">The changed order-detail.</param>
+            <returns>Orders-details index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderDetailController.Delete(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Displays a confirmation page for the following delete.
+            </summary>
+            <param name="orderID">The orderID of the order-detail that is going to be deleted.</param>
+            <param name="productID">The productID of the order-detail that is going to be deleted.</param>
+            <returns>Delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderDetailController.DeleteConfirmed(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Deletes an order-detail from the database. 
+            </summary>
+            <param name="orderID">The orderID of the order-detail that is going to be deleted.</param>
+            <param name="productID">The productID of the order-detail that is going to be deleted.</param>
+            <returns>Orders index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrderDetailController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.OrdersController">
+            <summary>
+            Orders Controller. For table Orders
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.Index(System.String)">
+            <summary>
+            Displays a page with all the orders existing in the database.
+            </summary>
+            <param name="search">The search look to find something asked</param>
+            <returns>Orders index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.Details(System.Int32)">
+            <summary>
+            Displays a page showing all the information about one order and its order-details.
+            </summary>
+            <param name="id">The id of the order whose information to show</param>
+            <returns>Orders details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.Create">
+            <summary>
+            Returns the view containing the form neccesary for creating a new order.
+            </summary>
+            <returns>Create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.Create(NorthwindWeb.Models.Orders)">
+            <summary>
+            Inserts an order into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="orders">The order entity to be inserted</param>
+            <returns>If successful returns orders index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Returns the view containing the form necessary for editing an existing order.
+            </summary>
+            <param name="id">The id of the order that is going to be edited</param>
+            <returns>Orders edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.Edit(NorthwindWeb.Models.Orders)">
+            <summary>
+            Updates the database 
+            changing the fields of the order whose id is equal to the id of the provided orders parameter
+            to those of the parameter.
+            </summary>
+            <param name="orders">The changed order.</param>
+            <returns>Orders index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Displays a confirmation page for the following delete.
+            </summary>
+            <param name="id">The order that is going to be deleted.</param>
+            <returns>Delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Deletes an order from the database. The order will be deleted along with its details
+            </summary>
+            <param name="id">The id of the order that is going to be deleted</param>
+            <returns>Orders index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Function used to control the dashboard datatables from the server
+            </summary>
+            <param name="draw"></param>
+            <param name="start"></param>
+            <param name="length"></param>
+            <returns>A JSON filtered orders list.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OrdersController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.OtherController">
+            <summary>
+            Controller with other Information about our site
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OtherController.FullWidth">
+            <summary>
+            returns  View
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OtherController.SideBar">
+            <summary>
+            returns  View
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OtherController.Faq">
+            <summary>
+            returns  View
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.OtherController.FourOhFour">
+            <summary>
+            returns  View
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ProductController">
+            <summary>
+            ProductController is controller that we use to show all product for Admins, Manager, Employees
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.Index(System.String)">
+            <summary>
+            Displays a page containing a datatable with all the products in the database.
+            </summary>
+            <param name="category">Filters the products and only shows the ones containing this category.</param>
+            <returns>Product index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Displays a page containing all the information about one product
+            </summary>
+            <param name="id">The id of the product that is going to be created.</param>
+            <returns>Product details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.Create">
+            <summary>
+            Displays a page containing a form required to add a new product in the database.
+            </summary>
+            <returns>Product create view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.Create(NorthwindWeb.Models.Products,System.Web.HttpPostedFileBase)">
+            <summary>
+            Creates a new product and adds it to the database.
+            </summary>
+            <param name="products">The products entity that will be added.</param>
+            <param name="ProductImage">The image of the products</param>
+            <returns>Product index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Displays a page containing a form neccessary to edit an existing product.
+            </summary>
+            <param name="id">The id of the product that is going to be edited.</param>
+            <returns>Product edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.Edit(NorthwindWeb.Models.Products,System.Web.HttpPostedFileBase)">
+            <summary>
+            Updates the information of a product in the database.
+            </summary>
+            <param name="products">The product entity with the updated information.</param>
+            <param name="ProductImage">The updated image</param>
+            <returns>Product index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Displays a confirmation page for the following delete operation.
+            </summary>
+            <param name="id">The id of the product that is going to be deleted.</param>
+            <returns>Product delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Deletes a product from the database.
+            </summary>
+            <param name="id">The id of the product that is going to be deleted.</param>
+            <returns>Product index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Send back a JsonDataTableObject as json with all the information that we need to populate datatable
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>JsonDataTableObject</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ProductsController">
+            <summary>
+            Products controller. From table Products.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ProductsController.Products(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Returns a paged list filtered by category and by name
+            </summary>
+            <param name="category">The category of the product, if it's not a valid value returns all products</param>
+            <param name="search">Filters by products' name</param>
+            <param name="page">Required for paged list to work</param>
+            
+            <returns>PagedList</returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.RegionsController">
+            <summary>
+            Regions Controller. For table Region
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.Index(System.String)">
+            <summary>
+            Displays a page with all the regions existing in the database.
+            </summary>
+            <param name="search">The search look to find something asked</param>
+            <returns>Regions index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Displays a page showing all the information about one region.
+            </summary>
+            <param name="id">The id of the region whose information to show</param>
+            <returns>Regions details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.Create">
+            <summary>
+            Returns the view containing the form neccesary for creating a new region.
+            </summary>
+            <returns>Create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.Create(NorthwindWeb.Models.Region)">
+            <summary>
+            Inserts a region into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="region">The region entity to be inserted</param>
+            <returns>If successful returns regions index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Returns the view containing the form necessary for editing an existing eregion.
+            </summary>
+            <param name="id">The id of the region that is going to be edited</param>
+            <returns>Regions edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.Edit(NorthwindWeb.Models.Region)">
+            <summary>
+            Updates the database changing the fields of the region whose id is equal to the id of the provided regions parameter to those of the parameter.
+            </summary>
+            <param name="region">The changed region.</param>
+            <returns>Regions index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Displays a confirmation page for the following delete.
+            </summary>
+            <param name="id">The employee that is going to be deleted.</param>
+            <returns>Delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Deletes a region from the database. The region must not contains territories.
+            </summary>
+            <param name="id">The id of the employee that is going to be deleted</param>
+            <returns>Regions index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.JsonTableFill(System.String)">
+            <summary>
+            Function used to control the dashboard datatables local
+            </summary>
+            <param name="search"></param>
+            <returns>A JSON filtered regions list.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.RegionsController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ReportsController">
+            <summary>
+            Contains the methods neccessary to deal with reports.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ReportsController.LogIn">
+            <summary>
+            Displays a page containing a form to login on the report server.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ReportsController.Index(NorthwindWeb.ViewModels.ReportLoginViewModel)">
+            <summary>
+            Shows the reports on the report server.
+            </summary>
+            <param name="login">Holds the username and password for the report server</param>
+            <returns></returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ServicesController">
+            <summary>
+            Services Controller. For table Products
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ServicesController.Index">
+            <summary>
+            take first 4 products and last 3 products with their details
+            </summary>
+            <returns>Products index view</returns>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ShippersController">
+            <summary>
+            Shippers Controller. For table Shippers
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.Index(System.String)">
+            <summary>
+            Displays a page with all the shippers existing in the database.
+            </summary>
+            <param name="search">The search look to find something asked</param>
+            <returns>Shippers index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Displays a page showing all the information about one shipper.
+            </summary>
+            <param name="id">The id of the shipper whose information to show</param>
+            <returns>Shippers details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.Create">
+            <summary>
+            Returns the view containing the form neccesary for creating a new shipper.
+            </summary>
+            <returns>Create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.Create(NorthwindWeb.Models.Shippers)">
+            <summary>
+            Inserts a shipper into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="shippers">The shipper entity to be inserted</param>
+            <returns>If successful returns shippers index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Returns the view containing the form necessary for editing an existing shipper.
+            </summary>
+            <param name="id">The id of the shipper that is going to be edited</param>
+            <returns>Shippers edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.Edit(NorthwindWeb.Models.Shippers)">
+            <summary>
+            Updates the database changing the fields of the shipper whose id is equal to the id of the provided shippers parameter to those of the parameter.
+            </summary>
+            <param name="shippers">The changed shipper.</param>
+            <returns>Shippers index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Displays a confirmation page for the following delete.
+            </summary>
+            <param name="id">The shipper that is going to be deleted.</param>
+            <returns>Delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Deletes a shipper from the database. The shipper must not have id in employees.
+            </summary>
+            <param name="id">The id of the shipper that is going to be deleted</param>
+            <returns>Shippers index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.JsonTableFill">
+            <summary>
+            Function used to control the dashboard datatables local
+            </summary>
+            <returns>A JSON filtered shipper list.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShippersController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.ShopCartController">
+            <summary>
+            Contains all the methods neccessary for interacting with the shopcart.
+            For example adding/removing products from the shopcart, or creating an order with those products.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.Index">
+            <summary>
+            See the curent shop list
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.Create(System.Int32,System.Int32)">
+            <summary>
+            Inserts or updates a product in the ShopCart table.
+            </summary>
+            <param name="id">The id of the product</param>
+            <param name="quantity">The quantity of the product</param>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.UpdateQuantity(System.Int32,System.Int32)">
+            <summary>
+            Updates the quantity of a product in the database. The product must exist.
+            </summary>
+            <param name="id">The id of the product.</param>
+            <param name="quantity">The new quantity value.</param>
+            <returns>"{}" on success, "Error" on failure.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.ImportFromLocal(System.String)">
+            <summary>
+            Import data from local storage when the user will log in.
+            </summary>
+            <param name="json">data will be parsed as a json string</param>
+            <returns>"{}" on success, "Error" on fail</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Deletes a product from the shopcart table in the database.
+            </summary>
+            <param name="id">The id of the product that is going to be deleted.</param>
+            <returns>"{}" on success, "Error" on failure.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Send back a JsonDataTableObject as json with all the information that we need to populate datatable
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>JsonDataTableObject</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.GetCartCount">
+            <summary>
+            Returns how many products a user has in hit shopcart.
+            </summary>
+            <returns>Number of products on success, "Error" on failure.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.GetShipVia(System.Int32)">
+            <summary>
+            Save selected Shippers
+            </summary>
+            <param name="shipVia">Shippers Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.ConfirmOrder">
+            <summary>
+            Creates an order with the products in the logged user's shopcart.
+            </summary>
+            <returns>Redirect to Home index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.CreateCustomers">
+            <summary>
+            Returns the view containing the form neccesary for creating a new customer.
+            </summary>
+            <returns>Shopart createCustomer view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.CreateCustomers(NorthwindWeb.ViewModels.Customer)">
+            <summary>
+            Inserts an customer into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="customers">The customer entity to be inserted</param>
+            <returns>If successful returns customers index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.ShopCartController.Dispose(System.Boolean)">
+            <summary>
+            Dispose
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.SuppliersController">
+            <summary>
+            Contains all the methods neccessary for CRUD on the suppliers table in the database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.Index">
+            <summary>
+            Displays a page containing a datatable with all the suppliers in the database.
+            </summary>
+            <returns>Suppliers index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.Details(System.Nullable{System.Int32})">
+            <summary>
+            Displays a page containing all the information about one supplier.
+            </summary>
+            <param name="id">The id of the supplier whose information will be shown.</param>
+            <returns>Suppliers details view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.Create">
+            <summary>
+            Displays a page containing a form neccessary to create a new supplier.
+            </summary>
+            <returns>Suppliers create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.Create(NorthwindWeb.Models.Suppliers)">
+            <summary>
+            Adds a new supplier in the database.
+            </summary>
+            <param name="suppliers">The supplier entity to be added.</param>
+            <returns>Suppliers index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.Edit(System.Nullable{System.Int32})">
+            <summary>
+            Displays a page containing a form neccessary to edit an existing supplier.
+            </summary>
+            <param name="id">The id of the supplier that is going to be edited.</param>
+            <returns>Suppliers edit view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.Edit(NorthwindWeb.Models.Suppliers)">
+            <summary>
+            Updates the information of a supplier in the database.
+            </summary>
+            <param name="suppliers">The supplier entity with the updated information.</param>
+            <returns>Suppliers index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Displays a confirmation page for the following delete operation.
+            </summary>
+            <param name="id">The id of the supplier that is going to be deleted.</param>
+            <returns>Suppliers delete view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.DeleteConfirmed(System.Int32)">
+            <summary>
+            Deletes a supplier from the database.
+            </summary>
+            <param name="id">The id of the supplier that is going to be deleted.</param>
+            <returns>Suppliers index view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Send back a JsonDataTableObject as json with all the information that we need to populate datatable
+            </summary>
+            <param name="draw">Draw order. Client send a draw id in request to keep track of asyncron response</param>
+            <param name="start">Start from this item</param>
+            <param name="length">Take a list with "lenght" (if exists) objects inside.</param>
+            <returns>JsonDataTableObject</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.SuppliersController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.Controllers.TerritoriesController">
+            <summary>
+            Territories Controller. For table Territories
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.TerritoriesController.Details(System.String)">
+            <summary>
+            Displays a page showing all the information about one territory.
+            </summary>
+            <param name="id">The id of the territory whose information to show</param>
+            <returns>Territory details view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.TerritoriesController.Create(System.Nullable{System.Int32})">
+            <summary>
+            Returns the view containing the form neccesary for creating a new territory.
+            </summary>
+            <returns>Create view.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.TerritoriesController.Create(NorthwindWeb.Models.Territories,System.Int32)">
+            <summary>
+            Inserts a territory into the database table. If it fails, goes back to the form.
+            </summary>
+            <param name="territories">The territory entity to be inserted</param>
+            <param name="id">The territory find by region's id</param>
+            <returns>If successful returns territories index view, else goes back to form.</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.TerritoriesController.Edit(System.String)">
+            <summary>
+            Returns the view containing the form necessary for editing an existing territory.
+            </summary>
+            <param name="id">The id of the territory that is going to be edited</param>
+            <returns>Territories edit view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.TerritoriesController.Edit(NorthwindWeb.Models.Territories)">
+            <summary>
+            Updates the database changing the fields of the territory whose id is equal to the id of the provided territories parameter to those of the parameter.
+            </summary>
+            <param name="territories">The changed territory.</param>
+            <returns>Territories index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.TerritoriesController.Delete(System.String)">
+            <summary>
+            Displays a confirmation page for the following delete.
+            </summary>
+            <param name="id">The territory that is going to be deleted.</param>
+            <returns>Delete view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.TerritoriesController.DeleteConfirmed(System.String)">
+            <summary>
+            Deletes a territory from the database. The territory must not have employees.
+            </summary>
+            <param name="id">The id of the territory that is going to be deleted</param>
+            <returns>Territories index view</returns>
+        </member>
+        <member name="M:NorthwindWeb.Controllers.TerritoriesController.Dispose(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:NorthwindWeb.MvcApplication">
+            <summary>
+            Mvc application.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.MvcApplication.Application_Start">
+            <summary>
+            Start IIS application.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.MvcApplication.Application_Error">
+            <summary>
+            Write global errors.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Categories">
+            <summary>
+            The entity that contains information about categories, located in database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Categories.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Products.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Categories.CategoryID">
+            <summary>
+            The ID through which we find the category.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Categories.CategoryName">
+            <summary>
+            The name through which we find the category.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Categories.Description">
+            <summary>
+            The description through which we find the category.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Categories.Products">
+            <summary>
+            A category may contains more products.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Customers">
+            <summary>
+            The entity that holds all the information from the Customers table in the database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Customers.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Orders and CustomerDemographics..
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.CustomerID">
+            <summary>
+            The id of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.CompanyName">
+            <summary>
+            The name of the company which is the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.ContactName">
+            <summary>
+            The name of the contact person from the company.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.ContactTitle">
+            <summary>
+            The function of the contact person.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.Address">
+            <summary>
+            The adress of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.City">
+            <summary>
+            The customer's city.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.Region">
+            <summary>
+            The customer's region.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.PostalCode">
+            <summary>
+            The customer's postal code.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.Country">
+            <summary>
+            The customer's country.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.Phone">
+            <summary>
+            The phone number of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.Fax">
+            <summary>
+            The fax of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.Orders">
+            <summary>
+            The orders of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Customers.CustomerDemographics">
+            <summary>
+            The demography of the customer.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.CustomerDemographics">
+            <summary>
+            The entity that holds all the information from the CustomerDemographics table in the database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.CustomerDemographics.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Customers.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.CustomerDemographics.CustomerTypeID">
+            <summary>
+            The id of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.CustomerDemographics.CustomerDesc">
+            <summary>
+            The description of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.CustomerDemographics.Customers">
+            <summary>
+            The customers with demographics.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Employees">
+            <summary>
+            The entity that holds all the information from the Employees table in the database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Employees.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Employees1, Orders and Territories.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.EmployeeID">
+            <summary>
+            The id of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.LastName">
+            <summary>
+            The lastname of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.FirstName">
+            <summary>
+            The firstname of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Title">
+            <summary>
+            The function of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.TitleOfCourtesy">
+            <summary>
+            The title of courtesy of the employee(Dra.,Dr. or Dl.).
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.BirthDate">
+            <summary>
+            The date of birth of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.HireDate">
+            <summary>
+            The date when the employee was hired.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Address">
+            <summary>
+            The adress of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.City">
+            <summary>
+            The city where the employee lives.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Region">
+            <summary>
+            The region where the employee lives.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.PostalCode">
+            <summary>
+            The postal code from the city where the employee lives.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Country">
+            <summary>
+            The country where the employee lives.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.HomePhone">
+            <summary>
+            The phone number of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Extension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Photo">
+            <summary>
+            The photo of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Notes">
+            <summary>
+            Some information about the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.ReportsTo">
+            <summary>
+            The id of the employee responsible for this employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Employees1">
+            <summary>
+            The employees that this employee is responsible for.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Employee1">
+            <summary>
+            The employee that is responsible for this employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Orders">
+            <summary>
+            The orders of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Employees.Territories">
+            <summary>
+            The territories where the employee works.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ExceptionHandler.DeleteException">
+            <summary>
+            The keeps all the exceptions in case that we can't delete
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.ExceptionHandler.DeleteException.#ctor(System.String)">
+            <summary>
+            The message of Delete exception
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:NorthwindWeb.Models.ApplicationUser">
+            <summary>
+            User's account information.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.ApplicationUser.GenerateUserIdentityAsync(Microsoft.AspNet.Identity.UserManager{NorthwindWeb.Models.ApplicationUser})">
+            <summary>
+            
+            </summary>
+            <param name="manager"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NorthwindWeb.Models.Interfaces.IJsonTableFillServerSide">
+            <summary>
+            Basic interface of datatable comunication (server side)
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Interfaces.IJsonTableFillServerSide.JsonTableFill(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            get data from server. Use it if you need a server side datatable
+            </summary>
+            <param name="draw">Current draw on client</param>
+            <param name="start">Start from "start"</param>
+            <param name="length">Take "lenght" elements</param>
+            <returns>You must return data as datatable need, see https://datatables.net/examples/data_sources/server_side.html </returns>
+        </member>
+        <member name="T:NorthwindWeb.Models.Interfaces.IJsonTableFill">
+            <summary>
+            Basic interface of datatable comunication (client side)
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Interfaces.IJsonTableFill.JsonTableFill">
+            <summary>
+            get data from server. Use it if you need a client side datatable
+            </summary>
+            <returns>You can return data as a list of objects see https://datatables.net for more information </returns>
+        </member>
+        <member name="T:NorthwindWeb.Models.Orders">
+            <summary>
+            The entity that holds all the information from the orders table in the database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Orders.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Order_Details.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.OrderID">
+            <summary>
+            The id of the order.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.CustomerID">
+            <summary>
+            The id of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.EmployeeID">
+            <summary>
+            The id of the employee.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.OrderDate">
+            <summary>
+            The date when the order was made.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.RequiredDate">
+            <summary>
+            The date when the order should arrive.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.ShippedDate">
+            <summary>
+            The date when the order was shipped.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.ShipVia">
+            <summary>
+            The id of the shipper.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.Freight">
+            <summary>
+            The freight of the order.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.ShipName">
+            <summary>
+            The name of the shipper.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.ShipAddress">
+            <summary>
+            The adress where the order is delivered.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.ShipCity">
+            <summary>
+            The city where the order is delivered.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.ShipRegion">
+            <summary>
+            The region where the order is delivered.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.ShipPostalCode">
+            <summary>
+            The postal code where the order is delivered.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.ShipCountry">
+            <summary>
+            The country where the order is delivered.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.Customer">
+            <summary>
+            The customer of the order.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.Employee">
+            <summary>
+            The employee who made the order.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.Order_Details">
+            <summary>
+            The details of the order.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Orders.Shipper">
+            <summary>
+            The shipper of the order.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Order_Details">
+            <summary>
+            The entity that holds all the information from the Order_Details table in the database.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Order_Details.OrderID">
+            <summary>
+            The order id of the order-detail.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Order_Details.ProductID">
+            <summary>
+            The product id of the order-detail.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Order_Details.UnitPrice">
+            <summary>
+            The unit price of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Order_Details.Quantity">
+            <summary>
+            The product's quantity.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Order_Details.Discount">
+            <summary>
+            The product's discount.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Order_Details.Order">
+            <summary>
+            The order of the order-detail.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Order_Details.Product">
+            <summary>
+            The product of the order-detail.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Persons">
+            <summary>
+            The entity that contains information about persons, located in database.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Persons.ID">
+            <summary>
+            The ID through which we find the person.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Persons.LastName">
+            <summary>
+            The LastName through which we find the person.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Persons.FirstName">
+            <summary>
+            The FirstName through which we find the person.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Persons.Email">
+            <summary>
+            The Email through which we find the person.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Persons.Comment">
+            <summary>
+            The Comment what belongs to the person.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Products">
+            <summary>
+            The entity that holds all the information from the products table in the database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Products.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Orders Details.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.ProductID">
+            <summary>
+            The id of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.ProductName">
+            <summary>
+            The productname of the product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.SupplierID">
+            <summary>
+            The id of the supplier.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.CategoryID">
+            <summary>
+            The id of the category.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.QuantityPerUnit">
+            <summary>
+            The QuantityPerUnit of the products.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.UnitPrice">
+            <summary>
+            The UnitPrice of the products
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.UnitsInStock">
+            <summary>
+            How many Units are in stock for this product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.UnitsOnOrder">
+            <summary>
+            How many Units are on orders
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.ReorderLevel">
+            <summary>
+            when the quantity in stock reaches this level , a new order is sent.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.Discontinued">
+            <summary>
+            True if the product is available.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.Category">
+            <summary>
+            The category of this product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.Order_Details">
+            <summary>
+            A list containing all the order details that this product is a part of.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Products.Supplier">
+            <summary>
+            The Suppliers of this product.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Region">
+            <summary>
+            The entity that contains information about regions, located in database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Region.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Territories.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Region.RegionID">
+            <summary>
+            The ID through which we find the Region.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Region.RegionDescription">
+            <summary>
+            The Description through which we find the Region.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Region.Territories">
+            <summary>
+            The region contains more territories.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ServerClientCommunication.CategoriesData">
+            <summary>
+             Contain data of categories that datatable need to draw a table.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.CategoriesData.ID">
+            <summary>
+            The ID of category.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.CategoriesData.CategoryName">
+            <summary>
+            The name of category.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.CategoriesData.Description">
+            <summary>
+            The description of category.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ServerClientCommunication.JsonDataTable">
+            <summary>
+            Contain data that datatable need to draw corect table from server
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTable.draw">
+            <summary>
+            The draw counter that this object is a response to - from the draw parameter 
+            sent as part of the data request.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTable.recordsTotal">
+            <summary>
+            Total records, before filtering (i.e. the total number of records in the database)
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTable.recordsFiltered">
+            <summary>
+            Total records, after filtering
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTable.data">
+            <summary>
+            The data to be displayed in the table. 
+            This is an array of data source objects, one for each row, which will be used by DataTables.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTable.error">
+            <summary>
+            Optional: If an error occurs during the running of the server-side processing script, 
+            you can inform the user of this error by passing back the error message to be displayed using this parameter.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableUserList">
+            <summary>
+            Contain data that datatable need to draw corect table from server
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableUserList.draw">
+            <summary>
+            The draw counter that this object is a response to - from the draw parameter 
+            sent as part of the data request.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableUserList.recordsTotal">
+            <summary>
+            Total records, before filtering (i.e. the total number of records in the database)
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableUserList.recordsFiltered">
+            <summary>
+            Total records, after filtering
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableUserList.data">
+            <summary>
+            The data to be displayed in the table. 
+            This is an array of data source objects, one for each row, which will be used by DataTables.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableUserList.error">
+            <summary>
+            Optional: If an error occurs during the running of the server-side processing script, 
+            you can inform the user of this error by passing back the error message to be displayed using this parameter.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableUserList.roleName">
+            <summary>
+            Optional:Only used if want users assigned to a role
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableOrderList">
+            <summary>
+            Contain data that datatable need to draw corect table from server
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableOrderList.draw">
+            <summary>
+            The draw counter that this object is a response to - from the draw parameter 
+            sent as part of the data request.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableOrderList.recordsTotal">
+            <summary>
+            Total records, before filtering (i.e. the total number of records in the database)
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableOrderList.recordsFiltered">
+            <summary>
+            Total records, after filtering
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableOrderList.data">
+            <summary>
+            The data to be displayed in the table. 
+            This is an array of data source objects, one for each row, which will be used by DataTables.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableOrderList.error">
+            <summary>
+            Optional: If an error occurs during the running of the server-side processing script, 
+            you can inform the user of this error by passing back the error message to be displayed using this parameter.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableRoleList">
+            <summary>
+            Contain data that datatable need to draw corect table from server
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableRoleList.draw">
+            <summary>
+            The draw counter that this object is a response to - from the draw parameter 
+            sent as part of the data request.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableRoleList.recordsTotal">
+            <summary>
+            Total records, before filtering (i.e. the total number of records in the database)
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableRoleList.recordsFiltered">
+            <summary>
+            Total records, after filtering
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableRoleList.data">
+            <summary>
+            The data to be displayed in the table. 
+            This is an array of data source objects, one for each row, which will be used by DataTables.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.JsonDataTableRoleList.error">
+            <summary>
+            Optional: If an error occurs during the running of the server-side processing script, 
+            you can inform the user of this error by passing back the error message to be displayed using this parameter.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ServerClientCommunication.RegionData">
+            <summary>
+            Contain data of region that datatable need to draw a table.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.RegionData.ID">
+            <summary>
+            The ID of region.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.RegionData.RegionDescription">
+            <summary>
+            The description of region.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ServerClientCommunication.ShipperData">
+            <summary>
+            Contain data of shipper that datatable need to draw a table.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.ShipperData.ID">
+            <summary>
+            The ID of shipper.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.ShipperData.CompanyName">
+            <summary>
+            The name of shipper.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ServerClientCommunication.ShipperData.Phone">
+            <summary>
+            The phone of shipper.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Shippers">
+            <summary>
+            The entity that contains information about shippers, located in database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Shippers.#ctor">
+            <summary>
+             Default constructor. Initialises new empty instances for Orders.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Shippers.ShipperID">
+            <summary>
+            The ID through which we find the shipper.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Shippers.CompanyName">
+            <summary>
+            The CompanyName through which we find the shipper.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Shippers.Phone">
+            <summary>
+            The Phone through which we find the shipper.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Shippers.Orders">
+            <summary>
+            The shipper which contains more orders.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ShopCarts">
+            <summary>
+            The entity that holds all the information from the ShopCarts table in the database.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCarts.UserName">
+            <summary>
+            The name of the user who added a product in the shopcart
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCarts.ProductID">
+            <summary>
+            The id of the product added.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCarts.Quantity">
+            <summary>
+            The quantity of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCarts.Products">
+            <summary>
+            The products contained by the shopcart
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ShopCart.ProductShopCart">
+            <summary>
+            contain basic info about shopcart
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopCart.ID">
+            <summary>
+            product id from shopcart
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopCart.Quantity">
+            <summary>
+            quantity of product
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ShopCart.ProductShopCartDetailed">
+            <summary>
+            ProductShopCartDetailed have aditional information about the product as against ProductShopCart
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopCartDetailed.ProductName">
+            <summary>
+            Get category of this product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopCartDetailed.UnitPrice">
+            <summary>
+            get unit price of this product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopCartDetailed.Category">
+            <summary>
+            get the category of this product
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.ShopCart.ProductShopResponse`1">
+            <summary>
+            Contains the response for shopcart from server
+            </summary>
+            <typeparam name="DataType">IQueriable if we have a proper database or string of json from another database</typeparam>
+        </member>
+        <member name="T:NorthwindWeb.Models.ShopCart.ProductShopResponse`1.ErrorType">
+            <summary>
+            contains all errors
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Models.ShopCart.ProductShopResponse`1.ErrorType.NoError">
+            <summary>
+            no error found
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Models.ShopCart.ProductShopResponse`1.ErrorType.UnknownError">
+            <summary>
+            a unknown type of error ocure
+            </summary>
+        </member>
+        <member name="F:NorthwindWeb.Models.ShopCart.ProductShopResponse`1.ErrorType.InvalidOrder">
+            <summary>
+            order contains some invalid data
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopResponse`1.Error">
+            <summary>
+            true if server cannot send back a proper response
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopResponse`1.MessageTitle">
+            <summary>
+            Title of message
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopResponse`1.MessageText">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.ShopCart.ProductShopResponse`1.data">
+            <summary>
+            Data about product that will be sent to client
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Suppliers">
+            <summary>
+            The entity that holds all the information from the Suppliers table in the database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Suppliers.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Products.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.SupplierID">
+            <summary>
+            The id of the supplier.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.CompanyName">
+            <summary>
+            The name of the company who is the supplier.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.ContactName">
+            <summary>
+            The name of the contact person from the company.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.ContactTitle">
+            <summary>
+            The function of the contact person.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.Address">
+            <summary>
+            The address of the supplier.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.City">
+            <summary>
+            The supplier's city.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.Region">
+            <summary>
+            The supplier's region.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.PostalCode">
+            <summary>
+            The supplier's postal code.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.Country">
+            <summary>
+            The supplier's country.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.Phone">
+            <summary>
+            The phone number of the supplier.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.Fax">
+            <summary>
+            The fax of the supplier.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.HomePage">
+            <summary>
+            The supplier's web site.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Suppliers.Products">
+            <summary>
+            The products delivered by the supplier.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.Models.Territories">
+            <summary>
+            The entity that contains information about territories, located in database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.Models.Territories.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Employees.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Territories.TerritoryID">
+            <summary>
+            The ID through which we find the territory.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Territories.TerritoryDescription">
+            <summary>
+            The Description through which we find the territory.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Territories.RegionID">
+            <summary>
+            The RegionID through which we find the territory.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Territories.Region">
+            <summary>
+            The region which contains more territories.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.Models.Territories.Employees">
+            <summary>
+            The employees where work in a territory.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ExternalLoginConfirmationViewModel">
+            <summary>
+            External log in.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ExternalLoginConfirmationViewModel.Email">
+            <summary>
+            Email field.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ExternalLoginListViewModel">
+            <summary>
+            External log in.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ExternalLoginListViewModel.ReturnUrl">
+            <summary>
+            Return url to log in.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.SendCodeViewModel">
+            <summary>
+            Send code.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.SendCodeViewModel.SelectedProvider">
+            <summary>
+            Provider.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.SendCodeViewModel.Providers">
+            <summary>
+            Providers.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.SendCodeViewModel.ReturnUrl">
+            <summary>
+            Return url to log in.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.SendCodeViewModel.RememberMe">
+            <summary>
+            Remember booleand check box.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.VerifyCodeViewModel">
+            <summary>
+            Verify code.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.VerifyCodeViewModel.Provider">
+            <summary>
+            Provider to verify.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.VerifyCodeViewModel.Code">
+            <summary>
+            Code to verify.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.VerifyCodeViewModel.ReturnUrl">
+            <summary>
+            Return url to verify.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.VerifyCodeViewModel.RememberBrowser">
+            <summary>
+            Browser to remember.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.VerifyCodeViewModel.RememberMe">
+            <summary>
+            Remember booleand check box.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ForgotViewModel">
+            <summary>
+            Forgot view model.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ForgotViewModel.Email">
+            <summary>
+            Email of user.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.LoginViewModel">
+            <summary>
+            Login view model.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.LoginViewModel.UserName">
+            <summary>
+            User name.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.LoginViewModel.Password">
+            <summary>
+            Password.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.LoginViewModel.RememberMe">
+            <summary>
+            Remember boolean check box.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.UserInfoViewModel">
+            <summary>
+            This Model class is used to retrieve and display user information.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.UserInfoViewModel.UserName">
+            <summary>
+            User name.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.UserInfoViewModel.Email">
+            <summary>
+            email.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.UserInfoViewModel.LastActiveDateTime">
+            <summary>
+            Last time when was activated.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.UserInfoViewModel.LastActiveString">
+            <summary>
+            Last time when was activated as string.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.UserInfoViewModel.IsLockedOut">
+            <summary>
+            Locked or not.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.UserInfoViewModel.IsOnline">
+            <summary>
+            Online or not.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.RegisterViewModel">
+            <summary>
+            This Model class is used to retrieve a new user information and create a new user.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegisterViewModel.UserName">
+            <summary>
+            User name.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegisterViewModel.Email">
+            <summary>
+            Email.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegisterViewModel.Password">
+            <summary>
+            Password.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegisterViewModel.ConfirmPassword">
+            <summary>
+            Seccond password.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegisterViewModel.UserImage">
+            <summary>
+            The image user.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ResetPasswordViewModel">
+            <summary>
+            Reset password view model.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ResetPasswordViewModel.Email">
+            <summary>
+            Email.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ResetPasswordViewModel.Password">
+            <summary>
+            Password.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ResetPasswordViewModel.ConfirmPassword">
+            <summary>
+            Seccond password.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ResetPasswordViewModel.Code">
+            <summary>
+            Check code.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ForgotPasswordViewModel">
+            <summary>
+            Forgot Password View Model.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ForgotPasswordViewModel.Email">
+            <summary>
+            Email of user.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.RoleInfoViewModel">
+            <summary>
+            Represents Membership Roles
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RoleInfoViewModel.Name">
+            <summary>
+            Role name.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ValidatePasswordLengthAttribute">
+            <summary>
+            Validate password.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.ValidatePasswordLengthAttribute.#ctor">
+            <summary>
+            Cstr.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.ValidatePasswordLengthAttribute.FormatErrorMessage(System.String)">
+            <summary>
+            Error message.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.ValidatePasswordLengthAttribute.IsValid(System.Object)">
+            <summary>
+            Valid or not.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.ValidatePasswordLengthAttribute.GetClientValidationRules(System.Web.Mvc.ModelMetadata,System.Web.Mvc.ControllerContext)">
+            <summary>
+            Get Client Validation Rules.
+            </summary>
+            <param name="metadata"></param>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.DashbordCustomer">
+            <summary>
+            New customer from ShopCart
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.CompanyName">
+            <summary>
+            The name of the company which is the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.ContactName">
+            <summary>
+            The name of the contact person from the company.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.ContactTitle">
+            <summary>
+            The function of the contact person.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.Address">
+            <summary>
+            The adress of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.City">
+            <summary>
+            The customer's city.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.Region">
+            <summary>
+            The customer's region.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.PostalCode">
+            <summary>
+            The customer's postal code.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.Country">
+            <summary>
+            The customer's country.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.Phone">
+            <summary>
+            The phone number of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.DashbordCustomer.Fax">
+            <summary>
+            The fax of the customer.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Customer">
+            <summary>
+            New customer from ShopCart
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.CompanyName">
+            <summary>
+            The name of the company which is the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.ContactTitle">
+            <summary>
+            The function of the contact person.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.Address">
+            <summary>
+            The adress of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.City">
+            <summary>
+            The customer's city.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.Region">
+            <summary>
+            The customer's region.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.PostalCode">
+            <summary>
+            The customer's postal code.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.Country">
+            <summary>
+            The customer's country.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.Phone">
+            <summary>
+            The phone number of the customer.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Customer.Fax">
+            <summary>
+            The fax of the customer.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ProductViewModel">
+            <summary>
+            The entity that holds all the information from the products table in the database.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.ProductViewModel.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instances for Orders Details.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.ProductID">
+            <summary>
+            The id of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.ProductName">
+            <summary>
+            The productname of the product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.SupplierID">
+            <summary>
+            The id of the supplier.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.CategoryID">
+            <summary>
+            The id of the category.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.QuantityPerUnit">
+            <summary>
+            The QuantityPerUnit of the products.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.UnitPrice">
+            <summary>
+            The UnitPrice of the products
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.UnitsInStock">
+            <summary>
+            How many Units are in stock for this product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.UnitsOnOrder">
+            <summary>
+            How many Units are on orders
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.ReorderLevel">
+            <summary>
+            when the quantity in stock reaches this level , a new order is sent.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.Discontinued">
+            <summary>
+            True if the product is available.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.Category">
+            <summary>
+            The category of this product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.Order_Details">
+            <summary>
+            A list containing all the order details that this product is a part of.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.Supplier">
+            <summary>
+            The Suppliers of this product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductViewModel.ProductImage">
+            <summary>
+            The image of this product.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.CustomizeViewEngine">
+            <summary>
+            Navigation link format
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.CustomizeViewEngine.#ctor">
+            <summary>
+             identifies the location of the pages in the project
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisArea">
+            <summary>
+            The data model for the MorrisArea graph
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisArea.Year">
+            <summary>
+            year on which sales are calculated
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisArea.Sales">
+            <summary>
+            Sales per Year
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisArea.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisBar">
+            <summary>
+            The data model for the MorrisBar graph
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisBar.Year">
+            <summary>
+            year on which sales are calculated
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisBar.dashboardMorrisBarColumA">
+            <summary>
+            first-quarter sales
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisBar.dashboardMorrisBarColumB">
+            <summary>
+            sales for the second quarter
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisBar.dashboardMorrisBarColumC">
+            <summary>
+            sales for the third quarter
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisBar.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisDonut">
+            <summary>
+             The data model for the MorrisDonut graph
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisDonut.label">
+            <summary>
+            category for which sales are calculated
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisDonut.value">
+            <summary>
+            value of sales in this category
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Dashboard.DashboardMorrisDonut.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Dashboard.DashboardIndexData">
+            <summary>
+            The data model sent by the DashboardController to Home
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardIndexData.TotalSalesValue">
+            <summary>
+            sales value
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardIndexData.NumberProductsSold">
+            <summary>
+            Number Products Sold
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardIndexData.NumberEmployees">
+            <summary>
+            Number of Employees
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardIndexData.NumberCustomers">
+            <summary>
+            Number of Customers
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardIndexData.SalesPerQuarter">
+            <summary>
+            Sales Per Quarter
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardIndexData.LastTenOrders">
+            <summary>
+            Last Ten Orders
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Dashboard.DashboardSearchData">
+            <summary>
+             The data model sent by the DashboardController to Search
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardSearchData.MatchesCount">
+            <summary>
+            number of matches
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardSearchData.MatchesFound">
+            <summary>
+            Location of matches
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.DashboardSearchData.MatchesFoundPaged">
+            <summary>
+            page locations of matches
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Dashboard.LastTenOrders">
+            <summary>
+            The data required for the table of the last 10 commands in the dashboard
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.LastTenOrders.OrderID">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.LastTenOrders.Ago">
+            <summary>
+            How long ago the order was placed
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Dashboard.LastTenOrders.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Dashboard.LocateSearch">
+            <summary>
+            MatchesFound format in dashboard search model
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.LocateSearch.Position">
+            <summary>
+            number match
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.LocateSearch.ID">
+            <summary>
+            locating matching matches
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.LocateSearch.WhereFound">
+            <summary>
+            name of the column in which it was found
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Dashboard.LocateSearch.Controller">
+            <summary>
+            controller that generates it
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Dashboard.LocateSearch.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.IndexViewModel">
+            <summary>
+            Index view.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.IndexViewModel.HasPassword">
+            <summary>
+            Has a password.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.IndexViewModel.Logins">
+            <summary>
+            Logins.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.IndexViewModel.PhoneNumber">
+            <summary>
+            Phone number.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.IndexViewModel.TwoFactor">
+            <summary>
+            Two factor log-in.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.IndexViewModel.BrowserRemembered">
+            <summary>
+            Browser remember.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ManageLoginsViewModel">
+            <summary>
+            Manage logins.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ManageLoginsViewModel.CurrentLogins">
+            <summary>
+            Current login.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ManageLoginsViewModel.OtherLogins">
+            <summary>
+            Others login.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.FactorViewModel">
+            <summary>
+            Factor view model.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.FactorViewModel.Purpose">
+            <summary>
+            Purpose.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.SetPasswordViewModel">
+            <summary>
+            Set password view.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.SetPasswordViewModel.NewPassword">
+            <summary>
+            New password.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.SetPasswordViewModel.ConfirmPassword">
+            <summary>
+            Confirm password.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ChangePasswordViewModel">
+            <summary>
+            Change password view.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ChangePasswordViewModel.OldPassword">
+            <summary>
+            Old.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ChangePasswordViewModel.NewPassword">
+            <summary>
+            New.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ChangePasswordViewModel.ConfirmPassword">
+            <summary>
+            Confirmed password.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ChangeEmailViewModel">
+            <summary>
+            Change Email view.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ChangeEmailViewModel.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ChangeEmailViewModel.Email">
+            <summary>
+            Email.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ChangeProfileViewModel">
+            <summary>
+            Change Email view.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ChangeProfileViewModel.Password">
+            <summary>
+            Password
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ChangeProfileViewModel.UserImage">
+            <summary>
+            The image user.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.AddPhoneNumberViewModel">
+            <summary>
+            Add phone number.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.AddPhoneNumberViewModel.Number">
+            <summary>
+            Phone number.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.VerifyPhoneNumberViewModel">
+            <summary>
+            Verify phone view.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.VerifyPhoneNumberViewModel.Code">
+            <summary>
+            Code.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.VerifyPhoneNumberViewModel.PhoneNumber">
+            <summary>
+            Number of phone.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ConfigureTwoFactorViewModel">
+            <summary>
+            Configure TwoFactor View.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ConfigureTwoFactorViewModel.SelectedProvider">
+            <summary>
+            Provider.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ConfigureTwoFactorViewModel.Providers">
+            <summary>
+            Providers collection.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Orders.DetailsOfOrder">
+            <summary>
+            Keeps all order-details 
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Orders.DetailsOfOrder.OrderID">
+            <summary>
+            The id of the order.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Orders.DetailsOfOrder.ProductID">
+            <summary>
+            The id of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Orders.DetailsOfOrder.UnitPrice">
+            <summary>
+            The unit price of product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Orders.DetailsOfOrder.Quantity">
+            <summary>
+            The quantity of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Orders.DetailsOfOrder.Discount">
+            <summary>
+            The discount of the product.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Orders.DetailsOfOrder.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instance.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Orders.OrderDetali">
+            <summary>
+            The data model sent by the OrdersController to Home
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Orders.OrderDetali.Order">
+            <summary>
+            Display the order. 
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Orders.OrderDetali.Details">
+            <summary>
+            Dispay the details of the order.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Menu">
+            <summary>
+            The menu of category from Dashbord
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Menu.name">
+            <summary>
+            The name of category
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Order.BigOrder">
+            <summary>
+            Order with most products
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.BigOrder.OrderID">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.BigOrder.NumberOfProduct">
+            <summary>
+            Number Of Product
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Order.BigOrder.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Order.OrderTen">
+            <summary>
+            The class used to store, Ten most expensive orders
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderTen.OrderID">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderTen.Cost">
+            <summary>
+            Order value
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Order.OrderTen.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Order.OrderInfo">
+            <summary>
+            The class used to store, join between the Orders, Customers and Shippers
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderInfo.OrderID">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderInfo.OrderDate">
+            <summary>
+            Order date
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderInfo.CompanyName">
+            <summary>
+            Name Company
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderInfo.ShipperName">
+            <summary>
+            Name Shipper
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Order.OrderIndexData">
+            <summary>
+            The data model sent by the OrderController to Home
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderIndexData.Page">
+            <summary>
+            Paging the list of OrderInfo
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderIndexData.Order">
+            <summary>
+            List of OrderInfo
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderIndexData.Order_Detail">
+            <summary>
+            List of OrderProduct
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderIndexData.Product">
+            <summary>
+            List of ProductCategory
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderIndexData.OrderTen">
+            <summary>
+            List of OrderTen
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderIndexData.Command">
+            <summary>
+            order with the highest number of products
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Order.OrderProduct">
+            <summary>
+            The class used to store, join between the Orders and Orders_Details
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderProduct.ProductID">
+            <summary>
+            Product id
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderProduct.ProductName">
+            <summary>
+            Name Product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderProduct.UnitPrice">
+            <summary>
+            Product Price
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderProduct.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.OrderProduct.Discount">
+            <summary>
+            Discount
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.Order.OrderProduct.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.Order.ProductCategory">
+            <summary>
+            The class used to store, join between the Products and Categories
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.ProductCategory.ProductName">
+            <summary>
+            Name Product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.ProductCategory.CategoryName">
+            <summary>
+            Name Category
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.Order.ProductCategory.UnitsInStock">
+            <summary>
+            Units In Stock
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ProductServices">
+            <summary>
+            Keeps all products from Services.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductServices.ProductName">
+            <summary>
+            The name of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductServices.ProductID">
+            <summary>
+            The id of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductServices.CategoryName">
+            <summary>
+            The category of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductServices.CompanyName">
+            <summary>
+            The name of the shipper.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductServices.QuantityPerUnit">
+            <summary>
+            The quantity per unit of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductServices.UnitPrice">
+            <summary>
+            The unit price of the product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductServices.UnitsInStock">
+            <summary>
+            The number of units available.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ProductServices.UnitsOnOrder">
+            <summary>
+            The number of units asked on the order.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.ProductServices.#ctor">
+            <summary>
+            Default constructor. Initialises new empty instance.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.RegionDetails">
+            <summary>
+             Keeps all territories from regions.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegionDetails.TerritoryID">
+            <summary>
+            The Id of territory.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegionDetails.TerritoryDescription">
+            <summary>
+            The description of territory.
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.RegionDetails.#ctor">
+            <summary>
+            The region of territory.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.RegionIndex">
+            <summary>
+            The data model sent by the RegionController to Home
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegionIndex.region">
+            <summary>
+            The name of region.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.RegionIndex.details">
+            <summary>
+            The details of region.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ReportViewModel">
+            <summary>
+            Raports View Model
+            </summary>
+        </member>
+        <member name="M:NorthwindWeb.ViewModels.ReportViewModel.#ctor(System.String,System.String)">
+            <summary>
+            Constructor of ReportViewModel
+            </summary>
+            <param name="link">set link</param>
+            <param name="filename">set filename</param>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ReportViewModel.Link">
+            <summary>
+            Link of RaportView
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ReportViewModel.Filename">
+            <summary>
+            File name of RaportView
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ReportLoginViewModel">
+            <summary>
+            Holds username and password for the report server.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ReportLoginViewModel.Username">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ReportLoginViewModel.Password">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ServicesIndex">
+            <summary>
+            The data model sent by the ServicesController to Home
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ServicesIndex.TopFourName">
+            <summary>
+            The names of the four first products. 
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ServicesIndex.TopFourProducts">
+            <summary>
+            Display the first four products with their details.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ServicesIndex.LastThreeProducts">
+            <summary>
+            Display the last three products with their details.
+            </summary>
+        </member>
+        <member name="T:NorthwindWeb.ViewModels.ViewProductCategoryS">
+            <summary>
+            This class is to parse data from products and category table in view
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ViewProductCategoryS.ProductID">
+            <summary>
+            The ID of product
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ViewProductCategoryS.ProductName">
+            <summary>
+            The name of product.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ViewProductCategoryS.CategoryName">
+            <summary>
+            The name of category.
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ViewProductCategoryS.ProductPrice">
+            <summary>
+            Product price
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ViewProductCategoryS.SuppliersName">
+            <summary>
+            Suppliers name
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ViewProductCategoryS.Stock">
+            <summary>
+            Stock
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ViewProductCategoryS.OnOrder">
+            <summary>
+            On order
+            </summary>
+        </member>
+        <member name="P:NorthwindWeb.ViewModels.ViewProductCategoryS.Discontinued">
+            <summary>
+            If this product is disponible this will be false
+            </summary>
+        </member>
+    </members>
+</doc>
