@@ -27,18 +27,18 @@ namespace NorthwindWeb
             log4net.Config.XmlConfigurator.Configure();
 
             // Create the source, if it does not already exist.
-            if (!EventLog.SourceExists("Northwind"))
-            {
-                //An event log source should not be created and immediately used.
-                //There is a latency time to enable the source, it should be created
-                //prior to executing the application that uses the source.
-                //Execute this sample a second time to use the new source.
-                EventLog.CreateEventSource("Northwind", "Application");
+            //if (!EventLog.SourceExists("Northwind"))
+            //{
+            //    //An event log source should not be created and immediately used.
+            //    //There is a latency time to enable the source, it should be created
+            //    //prior to executing the application that uses the source.
+            //    //Execute this sample a second time to use the new source.
+            //    EventLog.CreateEventSource("Northwind", "Application");
  
 
-                // The source is created.  Exit the application to allow it to be registered.
-                return;
-            }
+            //    // The source is created.  Exit the application to allow it to be registered.
+            //    return;
+            //}
         }
 
         /// <summary>
